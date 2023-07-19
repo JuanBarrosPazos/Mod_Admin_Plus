@@ -104,7 +104,6 @@
 		if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){
 			print("<input type='hidden' name='dni' value='".$defaults['dni']."' />".$defaults['dni']);
 		}else{
-		
 			print("<input type='text' name='dni' id='dni' size=12 maxlength=8 pattern='[0-9]{8,8}' placeholder='NUM. DOC.' value='".$defaults['dni']."' required />");
 		}
 		// FIN SI ES USER O PLUS SE LIMITA EL FORMULARIO 
