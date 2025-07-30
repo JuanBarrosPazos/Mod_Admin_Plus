@@ -1,0 +1,1 @@
+<?php $_SESSION['webmaster'] = 00000007; ?>
