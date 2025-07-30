@@ -24,74 +24,69 @@ session_start();
 	
 	desbloqueo();
 	
-		if(isset($_POST['oculto'])){
-			if($form_errors = validate_form()){
-							suma_denegado();
-							show_form2();
-							if($_SESSION['showf'] == 69){table_desblock();}
-							else{show_form($form_errors);
-								 show_visit();}
-							} 
-			else {	require 'Inclu/Only.index.php'; 
-					process_form();
-					show_ficha();
-					errors();
-					}
-		}	// FIN POST OCULTO
-
-	elseif(isset($_POST['ocultop'])){
+	if(isset($_POST['oculto'])){
+		if($form_errors = validate_form()){
+						suma_denegado();
+						show_form2();
+						if($_SESSION['showf'] == 69){table_desblock();}
+						else{show_form($form_errors);
+							 show_visit();}
+		}else{ require 'Inclu/Only.index.php'; 
+				process_form();
+				show_ficha();
+				errors();
+		}
+	// FIN POST OCULTO
+	}elseif(isset($_POST['ocultop'])){
 					
-			if($form_errorsp = validate_formp()){
+		if($form_errorsp = validate_formp()){
 				show_form2($form_errorsp);
-				if($_SESSION['showf'] == 69){table_desblock();}
-				else{show_form(@$form_errors);}
-					 show_visit();
-					} else {process_pin();
-						    //ayear();
-						   		}
-							} 
+				if($_SESSION['showf'] == 69){
+					table_desblock();
+				}else{
+					show_form(@$form_errors);
+				}
+				show_visit();
+		}else{	process_pin();
+				//ayear();
+		}
 
-	elseif(isset($_POST['entrada'])){	pin_in();
+	}elseif(isset($_POST['entrada'])){	pin_in();
 										//errors();
-								}
-							
-	elseif(isset($_POST['salida'])){	pin_out();
+
+	}elseif(isset($_POST['salida'])){	pin_out();
 										//errors();
-								}
 
-	elseif (isset($_POST['cancel'])) {	show_form2();
-									if($_SESSION['showf'] == 69){table_desblock();}
-									else{show_form(@$form_errors);
-										show_visit();}
-								}
+	}elseif (isset($_POST['cancel'])) {	show_form2();
+										if($_SESSION['showf'] == 69){table_desblock();
+										}else{	show_form(@$form_errors);
+												show_visit();
+										}
 
-	elseif(isset($_GET['ocultop'])){ process_pin();
-							  		 //ayear();
-							  		 errors();
-								}
+	}elseif(isset($_GET['ocultop'])){ 	process_pin();
+							  		 	//ayear();
+							  		 	errors();
 
-	elseif(isset($_GET['pin']) != ''){ process_pin();
-									   //ayear();
-							 		   errors();
-							   	}
+	}elseif(isset($_GET['pin']) != ''){ process_pin();
+									   	//ayear();
+							 		   	errors();
 
-
-	elseif (isset($_GET['salir'])) { salir();
-									 show_form2();
-									 show_form();
-									 show_visit();
-									 session_destroy();
-								}
-
-	else {	show_form2();
-			if($_SESSION['showf'] == 69){table_desblock();}
-			else{show_form(@$form_errors);
-				 show_visit();}
+	}elseif (isset($_GET['salir'])) { 	salir();
+									 	show_form2();
+									 	show_form();
+									 	show_visit();
+									 	session_destroy();
+	}else{	show_form2();
+			if($_SESSION['showf'] == 69){
+				table_desblock();
+			}else{
+				show_form(@$form_errors);
+				show_visit();
+			}
 			suma_visit();
 			bbdd_backup();
-			}
+	}
 				
-
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -354,7 +349,7 @@ function admin_entrada(){
 			// print("* ");
 				} else {
 				print("</br>
-				<font color='#FF0000'>
+				<font color='#F1BD2D'>
 		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
 				</br>";
 							}
@@ -376,10 +371,8 @@ function admin_entrada(){
 
 function show_visit(){
 
-	global $db;
-	global $db_name;
-	global $rowv;
-	global $sumavisit;
+	global $db;			global $db_name;
+	global $rowv;		global $sumavisit;
 
 	global $table_name_c;
 	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
@@ -393,8 +386,7 @@ function show_visit(){
 	
 	$tot = $rowv['admin'];
 
-	global $sumavisit;
-	$sumavisit = $tot + 1;
+	global $sumavisit;		$sumavisit = $tot + 1;
 
 	$idv = 69;
 	
@@ -415,15 +407,15 @@ function show_visit(){
 					<td align='right'><font color='#59746A'>".$rowv['deneg']."</font></td>
 				</tr>
 			</table>");
-	} else {print("<font color='#FF0000'>
+	}else{print("<font color='#F1BD2D'>
 						* Error: show visit
 					</font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
 						</br>");
-			}
-
 	}
+
+} // FIN function show_visit
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -431,10 +423,8 @@ function show_visit(){
 
 function suma_visit(){
 
-	global $db;
-	global $db_name;
-	global $rowv;
-	global $sumavisit;
+	global $db;				global $db_name;
+	global $rowv;			global $sumavisit;
 	
 	global $table_name_c;
 	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
@@ -447,32 +437,28 @@ function suma_visit(){
 	
 	$tot = $rowv['admin'];
 
-	global $sumavisit;
-	$sumavisit = $tot + 1;
+	global $sumavisit;		$sumavisit = $tot + 1;
 
 	$idv = 69;
 
 	global $table_name_c;
 	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
-	$sqlv = "UPDATE `$db_name`.$table_name_c SET `admin` = '$sumavisit' WHERE $table_name_c.`idv` = '$idv' LIMIT 1 ";
+	$sqlv = "UPDATE `$db_name`.$table_name_c SET `admin`='$sumavisit' WHERE $table_name_c.`idv`='$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlv)){
 		/**/	print(" </br>");
 
-		} else {
-				print("<font color='#FF0000'>
-						* Error: suma visit</font>
+	}else{	print("<font color='#F1BD2D'>* Error: suma visit</font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
 						</br>");
-						
-							}
-		global $text;
-		$text = "ACCESO A ADMIN SING IN".PHP_EOL;
-		ini_log();
-
 	}
+	
+	global $text;		$text = "ACCESO A ADMIN SING IN".PHP_EOL;
+	ini_log();
+
+} // FIN function suma_visit
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -493,8 +479,7 @@ function suma_acces(){
 	
 	$tota = $rowa['acceso'];
 
-	global $sumaacces;
-	$sumaacces = $tota + 1;
+	global $sumaacces;		$sumaacces = $tota + 1;
 
 	$idv = 69;
 
@@ -505,9 +490,9 @@ function suma_acces(){
 
 	if(mysqli_query($db, $sqla)){ 
 			print ('</br>');
-	} else { print("<font color='#FF0000'>* Error: suma access</font></br>
+	}else{ 	print("<font color='#F1BD2D'>* Error: suma access</font></br>
 					&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
-							}
+	}
 
 			////////////////////		************   		////////////////////
 	
@@ -524,7 +509,7 @@ function suma_acces(){
 	if(mysqli_query($db, $sqlip)){ } else { print("* MODIFIQUE LA ENTRADA L.457: ".mysqli_error($db));}
 
 
-	} // FIN FUNCTION
+} // FIN function suma_acces
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -532,10 +517,8 @@ function suma_acces(){
 
 function suma_denegado(){
 
-	global $db;
-	global $db_name;
-	global $rowd;
-	global $sumadeneg;
+	global $db;				global $db_name;
+	global $rowd;			global $sumadeneg;
 
 	global $table_name_c;
 	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
@@ -548,8 +531,7 @@ function suma_denegado(){
 	
 	$dng = $rowd['deneg'];
 	
-	global $sumadeneg;
-	$sumadeneg = $dng + 1;
+	global $sumadeneg;		$sumadeneg = $dng + 1;
 
 	$idd = 69;
 
@@ -560,9 +542,9 @@ function suma_denegado(){
 
 	if(mysqli_query($db, $sqld)){/*	print("	</br>");*/
 		
-		}  else {	print("<font color='#FF0000'>* Error: suma denegado</font></br>
+	}else{	print("<font color='#F1BD2D'>* Error: suma denegado</font></br>
 							&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
-					}
+	}
 	
 			////////////////////		**********   		////////////////////
 	
@@ -577,10 +559,11 @@ function suma_denegado(){
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '{$geoplugin->ip}', '1', '0', '$date', '$time')";
 	if(mysqli_query($db, $sqlip)){ 
-		global $text;
-		$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
-		ini_log();
-	} else { print("* MODIFIQUE LA ENTRADA L.518: ".mysqli_error($db));}
+			global $text;
+			$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
+			ini_log();
+
+	}else{ 	print("* MODIFIQUE LA ENTRADA L.518: ".mysqli_error($db));}
 
 	bloqueo();
 	
@@ -592,62 +575,53 @@ function suma_denegado(){
 
 function validate_form(){
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $table_name_a;
+	global $table_name_a;	
 	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	global $sqlp;
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Usuario` = '$_POST[Usuario]' AND `Pass` = '$_POST[Password]' LIMIT 1";
-	global $qp;
-	$qp = mysqli_query($db, $sqlp);
-	global $rn;
-	$rn = mysqli_fetch_assoc($qp);
-	global $count;
-	$count = mysqli_num_rows($qp);
+	global $qp;			$qp = mysqli_query($db, $sqlp);
+	global $rn;			$rn = mysqli_fetch_assoc($qp);
+	global $count;		$count = mysqli_num_rows($qp);
 
-	global $password;
-	$password = $_POST['Password'] ;
-	global $hash;
+	global $password;	$password = $_POST['Password'] ;
 	global $row;
-	$hash = @$row['Password'];
+	global $hash;		$hash = @$row['Password'];
+	
 	//echo $row['Password']."<br>";
 	//echo $hash;
 
 	$errors = array();
 	
-		if (strlen(trim($_POST['Usuario'])) == 0){
+	if(strlen(trim($_POST['Usuario'])) == 0){
 			//$errors [] = "Usuario: Campo obligatorio.";
 			$errors [] = "USER ACCES ERROR";
-			}
-
-		elseif (strlen(trim($_POST['Password'])) == 0){
+	}elseif(strlen(trim($_POST['Password'])) == 0){
 			//$errors [] = "Password: Campo Obligatorio:";
 			$errors [] = "USER ACCES ERROR";
-			}
-
-		elseif($count < 1){
+	}elseif($count < 1){
 			//$errors [] = "Nombre / password incorrecto";
 			$errors [] = "USER ACCES ERROR";
-			}
-		// VERIFICO EL HASH
-		elseif(!@password_verify($_POST['Password'], $hash)){
-			if(trim($_POST['Password'] != $rn['Pass'])){
-				//$errors [] = "Password incorrecto.";
-				$errors [] = "USER ACCES ERROR";
-				} else {}
-			}
+	}elseif(!@password_verify($_POST['Password'], $hash)){
+					// VERIFICO EL HASH
+		if(trim($_POST['Password'] != $rn['Pass'])){
+			//$errors [] = "Password incorrecto.";
+			$errors [] = "USER ACCES ERROR";
+		}else{ }
+	}
+		
+	if(@$rn['Nivel'] == 'close'){
 		// VERIFICO NIVEL CLOSE
-		if (@$rn['Nivel'] == 'close'){
-			$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
-			global $CloseLog;
-			$CloseLog = "\t ** NOMBRE: ".$rn['Nombre']." ".$rn['Apellidos']." REF: ".$rn['ref'];
-			}
+		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
+		global $CloseLog;
+		$CloseLog = "\t ** NOMBRE: ".$rn['Nombre']." ".$rn['Apellidos']." REF: ".$rn['ref'];
+	}
 	
 	return $errors;
 
-		} // FIN FUNCTION validate_form()
+} // FIN FUNCTION validate_form()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -655,8 +629,7 @@ function validate_form(){
 
 function validate_formp(){
 	
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";
@@ -670,22 +643,16 @@ function validate_formp(){
 	if (strlen(trim($_POST['pin'])) == 0){
 		//$errorsp [] = "PIN: Campo obligatorio.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-
-	elseif (strlen(trim($_POST['pin'])) < 8){
+	}elseif (strlen(trim($_POST['pin'])) < 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-
-	elseif (strlen(trim($_POST['pin'])) > 8){
+	}elseif (strlen(trim($_POST['pin'])) > 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-	
-	elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
+	}elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
+	}
 	
 	/*
 	elseif (!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
@@ -699,11 +666,11 @@ function validate_formp(){
 	elseif($cp == 0){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
+	}
 
 	return $errorsp;
 
-	} // FIN FUNCTION validate_formp()
+	} // FIN function validate_formp()
 
 
 				   ////////////////////				   ////////////////////
@@ -716,22 +683,21 @@ function process_form(){
 					
 	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){	
 
-			global $onlyindex;
-			if ($onlyindex == 1){
-					master_index();
-					ver_todo();
-					ayear();
-					admin_entrada();
-					suma_acces();
-					bbdd_backup();
-			} else { }
+		global $onlyindex;
+		if($onlyindex == 1){
+				master_index();
+				ver_todo();
+				ayear();
+				admin_entrada();
+				suma_acces();
+				bbdd_backup();
+		}else{ }
 
-	print("
-	<embed src='audi/sesion_open.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+	print("<embed src='audi/sesion_open.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>");
 
-		}else { require 'Inclu/table_permisos.php'; }
-	}	
+	}else { require 'Inclu/table_permisos.php'; }
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -745,7 +711,7 @@ function errors(){
 
 	require 'fichar/Inc_errors.php';
 
-	}
+}
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -770,9 +736,8 @@ function show_ficha(){
 	
 	if($count1 < 1){
 		
-		global $din;
-		global $tin;
-		$din = date('Y-m-d');
+		global $din;		$din = date('Y-m-d');
+		global $tin;			
 
 		/*
 			HORA ORIGINAL DE ENTRADA DEL SCRIPT
@@ -814,10 +779,8 @@ function show_ficha(){
 	elseif($count1 > 0){
 		
 		global $dout;	$dout = date('Y-m-d');
-		global $tout;
-		global $ttot;
+		global $tout;	global $ttot;
 		
-
 		/*
 			HORA ORIGINAL DE SALIDA DEL SCRIPT
 			$tout = date('H:i:s');
@@ -872,7 +835,7 @@ function process_pin(){
 	$_SESSION['usuarios'] = $rp['ref'];
 	$_SESSION['ref'] = $rp['ref'];
 
-	if ($cp > 0){
+	if($cp > 0){
 	
 	global $vname;
 	$tabla1 = $_SESSION['clave'].$rp['ref'];
@@ -887,101 +850,45 @@ function process_pin(){
 	$count1 = mysqli_num_rows($q1);
 
 	// FICHA ENTRADA.
-	
-	if($count1 < 1){
+		if($count1 < 1){
+			
+			global $din;	$din = date('Y-m-d');	
+			global $tin;
+
+			/*
+				HORA ORIGINAL DE ENTRADA DEL SCRIPT
+				$tin = date('H:i:s');
+			*/
+
+			require 'fichar/fichar_redondeo_in.php';
+
+				////////////////////		***********  		////////////////////
+
+			global $dout;		$dout = '';
+			global $tout;		$tout = '00:00:00';
+			global $ttot;		$ttot = '00:00:00';
 		
-		global $din;
-		global $tin;
-		$din = date('Y-m-d');
-
-		/*
-			HORA ORIGINAL DE ENTRADA DEL SCRIPT
-			$tin = date('H:i:s');
-		*/
-
-		require 'fichar/fichar_redondeo_in.php';
-
-			////////////////////		***********  		////////////////////
-
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = '';
-		$tout = '00:00:00';
-		$ttot = '00:00:00';
-		
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
-	<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-				</td>
-				<td>
-					".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-				</td>
-				<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-		<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-		<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-		<input type='hidden' id='din' name='din' value='".$din."' />
-		<input type='hidden' id='tin' name='tin' value='".$tin."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-		<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-					<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-					<input type='hidden' name='entrada' value=1 />
-	</form>														
-				</td>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-				<td valign='middle'  align='center'>
-						<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-						<input type='hidden' name='cancel' value=1 />
-				</td>
-			</form>
-		</tr>
-<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-</embed>
-	</table>"); 
-		}
-	
-	// FICHA SALIDA.
-	
-	elseif($count1 > 0){
-		
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = date('Y-m-d');
-		$tout = date('H:i:s');
-
-		/*
-			HORA ORIGINAL DE SALIDA DEL SCRIPT
-			$tout = date('H:i:s');
-		*/
-
-		require 'fichar/fichar_redondeo_out.php';
-
-			////////////////////		***********  		////////////////////
-
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
-	<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-				</td>
-				<td>
-					".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-				</td>
-				<td valign='middle'  align='center'>
+		print("<table align='center' style=\"margin-top:6px\">
+				<tr>
+					<td>
+		<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+					</td>
+					<td>
+						".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
+					</td>
+					<td valign='middle'  align='center'>
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 			<input name='myimg' type='hidden' value='".$rp['myimg']."' />
 			<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
 			<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
 			<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+			<input type='hidden' id='din' name='din' value='".$din."' />
+			<input type='hidden' id='tin' name='tin' value='".$tin."' />
 			<input type='hidden' id='dout' name='dout' value='".$dout."' />
 			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-						<input type='hidden' name='salida' value=1 />
+			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+						<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
+						<input type='hidden' name='entrada' value=1 />
 		</form>														
 					</td>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
@@ -991,19 +898,66 @@ function process_pin(){
 					</td>
 				</form>
 			</tr>
-<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-</embed>
-	</table>"); 
+			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+			</embed>
+		</table>");
+
+		// FICHA SALIDA.
+		}elseif($count1 > 0){
 		
+			global $dout;		$dout = date('Y-m-d');
+			global $tout;		$tout = date('H:i:s');
+			global $ttot;
+
+			/*
+				HORA ORIGINAL DE SALIDA DEL SCRIPT
+				$tout = date('H:i:s');
+			*/
+
+			require 'fichar/fichar_redondeo_out.php';
+
+			////////////////////		***********  		////////////////////
+
+		print("<table align='center' style=\"margin-top:6px\">
+				<tr>
+					<td>
+		<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+					</td>
+					<td>
+						".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
+					</td>
+					<td valign='middle'  align='center'>
+			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+				<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+				<input type='hidden' id='dout' name='dout' value='".$dout."' />
+				<input type='hidden' id='tout' name='tout' value='".$tout."' />
+							<input type='submit' value='FICHAR SALIDA' class='botonverde' />
+							<input type='hidden' name='salida' value=1 />
+			</form>														
+						</td>
+					<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+						<td valign='middle'  align='center'>
+								<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+								<input type='hidden' name='cancel' value=1 />
+						</td>
+					</form>
+				</tr>
+	<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+	</embed>
+		</table>"); 
+			
 		}
 	
 	ayear();
 		
-	}else{		print("<table align='center' style='margin-top:10px' width=450px >
+	}else{	print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
 					<th class='BorderInf'>
 					<b>
-					<font color='#FF0000'>
+					<font color='#F1BD2D'>
 						NO EXISTE EL USUARIO.
 						</br>
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.
@@ -1033,7 +987,7 @@ function process_pin(){
 			print ($redir);
 		 	}			
 		
-} // FIN FUNCTION process_pin()
+} // FIN function process_pin()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1041,8 +995,7 @@ function process_pin(){
 
 function pin_out(){
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
@@ -1052,7 +1005,7 @@ function pin_out(){
 	$vname = $tabla1."_".date('Y');
 	$vname = "`".$vname."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout`='' AND $vname.`tout`='00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -1094,13 +1047,13 @@ function pin_out(){
 	$ttotd = str_replace("-","",$ttotd);
 	
 
-	if (($ttoth > 9)||($ttotd > 0)){
+	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
 					<th class='BorderInf'>
 					<b>
-					<font color='#FF0000'>
+					<font color='#F1BD2D'>
 						NO PUEDE FICHAR MÁS DE 10 HORAS.</br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 					</font>
 					</b>
@@ -1114,21 +1067,19 @@ function pin_out(){
 					$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 					$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
 					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+		/* fin if >9 */
+		}else{	global $ttot;
+				global $text;
+				$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
+				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 
-					} /* fin if >9 */
-
-			else {	global $ttot;
-					global $text;
-					$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-			 } /* Fin else >9 */
+	} /* Fin else >9 */
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-			$tabla = "<table style='margin-top:10px' width=320px >
+		$tabla = "<table style='margin-top:10px' width=320px >
 						<tr>
 							<th colspan=2 align='center' class='BorderInf'>
 								HA FICHADO LA SALIDA</br>".$_POST['name1']." ".$_POST['name2']."
@@ -1204,7 +1155,7 @@ function pin_out(){
 						</script>";
 			print ($redir);
 	
-		} else {
+		}else{
 					print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
 							show_form2();
 							show_form ();
@@ -1291,15 +1242,14 @@ function pin_in(){
 						</script>";
 			print ($redir);
 
-		} else {
-					print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
-							show_form2();
-							show_form ();
-							global $texerror;
-							$texerror = PHP_EOL."\t ".mysqli_error($db);
-				}
+		}else{	print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
+				show_form2();
+				show_form ();
+				global $texerror;
+				$texerror = PHP_EOL."\t ".mysqli_error($db);
+		}
 	
-	} // FIN FUNCTION pin_in()
+	} // FIN function pin_in()
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1373,8 +1323,7 @@ function desbloqueo(){
 	$geoplugin = new geoPlugin();
 	$geoplugin->locate();
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 
 	$date = date('Y-m-d');
 	$time = date('H:i:s');
@@ -1422,8 +1371,8 @@ function desbloqueo(){
 				global $text;
 				$text = "!! ACCESO DESBLOQUEADO ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
 				ini_log();
-	} else { print("* ERROR ENTRADA 1678: ".mysqli_error($db))."."; }
-	} elseif($cx < 1) { $_SESSION['showf'] = 0; }	
+	}else{ print("* ERROR ENTRADA 1678: ".mysqli_error($db))."."; }
+	}elseif($cx < 1) { $_SESSION['showf'] = 0; }	
 	
 	global $blocker;		$blocker = @$rowx['error'];
 
@@ -1448,8 +1397,7 @@ function bloqueo(){
 	$geoplugin = new geoPlugin();
 	$geoplugin->locate();
 	
-	global $db;
-	global $db_name;
+	global $db;			global $db_name;
 	
 	$date = date('Y-m-d');
 	
@@ -1537,7 +1485,7 @@ function show_form($errors=[]){
 		$defaults = array ('Usuario' => '', 'Password' => '');
 	}
 								   
-	if ($errors){	
+	if($errors){	
 		print("<div class='juancentra' style='border-color:#F1BD2D !important;'>
 				<!--
 					<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>
@@ -1564,7 +1512,7 @@ function show_form($errors=[]){
 		print("<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>
 	</div>");
-		}
+	}
 	
 	print(/**/"<table style=\"margin-top:2px; margin-bottom:2px; text-align:center!important;\" >
 				<tr>
@@ -1580,14 +1528,14 @@ function show_form($errors=[]){
 						USUARIO
 					</td>
 					<td>
-<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' />
+		<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' />
 					</td>
 				</tr>
 	
 				<tr>
 					<td>PASSWORD</td>
 					<td>
-<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' />
+		<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' />
 					</td>
 				</tr>
 	
@@ -1632,8 +1580,7 @@ function show_form($errors=[]){
 
 function ver_todo(){
 
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";
@@ -1642,37 +1589,29 @@ function ver_todo(){
 			$ref = $_SESSION['ref'];
 			$sqlb =  "SELECT * FROM $table_name_a WHERE `ref` = '$ref'";
 			$qb = mysqli_query($db, $sqlb);
-		}
-	
-	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['webmaster'])) { 
+	}elseif(($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['webmaster'])){ 
 				require 'Admin/Paginacion_Head.php';
 				global $orden;
 				$orden = @$_POST['Orden'];
 				/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
 				$sqlb =  "SELECT * FROM $table_name_a  ORDER BY  `id` ASC $limit";
 				$qb = mysqli_query($db, $sqlb);
-			}
-	elseif (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['webmaster'])){ 
+	}elseif(($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['webmaster'])){ 
 				require 'Admin/Paginacion_Head.php';
 				global $orden;
 				$orden = @$_POST['Orden'];
 				/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
 				$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` ASC $limit";
 				$qb = mysqli_query($db, $sqlb);
-			}
+	}
 
 			////////////////////		**********  		////////////////////
 
-	global $twhile;
-	$twhile = "TODOS USUARIOS CONSULTA";
-	
-		global $ruta;
-		$ruta = "Admin/";
+	global $twhile;			$twhile = "TODOS USUARIOS CONSULTA";
+	global $ruta;			$ruta = "Admin/";
 	require 'Admin/Inc_While_Form.php';
-		global $rutaimg;
-		$rutaimg = "Users/";
-		global $pagedest;
-		$pagedest = "Admin_Ver.php";
+	global $rutaimg;		$rutaimg = "Users/";
+	global $pagedest;		$pagedest = "Admin_Ver.php";
 	require 'Admin/Inc_While_Total.php';
 
 			////////////////////		**********  		////////////////////
@@ -1683,10 +1622,8 @@ function ver_todo(){
 		ini_log();
 		// PASO LOGS DE USUARIO
 		$ActionTime = date('H:i:s');
-		global $dir;
-		$dir = "Users/".$_SESSION['ref']."/log";
-		global $text;
-		$text = "** ".$ActionTime.PHP_EOL."\t".$text;
+		global $dir;		$dir = "Users/".$_SESSION['ref']."/log";
+		global $text;		$text = "** ".$ActionTime.PHP_EOL."\t".$text;
 		require 'Admin/log_write.php';
 		
 	}	/* FIN FUNCTION VER TODO */
@@ -1695,34 +1632,26 @@ function ver_todo(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	function salir() {	unset($_SESSION['id']);
-						unset($_SESSION['Nivel']);
-						unset($_SESSION['Nombre']);
-						unset($_SESSION['Apellidos']);
-						unset($_SESSION['doc']);
-						unset($_SESSION['dni']);
-						unset($_SESSION['ldni']);
-						unset($_SESSION['Email']);
-						unset($_SESSION['Usuario']);
-						unset($_SESSION['Password']);
-						unset($_SESSION['Direccion']);
-						unset($_SESSION['Tlf1']);
-						unset($_SESSION['Tlf2']);
-						unset($_SESSION['nclient']);
-
-						echo "<div class='centradiv'>YOU HAVE CLOSE SESSION</div>";
-	}
+function salir() {	unset($_SESSION['id']);				unset($_SESSION['Nivel']);
+					unset($_SESSION['Nombre']);			unset($_SESSION['Apellidos']);
+					unset($_SESSION['doc']);			unset($_SESSION['dni']);
+					unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+					unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+					unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+					unset($_SESSION['Tlf2']);			unset($_SESSION['nclient']);
+					echo "<div class='centradiv'>YOU HAVE CLOSE SESSION</div>";
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	function master_index(){
+function master_index(){
 
-		require 'Inclu_MInd/rutaindex.php';
-		require 'Inclu_MInd/Master_Index.php';
+	require 'Inclu_MInd/rutaindex.php';
+	require 'Inclu_MInd/Master_Index.php';
 			
-				} 
+}
  
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1742,7 +1671,7 @@ function ini_log(){
     fwrite($log, $logtext);
     fclose($log);
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
