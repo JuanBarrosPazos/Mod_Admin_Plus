@@ -4,6 +4,7 @@
 ----
 ## ULTIMAS MODIFICACIONES.
 - Modificación de estilos, inclusión de iconos, sustitución de tablas...
+- Sincronizado con GitHub desde HP2.
 
 - Reparado error con lector de codigos QR.
 
