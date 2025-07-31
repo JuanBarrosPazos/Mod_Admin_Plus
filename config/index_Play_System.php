@@ -391,28 +391,17 @@ function show_visit(){
 	$idv = 69;
 	
 	if(mysqli_query($db, $sqlv)){
-		print("<table align='center'>
-				<tr>	
-					<td align='right'><font color='#59746A'>VISITS: </font></td>
-					<td  align='right'><font color='#59746A'>".$tot."</font></td>
-				</tr>
-						
-				<tr>
-					<td align='right'><font color='#59746A'>AUTHORIZED: </font></td>
-					<td align='right'><font color='#59746A'>".$rowv['acceso']."</font></td>
-				</tr>
+		print("<div class='juancentra' style='border:none;'>
+				<font color='#59746A'>
+					VISITS: ".$tot."<br>
+					AUTHORIZED: ".$rowv['acceso']."<br>
+					FORBIDDEN: ".$rowv['deneg']."
+				</font>
+			</div>");
 
-				<tr>
-					<td align='right'><font color='#59746A'>FORBIDDEN:</font></td>
-					<td align='right'><font color='#59746A'>".$rowv['deneg']."</font></td>
-				</tr>
-			</table>");
-	}else{print("<font color='#F1BD2D'>
-						* Error: show visit
-					</font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
-						</br>");
+	}else{
+		print("<font color='#F1BD2D'>* Error: show visit</font>
+				</br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 	}
 
 } // FIN function show_visit
@@ -752,26 +741,21 @@ function show_ficha(){
 		global $tout;	$tout = '00:00:00';
 		global $ttot;	$ttot = '00:00:00';
 		
-	print("<table align='center' style=\"margin-top:2px\">
-			<tr>
-				<td>
+	print("<div class='juancentra' style='border:none;'>
 					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</td>
-					<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
-		<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-		<input type='hidden' id='din' name='din' value='".$din."' />
-		<input type='hidden' id='tin' name='tin' value='".$tin."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-		<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-				<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-				<input type='hidden' name='entrada' value=1 />
-	</form>														
-				</td>
-			</tr></table>"); 
+			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
+				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+				<input type='hidden' id='din' name='din' value='".$din."' />
+				<input type='hidden' id='tin' name='tin' value='".$tin."' />
+				<input type='hidden' id='dout' name='dout' value='".$dout."' />
+				<input type='hidden' id='tout' name='tout' value='".$tout."' />
+				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+					<input type='hidden' name='entrada' value=1 />
+			</form>														
+		</div>"); 
 		}
 	
 	// FICHA SALIDA.
@@ -790,23 +774,18 @@ function show_ficha(){
 
 			////////////////////		***********  		////////////////////
 
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
+	print("<div class='juancentra' style='border:none;'>
 					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</td>
-				<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
-		<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-						<input type='hidden' name='salida' value=1 />
-		</form>														
-					</td>
-				</tr></table>"); 
+			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
+				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+				<input type='hidden' id='dout' name='dout' value='".$dout."' />
+				<input type='hidden' id='tout' name='tout' value='".$tout."' />
+					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+					<input type='hidden' name='salida' value=1 />
+			</form>														
+		</div>"); 
 		
 		}
 	
@@ -868,39 +847,30 @@ function process_pin(){
 			global $tout;		$tout = '00:00:00';
 			global $ttot;		$ttot = '00:00:00';
 		
-		print("<table align='center' style=\"margin-top:6px\">
-				<tr>
-					<td>
-		<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-					</td>
-					<td>
-						".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-					</td>
-					<td valign='middle'  align='center'>
-		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-			<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-			<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-			<input type='hidden' id='din' name='din' value='".$din."' />
-			<input type='hidden' id='tin' name='tin' value='".$tin."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-						<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-						<input type='hidden' name='entrada' value=1 />
-		</form>														
-					</td>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-					<td valign='middle'  align='center'>
-							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-					</td>
-				</form>
-			</tr>
+		print("<div class='juancentra' style='border:none;'>
+			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+			<br>".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."<br>
+
+			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
+				<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+				<input type='hidden' id='din' name='din' value='".$din."' />
+				<input type='hidden' id='tin' name='tin' value='".$tin."' />
+				<input type='hidden' id='dout' name='dout' value='".$dout."' />
+				<input type='hidden' id='tout' name='tout' value='".$tout."' />
+				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+					<input type='hidden' name='entrada' value=1 />
+			</form>														
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>
-		</table>");
+		</div>");
 
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
@@ -918,64 +888,45 @@ function process_pin(){
 
 			////////////////////		***********  		////////////////////
 
-		print("<table align='center' style=\"margin-top:6px\">
-				<tr>
-					<td>
-		<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-					</td>
-					<td>
-						".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-					</td>
-					<td valign='middle'  align='center'>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+		print("<div class='juancentra' style='border:none;'>
+
+			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+			<br>".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."<br>
+			
+			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
 				<input name='myimg' type='hidden' value='".$rp['myimg']."' />
 				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
 				<input type='hidden' id='dout' name='dout' value='".$dout."' />
 				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-							<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-							<input type='hidden' name='salida' value=1 />
+					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+					<input type='hidden' name='salida' value=1 />
 			</form>														
-						</td>
-					<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-						<td valign='middle'  align='center'>
-								<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-								<input type='hidden' name='cancel' value=1 />
-						</td>
-					</form>
-				</tr>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block;' >
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 	<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>
-		</table>"); 
+		</div>"); 
 			
 		}
 	
 	ayear();
 		
-	}else{	print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
+	}else{ print("<div class='juancentra' style='border-color:#F1BD2D;' >
 					<font color='#F1BD2D'>
-						NO EXISTE EL USUARIO.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
+						NO EXISTE EL USUARIO.<br>
+						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
 					</font>
-					</b>
-					</th>
-				 </tr>
-				 <tr>
-					<td valign='middle'  align='center'>
-				 	<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-						<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-						<input type='hidden' name='cancel' value=1 />
-					</form>
-					</td>
-				</tr>
-	<embed src='audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-		</table>");
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
+			<embed src='audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+			</embed>
+		</div");
 
 	 	global $redir;
 		$redir = "<script type='text/javascript'>
@@ -985,7 +936,7 @@ function process_pin(){
 						setTimeout('redir()',4000);
 						</script>";
 			print ($redir);
-		 	}			
+	}			
 		
 } // FIN function process_pin()
 
@@ -1049,17 +1000,11 @@ function pin_out(){
 
 	if(($ttoth > 9)||($ttotd > 0)){
 		
-		print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
+		print("<div class='juancentra' style='border-color:#F1BD2D;'>
 					<font color='#F1BD2D'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.</br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
+						NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 					</font>
-					</b>
-					</th>
-				 </tr>
-				</table>");
+				</div>");
 		
 					global $ttot;
 					$ttot = '03:22:02';
@@ -1079,44 +1024,20 @@ function pin_out(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-		$tabla = "<table style='margin-top:10px' width=320px >
-						<tr>
-							<th colspan=2 align='center' class='BorderInf'>
-								HA FICHADO LA SALIDA</br>".$_POST['name1']." ".$_POST['name2']."
-							</th>
-						</tr>
-						<tr>
-							<td colspan=2 align='center'>
-		<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
-							</td>
-						</tr>
-						<tr>
-							<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-						</tr>
-						<tr>
-							<td>FECHA ENTRADA</td><td>".$din."</td>
-						</tr>
-						<tr>
-							<td>HORA ENTRADA</td><td>".$tin."</td>
-						</tr>
-						<tr>
-							<td>FECHA SALIDA</td><td>".$_POST['dout']."</td>
-						</tr>
-						<tr>
-							<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
-						</tr>
-						<tr>
-							<td>HORAS REALIZADAS</td><td>".$ttot."</td>
-						</tr>
-					<tr>
-						<td colspan=2  valign='middle'  align='center'>
-							<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-								<input type='submit' value='VOLVER INICIO' class='botonverde' />
-								<input type='hidden' name='cancel' value=1 />
-							</form>	
-						</td>
-					</tr>
-			</table>
+		$tabla = "<div class='juancentra' >
+					HA FICHADO LA SALIDA<br>".$_POST['name1']." ".$_POST['name2']."<br>
+			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+					<br>REFERENCIA: ".$_POST['ref']."
+					<br>FECHA ENTRADA: ".$din."
+					<br>HORA ENTRADA: ".$tin."
+					<br>FECHA SALIDA: ".$_POST['dout']."
+					<br>HORA SALIDA: ".$_POST['tout']."
+					<br>HORAS REALIZADAS: ".$ttot."<br>
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;'>
+					<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='cancel' value=1 />
+				</form>	
+			</div>
 			<embed src='audi/salida.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>";	
 		
@@ -1126,44 +1047,42 @@ function pin_out(){
 
 	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
-		if(mysqli_query($db, $sqla)){ 
+	if(mysqli_query($db, $sqla)){ 
 			
-			print($tabla); 
-			suma_todo();
+		print($tabla); 
+		suma_todo();
 
-					global $dir;
-					$dir = "Users/".$_POST['ref']."/mrficha";
+		global $dir;
+		$dir = "Users/".$_POST['ref']."/mrficha";
 
-					global $sumatodo;
-					global $text;
-					$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
-					$text = $text.PHP_EOL."**********".PHP_EOL;
-					$rmfdocu = $_POST['ref'];
-					$rmfdate = date('Y_m');
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+		global $sumatodo;
+		global $text;
+		$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
+		$text = $text.PHP_EOL."**********".PHP_EOL;
+		$rmfdocu = $_POST['ref'];
+		$rmfdate = date('Y_m');
+		$rmftext = $text.PHP_EOL;
+		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+		$rmf = fopen($filename, 'ab+');
+		fwrite($rmf, $rmftext);
+		fclose($rmf);
 			
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='index.php';
-						}
-						setTimeout('redir()',8000);
-						</script>";
-			print ($redir);
-	
-		}else{
-					print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
-							show_form2();
-							show_form ();
-							global $texerror;
-							$texerror = PHP_EOL."\t ".mysqli_error($db);
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='index.php';
 					}
+					setTimeout('redir()',8000);
+					</script>";
+		print ($redir);
 	
-	} // FIN FUNCTION pin_out()
+	}else{	print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
+			show_form2();
+			show_form ();
+			global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
+	
+} // FIN function pin_out()
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1171,36 +1090,19 @@ function pin_out(){
 
 function pin_in(){
 	
-	$tabla = "<table style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=2 align='center' class='BorderInf'>
-						HA FICHADO LA ENTRADA</br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td colspan=2 align='center'>
-	<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
-					</td>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
-				</tr>
-				<tr>
-					<td colspan=2  valign='middle'  align='center'>
-						<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='VOLVER INICIO' class='botonverde' />
-							<input type='hidden' name='cancel' value=1 />
-						</form>
-					</td>
-				</tr>
-	<embed src='audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>
-		</table>";	
+	$tabla = "<div class='juancentra'>
+				HA FICHADO LA ENTRADA</br>".$_POST['name1']." ".$_POST['name2']."<br>
+			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+				<br>REFERENCIA: ".$_POST['ref']."
+				<br>FECHA ENTRADA: ".$_POST['din']."
+				<br>HORA ENTRADA: ".$_POST['tin']."<br>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
+				<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
+		</div>
+			<embed src='audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+			</embed>";	
 		
 	global $db;  	global $db_name;
 	
@@ -1217,21 +1119,20 @@ function pin_in(){
 		
 			print($tabla);
 		
-			global $dir;
-			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
+			global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 
 			global $text;
 			$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 			$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
 			$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
 			
-					$rmfdocu = $_POST['ref'];
-					$rmfdate = date('Y_m');
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+			$rmfdocu = $_POST['ref'];
+			$rmfdate = date('Y_m');
+			$rmftext = $text.PHP_EOL;
+			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+			$rmf = fopen($filename, 'ab+');
+			fwrite($rmf, $rmftext);
+			fclose($rmf);
 		
 			global $redir;
 			$redir = "<script type='text/javascript'>
@@ -1283,10 +1184,10 @@ function show_form2($errorsp=''){
 		$defaults = $_POST;
 	}else{$defaults = array ('pin' => '');}
 	
-	print("<div class='juancentra' >
+	print("<div class='juancentra' style='border:none;' >
 			<form name='pin' method='post' action='$_SERVER[PHP_SELF]'>	
-				<input type='Password' name='pin' size=16 maxlength=8 value='".$defaults['pin']."' placeholder='FICHAR CON PIN' style='text-align:center; margin-top:0.4em;' />
-				<button type='submit' title='FICHAR CON SU PIN' class='botonverde imgButIco InicioGrey' style='vertical-align:top;' ></button>
+				<input type='Password' name='pin' size=16 maxlength=8 value='".$defaults['pin']."' placeholder='FICHAR CON PIN' required style='text-align:center; margin-top:0.4em;' />
+				<button type='submit' title='FICHAR CON SU PIN' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 				<input type='hidden' name='ocultop' value=1 />
 			</form>
 			<!--
@@ -1509,70 +1410,33 @@ function show_form($errors=[]){
 				fwrite($log, $logtext);
 				fclose($log);
 		}
-		print("<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-	</div>");
+	print("<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+	</embed></div>");
 	}
 	
-	print(/**/"<table style=\"margin-top:2px; margin-bottom:2px; text-align:center!important;\" >
-				<tr>
-		<th colspan=2 class='BorderInf' style=\" text-align:center!important;\" >
-						SUS DATOS DE ACCESO
-					</th>
-				</tr>
-				
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-						
-				<tr>
-					<td>	
-						USUARIO
-					</td>
-					<td>
-		<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' />
-					</td>
-				</tr>
-	
-				<tr>
-					<td>PASSWORD</td>
-					<td>
-		<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' />
-					</td>
-				</tr>
-	
-				<tr>
-					<td valign='middle' align='right' colspan='2' style=\" text-align:center!important;\">
-			<button type='submit' title='ACCEDER' class='botonverde imgButIco CloseSessionBlack' style='vertical-align:top;' ></button>
-						<input type='hidden' name='oculto' value=1 />
+	print("<div class='juancentra' style='border:none;'>
+		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+			<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' placeholder='USUARIO' required  style='text-align:center; margin-top:0.4em;' />
 
+			<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' placeholder='PASSWORD' required  style='text-align:center; margin-top:0.4em;' />
+
+			<button type='submit' title='INICIAR SESIÓN' class='botonazul imgButIco OpenBlack' style='vertical-align:top;' ></button>
+			
+			<input type='hidden' name='oculto' value=1 />
 		</form>	
-					</td>
-				</tr>
-				
-				<tr>
-	<td colspan='2' valign='middle' class='BorderSup' style='padding-top: 10px;text-align:center!important;'>
-							<a href='indexcamini.php'>
-									GO TO QR SCANNER CAM
-							</a>
-					</td>
-				</tr>
-				<tr>
-	<td colspan='2' valign='middle' class='BorderSup' style='padding-top: 10px;text-align:center!important;'>
-						<a href='Admin/Claves_Perdidas.php'>
-							HE PERDIDO MIS CLAVES
-						</a>
-					</td>
-				</tr>
-					
-				<tr>
-	<td colspan='2' valign='middle' class='BorderSup' style='padding-top: 10px;text-align:center!important;'>
-						<a href='Mail_Php/index.php'  target='_blank'>
-							WEBMASTER @ CONTACTO
-						</a>
-					</td>
-				</tr>
-			</table>"); 
+
+			<a href='indexcamini.php'>
+				<button type='submit' title='GO TO QR SCANNER CAM' class='botonverde imgButIco FotoBlack' style='vertical-align:top;' ></button>
+			</a>
+			<a href='Admin/Claves_Perdidas.php'>
+				<button type='submit' title='HE PERDIDO MIS CLAVES' class='botonverde imgButIco Busca2Black' style='vertical-align:top;' ></button>
+			</a>
+			<a href='Mail_Php/index.php'  target='_blank'>
+				<button type='submit' title='WEBMASTER @ CONTACTO' class='botonverde imgButIco MailBlack' style='vertical-align:top;' ></button>
+			</a>
+		</div>"); 
 	
-	}
+} // FIN function show_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
