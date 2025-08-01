@@ -423,6 +423,7 @@ img {
 	vertical-align: top !important; 
     border: solid 0.1em #ccc;/*  */
 	border-radius: 12px;
+	size: 1.0em;
 }
 
 .whiletotal {
@@ -696,6 +697,21 @@ img {
 }
 
 
+.LlavesBlack{
+	background-image: url(../Images/BotonIcos/llaves_black.png);
+}
+.LlavesGrey{
+	background-image: url(../Images/BotonIcos/llaves_grey.png);
+}
+.LlavesWhite{
+	background-image: url(../Images/BotonIcos/llaves_white.png);
+}
+.LlavesBlack:hover, .LlavesGrey:hover, .LlavesWhite:hover{
+	background-image: url(../Images/BotonIcos/llaves_grey.png);
+}
+
+
+
 .MailBlack{
 	background-image: url(../Images/BotonIcos/mail_black.png);
 }
@@ -705,7 +721,7 @@ img {
 .MailWhite{
 	background-image: url(../Images/BotonIcos/mail_white.png);
 }
-.MailBlack:hover, .MMailGrey:hover, .MailWhite:hover{
+.MailBlack:hover, .MailGrey:hover, .MailWhite:hover{
 	background-image: url(../Images/BotonIcos/mail_grey.png);
 }
 
@@ -808,6 +824,20 @@ img {
 }
 
 
+.QrBlack{
+	background-image: url(../Images/BotonIcos/qr_black.png);
+}
+.QrGrey{
+	background-image: url(../Images/BotonIcos/qr_grey.png);
+}
+.QrWhite{
+	background-image: url(../Images/BotonIcos/qr_white.png);
+}
+.QrBlack:hover, .QrGrey:hover, .QrWhite:hover{
+	background-image: url(../Images/BotonIcos/qr_grey.png);
+}
+
+
 .RestoreBlack{
 	background-image: url(../Images/BotonIcos/restore_black.png);
 }
@@ -815,7 +845,7 @@ img {
 	background-image: url(../Images/BotonIcos/restore_grey.png);
 }
 .RestoreWhite{
-	background-image: url(../Images/BotonIcos/restore_black.png);
+	background-image: url(../Images/BotonIcos/restore_white.png);
 }
 .RestoreBlack:hover, .RestoreGrey:hover, .RestoreWhite:hover{
 	background-image: url(../Images/BotonIcos/restore_grey.png);
@@ -834,6 +864,21 @@ img {
 .SaveBlack:hover, .SaveGrey:hover, .SaveWhite:hover{
 	background-image: url(../Images/BotonIcos/save_grey.png);
 }
+
+
+.WebBlack{
+	background-image: url(../Images/BotonIcos/web_black.png);
+}
+.WebGrey{
+	background-image: url(../Images/BotonIcos/web_grey.png);
+}
+.WebWhite{
+	background-image: url(../Images/BotonIcos/web_white.png);
+}
+.WebBlack:hover, .WebGrey:hover, .WebWhite:hover{
+	background-image: url(../Images/BotonIcos/web_grey.png);
+}
+
 
 .imgButIco{
 	width: 2.1em !important;

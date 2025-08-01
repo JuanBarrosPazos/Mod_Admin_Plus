@@ -5,7 +5,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	global $playini; $playini = 1;
+	global $playini;		$playini = 1;
 
 	require 'Inclu/error_hidden.php';
 	require 'Inclu/Admin_head.php';
@@ -742,7 +742,13 @@ function show_ficha(){
 		global $ttot;	$ttot = '00:00:00';
 		
 	print("<div class='juancentra' style='border:none;'>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
+				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
+				<br>REFER: ".strtoupper($_SESSION['ref'])."
+				<br>FICHE SU ENTRADA<br>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
 				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
@@ -756,11 +762,8 @@ function show_ficha(){
 					<input type='hidden' name='entrada' value=1 />
 			</form>														
 		</div>"); 
-		}
-	
 	// FICHA SALIDA.
-	
-	elseif($count1 > 0){
+	}elseif($count1 > 0){
 		
 		global $dout;	$dout = date('Y-m-d');
 		global $tout;	global $ttot;
@@ -774,8 +777,14 @@ function show_ficha(){
 
 			////////////////////		***********  		////////////////////
 
-	print("<div class='juancentra' style='border:none;'>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
+		print("<div class='juancentra' style='border:none;'>
+				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
+				<br>RERER: ".strtoupper($_SESSION['ref'])."
+				<br>FICHE SU SALIDA<br>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
 				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
@@ -848,11 +857,17 @@ function process_pin(){
 			global $ttot;		$ttot = '00:00:00';
 		
 		print("<div class='juancentra' style='border:none;'>
-			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-			<br>".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."<br>
+			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
+			<br>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
+			<br>REFER: ".strtoupper($rp['ref'])."<br>
+			<br>FICHE SU ENTRADA<br>
 
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
-				<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+				<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
 				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
@@ -864,10 +879,6 @@ function process_pin(){
 					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='entrada' value=1 />
 			</form>														
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
 			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>
 		</div>");
@@ -889,12 +900,17 @@ function process_pin(){
 			////////////////////		***********  		////////////////////
 
 		print("<div class='juancentra' style='border:none;'>
-
-			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-			<br>".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."<br>
+			".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
+			<br>REFER: ".strtoupper($rp['ref'])."<br>
+			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
+			<br>FICHE SU SALIDA<br>
 			
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
 			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
-				<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+				<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
 				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
@@ -903,10 +919,6 @@ function process_pin(){
 					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='salida' value=1 />
 			</form>														
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block;' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
 	<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>
 		</div>"); 
@@ -921,7 +933,7 @@ function process_pin(){
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
 					</font>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			<embed src='audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
@@ -935,7 +947,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-			print ($redir);
+		print ($redir);
 	}			
 		
 } // FIN function process_pin()
@@ -960,28 +972,24 @@ function pin_out(){
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
-	global $din;
-	global $tin;
-	$din = trim($row1['din']);
-	$tin = trim($row1['tin']);
-	global $in;
-	$in = $din." ".$tin;
-	global $dout;
-	global $tout;
-	$dout = trim($_POST['dout']);
-	$tout = trim($_POST['tout']);
-	global $out;
-	$out = $dout." ".$tout;
+	global $din;		$din = trim($row1['din']);
+	global $tin;		$tin = trim($row1['tin']);
+	global $in;			$in = $din." ".$tin;
 	
-	$fecha1 = new DateTime($in);//fecha inicial
+	global $dout;		$dout = trim($_POST['dout']);
+	global $tout;		$tout = trim($_POST['tout']);
+	
+	global $out;		$out = $dout." ".$tout;
+	
+		$fecha1 = new DateTime($in);//fecha inicial
 	$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;
-	$difer = $fecha1->diff($fecha2);
+	global $difer;		$difer = $fecha1->diff($fecha2);
+	
 	//print ($difer);
 	
-	global $ttot;
-	$ttot = $difer->format('%H:%i:%s');
+	global $ttot;		$ttot = $difer->format('%H:%i:%s');
+	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -997,7 +1005,6 @@ function pin_out(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
-
 	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<div class='juancentra' style='border-color:#F1BD2D;'>
@@ -1025,8 +1032,8 @@ function pin_out(){
 				 ////////////////////				  ///////////////////
 	
 		$tabla = "<div class='juancentra' >
-					HA FICHADO LA SALIDA<br>".$_POST['name1']." ".$_POST['name2']."<br>
-			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+					HA FICHADO LA SALIDA<br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
+			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
 					<br>REFERENCIA: ".$_POST['ref']."
 					<br>FECHA ENTRADA: ".$din."
 					<br>HORA ENTRADA: ".$tin."
@@ -1034,7 +1041,7 @@ function pin_out(){
 					<br>HORA SALIDA: ".$_POST['tout']."
 					<br>HORAS REALIZADAS: ".$ttot."<br>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;'>
-					<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+					<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>	
 			</div>
@@ -1052,8 +1059,7 @@ function pin_out(){
 		print($tabla); 
 		suma_todo();
 
-		global $dir;
-		$dir = "Users/".$_POST['ref']."/mrficha";
+		global $dir;		$dir = "Users/".$_POST['ref']."/mrficha";
 
 		global $sumatodo;
 		global $text;
@@ -1091,13 +1097,13 @@ function pin_out(){
 function pin_in(){
 	
 	$tabla = "<div class='juancentra'>
-				HA FICHADO LA ENTRADA</br>".$_POST['name1']." ".$_POST['name2']."<br>
-			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+				HA FICHADO LA ENTRADA</br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
+			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
 				<br>REFERENCIA: ".$_POST['ref']."
 				<br>FECHA ENTRADA: ".$_POST['din']."
 				<br>HORA ENTRADA: ".$_POST['tin']."<br>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 		</div>
@@ -1425,11 +1431,14 @@ function show_form($errors=[]){
 			<input type='hidden' name='oculto' value=1 />
 		</form>	
 
+			<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
+				<button type='submit' title='WEB CORPORATIVA' class='botonverde imgButIco WebBlack' style='vertical-align:top;' ></button>
+			</a>
 			<a href='indexcamini.php'>
-				<button type='submit' title='GO TO QR SCANNER CAM' class='botonverde imgButIco FotoBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='GO TO QR SCANNER CAM' class='botonverde imgButIco QrBlack' style='vertical-align:top;' ></button>
 			</a>
 			<a href='Admin/Claves_Perdidas.php'>
-				<button type='submit' title='HE PERDIDO MIS CLAVES' class='botonverde imgButIco Busca2Black' style='vertical-align:top;' ></button>
+				<button type='submit' title='HE PERDIDO MIS CLAVES' class='botonverde imgButIco LlavesBlack' style='vertical-align:top;' ></button>
 			</a>
 			<a href='Mail_Php/index.php'  target='_blank'>
 				<button type='submit' title='WEBMASTER @ CONTACTO' class='botonverde imgButIco MailBlack' style='vertical-align:top;' ></button>
