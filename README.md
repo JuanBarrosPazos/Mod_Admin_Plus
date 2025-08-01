@@ -1,12 +1,15 @@
 
-## Mod_Admin_Plus V25.07.31 2025/07/31
+## Mod_Admin_Plus V25.08.01 2025/08/01
 
 ----
 ## ULTIMAS MODIFICACIONES.
 #### Mod_Admin_Plus V25.07.31 2025/07/31
-	- .\config\index_Play_System.php Modificación de estilos, inclusión de iconos, sustitución de tablas...
+	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
 	- Nuevos iconos aplicación.
 ----
+#### Mod_Admin_Plus V25.07.31 2025/07/31
+	- .\config\index_Play_System.php Modificación de estilos, inclusión de iconos, sustitución de tablas...
+	- Nuevos iconos aplicación.
 #### Mod_Admin_Plus V25.07.30 2025/07/30
 	- Configurada la sincronización con GitHub desde HP2.
 	- Reparado error con lector de codigos QR.
