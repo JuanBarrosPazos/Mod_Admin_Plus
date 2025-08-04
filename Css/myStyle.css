@@ -627,8 +627,22 @@ img {
 }
 
 
+.DescargaBlack{
+	background-image: url(../Images/BotonIcos/descarga_black.png);
+}
+.DescargaGrey{
+	background-image: url(../Images/BotonIcos/descarga_grey.png);
+}
+.DescargaWhite{
+	background-image: url(../Images/BotonIcos/descarga_white.png);
+}
+.DescargaBlack:hover, .DescargaGrey:hover, .DescargaWhite:hover{
+	background-image: url(../Images/BotonIcos/descarga_grey.png);
+}
+
+
 .DetalleBlack{
-	background-image: url(../Images/BotonIcos/detalle_black_.png);
+	background-image: url(../Images/BotonIcos/detalle_black.png);
 }
 .DetalleGrey{
 	background-image: url(../Images/BotonIcos/detalle_grey.png);

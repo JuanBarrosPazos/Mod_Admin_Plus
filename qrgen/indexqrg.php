@@ -181,11 +181,11 @@ function validate_form(){
 	$errors = array();
 
 	if(strlen(trim($_POST['metodo'])) == 0){
-		$errors [] = "METODO: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "METODO: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 
 	if(strlen(trim($_POST['usercod'])) == 0){
-		$errors [] = "USUARIO: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "USUARIO: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 
 	return $errors;
@@ -211,158 +211,97 @@ function qrimg(){
 
 function Show_form($errors=[]){	
 
-	if (isset($_POST['downl'])){
+	if(isset($_POST['downl'])){
 		print("<embed src='../audi/file_exp_ok.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
-			}
+	}
 
 	global $errorCorrectionLevel;
 	global $matrixPointSize;
 
 	if(isset($_POST['oculto'])){ $defaults = $_POST;
 
-	} else {$defaults = array ( 
+	}else{	$defaults = array ( 
 			'metodo' => isset($_REQUEST['metodo']),
 			'usercod' => isset($_REQUEST['usercod']),
-			'imgname' => isset($_REQUEST['imgname']),
-						);
-			}
+			'imgname' => isset($_REQUEST['imgname']),);
+	}
 
 	if ($errors){
-		global $a;
-		$a = 1;
-		print("	<table align='center'>
-					<tr>
-						<th style='text-align:center>
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
-					</tr>
-					<tr>
-						<td style='text-align:left'>");
-	for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errors [$a]."<br/>");
-			}
-	print("</td>
-				</tr>
-	<embed src='../audi/error_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-					</table>");
-	}else{	global $a;
-			$a = 0;
+		global $a;		$a = 1;
+		print("<div class='juancentra'>
+				<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>");
+		for($a=0; $c=count($errors), $a<$c; $a++){
+				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
 			}
 
-	$metodo = array (	'' => 'SELECCIONE EL METODO PARA FICHAR',
-						'index.php?pin=' => 'CONFIRMACION DATOS USUARIO',
-						'indexqr.php?pin=' => 'FICHAR AUTO SIN CONFIRMACION');														
+		print("</div>
+		<embed src='../audi/error_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+		</embed>");
 
-print("<div style='text-align: center'>
+	}else{	global $a;		$a = 0; }
 
-		<table align='center' style=\"border:0px;margin_bottom:6px;margin-top:10px\">
+	$metodo = array('' => 'SELECCIONE EL METODO PARA FICHAR',
+					'index.php?pin=' => 'CONFIRMACION DATOS USUARIO',
+					'indexqr.php?pin=' => 'FICHAR AUTO SIN CONFIRMACION');
+
+	print("<div class='juancentra'>
 			<form action='$_SERVER[PHP_SELF]' method='post'>
-		<tr>
-			<td colspan='2' align='center' class='BorderSup'>
-       			METODO EN QUE EL QR ACTUA
-	   		</td>
-		</tr>
-		<tr>
-			<td colspan='2' align='center' class='BorderInf'>
-			<select name='metodo'>");
+       			METODO EN QUE EL QR ACTUA<br>
+			<select name='metodo' class='botonazul'>");
 		foreach($metodo as $option => $label){
-				print ("<option value='".$option."' ");
-				if($option == $defaults['metodo']){	print ("selected = 'selected'");}
-													print ("> $label </option>");
-											}	
+			print ("<option value='".$option."' ");
+			if($option == $defaults['metodo']){	print ("selected = 'selected'");}
+												print ("> $label </option>");
+		}	
 					
-print ("</select>
-			</td>
-		</tr>
-		<tr>
-			<td align='right'>
-       			QR FOR USER:
-	   		</td>
-			<td align='left'>
-
-			<select name='usercod'>
+	print ("</select>
+			<hr>
+       		QR FOR USER:
+			<select name='usercod' class='botonazul'>
 			<option value=''>SELECCIONE UN USUARIO</option><!-- --> ");
 
-global $db;
-global $tablau;
-$tablau = $_SESSION['clave']."admin";
-$tablau = "`".$tablau."`";
+	global $db;
+	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
 
-$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
-$qu = mysqli_query($db, $sqlu);
-if(!$qu){
-		print("Modifique la entrada L.148 ".mysqli_error($db)."<br/>");
-} else {
-			
-	while($rowu = mysqli_fetch_assoc($qu)){
-				
-				print ("<option value='".$rowu['dni']."' ");
-				
-				if($rowu['dni'] == $defaults['usercod']){
-									print ("selected = 'selected'");
-																	}
-					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+	$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+	$qu = mysqli_query($db, $sqlu);
+
+	if(!$qu){
+			print("SQL ERROR L.266 ".mysqli_error($db)."<br/>");
+	}else{
+		while($rowu = mysqli_fetch_assoc($qu)){
+			print ("<option value='".$rowu['dni']."' ");
+			if($rowu['dni'] == $defaults['usercod']){
+				print ("selected = 'selected'");
+			}
+			print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
 		}
-}  
+	}  
 
-print ("</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan='2' align='center' class='BorderSup'>
-       			CALIDAD Y DEFINICION DEL QR
-	   		</td>
-		</tr>
-		<tr>
-			<td align='right'>
-		ECC:
-			</td>
-			<td align='left'>
-			");
+	print("</select><hr>
+				CALIDAD Y DEFINICION DEL QR <br> ECC: ");
 	
-	echo '<select name="level">
+	echo'<select name="level" class="botonazul">
 			<option value="L"'.(($errorCorrectionLevel=='L')?' selected':'').'>L - smallest</option>
 			<option value="M"'.(($errorCorrectionLevel=='M')?' selected':'').'>M</option>
 			<option value="Q"'.(($errorCorrectionLevel=='Q')?' selected':'').'>Q</option>
 			<option value="H"'.(($errorCorrectionLevel=='H')?' selected':'').'>H - best</option>
 		  </select>';
-
-	print("<td>
-		</tr>
-		<tr>
-			<td align='right' class='BorderInf'>
-        SIZE:
-			</td>
-			<td align='left' class='BorderInf'>
-			<select name='size'>");
+		  
+	print("SIZE: <select name='size' class='botonazul'>");
 
 	for($i=1;$i<=10;$i++){
-
 		echo '<option value="'.$i.'"'.(($matrixPointSize==$i)?' selected':'').'>'.$i.'</option>';
-
-		}
+	}
 
 	print ("</select>
-				</td>
-			</tr>
-			<tr>
-
-			<td align='right' class='BorderInf'>
-				NAME FOR IMAGE:
-			</td>
-			<td align='left' class='BorderInf'>
-				<input name='imgname' size=32 maxlength=14 value='".$defaults['imgname']."' placeholder='OPCIONAL' />
-			</td>
-		</tr>
-		<tr>
-			<td colspan=2 align='center' class='BorderInf'>
+				<hr>
+				NAME FOR IMAGE: <br>
+			<input name='imgname' size=32 maxlength=14 value='".$defaults['imgname']."' placeholder='OPCIONAL' />
+		<br>
 					<input type='submit' value='GENERATE QR CODE FOR USER' class='botonverde' />
 					<input type='hidden' name='oculto' value=1 />
 				</form>
-			</td>
-		</tr>
-		</table>
 	</div>");
 
 }
@@ -371,33 +310,36 @@ print ("</select>
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function deletemp(){
+function deletemp(){
 
-	global $ruta;
-	$ruta = "temp/";
-	if(file_exists($ruta)){  $dir = $ruta."/";
-							 $handle = opendir($dir);
-					while ($file = readdir($handle))
-						 {if (is_file($dir.$file)){unlink($dir.$file);}
-							}
-						} else { }
-	}
+	global $ruta;		$ruta = "temp/";
+	if(file_exists($ruta)){  
+		$dir = $ruta."/";
+		$handle = opendir($dir);
+		while ($file = readdir($handle)){
+			if (is_file($dir.$file)){
+				unlink($dir.$file);}
+			}
+	}else{ }
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function deleqrimg(){
+function deleqrimg(){
 
-	global $ruta;
-	$ruta = "qrimg/";
-	if(file_exists($ruta)){  $dir = $ruta."/";
-							 $handle = opendir($dir);
-			  while ($file = readdir($handle)){if (is_file($dir.$file))
-												 {unlink($dir.$file);}
-											 	}
-							} else { }
+	global $ruta;			$ruta = "qrimg/";
+	if(file_exists($ruta)){ 
+		$dir = $ruta."/";
+		$handle = opendir($dir);
+		while ($file = readdir($handle)){
+			if (is_file($dir.$file)){
+					unlink($dir.$file);
 			}
+		}
+	}else{ }
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -405,73 +347,58 @@ print ("</select>
 	
 function listfiles(){
 	
-	global $num3;
-	$num3=count(glob("qrimg/{*}",GLOB_BRACE));
+	global $num3;			$num3=count(glob("qrimg/{*}",GLOB_BRACE));
 
-	global $ruta;
-	$ruta ="qrimg/";
+	global $ruta;			$ruta ="qrimg/";
 	//print("RUTA: ".$ruta.".</br>");
 	
-	global $rutag;
-	$rutag = "qrimg/{*}";
+	global $rutag;			$rutag = "qrimg/{*}";
 	//print("RUTA G: ".$rutag.".</br>");
 		
 	$directorio = opendir($ruta);
-	global $num;
-	$num=count(glob($rutag,GLOB_BRACE));
-
+	global $num;			$num=count(glob($rutag,GLOB_BRACE));
 	global $a;
 
 	if($num < 1){
 		
-	if ($a == 0){
-		print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
-					}
+		if($a == 0){
+			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		}
 		
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-					<tr>
-						<td align='center'>NO HAY ARCHIVOS PARA DESCARGAR</td>
-					</tr>
-				</table>");
+		print ("<div class='juancentra'>
+					NO HAY ARCHIVOS PARA DESCARGAR
+				</div>");
 	}else{
 		
-	if ($a == 0) {
-		print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
-						}
+		if ($a == 0) {
+			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		}
 
-	print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-					<td align='center' colspan='3' class='BorderInf'>
-						QR CODES FOR EXPORT  ".$num3." 
-						<br>
-						IF > ".(($_SESSION['nuser']*2+6))." AUTO DELETE QR FILES
-					</td>
-				</tr>");
+		print("<ul class='juancentra'>
+				QR CODES FOR EXPORT  ".$num3." 
+				<br>IF > ".(($_SESSION['nuser']*2+6))." AUTO DELETE QR FILES
+			<hr>");
 
-while($archivo = readdir($directorio)){
-	if($archivo != ',' && $archivo != '.' && $archivo != '..'){
-		print("<tr>
-					<td class='BorderInfDch'>
-						<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
-							<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-							<input type='submit' value='ELIMINAR' class='botonrojo' />
-							<input type='hidden' name='delete' value='1' >
+		while($archivo = readdir($directorio)){
+			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
+				print("<li style='min-height:2.1em; list-style-type:none;'>
+				<form name='delete' action='$_SERVER[PHP_SELF]' method='post' style='display:inline-block; float:left;'>
+					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+					<button type='submit' title='ELIMINAR' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='delete' value='1' >
+				</form>
+				<form name='archivos' action='$_SERVER[PHP_SELF]' method='POST' style='display:inline-block; float:left; margin-left:0.4em;'>
+					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+					<button type='submit' title='DESCARGAR' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='downl' value='1' >
 						</form>
-					</td>
-					<td class='BorderInfDch'>
-						<form name='archivos' action='$_SERVER[PHP_SELF]' method='POST'>
-							<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-							<input type='hidden' name='downl' value='1' >
-							<input type='submit' value='DESCARGAR' class='botonverde' />
-						</form>
-					</td>
-					<td class='BorderInf'>".strtoupper($archivo)."</td>
-				</tr>");
+					<div style='display: inline-block; float:left; margin:0.5em 0.1em 0.1em 0.4em;'>".strtoupper($archivo)."</div>
+					</li><hr>");
 			}else{}
 		} // FIN DEL WHILE
 	}
 	closedir($directorio);
-	print("</table>");
+	print("</ul>");
 }
 
 				   ////////////////////				   ////////////////////
