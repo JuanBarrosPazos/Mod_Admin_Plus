@@ -387,16 +387,20 @@ img {
 	background-color: #90faf5;
 }
 .botonnaranja {
-	background-color: #fdc97a;
+	background-color: #ffcc7f;
 }
 .botonrojo {
-	background-color: #ff4d4d;
+	background-color: #ff6262;
 }
 .botonazul {
+	background-color: #82d4fd;
+}
+.botonlila {
 	background-color: #dd92fd;
 }
 
-.botonverde, .botonnaranja, .botonrojo, .botonazul, select {
+
+.botonverde, .botonnaranja, .botonrojo, .botonazul, .botonlila, select {
 	cursor: pointer;
 	border: none;
 	vertical-align: text-bottom;
@@ -405,7 +409,7 @@ img {
 	border-radius: 4px;
 	font-weight: bold;
 }
-.botonverde:hover, .botonnaranja:hover, .botonrojo:hover, .botonazul:hover {
+.botonverde:hover, .botonnaranja:hover, .botonrojo:hover, .botonazul:hover, .botonlila:hover {
 	background-color: #dadada;
 }
 

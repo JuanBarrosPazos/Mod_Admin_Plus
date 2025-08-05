@@ -746,7 +746,7 @@ function show_ficha(){
 				<br>REFER: ".strtoupper($_SESSION['ref'])."
 				<br>FICHE SU ENTRADA<br>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
@@ -782,7 +782,7 @@ function show_ficha(){
 				<br>RERER: ".strtoupper($_SESSION['ref'])."
 				<br>FICHE SU SALIDA<br>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
@@ -863,7 +863,7 @@ function process_pin(){
 			<br>FICHE SU ENTRADA<br>
 
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
@@ -878,10 +878,10 @@ function process_pin(){
 				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
 					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='entrada' value=1 />
-			</form>														
+			</form>
+			</div>													
 			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>
-		</div>");
+			</embed>");
 
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
@@ -906,7 +906,7 @@ function process_pin(){
 			<br>FICHE SU SALIDA<br>
 			
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
@@ -918,10 +918,9 @@ function process_pin(){
 				<input type='hidden' id='tout' name='tout' value='".$tout."' />
 					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='salida' value=1 />
-			</form>														
+			</form></div>														
 	<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-		</div>"); 
+	</embed>"); 
 			
 		}
 	
@@ -933,12 +932,12 @@ function process_pin(){
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
 					</font>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
+			</div>
 			<embed src='audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>
-		</div");
+			</embed>");
 
 	 	global $redir;
 		$redir = "<script type='text/javascript'>
@@ -1041,7 +1040,7 @@ function pin_out(){
 					<br>HORA SALIDA: ".$_POST['tout']."
 					<br>HORAS REALIZADAS: ".$ttot."<br>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;'>
-					<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>	
 			</div>
@@ -1103,7 +1102,7 @@ function pin_in(){
 				<br>FECHA ENTRADA: ".$_POST['din']."
 				<br>HORA ENTRADA: ".$_POST['tin']."<br>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='VOLVER INICIO' class='botonazul imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 		</div>
@@ -1426,22 +1425,22 @@ function show_form($errors=[]){
 
 			<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' placeholder='PASSWORD' required  style='text-align:center; margin-top:0.4em;' />
 
-			<button type='submit' title='INICIAR SESIÓN' class='botonazul imgButIco OpenBlack' style='vertical-align:top;' ></button>
+			<button type='submit' title='INICIAR SESIÓN' class='botonlila imgButIco OpenBlack' style='vertical-align:top;' ></button>
 			
 			<input type='hidden' name='oculto' value=1 />
 		</form>	
 
 			<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-				<button type='submit' title='WEB CORPORATIVA' class='botonverde imgButIco WebBlack' style='vertical-align:top;' ></button>
+				<button type='button' title='WEB CORPORATIVA' class='botonverde imgButIco WebBlack' style='vertical-align:top;' ></button>
 			</a>
 			<a href='indexcamini.php'>
-				<button type='submit' title='GO TO QR SCANNER CAM' class='botonverde imgButIco QrBlack' style='vertical-align:top;' ></button>
+				<button type='button' title='GO TO QR SCANNER CAM' class='botonverde imgButIco QrBlack' style='vertical-align:top;' ></button>
 			</a>
 			<a href='Admin/Claves_Perdidas.php'>
-				<button type='submit' title='HE PERDIDO MIS CLAVES' class='botonverde imgButIco LlavesBlack' style='vertical-align:top;' ></button>
+				<button type='button' title='HE PERDIDO MIS CLAVES' class='botonverde imgButIco LlavesBlack' style='vertical-align:top;' ></button>
 			</a>
 			<a href='Mail_Php/index.php'  target='_blank'>
-				<button type='submit' title='WEBMASTER @ CONTACTO' class='botonverde imgButIco MailBlack' style='vertical-align:top;' ></button>
+				<button type='button' title='WEBMASTER @ CONTACTO' class='botonverde imgButIco MailBlack' style='vertical-align:top;' ></button>
 			</a>
 		</div>"); 
 	

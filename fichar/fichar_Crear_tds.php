@@ -219,7 +219,7 @@ function show_form(){
 	<input name='name2' type='hidden' value='".$rowb['Apellidos']."' />".$rowb['Apellidos']."
 				</td>
 				<td align='right' class='BorderInf'>
-	<input type='submit' value='SELECCIONAR USUARIO ".strtoupper($rowb['ref'])."' class='botonazul' />
+	<input type='submit' value='SELECCIONAR USUARIO ".strtoupper($rowb['ref'])."' class='botonlila' />
 	<input type='hidden' name='oculto1' value=1 />
 				</td>
 	</form></tr>");

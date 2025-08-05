@@ -247,7 +247,7 @@ function Show_form($errors=[]){
 	print("<div class='juancentra'>
 			<form action='$_SERVER[PHP_SELF]' method='post'>
        			METODO EN QUE EL QR ACTUA<br>
-			<select name='metodo' class='botonazul'>");
+			<select name='metodo' class='botonlila'>");
 		foreach($metodo as $option => $label){
 			print ("<option value='".$option."' ");
 			if($option == $defaults['metodo']){	print ("selected = 'selected'");}
@@ -257,7 +257,7 @@ function Show_form($errors=[]){
 	print ("</select>
 			<hr>
        		QR FOR USER:
-			<select name='usercod' class='botonazul'>
+			<select name='usercod' class='botonlila'>
 			<option value=''>SELECCIONE UN USUARIO</option><!-- --> ");
 
 	global $db;
@@ -281,14 +281,14 @@ function Show_form($errors=[]){
 	print("</select><hr>
 				CALIDAD Y DEFINICION DEL QR <br> ECC: ");
 	
-	echo'<select name="level" class="botonazul">
+	echo'<select name="level" class="botonlila">
 			<option value="L"'.(($errorCorrectionLevel=='L')?' selected':'').'>L - smallest</option>
 			<option value="M"'.(($errorCorrectionLevel=='M')?' selected':'').'>M</option>
 			<option value="Q"'.(($errorCorrectionLevel=='Q')?' selected':'').'>Q</option>
 			<option value="H"'.(($errorCorrectionLevel=='H')?' selected':'').'>H - best</option>
 		  </select>';
 		  
-	print("SIZE: <select name='size' class='botonazul'>");
+	print("SIZE: <select name='size' class='botonlila'>");
 
 	for($i=1;$i<=10;$i++){
 		echo '<option value="'.$i.'"'.(($matrixPointSize==$i)?' selected':'').'>'.$i.'</option>';

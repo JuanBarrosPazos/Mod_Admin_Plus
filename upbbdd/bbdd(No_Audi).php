@@ -80,7 +80,7 @@ function show_form(){
 				<tr>
 					<td>
 					<div style='float:left; margin-right:6px''>
-						<input type='submit' value='SELECCIONE USUARIO / TABLA' class='botonazul' />
+						<input type='submit' value='SELECCIONE USUARIO / TABLA' class='botonlila' />
 						<input type='hidden' name='oculto1' value=1 />
 					</div>
 					<div style='float:left'>

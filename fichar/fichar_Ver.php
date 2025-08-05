@@ -74,7 +74,7 @@ function show_form(){
 	print ("<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
 				<tr>
 					<td align='center' class='BorderSup'>
-						<input type='submit' value='CONSULTA JORNADAS LABORALES' class='botonazul' />
+						<input type='submit' value='CONSULTA JORNADAS LABORALES' class='botonlila' />
 						<input type='hidden' name='todo' value=1 />
 					</td>
 					<td class='BorderSup'>	

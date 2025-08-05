@@ -80,7 +80,7 @@
 					<tr>
 						<td>
 						<div style='float:left; margin-right:6px'>
-							<input type='submit' value='SELECCIONE UN USUARIO' class='botonazul' />
+							<input type='submit' value='SELECCIONE UN USUARIO' class='botonlila' />
 							<input type='hidden' name='oculto1' value=1 />
 						</div>
 						<div style='float:left'>
@@ -144,7 +144,7 @@
 		<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
 				<tr>
 					<td align='center' class='BorderSup'>
-						<input type='submit' value='TODAS JORNADAS LABORALES' class='botonazul' />
+						<input type='submit' value='TODAS JORNADAS LABORALES' class='botonlila' />
 						<input type='hidden' name='todo' value=1 />
 					</td>
 					<td class='BorderSup'>	

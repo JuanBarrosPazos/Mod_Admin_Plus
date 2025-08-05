@@ -110,18 +110,20 @@ function show_form($errors=[]){
 	<form name='Perdidos' method='post' action='$_SERVER[PHP_SELF]'>
 		<input name='Asunto' type='hidden' value='".$defaults['Asunto']."' />".$defaults['Asunto']."
 		<br>
-			<input type='text' name='Email' size=30 value='".$defaults['Email']."' placeholder='EMAIL' required  />
+			<input type='text' name='Email' size=30 value='".$defaults['Email']."' placeholder='EMAIL' required />
 		<br>
 			<input type='text' name='dni' size=30 maxlength=8 value='".$defaults['dni']."' placeholder='DNI' required />
 		<br>
 			<input type='text' name='ldni' size=16 maxlength=1 value='".$defaults['ldni']."' placeholder='LETRA CONTROL' required />
-			<button type='submit' title='ENVIAR MIS CLAVES' class='botonazul imgButIco OpenBlack' style='vertical-align:top; margin-left:20%;' ></button>
+
+			<button type='submit' title='ENVIAR MIS CLAVES' class='botonlila imgButIco OpenBlack' style='vertical-align:top; margin-left:8%;' ></button>
 
 		<input type='hidden' name='oculto' value=1 />
+
+			<a href='../index.php'>
+				<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			</a>
 	</form>	
-		<a href='../index.php'>
-			<button type='submit' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
-		</a>
 	</div>"); /* Fin del print */
 
 	}	/* Fin de la función show_form(); */
@@ -169,13 +171,14 @@ function process_form(){
 			} /* Fin del while.*/
 
 			print("<br>
-				<button type='submit' title='CONFIRMAR Y ENVIAR MIS DATOS VIA MAIL' class='botonazul imgButIco OpenBlack' style='vertical-align:top; margin-left:85%;' ></button>
+				<button type='submit' title='CONFIRMAR Y ENVIAR MIS DATOS VIA MAIL' class='botonlila imgButIco OpenBlack' style='vertical-align:top; margin-left:72%;' ></button>
 
 				<input type='hidden' name='oculto2' value=1 />
-			</form>
+
 				<a href='../index.php'>
-					<button type='submit' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top; float:left;' ></button>
 				</a>
+			</form>
 			</div>");
 		} /* FIN segundo else anidado en if */
 
@@ -332,7 +335,7 @@ function process_form(){
 				</font>
 				<br>
 				<a href='../index.php'>
-					<button type='submit' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				</a>
 			</div>
 		<embed src='../audi/claves_lost_3.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
@@ -343,10 +346,10 @@ function process_form(){
 				EL MENSAJE NO HA PODIDO ENVIARSE.
 					<br>
 				<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-					<button type='submit' title='CONTACTOS WEB MASTER' class='botonverde imgButIco WebBlack' style='vertical-align:top;' ></button>
+					<button type='button' title='CONTACTOS WEB MASTER' class='botonverde imgButIco WebBlack' style='vertical-align:top;' ></button>
 				</a>
 				<a href='../index.php'>
-					<button type='submit' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				</a>
 			</div>
 		<embed src='../audi/claves_lost_4.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
