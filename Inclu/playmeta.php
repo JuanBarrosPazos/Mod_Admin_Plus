@@ -12,6 +12,7 @@ print("
 <title>Juan Manuel Barros Pazos</title>
 
 <link href='".$rutameta."Css/myStyle.css' rel='stylesheet' type='text/css' />
+<link href='".$rutameta."Css/MyStyleButtonIcos.css' rel='stylesheet' type='text/css' />
 <link href='".$rutameta."Css/menu.css' rel='stylesheet' type='text/css' />
 <link href='".$rutameta."Css/menuico.css' rel='stylesheet' type='text/css' />
 

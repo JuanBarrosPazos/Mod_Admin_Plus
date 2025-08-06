@@ -88,7 +88,7 @@ function show_form($errors=[]){
 	}
 	
 	if($errors){
-		print("<div class='juancentra' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 				* SOLUCIONE ESTOS ERRORES.<br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
@@ -105,7 +105,7 @@ function show_form($errors=[]){
 				</embed>");
 				}
 	
-	print("<div class='juancentra'>
+	print("<div class='centradiv'>
 
 	<form name='Perdidos' method='post' action='$_SERVER[PHP_SELF]'>
 		<input name='Asunto' type='hidden' value='".$defaults['Asunto']."' />".$defaults['Asunto']."
@@ -149,7 +149,7 @@ function process_form(){
 				print ("No hay datos.");
 							
 		}else{ 	
-			print ("<div class='juancentra'>
+			print ("<div class='centradiv'>
 				<form name='modifica' action='$_SERVER[PHP_SELF]' method='POST'>
 					<input type='hidden' name='Asunto' value='".$_POST['Asunto']."' />".$_POST['Asunto']."<br>");
 			
@@ -327,7 +327,7 @@ function process_form(){
 	*/
 				
 	if( mail($destinatario, $titulo, $mensaje, $cabecera)){
-		print("<div class='juancentra'>
+		print("<div class='centradiv'>
 				<font color='#0080C0'>
 					SUS DATOS HAN SIDO ENVIADOS.
 					<br>
@@ -342,7 +342,7 @@ function process_form(){
 		</embed>");
 
 	}else{	
-		print("<div class='juancentra' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 				EL MENSAJE NO HA PODIDO ENVIARSE.
 					<br>
 				<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>

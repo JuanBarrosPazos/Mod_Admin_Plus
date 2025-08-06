@@ -74,9 +74,9 @@
 		} else { echo "<body topmargin=\"0\" >";} 
 	?>
 	
-	<div id="Conte">
+	<div id="page" >
 
-	<div id="head"> 
+	<div id="header"> 
 				<span style="font-size:18px">
 						JUAN BARROS PAZOS
 				</span>
@@ -88,7 +88,7 @@
 
   <div style="clear:both"></div>
    
-   <div style="margin-top:2px; text-align:center" id="TitTut">
+   <div style="margin-top:2px; text-align:center" id="headerTitulo">
    
 		<?php
 			if (isset($playini)){ 
@@ -99,7 +99,7 @@
 	</div>
 			  <div style="clear:both"></div>
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 
 
 

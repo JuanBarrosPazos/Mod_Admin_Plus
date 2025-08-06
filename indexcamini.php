@@ -167,7 +167,7 @@ function show_form2($errorsp=''){
 <!-- *************************** -->		<!-- *************************** -->
 					<!-- *************************** -->
 	
- <div id="Caja2Admin" style="text-align: center">
+ <div id="pageContenido" style="text-align: center">
 	  
    	<div style="margin-top:4px; margin-bottom: 4px; text-align:center">
 		<a href="index.php">CANCELAR Y VOLVER AL INICIO.</a>
@@ -299,7 +299,7 @@ function show_form2($errorsp=''){
 
   </div> <!-- FIN DIV JS CODE -->	
 
-</div>  <!-- FIN DIV id="Conte" -->
+</div>  <!-- FIN DIV id="page"  -->
   
 <div style="clear:both"></div>
 
@@ -307,7 +307,7 @@ function show_form2($errorsp=''){
 <div id="footer"><?php print($head_footer);?></div>
 <!-- Fin footer -->
 
-</div> <!-- FIN DIV id="Caja2Admin" -->
+</div> <!-- FIN DIV id="pageContenido" -->
 
 </body>
 

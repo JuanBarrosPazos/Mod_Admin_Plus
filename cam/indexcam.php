@@ -163,7 +163,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 
 </div> <!-- FIN DIV JS CODE -->	
 
-</div> <!-- FIN DIV id="Conte" -->
+</div> <!-- FIN DIV id="page"  -->
 
 <div style="clear:both"></div>
 
@@ -171,7 +171,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 <div id="footer"><?php print($head_footer);?></div>
 <!-- Fin footer -->
 
-</div> <!-- FIN DIV id="Caja2Admin" -->
+</div> <!-- FIN DIV id="pageContenido" -->
 
 </body>
 

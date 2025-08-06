@@ -17,6 +17,7 @@ require '../../Inclu/misdatos.php';
 <title><?php print($meta_titulo);?></title>
 	
 <link href="../../Css/myStyle.css" rel="stylesheet" type="text/css" />
+<link href="../../Css/MyStyleButtonIcos.css" rel="stylesheet" type="text/css" />
 <link href="../../Css/menu.css" rel="stylesheet" type="text/css" />
 <link href="../../Css/menuico.css" rel="stylesheet" type="text/css" />
 
@@ -26,9 +27,9 @@ require '../../Inclu/misdatos.php';
 
 <body topmargin="0">
 	
-<div id="Conte">
+<div id="page" >
 
-  <div id="head"> 
+  <div id="header"> 
   			<span style="font-size:18px">
   							<?php print(strtoupper($head_titulo));?>
             </span>
@@ -48,6 +49,6 @@ require '../../Inclu/misdatos.php';
 ////////////////////////////////
 -->
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 
 

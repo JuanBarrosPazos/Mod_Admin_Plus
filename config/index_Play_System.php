@@ -161,10 +161,6 @@ function bbdd_backup(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
 function table_desblock(){
 	
 require_once('geo_class/geoplugin.class.php');
@@ -259,8 +255,7 @@ function modif2b(){
 
 function tcl(){
 	
-	global $db;
-	global $db_name;
+	global $db;			global $db_name;
 	
 	$vname = $_SESSION['clave'].$_SESSION['ref']."_".date('Y');
 	$vname = "`".$vname."`";
@@ -279,17 +274,14 @@ function tcl(){
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	if(mysqli_query($db , $tcl)){
-		
-					global $dat4;
-					$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
-			
-				} else {
-					
-					global $dat4;
-					$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
-					
-					}
-}
+		global $dat4;
+		$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+	}else{
+		global $dat4;
+		$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+	}
+
+} // FIN function tcl()
 					
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -347,15 +339,12 @@ function admin_entrada(){
 		
 	if(mysqli_query($db, $sqladin)){
 			// print("* ");
-				} else {
-				print("</br>
+	}else{	print("</br>
 				<font color='#F1BD2D'>
-		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
-				</br>";
-							}
+		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."</br>";
+	}
 					
-	global $dir;
-	$dir = "Users/".$_SESSION['ref']."/log";
+	global $dir;		$dir = "Users/".$_SESSION['ref']."/log";
 
 	global $datos;
 	global $text;
@@ -363,7 +352,7 @@ function admin_entrada(){
 
 	require 'Admin/log_write.php';
 
-	} 
+} // FIN function admin_entrada()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -391,17 +380,16 @@ function show_visit(){
 	$idv = 69;
 	
 	if(mysqli_query($db, $sqlv)){
-		print("<div class='juancentra' style='border:none;'>
+		print("<div class='centradiv' id='visitsDatos' >
 				<font color='#59746A'>
 					VISITS: ".$tot."<br>
 					AUTHORIZED: ".$rowv['acceso']."<br>
 					FORBIDDEN: ".$rowv['deneg']."
 				</font>
 			</div>");
-
 	}else{
 		print("<font color='#F1BD2D'>* Error: show visit</font>
-				</br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
+				</br>ERROR SQL L.369 ".mysqli_error($db)."</br>");
 	}
 
 } // FIN function show_visit
@@ -437,17 +425,14 @@ function suma_visit(){
 
 	if(mysqli_query($db, $sqlv)){
 		/**/	print(" </br>");
-
 	}else{	print("<font color='#F1BD2D'>* Error: suma visit</font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
-						</br>");
+						</br>ERROR SQL L.424 ".mysqli_error($db)."</br>");
 	}
 	
 	global $text;		$text = "ACCESO A ADMIN SING IN".PHP_EOL;
 	ini_log();
 
-} // FIN function suma_visit
+} // FIN function suma_visit()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -479,8 +464,8 @@ function suma_acces(){
 
 	if(mysqli_query($db, $sqla)){ 
 			print ('</br>');
-	}else{ 	print("<font color='#F1BD2D'>* Error: suma access</font></br>
-					&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
+	}else{ 	print("<font color='#F1BD2D'>* Error: suma access</font>
+					</br>ERROR SQL L.463 ".mysqli_error($db)."</br>");
 	}
 
 			////////////////////		************   		////////////////////
@@ -495,10 +480,9 @@ function suma_acces(){
 	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('$_SESSION[ref]', '$_SESSION[Nivel]', '{$geoplugin->ip}', '0', '1', '$date', '$time')";
-	if(mysqli_query($db, $sqlip)){ } else { print("* MODIFIQUE LA ENTRADA L.457: ".mysqli_error($db));}
+	if(mysqli_query($db, $sqlip)){ }else{ print("* ERROR SQL L.482: ".mysqli_error($db));}
 
-
-} // FIN function suma_acces
+} // FIN function suma_acces()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -531,8 +515,8 @@ function suma_denegado(){
 
 	if(mysqli_query($db, $sqld)){/*	print("	</br>");*/
 		
-	}else{	print("<font color='#F1BD2D'>* Error: suma denegado</font></br>
-							&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
+	}else{	print("<font color='#F1BD2D'>* Error: suma denegado</font>
+					</br>ERROR SQL L.514 ".mysqli_error($db)."</br>");
 	}
 	
 			////////////////////		**********   		////////////////////
@@ -548,11 +532,11 @@ function suma_denegado(){
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '{$geoplugin->ip}', '1', '0', '$date', '$time')";
 	if(mysqli_query($db, $sqlip)){ 
-			global $text;
-			$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
-			ini_log();
+		global $text;
+		$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
+		ini_log();
 
-	}else{ 	print("* MODIFIQUE LA ENTRADA L.518: ".mysqli_error($db));}
+	}else{ 	print("ERROR SQL L.533: ".mysqli_error($db));}
 
 	bloqueo();
 	
@@ -741,7 +725,7 @@ function show_ficha(){
 		global $tout;	$tout = '00:00:00';
 		global $ttot;	$ttot = '00:00:00';
 		
-	print("<div class='juancentra' style='border:none;'>
+	print("<div class='centradiv' style='border:none;'>
 				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
 				<br>REFER: ".strtoupper($_SESSION['ref'])."
 				<br>FICHE SU ENTRADA<br>
@@ -777,7 +761,7 @@ function show_ficha(){
 
 			////////////////////		***********  		////////////////////
 
-		print("<div class='juancentra' style='border:none;'>
+		print("<div class='centradiv' style='border:none;'>
 				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
 				<br>RERER: ".strtoupper($_SESSION['ref'])."
 				<br>FICHE SU SALIDA<br>
@@ -856,7 +840,7 @@ function process_pin(){
 			global $tout;		$tout = '00:00:00';
 			global $ttot;		$ttot = '00:00:00';
 		
-		print("<div class='juancentra' style='border:none;'>
+		print("<div class='centradiv' style='border:none;'>
 			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
 			<br>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
 			<br>REFER: ".strtoupper($rp['ref'])."<br>
@@ -899,7 +883,7 @@ function process_pin(){
 
 			////////////////////		***********  		////////////////////
 
-		print("<div class='juancentra' style='border:none;'>
+		print("<div class='centradiv' style='border:none;'>
 			".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
 			<br>REFER: ".strtoupper($rp['ref'])."<br>
 			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
@@ -926,7 +910,7 @@ function process_pin(){
 	
 	ayear();
 		
-	}else{ print("<div class='juancentra' style='border-color:#F1BD2D;' >
+	}else{ print("<div class='centradiv' style='border-color:#F1BD2D;' >
 					<font color='#F1BD2D'>
 						NO EXISTE EL USUARIO.<br>
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
@@ -1006,7 +990,7 @@ function pin_out(){
 	
 	if(($ttoth > 9)||($ttotd > 0)){
 		
-		print("<div class='juancentra' style='border-color:#F1BD2D;'>
+		print("<div class='centradiv' style='border-color:#F1BD2D;'>
 					<font color='#F1BD2D'>
 						NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 					</font>
@@ -1030,7 +1014,7 @@ function pin_out(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-		$tabla = "<div class='juancentra' >
+		$tabla = "<div class='centradiv' >
 					HA FICHADO LA SALIDA<br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
 			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
 					<br>REFERENCIA: ".$_POST['ref']."
@@ -1081,7 +1065,7 @@ function pin_out(){
 					</script>";
 		print ($redir);
 	
-	}else{	print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
+	}else{	print("ERROR SQL L.1038: ".mysqli_error($db));
 			show_form2();
 			show_form ();
 			global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -1095,7 +1079,7 @@ function pin_out(){
 
 function pin_in(){
 	
-	$tabla = "<div class='juancentra'>
+	$tabla = "<div class='centradiv'>
 				HA FICHADO LA ENTRADA</br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
 			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
 				<br>REFERENCIA: ".$_POST['ref']."
@@ -1122,40 +1106,40 @@ function pin_in(){
 		
 	if(mysqli_query($db, $sqla)){ 
 		
-			print($tabla);
+		print($tabla);
 		
-			global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
+		global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 
-			global $text;
-			$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
-			$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
-			$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
+		global $text;
+		$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
+		$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
+		$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
 			
-			$rmfdocu = $_POST['ref'];
-			$rmfdate = date('Y_m');
-			$rmftext = $text.PHP_EOL;
-			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-			$rmf = fopen($filename, 'ab+');
-			fwrite($rmf, $rmftext);
-			fclose($rmf);
+		$rmfdocu = $_POST['ref'];
+		$rmfdate = date('Y_m');
+		$rmftext = $text.PHP_EOL;
+		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+		$rmf = fopen($filename, 'ab+');
+		fwrite($rmf, $rmftext);
+		fclose($rmf);
 		
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='index.php';
-						}
-						setTimeout('redir()',8000);
-						</script>";
-			print ($redir);
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',8000);
+					</script>";
+		print ($redir);
 
-		}else{	print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
-				show_form2();
-				show_form ();
-				global $texerror;
-				$texerror = PHP_EOL."\t ".mysqli_error($db);
-		}
+	}else{	print("ERROR SQL L.1105: ".mysqli_error($db));
+			show_form2();
+			show_form ();
+			global $texerror;
+			$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 	
-	} // FIN function pin_in()
+} // FIN function pin_in()
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1189,7 +1173,7 @@ function show_form2($errorsp=''){
 		$defaults = $_POST;
 	}else{$defaults = array ('pin' => '');}
 	
-	print("<div class='juancentra' style='border:none;' >
+	print("<div class='centradiv' style='border:none;' >
 			<form name='pin' method='post' action='$_SERVER[PHP_SELF]'>	
 				<input type='Password' name='pin' size=16 maxlength=8 value='".$defaults['pin']."' placeholder='FICHAR CON PIN' required style='text-align:center; margin-top:0.4em;' />
 				<button type='submit' title='FICHAR CON SU PIN' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
@@ -1202,7 +1186,7 @@ function show_form2($errorsp=''){
 		</div>"); 
 
 	if ($errorsp){
-		print("	<div class='juancentra' style='border-color:#F1BD2D !important;'>
+		print("	<div class='centradiv' style='border-color:#F1BD2D !important;'>
 				<!--
 					<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>
 				-->
@@ -1244,23 +1228,24 @@ function desbloqueo(){
 	$qdip = mysqli_query($db, $sdip);
 	$cdip = mysqli_num_rows($qdip);
 	if($cdip > 0){
-	$sqlxd = "DELETE FROM `$db_name`.$table_name_b WHERE `date` <> '$date' ";
-	if(mysqli_query($db, $sqlxd)){
+		$sqlxd = "DELETE FROM `$db_name`.$table_name_b WHERE `date` <> '$date' ";
+		if(mysqli_query($db, $sqlxd)){
 			// SI SE CUMPLE EL QUERY Y NO HAY DATOS EN LA TABLA LE PASO EL ID 1.
 			$sx =  "SELECT * FROM $table_name_b ";
 			$qx = mysqli_query($db, $sx);
 			$cx = mysqli_num_rows($qx);
 				if($cx < 1){
 				$sx1 = "ALTER TABLE `$db_name`.$table_name_b AUTO_INCREMENT=1";
-						if(mysqli_query($db, $sx1)){ }
-						else { print("* MODIFIQUE LA ENTRADA L.1565: ".mysqli_error($db));}
-							}
+						if(mysqli_query($db, $sx1)){
+
+						}else{ print("ERROR SQL L.1238 ".mysqli_error($db));}
+				}
 		} else {}
-	}else{} // Fin borrado de las entradas del día anterior.
+	}else{ } // Fin borrado de las entradas del día anterior.
 	
 	// SELECCIONO LAS IPs == A LA MIA, BLOQUEADAS CON "ACCESO X".
 
-	$sqlx =  "SELECT * FROM $table_name_b WHERE `ipn` = '{$geoplugin->ip}' AND `acceso` = 'x' ORDER BY `id` ASC ";
+	$sqlx =  "SELECT * FROM $table_name_b WHERE `ipn`='{$geoplugin->ip}' AND `acceso`='x' ORDER BY `id` ASC ";
 	$qx = mysqli_query($db, $sqlx);
 	$cx = mysqli_num_rows($qx);
 	$rowx = mysqli_fetch_assoc($qx);
@@ -1277,8 +1262,8 @@ function desbloqueo(){
 				global $text;
 				$text = "!! ACCESO DESBLOQUEADO ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
 				ini_log();
-	}else{ print("* ERROR ENTRADA 1678: ".mysqli_error($db))."."; }
-	}elseif($cx < 1) { $_SESSION['showf'] = 0; }	
+	}else{ print("ERROR SQL L.1258 ".mysqli_error($db))."."; }
+	}elseif($cx < 1){ $_SESSION['showf'] = 0; }	
 	
 	global $blocker;		$blocker = @$rowx['error'];
 
@@ -1371,10 +1356,11 @@ function bloqueo(){
 		$text = "!! ACCESO BLOQUEADO ADMIN SING IN => IP: ".$geoplugin->ip.PHP_EOL;
 		ini_log();
 
-		if(mysqli_query($db, $emarc)){ }else {print("* ERROR ENTRADA 95: ".mysqli_error($db)).".";}
+		if(mysqli_query($db, $emarc)){ }else{ print("ERROR SQL L.1343 ".mysqli_error($db))."."; }
+
 	}else{ $_SESSION['showf'] = 0;}
 
-} // FIN FUCNTION BLOQUEO
+} // FIN function bloqueo()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -1392,7 +1378,7 @@ function show_form($errors=[]){
 	}
 								   
 	if($errors){	
-		print("<div class='juancentra' style='border-color:#F1BD2D !important;'>
+		print("<div class='centradiv' style='border-color:#F1BD2D !important;'>
 				<!--
 					<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>
 					<font color='#F1BD2D'>ERROR ACCESO USER</font><br>
@@ -1419,7 +1405,7 @@ function show_form($errors=[]){
 	</embed></div>");
 	}
 	
-	print("<div class='juancentra' style='border:none;'>
+	print("<div class='centradiv' style='border:none;'>
 		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 			<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' placeholder='USUARIO' required  style='text-align:center; margin-top:0.4em;' />
 

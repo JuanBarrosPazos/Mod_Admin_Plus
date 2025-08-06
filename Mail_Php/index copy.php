@@ -81,9 +81,9 @@ function MM_validateForm() {
 </head>
 
 <body topmargin="0">
-<div id="Conte">
+<div id="page" >
 
-  <div id="head" style="padding-bottom:12px; padding-top:6px">
+  <div id="header" style="padding-bottom:12px; padding-top:6px">
   			<font style="font-family:'Times New Roman', Times, serif; font-size:24px">
   							<?php print(strtoupper($head_titulo));?>
             </font>
@@ -95,7 +95,7 @@ function MM_validateForm() {
 
   	<div style="clear:both"></div>
    
-   <div id="TitTut" style="margin-top:12px; text-align:center; font-family:'Times New Roman', Times, serif; font-size:18px">
+   <div id="headerTitulo" style="margin-top:12px; text-align:center; font-family:'Times New Roman', Times, serif; font-size:18px">
    
         <font color="#FFFFFF">
 					<strong> <i>
@@ -110,7 +110,7 @@ function MM_validateForm() {
 	  <div style="clear:both"></div>
         
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 	  
 <?php
 		

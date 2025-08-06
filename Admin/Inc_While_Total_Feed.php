@@ -15,7 +15,7 @@
 							<font color='#FF0000'>NO HAY DATOS</font>
 						</td></tr></table>");
 
-		} else { print ("<div class=\"juancentra\">
+		} else { print ("<div class=\"centradiv\">
 			".$twhile.": ".mysqli_num_rows($qb)."<hr>".$inicioadmin.$inicioadmincrear);
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){

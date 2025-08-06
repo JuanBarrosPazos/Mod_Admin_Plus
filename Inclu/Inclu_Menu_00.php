@@ -17,6 +17,7 @@ require 'Inclu/misdatos.php';
 <title><?php print($meta_titulo);?></title>
 	
 <link href="Css/myStyle.css" rel="stylesheet" type="text/css" />
+<link href="Css/MyStyleButtonIcos.css" rel="stylesheet" type="text/css" />
 <link href="Css/menu.css" rel="stylesheet" type="text/css" />
 <link href="Css/menuico.css" rel="stylesheet" type="text/css" />
 
@@ -179,8 +180,8 @@ border-radius: 4px;
        </div>
 </div>
 -->
-	<div id="Conte">
-  <div id="head"> 
+	<div id="page" >
+  <div id="header"> 
   			<span style="font-size:18px">
   							<?php print(strtoupper($head_titulo));?>
             </span>
@@ -192,7 +193,7 @@ border-radius: 4px;
 
   <div style="clear:both"></div>
    
-   <div style="margin-top:2px; text-align:center" id="TitTut">
+   <div style="margin-top:2px; text-align:center" id="headerTitulo">
    
 		<font color="#59746A">
 
@@ -205,7 +206,7 @@ border-radius: 4px;
 
   
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 
 
 

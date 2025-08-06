@@ -1,0 +1,488 @@
+/* ******************************** */
+/* ******   ICONOS BOTONES   ****** */
+/* ******************************** */
+ 
+.botonverde {
+	background-color: #90faf5;
+}
+.botonnaranja {
+	background-color: #ffcc7f;
+}
+.botonrojo {
+	background-color: #ff6262;
+}
+.botonazul {
+	background-color: #82d4fd;
+}
+.botonlila {
+	background-color: #dd92fd;
+}
+
+.botonverde, .botonnaranja, .botonrojo, .botonazul, .botonlila, select {
+	cursor: pointer;
+	border: none;
+	vertical-align: text-bottom;
+	margin: 2px;
+	padding: 5px 5px 3px 5px !important;
+	border-radius: 4px;
+	font-weight: bold;
+}
+.botonverde:hover, .botonnaranja:hover, .botonrojo:hover, .botonazul:hover, .botonlila:hover {
+	background-color: #dadada;
+}
+
+/* ******************************** */
+/* ****** ICONOS BOTONES APP ****** */
+/* ******************************** */
+
+.AddBlack{
+	background-image: url(../Images/BotonIcos/add_black.png);
+}
+.AddGrey{
+	background-image: url(../Images/BotonIcos/add_grey.png);
+}
+.AddWhite{
+	background-image: url(../Images/BotonIcos/add_white.png);
+}
+.AddBlack:hover, .AddGrey:hover, .AddWhite:hover{
+	background-image: url(../Images/BotonIcos/add_grey.png);
+}
+
+
+.BuscaBlack{
+	background-image: url(../Images/BotonIcos/busca_black.png);
+}
+.BuscaGrey{
+	background-image: url(../Images/BotonIcos/busca_grey.png);
+}
+.BuscaWhite{
+	background-image: url(../Images/BotonIcos/busca_white.png);
+}
+.BuscaBlack:hover, .BuscaGrey:hover, .BuscaWhite:hover{
+	background-image: url(../Images/BotonIcos/busca_black.png);
+}
+
+
+.Busca2Black{
+	background-image: url(../Images/BotonIcos/busca2_black.png);
+}
+.Busca2Grey{
+	background-image: url(../Images/BotonIcos/busca2_grey.png);
+}
+.Busca2White{
+	background-image: url(../Images/BotonIcos/busca2_white.png);
+}
+.Busca2Black:hover, .Busca2Grey:hover, .Busca2White:hover{
+	background-image: url(../Images/BotonIcos/busca2_black.png);
+}
+
+
+.CancelBlack{
+	background-image: url(../Images/BotonIcos/cancel_black.png);
+}
+.CancelGrey{
+	background-image: url(../Images/BotonIcos/cancel_grey.png);
+}
+.CancelWhite{
+	background-image: url(../Images/BotonIcos/cancel_white.png);
+}
+.CancelBlack:hover, .CancelGrey:hover, .CancelWhite:hover{
+	background-image: url(../Images/BotonIcos/cancel_grey.png);
+}
+
+
+.CachedBlack{
+	background-image: url(../Images/BotonIcos/cached_black.png);
+}
+.CachedGrey{
+	background-image: url(../Images/BotonIcos/cached_grey.png);
+}
+.CachedWhite{
+	background-image: url(../Images/BotonIcos/cached_white.png);
+}
+.CachedBlack:hover, .CachedGrey:hover, .CachedWhite:hover{
+	background-image: url(../Images/BotonIcos/cached_grey.png);
+}
+
+
+.CandadoBlack{ 
+	background-image: url(../Images/BotonIcos/candado_black.png);
+}
+.CandadoGrey{
+	background-image: url(../Images/BotonIcos/candado_grey.png);
+}
+.CandadoWhite{
+	background-image: url(../Images/BotonIcos/candado_white.png);
+}
+.CandadoBlack:hover, .CandadoGrey:hover, .CandadoWhite:hover{
+	background-image: url(../Images/BotonIcos/candado_grey.png);
+}
+
+
+.CarroBlack{
+	background-image: url(../Images/BotonIcos/carro_black.png);
+}
+.CarroGrey{
+	background-image: url(../Images/BotonIcos/carro_grey.png);
+}
+.CarroWhite{
+	background-image: url(../Images/BotonIcos/carro_white.png);
+}
+.CarroBlack:hover, .CarroGrey:hover, .CarroWhite:hover{
+	background-image: url(../Images/BotonIcos/carro_grey.png);
+}
+
+
+.CloseSessionBlack{
+	background-image: url(../Images/BotonIcos/close_session_black.png);
+}
+.CloseSessionGrey{
+	background-image: url(../Images/BotonIcos/close_session_grey.png);
+}
+.CloseSessionWhite{
+	background-image: url(../Images/BotonIcos/close_session_white.png);
+}
+.CloseSessionBlack:hover, .CloseSessionGrey:hover, .CloseSessionWhite:hover{
+	background-image: url(../Images/BotonIcos/close_session_grey.png);
+}
+
+
+.Clock1Black{
+	background-image: url(../Images/BotonIcos/clock1_black.png);
+}
+.Clock1Grey{
+	background-image: url(../Images/BotonIcos/clock1_grey.png);
+}
+.Clock1nWhite{
+	background-image: url(../Images/BotonIcos/clock1_white.png);
+}
+.Clock1Black:hover, .Clock1Grey:hover, .Clock1White:hover{
+	background-image: url(../Images/BotonIcos/clock1_grey.png);
+}
+
+
+.Clock2Black{
+	background-image: url(../Images/BotonIcos/clock2_black.png);
+}
+.Clock2Grey{
+	background-image: url(../Images/BotonIcos/clock2_grey.png);
+}
+.Clock2nWhite{
+	background-image: url(../Images/BotonIcos/clock2_white.png);
+}
+.Clock2Black:hover, .Clock2Grey:hover, .Clock2White:hover{
+	background-image: url(../Images/BotonIcos/clock2_grey.png);
+}
+
+
+.DatosBlack{
+	background-image: url(../Images/BotonIcos/datos_black.png);
+}
+.DatosGrey{
+	background-image: url(../Images/BotonIcos/datos_grey.png);
+}
+.DatosWhite{
+	background-image: url(../Images/BotonIcos/datoswhite.png);
+}
+.DatosBlack:hover, .DatosGrey:hover, .DatosWhite:hover{
+	background-image: url(../Images/BotonIcos/datos_grey.png);
+}
+
+
+.DeleteBlack{
+	background-image: url(../Images/BotonIcos/delete_black.png);
+}
+.DeleteGrey{
+	background-image: url(../Images/BotonIcos/delete_grey.png);
+}
+.DeleteWhite{
+	background-image: url(../Images/BotonIcos/delete_white.png);
+}
+.DeleteBlack:hover, .DeleteGrey:hover, .DeleteWhite:hover{
+	background-image: url(../Images/BotonIcos/delete_grey.png);
+}
+
+
+.DescargaBlack{
+	background-image: url(../Images/BotonIcos/descarga_black.png);
+}
+.DescargaGrey{
+	background-image: url(../Images/BotonIcos/descarga_grey.png);
+}
+.DescargaWhite{
+	background-image: url(../Images/BotonIcos/descarga_white.png);
+}
+.DescargaBlack:hover, .DescargaGrey:hover, .DescargaWhite:hover{
+	background-image: url(../Images/BotonIcos/descarga_grey.png);
+}
+
+
+.DetalleBlack{
+	background-image: url(../Images/BotonIcos/detalle_black.png);
+}
+.DetalleGrey{
+	background-image: url(../Images/BotonIcos/detalle_grey.png);
+}
+.DetalleWhite{
+	background-image: url(../Images/BotonIcos/detalle_white.png);
+}
+.DetalleBlack:hover, .DetalleGrey:hover, .DetalleWhite:hover{
+	background-image: url(../Images/BotonIcos/detalle_grey.png);
+}
+
+
+.FotoBlack{
+	background-image: url(../Images/BotonIcos/foto_black.png);
+}
+.FotoGrey{
+	background-image: url(../Images/BotonIcos/foto_grey.png);
+}
+.FotoWhite{
+	background-image: url(../Images/BotonIcos/foto_white.png);
+}
+.FotoBlack:hover, .FotoGrey:hover, .FotoWhite:hover{
+	background-image: url(../Images/BotonIcos/foto_grey.png);
+}
+
+
+.HomeBlack{
+	background-image: url(../Images/BotonIcos/home_black.png);
+}
+.HomeGrey{
+	background-image: url(../Images/BotonIcos/home_grey.png);
+}
+.HomeWhite{
+	background-image: url(../Images/BotonIcos/home_white.png);
+}
+.HomeBlack:hover, .HomeGrey:hover, .HomeWhite:hover{
+	background-image: url(../Images/BotonIcos/home_grey.png);
+}
+
+
+.InfoBlack{
+	background-image: url(../Images/BotonIcos/info_black.png);
+}
+.InfoGrey{
+	background-image: url(../Images/BotonIcos/info_grey.png);
+}
+.InfoWhite{
+	background-image: url(../Images/BotonIcos/info_white.png);
+}
+.InfoBlack:hover, .InfoGrey:hover, .InfoWhite:hover{
+	background-image: url(../Images/BotonIcos/info_grey.png);
+}
+
+
+.InicioBlack{
+	background-image: url(../Images/BotonIcos/inicio_black.png);
+}
+.InicioGrey{
+	background-image: url(../Images/BotonIcos/inicio_grey.png);
+}
+.InicioWhite{
+	background-image: url(../Images/BotonIcos/inicio_white.png);
+}
+.InicioBlack:hover, .InicioGrey:hover, .InicioWhite:hover{
+	background-image: url(../Images/BotonIcos/inicio_grey.png);
+}
+
+
+.LlavesBlack{
+	background-image: url(../Images/BotonIcos/llaves_black.png);
+}
+.LlavesGrey{
+	background-image: url(../Images/BotonIcos/llaves_grey.png);
+}
+.LlavesWhite{
+	background-image: url(../Images/BotonIcos/llaves_white.png);
+}
+.LlavesBlack:hover, .LlavesGrey:hover, .LlavesWhite:hover{
+	background-image: url(../Images/BotonIcos/llaves_grey.png);
+}
+
+
+
+.MailBlack{
+	background-image: url(../Images/BotonIcos/mail_black.png);
+}
+.MailGrey{
+	background-image: url(../Images/BotonIcos/mail_grey.png);
+}
+.MailWhite{
+	background-image: url(../Images/BotonIcos/mail_white.png);
+}
+.MailBlack:hover, .MailGrey:hover, .MailWhite:hover{
+	background-image: url(../Images/BotonIcos/mail_grey.png);
+}
+
+
+.MenuListBlack{
+	background-image: url(../Images/BotonIcos/menu_list_black.png);
+}
+.MenuListGrey{
+	background-image: url(../Images/BotonIcos/menu_list_grey.png);
+}
+.MenuListWhite{
+	background-image: url(../Images/BotonIcos/menu_list_white.png);
+}
+.MenuListBlack:hover, .MenuListGrey:hover, .MenuListWhite:hover{
+	background-image: url(../Images/BotonIcos/menu_list_grey.png);
+}
+
+
+.MoneyBlack{
+	background-image: url(../Images/BotonIcos/money_black.png);
+}
+.MoneyGrey{
+	background-image: url(../Images/BotonIcos/money_grey.png);
+}
+.MoneyWhite{
+	background-image: url(../Images/BotonIcos/money_white.png);
+}
+.MoneyBlack:hover, .MoneyGrey:hover, .MoneyWhite:hover{
+	background-image: url(../Images/BotonIcos/money_grey.png);
+}
+
+
+.MoneypBlack{
+	background-image: url(../Images/BotonIcos/moneyp_black.png);
+}
+.MoneypGrey{
+	background-image: url(../Images/BotonIcos/moneyp_white.png);
+}
+.MoneypWhite{
+	background-image: url(../Images/BotonIcos/moneyp_white.png);
+}
+.MoneypBlack:hover, .MoneypGrey:hover, .MoneypWhite:hover{
+	background-image: url(../Images/BotonIcos/moneyp_grey.png);
+}
+
+
+.OpenBlack{
+	background-image: url(../Images/BotonIcos/open_black.png);
+}
+.OpenGrey{
+	background-image: url(../Images/BotonIcos/open_white.png);
+}
+.OpenWhite{
+	background-image: url(../Images/BotonIcos/open_white.png);
+}
+.OpenBlack:hover, .OpenGrey:hover, .OpenWhite:hover{
+	background-image: url(../Images/BotonIcos/open_grey.png);
+}
+
+
+.PersonAddBlack{
+	background-image: url(../Images/BotonIcos/person_add_black.png);
+}
+.PersonAddGrey{
+	background-image: url(../Images/BotonIcos/person_add_grey.png);
+}
+.PersonAddWhite{
+	background-image: url(../Images/BotonIcos/person_add_white.png);
+}
+.PersonAddBlack:hover, .PersonAddGrey:hover, .PersonAddWhite:hover{
+	background-image: url(../Images/BotonIcos/person_add_grey.png);
+}
+
+
+.PersonsBlack{
+	background-image: url(../Images/BotonIcos/people_black.png);
+}
+.PersonsGrey{
+	background-image: url(../Images/BotonIcos/people_grey.png);
+}
+.PersonsWhite{
+	background-image: url(../Images/BotonIcos/people_white.png);
+}
+.PersonsBlack:hover, .PersonsGrey:hover, .PersonsWhite:hover{
+	background-image: url(../Images/BotonIcos/people_grey.png);
+}
+
+
+.PrintBlack{
+	background-image: url(../Images/BotonIcos/print_black.png);
+}
+.PrintGrey{
+	background-image: url(../Images/BotonIcos/print_grey.png);
+}
+.PrintWhite{
+	background-image: url(../Images/BotonIcos/print_white.png);
+}
+.PrintBlack:hover, .PrintGrey:hover, .PrintWhite:hover{
+	background-image: url(../Images/BotonIcos/print_grey.png);
+}
+
+
+.QrBlack{
+	background-image: url(../Images/BotonIcos/qr_black.png);
+}
+.QrGrey{
+	background-image: url(../Images/BotonIcos/qr_grey.png);
+}
+.QrWhite{
+	background-image: url(../Images/BotonIcos/qr_white.png);
+}
+.QrBlack:hover, .QrGrey:hover, .QrWhite:hover{
+	background-image: url(../Images/BotonIcos/qr_grey.png);
+}
+
+
+.RestoreBlack{
+	background-image: url(../Images/BotonIcos/restore_black.png);
+}
+.RestoreGrey{
+	background-image: url(../Images/BotonIcos/restore_grey.png);
+}
+.RestoreWhite{
+	background-image: url(../Images/BotonIcos/restore_white.png);
+}
+.RestoreBlack:hover, .RestoreGrey:hover, .RestoreWhite:hover{
+	background-image: url(../Images/BotonIcos/restore_grey.png);
+}
+
+
+.SaveBlack{
+	background-image: url(../Images/BotonIcos/save_black.png);
+}
+.SaveGrey{
+	background-image: url(../Images/BotonIcos/save_grey.png);
+}
+.SaveWhite{
+	background-image: url(../Images/BotonIcos/save_white.png);
+}
+.SaveBlack:hover, .SaveGrey:hover, .SaveWhite:hover{
+	background-image: url(../Images/BotonIcos/save_grey.png);
+}
+
+
+.WebBlack{
+	background-image: url(../Images/BotonIcos/web_black.png);
+}
+.WebGrey{
+	background-image: url(../Images/BotonIcos/web_grey.png);
+}
+.WebWhite{
+	background-image: url(../Images/BotonIcos/web_white.png);
+}
+.WebBlack:hover, .WebGrey:hover, .WebWhite:hover{
+	background-image: url(../Images/BotonIcos/web_grey.png);
+}
+
+
+.imgButIco{
+	width: 2.1em !important;
+	height: 2.1em !important;
+	margin: 0.1em 0.1em 0.1em 0.1em;
+	/*background-image: url(../Images/BotonIcos/delete_white.png);*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	vertical-align:top;
+}
+
+/* ******************************** */
+/* ******                    ****** */
+/* ******************************** */
+
+  /* Creado por Juan Barros Pazos 2025 */

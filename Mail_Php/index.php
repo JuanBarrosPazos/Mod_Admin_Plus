@@ -75,9 +75,9 @@ function MM_validateForm() {
 </head>
 
 <body topmargin="0">
-<div id="Conte">
+<div id="page" >
 
-  <div id="head"> 
+  <div id="header"> 
   			<span style="font-size:18px">
 			  		JUAN BARROS PAZOS
             </span>
@@ -89,7 +89,7 @@ function MM_validateForm() {
 
   	<div style="clear:both"></div>
    
-   <div id="TitTut" style="margin-top:12px; text-align:center; font-family:'Times New Roman', Times, serif; font-size:18px">
+   <div id="headerTitulo" style="margin-top:12px; text-align:center; font-family:'Times New Roman', Times, serif; font-size:18px">
    
         <font color="#FFFFFF">
 					<strong> <i>
@@ -104,7 +104,7 @@ function MM_validateForm() {
 	  <div style="clear:both"></div>
         
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 	  
 <?php
 		

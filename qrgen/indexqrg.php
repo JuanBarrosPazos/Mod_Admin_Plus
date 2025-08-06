@@ -228,7 +228,7 @@ function Show_form($errors=[]){
 
 	if ($errors){
 		global $a;		$a = 1;
-		print("<div class='juancentra'>
+		print("<div class='centradiv'>
 				<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>");
 		for($a=0; $c=count($errors), $a<$c; $a++){
 				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
@@ -244,7 +244,7 @@ function Show_form($errors=[]){
 					'index.php?pin=' => 'CONFIRMACION DATOS USUARIO',
 					'indexqr.php?pin=' => 'FICHAR AUTO SIN CONFIRMACION');
 
-	print("<div class='juancentra'>
+	print("<div class='centradiv'>
 			<form action='$_SERVER[PHP_SELF]' method='post'>
        			METODO EN QUE EL QR ACTUA<br>
 			<select name='metodo' class='botonlila'>");
@@ -365,7 +365,7 @@ function listfiles(){
 			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
 		}
 		
-		print ("<div class='juancentra'>
+		print ("<div class='centradiv'>
 					NO HAY ARCHIVOS PARA DESCARGAR
 				</div>");
 	}else{
@@ -374,7 +374,7 @@ function listfiles(){
 			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
 		}
 
-		print("<ul class='juancentra'>
+		print("<ul class='centradiv'>
 				QR CODES FOR EXPORT  ".$num3." 
 				<br>IF > ".(($_SESSION['nuser']*2+6))." AUTO DELETE QR FILES
 			<hr>");

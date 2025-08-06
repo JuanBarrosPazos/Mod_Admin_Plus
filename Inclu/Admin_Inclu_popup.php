@@ -17,6 +17,7 @@ require '../Inclu/misdatos.php';
 <title><?php print($meta_titulo);?></title>
 	
 <link href="../Css/myStyle.css" rel="stylesheet" type="text/css" />
+<link href="../Css/MyStyleButtonIcos.css" rel="stylesheet" type="text/css" />
 <link href="../Css/menu.css" rel="stylesheet" type="text/css" />
 <link href="../Css/menuico.css" rel="stylesheet" type="text/css" />
 
@@ -49,6 +50,6 @@ require '../Inclu/misdatos.php';
 ////////////////////////////////
 -->
 
-  <div id="Caja2Admin">
+  <div id="pageContenido">
 
 
