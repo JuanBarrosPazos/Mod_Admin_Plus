@@ -726,50 +726,47 @@ function show_ficha(){
 		global $ttot;	$ttot = '00:00:00';
 		
 	print("<div class='centradiv' style='border:none;'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
-				<br>REFER: ".strtoupper($_SESSION['ref'])."
-				<br>FICHE SU ENTRADA<br>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
+			<br>REFER: ".strtoupper($_SESSION['ref'])."
+			<br>FICHE SU ENTRADA<br>
+		<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+			<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
-			</form>
-			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
-				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-				<input type='hidden' id='din' name='din' value='".$din."' />
-				<input type='hidden' id='tin' name='tin' value='".$tin."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='entrada' value=1 />
+		</form>
+		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+			<input type='hidden' id='din' name='din' value='".$din."' />
+			<input type='hidden' id='tin' name='tin' value='".$tin."' />
+			<input type='hidden' id='dout' name='dout' value='".$dout."' />
+			<input type='hidden' id='tout' name='tout' value='".$tout."' />
+			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+				<input type='hidden' name='entrada' value=1 />
 			</form>														
 		</div>"); 
 	// FICHA SALIDA.
 	}elseif($count1 > 0){
-		
 		global $dout;	$dout = date('Y-m-d');
 		global $tout;	global $ttot;
-		
 		/*
 			HORA ORIGINAL DE SALIDA DEL SCRIPT
 			$tout = date('H:i:s');
 		*/
-
 		require 'fichar/fichar_redondeo_out.php';
 
-			////////////////////		***********  		////////////////////
+		////////////////////		***********  		////////////////////
 
 		print("<div class='centradiv' style='border:none;'>
 				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
 				<br>RERER: ".strtoupper($_SESSION['ref'])."
 				<br>FICHE SU SALIDA<br>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
-			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
+			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
 				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
@@ -779,11 +776,9 @@ function show_ficha(){
 					<input type='hidden' name='salida' value=1 />
 			</form>														
 		</div>"); 
-		
 		}
 	
 	} // FIN FUNCTION show_ficha()
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -809,63 +804,59 @@ function process_pin(){
 
 	if($cp > 0){
 	
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$rp['ref'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+		global $vname;
+		$tabla1 = $_SESSION['clave'].$rp['ref'];
+		$tabla1 = strtolower($tabla1);
+		$vname = $tabla1."_".date('Y');
+		$vname = "`".$vname."`";
 
-	// FICHA ENTRADA O SALIDA.
+		// FICHA ENTRADA O SALIDA.
 	
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
-	$q1 = mysqli_query($db, $sql1);
-	$count1 = mysqli_num_rows($q1);
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+		$q1 = mysqli_query($db, $sql1);
+		$count1 = mysqli_num_rows($q1);
 
-	// FICHA ENTRADA.
+		// FICHA ENTRADA.
 		if($count1 < 1){
-			
 			global $din;	$din = date('Y-m-d');	
 			global $tin;
-
 			/*
 				HORA ORIGINAL DE ENTRADA DEL SCRIPT
 				$tin = date('H:i:s');
 			*/
-
 			require 'fichar/fichar_redondeo_in.php';
 
-				////////////////////		***********  		////////////////////
+			////////////////////		***********  		////////////////////
 
 			global $dout;		$dout = '';
 			global $tout;		$tout = '00:00:00';
 			global $ttot;		$ttot = '00:00:00';
 		
-		print("<div class='centradiv' style='border:none;'>
-			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
-			<br>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
-			<br>REFER: ".strtoupper($rp['ref'])."<br>
-			<br>FICHE SU ENTRADA<br>
+			print("<div class='centradiv' style='border:none;'>
+				<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
+				<br>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
+				<br>REFER: ".strtoupper($rp['ref'])."<br>
+				<br>FICHE SU ENTRADA<br>
 
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
-				<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
-				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-				<input type='hidden' id='din' name='din' value='".$din."' />
-				<input type='hidden' id='tin' name='tin' value='".$tin."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-					<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='entrada' value=1 />
-			</form>
-			</div>													
-			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>");
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='cancel' value=1 />
+				</form>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
+					<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
+					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+					<input type='hidden' id='din' name='din' value='".$din."' />
+					<input type='hidden' id='tin' name='tin' value='".$tin."' />
+					<input type='hidden' id='dout' name='dout' value='".$dout."' />
+					<input type='hidden' id='tout' name='tout' value='".$tout."' />
+					<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+						<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+						<input type='hidden' name='entrada' value=1 />
+				</form>
+				</div>												
+				<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>");
 
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
@@ -873,42 +864,39 @@ function process_pin(){
 			global $dout;		$dout = date('Y-m-d');
 			global $tout;		$tout = date('H:i:s');
 			global $ttot;
-
 			/*
 				HORA ORIGINAL DE SALIDA DEL SCRIPT
 				$tout = date('H:i:s');
 			*/
-
 			require 'fichar/fichar_redondeo_out.php';
 
 			////////////////////		***********  		////////////////////
 
-		print("<div class='centradiv' style='border:none;'>
-			".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
-			<br>REFER: ".strtoupper($rp['ref'])."<br>
-			<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
-			<br>FICHE SU SALIDA<br>
-			
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
-				<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
-				<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='salida' value=1 />
-			</form></div>														
-	<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>"); 
+			print("<div class='centradiv' style='border:none;'>
+				".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
+				<br>REFER: ".strtoupper($rp['ref'])."<br>
+				<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
+				<br>FICHE SU SALIDA<br>
+				
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='cancel' value=1 />
+				</form>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
+					<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
+					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+					<input type='hidden' id='dout' name='dout' value='".$dout."' />
+					<input type='hidden' id='tout' name='tout' value='".$tout."' />
+						<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+						<input type='hidden' name='salida' value=1 />
+				</form></div>														
+				<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>"); 
 			
 		}
 	
-	ayear();
+		ayear();
 		
 	}else{ print("<div class='centradiv' style='border-color:#F1BD2D;' >
 					<font color='#F1BD2D'>
@@ -1392,8 +1380,7 @@ function show_form($errors=[]){
 		for($a=0; $a<$c; $a++){
 			print("<font color='#F1BD2D'>".$errors [$a]."</font>");
 				// ESCRIBE ERRORES EN INI_LOG
-				global $text;
-				$text = $errors[$a];
+				global $text;			$text = $errors[$a];
 				$logdate = date('Y-m-d');
 				$logtext = "\t ** ".$text.PHP_EOL;
 				$filename = "LogsAcceso/LogsAcceso_".$logdate.".log";
@@ -1401,8 +1388,10 @@ function show_form($errors=[]){
 				fwrite($log, $logtext);
 				fclose($log);
 		}
-	print("<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed></div>");
+
+	print("</div><embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+	</embed>");
+
 	}
 	
 	print("<div class='centradiv' style='border:none;'>

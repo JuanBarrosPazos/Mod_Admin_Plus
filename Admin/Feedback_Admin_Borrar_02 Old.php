@@ -492,5 +492,5 @@ $text = PHP_EOL."- USER BAJAS BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t Nomb
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021 */
+/* Creado por Juan Barros Pazos 2021/25 */
 ?>

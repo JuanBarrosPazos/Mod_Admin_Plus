@@ -22,13 +22,13 @@ session_start();
 	require 'Inclu_MInd/Master_Index.php';
 	*/
 
-if(isset($_POST['ocultop'])){
-	
+	if(isset($_POST['ocultop'])){
+		
 		if($form_errorsp = validate_formp()){
 							show_form2($form_errorsp);
-		}else{process_pin();}
+		}else{ process_pin(); }
 
-}else{show_form2();}
+	}else{ show_form2(); }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -36,8 +36,7 @@ if(isset($_POST['ocultop'])){
 
 function process_pin(){
 	
-	global $phppin;
-	$phppin = $_POST['pin'];
+	global $phppin;				$phppin = $_POST['pin'];
 	global $redir;
 	$redir = "<script type='text/javascript'>
 					function redir(){
@@ -46,6 +45,7 @@ function process_pin(){
 				setTimeout('redir()',1000);
 			</script>";
 	print ($redir);
+
 }
 
 				   ////////////////////				   ////////////////////
@@ -54,11 +54,9 @@ function process_pin(){
 
 function validate_formp(){
 	
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$_POST[pin]' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -66,38 +64,27 @@ function validate_formp(){
 	
 	$errorsp = array();
 	
-	if (strlen(trim($_POST['pin'])) == 0){
+	if(strlen(trim($_POST['pin'])) == 0){
 		$errorsp [] = "PIN: Campo obligatorio.";
-		}
-
-	elseif (strlen(trim($_POST['pin'])) < 8){
+	}elseif (strlen(trim($_POST['pin'])) < 8){
 		$errorsp [] = "PIN: Incorrecto.";
-		}
-
-	elseif (strlen(trim($_POST['pin'])) > 8){
+	}elseif (strlen(trim($_POST['pin'])) > 8){
 		$errorsp [] = "PIN: Incorrecto.";
-		}
-
-	elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
+	}elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		$errorsp [] = "PIN: Incorrecto.";
-		}
-	
-	/*
-	elseif (!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
+	}/*elseif (!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 		}
 
 	elseif (!preg_match('/^[^a-z]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
-		}*/
-	
-	elseif($cp == 0){
+	}*/elseif($cp == 0){
 		$errorsp [] = "PIN: Incorrecto.";
-		}
+	}
 
 	return $errorsp;
 
-		}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -107,61 +94,49 @@ function show_form2($errorsp=''){
 	
 	if(isset($_POST['pin'])){
 		$defaults = $_POST;
-		} else {$defaults = array ('pin' => '');}
+	}else{ $defaults = array ('pin' => ''); }
 	
-	if ($errorsp){
-		
-		print("<table align='center'>
-		<embed src='audi/pin_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
-		</embed>
-			<tr>
-				<td style='text-align:center'>
-					<!--
-					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-					-->
-					<font color='#FF0000'>ERROR ACCESO PIN</font>
-				</td>
-			</tr>
-					<!--
-			<tr>
-				<td style='text-align:left'>
-					-->");
+	if($errorsp){
+		print("<div class='centradiv' style='border-color:#F1BD2D !important;'>
+		<!--
+			<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+		-->
+			<br>
+			<font color='#F1BD2D'>ERROR ACCESO PIN</font>");
 		/*	
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errorsp [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br/>");
 			}
 		*/
-		print("<!--</td>
-					</tr>-->
-						</table>");
-				}
-	
-	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
-				<tr>
-					<td>	
-						SU PIN
-					</td>
-					
-		<form name='pin' method='post' action='$_SERVER[PHP_SELF]'>	
-		
-					<td valign='middle'>
-		<input type='Password' name='pin' size=12 maxlength=9 value='".$defaults['pin']."' />
-					</td>
-					<td valign='middle' align='right' colspan='2'>
-						<input type='submit' value='FICHAR CON PIN' class='botonverde' />
-						<input type='hidden' name='ocultop' value=1 />
-		</form>	
-					</td>
-				</tr>
-			</table>"); 
-	
+		print("</div>
+		<embed src='audi/pin_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
+		</embed>");
 	}
+	
+	print("<div class='centradiv' >
+			SU PIN
+		<form name='pin' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>	
+
+			<input type='Password' name='pin' size=16 maxlength=9 value='".$defaults['pin']."' placeholder='FICHAR CON PIN' required style='text-align:center; margin-top:0.4em;' />
+
+			<button type='submit' title='FICHAR CON SU PIN' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+
+			<input type='hidden' name='ocultop' value=1 />
+
+			<a href='index.php'>
+				<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			</a>
+
+		</form>	
+			</div>"); 
+	
+} // FIN function show_form2
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	?>
+?>
 	
  					<!-- *************************** -->
 <!-- *************************** -->		<!-- *************************** -->
@@ -169,10 +144,6 @@ function show_form2($errorsp=''){
 	
  <div id="pageContenido" style="text-align: center">
 	  
-   	<div style="margin-top:4px; margin-bottom: 4px; text-align:center">
-		<a href="index.php">CANCELAR Y VOLVER AL INICIO.</a>
-	</div>
-	
 					<!-- *************************** -->
 <!-- *************************** -->		<!-- *************************** -->
 					<!-- *************************** -->

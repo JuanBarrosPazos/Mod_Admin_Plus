@@ -1,7 +1,7 @@
 <?php
 //session_start();
 
-	//require '../Inclu/error_hidden.php';
+	require '../Inclu/error_hidden.php';
 	require '../Inclu/Admin_head.php';
 
 	require '../Conections/conection.php';
@@ -25,6 +25,6 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021 */
+/* Creado por Juan Barros Pazos 2021/25 */
 
 ?>

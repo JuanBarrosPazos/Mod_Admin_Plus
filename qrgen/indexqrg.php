@@ -17,45 +17,42 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	global $num;
-	$num = count(glob("temp/{*}",GLOB_BRACE));
+	global $num;		$num = count(glob("temp/{*}",GLOB_BRACE));
+
 	if($num > 1){ deletemp(); } else { }
 
-	global $num2;
-	$num2 = count(glob("qrimg/{*}",GLOB_BRACE));
-	if($num2 >= ($_SESSION['nuser']*2+6)){ deleqrimg(); } else { }
+	global $num2;		$num2 = count(glob("qrimg/{*}",GLOB_BRACE));
+
 	//print($_SESSION['nuser']);
+	if($num2 >= ($_SESSION['nuser']*2+6)){ deleqrimg(); } else { }
 
 	if(isset($_POST['oculto'])){
+
 		if($form_errors = validate_form()){ qrsize();
 											show_form($form_errors);
 											listfiles();
-						} else {qrsize();
-								process_form();
-								qrimg();
-								show_form();
-								listfiles();
-									}
-							}
+		}else{	qrsize();
+				process_form();
+				qrimg();
+				show_form();
+				listfiles();
+		}
 
-	elseif(isset($_POST['delete'])){ qrsize();
-									 show_form();
-									 delete(); 
-									 listfiles();
-								}
+	}elseif(isset($_POST['delete'])){	qrsize();
+										show_form();
+										delete(); 
+										listfiles();
 
-	elseif(isset($_POST['downl'])){qrsize();
-							//qrimg();
-							show_form();
-							red();
-							listfiles();
-								}
-
-	else {	qrsize();
+	}elseif(isset($_POST['downl'])){	qrsize();
+										//qrimg();
+										show_form();
+										download();
+										listfiles();
+	}else{	qrsize();
 			//qrimg();
 			show_form();
 			listfiles();	
-				}
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -65,38 +62,40 @@ function qrsize(){
 
 	if (isset($_REQUEST['level']) && (in_array($_REQUEST['level'], array('L','M','Q','H')))){
 		global $errorCorrectionLevel;
-        $errorCorrectionLevel = $_REQUEST['level'];    
+        $errorCorrectionLevel = $_REQUEST['level']; 
+	   
 	}else{	global $errorCorrectionLevel;
 			$errorCorrectionLevel = 'Q';
-			}
+	}
 
     if (isset($_REQUEST['size'])){
 		global $matrixPointSize;
         $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
-			}
 
-	else{	global $matrixPointSize;
+	}else{	global $matrixPointSize;
     		$matrixPointSize = 6;
-			}
-}
+	}
+
+} // FIN function qrsize
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	function red(){
-		global $a;
-		$a = 1;
-		global $redir;
-		$redir = "<script type='text/javascript'>
-					function redir(){
-					window.open ('".$_POST['ruta']."', '_blank') ;
-					}
-			setTimeout('redir()',500);
-				  </script>";
-			print ($redir);
-				
-	}
+function download(){
+
+	global $a;				$a = 1;
+	// Redirección de la imagen a otra pestaña...
+	global $redir;
+	$redir = "<script type='text/javascript'>
+				function redir(){
+				window.open ('".$_POST['downlRuta']."', '_blank') ;
+				}
+				setTimeout('redir()',400);
+			  </script>";
+	print ($redir);
+
+}
 				
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -111,7 +110,7 @@ function process_form(){
 	global $PNG_WEB_DIR;
     $PNG_WEB_DIR = 'temp/';
 
-	include "phpqrcode.php";    
+	include "phpqrcode.php";
     
     //ofcourse we need rights to create temp dir
     if (!file_exists($PNG_TEMP_DIR))
@@ -134,8 +133,7 @@ function process_form(){
 			global $metodo;
 			$metodo = 'AUTO_';
 		}
-		global $data;
-		$data = $_REQUEST['metodo'].$_REQUEST['usercod'];
+		global $data;			$data = $_REQUEST['metodo'].$_REQUEST['usercod'];
 		//print ($data);
         //it's very important!
         if (trim($data) == '')
@@ -147,30 +145,28 @@ function process_form(){
 	//print("<br>".$filename."<br>".$metodo.$_REQUEST['usercod']);
 
 	if(strlen(trim($_POST['imgname'])) == 0){
-		global $imgname;
 		global $metodo;
-		$imgname = $metodo.$_REQUEST['usercod'];
-		if(file_exists("qrimg/".$imgname.".png")){unlink("qrimg/".$imgname.".png");}else{}
-		if(file_exists($filename)){copy($filename, "qrimg/".$imgname.".png");}else{}
-		}
-	else{ global $imgname;
-		  $imgname = str_replace(' ', '_',$_POST['imgname']);
-		  global $data;
-		  if(file_exists("qrimg/".$imgname.".png")){unlink("qrimg/".$imgname.".png");}else{}
-		  if(file_exists($filename)){copy($filename, "qrimg/".$imgname.".png");}else{}
-			}
- 
-    } else {    
-    
-        //default data
-   /*
-   echo 'You can provide data in GET parameter: <a href="?data=like_that">like that</a>'; 
-   */   
-        QRcode::png('PHP QR Code :)', $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
-     
-    	}    
+		global $imgname;				$imgname = $metodo.$_REQUEST['usercod'];
 
-}
+		if(file_exists("qrimg/".$imgname.".png")){unlink("qrimg/".$imgname.".png");}else{}
+
+		if(file_exists($filename)){copy($filename, "qrimg/".$imgname.".png");}else{}
+		}else{
+			global $imgname;		$imgname = str_replace(' ', '_',$_POST['imgname']);
+		  	global $data;
+			if(file_exists("qrimg/".$imgname.".png")){ unlink("qrimg/".$imgname.".png"); }else{}
+			if(file_exists($filename)){copy($filename, "qrimg/".$imgname.".png");}else{}
+		}
+ 
+    }else{    
+        //default data
+		/*
+			echo 'You can provide data in GET parameter: <a href="?data=like_that">like that</a>'; 
+		*/   
+        QRcode::png('PHP QR Code :)', $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
+    }    
+
+} //Fin function process_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -182,11 +178,11 @@ function validate_form(){
 
 	if(strlen(trim($_POST['metodo'])) == 0){
 		$errors [] = "METODO: <font color='#F1BD2D'> es obligatorio.</font>";
-		}
+	}
 
 	if(strlen(trim($_POST['usercod'])) == 0){
 		$errors [] = "USUARIO: <font color='#F1BD2D'> es obligatorio.</font>";
-		}
+	}
 
 	return $errors;
 
@@ -197,6 +193,7 @@ function validate_form(){
 				 ////////////////////				  ///////////////////
 
 function qrimg(){
+	
 	global $PNG_WEB_DIR;
 	global $filename;
 	//display generated file
@@ -220,10 +217,9 @@ function Show_form($errors=[]){
 
 	if(isset($_POST['oculto'])){ $defaults = $_POST;
 
-	}else{	$defaults = array ( 
-			'metodo' => isset($_REQUEST['metodo']),
-			'usercod' => isset($_REQUEST['usercod']),
-			'imgname' => isset($_REQUEST['imgname']),);
+	}else{	$defaults = array( 'metodo' => isset($_REQUEST['metodo']),
+								'usercod' => isset($_REQUEST['usercod']),
+								'imgname' => isset($_REQUEST['imgname']),);
 	}
 
 	if ($errors){
@@ -365,9 +361,10 @@ function listfiles(){
 			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
 		}
 		
-		print ("<div class='centradiv'>
+		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 					NO HAY ARCHIVOS PARA DESCARGAR
 				</div>");
+
 	}else{
 		
 		if ($a == 0) {
@@ -388,11 +385,13 @@ function listfiles(){
 						<input type='hidden' name='delete' value='1' >
 				</form>
 				<form name='archivos' action='$_SERVER[PHP_SELF]' method='POST' style='display:inline-block; float:left; margin-left:0.4em;'>
-					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-					<button type='submit' title='DESCARGAR' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='downlRuta' value='".$ruta.$archivo."'>
+					<input type='hidden' name='downlDir' value='".$ruta."'>
+					<input type='hidden' name='downlFile' value='".$archivo."'>
+					<button type='submit' title='DESCARGAR' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;'></button>
 						<input type='hidden' name='downl' value='1' >
-						</form>
-					<div style='display: inline-block; float:left; margin:0.5em 0.1em 0.1em 0.4em;'>".strtoupper($archivo)."</div>
+				</form>
+					<div style='display:inline-block; float:left; margin:0.5em 0.1em 0.1em 0.4em;'>".strtoupper($archivo)."</div>
 					</li><hr>");
 			}else{}
 		} // FIN DEL WHILE
@@ -406,10 +405,10 @@ function listfiles(){
 				 ////////////////////				  ///////////////////
 					
 function delete(){
-	global $a;
-	$a = 1;
-	unlink($_POST['ruta']);
-	print("<embed src='../audi/deleteqr.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+	global $a;			$a = 1;
+	unlink($_POST['downlRuta']);
+	print("<embed src='../audi/deleteqr.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
+	</embed>");
 }
 	
 				   ////////////////////				   ////////////////////
@@ -422,6 +421,6 @@ function delete(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021 */
+/* Creado por Juan Barros Pazos 2021/25 */
 
 ?>

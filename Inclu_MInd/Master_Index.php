@@ -108,5 +108,5 @@ if ($_SESSION['dni'] == $_SESSION['mydni']) {
 	require 'index_admin.php';
 	} 
 	
-/* Creado por Juan Barros Pazos 2021 */
+/* Creado por Juan Barros Pazos 2021/25 */
 ?>

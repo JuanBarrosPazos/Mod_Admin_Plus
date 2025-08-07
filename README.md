@@ -1,9 +1,9 @@
 
-## Mod_Admin_Plus V25.08.05 2025/08/05
+## Mod_Admin_Plus V25.08.06 2025/08/06
 
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.08.05 2025/08/045
+#### Mod_Admin_Plus V25.08.06 2025/08/06
 	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
 ----
 #### Mod_Admin_Plus V25.07.31 2025/07/31

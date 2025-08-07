@@ -374,5 +374,5 @@ $text = PHP_EOL."- ADMIN BORRAR SELECCIONADO ".$ActionTime.PHP_EOL."\t ID:".$_PO
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021 */
+/* Creado por Juan Barros Pazos 2021/25 */
 ?>
