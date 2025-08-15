@@ -100,8 +100,8 @@ function show_form2($errorsp=''){
 		print("<div class='centradiv' style='border-color:#F1BD2D !important;'>
 		<!--
 			<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-		-->
 			<br>
+		-->
 			<font color='#F1BD2D'>ERROR ACCESO PIN</font>");
 		/*	
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
@@ -111,10 +111,9 @@ function show_form2($errorsp=''){
 		print("</div>
 		<embed src='audi/pin_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
 		</embed>");
-	}
+	}else{ }
 	
-	print("<div class='centradiv' >
-			SU PIN
+	print("<div class='centradiv' style='border:none;'>
 		<form name='pin' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>	
 
 			<input type='Password' name='pin' size=16 maxlength=9 value='".$defaults['pin']."' placeholder='FICHAR CON PIN' required style='text-align:center; margin-top:0.4em;' />
@@ -126,9 +125,19 @@ function show_form2($errorsp=''){
 			<a href='index.php'>
 				<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 			</a>
+		</form>
+			</div>
+		<div id='AudioQr' style='height:0.0em !important;'></div>");
 
-		</form>	
-			</div>"); 
+		global $embedDelay;
+		$embedDelay = "<script type='text/javascript'>
+					function embedDelay(){
+		document.getElementById('AudioQr').innerHTML = \"<embed src='audi/ScanYourQr.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>\";
+					}
+					setTimeout('embedDelay()',3000);
+				</script>";
+		print ($embedDelay);
+
 	
 } // FIN function show_form2
 
@@ -204,7 +213,7 @@ function show_form2($errorsp=''){
 
     <video id="preview"></video>
 
-    <div style="margin-bottom: 2.0em;">
+    <div style="margin-bottom: 1.2em;">
         <label class="btn btn-primary active">
             <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
         </label>

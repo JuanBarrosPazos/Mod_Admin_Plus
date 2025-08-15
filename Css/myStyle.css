@@ -24,6 +24,14 @@ table, .centradiv {
 	text-align: center !important;
 	size: 1.0em;
 }
+
+embed {
+	display: none !important;
+	visibility: hidden !important;
+	height: 0.0em !important;
+	width: 0.0em !important;
+}
+
 .centradiv {
 	text-align: center;
 	width: max-content;

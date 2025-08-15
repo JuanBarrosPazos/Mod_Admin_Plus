@@ -774,11 +774,11 @@ function show_ficha(){
 				<input type='hidden' id='tout' name='tout' value='".$tout."' />
 					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='salida' value=1 />
-			</form>														
+			</form>
 		</div>"); 
-		}
+	}
 	
-	} // FIN FUNCTION show_ficha()
+} // FIN FUNCTION show_ficha()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -804,9 +804,9 @@ function process_pin(){
 
 	if($cp > 0){
 	
-		global $vname;
 		$tabla1 = $_SESSION['clave'].$rp['ref'];
 		$tabla1 = strtolower($tabla1);
+		global $vname;
 		$vname = $tabla1."_".date('Y');
 		$vname = "`".$vname."`";
 
@@ -1171,7 +1171,8 @@ function show_form2($errorsp=''){
 			<hr> 
 			<a href='indexcamini.php'>GO TO QR SCANNER CAM</a>
 			-->
-		</div>"); 
+		</div>
+		<div id='AudioQr' style='height:0.0em !important;'></div>"); 
 
 	if ($errorsp){
 		print("	<div class='centradiv' style='border-color:#F1BD2D !important;'>
@@ -1187,9 +1188,20 @@ function show_form2($errorsp=''){
 		print("<embed src='audi/pin_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
 		</embed>
 		</div>");
-		}
+
+	}else{ }
+
+	global $embedDelay;
+	$embedDelay = "<script type='text/javascript'>
+					function embedDelay(){
+		document.getElementById('AudioQr').innerHTML = \"<embed src='audi/FrontPageOptions.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>\";
+					}
+					setTimeout('embedDelay()',3000);
+				</script>";
+	print ($embedDelay);
+
 	
-	} // FIN FUNCTION show_form2()
+} // FIN FUNCTION show_form2()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

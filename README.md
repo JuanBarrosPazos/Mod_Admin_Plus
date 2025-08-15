@@ -1,10 +1,11 @@
 
-## Mod_Admin_Plus V25.08.06 2025/08/06
+## Mod_Admin_Plus V25.08.15 2025/08/15
 
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.08.06 2025/08/06
+#### Mod_Admin_Plus V25.08.06 2025/08/15
 	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
+	- Integración de nuevos audios con time delay.
 ----
 #### Mod_Admin_Plus V25.07.31 2025/07/31
 	- .\config\index_Play_System.php Modificación de estilos, inclusión de iconos, sustitución de tablas...
