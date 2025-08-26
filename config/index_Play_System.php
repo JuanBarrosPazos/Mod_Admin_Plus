@@ -28,9 +28,11 @@ session_start();
 		if($form_errors = validate_form()){
 						suma_denegado();
 						show_form2();
-						if($_SESSION['showf'] == 69){table_desblock();}
-						else{show_form($form_errors);
-							 show_visit();}
+						if($_SESSION['showf'] == 69){
+									table_desblock();}
+						else{	show_form($form_errors);
+							 	show_visit();
+						}
 		}else{ require 'Inclu/Only.index.php'; 
 				process_form();
 				show_ficha();
@@ -78,10 +80,10 @@ session_start();
 									 	session_destroy();
 	}else{	show_form2();
 			if($_SESSION['showf'] == 69){
-				table_desblock();
+					table_desblock();
 			}else{
-				show_form(@$form_errors);
-				show_visit();
+					show_form(@$form_errors);
+					show_visit();
 			}
 			suma_visit();
 			bbdd_backup();
@@ -204,7 +206,7 @@ $table_desblock = print("<table align='center' style=\"margin-top:2px; margin-bo
 						}
 						setTimeout('redir()',600000);
 						</script>";
-			print ($redir);
+			//print ($redir);
 
 }
 
@@ -321,19 +323,15 @@ function ayear(){
 
 function admin_entrada(){ 
 
-	global $db; 	global $db_name;
-	global $userid;
-	$userid = $_SESSION['id'];
+	global $db; 			global $db_name;
+	global $userid;			$userid = $_SESSION['id'];
 	
-	global $uservisita; 
-	$uservisita = $_SESSION['visitadmin'];
+	global $uservisita; 	$uservisita = $_SESSION['visitadmin'];
 	$total = $uservisita + 1;
 	
-	global $datein;
-	$datein = date('Y-m-d H:i:s');
+	global $datein;			$datein = date('Y-m-d H:i:s');
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqladin = "UPDATE `$db_name`.$table_name_a SET `lastin` = '$datein', `visitadmin` = '$total' WHERE $table_name_a.`id` = '$userid' LIMIT 1 ";
 		
@@ -360,11 +358,10 @@ function admin_entrada(){
 
 function show_visit(){
 
-	global $db;			global $db_name;
-	global $rowv;		global $sumavisit;
+	global $db;				global $db_name;
+	global $rowv;			global $sumavisit;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqlv =  "SELECT * FROM $table_name_c";
 	$qv = mysqli_query($db, $sqlv);
@@ -380,13 +377,17 @@ function show_visit(){
 	$idv = 69;
 	
 	if(mysqli_query($db, $sqlv)){
-		print("<div class='centradiv' id='visitsDatos' >
-				<font color='#59746A'>
-					VISITS: ".$tot."<br>
-					AUTHORIZED: ".$rowv['acceso']."<br>
-					FORBIDDEN: ".$rowv['deneg']."
-				</font>
-			</div>");
+		print("<ul class='centradiv' id='visitsDatos' >
+				<li>
+					<div>VISITS: </div><div>".$tot."</div>
+				</li>
+				<li>
+					<div>AUTHORIZED: </div><div>".$rowv['acceso']."</div>
+				</li>
+				<li>
+					<div>FORBIDDEN: </div><div>".$rowv['deneg']."</div>
+				</li>
+			</ul>");
 	}else{
 		print("<font color='#F1BD2D'>* Error: show visit</font>
 				</br>ERROR SQL L.369 ".mysqli_error($db)."</br>");
@@ -403,8 +404,7 @@ function suma_visit(){
 	global $db;				global $db_name;
 	global $rowv;			global $sumavisit;
 	
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqlv =  "SELECT * FROM $table_name_c";
 	$qv = mysqli_query($db, $sqlv);
@@ -418,8 +418,7 @@ function suma_visit(){
 
 	$idv = 69;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqlv = "UPDATE `$db_name`.$table_name_c SET `admin`='$sumavisit' WHERE $table_name_c.`idv`='$idv' LIMIT 1 ";
 
@@ -442,8 +441,7 @@ function suma_acces(){
 
 	global $db; 	global $db_name; 	global $rowa; 	global $sumaacces;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqla =  "SELECT * FROM $table_name_c";
 	$qa = mysqli_query($db, $sqla);
@@ -457,8 +455,7 @@ function suma_acces(){
 
 	$idv = 69;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqla = "UPDATE `$db_name`.$table_name_c SET `acceso` = '$sumaacces' WHERE $table_name_c.`idv` = '$idv' LIMIT 1 ";
 
@@ -476,8 +473,7 @@ function suma_acces(){
 	$date = date('Y-m-d');
 	$time = date('H:i:s');
 
-	global $table_name_b;
-	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
+	global $table_name_b;	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('$_SESSION[ref]', '$_SESSION[Nivel]', '{$geoplugin->ip}', '0', '1', '$date', '$time')";
 	if(mysqli_query($db, $sqlip)){ }else{ print("* ERROR SQL L.482: ".mysqli_error($db));}
@@ -493,8 +489,7 @@ function suma_denegado(){
 	global $db;				global $db_name;
 	global $rowd;			global $sumadeneg;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqld =  "SELECT * FROM $table_name_c";
 	$qd = mysqli_query($db, $sqld);
@@ -508,8 +503,7 @@ function suma_denegado(){
 
 	$idd = 69;
 
-	global $table_name_c;
-	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqld = "UPDATE `$db_name`.$table_name_c SET `deneg` = '$sumadeneg' WHERE $table_name_c.`idv` = '$idd' LIMIT 1 ";
 
@@ -527,8 +521,7 @@ function suma_denegado(){
 	$date = date('Y-m-d');
 	$time = date('H:i:s');
 
-	global $table_name_b;
-	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
+	global $table_name_b;	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '{$geoplugin->ip}', '1', '0', '$date', '$time')";
 	if(mysqli_query($db, $sqlip)){ 
@@ -550,8 +543,7 @@ function validate_form(){
 	
 	global $db;				global $db_name;
 	
-	global $table_name_a;	
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	global $sqlp;
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Usuario` = '$_POST[Usuario]' AND `Pass` = '$_POST[Password]' LIMIT 1";
@@ -604,8 +596,7 @@ function validate_formp(){
 	
 	global $db;					global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$_POST[pin]' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -625,18 +616,14 @@ function validate_formp(){
 	}elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-	}
-	
-	/*
+	}/*
 	elseif (!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 		}
 
 	elseif (!preg_match('/^[^a-z]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
-		}*/
-	
-	elseif($cp == 0){
+	}*/elseif($cp == 0){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
 	}
@@ -709,8 +696,7 @@ function show_ficha(){
 	
 	if($count1 < 1){
 		
-		global $din;		$din = date('Y-m-d');
-		global $tin;			
+		global $din;		$din = date('Y-m-d');		global $tin;			
 
 		/*
 			HORA ORIGINAL DE ENTRADA DEL SCRIPT
@@ -725,10 +711,13 @@ function show_ficha(){
 		global $tout;	$tout = '00:00:00';
 		global $ttot;	$ttot = '00:00:00';
 		
-	print("<div class='centradiv' style='border:none;'>
-			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
-			<br>REFER: ".strtoupper($_SESSION['ref'])."
-			<br>FICHE SU ENTRADA<br>
+	print("<ul class='centradiv'>
+			<li class='liCentra'>FICHE SU ENTRADA</li>
+			<li class='liCentra'>
+				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
+			</li>
+			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+			<li class='liCentra'>
 		<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
 			<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
@@ -744,8 +733,9 @@ function show_ficha(){
 			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
 				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 				<input type='hidden' name='entrada' value=1 />
-			</form>														
-		</div>"); 
+		</form>														
+			</li>
+		</ul>"); 
 	// FICHA SALIDA.
 	}elseif($count1 > 0){
 		global $dout;	$dout = date('Y-m-d');
@@ -758,10 +748,13 @@ function show_ficha(){
 
 		////////////////////		***********  		////////////////////
 
-		print("<div class='centradiv' style='border:none;'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
-				<br>RERER: ".strtoupper($_SESSION['ref'])."
-				<br>FICHE SU SALIDA<br>
+		print("<ul class='centradiv'>
+		<li class='liCentra'>FICHE SU SALIDA</li>
+		<li class='liCentra'>
+			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
+		</li>
+		<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+		<li class='liCentra'>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
@@ -775,7 +768,8 @@ function show_ficha(){
 					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='salida' value=1 />
 			</form>
-		</div>"); 
+		</li>
+		</ul>"); 
 	}
 	
 } // FIN FUNCTION show_ficha()
@@ -832,12 +826,14 @@ function process_pin(){
 			global $tout;		$tout = '00:00:00';
 			global $ttot;		$ttot = '00:00:00';
 		
-			print("<div class='centradiv' style='border:none;'>
-				<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
-				<br>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
-				<br>REFER: ".strtoupper($rp['ref'])."<br>
-				<br>FICHE SU ENTRADA<br>
-
+		print("<ul class='centradiv'>
+				<li class='liCentra'>FICHE SU ENTRADA</li>
+				<li class='liCentra'>
+					<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+				</li>
+				<li class='liCentra'>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos'])."</li>
+				<li class='liCentra'>REFER: ".strtoupper($rp['ref'])."</li>
+				<li class='liCentra'>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
@@ -855,8 +851,9 @@ function process_pin(){
 						<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 						<input type='hidden' name='entrada' value=1 />
 				</form>
-				</div>												
-				<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>");
+				</li>
+			</ul>												
+			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>");
 
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
@@ -872,12 +869,14 @@ function process_pin(){
 
 			////////////////////		***********  		////////////////////
 
-			print("<div class='centradiv' style='border:none;'>
-				".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos']).".
-				<br>REFER: ".strtoupper($rp['ref'])."<br>
-				<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='80.0em' width='64.0em' />
-				<br>FICHE SU SALIDA<br>
-				
+			print("<ul class='centradiv'>
+				<li class='liCentra'>FICHE SU SALIDA</li>
+				<li class='liCentra'>
+					<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+				</li>
+				<li class='liCentra'>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos'])."</li>
+				<li class='liCentra'>REFER: ".strtoupper($rp['ref'])."</li>
+				<li class='liCentra'>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
@@ -891,8 +890,10 @@ function process_pin(){
 					<input type='hidden' id='tout' name='tout' value='".$tout."' />
 						<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 						<input type='hidden' name='salida' value=1 />
-				</form></div>														
-				<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>"); 
+				</form>
+				</li>	
+			</ul>														
+			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>"); 
 			
 		}
 	
@@ -918,7 +919,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-		print ($redir);
+		//print ($redir);
 	}			
 		
 } // FIN function process_pin()
@@ -1002,20 +1003,37 @@ function pin_out(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-		$tabla = "<div class='centradiv' >
-					HA FICHADO LA SALIDA<br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
-			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
-					<br>REFERENCIA: ".$_POST['ref']."
-					<br>FECHA ENTRADA: ".$din."
-					<br>HORA ENTRADA: ".$tin."
-					<br>FECHA SALIDA: ".$_POST['dout']."
-					<br>HORA SALIDA: ".$_POST['tout']."
-					<br>HORAS REALIZADAS: ".$ttot."<br>
+		$tabla = "<ul class='centradiv' >
+			<li class='liCentra'>HA FICHADO LA SALIDA</li>
+			<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
+			<li class='liCentra'>
+				<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' />
+			</li>
+			<li>
+				<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
+			</li>
+			<li>
+				<div>FECHA ENTRADA: </div><div>".$din."</div>
+			</li>
+			<li>
+				<div>HORA ENTRADA: </div><div>".$tin."</div>
+			</li>
+			<li>
+				<div>FECHA SALIDA: </div><div>".$_POST['dout']."</div>
+			</li>
+			<li>
+				<div>HORA SALIDA: </div><div>".$_POST['tout']."</div>
+			</li>
+			<li>
+				<div>H. REALIZADAS: </div><div>".$ttot."</div>
+			</li>
+			<li class='liCentra'>
 				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;'>
 					<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>	
-			</div>
+			</li>
+		</ul>
 			<embed src='audi/salida.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>";	
 		
@@ -1051,7 +1069,7 @@ function pin_out(){
 					}
 					setTimeout('redir()',8000);
 					</script>";
-		print ($redir);
+		//print ($redir);
 	
 	}else{	print("ERROR SQL L.1038: ".mysqli_error($db));
 			show_form2();
@@ -1067,17 +1085,29 @@ function pin_out(){
 
 function pin_in(){
 	
-	$tabla = "<div class='centradiv'>
-				HA FICHADO LA ENTRADA</br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."<br>
+	$tabla = "<ul class='centradiv'>
+				<li class='liCentra'>
+					HA FICHADO LA ENTRADA</br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."
+				</li>
+				<li class='liCentra'>
 			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
-				<br>REFERENCIA: ".$_POST['ref']."
-				<br>FECHA ENTRADA: ".$_POST['din']."
-				<br>HORA ENTRADA: ".$_POST['tin']."<br>
+				</li>
+				<li>
+					<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
+				</li>
+				<li>
+					<div>FECHA ENTRADA: </div><div>".$_POST['din']."</div>
+				</li>
+				<li>
+					<div>HORA ENTRADA: </div><div>".$_POST['tin']."</div>
+				</li>
+				<li class='liCentra'>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
 				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
-		</div>
+				</li>
+		</ul>
 			<embed src='audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>";	
 		
@@ -1118,7 +1148,7 @@ function pin_in(){
 					}
 					setTimeout('redir()',8000);
 					</script>";
-		print ($redir);
+		//print ($redir);
 
 	}else{	print("ERROR SQL L.1105: ".mysqli_error($db));
 			show_form2();
@@ -1444,24 +1474,23 @@ function ver_todo(){
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";
 
-	if (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
+	global $qb;
+	if(($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){ 
 			$ref = $_SESSION['ref'];
 			$sqlb =  "SELECT * FROM $table_name_a WHERE `ref` = '$ref'";
 			$qb = mysqli_query($db, $sqlb);
-	}elseif(($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['webmaster'])){ 
-				require 'Admin/Paginacion_Head.php';
-				global $orden;
-				$orden = @$_POST['Orden'];
-				/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
-				$sqlb =  "SELECT * FROM $table_name_a  ORDER BY  `id` ASC $limit";
-				$qb = mysqli_query($db, $sqlb);
-	}elseif(($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] != $_SESSION['webmaster'])){ 
-				require 'Admin/Paginacion_Head.php';
-				global $orden;
-				$orden = @$_POST['Orden'];
-				/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
-				$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` ASC $limit";
-				$qb = mysqli_query($db, $sqlb);
+	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['webmaster'])){ 
+			require 'Admin/Paginacion_Head.php';
+			global $orden;		$orden = @$_POST['Orden'];
+			/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
+			$sqlb =  "SELECT * FROM $table_name_a  ORDER BY  `id` ASC $limit";
+			$qb = mysqli_query($db, $sqlb);
+	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] != $_SESSION['webmaster'])){ 
+			require 'Admin/Paginacion_Head.php';
+			global $orden;		$orden = @$_POST['Orden'];
+			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
+			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` ASC $limit";
+			$qb = mysqli_query($db, $sqlb);
 	}
 
 			////////////////////		**********  		////////////////////
@@ -1475,17 +1504,17 @@ function ver_todo(){
 
 			////////////////////		**********  		////////////////////
 
-		// PASO LOGS DE ACCESO
-		global $text;
-		$text = "!! ACCESO USUARIO: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].".".PHP_EOL."\t\tREFERENCIA: ".$_SESSION['ref']." NIVEL: ".$_SESSION['Nivel'].PHP_EOL;
-		ini_log();
-		// PASO LOGS DE USUARIO
-		$ActionTime = date('H:i:s');
-		global $dir;		$dir = "Users/".$_SESSION['ref']."/log";
-		global $text;		$text = "** ".$ActionTime.PHP_EOL."\t".$text;
-		require 'Admin/log_write.php';
+	// PASO LOGS DE ACCESO
+	global $text;
+	$text = "!! ACCESO USUARIO: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].".".PHP_EOL."\t\tREFERENCIA: ".$_SESSION['ref']." NIVEL: ".$_SESSION['Nivel'].PHP_EOL;
+	ini_log();
+	// PASO LOGS DE USUARIO
+	$ActionTime = date('H:i:s');
+	global $dir;		$dir = "Users/".$_SESSION['ref']."/log";
+	global $text;		$text = "** ".$ActionTime.PHP_EOL."\t".$text;
+	require 'Admin/log_write.php';
 		
-	}	/* FIN FUNCTION VER TODO */
+}	/* FIN FUNCTION VER TODO */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

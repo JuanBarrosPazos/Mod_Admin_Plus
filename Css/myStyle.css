@@ -18,7 +18,7 @@ h1 {
 }
 
 table, .centradiv {
-    border: solid 0.1em #ccc;/*  */
+    border: solid 0.1em #CCC;/*  */
 	border-radius: 12px !important;
 	margin: 6px auto 6px auto;
 	text-align: center !important;
@@ -36,17 +36,51 @@ embed {
 	text-align: center;
 	width: max-content;
     max-width: 95%;
-    min-width: 230px;
+    min-width: 16.8em;
 	padding: 6px 4px 6px 4px;
     height: auto;
-	vertical-align: top !important; 
+	vertical-align: top !important;
+	border: solid 0.1em #CCC;
+}
+.centradiv li{
+  	list-style: none;
+	text-align: left;
+}
+.centradiv li div{
+	display: inline-block;
+	margin: 0.2em;
+	padding: 0.1em;
+	width: fit-content;
+  	border: solid 0.1em #CCC !important;
+}
+.liCentra{
+	text-align: center !important;
+}
+.centradiv li img{
+	height: 8.0em;
+	width: 6.4em;
 }
 
 #visitsDatos{
-	border:none;
+	color:#59746A;
+	/*border:none;*/
+	border: solid 0.1em #59746A;
 	min-width:fit-content;
 	text-align:left !important;
 }
+#visitsDatos li div:first-child, .centradiv li div:first-child{
+	text-align: right;
+	width: fit-content;
+}
+#visitsDatos li div:first-child{
+	min-width: 7.2em;
+}
+.centradiv li div:first-child{
+	width: max-content;
+	min-width: 52%;
+	color: #f40 !important;
+}
+
 
 .limpiar {
 	clear: both;

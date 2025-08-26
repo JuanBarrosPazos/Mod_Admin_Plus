@@ -1,26 +1,18 @@
 <?php
 
 	if(!$qb){
-			print("<font color='#FF0000'>
-					Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
-					
+			print("SQL ERROR: ".mysqli_error($db)."</br>");
 			show_form();	
-			
-	} else {
-			
+	}else{
 		if(mysqli_num_rows($qb)== 0){
-			print ("<table style=\"text-align:center; border:0px;\">
-						<tr><td>
-							".$inicioadmincrear.$inciobajas."<hr>
-							<font color='#FF0000'>NO HAY DATOS</font>
-						</td></tr>
-					</table>");
-		} else { global $page;
-				 if ($page >= 1){ } 
-				 else { $page = 1;}
+			print ("<div class='centradiv'>
+						".$inicioadmincrear.$inciobajas."<hr>
+							NO HAY DATOS
+					</div>");
+		}else{ global $page;
+				if($page >= 1){ }else{ $page = 1;}
 
 			if(isset($_POST['ocultoc'])){
-
 				$defaults['Nombre'] = $_POST['Nombre'];
 				$defaults['Apellidos'] = $_POST['Apellidos'];
 				global $refrescaimg;
@@ -30,24 +22,21 @@
 					<input type='submit' value='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila' />
 					<input type='hidden' name='ocultoc' value=1 />
 								</form>";
-			} else { global $refrescaimg;
+			}else{ 	global $refrescaimg;
 					 $refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php'>
 						<input type='submit' value='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila' />
 						<input type='hidden' name='page' value=".$page." />
 								</form>";
-					}
+			}
 
 	print ("<div class=\"centradiv\">
 		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas."<hr>".$refrescaimg);
                                     
 	while($rowb = mysqli_fetch_assoc($qb)){
     
-		global $formularioh;
-		global $formulariof;
-		global $formulariohi;
-		global $formulariofi;
-		global $formulariohe;
-		global $formulariofe;
+		global $formularioh;			global $formulariof;
+		global $formulariohi;			global $formulariofi;
+		global $formulariohe;			global $formulariofe;
 
 	print (	"<hr><div class='whiletotalaimg'>
 	<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' style=\"height:34px; width:auto;\" />
@@ -85,13 +74,10 @@
 						<input type='hidden' name='oculto2' value=1 />
 						</form>
 						</td>";
-	} else {	
-		global $formulariohe;
-		$formulariohe = "";
-			
-		global $formulariofe;
-		$formulariofe = "";
-		}
+	}else{	
+		global $formulariohe;			$formulariohe = "";
+		global $formulariofe;			$formulariofe = "";
+	}
 
 		print($formulariohe);
 			require 'rowbtotal.php';

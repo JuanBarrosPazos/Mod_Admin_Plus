@@ -72,16 +72,21 @@ function process_pinqr(){
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 
-			$tabla = "<div class='centradiv'>
-				HA FICHADO LA ENTRADA</br>".$rp['Nombre']." ".$rp['Apellidos']."<br>
-	<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='80px' width='64px' />
-				<br>REFERENCIA: ".$rp['ref']."
-				<br>FECHA ENTRADA: ".$din."
-				<br>HORA ENTRADA: ".$tin."
-				<form name='cancel' action='indexcamini.php' >
-					<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
-				</form>
-			</div>
+			$tabla = "<ul class='centradiv'>
+				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
+				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
+				<li class='liCentra'>
+					<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
+				</li>
+				<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
+				<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
+				<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
+				<li class='liCentra'>
+			<form name='cancel' action='indexcamini.php' >
+				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
+			</form>
+				</li>
+			</ul>
 			<embed src='audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>
 			<script type='text/javascript'>
@@ -196,19 +201,24 @@ function process_pinqr(){
 	
 			////////////////////		**********  		////////////////////
 			
-			$tabla = "<div class='centradiv'>
-				HA FICHADO LA SALIDA<br>".$rp['Nombre']." ".$rp['Apellidos']."<br>
-	<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='80px' width='64px' />
-				<br>REFERENCIA: ".$rp['ref']."
-				<br>FECHA ENTRADA: ".$din."
-				<br>HORA ENTRADA: ".$tin."</td>
-				<br>FECHA SALIDA: ".$dout."
-				<br>HORA SALIDA: ".$tout."
-				<br>HORAS REALIZADAS: ".$ttot."
-				<form name='cancel' action='indexcamini.php' >
-					<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
-				</form>
-			</div>
+			$tabla = "<ul class='centradiv'>
+				<li class='liCentra'>HA FICHADO LA SALIDA</li>
+				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
+				<li class='liCentra'>
+					<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."'/>
+				</li>
+				<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
+				<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
+				<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
+				<li><div>FECHA SALIDA: </div><div>".$dout."</div></li>
+				<li><div>HORA SALIDA: </div><div>".$tout."</div></li>
+				<li><div>H. REALIZADAS: </div><div>".$ttot."</div></li>
+				<li class='liCentra'>
+			<form name='cancel' action='indexcamini.php' >
+				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
+			</form>
+				</li>
+			</ul>
 			<embed src='audi/salida.mp3'  autostart='true' loop='false' width='0' height='0' hidden='true' >
 			</embed>
 			<script type='text/javascript'>
