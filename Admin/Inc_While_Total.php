@@ -10,87 +10,100 @@
 							NO HAY DATOS
 					</div>");
 		}else{ global $page;
-				if($page >= 1){ }else{ $page = 1;}
+				if($page >= 1){ }else{ $page = 1;
+		}
 
 			if(isset($_POST['ocultoc'])){
 				$defaults['Nombre'] = $_POST['Nombre'];
 				$defaults['Apellidos'] = $_POST['Apellidos'];
 				global $refrescaimg;
-				$refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php' method='POST'>
+				$refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php' method='POST' style='display: inline-block;' >
 					<input type='hidden' name='Nombre' value='".@$defaults['Nombre']."' />
 					<input type='hidden' name='Apellidos' value='".@$defaults['Apellidos']."' />
-					<input type='submit' value='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila' />
+					<button type='submit' title='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila imgButIco CachedBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='ocultoc' value=1 />
 								</form>";
 			}else{ 	global $refrescaimg;
-					 $refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php'>
-						<input type='submit' value='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila' />
-						<input type='hidden' name='page' value=".$page." />
-								</form>";
+					$refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php' style='display: inline-block;' >
+				<button type='submit' title='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila imgButIco CachedBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='page' value=".$page." />
+				</form>";
 			}
 
-	print ("<div class=\"centradiv\">
-		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas."<hr>".$refrescaimg);
-                                    
-	while($rowb = mysqli_fetch_assoc($qb)){
+		print ("<div class='centraWhileDatos'>
+		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas.$refrescaimg."<br>");
+                  
+		while($rowb = mysqli_fetch_assoc($qb)){
     
-		global $formularioh;			global $formulariof;
-		global $formulariohi;			global $formulariofi;
-		global $formulariohe;			global $formulariofe;
+			global $formularioh;			global $formulariof;
+			global $formulariohi;			global $formulariofi;
+			global $formulariohe;			global $formulariofe;
 
-	print (	"<hr><div class='whiletotalaimg'>
-	<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' style=\"height:34px; width:auto;\" />
-				</div>
-				<div class='whiletotala'>NOMBRE<br>".$rowb['Nombre']."</div>
-				<div class='whiletotala'>APELLIDO<br>".$rowb['Apellidos']."</div>
-				<br>
-				<div class='whiletotala'>NIVEL<br>".$rowb['Nivel']."</div>
-				<div class='whiletotala'>REF USER<br>".$rowb['ref']."</div>
-				<div class='whiletotala'>USER<br>".$rowb['Usuario']."</div>
-				<div class='whiletotala'>PASS<br>".$rowb['Pass']."</div><br>
+		print ("<div class='CardWhileDatos'>
+			<div class='whiletotalaimg'>
+				<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' />
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>NOMBRE: </div><div class='Dato'>".$rowb['Nombre']."</div>
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>APELLIDO: </div><div class='Dato'>".$rowb['Apellidos']."</div>
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>NIVEL: </div><div class='Dato'>".$rowb['Nivel']."</div>
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>REF USER: </div><div class='Dato'>".$rowb['ref']."</div>
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>USER: </div><div class='Dato'>".$rowb['Usuario']."</div>
+			</div>
+			<div class='whiletotala'>
+				<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
+			</div>
 				
         <!-- AQUÍ VA LA BOTONERA -->
-	
-		".$formularioh);
+			<div style='text-align:center;'>".$formularioh);
 
-		require 'rowbtotal.php';
+			require 'rowbtotal.php';
 
 			print($formulariof.$formulariohg);
 
-		require 'rowbtotal.php';
+			require 'rowbtotal.php';
 
 			print($formulariofg.$formulariohi);
 		
-		require 'rowbtotal.php';
+			require 'rowbtotal.php';
 		
 			print($formulariofi.$formulariohe);
 
-	if(($_SESSION['Nivel'] == 'admin')&&($rowb['dni'] != $_SESSION['webmaster'])){
+		if(($_SESSION['Nivel'] == 'admin')&&($rowb['dni'] != $_SESSION['webmaster'])){
 
-		global $formulariohe;
-		$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
-		global $formulariofe;
-		$formulariofe = "<input type='submit' value='DAR DE BAJA' class='botonrojo' />
-						<input type='hidden' name='oculto2' value=1 />
-						</form>
-						</td>";
-	}else{	
-		global $formulariohe;			$formulariohe = "";
-		global $formulariofe;			$formulariofe = "";
-	}
+			global $formulariohe;
+			$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
+			global $formulariofe;
+			$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='oculto2' value=1 />
+				</form>";
+			}else{	
+				global $formulariohe;			$formulariohe = "";
+				global $formulariofe;			$formulariofe = "";
+			}
 
-		print($formulariohe);
-			require 'rowbtotal.php';
-		print($formulariofe);
-                    
-	}  // FIN DEL WHILE
+			print($formulariohe);
+				require 'rowbtotal.php';
+			print($formulariofe);
+            
+			print("</div></div>");// FIN div botonera y card datos.
 
-	    print("</div>");
-			
-			} 
+			}  // FIN DEL WHILE
 
-	require 'Paginacion_Footter.php';
+		print("</div>");
+
+		} // FIN else else
+
+		require 'Paginacion_Footter.php';
 	
-		} 
+	} //FIN else
 
 ?>

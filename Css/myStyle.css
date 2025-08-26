@@ -450,33 +450,70 @@ img {
 /* ******    WHILE DATOS     ****** */
 /* ******************************** */
 
-.whiletotal {
-	display:inline-block; 
+.centraWhileDatos{
+	text-align: center;
+	width: 70%;
+	border: solid 0.1em #CCC;
+	border-radius: 0.8em;
+	margin: 0.1em auto 0.1em auto;
+}
+.CardWhileDatos{
+	display: inline-block;
+	text-align: left;
+	border: solid 0.1em #CCC;
+	border-radius: 0.8em;
+	margin: 0.2em;
+	width: 23%;
+	min-width: max-content;
+}
+
+.whiletotal{
+	display:inline-block;
 	vertical-align: top !important;
-	width: 100px;
+	width: max-content;
 	padding: 1px 4px 1px 4px; 
 	margin: 0.4em 3px 1px 3px;
 }
 
-.whiletotala {
-	padding: 1px 4px 1px 4px; 
-	margin: 0.4em 3px 1px 3px;
+.whiletotala{
+	padding: 1px 4px 1px 4px;
+	margin: 0.2em;
 	/* border: #93D7BF solid 1px; */
 }
+.whiletotala div{
+	display: inline-block;
+	margin: 0.1em;
+	/*border: solid 0.1em #93D7BF;*/
+}
+.whiletotala div:first-child{
+	text-align: right;
+	width: 48%;
+	min-width: max-content;
+}
+.whiletotala div:last-child{
+	width: max-content;
+}
 
-.whiletotala, .whiletotalaimg {
-	display:inline-block; 
-	vertical-align: top !important;
-	width: 100px;
+.whiletotala, .whiletotalaimg{
+	display:block; 
 	max-width: auto;
 	/* border: #93D7BF solid 1px; */
 }
 
-.whiletotalaimg  {
-	margin-top: 0px !important;
+.whiletotalaimg{
+	display: block;
+	text-align: center !important;
+	margin: auto;
 	padding: 0px !important;
 	max-width: max-content !important;
-		}
+}
+
+.whiletotalaimg img{
+	height: 5.4em;
+	width:auto;
+	margin-top: 0.4em;
+	border: none;
+}
 
 
 /* ******************************** */
@@ -503,7 +540,16 @@ img {
 		overflow: hidden;
 			}
 
+	.centraWhileDatos{
+		width: 98%;
 	}
+
+	.CardWhileDatos{
+		width: 32%;
+		margin: 0.2em;
+	}
+
+}
 
 @media screen and (max-width:440px){
 
@@ -528,13 +574,18 @@ img {
 		border-radius: 6px !important;
 			}
 
+	.CardWhileDatos{
+		width: 90%;
+		display: block;
+		margin: 0.3em auto 0.3em auto;
+	}
+
 	.whiletotalaimg  {
-		display:block !important;
 		margin-left: auto !important;
 		margin-right: auto !important;
 		max-width: max-content !important;
 		/* border: #93D7BF solid 2px; */
-			}
+	}
 
 	}
 

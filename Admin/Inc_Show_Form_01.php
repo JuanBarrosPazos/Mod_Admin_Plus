@@ -3,22 +3,19 @@
     if(isset($_POST['ocultoc'])){
         $defaults = $_POST;
         $_SESSION['Orden'] = @$_POST['Orden'];
-        }
-    elseif(isset($_POST['todo'])){
+    }elseif(isset($_POST['todo'])){
         $defaults = $_POST;
         $_SESSION['Orden'] = $_POST['Orden'];
-    } 
-    elseif ((isset($_GET['page'])) || (isset($_POST['page']))) {
+    }elseif((isset($_GET['page'])) || (isset($_POST['page']))) {
         @$defaults['Orden'] = $_SESSION['Orden'];
-    }
-    else {  $defaults = array (	'Nombre' => '',
+    }else{  $defaults = array (	'Nombre' => '',
                                 'Apellidos' => '',
                                 'Orden' => '`id` ASC');
             $_SESSION['Orden'] = '`id` ASC';
-                         }
+    }
 
-if ($errors){
-    print("	<table align='center'>
+    if($errors){
+        print("	<table align='center'>
                 <tr>
                     <th style='text-align:center'>
                         <font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
@@ -55,7 +52,9 @@ print(" <table align='center' style=\"margin-top:12px\">
                     
             <tr>
                 <td style='text-align:right !important;'>
-                    <input type='submit' value='FILTRO' class='botonlila' />
+    <button type='submit' title='FILTRO' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;' >
+    </button>
+
                     <input type='hidden' name='ocultoc' value=1 />
                 </td>
                 <td style='text-align:right !important;'>	
@@ -81,14 +80,14 @@ print(" <table align='center' style=\"margin-top:12px\">
     <form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
             <tr>
                 <td style='text-align:right;'>
-                    <input type='submit' value='".$boton."' class='botonlila' />
+        <button type='submit' title='".$boton."' class='botonverde imgButIco PersonsBlack' style='vertical-align:top;' ></button>
                     <input type='hidden' name='todo' value=1 />
                 </td>
                 <td style='text-align:right !important;'>	
                     ORDEN
                 </td>
                 <td>
-                    <select name='Orden'>");
+                    <select name='Orden' class='botonverde'>");
                     
             foreach($ordenar as $option => $label){
                 

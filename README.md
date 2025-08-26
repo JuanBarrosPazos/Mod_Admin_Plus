@@ -1,10 +1,11 @@
 
-## Mod_Admin_Plus V25.08.15 2025/08/15
+## Mod_Admin_Plus V25.08.26B 2025/08/26
 
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.08.06 2025/08/15
+#### Mod_Admin_Plus V25.08.26B 2025/08/26
 	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
+	- Modificación de la persentación de usuarios y paginación.
 	- Integración de nuevos audios con time delay.
 ----
 #### Mod_Admin_Plus V25.07.31 2025/07/31

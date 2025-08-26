@@ -6,27 +6,23 @@
 	$num_total_rows = mysqli_num_rows($q);
 	
 	// DEFINO EL NUMERO DE ARTICULOS POR PÁGINA
-	global $nitem;
-	$nitem = 3;
+	global $nitem;		$nitem = 8;
 	
 	global $page;
 
-    if (isset($_POST["page"])) {
-		global $page;
-        $page = $_POST["page"];
+    if(isset($_POST["page"])) {
+		global $page;		$page = $_POST["page"];
     }
 
     //examino la pagina a mostrar y el inicio del registro a mostrar
-    if (isset($_GET["page"])) {
-		global $page;
-        $page = $_GET["page"];
+    if(isset($_GET["page"])) {
+		global $page;		$page = $_GET["page"];
     }
 
-    if (!$page) {
-		global $page;
-        $start = 0;
-        $page = 1;
-    } else {
+    if(!$page){
+		global $page;		$page = 1;		$start = 0;
+        
+    }else{
         $start = ($page - 1) * $nitem;
     }
     

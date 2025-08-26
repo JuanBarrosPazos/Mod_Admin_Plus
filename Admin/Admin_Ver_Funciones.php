@@ -35,7 +35,7 @@ function process_form(){
 	
 	//$orden = $_POST['Orden'];
 	global $qb;
-	if (($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['webmaster'])) {
+	if(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['webmaster'])){
 
 		$sqlb =  "SELECT * FROM $table_name_a WHERE `Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape'  ORDER BY `Nombre` ASC  ";
 		$qb = mysqli_query($db, $sqlb);
