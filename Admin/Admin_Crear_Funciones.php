@@ -165,6 +165,7 @@ function crear_tablas(){
 	
 	global $trf; 	$trf = $_SESSION['iniref'];
 	
+	global $rutCreaTablas; 	$rutCreaTablas = "../config/";
 	require 'admin_crea_tablas.php';
 	
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/

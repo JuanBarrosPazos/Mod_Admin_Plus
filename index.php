@@ -22,32 +22,33 @@
 						rewrite();
 						//inittot();
 						show_form();
-	} elseif(isset($_POST['config'])){
+	}elseif(isset($_POST['config'])){
 			$_SESSION['inst'] = "noinst";						
 		if($form_errors = validate_form()){
-			show_form($form_errors);
-			} else { process_form();
-					require 'Inclu/my_bbdd_clave.php';
-					require 'Conections/conection.php';
-					mysqli_report(MYSQLI_REPORT_OFF);
-					global $db;
-					@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-					if (!$db){ 	global $dbconecterror; // PARA LOG
-								$dbconecterror = $db_name." * ".mysqli_connect_error();
-								global $text;
-								$text = $dbconecterror;
-								ini_log();
-								print ("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
-								show_form();
-						} elseif($db) { config_one();
-										crear_tablas();
-										ayear();
-										global $tablepf;
-										print($tablepf);
-										}
-								} // Fin else process_form()
-		} else { inittot();
-				 show_form();}
+					show_form($form_errors);
+		}else{ 	process_form();
+				require 'Inclu/my_bbdd_clave.php';
+				require 'Conections/conection.php';
+				mysqli_report(MYSQLI_REPORT_OFF);
+				global $db;
+				@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
+				if (!$db){ 	global $dbconecterror; // PARA LOG
+							$dbconecterror = $db_name." * ".mysqli_connect_error();
+							global $text;
+							$text = $dbconecterror;
+							ini_log();
+							print ("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
+							show_form();
+				}elseif($db){ 	config_one();
+								crear_tablas();
+								ayear();
+								global $tablepf;
+								print($tablepf);
+				}
+			} // Fin else process_form()
+		}else{ 	inittot();
+				show_form();
+			}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -95,7 +96,7 @@ function inittot(){
 		global $link;
 		$link = "<tr>
 					<th align='center' class='BorderInf'>
-						<font color='#FF0000'>
+						<font color='#F1BD2D'>
 							0 EXISTE UNA INSTALACION ERRONEA EN BBDD".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
 						</font>
 					</th>
@@ -117,14 +118,13 @@ function inittot(){
 		global $text;
 		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION ERRONEA EN LA BBDD";
 		ini_log();
-	}
+	}elseif(($inst == 1)&&($countadm < 1)){
 	/* DETECTA LA CONEXIÓN Y UNA INSTALACIÓN INCOMPLETA SIN ADMINISTRADOR */
-	else if(($inst == 1)&&($countadm < 1)){
 		$_SESSION['inst'] = "inst";
 		global $link;
 		$link = "<tr>
 					<th align='center' class='BorderInf'>
-						<font color='#FF0000'>
+						<font color='#F1BD2D'>
 							1 EXISTE UNA INSTALACION INCOMPLETA
 							<br>
 							SIN ADMINISTRADOR
@@ -160,13 +160,13 @@ function inittot(){
 		global $text;
 		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION INCOMPLETA";
 		ini_log();
+	}elseif(($inst == 1)&&(($countcl >= 4)||($totTablas >= 4))){
 	/* DETECTA LAS TABLAS CON CLAVE Y LAS DE LA BBDD */
-	}else if(($inst == 1)&&(($countcl >= 4)||($totTablas >= 4))){
 			$_SESSION['inst'] = "inst";
 			global $link;
 			$link = "<tr>
 						<th align='center' class='BorderInf'>
-							<font color='#FF0000'>
+							<font color='#F1BD2D'>
 							2 EXISTE UNA INSTALACION ANTERIOR
 							".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
 							</font>
@@ -203,7 +203,6 @@ function inittot(){
 		global $text;
 		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION ANTERIOR";
 		ini_log();
-
 	}else{ 	$_SESSION['inst'] = "noinst";
 			global $link;
 		   	$link = "<tr>
@@ -419,7 +418,7 @@ function deltables(){
 	//$fila = mysqli_fetch_row($respuesta);
 
 if(!$respuesta){
-print("<font color='#FF0000'>300 Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
+print("<font color='#F1BD2D'>300 Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
 	} else { 
 		while ($fila = mysqli_fetch_row($respuesta)) {
 			if($fila[0]){
@@ -428,7 +427,7 @@ print("<font color='#FF0000'>300 Se ha producido un error: </font></br>".mysqli_
 			$sqlt = "DROP TABLE `$db_name`.`$fila[0]` ";
 			if(mysqli_query($db, $sqlt)){
 				} else {
-					//print ("<font color='#FF0000'>*** </font></br> ".mysqli_error($db).".</br>");
+					//print ("<font color='#F1BD2D'>*** </font></br> ".mysqli_error($db).".</br>");
 							} 
 		/* HASTA AQUI BORRA TABLAS */
 					} // FIN IF $FILA[0]
@@ -460,7 +459,7 @@ function deltablesb(){
 	$sqlt1 = "DROP TABLE `$db_name`.$table_name_a ";
 	if(mysqli_query($db, $sqlt1)){
 		} else {
-			print ("<font color='#FF0000'>*** </font></br> ".mysqli_error($db).".</br>");
+			print ("<font color='#F1BD2D'>*** </font></br> ".mysqli_error($db).".</br>");
 					}
 
 	global $table_name_b;
@@ -470,7 +469,7 @@ function deltablesb(){
 	$sqlt2 = "DROP TABLE `$db_name`.$table_name_b ";
 	if(mysqli_query($db, $sqlt2)){
 		} else {
-			print ("<font color='#FF0000'>*** </font></br> ".mysqli_error($db).".</br>");
+			print ("<font color='#F1BD2D'>*** </font></br> ".mysqli_error($db).".</br>");
 					}
 
 	global $table_name_c;
@@ -480,7 +479,7 @@ function deltablesb(){
 	$sqlt3 = "DROP TABLE `$db_name`.$table_name_c ";
 	if(mysqli_query($db, $sqlt3)){
 		} else {
-			print ("<font color='#FF0000'>*** </font></br> ".mysqli_error($db).".</br>");
+			print ("<font color='#F1BD2D'>*** </font></br> ".mysqli_error($db).".</br>");
 					}
 	} // FIN FUNCTON deltablesb()
 
@@ -559,7 +558,6 @@ function process_form(){
 	?>';
 
 	/* CREA EL ARCHIVO DE CONEXIONES */
-
 	$filename = "Conections/conection.php";
 	$config = fopen($filename, 'w+');
 	fwrite($config, $bddata);
@@ -570,39 +568,39 @@ function process_form(){
 	ini_log();
 
 	global $tablepf;
-	$tablepf = "<table>
+	$tablepf = "<table class='TFormAdmin'>
 				<tr>
-					<td colspan='2' align='center'>
-							SE HA CREADO EL ARCHIVO DE CONEXIONES.
+					<td colspan='2' style='text-align:center !important;'>
+							SE HA CREADO EL ARCHIVO DE CONEXIONES
 						</br>
-							CON LAS SIGUIENTES VARIABLES.
+							CON LAS SIGUIENTES VARIABLES
 					</td>
 				</tr>
 				<tr>
-					<td style='text-align:right !important;'>VARIABLE HOST ADRESS</td>
-					<td style='text-align:left !important;'>\$db_host = ".$host.";</td>		
+					<td>VARIABLE HOST ADRESS</td>
+					<td>\$db_host = ".$host.";</td>		
 				</tr>								
 				<tr>
-					<td style='text-align:right !important;'>VARIABLE USER NAME</td>
-					<td style='text-align:left !important;'>\$db_user = ".$user.";</td>		
+					<td>VARIABLE USER NAME</td>
+					<td>\$db_user = ".$user.";</td>		
 				</tr>	
 				<tr>
-					<td style='text-align:right !important;'>VARIABLE PASSWORD</td>
-					<td style='text-align:left !important;'>\$db_pass = ".$pass.";</td>		
+					<td>VARIABLE PASSWORD</td>
+					<td>\$db_pass = ".$pass.";</td>		
 				</tr>	
 				<tr>
-					<td style='text-align:right !important;'>VARIABLE BBDD NAME</td>
-					<td style='text-align:left !important;'>\$db_name = ".$name.";</td>		
+					<td>VARIABLE BBDD NAME</td>
+					<td>\$db_name = ".$name.";</td>		
 				</tr>
 				<tr>
-					<td style='text-align:right !important;'>CLAVE TABLES BBDD</td>
-					<td style='text-align:left !important;'>\$clave = ".$clave.";</td>		
+					<td>CLAVE TABLES BBDD</td>
+					<td>\$clave = ".$clave.";</td>		
 				</tr>
 				<tr>
-		   			<td colspan=2 align='center' class='BorderSup'>
-						<a href='config/config2.php'>
-		   					CREE EL USUARIO ADMINISTRADOR
-						</a>
+		   			<td colspan=2>
+			<a href='config/config2.php'>
+		<button type='button' title='CREE EL USUARIO ADMINISTRADOR' class='botonverde imgButIco PersonAddBlack' style='vertical-align:top; float:right;' ></button>
+			</a>
 					</td>
 				</tr>
 		</table>";
@@ -625,43 +623,40 @@ function process_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function crear_tablas(){
+function crear_tablas(){
 
 	// CREA EL DIRECTORIO DE USUARIOS.
-
 	global $data0;
-	global $carpeta;
-	$carpeta = "Users";
+	global $carpeta;				$carpeta = "Users";
 	if (!file_exists($carpeta)) {
 		mkdir($carpeta, 0777, true);
 		$data0 = "\t* OK DIRECTORIO USUARIOS.".PHP_EOL;
-		}
-	elseif (!file_exists($carpeta)){ print("* NO HA CREADO EL DIRECTORIO ".$carpeta.PHP_EOL);
+	}elseif (!file_exists($carpeta)){ print("* NO HA CREADO EL DIRECTORIO ".$carpeta.PHP_EOL);
 									 $data0 = "\t* NO OK DIRECTORIO USUARIOS.".PHP_EOL;
-									}
+	}else{ }
+
 	if (file_exists($carpeta)) {
 		copy("config/index.php", $carpeta."/index.php");
 		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;;
-	} else {}
+	}else{}
 
-	global $carpetat;
-	$carpetat = "Users/temp";
+	global $carpetat;				$carpetat = "Users/temp";
 	if (!file_exists($carpetat)) {
 		mkdir($carpetat, 0777, true);
 		$data0 = $data0."\t* OK DIRECTORIO TEMP.".PHP_EOL;
-		}
-	elseif (!file_exists($carpeta)){ print("* NO HA CREADO EL DIRECTORIO ".$carpetat.PHP_EOL);
+	}elseif(!file_exists($carpeta)){ print("* NO HA CREADO EL DIRECTORIO ".$carpetat.PHP_EOL);
 									 $data0 = $data0."\t* NO OK DIRECTORIO TEMP.".PHP_EOL;
-									}
-	if (file_exists($carpetat)) {
+	}else{ }
+
+	if(file_exists($carpetat)) {
 		copy("config/SecureIndex2.php", $carpetat."/index.php");
 		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;;
-	} else {}
+	}else{ }
 
 		require 'Inclu/my_bbdd_clave.php';
 		require 'config/Inc_Crea_Tablas.php'; 
 
-	}	
+} //FIN function crear_tablas
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -687,7 +682,7 @@ function modif(){
 	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO DE ARRAY ANUAL ".$filename;
 	ini_log();
 
-} // FIN FUNCTION
+} // FIN function modif
 
 function modif2(){
 
@@ -701,7 +696,7 @@ function modif2(){
 	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO SI PROCEDE: ".$filename;
 	ini_log();
 
-} // FIN FUCNTION
+} // FIN function modif2
 
 function ayear(){
 	$filename = "config/year.txt";
@@ -714,7 +709,7 @@ function ayear(){
 									modif2();
 		}
 
-} // FIN FUNCTION
+} // FIN function ayear
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -729,32 +724,25 @@ function show_form($errors=[]){
 		require 'config/num_tab_bd.php';
 
 		$defaults = $_POST;
-		} else {$defaults = array ( 'host' => '',
+	}else{$defaults = array ( 'host' => '',
 									'user' => '',
 									'pass' => '',
 									'name' => '',
 									'clave' => '',);
 								   }
-	if ($errors){
-
-		print("	<table align='center'>
-					<tr>
-						<th style='text-align:center'>
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
-					</tr>
-					<tr>
-						<td style='text-align:left'>");
+	if($errors){
+		print("<div class='centradiv'>
+						<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font>
+				<br/>");
 		global $text;
 		$text = "show_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
 		ini_log();
 
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font> ".$errors [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font> ".$errors [$a]."<br/>");
 
 				// ESCRIBE ERRORES EN INI_LOG
-				global $text;
-				$text = $errors[$a];
+				global $text;			$text = $errors[$a];
 				$logdate = date('Y-m-d');
 				$logtext = "\t ** ".$text.PHP_EOL;
 				$filename = "config/logs/ini_log_".$logdate.".log";
@@ -762,82 +750,61 @@ function show_form($errors=[]){
 				fwrite($log, $logtext);
 				fclose($log);
 						}
-		print("</td></tr></table>");
+		print("</div>");
 
-		} else { }
+	}else{ }
 					
 	global $link;
 	if($_SESSION['inst'] == "inst"){ print ("<table align='center'>
 														".$link."
 											</table>");		
 	}else{
-	print("<table align='center' style=\"margin-top:10px;\">
-					<tr>
-					<td style='color:red' align='center'>
-					INTRODUZCA LOS DATOS DE CONEXI&Oacute;N A LA BBDD.
-							</br>
+	print("<div class='centradiv' style='color: #F1BD2D; border-color:#F1BD2D;'>
+			INTRODUZCA LOS DATOS DE CONEXI&Oacute;N A LA BBDD.
+			<br>
 			SE CREAR&Aacute; EL ARCHIVO DE CONEXI&Oacute;N Y LAS TABLAS DE CONFIGURACI&Oacute;N.
-					</td>
-				</tr>
-			</table>
-			<table align='center' style=\"margin-top:10px;\">
-				<tr>
-					<th colspan=2 class='BorderInf'>INIT CONFIG DATA</th>
-				</tr>
-				
-	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-						
-				<tr>
-					<td style='text-align:right !important;' width=140px>	
-						<font color='#FF0000'>*</font>
-						DB HOST ADRESS
-					</td>
-					<td width=180px>
-		<input type='text' name='host' size=25 maxlength=25 value='".$defaults['host']."' />
-					</td>
-				</tr>
-				<tr>
-					<td style='text-align:right !important;'>	
-						<font color='#FF0000'>*</font>DB USER NAME
-					</td>
-					<td>
-		<input type='text' name='user' size=25 maxlength=25 value='".$defaults['user']."' />
-					</td>
-				</tr>
-				<tr>
-					<td style='text-align:right !important;'>	
-						<font color='#FF0000'>*</font>DB PASSWORD
-					</td>
-					<td>
-		<input type='text' name='pass' size=25 maxlength=25 value='".$defaults['pass']."' />
-					</td>
-				</tr>
-				<tr>
-					<td style='text-align:right !important;'>	
-						<font color='#FF0000'>*</font>DB NAME
-					</td>
-					<td>
-		<input type='text' name='name' size=25 maxlength=25 value='".$defaults['name']."' />
-					</td>
-				</tr>
-				<tr>
-					<td style='text-align:right !important;'	
-						<font color='#FF0000'>*</font>TABLES SYSTEM CLAVE
-					</td>
-					<td>
-		<input type='text' name='clave' size=25 maxlength=3 value='".$defaults['clave']."' />
-					</td>
-				</tr>
-				<tr>
-					<td align='right' valign='middle'  class='BorderSup' colspan='2'>
-						<input type='submit' value='INIT CONFIG' class='botonverde' />
-						<input type='hidden' name='config' value=1 />
-					</td>
-				</tr>
-		</form></table>"); 
-		} // FIN PRINT TABLE
+		</div>
+		<table class='centradiv'>
+			<tr>
+				<th>INIT CONFIG DATA</th>
+			</tr>
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
+			<tr>
+				<td width=180px>
+		<input type='text' name='host' size=25 maxlength=25 value='".$defaults['host']."' placeholder='DB HOST ADRESS' required />
+				</td>
+			</tr>
+			<tr>
+				<td>
+		<input type='text' name='user' size=25 maxlength=25 value='".$defaults['user']."' placeholder='DB USER NAME' required />
+				</td>
+			</tr>
+			<tr>
+				<td>
+		<input type='text' name='pass' size=25 maxlength=25 value='".$defaults['pass']."' placeholder='DB PASSWORD' required />
+				</td>
+			</tr>
+			<tr>
+				<td>
+		<input type='text' name='name' size=25 maxlength=25 value='".$defaults['name']."' placeholder='DB NAME' required />
+				</td>
+			</tr>
+			<tr>
+				<td>
+		<input type='text' name='clave' size=25 maxlength=3 value='".$defaults['clave']."' placeholder='TABLES CLAVE' required />
+				</td>
+			</tr>
+			<tr>
+				<td>
+			<button type='submit' title='GUARDAR CONFIGURACION' class='botonverde imgButIco SaveBlack' style='vertical-align:top; float:right;' ></button>
+					<input type='hidden' name='config' value=1 />
+				</td>
+			</tr>
+		</form>
+		</table>"); 
+	} // FIN PRINT TABLE
 	
-	} // FIN FUNCTION SHOW_FOMR	
+} // FIN function show_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -847,17 +814,14 @@ function ini_log(){
 
 	$ActionTime = date('H:i:s');
 
-	global $text;
-
     $logdate = date('Y-m-d');
-
-    $logtext = "** ".$ActionTime.PHP_EOL."\t ** ".$text.PHP_EOL;
+	global $text;			$logtext = "** ".$ActionTime.PHP_EOL."\t ** ".$text.PHP_EOL;
     $filename = "config/logs/ini_log_".$logdate.".log";
     $log = fopen($filename, 'ab+');
     fwrite($log, $logtext);
     fclose($log);
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -870,4 +834,5 @@ function ini_log(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

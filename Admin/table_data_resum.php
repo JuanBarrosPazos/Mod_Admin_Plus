@@ -13,8 +13,8 @@
 		}
 
         print(" <tr>
-					<td style='width:120px;' >Nombre:</td>
-					<td style='width:110px; text-align:left !important;' >".$_POST['Nombre']."</td>
+					<td style='width:120px;' >Nombre: </td>
+					<td style='width:110px;' >".$_POST['Nombre']."</td>
 					<td rowspan='5' style='text-align:center !important;'>
 						<img ".$rutaimg." height='120px' width='90px' />
 					</td>

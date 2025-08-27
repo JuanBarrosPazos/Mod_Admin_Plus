@@ -14,9 +14,9 @@
 	if (file_exists($carpeta)){
 		copy("../Images/untitled.png", $carpeta."/untitled.png");
 		copy("../Images/pdf.png", $carpeta."/pdf.png");
-		copy("../config/ayear_Init_System.php", $carpeta."/ayear.php");
-		copy("../config/year.txt", $carpeta."/year.txt");
-		copy("../config/SecureIndex2.php", $carpeta."/index.php");
+		copy($rutCreaTablas."ayear_Init_System.php", $carpeta."/ayear.php");
+		copy($rutCreaTablas."year.txt", $carpeta."/year.txt");
+		copy($rutCreaTablas."SecureIndex2.php", $carpeta."/index.php");
 		global $data1;			$data1 = $data1."\t* OK USER SYSTEM FILES ".$carpeta."\n";
 		y();
 		modif();
@@ -52,7 +52,7 @@
 		global $data5;			$data5 = "\t* NO OK TABLA FICHAR. ".mysqli_error($db)." \n";
 	}
 
-	/************** CREAMOS LA TABLA FEEDBACK CONTROL USUARIO ***************/
+	/************** CREAMOS LA TABLA FEEDBACK CONTROL USUARIO **************
 
 	$vname1 = $_SESSION['clave'].$trf."_feed";
 	$vname1 = "`".$vname1."`";
@@ -77,7 +77,7 @@ if(mysqli_query($db , $tcl)){
 }else{
 	global $data6;			$data6 = "\t* NO OK TABLA FEED FICHAR. ".mysqli_error($db)." \n";
 }
-
+*/
 	// CREA EL DIRECTORIO DE IMAGEN DE USUARIO.
 	$vn1 = "img_admin";
 	$carpetaimg = "../Users/".$trf."/".$vn1;

@@ -170,43 +170,24 @@ require_once('geo_class/geoplugin.class.php');
 	$geoplugin->locate();
 
 $table_desblock;
-$table_desblock = print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
-				<tr>
-					<th colspan=2 width=100% valign=\"bottom\" class='BorderInf'>
+$table_desblock = print("<div class='centradiv'>
 						* IP {$geoplugin->ip} BLOQUEADA HASTA LAS ".$_SESSION['desbloqh']."
-					</th>
-				</tr>
-				<tr>
-					<td colspan='2' align='center' valign='middle' class='BorderSup' style='padding-top: 10px'>
-						<a href='Inclu/desblock_ip.php'>
-							FORMULARIO DESBLOQUEO IP
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='2' align='center' valign='middle' class='BorderSup' style='padding-top: 10px'>
-						<a href='Admin/Claves_Perdidas.php'>
-							HE PERDIDO MIS CLAVES
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='2' align='center' valign='middle' class='BorderSup' style='padding-top: 10px'>
-						<a href='Mail_Php/index.php'  target='_blank'>
-							WEBMASTER @ CONTACTO
-						</a>
-					</td>
-				</tr>
-			</table>");
+					<br>
+						<a href='Inclu/desblock_ip.php'>FORMULARIO DESBLOQUEO IP</a>
+					<br>
+						<a href='Admin/Claves_Perdidas.php'>HE PERDIDO MIS CLAVES</a>
+					<br>
+						<a href='Mail_Php/index.php' target='_blank'>WEBMASTER @ CONTACTO</a>
+				</div>");
 	
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='index.php';
-						}
-						setTimeout('redir()',600000);
-						</script>";
-			print ($redir);
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',600000);
+					</script>";
+		print ($redir);
 
 }
 
@@ -1431,7 +1412,8 @@ function show_form($errors=[]){
 				fclose($log);
 		}
 
-	print("</div><embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
+	print("</div>
+	<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>");
 
 	}

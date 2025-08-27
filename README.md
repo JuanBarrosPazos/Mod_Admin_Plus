@@ -1,8 +1,14 @@
 
-## Mod_Admin_Plus V25.08.26B 2025/08/26
+## Mod_Admin_Plus V25.08.27B 2025/08/27
 
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.08.27B 2025/08/27
+	- Se modifica la estructura de la bbdd eliminando tablas y creando nuevos campos.
+	- La codificación de la bbdd se modifica a CHARSET=utf16 COLLATE=utf16_spanish2_ci
+	- Algunos métodos no funcionarán hasta ajustarlos a la nueva estructura.
+	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
+----
 #### Mod_Admin_Plus V25.08.26B 2025/08/26
 	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
 	- Modificación de la persentación de usuarios y paginación.
