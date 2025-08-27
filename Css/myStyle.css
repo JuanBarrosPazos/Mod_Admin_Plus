@@ -19,11 +19,21 @@ h1 {
 
 table, .centradiv {
     border: solid 0.1em #CCC;/*  */
-	border-radius: 12px !important;
+	border-radius: 12px;
 	margin: 6px auto 6px auto;
-	text-align: center !important;
+	text-align: center;
 	size: 1.0em;
 }
+.TFormAdmin td:first-child{
+	text-align: right !important;
+}
+.TFormAdmin td:last-child{
+	text-align: left !important;
+}
+.TFormAdmin td:only-child{
+	text-align: right !important;
+}
+
 
 embed {
 	display: none !important;

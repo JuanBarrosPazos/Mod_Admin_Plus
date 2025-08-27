@@ -43,7 +43,7 @@ $ordenar = array (	'`id` ASC' => 'ID Ascen',
 
 if (($_SESSION['Nivel'] == 'admin')){ 
 
-print(" <table align='center' style=\"margin-top:12px\">
+print(" <table align='center' style='margin-top:12px'>
             <tr>
                 <th colspan=3 class='BorderInf'>".$titulo."</th>
             </tr>
@@ -54,7 +54,6 @@ print(" <table align='center' style=\"margin-top:12px\">
                 <td style='text-align:right !important;'>
     <button type='submit' title='FILTRO' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;' >
     </button>
-
                     <input type='hidden' name='ocultoc' value=1 />
                 </td>
                 <td style='text-align:right !important;'>	

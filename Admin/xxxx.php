@@ -1,43 +1,14 @@
 <?php
-session_start();
- 
-	require '../Inclu/error_hidden.php';
-	require '../Inclu/Admin_Inclu_head.php';
-	require '../Inclu/mydni.php';
-	require '../Inclu/nemp.php';
-	require '../Conections/conection.php';
-	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
-if ($_SESSION['Nivel'] == 'admin'){
-
-		master_index();
-
-		if(isset($_POST['oculto'])){
-				if($form_errors = validate_form()){
-						show_form($form_errors);
-				} else { process_form(); }
-		} else {show_form();}
-
-	} else { require '../Inclu/table_permisos.php'; } 
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
 
 function validate_form(){
 	
-		/* global $sqld; 	global $qd; 	global $rowd; */
+	/*	global $sqld;		global $qd;			global $rowd;	*/
 		
-		require '../Inclu/validate.php';	
+	require '../Inclu/validate.php';	
 		
-		return $errors;
+	return $errors;
 
-	} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -47,61 +18,47 @@ function process_form(){
 	
 	global $db; 	global $db_name;
 	
-/*	REFERENCIA DE USUARIO	*/
-global $rf1;	global $rf2;	global $rf3;	global $rf4;
+	/*	REFERENCIA DE USUARIO	*/
+	global $rf1;	global $rf2;	global $rf3;	global $rf4;
 
-if (preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){	$rf1 = $ref1[1];
+	if(preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){ $rf1 = $ref1[1];
 														$rf1 = trim($rf1);
 														/*print($ref1[1]."</br>");*/
-																					}
-if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
-																$rf2 = trim($rf2);
-																/*print($ref2[2]."</br>");*/
-																						}
-if (preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
+		}
+	if(preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
+																	$rf2 = trim($rf2);
+																	/*print($ref2[2]."</br>");*/
+		}
+	if(preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
 															$rf3 = trim($rf3);
 																/*print($ref3[1]."</br>");*/
-																						}
-if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2];
+		}
+	if(preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){ $rf4 = $ref4[2];
 																	$rf4 = trim($rf4);
-																/*print($ref4[2]."</br>");*/
-																						}
+																	/*print($ref4[2]."</br>");*/
+		}
 
-	global $rf;
-	$rf = $rf1.$rf2.$rf3.$rf4.$_POST['dni'].$_POST['ldni'];
-	$rf = trim($rf);
-	$rf = strtolower($rf);
-
+	global $rf;			$rf = $rf1.$rf2.$rf3.$rf4.$_POST['dni'].$_POST['ldni'];
+	$rf = trim($rf);	$rf = strtolower($rf);
 	$_SESSION['iniref'] = $rf;
 
 	/**************************************/
-	
 		crear_tablas();
-
 	/**************************************/
 
 	// CREA IMAGEN DE USUARIO.
-
-	global $trf;
-	$trf = $_SESSION['iniref'];
-	global $vn1;
-	$vn1 = "img_admin";
-	global $carpetaimg;
-	$carpetaimg = "../Users/".$trf."/".$vn1;
-	global $new_name;
-	$new_name = $trf.".png";
+	global $trf;				$trf = $_SESSION['iniref'];
+	global $vn1;				$vn1 = "img_admin";
+	global $carpetaimg;			$carpetaimg = "../Users/".$trf."/".$vn1;
+	global $new_name;			$new_name = $trf.".png";
 	copy("../Images/untitled.png", $carpetaimg."/".$new_name);
 
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
 	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
-	global $password;
-	$password = $_POST['Password'] ;
+	global $password;			$password = $_POST['Password'] ;
 	global $passwordhash;
 	$passwordhash = password_hash($password, PASSWORD_DEFAULT, array ( "cost"=>10));
 
@@ -109,6 +66,8 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 	$sql = "INSERT INTO `$db_name`.$table_name_a (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Pass`, `Direccion`, `Tlf1`, `Tlf2`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$passwordhash', '$password', '$_POST[Direccion]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
 		
+	require 'Admin_Botonera.php';
+
 	if(mysqli_query($db, $sql)){
 		
 	/*	$fil = "%".$rf."%";
@@ -120,48 +79,49 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 		$dudas = trim($_SESSION['dudas']);
 		print("** ".$rowpimg['myimg']);
 	*/
-	print( "<table align='center' style='margin-top:10px'>
+	print( "<table class='TFormAdmin' style='margin-top:10px'>
 				<tr>
 					<th colspan=3 class='BorderInf'>
 						SE HA REGISTRADO CON ESTOS DATOS.
 					</th>
-				</tr>
-			");
+				</tr>");
 	
-			global $rutaimg;
-			$rutaimg = "src='".$carpetaimg."/".$new_name."'";
-			require 'table_data_resum.php';
+	global $rutaimg;				$rutaimg = "src='".$carpetaimg."/".$new_name."'";
+	require 'table_data_resum.php';
 
-	print(" <tr>
-				<td colspan=3 align='right' class='BorderSup'>
-					<form name='closewindow' action='Admin_Crear.php'>
-						<input type='submit' value='VOLVER A ADMIN CREAR' class='botonverde' />
-						<input type='hidden' name='volver' value=1 />
-					</form>
-				</td>
-			</tr>
-		</table>");
+	print("<tr>
+			<td colspan=3 class='BorderSup'>
+			".$inicioadmin.$inicioadmincrear."
+			</td>
+		</tr>
+	</table>");
 
 	$datein = date('Y-m-d/H:i:s');
 	
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 
 	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y-m-d');
+	$logdate = date('Y_m_d');
 	$logtext = PHP_EOL."- CREADO NUEVO USUARIO ".$datein.PHP_EOL."\t User Ref: ".$rf.PHP_EOL."\t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].PHP_EOL."\t User: ".$_POST['Usuario'].PHP_EOL."\t Pass: ".$_POST['Password'].PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
 	$log = fopen($filename, 'ab+');
 	fwrite($log, $logtext);
 	fclose($log);
 
-	} else { print("</br>
-				<font color='#FF0000'>
-			* Estos datos no son validos, modifique esta entrada: </font></br> ".mysqli_error($db))."
-				</br>";
-				show_form ();
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='Admin_Ver.php';
 					}
-		} // FIN FUNCTION PROCESS_FORM
+					setTimeout('redir()',8000);
+					</script>";
+		print ($redir);
+
+	}else{ 	print("</br>ERROR SQL L.102 ".mysqli_error($db))."</br>";
+			show_form ();
+	}
+
+} // FIN function process_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -169,8 +129,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 
 function y(){
 	
-	global $trf;
-	$trf = $_SESSION['iniref'];
+	global $trf;					$trf = $_SESSION['iniref'];
 	$carpeta = "../Users/".$trf;
 	$filename = $carpeta."/ayear.php";
 	$fw1 = fopen($filename, 'r+');
@@ -192,7 +151,7 @@ function modif(){
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);
 	fclose($fw2);
-	}
+}
 
 function crear_tablas(){
 	
@@ -207,27 +166,23 @@ function crear_tablas(){
 	if (!file_exists($carpeta)) {
 		mkdir($carpeta, 0777, true);
 		$data1 = "\t* OK DIRECTORIO USUARIO ".$carpeta."\n";
-		}
-		else{
+	}else{
 		//print("* NO OK DIRECTORIO ".$carpeta."\n");
 		$data1 = "\t* NO OK DIRECTORIO USUARIO ".$carpeta."\n";
-		}
+	}
 
-	if (file_exists($carpeta)) {
+	if (file_exists($carpeta)){
 		copy("../Images/untitled.png", $carpeta."/untitled.png");
 		copy("../Images/pdf.png", $carpeta."/pdf.png");
 		copy("../config/ayear_Init_System.php", $carpeta."/ayear.php");
 		copy("../config/year.txt", $carpeta."/year.txt");
 		copy("../config/SecureIndex2.php", $carpeta."/index.php");
-		global $data1;
-		$data1 = $data1."\t* OK USER SYSTEM FILES ".$carpeta."\n";
+		global $data1;			$data1 = $data1."\t* OK USER SYSTEM FILES ".$carpeta."\n";
 		y();
 		modif();
-		}
-		else{
+	}else{
 		print("* NO OK USER SYSTEM FILES ".$carpeta."\n");
-		global $data1;
-		$data1 = $data1."\t* NO OK USER SYSTEM FILES".$carpeta."\n";
+		global $data1;			$data1 = $data1."\t* NO OK USER SYSTEM FILES".$carpeta."\n";
 		}
 
 	/************** CREAMOS LA TABLA CONTROL USUARIO ***************/
@@ -237,28 +192,25 @@ function crear_tablas(){
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname1 (
   `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf8_spanish2_ci NOT NULL,
+  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
-  `dout` varchar(10) collate utf8_spanish2_ci NULL,
+  `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
+  `del` varchar(5) NOT NULL default 'false',
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `tfeed` time NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	if(mysqli_query($db , $tcl)){
-		
-					global $data5;
-					$data5 = "\t* OK TABLA FICHAR ".$vname1.".\n";
-			
-				} else {
-					
-					global $data5;
-					$data5 = "\t* NO OK TABLA FICHAR. ".mysqli_error($db)." \n";
-					
-					}
+		global $data5;			$data5 = "\t* OK TABLA FICHAR ".$vname1.".\n";
+	}else{
+		global $data5;			$data5 = "\t* NO OK TABLA FICHAR. ".mysqli_error($db)." \n";
+	}
 
 	/************** CREAMOS LA TABLA FEEDBACK CONTROL USUARIO ***************/
 
@@ -267,81 +219,71 @@ function crear_tablas(){
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname1 (
   `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf8_spanish2_ci NOT NULL,
+  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
-  `dout` varchar(10) collate utf8_spanish2_ci NULL,
+  `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
-  `dfeed` varchar(10) collate utf8_spanish2_ci NULL,
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
-	if(mysqli_query($db , $tcl)){
-					global $data6;
-					$data6 = "\t* OK TABLA FEED FICHAR ".$vname1.".\n";
-				} else {
-					global $data6;
-					$data6 = "\t* NO OK TABLA FEED FICHAR. ".mysqli_error($db)." \n";
-					}
+if(mysqli_query($db , $tcl)){
+	global $data6;			$data6 = "\t* OK TABLA FEED FICHAR ".$vname1.".\n";
+}else{
+	global $data6;			$data6 = "\t* NO OK TABLA FEED FICHAR. ".mysqli_error($db)." \n";
+}
 
-
-// CREA EL DIRECTORIO DE IMAGEN DE USUARIO.
-
+	// CREA EL DIRECTORIO DE IMAGEN DE USUARIO.
 	$vn1 = "img_admin";
 	$carpetaimg = "../Users/".$trf."/".$vn1;
 	if (!file_exists($carpetaimg)) {
 		mkdir($carpetaimg, 0777, true);
 		copy("../Images/untitled.png", $carpetaimg."/untitled.png");
 		$data2 = "\t* OK DIRECTORIO ".$carpetaimg." \n";
-		}
-		else{print("* NO OK DIRECTORIO ".$carpetaimg."\n");
+	}else{print("* NO OK DIRECTORIO ".$carpetaimg."\n");
 		$data2 = "\t* NO OK DIRECTORIO ".$carpetaimg."\n";
-		}
+	}
 	
-// CREA EL DIRECTORIO DE LOG DE USUARIO.
-
+	// CREA EL DIRECTORIO DE LOG DE USUARIO.
 	$vn1 = "log";
 	$carpetalog = "../Users/".$trf."/".$vn1;
 	if (!file_exists($carpetalog)) {
 		mkdir($carpetalog, 0777, true);
 		$data3 = "\t* OK DIRECTORIO ".$carpetalog."\n";
-		}
-		else{print("* NO OK EL DIRECTORIO ".$carpetalog."\n");
+	}else{print("* NO OK EL DIRECTORIO ".$carpetalog."\n");
 		$data3 = "\t* NO OK DIRECTORIO ".$carpetalog."\n";
-		}
+	}
 	
 	// CREA EL DIRECTORIO RESUMEN FICHAR MES.
-
 	$vn1 = "mrficha";
 	$carpetamrf = "../Users/".$trf."/".$vn1;
 	if (!file_exists($carpetamrf)) {
 		mkdir($carpetamrf, 0777, true);
 		$data4 = "\t* OK DIRECTORIO ".$carpetamrf."\n";
-		}
-		else{print("* NO OK DIRECTORIO ".$carpetamrf."\n");
+	}else{print("* NO OK DIRECTORIO ".$carpetamrf."\n");
 		$data4= "\t* NO OK DIRECTORIO ".$carpetamrf."\n";
-		}
+	}
 
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
 	$datein = date('Y-m-d/H:i:s');
 	
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
 
 	$logdocu = $_SESSION['ref'];
-	$logdate = date('Y-m-d');
+	$logdate = date('Y_m_d');
 	$logtext = PHP_EOL."- NUEVO USUARIO CREADAS BBDD TABLAS Y DIRECTORIOS. ".$datein.PHP_EOL." ".$dbconecterror.$data1.$data2.$data3.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
 	$log = fopen($filename, 'ab+');
 	fwrite($log, $logtext);
 	fclose($log);
 
-	} // FIN FUNCTION CREAR_TABLAS	
+} // FIN function crear_tablas
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -351,50 +293,40 @@ function show_form($errors=[]){
 	
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} else {$defaults = array ( 'Nombre' => '',
-									'Apellidos' => '',
-									'Nivel' => '',
-									'ref' => '',
-									'doc' => '',
-									'dni' => '',
-									'ldni' => '',
-									'Email' => '',
-									'Usuario' => '',
-									'Usuario2' => '',
-									'Password' => '',
-									'Password2' => '',
-									'Direccion' => '',
-									'Tlf1' => '',
-									'Tlf2' => '');
-								   }
+	}else{$defaults = array ( 'Nombre' => '','Apellidos' => '','Nivel' => '',
+								'ref' => '','doc' => '','dni' => '',
+								'ldni' => '','Email' => '','Usuario' => '',
+								'Usuario2' => '','Password' => '','Password2' => '',
+								'Direccion' => '','Tlf1' => '','Tlf2' => '');
+	}
 	
 	if ($errors){
 		print("	<table align='center'>
 					<tr>
 						<th style='text-align:center>
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+							<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
 						</th>
 					</tr>
 					<tr>
 						<td style='text-align:left'>");
 			
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errors [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
 			}
 		print("</td>
 				</tr>
 				</table>");
-					}
+	}
 		
-	$Nivel = array (	'' => 'NIVEL USUARIO',
-						'admin' => 'ADMINISTRADOR',
-						'plus' => 'USER PLUS',
-						'user'  => 'USER',
-						'close'  => 'CLOSE', );														
+	$Nivel = array( '' => 'NIVEL USUARIO',
+					'admin' => 'ADMINISTRADOR',
+					'plus' => 'USER PLUS',
+					'user'  => 'USER',
+					'close'  => 'CLOSE',);														
 
-	$doctype = array (	'DNI' => 'DNI/NIF Espa&ntilde;oles',
-						'NIE' => 'NIE/NIF Extranjeros',
-						'NIFespecial' => 'NIF Persona F&iacute;sica Especial',
+	$doctype = array('DNI' => 'DNI/NIF Espa&ntilde;oles',
+					 'NIE' => 'NIE/NIF Extranjeros',
+					 'NIFespecial' => 'NIF Persona F&iacute;sica Especial',
 						/*
 						'NIFsa' => 'NIF Sociedad An&oacute;nima',
 						'NIFsrl' => 'NIF Sociedad Responsabilidad Limitada',
@@ -413,44 +345,41 @@ function show_form($errors=[]){
 						'NIFute' => 'NIF Uniones Temporales de Empresas',
 						'NIFotnd' => 'NIF Otros Tipos no Definidos',
 						'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',
-						*/
-										);
+						*/);
 	
 ////////////////////				////////////////////				////////////////////
 
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$nu =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[mydni]'";
-		$user = mysqli_query($db, $nu);
-		//$ruser = mysqli_fetch_assoc($user);
-		$nuser = mysqli_num_rows($user);
+	$user = mysqli_query($db, $nu);
+	//$ruser = mysqli_fetch_assoc($user);
+	$nuser = mysqli_num_rows($user);
 	
-	if ($nuser >= $_SESSION['nuser']){ 
+	require 'Admin_Botonera.php';
+
+	if($nuser >= $_SESSION['nuser']){ 
 		print("<table align='center' style=\"margin-top:10px;margin-bottom:170px\">
-					<tr align='center'>
-						<td>
-							<b>
-								<font color='red'>ACCESO RESTRINGIDO</font>	
-							</b>
-					</br></br>
+				<tr align='center'>
+					<td>
+						<b>
+							<font color='red'>ACCESO RESTRINGIDO</font>	
+						</b>
+				</br>
 		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].". Nº EMPLEADOS: ".$nuser.". PARA CONTINUAR:
-					</br></br>
+					</br>
 		ELIMINE ALGUN EMPLEADO EN BORRAR BAJAS O DAR DE BAJA.
 						</td>
 					</tr>
-				</table>");
-			}else{
-
-				print("<table>
+			</table>");
+	}else{
+		print("<table class='TFormAdmin'>
 				<tr>
-					<th colspan=2 class='BorderInf'>DATOS DEL NUEVO ADMINISTRADOR</th>
+					<th colspan=2>NUEVO ADMINISTRADOR</th>
 				</tr>
 	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'  enctype='multipart/form-data'>
-						
 				<tr>
 					<td>NOMBRE:</td>
 					<td>
@@ -490,7 +419,7 @@ function show_form($errors=[]){
 				<tr>
 					<td>MAIL:</td>
 					<td>
-		<input type='mail' name='Email' size=52 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
+		<input type='mail' name='Email' size=32 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
 					</td>
 				</tr>	
 				<tr>
@@ -499,9 +428,9 @@ function show_form($errors=[]){
 		<select name='Nivel' required >");
 			foreach($Nivel as $optionnv => $labelnv){
 				print ("<option value='".$optionnv."' ");
-				if($optionnv == $defaults['Nivel']){print ("selected = 'selected'");}
-													print ("> $labelnv </option>");
-											}	
+				if($optionnv == $defaults['Nivel']){ print ("selected = 'selected'");}
+													 print ("> $labelnv </option>");
+						}	
 	print ("</select>
 					</td>
 				</tr>
@@ -533,7 +462,7 @@ function show_form($errors=[]){
 				<tr>
 					<td>DIRECCION:</td>
 					<td>
-		<input type='text' name='Direccion' size=52 maxlength=60 placeholder='MI DIRECCION' value='".$defaults['Direccion']."' required />
+		<input type='text' name='Direccion' size=32 maxlength=60 placeholder='MI DIRECCION' value='".$defaults['Direccion']."' required />
 					</td>
 				</tr>
 				<tr>
@@ -550,17 +479,16 @@ function show_form($errors=[]){
 					</td>
 				</tr>
 				<tr>
-					<td colspan='2'  align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='REGISTRARME CON ESTOS DATOS' class='botonverde' />
-						<input type='hidden' name='oculto' value=1 />
-						
+					<td colspan='2'>
+			<button type='submit' title='GUARDAR DATOS' class='botonverde imgButIco SaveBlack' style='vertical-align:top;' ></button>
+			<input type='hidden' name='oculto' value=1 />
+		</form>".$inicioadmin."
 					</td>
 				</tr>
-		</form>														
 			</table>"); 
-			} // FIN CONDICIONAL NUMERO USUARIOS
+	} // FIN CONDICIONAL NUMERO USUARIOS
 	
-	} // FIN FUNCTION SHOW_FORM
+} // FIN function show_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -573,15 +501,5 @@ function show_form($errors=[]){
 		
 	} 
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
 
-		require '../Inclu/Admin_Inclu_footer.php';
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-		
-/* Creado por Juan Barros Pazos 2021/25 */
 ?>

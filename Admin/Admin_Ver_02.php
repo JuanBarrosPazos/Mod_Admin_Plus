@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-	global $docs;
-	$docs = 1;
-	global $popup;
-	$popup = 1;
+	global $docs;			$docs = 1;
+	global $popup;			$popup = 1;
 	
 	require '../Inclu/error_hidden.php';
 	require '../Inclu/Admin_head.php';
@@ -18,15 +16,13 @@ session_start();
 
 if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 				
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-							
-				if($_POST['oculto2']){	process_form();
-										UserLog();
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
+	
+	if($_POST['oculto2']){	process_form();
+							UserLog();
 											} 
-				} else { require '../Inclu/table_permisos.php'; }
+	}else{ require '../Inclu/table_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -34,33 +30,38 @@ if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSIO
 
 function process_form(){
 	
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
 	
-	print("<table align='center'>
-				<tr>
-					<th colspan=3  class='BorderInf'>
-						DATOS DEL USUARIO
-					</th>
-				</tr>");
+	print("<table class='TFormAdmin'>
+			<tr>
+				<th colspan=3>DATOS DEL USUARIO</th>
+			</tr>");
 
-			global $rutaimg;
-			$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
-			require 'table_data_resum.php';
+	global $rutaimg;
+	$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
+	require 'table_data_resum.php';
 
 	print("<tr>
-				<td colspan=3 align='right' class='BorderSup'>
-					<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-						<input type='submit' value='CERRAR VENTANA' class='botonrojo' />
-						<input type='hidden' name='oculto2' value=1 />
-					</form>
-				</td>
-			</tr>
-		</table>"); 
+			<td colspan=3>
+				<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+		 <button type='submit' title='CERRAR VENTANA' class='botonrojo imgButIco CancelBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='oculto2' value=1 />
+				</form>
+			</td>
+		</tr>
+	</table>");
 
-		}
+	global $redir;
+	$redir = "<script type='text/javascript'>
+				function redir(){
+					window.close();
+				}
+			setTimeout('redir()',8000);
+		</script>";
+	print ($redir);
+
+}
 			
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -68,24 +69,20 @@ function process_form(){
 
 function UserLog(){
 
-	global $nombre;
-	global $apellido;
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
 		
 	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
 	$ActionTime = date('H:i:s');
 	
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."** USERS VER DETALLES ".$ActionTime.PHP_EOL."\t Nombre: ".$nombre." ".$apellido;
 
 	require 'log_write.php';
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

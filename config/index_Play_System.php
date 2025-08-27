@@ -206,7 +206,7 @@ $table_desblock = print("<table align='center' style=\"margin-top:2px; margin-bo
 						}
 						setTimeout('redir()',600000);
 						</script>";
-			//print ($redir);
+			print ($redir);
 
 }
 
@@ -919,7 +919,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-		//print ($redir);
+		print ($redir);
 	}			
 		
 } // FIN function process_pin()
@@ -1069,7 +1069,7 @@ function pin_out(){
 					}
 					setTimeout('redir()',8000);
 					</script>";
-		//print ($redir);
+		print ($redir);
 	
 	}else{	print("ERROR SQL L.1038: ".mysqli_error($db));
 			show_form2();
@@ -1148,7 +1148,7 @@ function pin_in(){
 					}
 					setTimeout('redir()',8000);
 					</script>";
-		//print ($redir);
+		print ($redir);
 
 	}else{	print("ERROR SQL L.1105: ".mysqli_error($db));
 			show_form2();

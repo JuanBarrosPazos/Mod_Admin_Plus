@@ -11,9 +11,7 @@ session_start();
 	require '../Inclu/my_bbdd_clave.php';
 
 	require 'Admin_Modificar_02_Funciones.php';
-
 	require 'Admin_Modificar_02_Logica.php';
-
 	require '../Inclu/Admin_Inclu_footer.php';
 
 				   ////////////////////				   ////////////////////

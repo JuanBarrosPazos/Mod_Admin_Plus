@@ -20,9 +20,11 @@ if(@$_SESSION['Nivel'] == 'admin'){
              <input type='hidden' name='volver' value=1 />
         </form>";
 
-    }else{ global $inicioadmin; $inicioadmin ="";
-             global $iniciobajas; $inciobajas ="";
-             global $inicioadmincrear; $inicioadmincrear ="";
+    
+
+    }else{  global $inicioadmin; $inicioadmin ="";
+            global $iniciobajas; $inciobajas ="";
+            global $inicioadmincrear; $inicioadmincrear ="";
     }
 
     global $closewindow;
