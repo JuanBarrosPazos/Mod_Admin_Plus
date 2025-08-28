@@ -18,12 +18,11 @@
 				<input type='submit' value='CERRAR VENTANA' class='botonrojo' />
 				<input type='hidden' name='closewin' value=1 />
 			</form></td></tr>"; 
-	}
-	elseif (!isset($modifadmin)){ 
+	}elseif (!isset($modifadmin)){ 
 		global $title;
-		$title = "DATOS DEL NUEVO ADMINISTRADOR";
+		$title = "NUEVO ADMINISTRADOR";
 		global $title2;
-		$title2 = "SE GENERA LA CLAVE AUTOMÁTICAMENTE";
+		$title2 = "SE GENERA AUTOMÁTICAMENTE";
 		global $title3;
 		$title3 = "REGISTRARME CON ESTOS DATOS";
 		global $title4;
@@ -31,14 +30,17 @@
 		if(isset($config2)){ global $closewin;
 							 $closewin = ""; 
 		}else{ 	global $closewin;
-				$closewin = "<tr><td colspan=3 style='text-align:center;' class='BorderInf'>".$inciobajas.$inicioadmin."</td></tr>";
+				$closewin = $inciobajas.$inicioadmin;
 		}
 	}
 
 	print("<table class='TFormAdmin'>
 				<tr>
-					<th colspan=2>".$title."</th>
-				</tr>".$closewin."
+					<th colspan=2>
+			<div style='display:inline-block;padding-left:1.6em;'>".$title."</div>
+			<div style='display:inline-block;float:right;'>".$closewin."</div>
+					</th>
+				</tr>
 
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 			<input name='id' type='hidden' value='".@$defaults['id']."' />				
@@ -65,7 +67,7 @@
 					<td>");
 	
 	// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
-	if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){ 
+	if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){ 
 
 		print("	<input type='hidden' name='doc' value='".$defaults['doc']."' />".$defaults['doc']);
 
@@ -111,7 +113,7 @@
 				<tr>
 					<td>MAIL:</td>
 					<td>
-		<input type='mail' name='Email' id='Email' size=42 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
+		<input type='mail' name='Email' id='Email' size=30 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
 					</td>
 				</tr>	
 				<tr>
@@ -176,7 +178,7 @@
 		print("	<tr>
 					<td>DIRECCION:</td>
 					<td>
-	<input type='text' name='Direccion' id='Direccion' size=42 maxlength=60 placeholder='MI DIRECCION' value='".$defaults['Direccion']."' required />
+	<input type='text' name='Direccion' id='Direccion' size=30 maxlength=60 placeholder='MI DIRECCION' value='".$defaults['Direccion']."' required />
 					</td>
 				</tr>
 				<tr>
@@ -201,15 +203,15 @@
 			<input type='file' name='myimg' value='".@$defaults['myimg']."' required />						
 				</td>
 			</tr>");
-		}else{ }	
+		}else{ }
 
 		print("<tr>
 				<td colspan='2'>
-			<button type='submit' title='".$title3."' class='botonverde imgButIco SaveBlack' style='vertical-align:top;' ></button>
+			<button type='submit' title='".$title3."' class='botonverde imgButIco SaveBlack' style='vertical-align:top;float:right;' ></button>
 					<input type='hidden' name='".$title4."' value=1 />
+				</form>".$closewin."
 				</td>
 			</tr>
-				</form>".$closewin."
 		</table>"); 
 
 ?>

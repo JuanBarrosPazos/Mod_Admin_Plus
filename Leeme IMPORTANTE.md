@@ -3,7 +3,10 @@
 VERSION CLPlus_V36(beta) 2023/05/28
 
 ----
-
+- Mod_Admin_Plus V25.08.27B 2025/08/27
+	- Se modifica la estructura de la bbdd eliminando tablas y creando nuevos campos.
+	- La codificación de la bbdd se modifica a CHARSET=utf16 COLLATE=utf16_spanish2_ci.
+----
 - DESDE LA VERSIÓN CLPlus_V.New18Beta_F4
 	- AL INICIAR LA INSTALACIÓN, SI EXISTE UNA INSTALACIÓN PREVIA NOS DA LA OPCIÓN DE CONSERVAR LA INSALACIÓN ANTIGUA 
 O INICIAR UNA NUEVA DESDE CERO.

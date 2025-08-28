@@ -286,39 +286,11 @@ function show_form($errors=[]){
 			require '../Admin/admin_array_total.php';
 	}
 	
-	if($errors){
-		print("<table align='center'>
-					<tr>
-						<th style='text-align:center'>
-							<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
-					</tr>
-					<tr>
-						<td style='text-align:left !important'>");
-		
-		global $text;
-		$text = "show_form(); ERRORES VALIDACION FORMULARIO ADMIN MASTER";
-		ini_log();
-
-		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
-
-				// ESCRIBE ERRORES EN INI_LOG 
-				global $text;			$text = $errors[$a];
-				$logdate = date('Y-m-d');
-				$logtext = "\t ** ".$text.PHP_EOL;
-				$filename = "logs/ini_log_".$logdate.".log";
-				$log = fopen($filename, 'ab+');
-				fwrite($log, $logtext);
-				fclose($log);
-			}
-		print("</td></tr></table>");
-
-	} // FIN SI HAY ERRORES
-			
+	require '../Admin/table_errors.php';
+				
 	global $config2;			$config2 = 1;
 	global $array_nive_doc;		$array_nive_doc = 1;
-	require '../Admin/admin_array_total.php';
+	require '../Admin/admin_array_total.php'; 
 	
 	global $imgform;			$imgform = "config2";
 	require '../Admin/table_crea_admin.php';

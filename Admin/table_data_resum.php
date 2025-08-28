@@ -5,6 +5,7 @@
 		}elseif(isset($_SESSION['refcl'])){
 			$rf = $_SESSION['refcl'];
 		}else{ }
+
 		global $pass;
         if(!isset($_POST['Pass'])){ 
 			$pass = $_POST['Password'];
@@ -13,8 +14,8 @@
 		}
 
         print(" <tr>
-					<td style='width:120px;' >Nombre: </td>
-					<td style='width:110px;' >".$_POST['Nombre']."</td>
+					<td style='width:120px;'>Nombre: </td>
+					<td style='width:110px;text-align:left !important;' >".$_POST['Nombre']."</td>
 					<td rowspan='5' style='text-align:center !important;'>
 						<img ".$rutaimg." height='120px' width='90px' />
 					</td>
@@ -24,7 +25,7 @@
 					<td>".$_POST['Apellidos']."</td>
 				</tr>				
 				<tr>
-					<td>Tipo Documento: </td>
+					<td>Documento: </td>
 					<td style=''>".$_POST['doc']."</td>
 				</tr>				
 				<tr>
@@ -40,11 +41,11 @@
 					<td>".$_POST['Email']."</td>
 				</tr>
 				<tr>
-					<td>Tipo Usuario: </td>
+					<td>Nivel: </td>
 					<td>".$_POST['Nivel']."</td>
 				</tr>
 				<tr>
-					<td>Referencia Usuario: </td>
+					<td>Referencia: </td>
 					<td colspan='2'>".$rf."</td>
 				</tr>
 				<tr>

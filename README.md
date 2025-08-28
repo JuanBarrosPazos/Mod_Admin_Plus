@@ -1,8 +1,12 @@
 
-## Mod_Admin_Plus V25.08.27B 2025/08/27
+## Mod_Admin_Plus V25.08.28A 2025/08/28
 
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.08.28A 2025/08/28
+	- Ok: Crear Administrador y modificar imagen de administrador.
+	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
+----
 #### Mod_Admin_Plus V25.08.27B 2025/08/27
 	- Se modifica la estructura de la bbdd eliminando tablas y creando nuevos campos.
 	- La codificación de la bbdd se modifica a CHARSET=utf16 COLLATE=utf16_spanish2_ci

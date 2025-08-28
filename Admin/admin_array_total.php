@@ -1,22 +1,13 @@
 <?php
 
 if(isset($array_cero)){
-    $defaults = array ( 'Nombre' => '',
-                        'Apellidos' => '',
-                        'Nivel' => '',
-                        'ref' => '',
-                        'doc' => '',
-                        'dni' => '',
-                        'ldni' => '',
-                        'Email' => '',
-                        'Usuario' => '',
-                        'Usuario2' => '',
-                        'Password' => '',
-                        'Password2' => '',
-                        'Direccion' => '',
-                        'Tlf1' => '',
-                        'Tlf2' => '');
-} elseif(isset($array_defaults)) { 
+    $defaults = array ( 'Nombre' => '','Apellidos' => '','Nivel' => '',
+                        'ref' => '','doc' => '','dni' => '',
+                        'ldni' => '','Email' => '','Usuario' => '',
+                        'Usuario2' => '','Password' => '','Password2' => '',
+                        'Direccion' => '','Tlf1' => '','Tlf2' => '');
+
+}elseif(isset($array_defaults)) { 
     $defaults = array ( 'id' => $defaults['id'],
 						'ref' => $defaults['ref'],
 						'Nombre' => $defaults['Nombre'],
@@ -34,7 +25,8 @@ if(isset($array_cero)){
 						'Direccion' => $defaults['Direccion'],
 						'Tlf1' => $defaults['Tlf1'],
 						'Tlf2' => $defaults['Tlf2']);
-} elseif(isset($array_a)) {
+
+}elseif(isset($array_a)) {
     $defaults = array ( 'id' => $_POST['id'],
 						'ref' => $_POST['ref'],
 						'Nivel' => $_POST['Nivel'],
@@ -55,7 +47,7 @@ if(isset($array_cero)){
 						'lastout' => $_POST['lastout'],
 						'visitadmin' => $_POST['visitadmin'],
 						'borrado' => $_POST['borrado'],);
-} elseif(isset($array_b)) {
+}elseif(isset($array_b)) {
 	$defaults = array ( 'id' => $_POST['id'],
 						'ref' => $_SESSION['refcl'],
 						'Nombre' => $_POST['Nombre'],
@@ -74,7 +66,7 @@ if(isset($array_cero)){
 						'Direccion' => $_POST['Direccion'],
 						'Tlf1' => $_POST['Tlf1'],
 						'Tlf2' => $_POST['Tlf2']);
-} elseif(isset($array_c)) { 
+}elseif(isset($array_c)) { 
 	$defaults = array ( 'id' => $_POST['id'],
 						'Nombre' => $_POST['Nombre'],
 						'Apellidos' => $_POST['Apellidos'],
@@ -94,22 +86,22 @@ if(isset($array_cero)){
 						'Tlf1' => $_POST['Tlf1'],
 						'Tlf2' => $_POST['Tlf2']);
 
-} else { }
+}else{ }
 
 if(isset($array_nive_doc)){
 
 		if(isset($config2)){ $Nivel = array ('admin' => 'WEBMASTER',
 											 'admin' => 'WEBMASTER',);
-		} else { $Nivel = array ('' => 'NIVEL USUARIO',
-								 'admin' => 'ADMINISTRADOR',
-								 'plus' => 'USER PLUS',
-								 'user' => 'USER',
-								 'close' => 'CLOSE', );														
- 					}
+		}else{ $Nivel = array(	'' => 'NIVEL USUARIO',
+								'admin' => 'ADMINISTRADOR',
+								'plus' => 'USER PLUS',
+								'user' => 'USER',
+								'close' => 'CLOSE',);												
+ 		}
 
   $doctype = array ('DNI' => 'DNI/NIF Espa&ntilde;oles',
-						'NIE' => 'NIE/NIF Extranjeros',
-					'NIFespecial' => 'NIF Persona F&iacute;sica Especial',
+					'NIE' => 'NIE/NIF Extranjeros',
+					'NIFespecial' => 'Persona F&iacute;sica Especial',
 					/*
 					'NIFsa' => 'NIF Sociedad An&oacute;nima',
 					'NIFsrl' => 'NIF Sociedad Responsabilidad Limitada',
@@ -128,11 +120,10 @@ if(isset($array_nive_doc)){
 					'NIFute' => 'NIF Uniones Temporales de Empresas',
 					'NIFotnd' => 'NIF Otros Tipos no Definidos',
 					'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',
-					*/
-				);
+					*/);
 
-} elseif(isset($array_nemp)) {	
-				$nemp = array (	'' => 'EMPLEADOS PERMITIDOS',
+}elseif(isset($array_nemp)) {	
+				$nemp = array(	'' => 'EMPLEADOS PERMITIDOS',
 								'1' => '<= 1 EMPLEADOS',
 								'3' => '<= 3 EMPLEADOS',
 								'5' => '<= 5 EMPLEADOS',
@@ -140,7 +131,7 @@ if(isset($array_nive_doc)){
 								'20' => '<= 20 EMPLEADOS',
 								'50' => '<= 50 EMPLEADOS',
 								'100' => '<= 100 EMPLEADOS',
-										);														
-} else { }
+							);														
+}else{ }
 
 ?>
