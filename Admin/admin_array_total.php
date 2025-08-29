@@ -46,7 +46,9 @@ if(isset($array_cero)){
 						'lastin' => $_POST['lastin'],
 						'lastout' => $_POST['lastout'],
 						'visitadmin' => $_POST['visitadmin'],
-						'borrado' => $_POST['borrado'],);
+						'borrado' => $_POST['borrado'],
+						'del' => $_POST['del'],
+						'recuper' => $_POST['recuper'],);
 }elseif(isset($array_b)) {
 	$defaults = array ( 'id' => $_POST['id'],
 						'ref' => $_SESSION['refcl'],

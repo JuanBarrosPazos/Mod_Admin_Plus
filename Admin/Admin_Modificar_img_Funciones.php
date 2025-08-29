@@ -105,7 +105,7 @@ function process_form(){
 			$rutaimg = "src='../Users/".$_SESSION['sref']."/img_admin/".$_SESSION['new_name']."'";
 			global $vertabla;
 			$vertabla = 1;
-			require 'table_data_resum.php';
+			require 'tabla_data_resum.php';
 													
 			print("<tr>
 						<td style='text-align:right !important;' colspan=3 >
@@ -161,7 +161,7 @@ function show_form($errors=[]){
 			require 'admin_array_total.php';
 		}
 	
-	require 'table_errors.php';
+	require 'tabla_errors.php';
 
 	print("<table align='center'  border=0 style='margin-top:20px; width:95.5%'>
 			<tr>

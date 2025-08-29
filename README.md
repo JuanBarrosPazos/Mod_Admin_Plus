@@ -1,9 +1,16 @@
 
-## Mod_Admin_Plus V25.08.28A 2025/08/28
-
-----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.08.29A 2025/08/29
+	* EN GESTION DE ADMINISTRADORES:
+	- Ok: Dar de baja temporal a un usuario, papelera.
+	- Ok: Modificación consultas Sql...
+	- Ok: Eliminación y modificación de funciones feecback...
+	- Ok: Paginación en Admin y Feedback, se modifican las consultas de paginación...
+	- Ok: Ajuste de la botonera para Ver_Admin y Ver_Feedback...
+	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
+----
 #### Mod_Admin_Plus V25.08.28A 2025/08/28
+	* EN GESTION DE ADMINISTRADORES:
 	- Ok: Crear Administrador y modificar imagen de administrador.
 	- Optimización de código, modificación de estilos, inclusión de iconos, sustitución de tablas...
 ----

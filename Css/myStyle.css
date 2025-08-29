@@ -19,8 +19,8 @@ h1 {
 
 table, .centradiv {
     border: solid 0.1em #CCC;/*  */
-	border-radius: 12px;
-	margin: 6px auto 6px auto;
+	border-radius: 1.2em;
+	margin: 1.0em auto 0.6em auto;
 	text-align: center;
 	size: 1.0em;
 }

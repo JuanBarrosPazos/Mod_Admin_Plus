@@ -163,7 +163,7 @@ function process_form(){
 				</tr>");
 								
 		global $rutaimg;			$rutaimg = "src='".$carpetaimg."/".$new_name."'";
-		require '../Admin/table_data_resum.php';
+		require '../Admin/tabla_data_resum.php';
 				
 	print("	<tr>
 				<td colspan=3>
@@ -286,14 +286,14 @@ function show_form($errors=[]){
 			require '../Admin/admin_array_total.php';
 	}
 	
-	require '../Admin/table_errors.php';
+	require '../Admin/tabla_errors.php';
 				
 	global $config2;			$config2 = 1;
 	global $array_nive_doc;		$array_nive_doc = 1;
 	require '../Admin/admin_array_total.php'; 
 	
 	global $imgform;			$imgform = "config2";
-	require '../Admin/table_crea_admin.php';
+	require '../Admin/tabla_crea_admin.php';
 
 } // FIN FUNCTION show_form()
 

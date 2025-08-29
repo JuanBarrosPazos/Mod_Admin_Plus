@@ -2,51 +2,54 @@
 
 function process_form(){
 	
-	print("<table align='center'>
+	require 'Admin_Botonera.php';
+
+	print("<table class='TFormAdmin'>
 				<tr>
-					<th colspan=3  class='BorderInf'>
-						OK BAJA TEMPORAL ESTE USUARIO.
+					<th colspan=3>
+						OK BAJA TEMPORAL DEL USUARIO
 					</th>
 				</tr>");
 				
-			global $rutaimg;
-			$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
-			require 'table_data_resum.php';
-
-	require 'Admin_Botonera.php';
+	global $rutaimg;
+	$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
+	
+	require 'tabla_data_resum.php';
 
 	print("	<tr>
-				<td colspan=3 class='BorderSup'>
+				<td colspan=3>
 				".$inicioadmin.$inciobajas."
 				</td>
 			</tr>
 		</table>");	
 
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 	
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
 
-	$sql = "DELETE FROM `$db_name`.$table_name_a WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
+	$FBaja = date('Y-m-d H:i:s');
+
+	$sql = "UPDATE `$db_name`.$table_name_a SET `del` = 'true',`borrado` = '$FBaja' WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sql)){
 			//print("* ");
-				} else {
-				print("<font color='#FF0000'>
-						SE HA PRODUCIDO UN ERROR: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
-						</br>";
-						show_form ();
-							}
+	}else{	print("ERROR SQL L.32 ".mysqli_error($db))."</br>";
+			show_form ();
+	}
 
-	}	
+	global $redir;
+	$redir = "<script type='text/javascript'>
+				function redir(){
+					window.location.href='Admin_Ver.php';
+				}
+				setTimeout('redir()',8000);
+			</script>";
+	print ($redir);
+
+} // FIN function process_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -63,22 +66,17 @@ function show_form(){
 							$array_a = 1;
 							require 'admin_array_total.php'; }
 								   
-	print("<table align='center' style=\"margin-top:10px\">
-				<tr>
-					<td colspan=3 class='BorderInf'>
-						<font color='#FF0000'>
-						SE DARÁ DE BAJA TEMPORAL EN EL REGISTRO.
+	print("<table class='TFormAdmin'>
+			<tr>
+				<th colspan=3 style='color:#F1BD2D;'>
+				<div style:'display:inline-block';>
+						SE DARÁ DE BAJA TEMPORAL
 						</br>
-						SE PODRÁN RECUPERAR DESDE FEEDBACK.
-						</font>
-					</td>
-				</tr>
-				<tr>
-					<td colspan=3 class='BorderInf' style=\"text-align:right\">
+						PODRÁR RECUPERARLO
+				</div>		
 						".$inicioadmin."
-					</td>
+					</th>
 				</tr>
-				
 	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>");
 
 	require 'admin_input_default_a.php';
@@ -91,56 +89,56 @@ function show_form(){
 			</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Nombre: </td>
-			<td style='text-align:left !important;'>".$defaults['Nombre']."</td>
+			<td>Nombre: </td>
+			<td>".$defaults['Nombre']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Apellidos: </td>
-			<td style='text-align:left !important;'>".$defaults['Apellidos']."</td>
+			<td>Apellidos: </td>
+			<td>".$defaults['Apellidos']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Tipo Documento: </td>
-			<td style='text-align:left !important;'>".$defaults['doc']."</td>
+			<td>Tipo Documento: </td>
+			<td>".$defaults['doc']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>N&uacute;mero: </td>
-			<td style='text-align:left !important;'>".$defaults['dni']."</td>
+			<td>N&uacute;mero: </td>
+			<td>".$defaults['dni']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Control: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['ldni']."</td>
+			<td>Control: </td>
+			<td colspan='2'>".$defaults['ldni']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Mail: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['Email']."</td>
+			<td>Mail: </td>
+			<td colspan='2'>".$defaults['Email']."</td>
 		</tr>	
 		<tr>
-			<td style='text-align:right !important;'>Nombre de Usuario: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['Usuario']."</td>
+			<td>Nombre de Usuario: </td>
+			<td colspan='2'>".$defaults['Usuario']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Password: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['Pass']."</td>
+			<td>Password: </td>
+			<td colspan='2'>".$defaults['Pass']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Dirección: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['Direccion']."</td>
+			<td>Dirección: </td>
+			<td colspan='2'>".$defaults['Direccion']."</td>
 		</tr>
 		<tr>
-			<td style='text-align:right !important;'>Teléfono 1: </td>
-			<td style='text-align:left !important;' colspan='2'>".$defaults['Tlf1']."</td>
+			<td>Teléfono 1: </td>
+			<td colspan='2'>".$defaults['Tlf1']."</td>
 		</tr>
 		<tr>
-			<td class='BorderInf' style='text-align:right !important;'>Teléfono 2: </td>
-			<td class='BorderInf' style='text-align:left !important;' colspan='2'>".$defaults['Tlf2']."</td>
+			<td>Teléfono 2: </td>
+			<td colspan='2'>".$defaults['Tlf2']."</td>
 		</tr>
 		<tr>
 			<td colspan='3'>
-				<input type='submit' value='CONFIRMAR LA BAJA TEMPORAL' class='botonrojo' />
+				<button type='submit' title='CONFIRMAR LA BAJA TEMPORAL' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;display:inline-block;' ></button>
 				<input type='hidden' name='borrar' value=1 />
+		</form>".$inicioadmin."											
 			</td>
 		</tr>
-	</form>														
 		</table>"); 
 	
 	}	
@@ -149,42 +147,12 @@ function show_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function Feedback(){
-	
-	$FBaja = date('Y-m-d H:i:s');
-	
-	require '../Conections/conection.php';
-
-	$dbf = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-	if (!$dbf){ die ("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
-				}
-	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."feedback`";
-
-	$sqlf = "INSERT INTO `$db_name`.$table_name_a (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Pass`, `Direccion`, `Tlf1`, `Tlf2`,`lastin`, `lastout`, `visitadmin`, `borrado` ) VALUES ('$_POST[ref]', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$_POST[myimg]', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]','$_POST[Pass]', '$_POST[Direccion]', '$_POST[Tlf1]', '$_POST[Tlf2]', '$_POST[lastin]', '$_POST[lastout]', '$_POST[visitadmin]', '$FBaja')";
-	
-	if(mysqli_query($dbf, $sqlf)){
-								//print("FOK.");
-					} else {
-				print("<font color='#FF0000'>
-						* SE HA PRODUCIDO UN ERROR AL GRABAR FEEDBACK: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($dbf)).
-						"</br>";
-					}
-	}
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	function master_index(){
+function master_index(){
 		
-		require '../Inclu_MInd/rutaadmin.php';
-		require '../Inclu_MInd/Master_Index.php';
+	require '../Inclu_MInd/rutaadmin.php';
+	require '../Inclu_MInd/Master_Index.php';
 		
-	} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -192,21 +160,14 @@ function Feedback(){
 
 function UserLog(){
 
-	global $nombre;
-	global $apellido;
-	global $rf;
-	
-	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
-	global $orden;
-	$orden = @$_POST['Orden'];	
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
+	global $rf;					$rf = $_POST['ref'];
+	global $orden;				$orden = @$_POST['Orden'];	
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 
 	$ActionTime = date('H:i:s');
 	global $InfoLog;
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
 
 	global $text;
 	$text = PHP_EOL.$InfoLog.$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL."\t Ref: ".$rf.". Nivel: ".$_POST['Nivel'].PHP_EOL."\t User: ".$_POST['Usuario'].". Pass: ".$_POST['Pass'];

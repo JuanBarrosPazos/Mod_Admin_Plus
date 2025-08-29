@@ -40,7 +40,7 @@ function process_form(){
 
 	global $rutaimg;
 	$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
-	require 'table_data_resum.php';
+	require 'tabla_data_resum.php';
 
 	print("<tr>
 			<td colspan=3>

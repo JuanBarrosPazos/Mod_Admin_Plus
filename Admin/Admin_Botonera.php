@@ -8,11 +8,20 @@ if(@$_SESSION['Nivel'] == 'admin'){
             <input type='hidden' name='volver' value=1 />
         </form>";
 
+    global $Feedback;   
     global $iniciobajas;
+   if($Feedback == 1){
+    $inciobajas ="<form name='boton' action='Admin_Ver.php' method='post' style='display: inline-block;' >
+                <button type='submit' title='INICIO ADMIN' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+                <input type='hidden' name='volver' value=1 />
+            </form>";
+       
+    }else{
     $inciobajas ="<form name='boton' action='Feedback_Ver.php' method='post' style='display: inline-block;' >
             <button type='submit' title='INICIO ADMIN BAJAS' class='botonlila imgButIco DeleteBlack' style='vertical-align:top;' ></button>
             <input type='hidden' name='volver' value=1 />
         </form>";
+    }
 
     global $inicioadmincrear;
     $inicioadmincrear ="<form name='boton' action='Admin_Crear.php' method='post' style='display: inline-block;' >

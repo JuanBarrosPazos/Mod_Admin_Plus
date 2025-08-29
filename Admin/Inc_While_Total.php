@@ -10,8 +10,7 @@
 							NO HAY DATOS
 					</div>");
 		}else{ global $page;
-				if($page >= 1){ }else{ $page = 1;
-		}
+				if($page >= 1){ }else{ $page = 1; }
 
 			if(isset($_POST['ocultoc'])){
 				$defaults['Nombre'] = $_POST['Nombre'];
@@ -60,9 +59,21 @@
 			</div>
 			<div class='whiletotala'>
 				<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
+			</div>");
+
+		if($Feedback==1){
+			$BorradoD = substr($rowb['borrado'],0,10);
+			$BorradoT = substr($rowb['borrado'],-8);
+			print("
+			<div class='whiletotala'>
+				<div class='DatLabel'>Del Date: </div><div class='Dato'>".$BorradoD."</div>
 			</div>
-				
-        <!-- AQUÍ VA LA BOTONERA -->
+			<div class='whiletotala'>
+				<div class='DatLabel'>Del Time: </div><div class='Dato'>".$BorradoT."</div>
+			</div>");
+		}else{ }
+
+        print("<!-- AQUÍ VA LA BOTONERA -->
 			<div style='text-align:center;'>".$formularioh);
 
 			require 'rowbtotal.php';

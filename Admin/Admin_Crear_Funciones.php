@@ -83,7 +83,7 @@ function process_form(){
 		$dudas = trim($_SESSION['dudas']);
 		print("** ".$rowpimg['myimg']);
 	*/
-	print( "<table class='TFormAdmin' style='margin-top:10px'>
+	print( "<table class='TFormAdmin'>
 				<tr>
 					<th colspan=3>
 						DATOS DE REGISTRO
@@ -91,7 +91,7 @@ function process_form(){
 				</tr>");
 	
 	global $rutaimg;				$rutaimg = "src='".$carpetaimg."/".$new_name."'";
-	require 'table_data_resum.php';
+	require 'tabla_data_resum.php';
 
 	print("<tr>
 			<td colspan=3>
@@ -196,7 +196,7 @@ function show_form($errors=[]){
 			require 'admin_array_total.php';
 	}
 	
-	require 'table_errors.php';
+	require 'tabla_errors.php';
 
 	global $array_nive_doc;		$array_nive_doc = 1;
 	require 'admin_array_total.php';
@@ -226,7 +226,7 @@ function show_form($errors=[]){
 					</tr>
 			</table>");
 	}else{
-		require 'table_crea_admin.php';
+		require 'tabla_crea_admin.php';
 	} // FIN CONDICIONAL NUMERO USUARIOS
 	
 } // FIN function show_form

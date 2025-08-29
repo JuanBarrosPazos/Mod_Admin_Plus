@@ -14,15 +14,13 @@ session_start();
 
 if ($_SESSION['Nivel'] == 'admin'){
 				
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-							
-		if($_POST['oculto2']){  process_form();
-								UserLog();
-								} 
-		} else { require '../Inclu/table_permisos.php'; }
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
+	
+	if($_POST['oculto2']){  process_form();
+							UserLog();
+						} 
+}else{ require '../Inclu/table_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -30,24 +28,19 @@ if ($_SESSION['Nivel'] == 'admin'){
 
 function process_form(){
 	
-	global $nombre;
-	global $apellido;
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-
-
-	print("<table align='center'>
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];
+	print("<table class='TFormAdmin'>
 				<tr>
 					<th colspan=3  class='BorderInf'>
 						ESTOS SON LOS DATOS DE SU CONSULTA
 					</th>
-				</tr>
-			");
+				</tr>");
 
 	global $rutaimg;
 	$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
-	require 'table_data_resum.php';
-	require 'table_data_resum_feed.php';
+	require 'tabla_data_resum.php';
+	require 'tabla_data_resum_feed.php';
 				
 		print(" <tr>
 					<td colspan=3 align='right' class='BorderSup'>
@@ -67,24 +60,19 @@ function process_form(){
 
 function UserLog(){
 
-	global $nombre;
-	global $apellido;	
-	
+	global $nombre;				$nombre = $_POST['Nombre'];
+	global $apellido;			$apellido = $_POST['Apellidos'];	
 	$rf = $_POST['ref'];
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
-		
+
 	$ActionTime = date('H:i:s');
 	
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
-
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	global $text;
 	$text = PHP_EOL."** ADMIN FEEDBACK DETALLES ".$ActionTime.PHP_EOL."\t Nombre: ".$nombre." ".$apellido;
 	
 	require 'log_write.php';
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

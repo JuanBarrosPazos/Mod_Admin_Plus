@@ -13,12 +13,12 @@ function process_form(){
 
 	if(mysqli_query($db, $sql)){
 
-	print ("<table align='center'>
+	print ("<table class='TFormAdmin'>
 				<tr><td colspan=3  class='BorderInf'>SE HAN BORRADO TODOS LOS DATOS</td></tr>");
 	
 		global $rutaimg;	$rutaimg = "src='../Users/temp/".$_POST['myimg']."'";
-		require 'table_data_resum.php';
-		require 'table_data_resum_feed.php';
+		require 'tabla_data_resum.php';
+		require 'tabla_data_resum_feed.php';
 
 	print("	<tr>
 				<td colspan=3 class='BorderSup'>

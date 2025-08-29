@@ -2,13 +2,13 @@
 
 function validate_form(){
 	
-		/* global $sqld;global $qd;global $rowd;*/
+	/* global $sqld;global $qd;global $rowd;*/
 	
 	require '../Inclu/validate.php';	
 		
-		return $errors;
+	return $errors;
 
-		} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -43,35 +43,32 @@ function process_form(){
 				$mydni = '<?php $_SESSION[\'webmaster\'] = '.$_POST['dni'].'; ?>';
 				fwrite($fw2, $mydni);
 				fclose($fw2);
-			}elseif(($_SESSION['dni'] != $_SESSION['webmaster']) && ($_SESSION['id'] == $_POST['id']) && ($_POST['dni'] != $_SESSION['dni'])) { 
+			}elseif(($_SESSION['dni'] != $_SESSION['webmaster'])&&($_SESSION['id'] == $_POST['id'])&&($_POST['dni'] != $_SESSION['dni'])){ 
 							$_SESSION['dni'] = $_POST['dni'];
 			}else{ }
 								 
 			require '../Inclu/webmaster.php';
 
-			print("<table align='center' style=\"margin-top:20px\">
-						<tr>
-							<th colspan=3  class='BorderInf'>
-								NUEVOS DATOS DEL USUARIO.
-							</th>
-						</tr>");
+			print("<table class='TFormAdmin'>
+					<tr>
+						<th colspan=3>NUEVOS DATOS DEL USUARIO</th>
+					</tr>");
 	
 			global $rutaimg;
 			$rutaimg = "src='../Users/".$_SESSION['refcl']."/img_admin/".$_SESSION['myimgcl']."'";
-			require 'table_data_resum.php';
+			require 'tabla_data_resum.php';
 
-			print("<tr><td colspan=3 style='text-align:right;' class='BorderSup BorderInf'>
-					<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-						<input type='submit' value='CERRAR VENTANA' class='botonrojo' />
-						<input type='hidden' name='closewin' value=1 />
-					</form></td></tr>
+			print("<tr>
+					<td colspan=3 style='text-align:right;'>
+						<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+							<button type='submit' title='CERRAR VENTANA' class='botonrojo imgButIco CancelBlack' style='vertical-align:top;' ></button>
+							<input type='hidden' name='closewin' value=1 />
+					</form>
+						</td>
+					</tr>
 				</table>");
-		}else{ print("<font color='#F1BD2D'>
-						* MODIFIQUE LA ENTRADA 220: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
-						</br>";
-						show_form ();
+		}else{ 	print("ERROR SQL L.34 ".mysqli_error($db))."</br>";
+				show_form ();
 				global $texerror;
 				$texerror = "\n\t ".mysqli_error($db);
 		}
@@ -87,35 +84,39 @@ function process_form(){
 		$sqlc = "UPDATE `$db_name`.$table_name_a SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `Email` = '$_POST[Email]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$tlf2' WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){ 
-		
-			print("<table align='center' style=\"margin-top:20px\">
-				<tr>
-					<th colspan=3  class='BorderInf'>
-						NUEVOS DATOS DEL USUARIO.
-					</th>
-				</tr>");
-	
+			print("<table class='TFormAdmin'>
+						<tr>
+							<th colspan=3>NUEVOS DATOS DEL USUARIO</th>
+						</tr>");
 		global $rutaimg;
 		$rutaimg = "src='../Users/".$_SESSION['refcl']."/img_admin/".$_SESSION['myimgcl']."'";
-		require 'table_data_resum.php';
+		require 'tabla_data_resum.php';
 
-		print("<tr><td colspan=3 style='text-align:right;' class='BorderSup BorderInf'>
-					<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-						<input type='submit' value='CERRAR VENTANA' class='botonrojo' />
+		print("<tr>
+				<td colspan=3 style='text-align:right;' class='BorderSup BorderInf'>
+				<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
+					 <button type='submit' title='CERRAR VENTANA' class='botonrojo imgButIco CancelBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='closewin' value=1 />
-					</form></td></tr>
-				</table>");
+				</form>
+				</td>
+			</tr>
+		</table>");
 
-	}else{ print("<font color='#F1BD2D'>
-						* MODIFIQUE LA ENTRADA 241: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
-						</br>";
-						show_form ();
-		global $texerror;		$texerror = "\n\t ".mysqli_error($db);
-							}
-					} // FIN CONDICIONAL USER / PLUS
+	}else{ 	print("SQL ERROR L.83 ".mysqli_error($db))."</br>";
+			show_form ();
+			global $texerror;		$texerror = "\n\t ".mysqli_error($db);
+		}
+	} // FIN CONDICIONAL USER / PLUS
 	
+	global $redir;
+	$redir = "<script type='text/javascript'>
+				function redir(){
+					window.close();
+				}
+			setTimeout('redir()',8000);
+		</script>";
+	print($redir);
+
 } // FIN function process_form
 
 				   ////////////////////				   ////////////////////
@@ -149,33 +150,18 @@ function show_form($errors=[]){
 			require 'admin_array_total.php';
 	}
 
-	if ($errors){
-		print("<table align='center'>
-					<tr>
-						<th style='text-align:center'>
-							<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-						</th>
-					</tr>
-					<tr>
-					<td style='text-align:left'>");
-			
-		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
-			}
-		print("</td>
-				</tr>
-				</table>");
-					}
+		require 'tabla_errors.php';
+
 		global $array_nive_doc;			$array_nive_doc = 1;
 		require 'admin_array_total.php';
 
 	if ($_SESSION['Nivel'] == 'admin'){
 		global $modifadmin;				$modifadmin = 1;
-		require 'table_crea_admin.php';
+		require 'tabla_crea_admin.php';
 	// FIN IF ADMIN
 	}elseif(($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 		global $modifadmin;				$modifadmin = 1;
-		require 'table_crea_admin.php';
+		require 'tabla_crea_admin.php';
 	} // FIN ELSE IF USER / PLUS
 	
 } // FIN function show_form

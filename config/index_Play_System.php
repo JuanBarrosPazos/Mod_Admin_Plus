@@ -1453,8 +1453,8 @@ function ver_todo(){
 
 	global $db;				global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $Feedback;		$Feedback = 0;
 
 	global $qb;
 	if(($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){ 

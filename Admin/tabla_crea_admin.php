@@ -5,7 +5,7 @@
 	if (isset($modifadmin)){ 
 		global $title;
 		$title = "<img src='../Users/".$_SESSION['refcl']."/img_admin/".$_POST['myimg']."' height='44px' width='33px' />
-					</br>MODIFIQUE LOS DATOS DEL ADMINISTRADOR";
+					</br>MODIFIQUE LOS DATOS DEL USUARIO";
 		global $title2;
 		$title2 = "<input name='ref' type='hidden' value='".$_SESSION['refcl']."' />".$defaults['ref'];
 		global $title3;
@@ -13,11 +13,10 @@
 		global $title4;
 		$title4 = "modifica";
 		global $closewin;
-		$closewin = "<tr><td colspan=3 style='text-align:right !important;' class='BorderSup BorderInf'>
-			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">
-				<input type='submit' value='CERRAR VENTANA' class='botonrojo' />
+		$closewin = "<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit='window.close()' style='display:inline-block;'>
+			<button type='submit' title='CERRAR VENTANA' class='botonrojo imgButIco CancelBlack' style='vertical-align:top;float:right;' ></button>
 				<input type='hidden' name='closewin' value=1 />
-			</form></td></tr>"; 
+			</form>"; 
 	}elseif (!isset($modifadmin)){ 
 		global $title;
 		$title = "NUEVO ADMINISTRADOR";
@@ -53,6 +52,7 @@
 				<tr>
 					<td>NOMBRE:</td>
 					<td>
+		
 		<input type='text' name='Nombre' id='Nombre' size=28 maxlength=25 pattern='[a-zA-Z\s]{3,25}' placeholder='MI NOMBRE' value='".$defaults['Nombre']."' required />
 					</td>
 				</tr>
@@ -207,7 +207,7 @@
 
 		print("<tr>
 				<td colspan='2'>
-			<button type='submit' title='".$title3."' class='botonverde imgButIco SaveBlack' style='vertical-align:top;float:right;' ></button>
+			<button type='submit' title='".$title3."' class='botonverde imgButIco SaveBlack' style='vertical-align:top;display:inline-block;' ></button>
 					<input type='hidden' name='".$title4."' value=1 />
 				</form>".$closewin."
 				</td>

@@ -1,6 +1,13 @@
 <?php
 
-	$result =  "SELECT * FROM $table_name_a ";
+	global $result;			global $Feedback;
+
+	if($Feedback==1){
+		$result =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'true' ";
+	}else{ 
+		$result =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'false' ";
+	}
+	
 	$q = mysqli_query($db, $result);
 	$row = mysqli_fetch_assoc($q);
 	$num_total_rows = mysqli_num_rows($q);
@@ -10,12 +17,12 @@
 	
 	global $page;
 
-    if(isset($_POST["page"])) {
+    if(isset($_POST["page"])){
 		global $page;		$page = $_POST["page"];
     }
 
     //examino la pagina a mostrar y el inicio del registro a mostrar
-    if(isset($_GET["page"])) {
+    if(isset($_GET["page"])){
 		global $page;		$page = $_GET["page"];
     }
 
@@ -39,7 +46,7 @@
 	//pongo el numero de registros total, el tamaño de pagina y la pagina que se muestra
 	echo '<div style="clear:both"></div>
 	<h7 class="textpaginacion">
-	* Administradores: '.$nres.' de '.$num_total_rows.' * P&aacute;gina '.$page.' de ' .$total_pages.'.
+	* Resultados: '.$nres.' de '.$num_total_rows.' * P&aacute;gina '.$page.' de ' .$total_pages.'.
 	</h7>';
 
 	global $limit;
