@@ -44,46 +44,6 @@ if(mysqli_query($db , $admin)){
 		global $table1;		$table1 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 }
 
-	/************* CREAMOS LA TABLA FEEDBACK ***************
-
-	global $table_name_f;
-	$table_name_f = "`".$_SESSION['clave']."feedback`";
-
-	$feedback = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_f (
-		`id` int(4) NOT NULL auto_increment,
-		`ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-		`Nivel` varchar(8) collate utf16_spanish2_ci NOT NULL default 'amd',
-		`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-		`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
-		`myimg` varchar(30) collate utf16_spanish2_ci NOT NULL default 'untitled.png',
-		`doc` varchar(11) collate utf16_spanish2_ci NOT NULL,
-		`dni` varchar(8) collate utf16_spanish2_ci NOT NULL,
-		`ldni` varchar(1) collate utf16_spanish2_ci NOT NULL,
-		`Email` varchar(50) collate utf16_spanish2_ci NOT NULL,
-		`Usuario` varchar(10) collate utf16_spanish2_ci NOT NULL,
-		`Password` varchar(100) collate utf16_spanish2_ci NOT NULL,
-	  	`Pass` varchar(10) collate utf16_spanish2_ci NOT NULL,
-		`Direccion` varchar(60) collate utf16_spanish2_ci NOT NULL,
-		`Tlf1` int(9) NOT NULL default 0,
-		`Tlf2` int(9) NOT NULL default 0,
-		`lastin` datetime collate utf16_spanish2_ci NOT NULL,
-		`lastout` datetime collate utf16_spanish2_ci NOT NULL,
-		`visitadmin` varchar(4) collate utf16_spanish2_ci NOT NULL,
-		`borrado` datetime collate utf16_spanish2_ci NOT NULL default CURRENT_TIMESTAMP,
-
-		UNIQUE KEY `id` (`id`),
-		UNIQUE KEY `ref` (`ref`),
-		UNIQUE KEY `dni` (`dni`),
-		UNIQUE KEY `Email` (`Email`),
-		UNIQUE KEY `Usuario` (`Usuario`)
-	  ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-			  
-if(mysqli_query($db, $feedback)){
-		global $table5;				$table5 = "\t* OK TABLA FEEDBACK.".PHP_EOL;
-}else{
-		global $table5;				$table5 = "\t* NO OK TABLA FEEDBACK. ".mysqli_error($db).PHP_EOL;
-}
-*/					
 	/************* CREAMOS LA TABLA IP CONTROL****************/
 
 	global $table_name_b;

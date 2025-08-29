@@ -21,7 +21,7 @@ function process_form(){
 	global $db;
 	global $nombre;				$nombre = $_POST['Nombre'];
 	global $apellido;			$apellido = $_POST['Apellidos'];
-	global $Feedback;		$Feedback = 1;
+	global $Feedback;			$Feedback = 1;
 	
 	show_form();
 		
