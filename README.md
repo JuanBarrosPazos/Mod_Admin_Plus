@@ -4,6 +4,7 @@
 	* EN GESTION DE ADMINISTRADORES:
 	- Ok: Botonera navegación Admin y Admin_Feedback.
 	- Ok: Recuperar Usuario Borrado.
+	- Ok: Modificación del nombre de los archivos Admin/
 ----
 #### Mod_Admin_Plus V25.08.29 2025/08/29
 	* EN GESTION DE ADMINISTRADORES:
