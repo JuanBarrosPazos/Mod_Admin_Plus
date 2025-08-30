@@ -58,14 +58,12 @@ function process_form(){
 function show_form(){
 		
 	require 'Admin_Botonera.php';
-	if($_POST['oculto2']){  global $array_a;
-							$array_a = 1;
-							require 'admin_array_total.php'; }
+	if((isset($_POST['oculto2']))||(isset($_POST['borrar']))){  	
+		global $array_a;
+		$array_a = 1;
+		require 'admin_array_total.php'; 
+	}
 
-	if(@$_POST['borrar']){  global $array_a;
-							$array_a = 1;
-							require 'admin_array_total.php'; }
-								   
 	print("<table class='TFormAdmin'>
 			<tr>
 				<th colspan=3 style='color:#F1BD2D;'>

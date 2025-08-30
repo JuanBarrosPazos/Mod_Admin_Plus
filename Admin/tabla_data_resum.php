@@ -8,7 +8,7 @@
 	}else{ }
 
 	global $pass;
-       if(!isset($_POST['Pass'])){ 
+    if(!isset($_POST['Pass'])){ 
 		$pass = $_POST['Password'];
 	}else{ 
 		$pass = $_POST['Pass'];
@@ -68,19 +68,46 @@
 			<tr>
 				<td>Teléfono 2: </td>
 				<td colspan='2'>".$_POST['Tlf2']."</td>
+			</tr>
+			<tr>
+				<td>Nº Visitas:</td>
+				<td colspan='2'>".$_POST['visitadmin']."</td>
 			</tr>");
+
+	if($_POST['visitadmin']>0){
+		print("<tr>
+				<td>Last IN:</td>
+				<td colspan='2'>".$_POST['lastin']."</td>
+			</tr>
+			<tr>
+				<td>Last Out:</td>
+				<td colspan='2'>".$_POST['lastout']."</td>
+			</tr>");
+	}else{ }
 
 	$BorradoD = substr($_POST['borrado'],0,10);
 	$BorradoT = substr($_POST['borrado'],-8);
-	
 	if($BorradoD!=''){
 		print("<tr>
 				<td>Del Date: </td>
-				<td>".$BorradoD."</td>
+				<td colspan='2'>".$BorradoD."</td>
 			</tr>
 			<tr>
 				<td>Del Time: </td=>
-				<td>".$BorradoT."</td>
+				<td colspan='2'>".$BorradoT."</td>
+			</tr>");
+	}else{ } 
+
+	$RecuperD = substr($_POST['recuper'],0,10);
+	$RecuperT = substr($_POST['recuper'],-8);
+	if($RecuperD!=''){
+		print("<tr>
+				<td>Recuper Date: </td>
+				<td colspan='2'>".$RecuperD."</td>
+			</tr>
+			<tr>
+				<td>Recuper Time: </td=>
+				<td colspan='2'>".$RecuperT."</td>
 			</tr>");
 	}else{ }
 				

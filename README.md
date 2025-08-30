@@ -1,8 +1,9 @@
 
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.08.30A 2025/08/30
+#### Mod_Admin_Plus V25.08.30B 2025/08/30
 	* EN GESTION DE ADMINISTRADORES:
 	- Ok: Botonera navegación Admin y Admin_Feedback.
+	- Ok: Recuperar Usuario Borrado.
 ----
 #### Mod_Admin_Plus V25.08.29 2025/08/29
 	* EN GESTION DE ADMINISTRADORES:

@@ -24,7 +24,7 @@ if(isset($array_cero)){
 						'Password2' => $defaults['Pass'],
 						'Direccion' => $defaults['Direccion'],
 						'Tlf1' => $defaults['Tlf1'],
-						'Tlf2' => $defaults['Tlf2']);
+						'Tlf2' => $defaults['Tlf2'],);
 
 }elseif(isset($array_a)) {
     $defaults = array ( 'id' => $_POST['id'],
@@ -48,7 +48,7 @@ if(isset($array_cero)){
 						'visitadmin' => $_POST['visitadmin'],
 						'borrado' => $_POST['borrado'],
 						'del' => $_POST['del'],
-						'recuper' => $_POST['recuper'],);
+						'recuper' => $_POST['recuper']);
 }elseif(isset($array_b)) {
 	$defaults = array ( 'id' => $_POST['id'],
 						'ref' => $_SESSION['refcl'],

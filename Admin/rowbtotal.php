@@ -19,7 +19,7 @@
             <input name='lastin' type='hidden' value='".$rowb['lastin']."' />
             <input name='lastout' type='hidden' value='".$rowb['lastout']."' />
             <input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
-            <input name='del' type='hidden' value='".@$rowb['']."' />
-            <input name='borrado' type='hidden' value='".@$rowb['borrado']."' />
-            <input name='recuper' type='hidden' value='".@$rowb['recuper']."' />" );
+            <input name='del' type='hidden' value='".$rowb['del']."' />
+            <input name='borrado' type='hidden' value='".$rowb['borrado']."' />
+            <input name='recuper' type='hidden' value='".$rowb['recuper']."' />");
 ?>

@@ -39,7 +39,7 @@ print("	<tr>
 			<td style='text-align:right !important;'>Usuario:</td>
 			<td style='text-align:left !important;' colspan=2>".$defaults['Usuario']."</td>
 		</tr>
-		<tr>
+		<tr> 
 			<td style='text-align:right !important;'>Password: </td>
 			<td style='text-align:left !important;' colspan=2>".$defaults['Pass']."</td>
 		</tr>

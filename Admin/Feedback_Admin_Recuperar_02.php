@@ -9,9 +9,7 @@ session_start();
 	require '../Inclu/my_bbdd_clave.php';
 
 	require 'Feedback_Admin_Recuperar_02_Funciones.php';
-
 	require 'Feedback_Admin_Recuperar_02_Logica.php';
-
 
 	require '../Inclu/Admin_Inclu_footer.php';
 
