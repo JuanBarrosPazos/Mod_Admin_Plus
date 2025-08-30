@@ -21,6 +21,7 @@ function process_form(){
 		require 'Admin_Botonera.php';
 		global $rutaimg;
 		$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
+		$_POST['recuper']=$FRecup;
 		require 'tabla_data_resum.php';
 				
 		print("<tr>
@@ -56,7 +57,7 @@ function show_form(){
 	print("<table class='TFormAdmin'>
 			<tr>
 				<th colspan=3>
-					<div style='display:inline-block;margin-top:0.4em;'>
+					<div style='display:inline-block; margin-top:0.4em; color:#F1BD2D;'>
 						DATOS A RECUPERAR
 					</div>
 					<a href='Feedback_Ver.php' >
@@ -67,7 +68,7 @@ function show_form(){
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>");
 			
-			require 'admin_input_default_a.php';
+			require 'admin_input_default.php';
 			global $rutaimg;
 			//$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
 			$rutaimg = "src='../Users/".$_SESSION['sref']."/img_admin/".$_POST['myimg']."'";

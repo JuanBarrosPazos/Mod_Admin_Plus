@@ -94,7 +94,7 @@
 				$formulariohe = '';
 				$formulariofe = '';
 			}else{
-				$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
+				$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
 				$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='oculto2' value=1 />
 					</form>";

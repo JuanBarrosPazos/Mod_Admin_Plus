@@ -194,7 +194,7 @@ function show_form(){
 				
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>");
 			
-			require 'admin_input_default_a.php';
+			require 'admin_input_default.php';
 			require 'feedback_table_show_form.php';
 
 		 print("<tr>

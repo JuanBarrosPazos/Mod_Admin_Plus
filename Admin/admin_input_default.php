@@ -19,6 +19,8 @@
             <input type='hidden' name='lastin' value='".$defaults['lastin']."' />					
             <input type='hidden' name='lastout' value='".$defaults['lastout']."' />					
             <input type='hidden' name='visitadmin' value='".$defaults['visitadmin']."' />
-            <input type='hidden' name='borrado' value='".$defaults['borrado']."' />"); 
+            <input type='hidden' name='del' value='".$defaults['del']."' />
+            <input type='hidden' name='borrado' value='".$defaults['borrado']."' />
+            <input type='hidden' name='recuper' value='".$defaults['recuper']."' />"); 
 
 ?>

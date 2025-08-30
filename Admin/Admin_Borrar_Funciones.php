@@ -5,11 +5,11 @@ function process_form(){
 	require 'Admin_Botonera.php';
 
 	print("<table class='TFormAdmin'>
-				<tr>
-					<th colspan=3>
-						OK BAJA TEMPORAL DEL USUARIO
-					</th>
-				</tr>");
+			<tr>
+				<th colspan=3 style='color:#F1BD2D;'>
+					OK BAJA TEMPORAL DEL USUARIO
+				</th>
+			</tr>");
 				
 	global $rutaimg;
 	$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
@@ -67,17 +67,15 @@ function show_form(){
 	print("<table class='TFormAdmin'>
 			<tr>
 				<th colspan=3 style='color:#F1BD2D;'>
-				<div style:'display:inline-block';>
+				<div style='display:inline-block; margin-top:0.4em;'>
 						SE DARÁ DE BAJA TEMPORAL
-						</br>
-						PODRÁR RECUPERARLO
 				</div>		
-						".$inicioadmin."
+				<div style='display:inline-block; vertical-align:top;float:right;'>".$inicioadmin."</div>
 					</th>
 				</tr>
 	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>");
 
-	require 'admin_input_default_a.php';
+	require 'admin_input_default.php';
 
 	print("<tr>
 			<td style='text-align:right !important; width:120px;'>Nivel: </td>

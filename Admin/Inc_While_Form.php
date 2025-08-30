@@ -12,7 +12,7 @@ if($Feedback==1){
 				</form>";
 
 	global $formulariohg;
-	$formulariohg = "<form style='display:inline-block;' name='modifica' action='Feedback_Admin_Borrar_02.php' method='POST'>";
+	$formulariohg = "<form style='display:inline-block;' name='modifica' action='Feedback_Admin_Borrar.php' method='POST'>";
 
 	global $formulariofg;
 	$formulariofg = "<button type='submit' title='BORRAR DATOS EMPLEADO' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
@@ -20,7 +20,7 @@ if($Feedback==1){
 				</form>";
 
 	global $formulariohi;
-	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='Feedback_Admin_Recuperar_02.php' method='POST'>";
+	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='Feedback_Recuperar.php' method='POST'>";
 
 	global $formulariofi;
 	$formulariofi = "<button type='submit' title='RECUPERAR BAJA' class='botonverde imgButIco RestoreBlack' style='vertical-align:top;' ></button>
@@ -46,7 +46,7 @@ if($Feedback==1){
 		</form>";
 
 	global $formulariohi;
-	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='".@$ruta."Admin_Modificar_02.php' method='POST' target='popup' onsubmit=\"window.open('', 'popup', 'width=480px,height=680px')\">";
+	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='".@$ruta."Admin_Modificar.php' method='POST' target='popup' onsubmit=\"window.open('', 'popup', 'width=480px,height=680px')\">";
 
 	global $formulariofi;
 	$formulariofi = "<button type='submit' title='MODIFICAR DATOS' class='botonnaranja imgButIco DatosBlack' style='vertical-align:top;' ></button>
@@ -56,7 +56,7 @@ if($Feedback==1){
 	if($_SESSION['Nivel'] == 'admin'){
 
 	global $formulariohe;
-	$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
+	$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
 
 	global $formulariofe;
 	$formulariofe = "<input type='submit' value='DAR DE BAJA' class='botonrojo' />
