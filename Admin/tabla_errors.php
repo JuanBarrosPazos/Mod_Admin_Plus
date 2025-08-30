@@ -1,7 +1,7 @@
 <?php
 
 	if ($errors){
-		print("	<table class='centradiv'>
+		print("	<table class='centradiv' style='border-color:#F1BD2D;'>
 					<tr>
 						<th style='text-align:center;color:#F1BD2D;'>
 							* SOLUCIONE ESTOS ERRORES

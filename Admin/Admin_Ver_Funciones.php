@@ -49,12 +49,9 @@ function process_form(){
 
 	global $twhile;				$twhile = "FILTRO USUARIOS CONSULTA";
 	global $ruta;				$ruta = "";
-
 	require 'Admin_Botonera.php';
 	require 'Inc_While_Form.php';
-
 	global $rutaimg;			$rutaimg = "../Users/";
-
 	require 'Inc_While_Total.php';
 
 } // FIN function process_form()

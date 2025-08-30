@@ -1,5 +1,5 @@
 <?php
-       
+    
 	global $rf;
     if($rf == ''){
 		$rf = $_POST['ref'];
@@ -69,5 +69,19 @@
 				<td>Teléfono 2: </td>
 				<td colspan='2'>".$_POST['Tlf2']."</td>
 			</tr>");
+
+	$BorradoD = substr($_POST['borrado'],0,10);
+	$BorradoT = substr($_POST['borrado'],-8);
+	
+	if($BorradoD!=''){
+		print("<tr>
+				<td>Del Date: </td>
+				<td>".$BorradoD."</td>
+			</tr>
+			<tr>
+				<td>Del Time: </td=>
+				<td>".$BorradoT."</td>
+			</tr>");
+	}else{ }
 				
 ?>

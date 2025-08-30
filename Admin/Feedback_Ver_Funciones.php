@@ -43,7 +43,9 @@ function process_form(){
 
 	global $twhile;			$twhile = "FILTRO USUARIOS BAJAS CONSULTAR";
 
+	require 'Admin_Botonera.php';
 	require 'Inc_While_Form.php';
+	global $ruta;			$ruta = "";
 	global $rutaimg;		$rutaimg = "../Users/";
 	require 'Inc_While_Total.php';
 

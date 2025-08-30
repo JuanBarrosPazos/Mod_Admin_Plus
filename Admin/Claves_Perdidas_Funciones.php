@@ -146,8 +146,9 @@ function process_form(){
 			
 	}else{	
 		if(mysqli_num_rows($qc)== 0){
-				print ("No hay datos.");
-							
+			print ("<div class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;'>
+						NO HAY DATOS
+					</div>");
 		}else{ 	
 			print ("<div class='centradiv'>
 				<form name='modifica' action='$_SERVER[PHP_SELF]' method='POST'>

@@ -5,9 +5,8 @@
 			show_form();	
 	}else{
 		if(mysqli_num_rows($qb)== 0){
-			print ("<div class='centradiv'>
-						".$inicioadmincrear.$inciobajas."<hr>
-							NO HAY DATOS
+			print ("<div class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;padding-bottom:0.8em;'>
+						<div style='margin:0.8em auto 0.8em auto;'>NO HAY DATOS</div>".$inicioadmincrear.$inciobajas."
 					</div>");
 		}else{ global $page;
 				if($page >= 1){ }else{ $page = 1; }
@@ -31,7 +30,6 @@
 
 		print ("<div class='centraWhileDatos'>
 		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas.$refrescaimg."<br>");
-                  
 		while($rowb = mysqli_fetch_assoc($qb)){
     
 			global $formularioh;			global $formulariof;
@@ -88,18 +86,21 @@
 		
 			print($formulariofi.$formulariohe);
 
+		global $Feedback;
+		global $formulariohe;			global $formulariofe;
 		if(($_SESSION['Nivel'] == 'admin')&&($rowb['dni'] != $_SESSION['webmaster'])){
 
-			global $formulariohe;
-			$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
-			global $formulariofe;
-			$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='oculto2' value=1 />
-				</form>";
-			}else{	
-				global $formulariohe;			$formulariohe = "";
-				global $formulariofe;			$formulariofe = "";
+			if($Feedback==1){
+				$formulariohe = '';
+				$formulariofe = '';
+			}else{
+				$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar_02.php' method='POST'>";
+				$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='oculto2' value=1 />
+					</form>";
 			}
+
+		}else{	$formulariohe = "";			$formulariofe = "";	}
 
 			print($formulariohe);
 				require 'rowbtotal.php';

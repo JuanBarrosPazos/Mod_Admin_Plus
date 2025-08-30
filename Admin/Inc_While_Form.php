@@ -1,7 +1,36 @@
 <?php
 
+if($Feedback==1){
+
 	global $formularioh;
-	$formularioh = "<form style=\"display:inline-block;\" name='ver' action='".@$ruta."Admin_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=380px,height=530px')\">";
+	$formularioh = "<td colspan=7 align='center' class='BorderInf'>
+			<form style='display:inline-block;' name='ver' action='".@$ruta."Admin_Ver_02.php' target='popup'method='POST' onsubmit=\"window.open('', 'popup', 'width=420px,height=550px,')\">";
+
+	global $formulariof;
+	$formulariof = "<button type='submit' title='VER DETALLES' class='botonlila imgButIco DetalleBlack' style='vertical-align:top;' ></button>
+			<input type='hidden' name='oculto2' value=1 />
+				</form>";
+
+	global $formulariohg;
+	$formulariohg = "<form style='display:inline-block;' name='modifica' action='Feedback_Admin_Borrar_02.php' method='POST'>";
+
+	global $formulariofg;
+	$formulariofg = "<button type='submit' title='BORRAR DATOS EMPLEADO' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='oculto2' value=1 />
+				</form>";
+
+	global $formulariohi;
+	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='Feedback_Admin_Recuperar_02.php' method='POST'>";
+
+	global $formulariofi;
+	$formulariofi = "<button type='submit' title='RECUPERAR BAJA' class='botonverde imgButIco RestoreBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='oculto2' value=1 />
+				</form>";
+
+}else{
+
+	global $formularioh;
+	$formularioh = "<form style='display:inline-block;' name='ver' action='".@$ruta."Admin_Ver_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=380px,height=530px')\">";
 
 	global $formulariof;
 	$formulariof = "<button type='submit' title='VER DETALLES' class='botonlila imgButIco DetalleBlack' style='vertical-align:top;' ></button>
@@ -9,7 +38,7 @@
 		</form>";
 
 	global $formulariohg;
-	$formulariohg = "<form style=\"display:inline-block;\" name='modifica_img' action='".@$ruta."Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=520px,height=450px')\">";
+	$formulariohg = "<form style='display:inline-block;' name='modifica_img' action='".@$ruta."Admin_Modificar_img.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup',  'width=520px,height=450px')\">";
 
 	global $formulariofg;
 	$formulariofg = "<button type='submit' title='MODIFICAR IMAGEN' class='botonnaranja imgButIco FotoBlack' style='vertical-align:top;' ></button>
@@ -42,6 +71,8 @@
 		$formulariofe = "";
 		}
 */	
+
+}
 
 
 ?>
