@@ -28,6 +28,6 @@ if (($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){
 			ver_todo();
 	}
 
-}else{ require '../Inclu/table_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 ?>

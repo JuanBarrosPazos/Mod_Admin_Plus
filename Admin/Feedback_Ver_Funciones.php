@@ -97,7 +97,7 @@ function ver_todo(){
 
 	global $twhile;			$twhile = "TODOS USUARIOS BAJAS";
 
-	require 'Admin_Botonera.php';
+	require 'Admin_Botonera.php'; 
 	require 'Inc_While_Form.php';
 	global $ruta;				$ruta = "";
 	global $rutaimg;			$rutaimg = "../Users/";

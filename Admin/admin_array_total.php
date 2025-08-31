@@ -98,7 +98,7 @@ if(isset($array_nive_doc)){
 								'admin' => 'ADMINISTRADOR',
 								'plus' => 'USER PLUS',
 								'user' => 'USER',
-								'close' => 'CLOSE',);												
+								'locked' => 'LOCKED',);												
  		}
 
   $doctype = array ('DNI' => 'DNI/NIF Espa&ntilde;oles',

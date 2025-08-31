@@ -25,7 +25,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 		   errors();
 		 	}
 
-		} else { require '../Inclu/table_permisos.php'; }
+		} else { require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

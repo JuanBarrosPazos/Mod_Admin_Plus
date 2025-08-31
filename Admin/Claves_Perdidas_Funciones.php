@@ -55,7 +55,7 @@
 		$errors [] = "Email, Nº DNI o Letra.";
 	}elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
 		$errors [] = "Email, Nº DNI o Letra.";
-	}elseif (@$row['Nivel'] == 'close'){
+	}elseif (@$row['Nivel'] == 'locked'){
 		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 	}else{ }
 	 

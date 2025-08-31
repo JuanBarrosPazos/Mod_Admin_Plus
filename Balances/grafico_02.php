@@ -20,7 +20,7 @@ if ($_SESSION['Nivel'] == 'admin') {
 		if($_POST['grafico2']){	a();
 								process_form();
 									} 
-		} else { require '../Inclu/table_permisos.php'; }
+		} else { require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

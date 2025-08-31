@@ -558,8 +558,8 @@ function validate_form(){
 		}else{ }
 	}
 		
-	if(@$rn['Nivel'] == 'close'){
-		// VERIFICO NIVEL CLOSE
+	if(@$rn['Nivel'] == 'locked'){
+		// VERIFICO NIVEL LOCKED
 		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 		global $CloseLog;
 		$CloseLog = "\t ** NOMBRE: ".$rn['Nombre']." ".$rn['Apellidos']." REF: ".$rn['ref'];
@@ -622,7 +622,7 @@ function process_form(){
 	
 	global $db;
 					
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){	
+	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){	
 
 		global $onlyindex;
 		if($onlyindex == 1){
@@ -637,7 +637,7 @@ function process_form(){
 	print("<embed src='audi/sesion_open.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>");
 
-	}else { require 'Inclu/table_permisos.php'; }
+	}else { require 'Inclu/tabla_permisos.php'; }
 }	
 
 				   ////////////////////				   ////////////////////

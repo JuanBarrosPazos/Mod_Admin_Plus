@@ -41,7 +41,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 
 	else {	show_form2();}
 
-}else { require '../Inclu/table_permisos.php'; }
+}else { require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

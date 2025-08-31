@@ -1,5 +1,8 @@
 <?php
 
+	global $Feedback;
+	global $refrescaimg;
+	
 	if(!$qb){
 			print("SQL ERROR: ".mysqli_error($db)."</br>");
 			show_form();	
@@ -8,25 +11,25 @@
 			print ("<div class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;padding-bottom:0.8em;'>
 						<div style='margin:0.8em auto 0.8em auto;'>NO HAY DATOS</div>".$inicioadmincrear.$inciobajas."
 					</div>");
-		}else{ global $page;
+		}else{ 	global $page;
 				if($page >= 1){ }else{ $page = 1; }
 
-			if(isset($_POST['ocultoc'])){
+			if((isset($_POST['ocultoc']))&&($Feedback != 1)){
 				$defaults['Nombre'] = $_POST['Nombre'];
 				$defaults['Apellidos'] = $_POST['Apellidos'];
-				global $refrescaimg;
 				$refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php' method='POST' style='display: inline-block;' >
 					<input type='hidden' name='Nombre' value='".@$defaults['Nombre']."' />
 					<input type='hidden' name='Apellidos' value='".@$defaults['Apellidos']."' />
 					<button type='submit' title='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila imgButIco CachedBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='ocultoc' value=1 />
 								</form>";
-			}else{ 	global $refrescaimg;
+			}elseif($Feedback != 1){ 
 					$refrescaimg = "<form name='refresimg' action='".$ruta."Admin_Ver.php' style='display: inline-block;' >
 				<button type='submit' title='REFRESCAR DESPUES DE MODIFICAR DATOS' class='botonlila imgButIco CachedBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='page' value=".$page." />
 				</form>";
-			}
+
+			}else{ $refrescaimg = ""; }
 
 		print ("<div class='centraWhileDatos'>
 		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas.$refrescaimg."<br>");

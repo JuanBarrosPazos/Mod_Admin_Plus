@@ -29,7 +29,7 @@ if ($_SESSION['Nivel'] == 'admin'){
 											info_02();
 							
 							} else {show_form();}
-					} else { require '../Inclu/table_permisos.php'; } 
+					} else { require '../Inclu/tabla_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

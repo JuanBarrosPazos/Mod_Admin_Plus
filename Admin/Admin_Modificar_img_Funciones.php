@@ -13,31 +13,31 @@ function validate_form(){
 
 	// $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_FILES['myimg']['type']);
 
-		if($_FILES['myimg']['size'] == 0){
-			$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
-			global $img2;		$img2 = 'untitled.png';
-		}elseif(!$ext_correcta){
-			$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
-			global $img2;		$img2 = 'untitled.png';
-		}/*elseif(!$tipo_correcto){
-			$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
-			global $img2;			$img2 = 'untitled.png';
-		}*/elseif ($_FILES['myimg']['size'] > $limite){
-			$tamanho = $_FILES['myimg']['size'] / 1024;
-			$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
-			global $img2;			$img2 = 'untitled.png';
-		}elseif($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
-				$errors [] = "La carga del archivo se ha interrumpido.";
-				global $img2;
-				$img2 = 'untitled.png';
-		}elseif($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
-			$errors [] = "Es archivo no se ha cargado.";
-			global $img2;			$img2 = 'untitled.png';
-		}
+	if($_FILES['myimg']['size'] == 0){
+		$errors [] = "Ha de seleccionar una fotograf&iacute;a.";
+		global $img2;		$img2 = 'untitled.png';
+	}elseif(!$ext_correcta){
+		$errors [] = "La extension no esta admitida: ".$_FILES['myimg']['name'];
+		global $img2;		$img2 = 'untitled.png';
+	}/*elseif(!$tipo_correcto){
+		$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
+		global $img2;			$img2 = 'untitled.png';
+	}*/elseif ($_FILES['myimg']['size'] > $limite){
+		$tamanho = $_FILES['myimg']['size'] / 1024;
+		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		global $img2;			$img2 = 'untitled.png';
+	}elseif($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
+			$errors [] = "La carga del archivo se ha interrumpido.";
+			global $img2;
+			$img2 = 'untitled.png';
+	}elseif($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
+		$errors [] = "Es archivo no se ha cargado.";
+		global $img2;			$img2 = 'untitled.png';
+	}
 					
-		return $errors;
+	return $errors;
 
-} 
+} // FIN fucntion validate_form
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -103,8 +103,6 @@ function process_form(){
 
 			global $rutaimg;
 			$rutaimg = "src='../Users/".$_SESSION['sref']."/img_admin/".$_SESSION['new_name']."'";
-			global $vertabla;
-			$vertabla = 1;
 			require 'tabla_data_resum.php';
 													
 			print("<tr>
@@ -140,11 +138,10 @@ function process_form(){
 
 function show_form($errors=[]){
 	
-	global $dt;
-	$id = $_POST['id'];
-	$img = 	isset($_POST['myimg']);
-	$dt = $_POST['doc'];
-
+	global $dt;				$dt = $_POST['doc'];
+	global $id;				$id = $_POST['id'];
+	global $img;			$img = 	isset($_POST['myimg']);
+	
 	if(isset($_POST['oculto2'])){
 
 		$_SESSION['smyimg'] = $_POST['myimg'];
@@ -165,7 +162,7 @@ function show_form($errors=[]){
 
 	print("<table align='center'  border=0 style='margin-top:20px; width:95.5%'>
 			<tr>
-				<th colspan=2 >SELECCIONE UNA NUEVA IMAGEN.</th>
+				<th colspan=2 >SELECCIONE UNA NUEVA IMAGEN</th>
 			</tr>
 			<tr>
 				<th>
@@ -232,25 +229,18 @@ function show_form($errors=[]){
 
 function UserLog(){
 
-	global $nombre;
-	global $apellido;
-	global $destination_file;	
-	global $rename_filename;
-
+	global $nombre;					global $apellido;
+	global $destination_file;		global $rename_filename;
+	global $rf;						$rf = $_POST['ref'];
 	$ActionTime = date('H:i:s');
-
-	$rf = $_POST['ref'];
-
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
-	global $InfoLog;
-	global $InfoLogImg;
+	global $dir;					$dir = "../Users/".$_SESSION['ref']."/log";
+	global $InfoLog;				global $InfoLogImg;
 
 	global $text;
 	$text = PHP_EOL.$InfoLog.$ActionTime.PHP_EOL."\t ID:".$_POST['id'].PHP_EOL."\t Nombre: ".$nombre." ".$apellido.PHP_EOL.$InfoLogImg;
 
 	require 'log_write.php';
 
-	}
+}
 
 ?>

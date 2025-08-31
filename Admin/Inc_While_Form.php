@@ -12,7 +12,7 @@ if($Feedback==1){
 				</form>";
 
 	global $formulariohg;
-	$formulariohg = "<form style='display:inline-block;' name='modifica' action='Feedback_Admin_Borrar.php' method='POST'>";
+	$formulariohg = "<form style='display:inline-block;' name='modifica' action='Feedback_Borrar.php' method='POST'>";
 
 	global $formulariofg;
 	$formulariofg = "<button type='submit' title='BORRAR DATOS EMPLEADO' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>

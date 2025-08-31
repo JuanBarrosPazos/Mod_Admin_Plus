@@ -22,7 +22,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 	require '../Inclu_MInd/rutacam.php';
 	require '../Inclu_MInd/Master_Index.php';
 
-} else { require '../Inclu/table_permisos.php'; }
+} else { require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

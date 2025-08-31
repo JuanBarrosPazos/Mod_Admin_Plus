@@ -22,7 +22,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESS
 		elseif ($_POST['cerrar']){  master_index();
 									desconex(); }
 
-	} else { require '../Inclu/table_permisos.php';}
+	} else { require '../Inclu/tabla_permisos.php';}
 		
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

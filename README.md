@@ -1,5 +1,16 @@
-
+## PENDIENTES...
+#### Ojo con sesión abierta al redireccionamiento fichar con usuario no admin o webmaster...
+#### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
+----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.08.31 2025/08/31
+	* EN GESTION DE ADMINISTRADORES:
+	- Ajustes generales...
+	- Ok: Baja temporal de usuario sin eliminar las tablas de la bbdd, ni directorios (recuperable).
+	- Ok: Eliminación definitiva y total del usuario, tablas y directorios...
+	- Ok: Modificación del estado "close" a "locked" de acceso al sistema del usuario.
+	- Ok: logs de actividad del usuario.
+----
 #### Mod_Admin_Plus V25.08.30B 2025/08/30
 	* EN GESTION DE ADMINISTRADORES:
 	- Ok: Botonera navegación Admin y Admin_Feedback.

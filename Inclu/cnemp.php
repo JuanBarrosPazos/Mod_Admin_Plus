@@ -29,7 +29,7 @@ if ($_SESSION['Nivel'] == 'admin'){
 				 global $InfoLog;
 				 $InfoLog = $_SESSION['nuser'];
 				 UserLog(); }
-	} else { require 'table_permisos.php'; } 
+	} else { require 'tabla_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

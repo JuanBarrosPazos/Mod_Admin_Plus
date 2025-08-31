@@ -10,7 +10,7 @@ function process_form(){
 
 	$FRecup = date('Y-m-d H:i:s');
 
-	$sqlc = "UPDATE `$db_name`.$table_name_a SET `del` = 'false',`recuper` = '$FRecup' WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
+	$sqlc = "UPDATE `$db_name`.$table_name_a SET `Nivel` = 'user',`del` = 'false',`recuper` = '$FRecup' WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlc)){
 		print("<table class='TFormAdmin'>
@@ -22,12 +22,11 @@ function process_form(){
 		global $rutaimg;
 		$rutaimg = "src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."'";
 		$_POST['recuper']=$FRecup;
+		$_POST['Nivel'] = "user";
 		require 'tabla_data_resum.php';
 				
 		print("<tr>
-				<td colspan=3>
-					".$inicioadmin.$inciobajas."
-				</td>
+				<td colspan=3>".$inicioadmin.$inciobajas."</td>
 			</tr>
 		</table>");
 
@@ -36,6 +35,15 @@ function process_form(){
 		show_form ();
 		global $texerror;		$texerror = "\n\t ".mysqli_error($db);
 	}
+
+	global $redir;
+	$redir = "<script type='text/javascript'>
+				function redir(){
+					window.location.href='Admin_Ver.php';
+				}
+				setTimeout('redir()',10000);
+			</script>";
+	print ($redir);
 
 } // FIN function process_form
 
@@ -61,7 +69,7 @@ function show_form(){
 						DATOS A RECUPERAR
 					</div>
 					<a href='Feedback_Ver.php' >
-				<button type='button' title='INICIO ADMIN GESTION' class='botonlila imgButIco HomeBlack' style='vertical-align:top;float:right;' ></button>
+				<button type='button' title='INICIO ADMIN PAPELERA' class='botonlila imgButIco HomeBlack' style='vertical-align:top;float:right;' ></button>
 					</a>
 				</th>
 			</tr>
@@ -80,7 +88,7 @@ function show_form(){
 				<input type='hidden' name='modifica' value=1 />
 		</form>
 				<a href='Feedback_Ver.php' >
-            <button type='button' title='INICIO ADMIN GESTION' class='botonlila imgButIco HomeBlack' style='vertical-align:top;float:right;' ></button>
+            <button type='button' title='INICIO ADMIN PAPELERA' class='botonlila imgButIco HomeBlack' style='vertical-align:top;float:right;' ></button>
 				</a>
 					</td>
 				</tr>

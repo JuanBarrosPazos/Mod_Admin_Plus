@@ -51,97 +51,75 @@
 
  function validate_form(){
 	 
-	global $sql;
-	global $q;
-	global $row;
-	global $db;
-	global $db_name;
-
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $db;				global $db_name;			global $sql;
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 $sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
  	
-	$q = mysqli_query($db, $sql);
-	$row = mysqli_fetch_assoc($q);
+	global $q;				$q = mysqli_query($db, $sql);
+	global $row;			$row = mysqli_fetch_assoc($q);
 	@$_SESSION['L_Email'] = $row['Email'];
 	@$_SESSION['L_dni'] = $row['dni'];
 	@$_SESSION['L_ldni'] = $row['ldni'];
 
 	@$errors = array();
 		
-	if ((@$row['Nivel'] == 'close')||(@$row['Nivel'] == 'user')){
+	if ((@$row['Nivel'] == 'locked')||(@$row['Nivel'] == 'user')){
 		@$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
-		}
-	 
-	 /* Validamos el campo mail. */
-	
-	elseif(strlen(trim($_POST['Email'])) == 0){
-		/*$errors [] = "Mail: <font color='#FF0000'>CAMPO OBLIGATORIO.</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
-	
-	elseif (strlen(trim($_POST['Email'])) < 5 ){
-		/*$errors [] = "Mail: <font color='#FF0000'>MÁS DE 5 CARÁCTERES.</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
-		
-	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
-		/*$errors [] = "Mail: <font color='#FF0000'>@ NO VÁLIDO</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
-		
-	/* Validamos el campo dni */
-	
-	elseif(strlen(trim($_POST['dni'])) == 0){
-		/*$errors [] = "Nº DNI: <font color='#FF0000'>CAMPO OBLIGATORIO.</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
-	
-	elseif (!preg_match('/^[A-Z\d]+$/',$_POST['dni'])){
-		/*$errors [] = "Nº DNI: <font color='#FF0000'>SÓLO NÚMEROS O LETRAS MAYÚSCULAS</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
 
-	elseif (strlen(trim($_POST['dni'])) < 8){
-		/*$errors [] = "Nº DNI: <font color='#FF0000'>MAS DE 7 DÍGITOS</font>";*/
+	}elseif(strlen(trim($_POST['Email'])) == 0){
+	/* VALIDAMOS EL CAMPO EMAIL */		
+	/*$errors [] = "Mail: <font color='#F1BD2D'>CAMPO OBLIGATORIO.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		}
 
-	/* Validamos el campo ldni */
-	
-	elseif(strlen(trim($_POST['ldni'])) == 0){
-		/*$errors [] = "Letra DNI: <font color='#FF0000'>CAMPO OBLIGATORIO</font>";*/
+	}elseif (strlen(trim($_POST['Email'])) < 5 ){
+		/*$errors [] = "Mail: <font color='#F1BD2D'>MÁS DE 5 CARÁCTERES.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		}
-	
-	elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
-		/*$errors [] = "Letra DNI: <font color='#FF0000'>SÓLO TEXTO</font>";*/
-		$errors [] = "@ / Nº / LETRA";
-		}
 
-	elseif (!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
-		/*$errors [] = "Letra DNI: <font color='#FF0000'>SÓLO MAYÚSCULAS</font>";*/
+	}elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
+		/*$errors [] = "Mail: <font color='#F1BD2D'>@ NO VÁLIDO</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		}
 
-	/* Realizamos un condicional de validacion de campos Nombre y dni.*/
-		
-	elseif(trim($_POST['Email'] != $_SESSION['L_Email'])){
+	}elseif(strlen(trim($_POST['dni'])) == 0){
+	/* VALIDAMOS CAMPO DNI */
+		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>CAMPO OBLIGATORIO.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		}
-		
-	elseif(trim($_POST['dni'] != $_SESSION['L_dni'])){
+
+	}elseif (!preg_match('/^[A-Z\d]+$/',$_POST['dni'])){
+		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>SÓLO NÚMEROS O LETRAS MAYÚSCULAS</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		} 
-		
-	elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
+
+	}elseif (strlen(trim($_POST['dni'])) < 8){
+		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>MAS DE 7 DÍGITOS</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-		} 
+
+	}elseif(strlen(trim($_POST['ldni'])) == 0){
+	/* VALIDAMOS CAMPO LDNI */
+		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>CAMPO OBLIGATORIO</font>";*/
+		$errors [] = "@ / Nº / LETRA";
+
+	}elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
+		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>SÓLO TEXTO</font>";*/
+		$errors [] = "@ / Nº / LETRA";
+
+	}elseif (!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
+		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>SÓLO MAYÚSCULAS</font>";*/
+		$errors [] = "@ / Nº / LETRA";
+
+	}elseif(trim($_POST['Email'] != $_SESSION['L_Email'])){
+	/* VALIDACION DE NOMBRE Y DNI */
+		$errors [] = "@ / Nº / LETRA";
+
+	}elseif(trim($_POST['dni'] != $_SESSION['L_dni'])){
+		$errors [] = "@ / Nº / LETRA";
+	}elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
+		$errors [] = "@ / Nº / LETRA";
+
+	}else{ }
 	 
 	return $errors;
 	 
- 			}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -149,32 +127,32 @@ $sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' 
 
 function show_form($errors=[]){
 	
-	global $sql;
-	global $q;
-	global $row;
+	global $sql;			global $q;			global $row;
 	
 	if(isset($_POST['oculto2'])){
-				$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
-									'Email' => $_POST['Email'],
-									'dni' => $_POST['dni'],	
-									'ldni' => $_POST['ldni']);
-								   }
+		$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
+							'Email' => $_POST['Email'],
+							'dni' => $_POST['dni'],	
+							'ldni' => $_POST['ldni']);
+	 }
 	
 	if(isset($_POST['oculto'])){
-		$defaults = $_POST;
-		} else {
-				$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
-									'Email' => '',
-									'dni' => '',
-									'ldni' => isset($_POST['ldni']));
-									}
+			$defaults = $_POST;
+	}else{	$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
+								'Email' => '',
+								'dni' => '',
+								'ldni' => isset($_POST['ldni']));
+	}
 	
-	if ($errors){
-		print("<table align='center'>
-				<tr><td style='text-align:center'>
-					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-				</td></tr>
-				<tr><td style='text-align:left'>");
+	if($errors){
+		print("<table class='centradiv' style='border-color:#F1BD2D;'>
+				<tr>
+					<th style='text-align:center;color:#F1BD2D;'>
+						* SOLUCIONE ESTOS ERRORES
+					</th>
+				</tr>
+				<tr>
+					<td style='text-align:left !important'>");
 		
 		// PASO LOGS DE FORMULARIO DESBLOQUEO IP
 		global $text;
@@ -182,7 +160,7 @@ function show_form($errors=[]){
 		ini_log();
 
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* </font>".$errors [$a]."<br/>	");
+			print("<font color='#F1BD2D'>* </font>".$errors [$a]."<br/>	");
 				// ESCRIBE ERRORES EN INI_LOG
 				global $text;
 				$text = $errors[$a];

@@ -14,6 +14,6 @@ if ($_SESSION['Nivel'] == 'admin'){
                                     UserLog();
     }else{ show_form(); }
 
-}else{ require '../Inclu/table_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 ?>

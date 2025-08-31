@@ -36,7 +36,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESS
 					} else {show_form();
 							errors();
 							}
-	} else { require '../Inclu/table_permisos.php';} 
+	} else { require '../Inclu/tabla_permisos.php';} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

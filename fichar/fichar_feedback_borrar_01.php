@@ -24,7 +24,7 @@ if ($_SESSION['Nivel'] == 'admin'){
 										show_form();
 										}
 								
-				} else { require '../Inclu/table_permisos.php'; }
+				} else { require '../Inclu/tabla_permisos.php'; }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -22,7 +22,7 @@ if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSIO
 	if($_POST['oculto2']){	process_form();
 							UserLog();
 											} 
-	}else{ require '../Inclu/table_permisos.php'; }
+	}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -57,7 +57,7 @@ function process_form(){
 				function redir(){
 					window.close();
 				}
-			setTimeout('redir()',8000);
+			setTimeout('redir()',10000);
 		</script>";
 	print ($redir);
 

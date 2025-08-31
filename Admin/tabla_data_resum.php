@@ -2,16 +2,16 @@
     
 	global $rf;
     if($rf == ''){
-		$rf = $_POST['ref'];
+			$rf = $_POST['ref'];
 	}elseif(isset($_SESSION['refcl'])){
-		$rf = $_SESSION['refcl'];
+			$rf = $_SESSION['refcl'];
 	}else{ }
 
 	global $pass;
     if(!isset($_POST['Pass'])){ 
-		$pass = $_POST['Password'];
+			$pass = $_POST['Password'];
 	}else{ 
-		$pass = $_POST['Pass'];
+			$pass = $_POST['Pass'];
 	}
 
 		print("<tr>
@@ -68,14 +68,14 @@
 			<tr>
 				<td>Teléfono 2: </td>
 				<td colspan='2'>".$_POST['Tlf2']."</td>
-			</tr>
-			<tr>
-				<td>Nº Visitas:</td>
-				<td colspan='2'>".$_POST['visitadmin']."</td>
 			</tr>");
 
 	if($_POST['visitadmin']>0){
 		print("<tr>
+				<td>Nº Visitas:</td>
+				<td colspan='2'>".$_POST['visitadmin']."</td>
+			</tr>
+			<tr>
 				<td>Last IN:</td>
 				<td colspan='2'>".$_POST['lastin']."</td>
 			</tr>
