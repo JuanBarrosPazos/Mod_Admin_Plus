@@ -549,7 +549,7 @@ function process_form(){
 	global $tablepf;
 	$tablepf = "<table class='TFormAdmin'>
 				<tr>
-					<th>
+					<th colspan=2>
 						SE HA CREADO EL ARCHIVO DE CONEXIONES
 						</br>
 						CON LAS SIGUIENTES VARIABLES
