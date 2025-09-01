@@ -180,7 +180,7 @@ function process_form(){
 	crear_tablas();
 	upImg();
 
-	ini_log();
+	ini_log(); 
 	config_one();
 				
 	}else{	print("ERROR SQL L.178: ".mysqli_error($db))."</br>";
