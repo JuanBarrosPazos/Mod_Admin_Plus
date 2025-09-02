@@ -121,6 +121,6 @@ function UserLog(){
 
 	require 'log_write.php';
 
-	}
+}
 
 ?>

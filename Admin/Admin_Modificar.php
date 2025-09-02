@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-	global $docs;
-	$docs = 1;
+	global $docs;			$docs = 1;
 	
 	require '../Inclu/error_hidden.php';
 	require '../Inclu/Admin_head.php';

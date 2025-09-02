@@ -64,7 +64,7 @@ $sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' 
 
 	@$errors = array();
 		
-	if ((@$row['Nivel'] == 'locked')||(@$row['Nivel'] == 'user')){
+	if ((@$row['Nivel'] == 'locked')||(@$row['Nivel'] == 'user')||(@$row['del'] == 'true')){
 		@$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 
 	}elseif(strlen(trim($_POST['Email'])) == 0){

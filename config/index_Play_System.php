@@ -558,7 +558,7 @@ function validate_form(){
 		}else{ }
 	}
 		
-	if(@$rn['Nivel'] == 'locked'){
+	if((@$rn['Nivel'] == 'locked')||(@$rn['del'] == 'true')){
 		// VERIFICO NIVEL LOCKED
 		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 		global $CloseLog;
@@ -624,7 +624,7 @@ function process_form(){
 					
 	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){	
 
-		global $onlyindex;
+		global $onlyindex; 
 		if($onlyindex == 1){
 				master_index();
 				ver_todo();
@@ -672,10 +672,26 @@ function show_ficha(){
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
-
-	// FICHA ENTRADA.
+	$rp = mysqli_fetch_assoc($q1);
 	
-	if($count1 < 1){
+	if($rp['del']=="true"){
+		print("<div class='centradiv'>
+				ACCESO RESTRINGIDO POR EL WEB MASTER**
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+		</form>
+			</div>");
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',6000);
+					</script>";
+		print($redir);
+
+	}elseif($count1 < 1){ // FICHA ENTRADA.
 		
 		global $din;		$din = date('Y-m-d');		global $tin;			
 
@@ -717,8 +733,9 @@ function show_ficha(){
 		</form>														
 			</li>
 		</ul>"); 
-	// FICHA SALIDA.
-	}elseif($count1 > 0){
+
+	}elseif($count1 > 0){ // FICHA SALIDA.
+
 		global $dout;	$dout = date('Y-m-d');
 		global $tout;	global $ttot;
 		/*
@@ -763,7 +780,7 @@ function process_pin(){
 	
 	global $db; 	global $db_name;	global $qrp;
 	
-	if ((isset($_GET['ocultop']))  || (isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
+	if ((isset($_GET['ocultop'])) ||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
 	else{ $qrp = $_POST['pin']; }
 	
 	global $table_name_a;
@@ -776,17 +793,32 @@ function process_pin(){
 	
 	$_SESSION['usuarios'] = $rp['ref'];
 	$_SESSION['ref'] = $rp['ref'];
-
-	if($cp > 0){
 	
+	if($rp['del']=="true"){
+		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;'>
+				ACCESO RESTRINGIDO POR EL WEB MASTER
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
+			</div>");
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',6000);
+					</script>";
+		print($redir);
+
+	}elseif($cp > 0){
 		$tabla1 = $_SESSION['clave'].$rp['ref'];
 		$tabla1 = strtolower($tabla1);
-		global $vname;
+		global $vname;	
 		$vname = $tabla1."_".date('Y');
 		$vname = "`".$vname."`";
 
 		// FICHA ENTRADA O SALIDA.
-	
 		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
@@ -875,7 +907,6 @@ function process_pin(){
 				</li>	
 			</ul>														
 			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'></embed>"); 
-			
 		}
 	
 		ayear();

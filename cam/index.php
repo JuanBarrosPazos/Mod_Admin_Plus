@@ -243,8 +243,7 @@ function errors(){
 
 function show_ficha(){
 	
-	global $db;
-	global $db_name;
+	global $db;			global $db_name;
 	
 	global $vname;
 	$tabla1 = $_SESSION['clave'].$_SESSION['ref'];
@@ -257,30 +256,42 @@ function show_ficha(){
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
-
-	// FICHA ENTRADA.
+	$rp = mysqli_fetch_assoc($q1);
 	
-	if($count1 < 1){
+	if($rp['del']=="true"){
+		print("<div class='centradiv'>
+				ACCESO RESTRINGIDO POR EL WEB MASTER
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</form>
+		</div>");
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='../index.php';
+					}
+					setTimeout('redir()',6000);
+					</script>";
+		print ($redir);
+			
+	}elseif($count1 < 1){ // FICHA ENTRADA.
 		
-		global $din;
-		global $tin;
-		$din = date('Y-m-d');
-		$tin = date('H:i:s');
-
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = '';
-		$tout = '00:00:00';
-		$ttot = '00:00:00';
+		global $din;			$din = date('Y-m-d');
+		global $tin;			$tin = date('H:i:s');
 		
-	print("<table align='center' style=\"margin-top:2px\">
-			<tr>
-				<td>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</td>
-					<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
+		global $dout;			$dout = '';
+		global $tout;			$tout = '00:00:00';
+		global $ttot;			$ttot = '00:00:00';
+		
+	print("<ul class='centradiv'>
+			<li class='liCentra'>FICHE SU ENTRADA</li>
+			<li class='liCentra'>
+				".mb_strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
+			</li>
+			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+			<li class='liCentra'>
+	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
 		<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 		<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 		<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
@@ -289,49 +300,39 @@ function show_ficha(){
 		<input type='hidden' id='dout' name='dout' value='".$dout."' />
 		<input type='hidden' id='tout' name='tout' value='".$tout."' />
 		<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-						<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-						<input type='hidden' name='entrada' value=1 />
+			<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+			<input type='hidden' name='entrada' value=1 />
 	</form>														
-					</td>
-				</tr>
-				
-			</table>			
-						"); 
-		}
-	
+			</li>
+		</ul>"); 
+
+	}elseif($count1 > 0){
 	// FICHA SALIDA.
-	
-	elseif($count1 > 0){
-		
 
-		global $dout;
-		global $tout;
+		global $dout;		$dout = date('Y-m-d');
+		global $tout;		$tout = date('H:i:s');
 		global $ttot;
-		$dout = date('Y-m-d');
-		$tout = date('H:i:s');
 
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</td>
-				<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data'>
-		<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-						<input type='hidden' name='salida' value=1 />
+	print("<ul class='centradiv'>
+			<li class='liCentra'>FICHE SU SALIDA</li>
+			<li class='liCentra'>
+				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
+			</li>
+			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+			<li class='liCentra'>
+		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display: inline-block; margin-right:10%;'>
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+			<input type='hidden' id='dout' name='dout' value='".$dout."' />
+			<input type='hidden' id='tout' name='tout' value='".$tout."' />
+				<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+				<input type='hidden' name='salida' value=1 />
 		</form>														
-					</td>
-				</tr>
-			</table>"); 
-		
-		}
-	
-	}	
+			</li>
+		</ul>"); 
+	}
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

@@ -164,14 +164,14 @@
 	if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){ 
 	print("<input type='hidden' name='Password' value='".$defaults['Password']."' />".$defaults['Password']."
 				</td></tr>
-			<input type='hidden' name='Password2' value='".$defaults['Password2']."' />");
+			<input type='hidden' name='Password2' value='".$defaults['Password2']."' required />");
 	}else{ 
-		print("<input type='text' name='Password' size=12 maxlength=10 value='".$defaults['Password']."' />
+		print("<input type='text' name='Password' placeholder='PASSWORD' size=12 maxlength=10 value='".$defaults['Password']."' />
 				</td>
 				</tr><tr>
 				<td>PASSWORD:</td>
 				<td>
-	<input type='text' name='Password2' id='Password2' size=12 maxlength=10 pattern='[a-z A-Z 0-9\s]{3,10}' placeholder='MI PASSWORD' value='".$defaults['Password2']."' required />
+	<input type='text' name='Password2' id='Password2' size=12 maxlength=10 pattern='[a-z A-Z 0-9\s]{3,10}' placeholder='PASSWORD' value='".$defaults['Password2']."' required />
 				</td></tr>");
 		}
 	// FIN SI ES USER O PLUS SE LIMITA EL FORMULARIO 

@@ -57,6 +57,8 @@
 		$errors [] = "Email, Nº DNI o Letra.";
 	}elseif (@$row['Nivel'] == 'locked'){
 		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
+	}elseif (@$row['del'] == 'true'){
+		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 	}else{ }
 	 
 	return $errors;
