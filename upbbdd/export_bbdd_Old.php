@@ -43,24 +43,24 @@ $campo = 'id,ref,Nivel,Nombre,Apellidos,myimg,doc,dni,ldni,Email,Usuario,Passwor
 $texc = '`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Pass`, `Direccion`, `Tlf1`, `Tlf2`, `lastin`, `lastout`, `visitadmin`';
 		$id = "`id`";
 $c3 = "\n\t`id` int(4) NOT NULL auto_increment,
-\t`ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-\t`Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'amd',
-\t`Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
-\t`Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
-\t`myimg` varchar(30) collate utf8_spanish2_ci NOT NULL default 'untitled.png ',
-\t`doc` varchar(11) collate utf8_spanish2_ci NOT NULL,
-\t`dni` varchar(8) collate utf8_spanish2_ci NOT NULL,
-\t`ldni` varchar(1) collate utf8_spanish2_ci NOT NULL,
-\t`Email` varchar(50) collate utf8_spanish2_ci NOT NULL,
-\t`Usuario` varchar(10) collate utf8_spanish2_ci NOT NULL,
-\t`Password` varchar(100) collate utf8_spanish2_ci NOT NULL,
-\t`Pass` varchar(10) collate utf8_spanish2_ci NOT NULL,
-\t`Direccion` varchar(60) collate utf8_spanish2_ci NOT NULL,
+\t`ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+\t`Nivel` varchar(8) collate utf16_spanish2_ci NOT NULL default 'amd',
+\t`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+\t`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+\t`myimg` varchar(30) collate utf16_spanish2_ci NOT NULL default 'untitled.png ',
+\t`doc` varchar(11) collate utf16_spanish2_ci NOT NULL,
+\t`dni` varchar(8) collate utf16_spanish2_ci NOT NULL,
+\t`ldni` varchar(1) collate utf16_spanish2_ci NOT NULL,
+\t`Email` varchar(50) collate utf16_spanish2_ci NOT NULL,
+\t`Usuario` varchar(10) collate utf16_spanish2_ci NOT NULL,
+\t`Password` varchar(100) collate utf16_spanish2_ci NOT NULL,
+\t`Pass` varchar(10) collate utf16_spanish2_ci NOT NULL,
+\t`Direccion` varchar(60) collate utf16_spanish2_ci NOT NULL,
 \t`Tlf1`varchar(9) NOT NULL default '0',
 \t`Tlf2`varchar(9) NOT NULL default '0',
-\t`lastin` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`lastout` varchar(20) collate utf8_spanish2_ci NOT NULL default '0',
-\t`visitadmin` varchar(4) collate utf8_spanish2_ci NOT NULL default '0',
+\t`lastin` varchar(20) collate utf16_spanish2_ci NOT NULL default '0',
+\t`lastout` varchar(20) collate utf16_spanish2_ci NOT NULL default '0',
+\t`visitadmin` varchar(4) collate utf16_spanish2_ci NOT NULL default '0',
 \tUNIQUE KEY `id` (`id`),
 \tUNIQUE KEY `ref` (`ref`),
 \tUNIQUE KEY `dni` (`dni`),
@@ -71,7 +71,7 @@ $c3 = "\n\t`id` int(4) NOT NULL auto_increment,
 			while($rowc = mysqli_fetch_row($qc)){
 				global $numr;
 				$numr = ($rowc[0]+1);}
-$c4 = "\nENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
+$c4 = "\nENGINE=MyISAM  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=".$numr;
 		 		}	
 				
 				   ////////////////////				   ////////////////////
@@ -110,12 +110,12 @@ $campo = 'id,ref,Nombre,Apellidos,din,tin,dout,tout,ttot';
 $texc = '`id`, `ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`';
 		$id = "`id`";
 $c3 = "\n\t  `id` int(4) NOT NULL auto_increment,
-\t`ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-\t`Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
-\t`Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
-\t`din` varchar(10) collate utf8_spanish2_ci NOT NULL,
+\t`ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+\t`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+\t`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+\t`din` varchar(10) collate utf16_spanish2_ci NOT NULL,
 \t`tin` time NOT NULL,
-\t`dout` varchar(10) collate utf8_spanish2_ci NULL,
+\t`dout` varchar(10) collate utf16_spanish2_ci NULL,
 \t`tout` time NULL,
 \t`ttot` time NULL,
 \tPRIMARY KEY  (`id`),
@@ -125,7 +125,7 @@ $c3 = "\n\t  `id` int(4) NOT NULL auto_increment,
 			while($rowc = mysqli_fetch_row($qc)){
 				global $numr;
 				$numr = ($rowc[0]+1);}
-$c4 = "\nENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=".$numr;
+$c4 = "\nENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=".$numr;
 				 }	
 				 
 				   ////////////////////				   ////////////////////

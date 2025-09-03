@@ -92,7 +92,7 @@ class HandDigits {
         //==========================================================
         // d8-small.jpg
         //==========================================================
-        $this->digits['8'][0]= 694 ;
+        $this->digits['8'][0]= 684 ;
         $this->digits['8'][1]=
      '/9j/4AAQSkZJRgABAQEASgBKAAD//gAJSnBHcmFwaP/bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQdGh8eHRocHCAkLicg'.
      'IiwjHBwoNyksMDE0NDQfJzk9ODI8LjM0Mv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy'.

@@ -91,7 +91,7 @@ function show_form($errors=[]){
 	
 	if($errors){
 		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
-				* SOLUCIONE ESTOS ERRORES.<br>");
+				SOLUCIONE ESTOS ERRORES.<br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
 				//print("<font color='#F1BD2D'>* </font>".$errors [$a]."<br>");

@@ -56,7 +56,7 @@
 			
 	while($rowb = mysqli_fetch_assoc($qb)){
 
-		if($rowb['ttot'] == "03:22:02"){ 
+		if($rowb['ttot'] == "68:68:68"){ 
 				global $sty;
 				$sty = "style=\"color: #FF0000; font-weight: bold;\"";}
 			else{ global $sty;

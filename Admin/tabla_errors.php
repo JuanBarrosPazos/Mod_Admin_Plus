@@ -1,18 +1,16 @@
 <?php
 
-	if ($errors){
-		print("	<table class='centradiv' style='border-color:#F1BD2D;'>
+	if($errors){
+		print("	<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 					<tr>
-						<th style='text-align:center;color:#F1BD2D;'>
-							* SOLUCIONE ESTOS ERRORES
-						</th>
+						<th>SOLUCIONE ESTOS ERRORES</th>
 					</tr>
 					<tr>
 						<td style='text-align:left !important'>");
 			
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font> ".$errors [$a]."<br/>");
-			}
+			print("** ".$errors [$a]."<br/>");
+		}
 		print("</td></tr></table>");
 	}
 

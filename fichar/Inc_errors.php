@@ -11,7 +11,7 @@
 
 	// INICIO ERRORES FICHAR.
 		global $db;		global $db_name;
-	$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ttot` = '03:22:02' ";
+	$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ttot` = '68:68:68' ";
 		$qe = mysqli_query($db, $sqle);
 		global $counte;
 		if(!$qe){

@@ -112,16 +112,16 @@ function tcl(){
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf8_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf8_spanish2_ci NOT NULL,
+  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
-  `dout` varchar(10) collate utf8_spanish2_ci NULL,
+  `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	if(mysqli_query($db , $tcl)){
 		
@@ -592,7 +592,7 @@ function pin_out(){
 				</table>");
 		
 					global $ttot;
-					$ttot = '03:22:02';
+					$ttot = '68:68:68';
 					global $text;
 					$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 					$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];

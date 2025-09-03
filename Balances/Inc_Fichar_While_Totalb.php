@@ -59,58 +59,48 @@
 			
 	while($rowb = mysqli_fetch_assoc($qb)){
 
-		if($rowb['ttot'] == "03:22:02"){ 
-				global $sty;
-				$sty = "style=\"color: #FF0000; font-weight: bold;\"";}
-			else{ global $sty;
-				  $sty = "";}
+		if($rowb['ttot'] == "68:68:68"){ 
+				global $sty;	$sty = "style=\"color: #FF0000; font-weight: bold;\"";
 
-    global $vname;
-    global $dyt1;
-    global $formularioh;
-    global $formulariof;
-	global $colspana;
-	global $colspanb;
+		}else{ 	global $sty;	$sty = ""; }
+
+    global $vname;				global $dyt1;
+    global $formularioh;		global $formulariof;
+	global $colspana;			global $colspanb;
 
 	print (	"<tr align='center'>".$formularioh."
-
-            <input name='dyt1' type='hidden' value='".$dyt1."' />
+                <td class='BorderInfDch' align='center' ".$sty.">
+            <input type='hidden' id='dyt1' name='dyt1' value='".$dyt1."' />
             <input type='hidden' id='ref' name='ref' value='".$refses."' />
             <input type='hidden' id='name1' name='name1' value='".$rowb['Nombre']."' />
             <input type='hidden' id='name2' name='name2' value='".$rowb['Apellidos']."' />
 
-                <td class='BorderInfDch' align='center' ".$sty.">
-            <input name='id' type='hidden' value='".$rowb['id']."' />".$rowb['id']."
+            <input type='hidden' name='id' value='".$rowb['id']."' />".$rowb['id']."
                 </td>
-
 				<td class='BorderInfDch' align='left' ".$sty.">
-			<input name='din' type='hidden' value='".$rowb['din']."' />".$rowb['din']."
+			<input type='hidden' name='din' value='".$rowb['din']."' />".$rowb['din']."
 				</td>
-						
 				<td class='BorderInfDch' align='right' ".$sty.">
-			<input name='tin' type='hidden' value='".$rowb['tin']."' />".$rowb['tin']."
+			<input type='hidden' name='tin' value='".$rowb['tin']."' />".$rowb['tin']."
 				</td>
-						
 				<td class='BorderInfDch' align='right' ".$sty.">
-			<input name='dout' type='hidden' value='".$rowb['dout']."' />".$rowb['dout']."
+			<input type='hidden' name='dout' value='".$rowb['dout']."' />".$rowb['dout']."
 				</td>
-
 				<td class='BorderInfDch' align='right' ".$sty.">
-			<input name='tout' type='hidden' value='".$rowb['tout']."' />".$rowb['tout']."
+			<input type='hidden' name='tout' value='".$rowb['tout']."' />".$rowb['tout']."
 				</td>
-
 				<td class='BorderInfDch' align='right' ".$sty.">
-			<input name='ttot' type='hidden' value='".$rowb['ttot']."' />".$rowb['ttot']."
+			<input type='hidden' name='ttot' value='".$rowb['ttot']."' />".$rowb['ttot']."
 				</td>");
 
 			if(@$rowb['dfeed'] != ''){
 			print("
 				<td class='BorderInfDch' align='right'>
-						<input name='dfeed' type='hidden' value='".$rowb['dfeed']."' />
+						<input type='hidden' name='dfeed' value='".$rowb['dfeed']."' />
 						".$rowb['dfeed']." / ".$rowb['tfeed']."
-						<input name='tfeed' type='hidden' value='".$rowb['tfeed']."' />
+						<input type='hidden' name='tfeed' value='".$rowb['tfeed']."' />
 				</td>");
-			}else{}
+			}else{ }
 
 			print($formulariof."</tr>");
 			
@@ -121,7 +111,7 @@
 		
 		botones();
 
-        print ("<table align='center'>
+        print ("<table class='TFormAdmin'>
                     <tr>
                         <th colspan=".$colspana." class='BorderInf'>
                             ".$name1." ".$name2." Ref: ".$refses.".
@@ -134,13 +124,11 @@
                     </tr>");
                 }
 	
-	if($feedtot == "nofeed"){}
-	else{
+	if($feedtot == "nofeed"){
+	}else{
 	print("	<tr>
-				<td colspan='".$colspana."' class='BorderInf'>
-				</td>
+				<td colspan='".$colspana."' class='BorderInf'></td>
 			</tr>
-						
 			<tr>
 				<td colspan='2' class='BorderInf' align='right'>
 						TOTALES:
@@ -149,7 +137,7 @@
 						".$totaltime."
 				</td>
 			</tr>");
-			}
+	}
 	print("</table>");
 		
 		} /* Fin segundo else anidado en if */

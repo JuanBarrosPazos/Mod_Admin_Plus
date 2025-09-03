@@ -312,7 +312,7 @@ class HandDigits {
         //==========================================================
         // d8-small.jpg
         //==========================================================
-        $this->chars['8'][0]= 694 ;
+        $this->chars['8'][0]= 684 ;
         $this->chars['8'][1]=
 '/9j/4AAQSkZJRgABAQEASgBKAAD//gAJSnBHcmFwaP/bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQdGh8eHRocHCAkLicg'.
 'IiwjHBwoNyksMDE0NDQfJzk9ODI8LjM0Mv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy'.
@@ -328,7 +328,7 @@ class HandDigits {
         //==========================================================
         // lz-small.jpg
         //==========================================================
-        $this->chars['z'][0]= 690 ;
+        $this->chars['z'][0]= 680 ;
         $this->chars['z'][1]=
 '/9j/4AAQSkZJRgABAQEASgBKAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAx'.
 'NDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy'.

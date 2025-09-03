@@ -438,7 +438,7 @@ function salida(){
 				 </tr>
 				</table>");
 		
-		global $ttot;	$ttot = '03:22:02';
+		global $ttot;	$ttot = '68:68:68';
 		global $text;
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."  - FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];

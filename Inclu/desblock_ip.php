@@ -1,8 +1,7 @@
 <?php
 //session_start();
 
-	global $playinclu;
-	$playinclu = 1;
+	global $playinclu;		$playinclu = 1;
 
 	//require 'error_hidden.php';
 	require 'Admin_head.php';
@@ -16,34 +15,31 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(isset($_POST['oculto'])){
-		if($form_errors = validate_form()){
+if(isset($_POST['oculto'])){
+
+	if($form_errors = validate_form()){
 					show_form($form_errors);
-			} else { print("<table align='center' style=\"margin-top:20px\">
-							<tr><td>
-								<font color='#0080C0'>
-									SE HA PROCESADO SU PETICION CORRECTAMENTE.
-								</font>
-							</td></tr>
-						</table>
+	}else{ print("<div class='centradiv' style=border-color:#0080C0;color:#0080C0;padding:0.6em;'>
+							PETICIÓN PROCESADA CORRECTAMENTE
+				</div>
 	<embed src='../audi/ip_confirm_unlock.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
 	</embed>");
 			process_form();
-		}
-	}	/* Fin del if $_POST['oculto']*/
-										
-	elseif(isset($_POST['oculto2'])){ desbloqueo(); }
-	else {show_form();
-			if(isset($_POST['cancel'])){
-				global $text;
-				$text = "!! CANCELADO DESBLOQUEO IP NUEVO ACCESO AL FORMULARIO INICIAL".PHP_EOL;
-			}else{
-				global $text;
+	}
+
+/* FIN del if $_POST['oculto']*/
+}elseif(isset($_POST['oculto2'])){ 
+					desbloqueo();
+}else{	show_form();
+		global $text;
+		if(isset($_POST['cancel'])){
+				$text = "!! CANCELADO DESBLOQUEO IP".PHP_EOL." NUEVO ACCESO AL FORMULARIO INICIAL".PHP_EOL;
+		}else{
 				$text = "!! DESBLOQUEO IP ACCESO A FORMULARIO".PHP_EOL;
-				}
-			// PASO LOGS DE DESBLOQUEO
-			ini_log();
 		}
+		// PASO LOGS DE DESBLOQUEO
+		ini_log();
+}
 												
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -54,7 +50,7 @@
 	global $db;				global $db_name;			global $sql;
 	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
-$sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
+	$sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' AND `dni` = '$_POST[dni]' AND `ldni` = '$_POST[ldni]' ";
  	
 	global $q;				$q = mysqli_query($db, $sql);
 	global $row;			$row = mysqli_fetch_assoc($q);
@@ -64,62 +60,50 @@ $sql =  "SELECT * FROM `$db_name`.$table_name_a WHERE `Email` = '$_POST[Email]' 
 
 	@$errors = array();
 		
-	if ((@$row['Nivel'] == 'locked')||(@$row['Nivel'] == 'user')||(@$row['del'] == 'true')){
-		@$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
-
+	if((@$row['Nivel'] == 'locked')||(@$row['Nivel'] == 'user')||(@$row['del'] == 'true')){
+			@$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
 	}elseif(strlen(trim($_POST['Email'])) == 0){
 	/* VALIDAMOS EL CAMPO EMAIL */		
 	/*$errors [] = "Mail: <font color='#F1BD2D'>CAMPO OBLIGATORIO.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (strlen(trim($_POST['Email'])) < 5 ){
+	}elseif(strlen(trim($_POST['Email'])) < 5 ){
 		/*$errors [] = "Mail: <font color='#F1BD2D'>MÁS DE 5 CARÁCTERES.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
+	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
 		/*$errors [] = "Mail: <font color='#F1BD2D'>@ NO VÁLIDO</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
 	}elseif(strlen(trim($_POST['dni'])) == 0){
 	/* VALIDAMOS CAMPO DNI */
 		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>CAMPO OBLIGATORIO.</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (!preg_match('/^[A-Z\d]+$/',$_POST['dni'])){
+	}elseif(!preg_match('/^[A-Z\d]+$/',$_POST['dni'])){
 		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>SÓLO NÚMEROS O LETRAS MAYÚSCULAS</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (strlen(trim($_POST['dni'])) < 8){
+	}elseif(strlen(trim($_POST['dni'])) < 8){
 		/*$errors [] = "Nº DNI: <font color='#F1BD2D'>MAS DE 7 DÍGITOS</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
 	}elseif(strlen(trim($_POST['ldni'])) == 0){
 	/* VALIDAMOS CAMPO LDNI */
 		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>CAMPO OBLIGATORIO</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
+	}elseif(!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
 		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>SÓLO TEXTO</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
-	}elseif (!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
+	}elseif(!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
 		/*$errors [] = "Letra DNI: <font color='#F1BD2D'>SÓLO MAYÚSCULAS</font>";*/
 		$errors [] = "@ / Nº / LETRA";
-
 	}elseif(trim($_POST['Email'] != $_SESSION['L_Email'])){
 	/* VALIDACION DE NOMBRE Y DNI */
 		$errors [] = "@ / Nº / LETRA";
-
 	}elseif(trim($_POST['dni'] != $_SESSION['L_dni'])){
 		$errors [] = "@ / Nº / LETRA";
 	}elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
 		$errors [] = "@ / Nº / LETRA";
-
 	}else{ }
 	 
 	return $errors;
 	 
-}
+} // FIN function validate_form()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -130,26 +114,22 @@ function show_form($errors=[]){
 	global $sql;			global $q;			global $row;
 	
 	if(isset($_POST['oculto2'])){
-		$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
+		$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP',
 							'Email' => $_POST['Email'],
 							'dni' => $_POST['dni'],	
 							'ldni' => $_POST['ldni']);
-	 }
-	
-	if(isset($_POST['oculto'])){
+	}elseif(isset($_POST['oculto'])){
 			$defaults = $_POST;
-	}else{	$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP.',
+	}else{	$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP',
 								'Email' => '',
 								'dni' => '',
 								'ldni' => isset($_POST['ldni']));
 	}
 	
 	if($errors){
-		print("<table class='centradiv' style='border-color:#F1BD2D;'>
+		print("<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 				<tr>
-					<th style='text-align:center;color:#F1BD2D;'>
-						* SOLUCIONE ESTOS ERRORES
-					</th>
+					<th>SOLUCIONE ESTOS ERRORES</th>
 				</tr>
 				<tr>
 					<td style='text-align:left !important'>");
@@ -178,63 +158,45 @@ function show_form($errors=[]){
 			</table>");
 
 		}elseif(isset($_POST['oculto2']) != 1){
-		print("<embed src='../audi/ip_unlock_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
-				}
+			print("<embed src='../audi/ip_unlock_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		}
 	
-	print("<table align='center' style=\"border:0px;margin_bottom:6px;margin-top:2px\">
+	print("<table class='centradiv'>
 				<tr>
+					<th>
 			<form name='Perdidos' method='post' action='$_SERVER[PHP_SELF]'>
-					<th colspan=2>
-		<input name='Asunto' type='hidden' value='".$defaults['Asunto']."' />".$defaults['Asunto']."
+		<input type='hidden' name='Asunto' value='".$defaults['Asunto']."' />".$defaults['Asunto']."
 					</th>
 				</tr>
-
 				<tr>
-					<td>	
-						Su E Mail:
-					</td>
 					<td>
-		<input type='text' name='Email' size=30 value='".$defaults['Email']."' />
+		<input type='text' name='Email' size=30 value='".$defaults['Email']."' placeholder='EMAIL' required />
 					</td>
 				</tr>
-	
 				<tr>
-					<td>	
-						Su DNI:
-					</td>
 					<td>
-		<input type='text' name='dni' size=30 maxlength=8 value='".$defaults['dni']."' />
+		<input type='text' name='dni' size=30 maxlength=8 value='".$defaults['dni']."' placeholder='DNI' required/>
 					</td>
 				</tr>
-	
 				<tr>
-					<td>	
-						Su Letra DNI:
-					</td>
 					<td>
-		<input type='text' name='ldni' size=30 maxlength=1 value='".$defaults['ldni']."' />
+		<input type='text' name='ldni' size=30 maxlength=1 value='".$defaults['ldni']."' placeholder='LETRA DNI' required />
 					</td>
 				</tr>
-				
-				<tr align='center'>
-				
-					<td colspan='2' align='center'>
-		<input type='submit' value='SOLICITAR DEBLOQUEO DE SU IP' class='botonverde' />
-		<input type='hidden' name='oculto' value=1 />
-					</td>
+				<tr>
+					<td>
+			<button type='submit' title='SOLICITAR DEBLOQUEO DE SU IP' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+			<input type='hidden' name='oculto' value=1 />
 		</form>	
-				</tr>
-				
-				<tr>
-					<td colspan='2' align='center'>
-						<a href='../index.php'>
-							VOLVER ADMIN ACCESS
-						</a>
+			<a href='../index.php'>
+				<button type='button' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				<input type='hidden' name='cancel' value=1 />
+			</a>
 					</td>
 				</tr>
-		</table>"); /* Fin del print */
+		</table>"); /* FIN del print */
 
-	}	/* Fin de la función show_form(); */
+	}	/* FIN de la función show_form(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -242,11 +204,9 @@ function show_form($errors=[]){
 
 function process_form(){
 	
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	// print ("* ".$_POST['Email']." / ".$_POST[dni].$_POST[ldni].". ".$_SESSION['refdesb']." / ".$_SESSION['nivdesb']);
 	
@@ -256,48 +216,45 @@ function process_form(){
 	$_SESSION['refdesb'] = $rowqc['ref'];
 	$_SESSION['nivdesb'] = $rowqc['Nivel'];
 	
-	if(!$qc){	print("Se ha producido un error: ".mysqli_error($db)."<br/><br/>");
-			
-		} else {	
+	if(!$qc){
+		print("Se ha producido un error: ".mysqli_error($db)."<br/><br/>");
+	}else{	
 			if(mysqli_num_rows($qc) == 0){
 					print ("No hay datos.");
 				// PASO LOGS DE DESBLOQUEO
 				global $text;
 				$text = "!! NO HAY DATOS DE LA CONSULTA.".PHP_EOL;
 
-			} else { print ("<table align='center' style=\"border:0px;margin_bottom:4px;margin-top:4px\">
-				<tr><td colspan=2 align='center'>SUS DATOS DE USUARIO</td></tr>
-				<tr><td colspan=2 align='center'>
-					<img src='../Users/".$rowqc['ref']."/img_admin/".$rowqc['myimg']."' height='60px' width='45px' />
-				</td></tr>
-				<tr><td colspan=2 align='center'>
-					".$rowqc['Nombre']." ".$rowqc['Apellidos'].".
-				</td></tr>
-				<tr><td colspan=2 align='center'>
-				<form name='modifica' action='$_SERVER[PHP_SELF]' method='POST'>
-					<input type='submit' value='DESBLOQUEAR SU IP' class='botonverde' />
+			}else{ 
+				print ("<div class='centradiv'>
+					<div>SUS DATOS DE USUARIO</div>
+					<div>
+			<img src='../Users/".$rowqc['ref']."/img_admin/".$rowqc['myimg']."' height='60px' width='45px' />
+					</div>
+					<div>".$rowqc['Nombre']." ".$rowqc['Apellidos']."</div>
+					<div>
+			<form name='modifica' action='$_SERVER[PHP_SELF]' method='POST' style='display:inline-block;'>
+				<button type='submit' title='DESBLOQUEAR SU IP' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='oculto2' value=1 />
 					<input type='hidden' name='refdesb' value=".$rowqc['ref']." />
 					<input type='hidden' name='nivdesb' value=".$rowqc['Nivel']." />
-				</form>
-				</td></tr>
-				<tr><td colspan=2 align='center'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-				</form>
-				</td></tr>
-				</table>");
+			</form>
+			<a  href='../index.php'>
+				<button type='button' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			</a>
+				</div>
+			</div>");
 				// PASO LOGS DE DESBLOQUEO
 				global $text;
 				$text = "!! SOLICITUD CONFIRMACION DESBLOQUEO IP".PHP_EOL."\t\tUSUARIO: ".$rowqc['Nombre']." ".$rowqc['Apellidos'].PHP_EOL."\t\tREFERENCIA: ".$rowqc['ref']." NIVEL: ".$rowqc['Nivel'].PHP_EOL;
 				
-			} /* Fin segundo else anidado en if */
+			} /* FIN segundo else anidado en if */
 
-				ini_log();
+			ini_log();
 
-			} /* Fin de primer else . */
-	}	/* Final de la función process_form(); */
+		} /* FIN de primer else */
+
+	} /* FINal de la función process_form(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -305,12 +262,9 @@ function process_form(){
 
 function desbloqueo(){
 	
-	require_once('../geo_class/geoplugin.class.php');
-	$geoplugin = new geoPlugin();
-	$geoplugin->locate();
-	
-	global $db;
-	global $db_name;
+	require '../config/ipCliente.php';
+
+	global $db;			global $db_name;
 
 	/*
 		<input type='hidden' name='refdesb' value=".$rowqc['ref']." />
@@ -318,24 +272,22 @@ function desbloqueo(){
 	*/
 	
 	// DESBLOQUEO TODAS LAS IPs IGUALES A LA MIA
-	global $table_name_b;
-	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
+	global $table_name_b;			$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
-	$desb = "UPDATE `$db_name`.$table_name_b SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '{$geoplugin->ip}' AND $table_name_b.`acceso` = 'x' OR $table_name_b.`acceso` = '0' ";
+	$desb = "UPDATE `$db_name`.$table_name_b SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' AND $table_name_b.`acceso` = 'x' OR $table_name_b.`acceso` = '0' ";
 	if(mysqli_query($db, $desb)){ $_SESSION['showf'] = 0;
-		print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
-				<tr><td align='center'>
-						SU IP {$geoplugin->ip} HA SIDO DESBLOQUEADA
-				</td></tr>
-				<tr><td align='center'>
-					<a href='../index.php'>VOLVER A ADMIN ACCESS</a>
-				</td></tr>
-				</table>
-			<embed src='../audi/ip_unlocked_ok.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6 em;'>
+						SU IP ".$ipCliente." HA SIDO DESBLOQUEADA
+						<br>
+					<a href='../index.php'>
+				<button type='button' title='VOLVER A ADMIN ACCESS' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					</a>
+				</div>
+		<embed src='../audi/ip_unlocked_ok.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
 			
 			// PASO LOGS DE DESBLOQUEO
 			global $text;
-			$text = "!! CONFIRMACION DESBLOQUEO IP: ".$geoplugin->ip.PHP_EOL."\t\tREFERENCIA: ".$_POST['refdesb']." NIVEL: ".$_POST['nivdesb'].PHP_EOL;
+			$text = "!! CONFIRMACION DESBLOQUEO IP: ".$ipCliente.PHP_EOL."\t\tREFERENCIA: ".$_POST['refdesb']." NIVEL: ".$_POST['nivdesb'].PHP_EOL;
 			ini_log();
 					 
 		 	global $redir;
@@ -347,7 +299,7 @@ function desbloqueo(){
 						</script>";
 			print ($redir);
 
-		} else { print("* ERROR ENTRADA 355: ".mysqli_error($db))."."; }
+		}else{ print("* ERROR ENTRADA 355: ".mysqli_error($db))."."; }
 	
 }
 

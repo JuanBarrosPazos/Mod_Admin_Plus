@@ -505,7 +505,7 @@ function rewrite(){
 				 ////////////////////				  ///////////////////
 
 function validate_form(){
-	
+	 
 	require 'config/validate_Init_System.php';
 	return $errors;
 
@@ -705,9 +705,8 @@ function show_form($errors=[]){
 	}else{ $defaults = array('host' => '','user' => '','pass' => '','name' => '','clave' => '',); }
 
 	if($errors){
-		print("<div class='centradiv'>
-					<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font>
-				<br/>");
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+					SOLUCIONE ESTOS ERRORES<br/>");
 		global $text;
 		$text = "show_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
 		ini_log();

@@ -260,7 +260,7 @@ function salida(){
 				</table>");
 		
 		global $ttot;
-		$ttot = '03:22:02';
+		$ttot = '68:68:68';
 		global $text;
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."** NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
