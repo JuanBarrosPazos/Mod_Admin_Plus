@@ -3,7 +3,11 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.02 2025/08/31
+#### Mod_Admin_Plus V25.09.03 2025/08/03
+	* EN GESTION DE ADMINISTRADORES:
+	- Ok: Desbloqueo ip
+
+#### Mod_Admin_Plus V25.09.02 2025/08/02
 	* EN GESTION DE ADMINISTRADORES:
 	- Ajustes generales...
 	- No se puede fichar si el usuario está locked y redirección...
