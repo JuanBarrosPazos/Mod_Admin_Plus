@@ -46,7 +46,7 @@ function red(){
 				}
 				setTimeout('redir()',1000);
 				</script>";
-	print ($redir);
+	print($redir);
 
 }
 

@@ -44,7 +44,7 @@ function process_form(){
 				}
 				setTimeout('redir()',8000);
 			</script>";
-	print ($redir);
+	print($redir);
 
 } // FIN function process_form
 

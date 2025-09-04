@@ -27,7 +27,7 @@ $redir = "<script type='text/javascript'>
             }
             setTimeout('redir()',2000);
             </script>";
-print ($redir);
+print($redir);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

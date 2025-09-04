@@ -183,7 +183,7 @@ function table_desblock(){
 				}
 				setTimeout('redir()',600000);
 				</script>";
-	print ($redir);
+	print($redir);
 
 }
 
@@ -892,7 +892,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-		print ($redir);
+		print($redir);
 	}			
 		
 } // FIN function process_pin()
@@ -1005,13 +1005,24 @@ function pin_out(){
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
-						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
+	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
+	global $vname;
 	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',8000);
+					</script>";
+		print($redir);
+
 		print($tabla); 
+
 		suma_todo();
 
 		global $dir;			$dir = "Users/".$_POST['ref']."/mrficha";
@@ -1026,15 +1037,6 @@ function pin_out(){
 		$rmf = fopen($filename, 'ab+');
 		fwrite($rmf, $rmftext);
 		fclose($rmf);
-			
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='index.php';
-					}
-					setTimeout('redir()',8000);
-					</script>";
-		print ($redir);
 	
 	}else{	print("ERROR SQL L.1028: ".mysqli_error($db));
 			show_form2();
@@ -1086,6 +1088,15 @@ function pin_in(){
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
 	if(mysqli_query($db, $sqla)){
+
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='index.php';
+					}
+					setTimeout('redir()',8000);
+					</script>";
+		print($redir);
 		
 		print($tabla);
 		
@@ -1104,14 +1115,6 @@ function pin_in(){
 		fwrite($rmf, $rmftext);
 		fclose($rmf);
 		
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='index.php';
-					}
-					setTimeout('redir()',8000);
-					</script>";
-		print ($redir);
 
 	}else{	print("ERROR SQL L.1105: ".mysqli_error($db));
 			show_form2();
@@ -1177,8 +1180,8 @@ function show_form2($errorsp=''){
 			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br/>");
 			}
 		*/
-		print("<embed src='audi/pin_error.mp3' autostart='true' loop='false'></embed>
-		</div>");
+		print("</div>
+		<embed src='audi/pin_error.mp3' autostart='true' loop='false'></embed>");
 
 	}else{ }
 
@@ -1189,7 +1192,7 @@ function show_form2($errorsp=''){
 					}
 					setTimeout('embedDelay()',3000);
 				</script>";
-	print ($embedDelay);
+	print($embedDelay);
 
 	
 } // FIN FUNCTION show_form2()

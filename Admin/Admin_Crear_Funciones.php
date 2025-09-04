@@ -119,7 +119,7 @@ function process_form(){
 					}
 					setTimeout('redir()',8000);
 					</script>";
-		print ($redir);
+		print($redir);
 
 	}else{ 	print("</br>ERROR SQL L.102 ".mysqli_error($db))."</br>";
 			show_form();

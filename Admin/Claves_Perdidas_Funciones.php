@@ -335,7 +335,7 @@ function process_form(){
 			</div>
 		<embed src='../audi/claves_lost_3.mp3' autostart='true' loop='false' ></embed>");
 
-	}else{	
+	}else{
 		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 				EL MENSAJE NO HA PODIDO ENVIARSE.
 					<br>
@@ -387,7 +387,7 @@ function process_form(){
 				}
 				setTimeout('redir()',10000);
 				</script>";
-		print ($redir);
+		print($redir);
 														
 }	/* Fin funcion process_Mail(); */
 			
@@ -395,12 +395,12 @@ function process_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
-		require '../Inclu_MInd/rutaadmin.php';
-		require '../Inclu_MInd/Master_Index.php';
+	require '../Inclu_MInd/rutaadmin.php';
+	require '../Inclu_MInd/Master_Index.php';
 		
-	} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

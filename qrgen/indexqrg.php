@@ -93,7 +93,7 @@ function download(){
 				}
 				setTimeout('redir()',400);
 			  </script>";
-	print ($redir);
+	print($redir);
 
 }
 				

@@ -102,7 +102,7 @@ function salir() {
 				}
 				setTimeout('redir()',3000);
 			</script>";
-	print ($redir);
+	print($redir);
 }
 
 				   ////////////////////				   ////////////////////

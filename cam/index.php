@@ -55,7 +55,7 @@ function red(){
 				}
 				setTimeout('redir()',500);
 			</script>";
-	print ($redir);
+	print($redir);
 }
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -273,7 +273,7 @@ function show_ficha(){
 					}
 					setTimeout('redir()',6000);
 					</script>";
-		print ($redir);
+		print($redir);
 			
 	}elseif($count1 < 1){ // FICHA ENTRADA.
 		
@@ -429,7 +429,7 @@ function process_pin(){
 					}
 					setTimeout('redir()',14000);
 					</script>";
-		print ($redir);
+		print($redir);
 
 		}
 	
@@ -507,7 +507,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-			print ($redir);
+			print($redir);
 
 		 	}			
 		
@@ -681,7 +681,7 @@ function pin_out(){
 						}
 						setTimeout('redir()',8000);
 						</script>";
-			print ($redir);
+			print($redir);
 	
 		} else {
 					print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
@@ -768,7 +768,7 @@ function pin_in(){
 						}
 						setTimeout('redir()',8000);
 						</script>";
-			print ($redir);
+			print($redir);
 
 		} else {
 					print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));

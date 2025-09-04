@@ -59,7 +59,7 @@ function process_form(){
 				}
 			setTimeout('redir()',10000);
 		</script>";
-	print ($redir);
+	print($redir);
 
 }
 			

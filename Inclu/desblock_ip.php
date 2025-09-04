@@ -295,7 +295,7 @@ function desbloqueo(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-			print ($redir);
+			print($redir);
 
 		}else{ print("* ERROR ENTRADA 355: ".mysqli_error($db))."."; }
 	
