@@ -110,7 +110,10 @@ function UserLog(){
 	global $nombre;				$nombre = $_POST['Nombre'];
 	global $apellido;			$apellido = $_POST['Apellidos'];
 	global $rf;					$rf = $_POST['ref'];
-	global $orden;				$orden = @$_POST['Orden'];	
+
+	global $orden;
+	require '../Inclu/orden.php';
+
 	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 
 	$ActionTime = date('H:i:s');

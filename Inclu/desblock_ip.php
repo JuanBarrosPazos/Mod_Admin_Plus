@@ -22,8 +22,7 @@ if(isset($_POST['oculto'])){
 	}else{ print("<div class='centradiv' style=border-color:#0080C0;color:#0080C0;padding:0.6em;'>
 							PETICIÓN PROCESADA CORRECTAMENTE
 				</div>
-	<embed src='../audi/ip_confirm_unlock.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>");
+		<embed src='../audi/ip_confirm_unlock.mp3' autostart='true' loop='false' ></embed>");
 			process_form();
 	}
 
@@ -151,14 +150,13 @@ function show_form($errors=[]){
 				fwrite($log, $logtext);
 				fclose($log);
 				}
-				print("</td>
-						 </tr>
-		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-		</embed>
-			</table>");
+		print("</td>
+				</tr>
+			</table>
+		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
 
 		}elseif(isset($_POST['oculto2']) != 1){
-			print("<embed src='../audi/ip_unlock_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+			print("<embed src='../audi/ip_unlock_form.mp3' autostart='true' loop='false' ></embed>");
 		}
 	
 	print("<table class='centradiv'>
@@ -262,7 +260,7 @@ function process_form(){
 
 function desbloqueo(){
 	
-	require '../config/ipCliente.php';
+	require '../Inclu/ipCliente.php';
 
 	global $db;			global $db_name;
 
@@ -283,7 +281,7 @@ function desbloqueo(){
 				<button type='button' title='VOLVER A ADMIN ACCESS' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					</a>
 				</div>
-		<embed src='../audi/ip_unlocked_ok.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		<embed src='../audi/ip_unlocked_ok.mp3' autostart='true' loop='false' ></embed>");
 			
 			// PASO LOGS DE DESBLOQUEO
 			global $text;

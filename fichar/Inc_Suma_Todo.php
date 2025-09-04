@@ -1,13 +1,9 @@
 <?php
 
 /* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
-	
-    if(!isset($_POST['Orden'])){global $orden;
-                                $orden = "`id` ASC";}
-      elseif(isset($_POST['Orden'])){global $orden;
-                                     $orden = $_POST['Orden'];
-                                             }
-    
+	global $orden;
+	require '../Inclu/orden.php';
+
 			///////////////////////			***********  		///////////////////////
 	
     //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";

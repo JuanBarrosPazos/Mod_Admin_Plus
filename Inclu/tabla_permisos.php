@@ -19,8 +19,7 @@
 					</td>
 				</tr>
 			</table>
-		<embed src='audi/user_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-		</embed>");
+		<embed src='audi/user_error.mp3' autostart='true' loop='false' ></embed>");
 
 	print("$redirphp");	
 

@@ -130,7 +130,8 @@ function show_form(){
 function ver_todo(){
 		
 	global $db; 	global $db_name;
-	//$orden = $_POST['Orden'];
+	global $orden;
+	require '../Inclu/orden.php';
 
 	global $dyt1; 		global $dm1; 		global $dd1;
 	
@@ -253,8 +254,7 @@ function info(){
 	
 	global $db;
 	global $orden;
-	
-	$orden = $_POST['Orden'];
+	require '../Inclu/orden.php';
 	
 	if ($_POST['todo']){$filtro = PHP_EOL."\tFiltro => TODAS LAS JORNADAS LABORALES. ".$orden;
 						$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";}

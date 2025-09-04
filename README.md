@@ -3,8 +3,32 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.09.04 2025/08/04
+	- Eliminación de la librería geoclass...
+	- Bloqueo Ip: Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
+			if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+					$ipCliente = $_SERVER['HTTP_CLIENT_IP'];
+			}elseif($_SERVER['REMOTE_ADDR'] == getenv("REMOTE_ADDR")){
+					$ipCliente = $_SERVER['REMOTE_ADDR'];
+			}elseif(!empty(getenv("REMOTE_ADDR"))){
+					$ipCliente = getenv("REMOTE_ADDR");
+			}elseif(!empty($_SERVER['REMOTE_ADDR'])){
+					$ipCliente = $_SERVER['REMOTE_ADDR'];
+			}elseif(getenv($_SERVER['HTTP_X-FORWARDED_FOR'])){
+					$ipCliente = $_SERVER['HTTP_X-FORWARDED_FOR'];
+			}elseif(getenv($_SERVER['HTTP_X_FORWARDED'])){
+					$ipCliente = $_SERVER['HTTP_X_FORWARDED'];
+			}elseif(getenv($_SERVER['HTTP_FORWARDED_FOR'])){
+					$ipCliente = $_SERVER['HTTP_FORWARDED_FOR'];
+			}elseif(getenv($_SERVER['HTTP_FORWARDED'])){
+					$ipCliente = $_SERVER['HTTP_FORWARDED'];
+			}else{ echo "NO SE DETECTA LA IP DEL CLIENTE"; }
+	- Ok: Admin/Claves_Perdidas.php
+	- Ok: $Orden en Inclu/orden.php
+	- Ok: Embed ajustados parámetros por css...
+	- Ajustes generales de código...
+
 #### Mod_Admin_Plus V25.09.03 2025/08/03
-	* EN GESTION DE ADMINISTRADORES:
 	- Ok: Desbloqueo ip
 
 #### Mod_Admin_Plus V25.09.02 2025/08/02

@@ -79,14 +79,8 @@ function ver_todo(){
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 	global $Feedback;			$Feedback = 0;
 
-	if(isset($_POST['Orden'])){	global $orden;		$orden = $_POST['Orden'];
-
-	}elseif((isset($_GET['page']))||(isset($_POST['page']))){
-
-		if(isset($_SESSION['Orden'])){	global $orden;	$orden = $_SESSION['Orden']; 
-		}else{ global $orden;	$orden ='`id` ASC';	}
-
-	}else{ global $orden;	$orden ='`id` ASC'; }
+	global $orden;
+	require '../Inclu/orden.php';
 
 	if(($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
 			$ref = $_SESSION['ref'];
@@ -143,9 +137,10 @@ function ver_todo(){
 function UserLog(){
 
 	global $nombre;				global $apellido;
-	global $orden;				$orden = isset($_POST['Orden']);
+	global $orden;
+	require '../Inclu/orden.php';
 	
-	if(isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS ".$orden;};	
+	if(isset($_POST['todo'])){ $nombre = "TODOS LOS USUARIOS ".$orden; }
 
 	if(($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){	
 										$nombre = $_SESSION['Nombre'];

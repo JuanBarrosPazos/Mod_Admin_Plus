@@ -187,7 +187,9 @@ function master_index(){
 function UserLog(){
 
 	global $texerror;
-	global $orden;				$orden = isset($_POST['Orden']);	
+	global $orden;
+	require '../Inclu/orden.php';
+	
 	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	global $InfoLog;			global $password;
 

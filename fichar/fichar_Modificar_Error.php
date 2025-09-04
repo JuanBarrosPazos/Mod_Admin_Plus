@@ -49,7 +49,9 @@ function show_form(){
 function ver_todo(){
 		
 	global $db;
-	//$orden = $_POST['Orden'];
+
+	global $orden;
+	require '../Inclu/orden.php';
 
 	global $dyt1;
 	
@@ -177,8 +179,7 @@ function info(){
 	
 	global $db;
 	global $orden;
-	
-	$orden = $_POST['Orden'];
+	require '../Inclu/orden.php';
 	
 	if ($_POST['todo']){$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS MODIFICAR. ".$orden;
 						$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";}

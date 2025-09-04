@@ -240,14 +240,13 @@ function show_form($errors=[]){
 					}
 	print("</td>
 				</tr>
-<embed src='../audi/error_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-</embed>
-		</table>");
+			</table>
+		<embed src='../audi/error_form.mp3' autostart='true' loop='false' ></embed>");
 
-				}
-	elseif(isset($_POST['oculto']) != 1){
-		print("<embed src='../audi/admin_sys_contact.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed></table>");
-			}
+	}elseif(isset($_POST['oculto']) != 1){
+		print("</table>
+		<embed src='../audi/admin_sys_contact.mp3' autostart='true' loop='false' ></embed>");
+	}
 	
 print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15px\">
 		<tr>
@@ -436,8 +435,8 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 										</a>
 									</td>
 								</tr>
-							<table>
-			<embed src='../audi/form_submit_1.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+							</table>
+			<embed src='../audi/form_submit_1.mp3' autostart='true' loop='false' ></embed>");
 		}else{
 			global $head_footer;
 			print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
@@ -457,8 +456,8 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 								</a>
 							</td>
 						</tr>
-					<table>
-		<embed src='../audi/form_submit_2.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+					</table>
+		<embed src='../audi/form_submit_2.mp3' autostart='true' loop='false' ></embed>");
 			show_form();											
 					} /*Fin del if del mail*/
 														

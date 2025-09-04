@@ -193,7 +193,7 @@ function show_form(){
 
 function botones(){
 	
-	print(" <table align='center' style=\"border:0px;margin-top:0px\">
+	print("<table align='center' style=\"border:0px;margin-top:0px\">
 				<tr>
 		 			<td align='right' class='BorderInf'>
 
@@ -234,32 +234,29 @@ function ver_todo(){
 			//$filename = 'grafico_01.php';
 			//clearstatcache ($clear_realpath_cache = true, $filename );
 			clearstatcache ();
-		}
+	}
 
-	global $db;
-	$orden = $_POST['Orden'];
-
-	global $dyt1;
-	global $dm1;
+	global $db;			global $dyt1;			global $dm1;
+	global $orden;
+	require '../Inclu/orden.php';
 	
-	if ($_POST['dy'] == ''){ $dy1 = date('Y');
+	if($_POST['dy'] == ''){ $dy1 = date('Y');
 							 $dyt1 = date('Y');	
-							 $_SESSION['gyear'] = date('Y');} 
-							 				else {	$dy1 = "20".$_POST['dy'];
-													$dyt1 = "20".$_POST['dy'];
-													$_SESSION['gyear'] = "20".$_POST['dy'];	
-													}
+							 $_SESSION['gyear'] = date('Y');
+	}else{	$dy1 = "20".$_POST['dy'];
+			$dyt1 = "20".$_POST['dy'];
+			$_SESSION['gyear'] = "20".$_POST['dy'];	
+	}
 	
-	if ($_POST['dm'] == ''){ $dm1 = '';
-							 $_SESSION['gtime'] = '';} 
-							 				else {	//global $dd1;
-													//$dd1 = '';
-													$dm1 = "-".$_POST['dm']."-";
-													$_SESSION['gtime'] = $_POST['dm'];	
-													}
+	if($_POST['dm'] == ''){ $dm1 = '';
+							$_SESSION['gtime'] = '';
+	}else{	//global $dd1;
+			//$dd1 = '';
+			$dm1 = "-".$_POST['dm']."-";
+			$_SESSION['gtime'] = $_POST['dm'];	
+	}
 	
-	global $fil;												
-	$fil = "%".$dy1.$dm1."%";
+	global $fil;			$fil = "%".$dy1.$dm1."%";
 	
 	/*
 	if (($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = '';
@@ -268,12 +265,8 @@ function ver_todo(){
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
 																					}
 	*/
-	global $tabla1;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;
-	$vname = $tabla1."_".$dyt1;
-	$vname = "`".$vname."`";
+	global $tabla1;			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
 
 	require 'calc_anu_mes.php';
 	
@@ -283,71 +276,60 @@ function ver_todo(){
 
 			///////////////////////			***********  		///////////////////////
 
-	global $sqlb;
-	global $qb;
+	global $sqlb;			global $qb;
 	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
 	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////
 
-	global $refses;
-	$refses = $_SESSION['usuarios'];
+	global $refses;			$refses = $_SESSION['usuarios'];
 
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
 	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.308: </font>
 					</br>".mysqli_error($db)."</br>");
-		} else {
-			while($rowun = mysqli_fetch_assoc($qun)){	
-					global $name1;
+	}else{
+		global $name1;			global $name2;
+		while($rowun = mysqli_fetch_assoc($qun)){	
 					$name1 = $rowun['Nombre'];
-					global $name2;
 					$name2 = $rowun['Apellidos'];
-						}
-					}
+		}
+	}
 
-	global $pdm;
-	$pdm = "";
-	global $feedtot;
-	$feedtot = "";
-	global $nodata;
-	$nodata = "NO HAY DATOS PARA ".$_POST['usuarios'];
-	if($_POST['dy'] == ''){ global $ycons;
-							$ycons = date('Y');
-	}else{ global $ycons;
-		   $ycons =	"20".$_POST['dy'];}
+	global $pdm;			$pdm = "";
+	global $feedtot;		$feedtot = "";
+	global $nodata;			$nodata = "NO HAY DATOS PARA ".$_POST['usuarios'];
+	global $ycons;
+	if($_POST['dy'] == ''){ $ycons = date('Y');
+	}else{ $ycons =	"20".$_POST['dy'];}
+
 	global $twhile;
 	$twhile = "<tr><th colspan=6 class='BorderInf'>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</th></tr><tr><th colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES.</th></tr>";
 
-	global $tdplus;
-	$tdplus = "";
-	global $formularioh;
-	$formularioh = "";
-	global $formulariof;
-	$formulariof = "";
-	global $colspana;
-	$colspana = "6";
-	global $colspanb;
-	$colspanb = "4";
+	global $tdplus;			$tdplus = "";
+	global $formularioh;	$formularioh = "";
+	global $formulariof;	$formulariof = "";
+	global $colspana;		$colspana = "6";
+	global $colspanb;		$colspanb = "4";
 
 	require 'Inc_Fichar_While_Totalb.php';
 
 			////////////////////		**********  		////////////////////
 	
-	}	/* Final ver_todo(); */
+}/* FIN ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
-		require '../Inclu_MInd/rutabalances.php';
-		require '../Inclu_MInd/Master_Index.php';
+	require '../Inclu_MInd/rutabalances.php';
+	require '../Inclu_MInd/Master_Index.php';
 				
-				} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -360,4 +342,5 @@ function ver_todo(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

@@ -158,10 +158,10 @@ function ver_todo(){
 		}
 
 	global $db;
-	$orden = $_POST['Orden'];
+	global $orden;
+	require '../Inclu/orden.php';
 
-	global $dyt1;
-	global $dm1;
+	global $dyt1;			global $dm1;
 	
 	if ($_POST['dy'] == ''){ $dy1 = date('Y');
 							 $dyt1 = date('Y');	

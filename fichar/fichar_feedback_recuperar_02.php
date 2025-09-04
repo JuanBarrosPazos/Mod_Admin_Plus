@@ -356,37 +356,36 @@ function show_form(){
 
 function info_01(){
 
-		global $ttot;
+	global $ttot;
 
-		global $orden;
-		$orden = $_POST['Orden'];
+	global $orden;
+	require '../Inclu/orden.php';
 
-		$ActionTime = date('H:i:s');
+	$ActionTime = date('H:i:s');
 
-		global $dir;
-		$dir = "../Users/".$_SESSION['usuarios']."/log";
+	global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/log";
 
-		global $text;
-		$text = PHP_EOL."- JORNADA LABORAL FEEDBACK RECUPERAR SELECCIONADO ".$ActionTime;
-		$text = $text.PHP_EOL."\tNº REF: ".$_SESSION['usuarios'];
-		$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
-		$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
-		$text = $text.PHP_EOL."\tID: ".$_POST['id'];
-		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
-		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
-		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
-		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
-		$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
+	global $text;
+	$text = PHP_EOL."- JORNADA LABORAL FEEDBACK RECUPERAR SELECCIONADO ".$ActionTime;
+	$text = $text.PHP_EOL."\tNº REF: ".$_SESSION['usuarios'];
+	$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
+	$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
+	$text = $text.PHP_EOL."\tID: ".$_POST['id'];
+	$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
+	$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
+	$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
+	$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
+	$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
 
-		$logdocu = $_SESSION['usuarios'];
-		$logdate = date('Y-m-d');
-		$logtext = $text.PHP_EOL;
-		$filename = $dir."/".$logdate."_".$logdocu.".log";
-		$log = fopen($filename, 'ab+');
-		fwrite($log, $logtext);
-		fclose($log);
+	$logdocu = $_SESSION['usuarios'];
+	$logdate = date('Y-m-d');
+	$logtext = $text.PHP_EOL;
+	$filename = $dir."/".$logdate."_".$logdocu.".log";
+	$log = fopen($filename, 'ab+');
+	fwrite($log, $logtext);
+	fclose($log);
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

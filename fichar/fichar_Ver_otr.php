@@ -43,13 +43,11 @@ function show_form(){
 
 function ver_todo(){
 		
-	global $db;
-	global $db_name;
-	//$orden = $_POST['Orden'];
+	global $db;					global $db_name;
+	global $orden;
+	require '../Inclu/orden.php';
 
-	global $dyt1;
-	global $dm1;
-	global $dd1;
+	global $dyt1;			global $dm1;			global $dd1;
 	
 	if ($_POST['dy'] == ''){ $dy1 = date('Y');
 							 $dyt1 = date('Y');	
@@ -186,8 +184,7 @@ function info(){
 	if($_POST['dy'] == ''){ $dy = date('Y');} else{$dy = "20".$_POST['dy'];}
 	
 	global $orden;
-	
-	$orden = $_POST['Orden'];
+	require '../Inclu/orden.php';
 	
 	if ($_POST['todo']){$filtro = PHP_EOL."\tFiltro => TODAS LAS JORNADAS LABORALES. ".$orden;
 						$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";}

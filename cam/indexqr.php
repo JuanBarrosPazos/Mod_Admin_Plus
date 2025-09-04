@@ -118,21 +118,17 @@ function process_pinqr(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>
+			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='indexcam.php';}
 				setTimeout('redir()',10000);
 			</script>";	
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $vname;
 	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
 	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -228,9 +224,8 @@ function process_pinqr(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
-
-	if (($ttoth > 9)||($ttotd > 0)){
-		
+	global $ttot;				global $text;
+	if(($ttoth > 9)||($ttotd > 0)){
 		print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
 					<th class='BorderInf'>
@@ -245,23 +240,17 @@ function process_pinqr(){
 				 </tr>
 				</table>
 				<!--
-				<embed src='../audi/10horas.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-				</embed>
+				<embed src='../audi/10horas.mp3' autostart='true' loop='false' ></embed>
 				-->");
 		
-		global $ttot;
 		$ttot = '68:68:68';
-		global $text;
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
 		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-		} /* fin if >9 */
-
-			else {	global $ttot;
-					global $text;
-					$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
-					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+		/* fin if >9 */
+	}else{	
+			$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
+			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 
 	 } /* Fin else >9 */
 	
@@ -301,15 +290,14 @@ function process_pinqr(){
 							<form name='cancel' action='indexcam.php' >
 									<input type='submit'  value='CERRAR / SALIR' class='botonrojo' />
 							</form>
-		<embed src='../audi/salida.mp3'  autostart='true' loop='false' width='0' height='0' hidden='true' >
-		</embed>
+						</td>
+					</tr>
+				</table>
+		<embed src='../audi/salida.mp3'  autostart='true' loop='false' ></embed>
 				<script type='text/javascript'>
 						function redir(){window.location.href='indexcam.php';}
 						setTimeout('redir()',10000);
-				</script>
-						</td>
-					</tr>
-				</table>";	
+				</script>";	
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -362,9 +350,8 @@ function process_pinqr(){
 					</td>
 				</tr>
 			</table>
-	<embed src='../audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>");
-	 		}	
+		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+	}	
 	
 } // FIN FUNCTION 
 

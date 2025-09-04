@@ -209,11 +209,10 @@ function qrimg(){
 function Show_form($errors=[]){	
 
 	if(isset($_POST['downl'])){
-		print("<embed src='../audi/file_exp_ok.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+		print("<embed src='../audi/file_exp_ok.mp3' autostart='true' loop='false' ></embed>");
 	}
 
-	global $errorCorrectionLevel;
-	global $matrixPointSize;
+	global $errorCorrectionLevel;			global $matrixPointSize;
 
 	if(isset($_POST['oculto'])){ $defaults = $_POST;
 
@@ -231,8 +230,7 @@ function Show_form($errors=[]){
 			}
 
 		print("</div>
-		<embed src='../audi/error_form.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-		</embed>");
+		<embed src='../audi/error_form.mp3' autostart='true' loop='false' ></embed>");
 
 	}else{	global $a;		$a = 0; }
 
@@ -358,7 +356,7 @@ function listfiles(){
 	if($num < 1){
 		
 		if($a == 0){
-			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
 		}
 		
 		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
@@ -368,7 +366,7 @@ function listfiles(){
 	}else{
 		
 		if ($a == 0) {
-			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' ></embed>");
+			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' ></embed>");
 		}
 
 		print("<ul class='centradiv'>
@@ -407,8 +405,7 @@ function listfiles(){
 function delete(){
 	global $a;			$a = 1;
 	unlink($_POST['downlRuta']);
-	print("<embed src='../audi/deleteqr.mp3' autostart='true' loop='false' width='0' height='0' hidden='true'>
-	</embed>");
+	print("<embed src='../audi/deleteqr.mp3' autostart='true' loop='false'></embed>");
 }
 	
 				   ////////////////////				   ////////////////////

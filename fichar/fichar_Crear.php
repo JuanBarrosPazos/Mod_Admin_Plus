@@ -74,8 +74,7 @@ function entrada(){
 					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
 				</tr>
 			</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>
+			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='fichar_Crear_tds.php';}
 					setTimeout('redir()',8000);
@@ -373,9 +372,8 @@ function salida(){
 					<td>HORAS REALIZADAS</td><td>".$ttot."</td>
 				</tr>
 			</table>
-			<embed src='../audi/salida.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>
-				<script type='text/javascript'>
+			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
+			<script type='text/javascript'>
 				function redir(){window.location.href='fichar_Crear_tds.php';}
 				setTimeout('redir()',8000);
 			</script>";	

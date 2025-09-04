@@ -419,9 +419,8 @@ function process_pin(){
 				</td>
 			</form>
 		</tr>
-<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-</embed>
-	</table>");
+		</table>
+		<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>");
 
 	global $redir;
 	$redir = "<script type='text/javascript'>
@@ -463,17 +462,16 @@ function process_pin(){
 						<input type='submit' value='FICHAR SALIDA' class='botonverde' />
 						<input type='hidden' name='salida' value=1 />
 		</form>														
-					</td>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-					<td valign='middle'  align='center'>
-							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-					</td>
-				</form>
+				</td>
+				<td valign='middle'  align='center'>
+		<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+			<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+			<input type='hidden' name='cancel' value=1 />
+		</form>
+				</td>
 			</tr>
-<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-</embed>
-			</table>"); 
+		</table>
+		<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>"); 
 		
 		}
 	
@@ -499,9 +497,8 @@ function process_pin(){
 					</form>
 					</td>
 				</tr>
-	<embed src='../audi/user_lost.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-			</table>");
+			</table>
+			<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
 
 	 	global $redir;
 		$redir = "<script type='text/javascript'>
@@ -646,11 +643,10 @@ function pin_out(){
 							<input type='submit' value='VOLVER INICIO' class='botonnaranja' />
 							<input type='hidden' name='cancel' value=1 />
 						</form>	
-				<embed src='../audi/salida.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-				</embed>
 					</td>
 				</tr>
-			</table>";	
+			</table>
+			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>";	
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -732,19 +728,16 @@ function pin_in(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-			</embed>";	
+			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>";	
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	global $vname;
 	$tabla1 = $_SESSION['clave'].$_POST['ref'];
 	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	global $vname;
+	$vname ="`". $tabla1."_".date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
@@ -848,9 +841,8 @@ function show_form2($errorsp=''){
 		*/
 		print("<!--</td>
 				  </tr>-->
-	<embed src='../audi/pin_error.mp3' autostart='true' loop='false' width='0' height='0' hidden='true' >
-	</embed>
-		</table>");
+		</table>
+			<embed src='../audi/pin_error.mp3' autostart='true' loop='false' ></embed>");
 		}
 	
 	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >

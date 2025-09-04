@@ -27,7 +27,8 @@ function process_form(){
 		
 	$nom = "%".$_POST['Nombre']."%";
 	$ape = "%".$_POST['Apellidos']."%";
-	global $orden;				$orden = @$_POST['Orden'];
+	global $orden;
+	require '../Inclu/orden.php';
 		
 	if (strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
 	if (strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
@@ -74,22 +75,16 @@ function ver_todo(){
 
 	if (($_SESSION['Nivel'] == 'admin')){ 
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+		global $table_name_a;			$table_name_a = "`".$_SESSION['clave']."admin`";
 
-		if(isset($_POST['Orden'])){	global $orden;
-									$orden = $_POST['Orden'];
-		}elseif((isset($_GET['page']))||(isset($_POST['page']))) {
-									global $orden;
-									$orden = $_SESSION['Orden']; 
-		}else{ 	global $orden;
-				$orden ='`id` ASC';}
+		global $orden;
+		require '../Inclu/orden.php';
 
-	require 'Paginacion_Head.php';
+		require 'Paginacion_Head.php';
 
-	$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'true' ORDER BY $orden $limit";
-	/* $sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden "; */
-	$qb = mysqli_query($db, $sqlb);
+		$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'true' ORDER BY $orden $limit";
+		/* $sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden "; */
+		$qb = mysqli_query($db, $sqlb);
 
 	}
 	
@@ -124,21 +119,17 @@ function master_index(){
 function UserLog(){
 
 	global $orden;
-	$orden = @$_POST['Orden'];
+	require '../Inclu/orden.php';
 	
-	if (@$_POST['todo']){$nombre = "TODOS LOS USUARIOS ".$orden;};	
+	if(isset($_POST['todo'])){ $nombre = "TODOS LOS USUARIOS ".$orden; }
 
-	global $rf;
-	$rf = @$_POST['ref'];
-	global $nombre;
-	$nombre = @$_POST['Nombre'];
-	global $apellido;
-	$apellido = @$_POST['Apellidos'];
+	global $rf;				$rf = @$_POST['ref'];
+	global $nombre;			$nombre = @$_POST['Nombre'];
+	global $apellido;		$apellido = @$_POST['Apellidos'];
 		
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
 
 	global $text;
 	$text = PHP_EOL."** USER BAJAS BUSQUEDA ".$ActionTime.PHP_EOL."\t Filtro => ".$nombre." ".$apellido;

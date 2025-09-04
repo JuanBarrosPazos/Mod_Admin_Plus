@@ -44,7 +44,8 @@ function show_form(){
 function ver_todo(){
 		
 	global $db;
-	//$orden = $_POST['Orden'];
+	global $orden;
+	require '../Inclu/orden.php';
 
 	global $dyt1;
 	
@@ -170,11 +171,11 @@ function info(){
 	if($_POST['dy'] == ''){ $dy = date('Y');} else{$dy = "20".$_POST['dy'];}
 	
 	global $db;
-	global $orden;
+
+    global $orden;
+	require '../Inclu/orden.php';
 	
-	$orden = $_POST['Orden'];
-	
-	if ($_POST['todo']){$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS BORRAR. ".$orden;
+	if($_POST['todo']){$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS BORRAR. ".$orden;
 						$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";}
 
 	$ActionTime = date('H:i:s');
