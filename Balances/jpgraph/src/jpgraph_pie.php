@@ -224,7 +224,7 @@ class PiePlot {
 
     // Size in percentage
     function SetSize($aSize) {
-        if( ($aSize>0 && $aSize<=0.5) || ($aSize>10 && $aSize<1000) )
+        if( ($aSize>0 && $aSize<=0.5)||($aSize>10 && $aSize<1000) )
         $this->radius = $aSize;
         else
         JpGraphError::RaiseL(15006);

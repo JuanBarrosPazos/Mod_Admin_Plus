@@ -161,7 +161,7 @@ class BarPlot extends Plot {
                 $graph->SetTextScaleOff(1-$this->width);
             }
         }
-        elseif( ($this instanceof AccBarPlot) || ($this instanceof GroupBarPlot) ) {
+        elseif( ($this instanceof AccBarPlot)||($this instanceof GroupBarPlot) ) {
             // We only set an absolute width for linear and int scale
             // for text scale the width will be set to a fraction of
             // the majstep width.

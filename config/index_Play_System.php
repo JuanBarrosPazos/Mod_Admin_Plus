@@ -44,8 +44,7 @@ if(isset($_POST['oculto'])){
 					show_visit();
 	}else{	process_pin();
 			//ayear();
-		}
-
+	}
 }elseif(isset($_POST['entrada'])){	pin_in();
 									//errors();
 }elseif(isset($_POST['salida'])){	pin_out();
@@ -57,6 +56,7 @@ if(isset($_POST['oculto'])){
 					}else{	show_form(@$form_errors);
 							show_visit();
 					}
+					
 }elseif(isset($_GET['ocultop'])){ 	process_pin();
 							  		 	//ayear();
 							  		 	errors();
@@ -233,8 +233,7 @@ function tcl(){
 	
 	global $db;			global $db_name;
 	
-	$vname = $_SESSION['clave'].$_SESSION['ref']."_".date('Y');
-	$vname = "`".$vname."`";
+	$vname = "`".$_SESSION['clave'].$_SESSION['ref']."_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -1178,7 +1177,7 @@ function show_form2($errorsp=''){
 					<font color='#F1BD2D'>ERROR ACCESO PIN</font>");
 		/*
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br>");
 			}
 		*/
 		print("</div>

@@ -705,13 +705,13 @@ function show_form($errors=[]){
 
 	if($errors){
 		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
-					SOLUCIONE ESTOS ERRORES<br/>");
+					SOLUCIONE ESTOS ERRORES<br>");
 		global $text;
 		$text = "show_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
 		ini_log();
 
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font> ".$errors [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font> ".$errors [$a]."<br>");
 			// ESCRIBE ERRORES EN INI_LOG
 			global $text;			$text = $errors[$a];
 			$logdate = date('Y-m-d');

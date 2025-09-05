@@ -6,7 +6,7 @@
     }elseif(isset($_POST['todo'])){
         $defaults = $_POST;
         $_SESSION['Orden'] = $_POST['Orden'];
-    }elseif((isset($_GET['page'])) || (isset($_POST['page']))){
+    }elseif((isset($_GET['page']))||(isset($_POST['page']))){
         @$defaults['Orden'] = $_SESSION['Orden'];
     }else{  $defaults = array (	'Nombre' => '',
                                 'Apellidos' => '',

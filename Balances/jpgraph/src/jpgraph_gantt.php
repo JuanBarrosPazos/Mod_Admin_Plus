@@ -414,7 +414,7 @@ class GanttGraph extends Graph {
                     // Check if this activity should have a constrain line
                     $n = count($constrains);
                     for( $j=0; $j < $n; ++$j ) {
-                        if( empty($constrains[$j]) || (count($constrains[$j]) != 3) ) {
+                        if( empty($constrains[$j])||(count($constrains[$j]) != 3) ) {
                             JpGraphError::RaiseL(6003,$j);
                             //("Invalid format for Constrain parameter at index=$j in CreateSimple(). Parameter must start with index 0 and contain arrays of (Row,Constrain-To,Constrain-Type)");
                         }
@@ -427,7 +427,7 @@ class GanttGraph extends Graph {
                     $n = count($progress);
                     for( $j=0; $j < $n; ++$j ) {
 
-                        if( empty($progress[$j]) || (count($progress[$j]) != 2) ) {
+                        if( empty($progress[$j])||(count($progress[$j]) != 2) ) {
                             JpGraphError::RaiseL(6004,$j);
                             //("Invalid format for Progress parameter at index=$j in CreateSimple(). Parameter must start with index 0 and contain arrays of (Row,Progress)");
                         }
@@ -2256,7 +2256,7 @@ class GanttScale {
         // Is the year a leap year?
         //$year = 0+date("Y",$aDate);
         if( $aYear % 4 == 0)
-        if( !($aYear % 100 == 0) || ($aYear % 400 == 0) )
+        if( !($aYear % 100 == 0)||($aYear % 400 == 0) )
         return true;
         return false;
     }

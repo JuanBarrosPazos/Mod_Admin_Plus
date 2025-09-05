@@ -222,9 +222,9 @@ function Show_form($errors=[]){
 	if($errors){
 		global $a;		$a = 1;
 		print("<div class='centradiv'>
-				<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>");
+				<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>");
 		for($a=0; $c=count($errors), $a<$c; $a++){
-				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br/>");
+				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br>");
 			}
 
 		print("</div>
@@ -259,7 +259,7 @@ function Show_form($errors=[]){
 	$qu = mysqli_query($db, $sqlu);
 
 	if(!$qu){
-			print("SQL ERROR L.266 ".mysqli_error($db)."<br/>");
+			print("SQL ERROR L.266 ".mysqli_error($db)."<br>");
 	}else{
 		while($rowu = mysqli_fetch_assoc($qu)){
 			print ("<option value='".$rowu['dni']."' ");

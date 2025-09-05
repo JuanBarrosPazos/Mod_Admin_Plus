@@ -11,15 +11,15 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(isset($_GET['ocultop'])){	process_pinqr();
-									//ayear();
-									errors();
-	}elseif(isset($_POST['cancel'])) {	
-							unset($_SESSION['usuarios']); 
-	}else{ 	process_pinqr();
-			//ayear();
-		   	errors();
-	}
+if(isset($_GET['ocultop'])){ process_pinqr();
+							 //ayear();
+							 errors();
+}elseif(isset($_POST['cancel'])) {	
+						unset($_SESSION['usuarios']); 
+}else{ 	process_pinqr();
+		//ayear();
+		errors();
+}
 												
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -42,19 +42,13 @@ function process_pinqr(){
 		
 		ayear();	
 		
-		$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-		$tabla1 = strtolower($tabla1);
-		global $vname;
-		$vname = "`".$tabla1."_".date('Y')."`";
-
-			////////////////////		**********  		////////////////////
+		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
 		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
-
-			////////////////////		**********  		////////////////////
 
 		// FICHA ENTRADA.
 		if($count1 < 1){
@@ -71,123 +65,117 @@ function process_pinqr(){
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 
-	$tabla = "<ul class='centradiv'>
-				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
-				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
-				<li class='liCentra'>
-					<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
-				</li>
-				<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
-				<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
-				<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
-				<li class='liCentra'>
-			<form name='cancel' action='indexcamini.php' >
-				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
-			</form>
-				</li>
-			</ul>
-			<embed src='audi/entrada.mp3' autostart='true' loop='false' ></embed>
-			<script type='text/javascript'>
-				function redir(){window.location.href='indexcamini.php';}
-				setTimeout('redir()',8000);
-			</script>";	
+			$tabla = "<ul class='centradiv'>
+						<li class='liCentra'>HA FICHADO LA ENTRADA</li>
+						<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
+						<li class='liCentra'>
+							<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
+						</li>
+						<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
+						<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
+						<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
+						<li class='liCentra'>
+					<form name='cancel' action='indexcamini.php' >
+						<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
+					</form>
+						</li>
+					</ul>
+					<embed src='audi/entrada.mp3' autostart='true' loop='false' ></embed>
+					<script type='text/javascript'>
+						function redir(){window.location.href='indexcamini.php';}
+						setTimeout('redir()',8000);
+					</script>";	
 
-		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		global $vname;
-		$vname = "`".$tabla1."_".date('Y')."`";
+			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+			global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
-		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
+			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
-		if(mysqli_query($db, $sqla)){
+			if(mysqli_query($db, $sqla)){
 
-			print($tabla);
-			
-			global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
-			global $text;			
-			$text = PHP_EOL."\t- NOMBRE: ".$rp['Nombre']." ".$rp['Apellidos'];
-			$text = $text.PHP_EOL."\t- USER REF: ".$_SESSION['usuarios'];
-			$text = $text.PHP_EOL."** F. ENTRADA ".$din." / ".$tin;
-			
-			$rmfdocu = $_SESSION['usuarios'];
-			$rmfdate = date('Y_m');
-			$rmftext = $text.PHP_EOL;
-			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-			$rmf = fopen($filename, 'ab+');
-			fwrite($rmf, $rmftext);
-			fclose($rmf);
+				print($tabla);
+				
+				global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
+				global $text;			
+				$text = PHP_EOL."\t- NOMBRE: ".$rp['Nombre']." ".$rp['Apellidos'];
+				$text = $text.PHP_EOL."\t- USER REF: ".$_SESSION['usuarios'];
+				$text = $text.PHP_EOL."** F. ENTRADA ".$din." / ".$tin;
+				
+				$rmfdocu = $_SESSION['usuarios'];
+				$rmfdate = date('Y_m');
+				$rmftext = $text.PHP_EOL;
+				$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+				$rmf = fopen($filename, 'ab+');
+				fwrite($rmf, $rmftext);
+				fclose($rmf);
 	
-		}else{ 
-			print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
-			global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
-		}
+			}else{ 
+				print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
+				global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
+			}
 		// FIN FICHA ENTRADA
+		
+		}elseif($count1 > 0){ // FICHA SALIDA.
+		
+			global $dout;			$dout = date('Y-m-d');
+			global $tout;			global $ttot;
+			/*
+				HORA ORIGINAL DE SALIDA DEL SCRIPT
+				$tout = date('H:i:s');
+			*/
+
+			require 'fichar/fichar_redondeo_out.php';
+
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+			$q1 = mysqli_query($db, $sql1);
+			$count1 = mysqli_num_rows($q1);
+			$row1 = mysqli_fetch_assoc($q1);
+			
+			global $din;			$din = trim($row1['din']);
+			global $tin;			$tin = trim($row1['tin']);
+			global $in;				$in = $din." ".$tin;
 	
-	}elseif($count1 > 0){ // FICHA SALIDA.
-		
-		global $dout;			$dout = date('Y-m-d');
-		global $tout;			global $ttot;
-		/*
-			HORA ORIGINAL DE SALIDA DEL SCRIPT
-			$tout = date('H:i:s');
-		*/
+			global $dout;			$dout = trim($dout);
+			global $tout;			$tout = trim($tout);
+			
+			global $out;			$out = $dout." ".$tout;
 
-		require 'fichar/fichar_redondeo_out.php';
+			$fecha1 = new DateTime($in);//fecha inicial
+			$fecha2 = new DateTime($out);//fecha de cierre
 
-			////////////////////		***********  		////////////////////
+			global $difer;			$difer = $fecha1->diff($fecha2);
+			//print ($difer);
+			
+			global $ttot;			$ttot = $difer->format('%H:%i:%s');
 
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
-		$q1 = mysqli_query($db, $sql1);
-		$count1 = mysqli_num_rows($q1);
-		$row1 = mysqli_fetch_assoc($q1);
-		
-		global $din;			$din = trim($row1['din']);
-		global $tin;			$tin = trim($row1['tin']);
-		global $in;				$in = $din." ".$tin;
+			$ttot1 = $difer->format('%H:%i:%s');
+			global $ttoth;
+			$ttoth = substr($ttot1,0,2);
+			$ttoth = str_replace(":","",$ttoth);
+			
+			$ttot2 = $difer->format('%d-%H:%i:%s');
+			global $ttotd;
+			$ttotd = substr($ttot2,0,2);
+			$ttotd = str_replace("-","",$ttotd);
 	
-		global $dout;			$dout = trim($dout);
-		global $tout;			$tout = trim($tout);
+			if(($ttoth > 9)||($ttotd > 0)){
+				print("<div class='centradiv'>
+						<font color='#F1BD2D'>
+							NO PUEDE FICHAR MÁS DE 10 HORAS.
+							</br>
+							PONGASE EN CONTACTO CON ADMIN SYSTEM.
+						</font>
+					</div>
+					<!--
+					<embed src='audi/10horas.mp3' autostart='true' loop='false' ></embed>
+					-->");
 		
-		global $out;			$out = $dout." ".$tout;
-
-		$fecha1 = new DateTime($in);//fecha inicial
-		$fecha2 = new DateTime($out);//fecha de cierre
-
-		global $difer;			$difer = $fecha1->diff($fecha2);
-		//print ($difer);
-		
-		global $ttot;			$ttot = $difer->format('%H:%i:%s');
-
-			////////////////////		***********  		////////////////////
-	
-		$ttot1 = $difer->format('%H:%i:%s');
-		global $ttoth;
-		$ttoth = substr($ttot1,0,2);
-		$ttoth = str_replace(":","",$ttoth);
-		
-		$ttot2 = $difer->format('%d-%H:%i:%s');
-		global $ttotd;
-		$ttotd = substr($ttot2,0,2);
-		$ttotd = str_replace("-","",$ttotd);
-	
-		if(($ttoth > 9)||($ttotd > 0)){
-		
-			print("<div class='centradiv'>
-					<font color='#F1BD2D'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
-				</div>
-				<!--
-				<embed src='audi/10horas.mp3' autostart='true' loop='false' ></embed>
-				-->");
-		
-			global $ttot;				$ttot = '68:68:68';
-			global $text;
-			$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
-			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-			/* fin if >9 */
+				global $ttot;				$ttot = '68:68:68';
+				global $text;
+				$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
+				$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
+				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+				/* fin if >9 */
 			}else{	
 				global $ttot;
 				global $text;
@@ -195,8 +183,6 @@ function process_pinqr(){
 				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 	 		} /* Fin else >9 */
 	
-			////////////////////		**********  		////////////////////
-			
 			$tabla = "<ul class='centradiv'>
 				<li class='liCentra'>HA FICHADO LA SALIDA</li>
 				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
@@ -227,29 +213,29 @@ function process_pinqr(){
 
 		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
-		if(mysqli_query($db, $sqla)){ 
+			if(mysqli_query($db, $sqla)){ 
 					
-			print($tabla);
-			suma_todo();
-					
-			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
+				print($tabla);
+				suma_todo();
+						
+				$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 
-			global $sumatodo;
-			global $text;
-			$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
-			$text = $text.PHP_EOL."**********".PHP_EOL;
-			$rmfdocu = $_SESSION['usuarios'];
-			$rmfdate = date('Y_m');
-			$rmftext = $text.PHP_EOL;
-			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-			$rmf = fopen($filename, 'ab+');
-			fwrite($rmf, $rmftext);
-			fclose($rmf);
+				global $sumatodo;
+				global $text;
+				$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
+				$text = $text.PHP_EOL."**********".PHP_EOL;
+				$rmfdocu = $_SESSION['usuarios'];
+				$rmfdate = date('Y_m');
+				$rmftext = $text.PHP_EOL;
+				$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+				$rmf = fopen($filename, 'ab+');
+				fwrite($rmf, $rmftext);
+				fclose($rmf);
 			
-		}else{	print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
-				global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
-		}
-	} // FIN elseif($count1 > 0)
+			}else{ 	print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
+					global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
+			}
+		} // FIN elseif($count1 > 0)
 	
 	}else{	// FIN if($cp > 0)
 		print("<div class='centradiv' >
@@ -345,9 +331,8 @@ function modif2b(){
 function tcl(){
 	
 	global $db;				global $db_name;
-	
-	$vname = $_SESSION['clave'].$_SESSION['usuarios']."_".date('Y');
-	$vname = "`".$vname."`";
+	global $vname;
+	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -361,12 +346,14 @@ function tcl(){
   `ttot` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
+	
+	global $dat4;	
 	if(mysqli_query($db, $tcl)){	
-		global $dat4;		$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
 	}else{
-		global $dat4;		$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+			$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 	}
+
 }
 
 				   ////////////////////				   ////////////////////
@@ -374,6 +361,7 @@ function tcl(){
 				 ////////////////////				  ///////////////////
 	
 function ayear(){
+
 	$filename = "Users/".$_SESSION['usuarios']."/year.txt";
 	$fw2 = fopen($filename, 'r+');
 	$fget = fgets($fw2);
@@ -390,9 +378,7 @@ function ayear(){
 		modif2b();
 		tcl();
 		global $dat1;	global $dat2;	global $dat3;	global $dat4;
-		global $datos;
-		$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
-		
+		global $datos;			$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
 		global $dir;			$dir = "Users/".$_SESSION['usuarios']."/log";
 	
 		$logdocu = $_SESSION['usuarios'];
@@ -407,6 +393,7 @@ function ayear(){
 		fclose($log);
 		
 	}
+
 } // FIN function ayear
 
 				   ////////////////////				   ////////////////////
@@ -434,4 +421,5 @@ function salir(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

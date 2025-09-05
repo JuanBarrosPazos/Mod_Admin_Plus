@@ -19,10 +19,9 @@ if($_SESSION['Nivel'] == 'admin'){
 	if(isset($_POST['todo'])){  show_form();							
 								ver_todo();
 								info();
-										}
-	else {show_form();}
+	}else{show_form(); }
 								
-	}else{ require '../Inclu/tabla_permisos.php';	}
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -30,12 +29,11 @@ if($_SESSION['Nivel'] == 'admin'){
 
 function show_form(){
 
-	global $titulo;
-	$titulo = "BORRAR REGISTRO JORNADA";
+	global $titulo;				$titulo = "BORRAR REGISTRO JORNADA";
 
 	require 'Inc_Show_Form_tot.php';
 
-	}	/* Fin show_form(); */
+}	/* Fin show_form(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -48,36 +46,31 @@ function ver_todo(){
 	require '../Inclu/orden.php';
 
 	global $dyt1;
-	
 	if($_POST['dy'] == ''){ $dy1 = '';
-							 $dyt1 = date('Y');	
-							 $_SESSION['gyear'] = date('Y');} 
-							 				else {	$dy1 = $_POST['dy'];
-													$dyt1 = "20".$_POST['dy'];
-													$_SESSION['gyear'] = "20".$_POST['dy'];									
-													}
+							$dyt1 = date('Y');	
+							$_SESSION['gyear'] = date('Y');
+	}else{	$dy1 = $_POST['dy'];
+			$dyt1 = "20".$_POST['dy'];
+			$_SESSION['gyear'] = "20".$_POST['dy'];									
+	}
+
 	if($_POST['dm'] == ''){ //$dm1 = '';
 							 $dm1 = "-".date('m')."-";
-							 $_SESSION['gtime'] = '';} 
-							 				else {	$dm1 = "-".$_POST['dm']."-";
-													$_SESSION['gtime'] = $_POST['dm'];	
-													}
-	if($_POST['dd'] == ''){ $dd1 = '';}else{	$dd1 = $_POST['dd'];}
+							 $_SESSION['gtime'] = '';
+	}else{	$dm1 = "-".$_POST['dm']."-";
+			$_SESSION['gtime'] = $_POST['dm'];	
+	}
+
+	if($_POST['dd'] == ''){ $dd1 = '';}else{ $dd1 = $_POST['dd']; }
 	
-	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = date('m');
+	global $fil;
+	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){	$dm1 = date('m');
 													$dd1 = $_POST['dd'];
-													global $fil;
 													$fil = $dy1."-%".$dm1."%-".$dd1."%";
-																					}
-												else{ global $fil;												
-													  $fil = "%".$dy1.$dm1.$dd1."%";
-														}
+	}else{ $fil = "%".$dy1.$dm1.$dd1."%"; }
 	
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".$dyt1;
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
 
 			///////////////////////			***********  		///////////////////////
 			
@@ -86,48 +79,38 @@ function ver_todo(){
 
 			///////////////////////			***********  		///////////////////////
 
-	global $sqlb;
-	global $qb;
+	global $qb;			global $sqlb;
 	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `dout` <> '00:00:00' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 
 			////////////////////		**********  		////////////////////
 
-	global $refses;
-	$refses = $_SESSION['usuarios'];
+	global $refses;		$refses = $_SESSION['usuarios'];
 
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
 	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.300: </font>
 					</br>".mysqli_error($db)."</br>");
-		}else{
-			while($rowun = mysqli_fetch_assoc($qun)){	
-					global $name1;
-					$name1 = $rowun['Nombre'];
-					global $name2;
-					$name2 = $rowun['Apellidos'];
-						}
-					}
+	}else{
+		while($rowun = mysqli_fetch_assoc($qun)){	
+				global $name1;			$name1 = $rowun['Nombre'];
+				global $name2;			$name2 = $rowun['Apellidos'];
+		}
+	}
 
-	global $pdm;
-	$pdm = "pdm";
-	global $feedtot;
-	$feedtot = "nofeed";
+	global $pdm;				$pdm = "pdm";
+	global $feedtot;			$feedtot = "nofeed";
 	//$feedtot = "";
-	global $nodata;
-	$nodata = "NO HAY DATOS";
-	if($_POST['dy'] == ''){ global $ycons;
-							$ycons = date('Y');
-	}else{ global $ycons;
-		   $ycons =	"20".$_POST['dy'];}
+	global $nodata;				$nodata = "NO HAY DATOS";
+	global $ycons;
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons = "20".$_POST['dy']; }
 	global $twhile;
 	$twhile = "<tr><th colspan=7 class='BorderInf'>
 				".$name1." ".$name2.". Ref: ".$refses."
 				.</th></tr>";
 
-	global $tdplus;
-	$tdplus = "<th class='BorderInfDch'></th>";
+	global $tdplus;				$tdplus = "<th class='BorderInfDch'></th>";
 	global $formularioh;
 	$formularioh = "<form name='modifica' action='fichar_Borrar_02.php' method='POST'>";
 	global $formulariof;
@@ -136,27 +119,23 @@ function ver_todo(){
 					<input type='hidden' name='oculto2' value=1 />
 					</td>
 					</form>";
-	global $colspana;
-	$colspana = "7";
-	global $colspanb;
-	$colspanb = "5";
+	global $colspana;			$colspana = "7";
+	global $colspanb;			$colspanb = "5";
 
 	require 'Inc_Fichar_While_Total.php';
 
-			////////////////////		**********  		////////////////////
-
-	}	/* Final ver_todo(); */
+}	/* Final ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-		} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -197,7 +176,7 @@ function info(){
 	fwrite($log, $logtext);
 	fclose($log);
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -210,4 +189,5 @@ function info(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

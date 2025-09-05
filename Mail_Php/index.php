@@ -218,14 +218,14 @@ function show_form($errors=[]){
 	print("<table align='center'>
 				<tr>
 					<td style='text-align:'center'>
-						<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+						<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br>
 					</td>
 				</tr>
 				<tr>
 					<td style='text-align:left'>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FFFFFF'>* </font>".$errors [$a]."<br/>");
+			print("<font color='#FFFFFF'>* </font>".$errors [$a]."<br>");
 					}
 	print("</td>
 				</tr>
@@ -395,7 +395,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 									<td align='center'>
 										<font color='#0080C0'>
 											SU MENSAJE HA SIDO ENVIADO.
-											<br/>
+											<br>
 											MUCHAS GRACIAS. ".$_POST['nombre']." ".$_POST['apellidos'].".
 										</font>
 									</td>

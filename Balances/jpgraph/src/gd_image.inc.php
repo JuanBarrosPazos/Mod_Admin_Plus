@@ -201,7 +201,7 @@ class Image {
             $toX,$toY,$fromX,$fromY,$toWidth,$toHeight,$fromWidth,$fromHeight);
         }
         else {
-            if( ($fromWidth  != -1 && ($fromWidth != $toWidth)) || ($fromHeight != -1 && ($fromHeight != $fromHeight)) ) {
+            if( ($fromWidth  != -1 && ($fromWidth != $toWidth))||($fromHeight != -1 && ($fromHeight != $fromHeight)) ) {
                 // Create a new canvas that will hold the re-scaled original from image
                 if( $toWidth <= 1 || $toHeight <= 1 ) {
                     JpGraphError::RaiseL(25083);//('Illegal image size when copying image. Size for copied to image is 1 pixel or less.');
@@ -888,7 +888,7 @@ class Image {
             $oy=$y;
         }
 
-        if( !preg_match('/\n/',$txt) || ($dir>0 && preg_match('/\n/',$txt)) ) {
+        if( !preg_match('/\n/',$txt)||($dir>0 && preg_match('/\n/',$txt)) ) {
             // Format a single line
 
             $txt = $this->AddTxtCR($txt);

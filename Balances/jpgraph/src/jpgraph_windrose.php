@@ -1496,7 +1496,7 @@ class WindroseGraph extends Graph {
         elseif( $cl instanceof IconPlot ) {
             $this->AddIcon($aObj);
         }
-        elseif( ($cl instanceof WindrosePlot) || ($cl instanceof LayoutRect) || ($cl instanceof LayoutHor)) {
+        elseif( ($cl instanceof WindrosePlot)||($cl instanceof LayoutRect)||($cl instanceof LayoutHor)) {
             $this->plots[] = $aObj;
         }
         else {

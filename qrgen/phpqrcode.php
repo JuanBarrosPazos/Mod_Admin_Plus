@@ -1394,7 +1394,7 @@
         public static function checkModeNum($size, $data)
         {
             for($i=0; $i<$size; $i++) {
-                if((ord($data[$i]) < ord('0')) || (ord($data[$i]) > ord('9'))){
+                if((ord($data[$i]) < ord('0'))||(ord($data[$i]) > ord('9'))){
                     return false;
                 }
             }
@@ -2009,7 +2009,7 @@
                 {
                     $d = $this->dataStr[$pos+1];
                     $word = (ord($c) << 8) | ord($d);
-                    if(($word >= 0x8140 && $word <= 0x9ffc) || ($word >= 0xe040 && $word <= 0xebbf)) {
+                    if(($word >= 0x8140 && $word <= 0x9ffc)||($word >= 0xe040 && $word <= 0xebbf)) {
                         return QR_MODE_KANJI;
                     }
                 }
@@ -2666,9 +2666,9 @@
                            ($this->runLength[$i-1] == $fact) &&
                            ($this->runLength[$i+1] == $fact) &&
                            ($this->runLength[$i+2] == $fact)) {
-                            if(($this->runLength[$i-3] < 0) || ($this->runLength[$i-3] >= (4 * $fact))) {
+                            if(($this->runLength[$i-3] < 0)||($this->runLength[$i-3] >= (4 * $fact))) {
                                 $demerit += N3;
-                            } else if((($i+3) >= $length) || ($this->runLength[$i+3] >= (4 * $fact))) {
+                            } else if((($i+3) >= $length)||($this->runLength[$i+3] >= (4 * $fact))) {
                                 $demerit += N3;
                             }
                         }

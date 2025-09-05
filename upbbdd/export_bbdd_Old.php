@@ -146,7 +146,7 @@ $filename = "bbdd/TBL_".$valor."_DT_".$datein.".sql";
 	$nrw = mysqli_num_rows($qb);
 	//$_SESSION['numr'] = $numr;
 		if(!$qb){
-	print("<font color='#FF0000'>214 Se ha producido un error: </form><br/>".mysqli_error($db)."<br/>");
+	print("<font color='#FF0000'>214 Se ha producido un error: </form><br>".mysqli_error($db)."<br>");
 			
 		}else{
 			if(mysqli_num_rows($qb)== 0){
@@ -174,12 +174,12 @@ $filename = "bbdd/TBL_".$valor."_DT_".$datein.".sql";
 						</tr>
 						<tr>");
 						
-				print("<td>* Nº Campos:".$count.".<br/>||  ");
+				print("<td>* Nº Campos:".$count.".<br>||  ");
 				for($a=0; $c=$count, $a<$c; $a++){
 				print($campos[$a]." || ");
 					}
-				print("<br/>* Nº Entradas: ".$nentradas." &nbsp; * Nº Id. Max: ".($numr-1)."
-				<br/>* Ruta Documento: ".$filename."</td>");
+				print("<br>* Nº Entradas: ".$nentradas." &nbsp; * Nº Id. Max: ".($numr-1)."
+				<br>* Ruta Documento: ".$filename."</td>");
 									
 			for($a=0; $c=$count, $a<$c; $a++){
 				//print(	"<td class='BorderInfDch'>".$campos[$a]."</td>");

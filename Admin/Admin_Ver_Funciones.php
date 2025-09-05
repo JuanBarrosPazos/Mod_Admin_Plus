@@ -82,7 +82,7 @@ function ver_todo(){
 	global $orden;
 	require '../Inclu/orden.php';
 
-	if(($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){ 
+	if(($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){ 
 			$ref = $_SESSION['ref'];
 			$sqlb =  "SELECT * FROM $table_name_a WHERE `ref` = '$ref'";
 			$qb = mysqli_query($db, $sqlb);

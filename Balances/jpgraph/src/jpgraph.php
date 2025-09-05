@@ -2094,7 +2094,7 @@ class Graph {
         // For X-text scale we ignore all this since the tick are usually
         // much further in and not close to the Y-axis. Hence the test
         // for 'text'
-        if( ($this->yaxis->pos==$this->xscale->GetMinVal() || (is_string($this->yaxis->pos) && $this->yaxis->pos=='min')) &&
+        if( ($this->yaxis->pos==$this->xscale->GetMinVal()||(is_string($this->yaxis->pos) && $this->yaxis->pos=='min')) &&
             !is_numeric($this->xaxis->pos) && $this->yscale->GetMinVal() < 0 &&
             substr($this->axtype,0,4) != 'text' && $this->xaxis->pos != 'min' ) {
 
@@ -4321,7 +4321,7 @@ class LinearTicks extends Ticks {
     }
 
     function SetTickPositions($aMajPos,$aMinPos=NULL,$aLabels=NULL) {
-        if( !is_array($aMajPos) || ($aMinPos!==NULL && !is_array($aMinPos)) ) {
+        if( !is_array($aMajPos)||($aMinPos!==NULL && !is_array($aMinPos)) ) {
             JpGraphError::RaiseL(25065);//('Tick positions must be specifued as an array()');
             return;
         }
@@ -4543,7 +4543,7 @@ class LinearTicks extends Ticks {
             $l = sprintf('%01.'.$precision.'f',round($aVal,$precision));
         }
 
-        if( ($this->supress_zerolabel && $l==0) ||  ($this->supress_first && $aIdx==0) || ($this->supress_last  && $aIdx==$aNbrTicks-1) ) {
+        if( ($this->supress_zerolabel && $l==0) ||  ($this->supress_first && $aIdx==0)||($this->supress_last  && $aIdx==$aNbrTicks-1) ) {
             $l='';
         }
         return $l;

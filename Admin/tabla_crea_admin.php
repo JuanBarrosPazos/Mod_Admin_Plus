@@ -88,7 +88,7 @@
 				<td style='text-align:left !important;'>");
 
 		// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
-		if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){
+		if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){
 			print("<input type='hidden' name='dni' value='".$defaults['dni']."' />".$defaults['dni']);
 		}else{
 			print("<input type='text' name='dni' id='dni' size=12 maxlength=8 pattern='[0-9]{8,8}' placeholder='NUM. DOC.' value='".$defaults['dni']."' required />");
@@ -102,7 +102,7 @@
 				<td>");
 
 		// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
-		if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){
+		if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){
 			print("<input type='hidden' name='ldni' value='".$defaults['ldni']."' />".$defaults['ldni']);
 		}else{
 			print("<input type='text' name='ldni' id='ldni' size=4 maxlength=1 pattern='[A-Z]{1,1}' value='".$defaults['ldni']."' required />");
@@ -121,7 +121,7 @@
 					<td>");
 
 	// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
-	if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){ 
+	if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){ 
 			print("<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />".$defaults['Nivel']);
 	}else{ 	print("<select name='Nivel'>");
 			foreach($Nivel as $optionnv => $labelnv){
@@ -140,7 +140,7 @@
 				<td>");
 
 	// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
-	if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){
+	if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){
 
 	print("	<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />".$defaults['Usuario']."
 				</td></tr>
@@ -161,7 +161,7 @@
 
 	// INICIO SI ES USER O PLUS SE LIMITA EL FORMULARIO 
 
-	if((@$_SESSION['Nivel'] == 'user') || (@$_SESSION['Nivel'] == 'plus')){ 
+	if((@$_SESSION['Nivel'] == 'user')||(@$_SESSION['Nivel'] == 'plus')){ 
 	print("<input type='hidden' name='Password' value='".$defaults['Password']."' />".$defaults['Password']."
 				</td></tr>
 			<input type='hidden' name='Password2' value='".$defaults['Password2']."' required />");

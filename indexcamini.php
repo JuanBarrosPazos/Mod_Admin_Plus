@@ -99,13 +99,13 @@ function show_form2($errorsp=''){
 	if($errorsp){
 		print("<div class='centradiv' style='border-color:#F1BD2D !important;'>
 		<!--
-			<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+			<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>
 			<br>
 		-->
 			<font color='#F1BD2D'>ERROR ACCESO PIN</font>");
 		/*	
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
-			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br/>");
+			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br>");
 			}
 		*/
 		print("</div>

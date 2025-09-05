@@ -450,13 +450,13 @@ function show_form($errors=[]){
 	if($errors){
 		print("<table align='center'>
 					<th style='text-align:center'>
-					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br>
 					</th>
 					<tr>
 					<td style='text-align:left'>");
 			
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errors [$a]."<br/>");
+			print("<font color='#FF0000'>**</font>  ".$errors [$a]."<br>");
 			}
 		print("</td>
 				</tr>

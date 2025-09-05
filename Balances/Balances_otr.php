@@ -74,7 +74,7 @@ function show_form(){
 	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
 	$qu = mysqli_query($db, $sqlu);
 	if(!$qu){
-			print("* ".mysqli_error($db)."<br/>");
+			print("* ".mysqli_error($db)."<br>");
 	}else{
 					
 		while($rowu = mysqli_fetch_assoc($qu)){

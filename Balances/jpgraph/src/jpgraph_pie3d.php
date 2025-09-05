@@ -186,7 +186,7 @@ class PiePlot3D extends PiePlot {
         // belongs to either the left or right side of the
         // pie ellipse. Hence, no slice will cross 90 or 270
         // point.
-        if( ($sa < 90 && $ea > 90) || ( ($sa > 90 && $sa < 270) && $ea > 270) ) {
+        if( ($sa < 90 && $ea > 90)||( ($sa > 90 && $sa < 270) && $ea > 270) ) {
             JpGraphError::RaiseL(14003);//('Internal assertion failed. Pie3D::Pie3DSlice');
             exit(1);
         }
@@ -535,7 +535,7 @@ class PiePlot3D extends PiePlot {
                 //  c) If start is > 270 (hence the firstr split is at 90)
                 //     and the slice is so large that it goes all the way
                 //     around 270.
-                if( ($a < 90 && ($a+$da > 270)) || ($a > 90 && $a<=270 && ($a+$da>360+90) ) || ($a > 270 && $this->NormAngle($a+$da)>270) ) {
+                if( ($a < 90 && ($a+$da > 270))||($a > 90 && $a<=270 && ($a+$da>360+90) )||($a > 270 && $this->NormAngle($a+$da)>270) ) {
                     $angles[++$idx] = array($split,360-$split);
                     $adjcolors[$idx] = $colors[$i % $numcolors];
                     $adjexplode[$idx] = $explode;
@@ -753,7 +753,7 @@ class PiePlot3D extends PiePlot {
                 $sa = M_PI;
             }
 
-            if($sa < 2*M_PI && (($ea >= 2*M_PI) || ($ea > 0 && $ea < $sa ) ) ) {
+            if($sa < 2*M_PI && (($ea >= 2*M_PI)||($ea > 0 && $ea < $sa ) ) ) {
                 $ea = 2*M_PI;
             }
 

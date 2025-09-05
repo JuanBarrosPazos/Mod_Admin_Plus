@@ -11,21 +11,19 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
 
 	if(isset($_GET['ocultop'])){ process_pinqr();
 						  		//ayear();
 						  		errors();
-								}
-
-	elseif(isset($_POST['cancel'])) {	unset($_SESSION['usuarios']); }
-
-	else { process_pinqr();
+	}elseif(isset($_POST['cancel'])) {
+		unset($_SESSION['usuarios']);
+	}else { process_pinqr();
 		   //ayear();
 		   errors();
-		 	}
+	}
 
-		}else{ require '../Inclu/tabla_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -33,11 +31,9 @@ if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 
 function process_pinqr(){
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$_GET[pin]' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -50,27 +46,19 @@ function process_pinqr(){
 		
 		ayear();	
 		
-		global $vname;
 		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		$vname = "`".$tabla1."_".date('Y')."`";
-
-			////////////////////		**********  		////////////////////
+		global $vname;				$vname = "`".$tabla1."_".date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
-		
 		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
-			////////////////////		**********  		////////////////////
-
 	// FICHA ENTRADA.
-	
 	if($count1 < 1){
-		
+
 		global $din;				$din = date('Y-m-d');
 		global $tin;
-
 		/*
 			HORA ORIGINAL DE ENTRADA DEL SCRIPT
 			$tin = date('H:i:s');
@@ -78,40 +66,38 @@ function process_pinqr(){
 
 		require '../fichar/fichar_redondeo_in.php';
 
-			////////////////////		***********  		////////////////////
-
 		global $dout;				$dout = '';
 		global $tout;				$tout = '00:00:00';
 		global $ttot;				$ttot = '00:00:00';
 		
-	$tabla = "<table align='center' style='margin-top:10px' width=300px >
-				<tr>
-					<th colspan=2 class='BorderInf'>
-						HA FICHADO LA ENTRADA </br>".$rp['Nombre']." ".$rp['Apellidos']."
-					</th>
-				</tr>
-				<tr>
-					<td colspan=2 align='center'>
-	<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-					</td>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$rp['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$din."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$tin."</td>
-				</tr>
-				<tr>
-					<td colspan=2  valign='middle'  align='right'>
-						<form name='cancel' action='indexcam.php' >
-									<input type='submit'  value='CERRAR / SALIR' class='botonrojo' />
-						</form>
-					</td>
-				</tr>
-			</table>
+		$tabla = "<table align='center' style='margin-top:10px' width=300px >
+					<tr>
+						<th colspan=2 class='BorderInf'>
+							HA FICHADO LA ENTRADA </br>".$rp['Nombre']." ".$rp['Apellidos']."
+						</th>
+					</tr>
+					<tr>
+						<td colspan=2 align='center'>
+				<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+							</td>
+					</tr>
+					<tr>
+						<td>REFERENCIA</td><td>".$rp['ref']."</td>
+					</tr>
+					<tr>
+						<td>FECHA ENTRADA</td><td>".$din."</td>
+					</tr>
+					<tr>
+						<td>HORA ENTRADA</td><td>".$tin."</td>
+					</tr>
+					<tr>
+						<td colspan=2  valign='middle'  align='right'>
+							<form name='cancel' action='indexcam.php' >
+										<input type='submit'  value='CERRAR / SALIR' class='botonrojo' />
+							</form>
+						</td>
+					</tr>
+				</table>
 			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='indexcam.php';}
@@ -130,8 +116,7 @@ function process_pinqr(){
 		
 			print($tabla);
 		
-			global $dir;
-			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 
 			global $text;
 			$text = PHP_EOL."\t- NOMBRE: ".$rp['Nombre']." ".$rp['Apellidos'];
@@ -149,23 +134,13 @@ function process_pinqr(){
 		}else{print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
 					global $texerror;
 					$texerror = PHP_EOL."\t ".mysqli_error($db);
-				}
-		
 		}
-	
 	// FIN FICHA ENTRADA
-	
-			////////////////////		***********  		////////////////////
-
-	// FICHA SALIDA.
-	
-	elseif($count1 > 0){
+	}elseif($count1 > 0){ // FICHA SALIDA.
 		
-	global $dout;
-	global $tout;
-	global $ttot;
-	$dout = date('Y-m-d');
-
+		global $dout;			$dout = date('Y-m-d');
+		global $tout;
+		global $ttot;
 		/*
 			HORA ORIGINAL DE SALIDA DEL SCRIPT
 			$tout = date('H:i:s');
@@ -175,80 +150,63 @@ function process_pinqr(){
 
 			////////////////////		***********  		////////////////////
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
-	$q1 = mysqli_query($db, $sql1);
-	$count1 = mysqli_num_rows($q1);
-	$row1 = mysqli_fetch_assoc($q1);
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+		$q1 = mysqli_query($db, $sql1);
+		$count1 = mysqli_num_rows($q1);
+		$row1 = mysqli_fetch_assoc($q1);
 		
-	global $din;
-	global $tin;
-	$din = trim($row1['din']);
-	$tin = trim($row1['tin']);
-		
-	global $in;
-	$in = $din." ".$tin;
-		
-	global $dout;
-	global $tout;
-	$dout = trim($dout);
-	$tout = trim($tout);
-		
-	global $out;
-	$out = $dout." ".$tout;
+		global $din;			$din = trim($row1['din']);
+		global $tin;			$tin = trim($row1['tin']);
+		global $in;				$in = $din." ".$tin;
+		global $dout;			$dout = trim($dout);
+		global $tout;			$tout = trim($tout);
+		global $out;			$out = $dout." ".$tout;
 	
-	$fecha1 = new DateTime($in);//fecha inicial
-	$fecha2 = new DateTime($out);//fecha de cierre
+		$fecha1 = new DateTime($in);//fecha inicial
+		$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;
-	$difer = $fecha1->diff($fecha2);
-	//print ($difer);
-	
-	global $ttot;
-	$ttot = $difer->format('%H:%i:%s');
+		global $difer;			$difer = $fecha1->diff($fecha2);
+		//print ($difer);
+		global $ttot;			$ttot = $difer->format('%H:%i:%s');
 
-			////////////////////		***********  		////////////////////
+		$ttot1 = $difer->format('%H:%i:%s');
+		global $ttoth;
+		$ttoth = substr($ttot1,0,2);
+		$ttoth = str_replace(":","",$ttoth);
 	
-	$ttot1 = $difer->format('%H:%i:%s');
-	global $ttoth;
-	$ttoth = substr($ttot1,0,2);
-	$ttoth = str_replace(":","",$ttoth);
+		$ttot2 = $difer->format('%d-%H:%i:%s');
+		global $ttotd;
+		$ttotd = substr($ttot2,0,2);
+		$ttotd = str_replace("-","",$ttotd);
 	
-	$ttot2 = $difer->format('%d-%H:%i:%s');
-	global $ttotd;
-	$ttotd = substr($ttot2,0,2);
-	$ttotd = str_replace("-","",$ttotd);
-	
-	global $ttot;				global $text;
-	if(($ttoth > 9)||($ttotd > 0)){
-		print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
-					<font color='#FF0000'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
-					</b>
-					</th>
-				 </tr>
-				</table>
-				<!--
-				<embed src='../audi/10horas.mp3' autostart='true' loop='false' ></embed>
-				-->");
+		global $ttot;				global $text;
+		if(($ttoth > 9)||($ttotd > 0)){
+			print("<table align='center' style='margin-top:10px' width=450px >
+					<tr>
+						<th class='BorderInf'>
+						<b>
+						<font color='#FF0000'>
+							NO PUEDE FICHAR MÁS DE 10 HORAS.
+							</br>
+							PONGASE EN CONTACTO CON ADMIN SYSTEM.
+						</font>
+						</b>
+						</th>
+					</tr>
+					</table>
+					<!--
+					<embed src='../audi/10horas.mp3' autostart='true' loop='false' ></embed>
+					-->");
 		
 		$ttot = '68:68:68';
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
 		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 		/* fin if >9 */
-	}else{	
-			$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
-			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-	 } /* Fin else >9 */
-	
-			////////////////////		**********  		////////////////////
+		}else{	
+				$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
+				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+		} /* Fin else >9 */
 	
 		$tabla = "<table align='center' style='margin-top:10px' width=300px >
 					<tr>
@@ -258,7 +216,7 @@ function process_pinqr(){
 					</tr>
 					<tr>
 						<td colspan=2 align='center'>
-		<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+			<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
 						</td>
 					</tr>
 					<tr>
@@ -287,23 +245,23 @@ function process_pinqr(){
 						</td>
 					</tr>
 				</table>
-		<embed src='../audi/salida.mp3'  autostart='true' loop='false' ></embed>
+			<embed src='../audi/salida.mp3'  autostart='true' loop='false' ></embed>
 				<script type='text/javascript'>
 						function redir(){window.location.href='indexcam.php';}
 						setTimeout('redir()',10000);
 				</script>";	
-		
-	//print($in." / ".$out." / ".$ttot."</br>");
-	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
-						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
-
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
-		
-		if(mysqli_query($db, $sqla)){ 
 			
+		//print($in." / ".$out." / ".$ttot."</br>");
+		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
+							//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
+
+		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+			
+		if(mysqli_query($db, $sqla)){ 
+				
 			print($tabla); 
 			suma_todo();
-			
+				
 			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 
 			global $sumatodo;
@@ -317,14 +275,13 @@ function process_pinqr(){
 			$rmf = fopen($filename, 'ab+');
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
-	
-	}else{print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
-					global $texerror;
-					$texerror = PHP_EOL."\t ".mysqli_error($db);
-				}
-		}
 		
-	}else{	print("<table align='center' style='margin-top:10px' width=450px >
+		}else{	print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
+				global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
+		}
+	}
+		
+}else{	print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
 					<th class='BorderInf'>
 					<b>
@@ -345,7 +302,7 @@ function process_pinqr(){
 				</tr>
 			</table>
 		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
-	}	
+	}
 	
 } // FIN FUNCTION 
 
@@ -355,25 +312,17 @@ function process_pinqr(){
 
 function suma_todo(){
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $dyt;
-	$dyt = date('Y');
-	global $dm;
-	$dm = "-".date('m')."-";
-	global $dd;
-	$dd = '';
-	global $fil;											
-	$fil = $dyt.$dm."%";
+	global $dyt;			$dyt = date('Y');
+	global $dm;				$dm = "-".date('m')."-";
+	global $dd;				$dd = '';
+	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;
-	$vname = $tabla1."_".$dyt;
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$dyt."`";
 
-	global $ruta;		$ruta = '../';
+	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 }
@@ -384,11 +333,8 @@ function suma_todo(){
 
 function errors(){
 	
-	global $db;
-	global $db_name;
-	
-	global $sesus;
-	$sesus = $_SESSION['usuarios'];
+	global $db;				global $db_name;
+	global $sesus;			$sesus = $_SESSION['usuarios'];
 
 	require '../fichar/Inc_errors.php';
 
@@ -441,11 +387,8 @@ function modif2b(){
 
 function tcl(){
 	
-	global $db;
-	global $db_name;
-	
-	$vname = $_SESSION['clave'].$_SESSION['usuarios']."_".date('Y');
-	$vname = "`".$vname."`";
+	global $db;					global $db_name;
+	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -459,20 +402,20 @@ function tcl(){
   `ttot` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
-	if(mysqli_query($db, $tcl)){	global $dat4;
-									$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
-			
-				}else{	global $dat4;
-							$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
-							}
-	}
+	
+	global $dat4;
+	if(mysqli_query($db, $tcl)){
+			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+	}else{	$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL; }
+
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
 function ayear(){
+
 	$filename = "../Users/".$_SESSION['usuarios']."/year.txt";
 	$fw2 = fopen($filename, 'r+');
 	$fget = fgets($fw2);
@@ -481,8 +424,7 @@ function ayear(){
 	if($fget == date('Y')){
 		/*print(" <div style='clear:both'></div>
 				<div style='width:200px'>* EL AÑO ES EL MISMO</br>&nbsp;&nbsp;&nbsp;".date('Y')." == ".$fget."</div>"); */
-				}
-	elseif($fget != date('Y')){ 
+	}elseif($fget != date('Y')){ 
 		print(" <div style='clear:both'></div>
 				<div style='width:200px'>* EL AÑO HA CAMBIADO</div>");/*</br>&nbsp;&nbsp;&nbsp;".date('Y')." != ".$fget." */
 		modif();
@@ -490,44 +432,35 @@ function ayear(){
 		modif2b();
 		tcl();
 		global $dat1;	global $dat2;	global $dat3;	global $dat4;
-		global $datos;
-		$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
-		
-	global $dir;
-	$dir = "../Users/".$_SESSION['usuarios']."/log";
+		global $datos;			$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
+		global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/log";
 	
-	$logdocu = $_SESSION['usuarios'];
-	$logdate = date('Y-m-d');
+		$logdocu = $_SESSION['usuarios'];
+		$logdate = date('Y-m-d');
 	
-	$logtext = PHP_EOL."** EL AÑO HA CAMBIADO **".PHP_EOL.".\t User Ref: ".$_SESSION['usuarios'];
-	$logtext = $logtext.PHP_EOL.$datos;
+		$logtext = PHP_EOL."** EL AÑO HA CAMBIADO **".PHP_EOL.".\t User Ref: ".$_SESSION['usuarios'];
+		$logtext = $logtext.PHP_EOL.$datos;
 
-	$filename = $dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
-		
-		}
+		$filename = $dir."/".$logdate."_".$logdocu.".log";
+		$log = fopen($filename, 'ab+');
+		fwrite($log, $logtext);
+		fclose($log);
+	}
 }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function salir() {	unset($_SESSION['id']);
-						unset($_SESSION['Nivel']);
-						unset($_SESSION['Nombre']);
-						unset($_SESSION['Apellidos']);
-						unset($_SESSION['doc']);
-						unset($_SESSION['dni']);
-						unset($_SESSION['ldni']);
-						unset($_SESSION['Email']);
-						unset($_SESSION['Usuario']);
-						unset($_SESSION['Password']);
-						unset($_SESSION['Direccion']);
-						unset($_SESSION['Tlf1']);
-						unset($_SESSION['Tlf2']);
-					}
+function salir() {	
+		unset($_SESSION['id']);				unset($_SESSION['Nivel']);
+		unset($_SESSION['Nombre']);			unset($_SESSION['Apellidos']);
+		unset($_SESSION['doc']);			unset($_SESSION['dni']);
+		unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+		unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+		unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+		unset($_SESSION['Tlf2']);
+}
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -540,4 +473,5 @@ function ayear(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

@@ -183,7 +183,7 @@ border-radius: 4px;
 <!--
        <div class='contenido' align="center" style="padding-top:22px">
        				DOWNLOAD THIS APP FREE AND MORE IN:
-            <br/>
+            <br>
 <a href="http://juanbarrospazos.blogspot.com.es/" target="_blank" style="text-decoration:none" onclick='document.getElementById(&apos;ventana-flotante&apos;).className = &apos;oculto&apos;'>	
   				http://juanbarrospazos.blogspot.com.es/
             </a>

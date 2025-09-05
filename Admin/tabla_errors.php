@@ -9,7 +9,7 @@
 						<td style='text-align:left !important'>");
 			
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("** ".$errors [$a]."<br/>");
+			print("** ".$errors [$a]."<br>");
 		}
 		print("</td></tr></table>");
 	}

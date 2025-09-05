@@ -15,7 +15,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user')){
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')){
 				
 	if(isset($_POST['grafico'])){	a();
 									process_form();

@@ -38,27 +38,20 @@ if($_SESSION['Nivel'] == 'admin'){
 
 function suma_todo(){
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	global $nm;
 	$nm = substr($_POST['din'],5,2);
 	$nm = str_replace(":","",$nm);
 
-	global $dyt;
-	$dyt = date('Y');
-	global $dm;
-	$dm = "-".$nm."-";
-	global $dd;
-	$dd = '';
-	global $fil;											
-	$fil = $dyt.$dm."%";
+	global $dyt;			$dyt = date('Y');
+	global $dm;				$dm = "-".$nm."-";
+	global $dd;				$dd = '';
+	global $fil;			$fil = $dyt.$dm."%";
 
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$vname = "`".$tabla1."_".date('Y')."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -71,14 +64,11 @@ function suma_todo(){
 
 function process_form(){
 	
-	global $db;
-	global $db_name;	
+	global $db;					global $db_name;	
 	
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_feed";
-	$vname = "`".$vname."`";
+	$vname = "`".$tabla1."_feed`";
 
 	$tabla = "<table align='center' style='margin-top:10px' width=450px >
 				<tr>
@@ -172,60 +162,49 @@ function process_form(){
 
 function feedback(){
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $feed;
-	global $tfeed;
-	$dfeed = date('Y-m-d');
-	$tfeed = date('H:i:s');
-	
+	global $dfeed;			$dfeed = date('Y-m-d');
+	global $tfeed;			$tfeed = date('H:i:s');
 	global $yin;
 	$yin = trim($_POST['din']);
 	$yin = substr($yin,0,4);
 
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".$yin;
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$yin."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
-		if(mysqli_query($db, $sqla)){ suma_todo();
-			
-					global $dir;
-					$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
-			
-					global $nm;
-					$nm = substr($_POST['din'],5,2);
-					$nm = str_replace(":","",$nm);
+	if(mysqli_query($db, $sqla)){ 
+			suma_todo();
+			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+			global $nm;
+			$nm = substr($_POST['din'],5,2);
+			$nm = str_replace(":","",$nm);
 
-					global $sumatodo;
-					global $text;
-					$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
-					$text = $text.PHP_EOL."** HORARIO RECUPERADO: ";
-					$text = $text.PHP_EOL."** ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-					$text = $text.PHP_EOL."** SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
-					$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['ttot'].".";
+			global $sumatodo;
+			global $text;
+			$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
+			$text = $text.PHP_EOL."** HORARIO RECUPERADO: ";
+			$text = $text.PHP_EOL."** ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
+			$text = $text.PHP_EOL."** SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
+			$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['ttot'].".";
 			
-					$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
-					$text = $text.PHP_EOL."\t**********".PHP_EOL;
-					$rmfdocu = $_SESSION['usuarios'];
-					$rmfdate = date('Y_').$nm;
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+			$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
+			$text = $text.PHP_EOL."\t**********".PHP_EOL;
+			$rmfdocu = $_SESSION['usuarios'];
+			$rmfdate = date('Y_').$nm;
+			$rmftext = $text.PHP_EOL;
+			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+			$rmf = fopen($filename, 'ab+');
+			fwrite($rmf, $rmftext);
+			fclose($rmf);
 
-					}else{
-							print("* MODIFIQUE LA ENTRADA L.166: ".mysqli_error($db));
-									global $texerror;
-									$texerror = PHP_EOL."\t ".mysqli_error($db);
-					}
+	}else{	print("* MODIFIQUE LA ENTRADA L.166: ".mysqli_error($db));
+			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 	
-	}	
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -250,103 +229,70 @@ function show_form(){
 	}
 
 	print("<table align='center' style='margin-top:10px' width=300px >
-	
-<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-
 				<tr>
+					<td>ID</td>
 					<td>
-						ID
-					</td>
-					<td>
-	<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+			<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
 					</td>
 				</tr>
-									
 				<tr>
+					<td>USER REF</td>
 					<td>
-						USER REF
-					</td>
-					<td>
-	<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />".$_SESSION['usuarios']."
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />".$_SESSION['usuarios']."
 					</td>
 				</tr>
-									
 				<tr>
+					<td>NOMBRE</td>
 					<td>
-						NOMBRE
-					</td>
-					<td>
-	<input type='hidden' name='name1' value='".$defaults['name1']."' />".$defaults['name1']."
+			<input type='hidden' name='name1' value='".$defaults['name1']."' />".$defaults['name1']."
 					</td>
 				</tr>
-									
 				<tr>
-					<td>						
-						APELLIDOS
-					</td>
+					<td>APELLIDOS</td>
 					<td>
-	<input type='hidden' name='name2' value='".$defaults['name2']."' />".$defaults['name2']."
-					</td>
-					
-				</tr>
-									
-				<tr>
-					<td>						
-						DATE IN
-					</td>
-					<td>
-	<input type='hidden' name='din' value='".$defaults['din']."' />".$defaults['din']."
+			<input type='hidden' name='name2' value='".$defaults['name2']."' />".$defaults['name2']."
 					</td>
 				</tr>
-					
 				<tr>
-					<td>						
-						TIME IN
-					</td>
+					<td>DATE IN</td>
 					<td>
-	<input name='tin' type='hidden' value='".$defaults['tin']."' />".$defaults['tin']."
+			<input type='hidden' name='din' value='".$defaults['din']."' />".$defaults['din']."
 					</td>
 				</tr>
-					
 				<tr>
-					<td>						
-						DATE OUT
-					</td>
+					<td>TIME IN</td>
 					<td>
-	<input type='hidden' name='dout' value='".$defaults['dout']."' />".$defaults['dout']."
+			<input name='tin' type='hidden' value='".$defaults['tin']."' />".$defaults['tin']."
 					</td>
 				</tr>
-					
 				<tr>
-					<td>						
-						TIME OUT
-					</td>
+					<td>DATE OUT</td>
 					<td>
-	<input type='hidden' name='tout' value='".$defaults['tout']."' />".$defaults['tout']."
+			<input type='hidden' name='dout' value='".$defaults['dout']."' />".$defaults['dout']."
 					</td>
 				</tr>
-					
 				<tr>
-					<td>						
-						TIME TOTAL
-					</td>
+					<td>TIME OUT</td>
 					<td>
-	<input type='hidden' name='ttot' value='".$defaults['ttot']."' />".$defaults['ttot']."
+			<input type='hidden' name='tout' value='".$defaults['tout']."' />".$defaults['tout']."
 					</td>
 				</tr>
-
+				<tr>
+					<td>TIME TOTAL</td>
+					<td>
+			<input type='hidden' name='ttot' value='".$defaults['ttot']."' />".$defaults['ttot']."
+					</td>
+				</tr>
 				<tr>
 					<td colspan='2' align='right' valign='middle'  class='BorderSup'>
 						<input type='submit' value='RECUPERAR DATOS' class='botonverde' />
 						<input type='hidden' name='oculto' value=1 />
+		</form>														
 					</td>
 				</tr>
-				
-		</form>														
-			
-			</table>				
-						"); 
-		}
+			</table>"); 
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -427,12 +373,12 @@ function info_02(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-		} /* Fin funcion master_index.*/
+} /* Fin funcion master_index.*/
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -441,4 +387,5 @@ function info_02(){
 	require '../Inclu/Admin_Inclu_footer.php';
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

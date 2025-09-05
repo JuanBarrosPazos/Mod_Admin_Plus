@@ -8,13 +8,13 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-/*	
-global $table_name_a;
-$table_name_a = "`".$_SESSION['clave']."admin`";
-$sqld =  "SELECT * FROM $table_name_a WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
-$qd = mysqli_query($db, $sqld);
-$rowd = mysqli_fetch_assoc($qd);
-*/
+	/*	
+	global $table_name_a;
+	$table_name_a = "`".$_SESSION['clave']."admin`";
+	$sqld =  "SELECT * FROM $table_name_a WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
+	$qd = mysqli_query($db, $sqld);
+	$rowd = mysqli_fetch_assoc($qd);
+	*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,29 +34,21 @@ if($_SESSION['Nivel'] == 'admin'){
 
 function suma_todo(){
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	global $nm;
 	$nm = substr($_POST['din'],5,2);
 	$nm = str_replace(":","",$nm);
 
-	global $dyt;
-	$dyt = date('Y');
-	global $dm;
-	$dm = "-".$nm."-";
-	global $dd;
-	$dd = '';
-	global $fil;											
-	$fil = $dyt.$dm."%";
+	global $dyt;			$dyt = date('Y');
+	global $dm;				$dm = "-".$nm."-";
+	global $dd;				$dd = '';
+	global $fil;			$fil = $dyt.$dm."%";
 
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
-	global $ruta;		$ruta = '../';
+	global $ruta;			$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 }
@@ -65,136 +57,85 @@ function suma_todo(){
 
 function process_form(){
 	
-	global $db;
-	global $db_name;	
+	global $db;				global $db_name;	
 	
 	$tabla = "<table align='center' style='margin-top:10px' width=450px >
 				<tr>
 					<th colspan=4 class='BorderInf'>
-						HA BORRADO: ".$_POST['name1']." ".$_POST['name2']."
+						HA BORRADO ".$_POST['name1']." ".$_POST['name2']."
 					</th>
 				</tr>
-												
 				<tr>
-					<td>
-						ID
-					</td>
-					<td>"
-						.$_POST['id'].
-					"</td>
+					<td>ID</td><td>".$_POST['id']."</td>
 				</tr>
-				
 				<tr>
-					<td>
-						REFERENCIA
-					</td>
-					<td>"
-						.$_SESSION['usuarios'].
-					"</td>
+					<td>REFERENCIA</td><td>".$_SESSION['usuarios']."</td>
 				</tr>
-				
 				<tr>
-					<td>	
-						FECHA ENTRADA
-					</td>
-					<td>"
-						.$_POST['din'].
-					"</td>
+					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
 				</tr>
-				
 				<tr>
-					<td>
-						HORA ENTRADA
-					</td>
-					<td>"
-						.$_POST['tin'].
-					"</td>
+					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
 				</tr>
-								
 				<tr>
-					<td>	
-						FECHA SALIDA
-					</td>
-					<td>"
-						.$_POST['dout'].
-					"</td>
+					<td>FECHA SALIDA</td><td>".$_POST['dout']."</td>
 				</tr>
-				
 				<tr>
-					<td>
-						HORA SALIDA
-					</td>
-					<td>"
-						.$_POST['tout'].
-					"</td>
+					<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
 				</tr>
-								
 				<tr>
-					<td>
-						HORAS REALIZADAS
-					</td>
-					<td>"
-						.$_POST['ttot'].
-					"</td>
+					<td>HORAS REALIZADAS</td><td>".$_POST['ttot']."</td>
 				</tr>
-								
 			</table>";	
 		
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 	$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id` = '$_POST[id]' LIMIT 1 ";
 	
-	if(mysqli_query($db, $sql)){ feedback();
-								 print($tabla);
-								 suma_todo();
-			
-					global $dir;
-					$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
-			
-					global $nm;
-					$nm = substr($_POST['din'],5,2);
-					$nm = str_replace(":","",$nm);
+	if(mysqli_query($db, $sql)){ 
+			feedback();
+			print($tabla);
+			suma_todo();
+			global $dir;
+			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+			global $nm;
+			$nm = substr($_POST['din'],5,2);
+			$nm = str_replace(":","",$nm);
 
-					global $sumatodo;
-					global $text;
-					$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
-					$text = $text.PHP_EOL."** HORARIO ELIMINADO: ";
-					$text = $text.PHP_EOL."** ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-					$text = $text.PHP_EOL."** SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
-					$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['ttot'].".";
+			global $sumatodo;
+			global $text;
+			$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
+			$text = $text.PHP_EOL."** HORARIO ELIMINADO: ";
+			$text = $text.PHP_EOL."** ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
+			$text = $text.PHP_EOL."** SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
+			$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['ttot'].".";
 			
-					$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
-					$text = $text.PHP_EOL."\t**********".PHP_EOL;
-					$rmfdocu = $_SESSION['usuarios'];
-					$rmfdate = date('Y_').$nm;
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+			$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
+			$text = $text.PHP_EOL."\t**********".PHP_EOL;
+			$rmfdocu = $_SESSION['usuarios'];
+			$rmfdate = date('Y_').$nm;
+			$rmftext = $text.PHP_EOL;
+			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+			$rmf = fopen($filename, 'ab+');
+			fwrite($rmf, $rmftext);
+			fclose($rmf);
 
-				}else{
-				print("<font color='#FF0000'>
+	}else{	print("<font color='#FF0000'>
 						SE HA PRODUCIDO UN ERROR: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
 						</br>";
 						show_form ();
-						
-							}
+	}
 	
-} 
+} // FIN fucntion process_form
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 function show_form(){
 
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
@@ -211,132 +152,90 @@ function show_form(){
 	}
 
 	print("<table align='center' style='margin-top:10px' width=300px >
-	
-<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-
-				<tr>
-					<td>
-						ID
-					</td>
-					<td>
-	<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
-					</td>
-				</tr>
-									
-				<tr>
-					<td>
-						USER REF
-					</td>
-					<td>
-	<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />".$_SESSION['usuarios']."
-					</td>
-				</tr>
-									
-				<tr>
-					<td>
-						NOMBRE
-					</td>
-					<td>
-	<input type='hidden' name='name1' value='".$defaults['name1']."' />".$defaults['name1']."
-					</td>
-				</tr>
-									
-				<tr>
-					<td>						
-						APELLIDOS
-					</td>
-					<td>
-	<input type='hidden' name='name2' value='".$defaults['name2']."' />".$defaults['name2']."
-					</td>
-					
-				</tr>
-									
-				<tr>
-					<td>						
-						DATE IN
-					</td>
-					<td>
-	<input name='din' type='hidden' value='".$defaults['din']."' />".$defaults['din']."
-					</td>
-				</tr>
-					
-				<tr>
-					<td>						
-						TIME IN
-					</td>
-					<td>
-	<input name='tin' type='hidden' value='".$defaults['tin']."' />".$defaults['tin']."
-					</td>
-				</tr>
-					
-				<tr>
-					<td>						
-						DATE OUT
-					</td>
-					<td>
-	<input name='dout' type='hidden' value='".$defaults['dout']."' />".$defaults['dout']."
-					</td>
-				</tr>
-					
-				<tr>
-					<td>						
-						TIME OUT
-					</td>
-					<td>
-	<input name='tout' type='hidden' value='".$defaults['tout']."' />".$defaults['tout']."
-					</td>
-				</tr>
-					
-				<tr>
-					<td>						
-						TIME TOTAL
-					</td>
-					<td>
-	<input name='ttot' type='hidden' value='".$defaults['ttot']."' />".$defaults['ttot']."
-					</td>
-				</tr>
-
-				<tr>
-					<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-						<input type='submit' value='BORRAR DATOS ' class='botonrojo' />
-						<input type='hidden' name='oculto' value=1 />
-					</td>
-				</tr>
-				
+			<tr>
+				<td>ID</td>
+				<td>
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
+			<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
+				</td>
+			</tr>
+			<tr>
+				<td>USER REF</td>
+				<td>
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />".$_SESSION['usuarios']."
+				</td>
+			</tr>
+			<tr>
+				<td>NOMBRE</td>
+				<td>
+		<input type='hidden' name='name1' value='".$defaults['name1']."' />".$defaults['name1']."
+				</td>
+			</tr>
+			<tr>
+				<td>APELLIDOS</td>
+				<td>
+		<input type='hidden' name='name2' value='".$defaults['name2']."' />".$defaults['name2']."
+				</td>
+			</tr>
+			<tr>
+				<td>DATE IN</td>
+				<td>
+		<input name='din' type='hidden' value='".$defaults['din']."' />".$defaults['din']."
+				</td>
+			</tr>
+			<tr>
+				<td>TIME IN</td>
+				<td>
+		<input name='tin' type='hidden' value='".$defaults['tin']."' />".$defaults['tin']."
+				</td>
+			</tr>
+			<tr>
+				<td>DATE OUT</td>
+				<td>
+		<input name='dout' type='hidden' value='".$defaults['dout']."' />".$defaults['dout']."
+				</td>
+			</tr>
+			<tr>
+				<td>TIME OUT</td>
+				<td>
+		<input name='tout' type='hidden' value='".$defaults['tout']."' />".$defaults['tout']."
+				</td>
+			</tr>
+			<tr>
+				<td>TIME TOTAL</td>
+				<td>
+		<input name='ttot' type='hidden' value='".$defaults['ttot']."' />".$defaults['ttot']."
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
+					<input type='submit' value='BORRAR DATOS ' class='botonrojo' />
+					<input type='hidden' name='oculto' value=1 />
 		</form>														
-			
-			</table>				
-						"); 
-		}
+				</td>
+			</tr>
+			</table>"); 
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 function feedback(){
 	
-	global $db;
-	global $db_name;
-	
-	global $feed;
-	global $tfeed;
-	$dfeed = date('Y-m-d');
-	$tfeed = date('H:i:s');
+	global $db;				global $db_name;
+	global $tfeed;			$dfeed = date('Y-m-d');
+	global $tfeed;			$tfeed = date('H:i:s');
 
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_feed";
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_feed`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`, `dfeed`, `tfeed`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]', '$dfeed', '$tfeed')";
 		
-		if(mysqli_query($db, $sqla)){ 
-					}else{
-							print("* MODIFIQUE LA ENTRADA L.308: ".mysqli_error($db));
-									global $texerror;
-									$texerror = PHP_EOL."\t ".mysqli_error($db);
-					}
+	if(mysqli_query($db, $sqla)){ 
+	}else{	print("* MODIFIQUE LA ENTRADA L.308: ".mysqli_error($db));
+			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 	
-	}	
+}	
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -407,20 +306,21 @@ function info_02(){
 		fwrite($log, $logtext);
 		fclose($log);
 
-	}
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	function master_index(){
+function master_index(){
 		
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-		} /* Fin funcion master_index.*/
+} /* Fin funcion master_index.*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Inclu/Admin_Inclu_footer.php';
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

@@ -311,7 +311,7 @@ class LinePlot extends Plot{
                 if( $tmp1==='' || $tmp1===NULL || $tmp1==='X' ) $tmp1 = 'x';
                 if( $prev==='' || $prev===null || $prev==='X' ) $prev = 'x';
 
-                if( is_numeric($y) || (is_string($y) && $y != '-') ) {
+                if( is_numeric($y)||(is_string($y) && $y != '-') ) {
                     if( is_numeric($y) && (is_numeric($prev) || $prev === '-' ) ) {
                         $img->StyleLineTo($xt,$yt);
                     }

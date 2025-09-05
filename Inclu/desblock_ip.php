@@ -139,7 +139,7 @@ function show_form($errors=[]){
 		ini_log();
 
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#F1BD2D'>* </font>".$errors [$a]."<br/>	");
+			print("<font color='#F1BD2D'>* </font>".$errors [$a]."<br>	");
 				// ESCRIBE ERRORES EN INI_LOG
 				global $text;
 				$text = $errors[$a];
@@ -215,7 +215,7 @@ function process_form(){
 	$_SESSION['nivdesb'] = $rowqc['Nivel'];
 	
 	if(!$qc){
-		print("Se ha producido un error: ".mysqli_error($db)."<br/><br/>");
+		print("Se ha producido un error: ".mysqli_error($db)."<br><br>");
 	}else{	
 			if(mysqli_num_rows($qc) == 0){
 					print ("No hay datos.");

@@ -11,15 +11,15 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(isset($_GET['ocultop'])){	process_pinqr();
-									//ayear();
-									errors();
-	}elseif(isset($_POST['cancel'])) {	
-							unset($_SESSION['usuarios']); 
-	}else { process_pinqr();
-		  	//ayear();
-		   	errors();
-	}
+if(isset($_GET['ocultop'])){ process_pinqr();
+							 //ayear();
+							 errors();
+}elseif(isset($_POST['cancel'])) {	
+						unset($_SESSION['usuarios']); 
+}else { process_pinqr();
+		//ayear();
+			errors();
+}
 												
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -42,11 +42,8 @@ function process_pinqr(){
 		
 		ayear();	
 		
-		$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-		$tabla1 = strtolower($tabla1);
-		global $vname;
-		$vname = $tabla1."_".date('Y');
-		$vname = "`".$vname."`";
+		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 			////////////////////		**********  		////////////////////
 
@@ -93,10 +90,8 @@ function process_pinqr(){
 				setTimeout('redir()',8000);
 			</script>";	
 
-		global $vname;			$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-		$tabla1 = strtolower($tabla1);
-		$vname = $tabla1."_".date('Y');
-		$vname = "`".$vname."`";
+		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -280,11 +275,9 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;
-	$vname = $tabla1."_".$dyt;
-	$vname = "`".$vname."`";
+	$vname = "`".$tabla1."_".$dyt."`";
 
 	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';
@@ -350,8 +343,7 @@ function tcl(){
 	
 	global $db;				global $db_name;
 	
-	$vname = $_SESSION['clave'].$_SESSION['usuarios']."_".date('Y');
-	$vname = "`".$vname."`";
+	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -365,12 +357,14 @@ function tcl(){
   `ttot` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
+	
+	global $dat4;
 	if(mysqli_query($db, $tcl)){	
-		global $dat4;		$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
 	}else{
-		global $dat4;		$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+			$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 	}
+
 }
 
 				   ////////////////////				   ////////////////////
@@ -444,4 +438,5 @@ function salir(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

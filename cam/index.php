@@ -14,40 +14,37 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){	
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){	
 
 	require '../Inclu_MInd/rutacam.php';
 	require '../Inclu_MInd/Master_Index.php';
 
-	if(isset($_POST['entrada'])){	pin_in();
-										//errors();
-								}
-							
-	elseif(isset($_POST['salida'])){	pin_out();
-										//errors();
-								}
+	if(isset($_POST['entrada'])){
+							pin_in();
+							//errors();
+	}elseif(isset($_POST['salida'])){
+							pin_out();
+							//errors();
+	}elseif(isset($_POST['cancel'])) {
+							red(); 
+	}elseif(isset($_GET['ocultop'])){ 
+							process_pin();
+							//ayear();
+							errors();
+	}elseif(isset($_GET['pin']) != ''){
+							process_pin();
+							//ayear();
+							errors();
+	}else{ show_form2(); }
 
-	elseif(isset($_POST['cancel'])) {	red(); }
-
-	elseif(isset($_GET['ocultop'])){ process_pin();
-							  		 //ayear();
-							  		 errors();
-									}
-
-	elseif(isset($_GET['pin']) != ''){ 	process_pin();
-										//ayear();
-							 			errors();
-							  			}
-
-	else {	show_form2();}
-
-}else { require '../Inclu/tabla_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
 function red(){
+
 	global $redir;
 	$redir = "<script type='text/javascript'>
 					function redir(){
@@ -56,6 +53,7 @@ function red(){
 				setTimeout('redir()',500);
 			</script>";
 	print($redir);
+
 }
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -76,8 +74,7 @@ function modif(){
 	$fw = fopen($filename, 'w+');
 	fwrite($fw, $contenido);
 	fclose($fw);
-	global $dat1;
-	$dat1 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
+	global $dat1;			$dat1 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
 }
 
 function modif2(){
@@ -87,8 +84,7 @@ function modif2(){
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);
 	fclose($fw2);
-	global $dat2;
-	$dat2 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
+	global $dat2;			$dat2 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
 }
 
 function modif2b(){
@@ -98,17 +94,13 @@ function modif2b(){
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);
 	fclose($fw2);
-	global $dat3;
-	$dat3 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
+	global $dat3;			$dat3 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
 }
 
 function tcl(){
 	
-	global $db;
-	global $db_name;
-	
-	$vname = $_SESSION['clave'].$_SESSION['ref']."_".date('Y');
-	$vname = "`".$vname."`";
+	global $db;				global $db_name;
+	global $vname;			$vname = "`".$_SESSION['clave'].$_SESSION['ref']."_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -122,18 +114,14 @@ function tcl(){
   `ttot` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
+
+	global $dat4;	
 	if(mysqli_query($db , $tcl)){
-		
-					global $dat4;
-					$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
-			
-				}else{
-					
-					global $dat4;
-					$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
-					
-					}
+			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+	}else{
+			$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+	}
+
 }
 					
 				   ////////////////////				   ////////////////////
@@ -149,8 +137,7 @@ function ayear(){
 	if($fget == date('Y')){
 		/*print(" <div style='clear:both'></div>
 				<div style='width:200px'>* EL AÑO ES EL MISMO</br>&nbsp;&nbsp;&nbsp;".date('Y')." == ".$fget."</div>"); */
-				}
-	elseif($fget != date('Y')){ 
+	}elseif($fget != date('Y')){ 
 		print(" <div style='clear:both'></div>
 				<div style='width:200px'>* EL AÑO HA CAMBIADO</div>");/*</br>&nbsp;&nbsp;&nbsp;".date('Y')." != ".$fget." */
 		modif();
@@ -158,11 +145,9 @@ function ayear(){
 		modif2b();
 		tcl();
 		global $dat1;	global $dat2;	global $dat3;	global $dat4;
-		global $datos;
-		$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
-		}
+		global $datos;			$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
+	}
 }
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -170,11 +155,9 @@ function ayear(){
 
 function validate_formp(){
 	
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$_POST[pin]' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -185,41 +168,29 @@ function validate_formp(){
 	if(strlen(trim($_POST['pin'])) == 0){
 		//$errorsp [] = "PIN: Campo obligatorio.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-
-	elseif(strlen(trim($_POST['pin'])) < 8){
+	}elseif(strlen(trim($_POST['pin'])) < 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-
-	elseif(strlen(trim($_POST['pin'])) > 8){
+	}elseif(strlen(trim($_POST['pin'])) > 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-	
-	elseif(!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
+	}elseif(!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
-	
-	/*
-	elseif(!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
+	}/*elseif(!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 		}
 
 	elseif(!preg_match('/^[^a-z]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
-		}*/
-	
-	elseif($cp == 0){
+	}*/elseif($cp == 0){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-		}
+	}
 
 	return $errorsp;
 
-		}
-
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -227,11 +198,8 @@ function validate_formp(){
 
 function errors(){
 	
-	global $db;
-	global $db_name;
-	
-	global $sesus;
-	$sesus = $_SESSION['ref'];
+	global $db;				global $db_name;
+	global $sesus;			$sesus = $_SESSION['ref'];
 
 	require '../fichar/Inc_errors.php';
 
@@ -243,16 +211,12 @@ function errors(){
 
 function show_ficha(){
 	
-	global $db;			global $db_name;
+	global $db;				global $db_name;
 	
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['ref'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";;
 
 	// FICHA ENTRADA O SALIDA.
-	
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
@@ -279,7 +243,6 @@ function show_ficha(){
 		
 		global $din;			$din = date('Y-m-d');
 		global $tin;			$tin = date('H:i:s');
-		
 		global $dout;			$dout = '';
 		global $tout;			$tout = '00:00:00';
 		global $ttot;			$ttot = '00:00:00';
@@ -291,20 +254,20 @@ function show_ficha(){
 			</li>
 			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
 			<li class='liCentra'>
-	<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
-		<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-		<input type='hidden' id='din' name='din' value='".$din."' />
-		<input type='hidden' id='tin' name='tin' value='".$tin."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-		<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-			<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-			<input type='hidden' name='entrada' value=1 />
-	</form>														
-			</li>
-		</ul>"); 
+		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+			<input type='hidden' id='din' name='din' value='".$din."' />
+			<input type='hidden' id='tin' name='tin' value='".$tin."' />
+			<input type='hidden' id='dout' name='dout' value='".$dout."' />
+			<input type='hidden' id='tout' name='tout' value='".$tout."' />
+			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+				<input type='hidden' name='entrada' value=1 />
+		</form>														
+				</li>
+			</ul>"); 
 
 	}elseif($count1 > 0){
 	// FICHA SALIDA.
@@ -340,16 +303,14 @@ function show_ficha(){
 
 function process_pin(){
 	
-	global $db;
-	global $db_name;
+	global $db;					global $db_name;
 	
 	global $qrp;
 	
-	if((isset($_GET['ocultop']))  || (isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
+	if((isset($_GET['ocultop']))||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
 	else{ $qrp = $_POST['pin']; }
 	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$qrp' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -361,153 +322,137 @@ function process_pin(){
 
 	if($cp > 0){
 	
-	global $vname;
 	$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
-	$vname = "`".$tabla1."_".date('Y')."`";
+	global $vname;				$vname = "`".$tabla1."_".date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
-	
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 
 	// FICHA ENTRADA.
-	
-	if($count1 < 1){
-		
-		global $din;
-		global $tin;
-		$din = date('Y-m-d');
-		$tin = date('H:i:s');
-
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = '';
-		$tout = '00:00:00';
-		$ttot = '00:00:00';
-		
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
-	<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-				</td>
-				<td>
-					".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-				</td>
-				<td valign='middle'  align='center'>
-	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-		<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-		<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-		<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-		<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-		<input type='hidden' id='din' name='din' value='".$din."' />
-		<input type='hidden' id='tin' name='tin' value='".$tin."' />
-		<input type='hidden' id='dout' name='dout' value='".$dout."' />
-		<input type='hidden' id='tout' name='tout' value='".$tout."' />
-		<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-					<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-					<input type='hidden' name='entrada' value=1 />
-	</form>														
-				</td>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-				<td valign='middle'  align='center'>
-						<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-						<input type='hidden' name='cancel' value=1 />
-				</td>
-			</form>
-		</tr>
-		</table>
-		<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>");
-
-	global $redir;
-	$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='indexcam.php';
-					}
-					setTimeout('redir()',14000);
-					</script>";
-		print($redir);
-
-		}
-	
-	// FICHA SALIDA.
-	
-	elseif($count1 > 0){
-		
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = date('Y-m-d');
-		$tout = date('H:i:s');
-
-	print("<table align='center' style=\"margin-top:6px\">
-			<tr>
-				<td>
-	<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-				</td>
-				<td>
-					".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-				</td>
-				<td valign='middle'  align='center'>
-		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-			<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-			<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-						<input type='hidden' name='salida' value=1 />
-		</form>														
-				</td>
-				<td valign='middle'  align='center'>
-		<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-			<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-			<input type='hidden' name='cancel' value=1 />
-		</form>
-				</td>
-			</tr>
-		</table>
-		<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>"); 
-		
-		}
-	
-	ayear();
-		
-	}else{		print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
-					<font color='#FF0000'>
-						NO EXISTE EL USUARIO.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
-					</b>
-					</th>
-				 </tr>
-				 <tr>
-					<td valign='middle'  align='center'>
-				 	<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-						<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-						<input type='hidden' name='cancel' value=1 />
-					</form>
-					</td>
+		if($count1 < 1){
+			
+			global $din;			$din = date('Y-m-d');		
+			global $tin;			$tin = date('H:i:s');
+			global $dout;			$dout = '';
+			global $tout;			$tout = '00:00:00';
+			global $ttot;			$ttot = '00:00:00';
+			
+			print("<table align='center' style=\"margin-top:6px\">
+					<tr>
+						<td>
+				<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+						</td>
+						<td>
+							".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
+						</td>
+						<td valign='middle'  align='center'>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+					<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+					<input type='hidden' id='din' name='din' value='".$din."' />
+					<input type='hidden' id='tin' name='tin' value='".$tin."' />
+					<input type='hidden' id='dout' name='dout' value='".$dout."' />
+					<input type='hidden' id='tout' name='tout' value='".$tout."' />
+					<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+							<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
+							<input type='hidden' name='entrada' value=1 />
+				</form>														
+						</td>
+						<td valign='middle'  align='center'>
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+							<input type='hidden' name='cancel' value=1 />
+				</form>
+						</td>
 				</tr>
 			</table>
-			<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>");
 
-	 	global $redir;
+			global $redir;
+			$redir = "<script type='text/javascript'>
+								function redir(){
+								window.location.href='indexcam.php';
+							}
+							setTimeout('redir()',14000);
+							</script>";
+			print($redir);
+		// FICHA SALIDA.
+		}elseif($count1 > 0){
+			
+			global $dout;			$dout = date('Y-m-d');
+			global $tout;			$tout = date('H:i:s');
+			global $ttot;
+
+			print("<table align='center' style=\"margin-top:6px\">
+					<tr>
+						<td>
+				<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+						</td>
+						<td>
+							".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
+						</td>
+						<td valign='middle'  align='center'>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+					<input name='myimg' type='hidden' value='".$rp['myimg']."' />
+					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
+					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
+					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
+					<input type='hidden' id='dout' name='dout' value='".$dout."' />
+					<input type='hidden' id='tout' name='tout' value='".$tout."' />
+							<input type='submit' value='FICHAR SALIDA' class='botonverde' />
+							<input type='hidden' name='salida' value=1 />
+				</form>														
+						</td>
+						<td valign='middle'  align='center'>
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+					<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+					<input type='hidden' name='cancel' value=1 />
+				</form>
+						</td>
+					</tr>
+				</table>
+				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>"); 
+		}
+		
+		ayear();
+			
+	}else{ print("<table align='center' style='margin-top:10px' width=450px >
+					<tr>
+						<th class='BorderInf'>
+						<b>
+						<font color='#FF0000'>
+							NO EXISTE EL USUARIO.
+							</br>
+							PONGASE EN CONTACTO CON ADMIN SYSTEM.
+						</font>
+						</b>
+						</th>
+					</tr>
+					<tr>
+						<td valign='middle'  align='center'>
+						<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+							<input type='hidden' name='cancel' value=1 />
+						</form>
+						</td>
+					</tr>
+				</table>
+				<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+
+		global $redir;
 		$redir = "<script type='text/javascript'>
 							function redir(){
 							window.location.href='indexcam.php';
 						}
 						setTimeout('redir()',4000);
 						</script>";
-			print($redir);
+		print($redir);
 
-		 	}			
+	}			
 		
 } // FIN FUNCTION
 
@@ -517,43 +462,30 @@ function process_pin(){
 
 function pin_out(){
 	
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_POST['ref'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
-	global $din;
-	global $tin;
-	$din = trim($row1['din']);
-	$tin = trim($row1['tin']);
-	global $in;
-	$in = $din." ".$tin;
-	global $dout;
-	global $tout;
-	$dout = trim($_POST['dout']);
-	$tout = trim($_POST['tout']);
-	global $out;
-	$out = $dout." ".$tout;
+	global $din;			$din = trim($row1['din']);
+	global $tin;			$tin = trim($row1['tin']);
+	global $in;				$in = $din." ".$tin;
+	global $dout;			$dout = trim($_POST['dout']);
+	global $tout;			$tout = trim($_POST['tout']);
+	global $out;			$out = $dout." ".$tout;
 	
 	$fecha1 = new DateTime($in);//fecha inicial
 	$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;
-	$difer = $fecha1->diff($fecha2);
+	global $difer;			$difer = $fecha1->diff($fecha2);
 	//print ($difer);
-	
-	global $ttot;
-	$ttot = $difer->format('%H:%i:%s');
+	global $ttot;			$ttot = $difer->format('%H:%i:%s');
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -569,7 +501,6 @@ function pin_out(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
-
 	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<table align='center' style='margin-top:10px' width=450px >
@@ -586,21 +517,17 @@ function pin_out(){
 				 </tr>
 				</table>");
 		
-					global $ttot;
-					$ttot = '68:68:68';
-					global $text;
-					$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-					$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-					} /* fin if >9 */
-
-			else {	global $ttot;
-					global $text;
-					$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-			 } /* Fin else >9 */
+		global $ttot;			$ttot = '68:68:68';
+		global $text;
+		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
+		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
+		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+	/* fin if >9 */
+	}else{	global $ttot;
+			global $text;
+			$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
+			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+	} /* Fin else >9 */
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -652,44 +579,41 @@ function pin_out(){
 
 	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
-		if(mysqli_query($db, $sqla)){ 
+	if(mysqli_query($db, $sqla)){ 
 			
-			print($tabla); 
-			suma_todo();
+		print($tabla); 
+		suma_todo();
 
-					global $dir;
-					$dir = "../Users/".$_POST['ref']."/mrficha";
+		global $dir;			$dir = "../Users/".$_POST['ref']."/mrficha";
 
-					global $sumatodo;
-					global $text;
-					$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
-					$text = $text.PHP_EOL."**********".PHP_EOL;
-					$rmfdocu = $_POST['ref'];
-					$rmfdate = date('Y_m');
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+		global $sumatodo;
+		global $text;
+		$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
+		$text = $text.PHP_EOL."**********".PHP_EOL;
+		$rmfdocu = $_POST['ref'];
+		$rmfdate = date('Y_m');
+		$rmftext = $text.PHP_EOL;
+		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+		$rmf = fopen($filename, 'ab+');
+		fwrite($rmf, $rmftext);
+		fclose($rmf);
 			
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='indexcam.php';
-						}
-						setTimeout('redir()',8000);
-						</script>";
-			print($redir);
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+					window.location.href='indexcam.php';
+				}
+				setTimeout('redir()',8000);
+				</script>";
+		print($redir);
 	
-		}else{
-					print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
-							show_form2();
-							show_form ();
-							global $texerror;
-							$texerror = PHP_EOL."\t ".mysqli_error($db);
-					}
+	}else{	print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
+			show_form2();
+			show_form ();
+			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 	
-	}	
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -734,50 +658,45 @@ function pin_in(){
 
 	$tabla1 = $_SESSION['clave'].$_POST['ref'];
 	$tabla1 = strtolower($tabla1);
-	global $vname;
-	$vname ="`". $tabla1."_".date('Y')."`";
+	global $vname;			$vname ="`". $tabla1."_".date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
 	if(mysqli_query($db, $sqla)){ 
 		
 			print($tabla);
-		
-			global $dir;
-			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+
+			global $dir;		$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 
 			global $text;
 			$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 			$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
 			$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
 			
-					$rmfdocu = $_POST['ref'];
-					$rmfdate = date('Y_m');
-					$rmftext = $text.PHP_EOL;
-					$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-					$rmf = fopen($filename, 'ab+');
-					fwrite($rmf, $rmftext);
-					fclose($rmf);
+			$rmfdocu = $_POST['ref'];
+			$rmfdate = date('Y_m');
+			$rmftext = $text.PHP_EOL;
+			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+			$rmf = fopen($filename, 'ab+');
+			fwrite($rmf, $rmftext);
+			fclose($rmf);
 		
-			global $redir;
-			$redir = "<script type='text/javascript'>
-							function redir(){
-							window.location.href='indexcam.php';
-						}
-						setTimeout('redir()',8000);
-						</script>";
-			print($redir);
+		global $redir;
+		$redir = "<script type='text/javascript'>
+						function redir(){
+						window.location.href='indexcam.php';
+					}
+					setTimeout('redir()',8000);
+					</script>";
+		print($redir);
 
-		}else{
-					print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
-							show_form2();
-							show_form ();
-							global $texerror;
-							$texerror = PHP_EOL."\t ".mysqli_error($db);
-				}
+	}else{ 	print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
+			show_form2();
+			show_form ();
+			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 	
-	}	
-
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -785,25 +704,17 @@ function pin_in(){
 
 function suma_todo(){
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $dyt;
-	$dyt = date('Y');
-	global $dm;
-	$dm = "-".date('m')."-";
-	global $dd;
-	$dd = '';
-	global $fil;											
-	$fil = $dyt.$dm."%";
+	global $dyt;			$dyt = date('Y');
+	global $dm;				$dm = "-".date('m')."-";
+	global $dd;				$dd = '';
+	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;
-	$vname = $tabla1."_".$dyt;
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$dyt."`";
 
-	global $ruta;		$ruta = '../';
+	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 }
@@ -816,26 +727,26 @@ function show_form2($errorsp=''){
 	
 	if(isset($_POST['pin'])){
 		$defaults = $_POST;
-		}else{$defaults = array ('pin' => '');}
+	}else{$defaults = array ('pin' => '');}
 	
 	if($errorsp){
-		print("	<table align='center'>
-					<tr>
-						<td style='text-align:center'>
-							<!--
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
-							-->
-							<font color='#FF0000'>ERROR ACCESO PIN</font>
-						</td>
-					</tr>
-					<!--
-					<tr>
-						<td style='text-align:left'>
-					-->");
+		print("<table align='center'>
+				<tr>
+					<td style='text-align:center'>
+						<!--
+						<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br>
+						-->
+						<font color='#FF0000'>ERROR ACCESO PIN</font>
+					</td>
+				</tr>
+				<!--
+				<tr>
+					<td style='text-align:left'>
+				-->");
 			
 		/*
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errorsp [$a]."<br/>");
+			print("<font color='#FF0000'>**</font>  ".$errorsp [$a]."<br>");
 			}
 		*/
 		print("<!--</td>
@@ -845,19 +756,16 @@ function show_form2($errorsp=''){
 		}
 	
 	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
-				
-				<tr>
-					<th colspan=3 class='BorderSup' style='padding-top: 10px'>
-							<a href='indexcam.php'>
-									GO TO QR SCANNER CAM
-							</a>
-					</th>
-				</tr>
-				
-			</table>"); 
+			<tr>
+				<th colspan=3 class='BorderSup' style='padding-top: 10px'>
+					<a href='indexcam.php'>
+								GO TO QR SCANNER CAM
+						</a>
+				</th>
+			</tr>
+		</table>"); 
 	
-	}
-
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -865,25 +773,17 @@ function show_form2($errorsp=''){
 
 function ver_todo(){
 		
-	global $db;
-	global $db_name;
+	global $db;				global $db_name;
 	
-	global $dyt1;
-	$dyt1 = date('Y');
-	global $dm1;
-	global $dd1;
-	$dm1 = date('m');
-	$dd1 = '';
-	global $fil;												
-	$fil = "%".$dyt1."-%".$dm1."%-".$dd1."%";
+	global $dyt1;			$dyt1 = date('Y');
+	global $dm1;			$dm1 = date('m');
+	global $dd1;			$dd1 = '';
+	global $fil;			$fil = "%".$dyt1."-%".$dm1."%-".$dd1."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['ref'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;
-	$vname = $tabla1."_".$dyt1;
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
 
-	global $ruta;		$ruta = '../';
+	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 //////////////////////////
@@ -893,115 +793,61 @@ function ver_todo(){
 	
 	if(!$qb){
 			print("<font color='#FF0000'>Se ha producido un error L.773: </font></br>".mysqli_error($db)."</br>");
-			
+	}else{
+		if(mysqli_num_rows($qb) == 0){
+			print ("<table align='center'>
+					<tr>
+						<td>
+							<font color='#FF0000'>
+								NO HAY DATOS ESTE MES ".date('Y/m')."
+							</font>
+						</td>
+					</tr>
+				</table>");
+
 		}else{
-			
-			if(mysqli_num_rows($qb) == 0){
-							print ("<table align='center'>
-										<tr>
-											<td>
-												<font color='#FF0000'>
-													NO HAY DATOS ESTE MES ".date('Y/m')."
-												</font>
-											</td>
-										</tr>
-									</table>");
-
-
-				}else{ 	print ("<table align='center'>
-									<tr>
-										<th colspan=6 class='BorderInf'>
-								".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref'].". "
-								   .mysqli_num_rows($qb)." RESULTADOS.
-										</th>
-									</tr>
-									
-									<tr>
-										
-										<th class='BorderInfDch'>
-												ID
-										</th>																			
-										
-										<th class='BorderInfDch'>
-												DATE IN
-										</th>																			
-										
-										<th class='BorderInfDch'>
-												TIME IN
-										</th>																			
-										
-										<th class='BorderInfDch'>
-												DATE OUT
-										</th>										
-
-										<th class='BorderInfDch'>
-												TIME OUT
-										</th>
-										
-										<th class='BorderInfDch'>
-												TIME TOT
-										</th>
-										
-									</tr>");
-			
-			while($rowb = mysqli_fetch_assoc($qb)){
-
-			print (	"<tr align='center'>
-									
-						<td class='BorderInfDch' align='center'>
-																".$rowb['id']."
-						</td>
-
-						<td class='BorderInfDch' align='left'>
-																".$rowb['din']."
-						</td>
-						
-						<td class='BorderInfDch' align='right'>
-																".$rowb['tin']."
-						</td>
-						
-						<td class='BorderInfDch' align='right'>
-																".$rowb['dout']."
-						</td>
-
-						<td class='BorderInfDch' align='right'>
-																".$rowb['tout']."
-						</td>
-
-						<td class='BorderInfDch' align='right'>
-																".$rowb['ttot']."
-						</td>
-
+			print ("<table align='center'>
+					<tr>
+						<th colspan=6 class='BorderInf'>
+						".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref'].". "
+						   .mysqli_num_rows($qb)." RESULTADOS.
+						</th>
+					</tr>
+					<tr>
+						<th class='BorderInfDch'>ID</th>				
+						<th class='BorderInfDch'>DATE IN</th>
+						<th class='BorderInfDch'>TIME IN</th>
+						<th class='BorderInfDch'>DATE OUT</th>										
+						<th class='BorderInfDch'>TIME OUT</th>
+						<th class='BorderInfDch'>TIME TOT</th>
 					</tr>");
-					
-								} /* Fin del while.*/ 
 
-									print("		<tr>
-										<td colspan='6' class='BorderInf'>
-										</td>
-									</tr>
-						
-									<tr>
-										
-										<td colspan='3' class='BorderInf' align='right'>
-												HORAS TOTALES:
-										</td>
-																				
-										
-										<td colspan='3' class='BorderInf' align='left'>
-												".$sumatodo."
-										</td>
-										
-																				
-									</tr>
-						</table>
-								");
-		
-						} /* Fin segundo else anidado en if */
+			while($rowb = mysqli_fetch_assoc($qb)){
+				print ("<tr align='center'>
+							<td class='BorderInfDch' align='center'>".$rowb['id']."</td>
+							<td class='BorderInfDch' align='left'>".$rowb['din']."</td>
+							<td class='BorderInfDch' align='right'>".$rowb['tin']."</td>
+							<td class='BorderInfDch' align='right'>".$rowb['dout']."</td>
+							<td class='BorderInfDch' align='right'>".$rowb['tout']."</td>
+							<td class='BorderInfDch' align='right'>".$rowb['ttot']."</td>
+						</tr>");
+				} /* Fin del while.*/ 
 
-			} /* Fin de primer else . */
+				print("<tr>
+							<td colspan='6' class='BorderInf'></td>
+						</tr>
+						<tr>
+							<td colspan='3' class='BorderInf' align='right'>
+								HORAS TOTALES:
+							</td>
+							<td colspan='3' class='BorderInf' align='left'>".$sumatodo."</td>
+						</tr>
+					</table>");
 		
-	}	/* Final ver_todo(); */
+		} /* Fin segundo else anidado en if */
+	} /* Fin de primer else . */
+	
+}	/* Final ver_todo(); */
 
 
 				   ////////////////////				   ////////////////////

@@ -24,7 +24,7 @@
 		$winini ="<div id='ventana-flotante'>
 		<a class='cerrar' href='javascript:void(0);' onclick='document.getElementById(&apos;ventana-flotante&apos;).className = &apos;oculto&apos;'>X</a>
 		<div class='contenido' style=\"text-align:center; padding-top:22px\">
-		DOWNLOAD THIS APP FREE AND MORE IN:<br/>
+		DOWNLOAD THIS APP FREE AND MORE IN:<br>
 		<a href=\"http://juanbarrospazos.blogspot.com.es/\" target=\"_blank\" >	
 		http://juanbarrospazos.blogspot.com.es/</a></div></div>";
 	}else{ 
