@@ -14,7 +14,7 @@ session_start();
 	if(isset($_GET['ocultop'])){	process_pinqr();
 									//ayear();
 									errors();
-	}elseif (isset($_POST['cancel'])) {	
+	}elseif(isset($_POST['cancel'])) {	
 							unset($_SESSION['usuarios']); 
 	}else { process_pinqr();
 		  	//ayear();
@@ -253,7 +253,7 @@ function process_pinqr(){
 			}
 		} // FIN elseif($count1 > 0)
 	
-	}else{	// FIN if ($cp > 0)
+	}else{	// FIN if($cp > 0)
 		print("<div class='centradiv' >
 					<font color='#F1BD2D'>NO EXISTE EL USUARIO.
 						<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
@@ -286,6 +286,7 @@ function suma_todo(){
 	$vname = $tabla1."_".$dyt;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';
 
 }

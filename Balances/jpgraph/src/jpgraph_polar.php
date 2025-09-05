@@ -521,7 +521,7 @@ class PolarAxis extends Axis {
         }
 
 
-        if (!$this->hide_labels) {
+        if(!$this->hide_labels) {
             $this->StrokeLabels($pos,false);
         }
         $this->img->SetColor($this->radius_tick_color);
@@ -583,7 +583,7 @@ class PolarAxis extends Axis {
                 ++$i;
             }
         }
-        if (!$this->hide_labels) {
+        if(!$this->hide_labels) {
             $this->StrokeLabels($pos,false);
         }
         $this->title->Stroke($this->img);

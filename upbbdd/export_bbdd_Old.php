@@ -38,7 +38,7 @@
 
 // EXPORTA LA TABLA ADMIN DEL SISTEMA //
 
-if (trim($_POST['tabla']) == $_SESSION['clave']."admin" ){
+if(trim($_POST['tabla']) == $_SESSION['clave']."admin" ){
 $campo = 'id,ref,Nivel,Nombre,Apellidos,myimg,doc,dni,ldni,Email,Usuario,Password,Pass,Direccion,Tlf1,Tlf2,lastin,lastout,visitadmin';
 $texc = '`id`, `ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Pass`, `Direccion`, `Tlf1`, `Tlf2`, `lastin`, `lastout`, `visitadmin`';
 		$id = "`id`";
@@ -80,7 +80,7 @@ $c4 = "\nENGINE=MyISAM  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INC
 
 // EXPORTA LA TABLA VISITAS ADMIN DEL SISTEMA //
 
-elseif (trim($_POST['tabla']) == $_SESSION['clave']."visitasadmin" ){
+elseif(trim($_POST['tabla']) == $_SESSION['clave']."visitasadmin" ){
 $campo = 'idv,visita,admin,deneg,acceso';
 $texc = '`idv`, `visita`, `admin`, `deneg`, `acceso`';
 		$id = "`idv`";
@@ -148,7 +148,7 @@ $filename = "bbdd/TBL_".$valor."_DT_".$datein.".sql";
 		if(!$qb){
 	print("<font color='#FF0000'>214 Se ha producido un error: </form><br/>".mysqli_error($db)."<br/>");
 			
-		} else {
+		}else{
 			if(mysqli_num_rows($qb)== 0){
 						print("
 			<table align='center' style='border:1; margin-top:2px' width='auto'>
@@ -160,7 +160,7 @@ $filename = "bbdd/TBL_".$valor."_DT_".$datein.".sql";
 				</tr>
 				</table>");	
 
-				} else { 
+				}else{ 
 			
 			$campos = explode(',',$campo);
 			$count = count($campos);

@@ -143,7 +143,7 @@ class GTextTableCell {
     function SetGridWeight($aLeft=null,$aTop=null,$aBottom=null,$aRight=null) {
         $weight_arr = array($aLeft, $aTop, $aBottom, $aRight);
         for ($i = 0; $i < count($weight_arr); $i++) {
-            if ($weight_arr[$i] === "") {
+            if($weight_arr[$i] === "") {
                 $weight_arr[$i] = 0;
             }
         }

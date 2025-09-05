@@ -14,10 +14,10 @@ session_start();
 	if(isset($_GET['ocultop'])){	process_pinqr();
 									//ayear();
 									errors();
-	}elseif (isset($_POST['cancel'])) {	
+	}elseif(isset($_POST['cancel'])) {	
 							unset($_SESSION['usuarios']); 
-	}else { process_pinqr();
-		  	//ayear();
+	}else{ 	process_pinqr();
+			//ayear();
 		   	errors();
 	}
 												
@@ -45,8 +45,7 @@ function process_pinqr(){
 		$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
 		$tabla1 = strtolower($tabla1);
 		global $vname;
-		$vname = $tabla1."_".date('Y');
-		$vname = "`".$vname."`";
+		$vname = "`".$tabla1."_".date('Y')."`";
 
 			////////////////////		**********  		////////////////////
 
@@ -72,7 +71,7 @@ function process_pinqr(){
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 
-			$tabla = "<ul class='centradiv'>
+	$tabla = "<ul class='centradiv'>
 				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
 				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
 				<li class='liCentra'>
@@ -93,10 +92,9 @@ function process_pinqr(){
 				setTimeout('redir()',8000);
 			</script>";	
 
-		global $vname;			$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-		$tabla1 = strtolower($tabla1);
-		$vname = $tabla1."_".date('Y');
-		$vname = "`".$vname."`";
+		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		global $vname;
+		$vname = "`".$tabla1."_".date('Y')."`";
 
 		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -127,7 +125,7 @@ function process_pinqr(){
 	}elseif($count1 > 0){ // FICHA SALIDA.
 		
 		global $dout;			$dout = date('Y-m-d');
-		global $tout;		global $ttot;
+		global $tout;			global $ttot;
 		/*
 			HORA ORIGINAL DE SALIDA DEL SCRIPT
 			$tout = date('H:i:s');
@@ -229,31 +227,31 @@ function process_pinqr(){
 
 		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
-			if(mysqli_query($db, $sqla)){ 
+		if(mysqli_query($db, $sqla)){ 
 					
-				print($tabla);
-				suma_todo();
+			print($tabla);
+			suma_todo();
 					
-				$dir = "Users/".$_SESSION['usuarios']."/mrficha";
+			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 
-				global $sumatodo;
-				global $text;
-				$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
-				$text = $text.PHP_EOL."**********".PHP_EOL;
-				$rmfdocu = $_SESSION['usuarios'];
-				$rmfdate = date('Y_m');
-				$rmftext = $text.PHP_EOL;
-				$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-				$rmf = fopen($filename, 'ab+');
-				fwrite($rmf, $rmftext);
-				fclose($rmf);
+			global $sumatodo;
+			global $text;
+			$text = $text.PHP_EOL."** H. TOT. MES: ".$sumatodo;
+			$text = $text.PHP_EOL."**********".PHP_EOL;
+			$rmfdocu = $_SESSION['usuarios'];
+			$rmfdate = date('Y_m');
+			$rmftext = $text.PHP_EOL;
+			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+			$rmf = fopen($filename, 'ab+');
+			fwrite($rmf, $rmftext);
+			fclose($rmf);
 			
-			}else{	print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
-					global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
-			}
-		} // FIN elseif($count1 > 0)
+		}else{	print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
+				global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
+		}
+	} // FIN elseif($count1 > 0)
 	
-	}else{	// FIN if ($cp > 0)
+	}else{	// FIN if($cp > 0)
 		print("<div class='centradiv' >
 					<font color='#F1BD2D'>NO EXISTE EL USUARIO.
 						<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
@@ -280,12 +278,11 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;
-	$vname = $tabla1."_".$dyt;
-	$vname = "`".$vname."`";
+	$vname = "`".$tabla1."_".$dyt."`";
 
+	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';
 
 }
@@ -417,18 +414,12 @@ function ayear(){
 				 ////////////////////				  ///////////////////
 	
 function salir(){	
-	unset($_SESSION['id']);
-	unset($_SESSION['Nivel']);
-	unset($_SESSION['Nombre']);
-	unset($_SESSION['Apellidos']);
-	unset($_SESSION['doc']);
-	unset($_SESSION['dni']);
-	unset($_SESSION['ldni']);
-	unset($_SESSION['Email']);
-	unset($_SESSION['Usuario']);
-	unset($_SESSION['Password']);
-	unset($_SESSION['Direccion']);
-	unset($_SESSION['Tlf1']);
+	unset($_SESSION['id']);				unset($_SESSION['Nivel']);
+	unset($_SESSION['Nombre']);			unset($_SESSION['Apellidos']);
+	unset($_SESSION['doc']);			unset($_SESSION['dni']);
+	unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
 	unset($_SESSION['Tlf2']);
 }
 	

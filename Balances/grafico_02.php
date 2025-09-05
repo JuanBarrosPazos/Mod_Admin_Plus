@@ -15,12 +15,13 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin') {
+if($_SESSION['Nivel'] == 'admin') {
 				
-		if($_POST['grafico2']){	a();
-								process_form();
-									} 
-		} else { require '../Inclu/tabla_permisos.php'; }
+	if(isset($_POST['grafico2'])){	a();
+									process_form();
+	}else{ }
+
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -82,18 +83,18 @@ function process_form(){
 		
 global $timemes;
 $timemes = trim($_SESSION['gtime']);
-if ($timemes == '01'){$timemes = 'ENERO';}
-elseif ($timemes == '02'){$timemes = 'FEBRERO';}
-elseif ($timemes == '03'){$timemes = 'MARZO';}
-elseif ($timemes == '04'){$timemes = 'ABRIL';}
-elseif ($timemes == '05'){$timemes = 'MAYO';}
-elseif ($timemes == '06'){$timemes = 'JUNIO';}
-elseif ($timemes == '07'){$timemes = 'JULIO';}
-elseif ($timemes == '08'){$timemes = 'AGOSTO';}
-elseif ($timemes == '09'){$timemes = 'SEPTIEMBRE';}
-elseif ($timemes == '10'){$timemes = 'OCTUBRE';}
-elseif ($timemes == '11'){$timemes = 'NOVIEMBRE';}
-elseif ($timemes == '12'){$timemes = 'DICIEMBRE';}
+if($timemes == '01'){$timemes = 'ENERO';}
+elseif($timemes == '02'){$timemes = 'FEBRERO';}
+elseif($timemes == '03'){$timemes = 'MARZO';}
+elseif($timemes == '04'){$timemes = 'ABRIL';}
+elseif($timemes == '05'){$timemes = 'MAYO';}
+elseif($timemes == '06'){$timemes = 'JUNIO';}
+elseif($timemes == '07'){$timemes = 'JULIO';}
+elseif($timemes == '08'){$timemes = 'AGOSTO';}
+elseif($timemes == '09'){$timemes = 'SEPTIEMBRE';}
+elseif($timemes == '10'){$timemes = 'OCTUBRE';}
+elseif($timemes == '11'){$timemes = 'NOVIEMBRE';}
+elseif($timemes == '12'){$timemes = 'DICIEMBRE';}
 
 if($_SESSION['gtime'] == ""){ 
 					global $timeanho;

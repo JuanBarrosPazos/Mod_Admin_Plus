@@ -173,12 +173,12 @@
         {
             $barcode_array = array();
             
-            if (!is_array($mode))
+            if(!is_array($mode))
                 $mode = explode(',', $mode);
                 
             $eccLevel = 'L';
                 
-            if (count($mode) > 1) {
+            if(count($mode) > 1) {
                 $eccLevel = $mode[1];
             }
                 
@@ -213,7 +213,7 @@
 			$mask = new QRmask();
             for ($a=1; $a <= QRSPEC_VERSION_MAX; $a++) {
                 $frame = QRspec::newFrame($a);
-                if (QR_IMAGE) {
+                if(QR_IMAGE) {
                     $fileName = QR_CACHE_DIR.'frame_'.$a.'.png';
                     QRimage::png(self::binarize($frame), $fileName, 1, 0);
                 }
@@ -230,11 +230,11 @@
         //----------------------------------------------------------------------
         public static function log($outfile, $err)
         {
-            if (QR_LOG_DIR !== false) {
-                if ($err != '') {
-                    if ($outfile !== false) {
+            if(QR_LOG_DIR !== false) {
+                if($err != '') {
+                    if($outfile !== false) {
                         file_put_contents(QR_LOG_DIR.basename($outfile).'-errors.txt', date('Y-m-d H:i:s').': '.$err, FILE_APPEND);
-                    } else {
+                    }else{
                         file_put_contents(QR_LOG_DIR.'errors.txt', date('Y-m-d H:i:s').': '.$err, FILE_APPEND);
                     }
                 }    
@@ -258,7 +258,7 @@
             list($usec, $sec) = explode(" ", microtime());
             $time = ((float)$usec + (float)$sec);
             
-            if (!isset($GLOBALS['qr_time_bench']))
+            if(!isset($GLOBALS['qr_time_bench']))
                 $GLOBALS['qr_time_bench'] = array();
             
             $GLOBALS['qr_time_bench'][$markerId] = $time;
@@ -278,9 +278,9 @@
                     <tbody>';
 
             foreach($GLOBALS['qr_time_bench'] as $markerId=>$thisTime) {
-                if ($p > 0) {
+                if($p > 0) {
                     echo '<tr><th style="text-align:right">till '.$markerId.': </th><td>'.number_format($thisTime-$lastTime, 6).'s</td></tr>';
-                } else {
+                }else{
                     $startTime = $thisTime;
                 }
                 
@@ -438,14 +438,14 @@
         //----------------------------------------------------------------------
         public static function lengthIndicator($mode, $version)
         {
-            if ($mode == QR_MODE_STRUCTURE)
+            if($mode == QR_MODE_STRUCTURE)
                 return 0;
                 
-            if ($version <= 9) {
+            if($version <= 9) {
                 $l = 0;
-            } else if ($version <= 26) {
+            } else if($version <= 26) {
                 $l = 1;
-            } else {
+            }else{
                 $l = 2;
             }
 
@@ -462,7 +462,7 @@
                 $l = 0;
             } else if($version <= 26) {
                 $l = 1;
-            } else {
+            }else{
                 $l = 2;
             }
 
@@ -529,7 +529,7 @@
         
         public static function getEccSpec($version, $level, array &$spec)
         {
-            if (count($spec) < 5) {
+            if(count($spec) < 5) {
                 $spec = array(0,0,0,0,0);
             }
 
@@ -544,7 +544,7 @@
                 $spec[2] = (int)($ecc / $b1);
                 $spec[3] = 0; 
                 $spec[4] = 0;
-            } else {
+            }else{
                 $spec[0] = $b1;
                 $spec[1] = (int)($data / ($b1 + $b2));
                 $spec[2] = (int)($ecc  / ($b1 + $b2));
@@ -608,7 +608,7 @@
             $d = self::$alignmentPattern[$version][1] - self::$alignmentPattern[$version][0];
             if($d < 0) {
                 $w = 2;
-            } else {
+            }else{
                 $w = (int)(($width - self::$alignmentPattern[$version][0]) / $d + 2);
             }
 
@@ -791,7 +791,7 @@
         //----------------------------------------------------------------------
         public static function debug($frame, $binary_mode = false)
         {
-            if ($binary_mode) {
+            if($binary_mode) {
             
                     foreach ($frame as &$frameLine) {
                         $frameLine = join('<span class="m">&nbsp;&nbsp;</span>', explode('0', $frameLine));
@@ -807,7 +807,7 @@
                     echo join("<br/ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $frame);
                     echo '</tt></pre><br/ ><br/ ><br/ ><br/ ><br/ ><br/ >';
             
-            } else {
+            }else{
             
                 foreach ($frame as &$frameLine) {
                     $frameLine = join('<span class="m">&nbsp;</span>',  explode("\xc0", $frameLine));
@@ -864,14 +864,14 @@
                 
                 $fileName = QR_CACHE_DIR.'frame_'.$version.'.dat';
                 
-                if (QR_CACHEABLE) {
-                    if (file_exists($fileName)) {
+                if(QR_CACHEABLE) {
+                    if(file_exists($fileName)) {
                         self::$frames[$version] = self::unserial(file_get_contents($fileName));
-                    } else {
+                    }else{
                         self::$frames[$version] = self::createFrame($version);
                         file_put_contents($fileName, self::serial(self::$frames[$version]));
                     }
-                } else {
+                }else{
                     self::$frames[$version] = self::createFrame($version);
                 }
             }
@@ -934,10 +934,10 @@
         {
             $image = self::image($frame, $pixelPerPoint, $outerFrame);
             
-            if ($filename === false) {
+            if($filename === false) {
                 Header("Content-type: image/png");
                 ImagePng($image);
-            } else {
+            }else{
                 if($saveandprint===TRUE){
                     ImagePng($image, $filename);
                     header("Content-type: image/png");
@@ -955,10 +955,10 @@
         {
             $image = self::image($frame, $pixelPerPoint, $outerFrame);
             
-            if ($filename === false) {
+            if($filename === false) {
                 Header("Content-type: image/jpeg");
                 ImageJpeg($image, null, $q);
-            } else {
+            }else{
                 ImageJpeg($image, $filename, $q);            
             }
             
@@ -983,7 +983,7 @@
 
             for($y=0; $y<$h; $y++) {
                 for($x=0; $x<$w; $x++) {
-                    if ($frame[$y][$x] == '1') {
+                    if($frame[$y][$x] == '1') {
                         ImageSetPixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
                     }
                 }
@@ -1044,7 +1044,7 @@
         {
             $setData = array_slice($data, 0, $size);
             
-            if (count($setData) < $size) {
+            if(count($setData) < $size) {
                 $setData = array_merge($setData, array_fill(0,$size-count($setData),0));
             }
         
@@ -1160,7 +1160,7 @@
                     $val = (ord($this->data[$i]) << 8) | ord($this->data[$i+1]);
                     if($val <= 0x9ffc) {
                         $val -= 0x8140;
-                    } else {
+                    }else{
                         $val -= 0xc140;
                     }
                     
@@ -1247,7 +1247,7 @@
                     unset($st1);
                     unset($st2);
                     
-                } else {
+                }else{
                     
                     $ret = 0;
                     
@@ -1286,7 +1286,7 @@
         //----------------------------------------------------------------------
         public function __construct($version = 0, $level = QR_ECLEVEL_L)
         {
-            if ($version < 0 || $version > QRSPEC_VERSION_MAX || $level > QR_ECLEVEL_H) {
+            if($version < 0 || $version > QRSPEC_VERSION_MAX || $level > QR_ECLEVEL_H) {
                 throw new Exception('Invalid version no');
                 return NULL;
             }
@@ -1444,7 +1444,7 @@
         public static function checkModeAn($size, $data)
         {
             for($i=0; $i<$size; $i++) {
-                if (self::lookAnTable(ord($data[$i])) == -1) {
+                if(self::lookAnTable(ord($data[$i])) == -1) {
                     return false;
                 }
             }
@@ -1540,7 +1540,7 @@
                 $prev = $version;
                 $bits = $this->estimateBitStreamSize($prev);
                 $version = QRspec::getMinimumVersion((int)(($bits + 7) / 8), $this->level);
-                if ($version < 0) {
+                if($version < 0) {
                     return -1;
                 }
             } while ($version > $prev);
@@ -1628,7 +1628,7 @@
                     return -1;
                 } else if($ver > $this->getVersion()) {
                     $this->setVersion($ver);
-                } else {
+                }else{
                     break;
                 }
             }
@@ -1643,11 +1643,11 @@
             $maxwords = QRspec::getDataLength($this->version, $this->level);
             $maxbits = $maxwords * 8;
 
-            if ($maxbits == $bits) {
+            if($maxbits == $bits) {
                 return 0;
             }
 
-            if ($maxbits - $bits < 5) {
+            if($maxbits - $bits < 5) {
                 return $bstream->appendNum($maxbits - $bits, 0);
             }
 
@@ -1793,7 +1793,7 @@
             for($i=0; $i<$bits; $i++) {
                 if($num & $mask) {
                     $bstream->data[$i] = 1;
-                } else {
+                }else{
                     $bstream->data[$i] = 0;
                 }
                 $mask = $mask >> 1;
@@ -1814,7 +1814,7 @@
                 for($j=0; $j<8; $j++) {
                     if($data[$i] & $mask) {
                         $bstream->data[$p] = 1;
-                    } else {
+                    }else{
                         $bstream->data[$p] = 0;
                     }
                     $p++;
@@ -1828,7 +1828,7 @@
         //----------------------------------------------------------------------
         public function append(QRbitstream $arg)
         {
-            if (is_null($arg)) {
+            if(is_null($arg)) {
                 return -1;
             }
             
@@ -1849,7 +1849,7 @@
         //----------------------------------------------------------------------
         public function appendNum($bits, $num)
         {
-            if ($bits == 0) 
+            if($bits == 0) 
                 return 0;
 
             $b = QRbitstream::newFromNum($bits, $num);
@@ -1866,7 +1866,7 @@
         //----------------------------------------------------------------------
         public function appendBytes($size, $data)
         {
-            if ($size == 0) 
+            if($size == 0) 
                 return 0;
 
             $b = QRbitstream::newFromBytes($size, $data);
@@ -1976,7 +1976,7 @@
         //----------------------------------------------------------------------
         public static function isdigitat($str, $pos)
         {    
-            if ($pos >= strlen($str))
+            if($pos >= strlen($str))
                 return false;
             
             return ((ord($str[$pos]) >= ord('0'))&&(ord($str[$pos]) <= ord('9')));
@@ -1985,7 +1985,7 @@
         //----------------------------------------------------------------------
         public static function isalnumat($str, $pos)
         {
-            if ($pos >= strlen($str))
+            if($pos >= strlen($str))
                 return false;
                 
             return (QRinput::lookAnTable(ord($str[$pos])) >= 0);
@@ -1994,7 +1994,7 @@
         //----------------------------------------------------------------------
         public function identifyMode($pos)
         {
-            if ($pos >= strlen($this->dataStr)) 
+            if($pos >= strlen($this->dataStr)) 
                 return QR_MODE_NUL;
                 
             $c = $this->dataStr[$pos];
@@ -2005,7 +2005,7 @@
                 return QR_MODE_AN;
             } else if($this->modeHint == QR_MODE_KANJI) {
             
-                if ($pos+1 < strlen($this->dataStr)) 
+                if($pos+1 < strlen($this->dataStr)) 
                 {
                     $d = $this->dataStr[$pos+1];
                     $word = (ord($c) << 8) | ord($d);
@@ -2076,10 +2076,10 @@
                          
                     if($dif < 0) {
                         break;
-                    } else {
+                    }else{
                         $p = $q;
                     }
-                } else {
+                }else{
                     $p++;
                 }
             }
@@ -2143,7 +2143,7 @@
                          - QRinput::estimateBitsMode8($q); // - 4 - l8
                     if($dif < 0) {
                         break;
-                    } else {
+                    }else{
                         $p = $q;
                     }
                 } else if($mode == QR_MODE_AN) {
@@ -2156,10 +2156,10 @@
                          - QRinput::estimateBitsMode8($q); // - 4 - l8
                     if($dif < 0) {
                         break;
-                    } else {
+                    }else{
                         $p = $q;
                     }
-                } else {
+                }else{
                     $p++;
                 }
             }
@@ -2187,7 +2187,7 @@
                     case QR_MODE_NUM: $length = $this->eatNum(); break;
                     case QR_MODE_AN:  $length = $this->eatAn(); break;
                     case QR_MODE_KANJI:
-                        if ($hint == QR_MODE_KANJI)
+                        if($hint == QR_MODE_KANJI)
                                 $length = $this->eatKanji();
                         else    $length = $this->eat8();
                         break;
@@ -2212,8 +2212,8 @@
                 $mode = self::identifyMode(substr($this->dataStr, $p), $this->modeHint);
                 if($mode == QR_MODE_KANJI) {
                     $p += 2;
-                } else {
-                    if (ord($this->dataStr[$p]) >= ord('a') && ord($this->dataStr[$p]) <= ord('z')) {
+                }else{
+                    if(ord($this->dataStr[$p]) >= ord('a') && ord($this->dataStr[$p]) <= ord('z')) {
                         $this->dataStr[$p] = chr(ord($this->dataStr[$p]) - 32);
                     }
                     $p++;
@@ -2369,9 +2369,9 @@
 
                 // Multiply rs->genpoly[] by  @**(root + x)
                 for ($j = $i; $j > 0; $j--) {
-                    if ($rs->genpoly[$j] != 0) {
+                    if($rs->genpoly[$j] != 0) {
                         $rs->genpoly[$j] = $rs->genpoly[$j-1] ^ $rs->alpha_to[$rs->modnn($rs->index_of[$rs->genpoly[$j]] + $root)];
-                    } else {
+                    }else{
                         $rs->genpoly[$j] = $rs->genpoly[$j-1];
                     }
                 }
@@ -2422,7 +2422,7 @@
                 array_shift($parity);
                 if($feedback != $A0) {
                     array_push($parity, $ALPHA_TO[$this->modnn($feedback + $GENPOLY[0])]);
-                } else {
+                }else{
                     array_push($parity, 0);
                 }
             }
@@ -2514,14 +2514,14 @@
                 if($format & 1) {
                     $blacks += 2;
                     $v = 0x85;
-                } else {
+                }else{
                     $v = 0x84;
                 }
                 
                 $frame[8][$width - 1 - $i] = chr($v);
                 if($i < 6) {
                     $frame[$i][8] = chr($v);
-                } else {
+                }else{
                     $frame[$i + 1][8] = chr($v);
                 }
                 $format = $format >> 1;
@@ -2531,14 +2531,14 @@
                 if($format & 1) {
                     $blacks += 2;
                     $v = 0x85;
-                } else {
+                }else{
                     $v = 0x84;
                 }
                 
                 $frame[$width - 7 + $i][8] = chr($v);
                 if($i == 0) {
                     $frame[8][7] = chr($v);
-                } else {
+                }else{
                     $frame[8][6 - $i] = chr($v);
                 }
                 
@@ -2567,7 +2567,7 @@
                 for($x=0; $x<$width; $x++) {
                     if(ord($frame[$y][$x]) & 0x80) {
                         $bitMask[$y][$x] = 0;
-                    } else {
+                    }else{
                         $maskFunc = call_user_func(array($this, 'mask'.$maskNo), $x, $y);
                         $bitMask[$y][$x] = ($maskFunc == 0)?1:0;
                     }
@@ -2609,20 +2609,20 @@
             
             $fileName = QR_CACHE_DIR.'mask_'.$maskNo.DIRECTORY_SEPARATOR.'mask_'.$width.'_'.$maskNo.'.dat';
 
-            if (QR_CACHEABLE) {
-                if (file_exists($fileName)) {
+            if(QR_CACHEABLE) {
+                if(file_exists($fileName)) {
                     $bitMask = self::unserial(file_get_contents($fileName));
-                } else {
+                }else{
                     $bitMask = $this->generateMaskNo($maskNo, $width, $s, $d);
-                    if (!file_exists(QR_CACHE_DIR.'mask_'.$maskNo))
+                    if(!file_exists(QR_CACHE_DIR.'mask_'.$maskNo))
                         mkdir(QR_CACHE_DIR.'mask_'.$maskNo);
                     file_put_contents($fileName, self::serial($bitMask));
                 }
-            } else {
+            }else{
                 $bitMask = $this->generateMaskNo($maskNo, $width, $s, $d);
             }
 
-            if ($maskGenOnly)
+            if($maskGenOnly)
                 return;
                 
             $d = $s;
@@ -2690,7 +2690,7 @@
                 
                 $frameY = $frame[$y];
                 
-                if ($y>0)
+                if($y>0)
                     $frameYM = $frame[$y-1];
                 
                 for($x=0; $x<$width; $x++) {
@@ -2710,7 +2710,7 @@
                         if((ord($frameY[$x]) ^ ord($frameY[$x-1])) & 1) {
                             $head++;
                             $this->runLength[$head] = 1;
-                        } else {
+                        }else{
                             $this->runLength[$head]++;
                         }
                     }
@@ -2732,7 +2732,7 @@
                         if((ord($frame[$y][$x]) ^ ord($frame[$y-1][$x])) & 1) {
                             $head++;
                             $this->runLength[$head] = 1;
-                        } else {
+                        }else{
                             $this->runLength[$head]++;
                         }
                     }
@@ -2754,7 +2754,7 @@
             
             $checked_masks = array(0,1,2,3,4,5,6,7);
             
-            if (QR_FIND_FROM_RANDOM !== false) {
+            if(QR_FIND_FROM_RANDOM !== false) {
             
                 $howManuOut = 8-(QR_FIND_FROM_RANDOM % 9);
                 for ($i = 0; $i <  $howManuOut; $i++) {
@@ -2942,7 +2942,7 @@
                 $row = ($this->count - $this->dataLength) % $this->blocks;
                 $col = ($this->count - $this->dataLength) / $this->blocks;
                 $ret = $this->rsblocks[$row]->ecc[$col];
-            } else {
+            }else{
                 return 0;
             }
             $this->count++;
@@ -3012,12 +3012,12 @@
             $maskObj = new QRmask();
             if($mask < 0) {
             
-                if (QR_FIND_BEST_MASK) {
+                if(QR_FIND_BEST_MASK) {
                     $masked = $maskObj->mask($width, $frame, $input->getErrorCorrectionLevel());
-                } else {
+                }else{
                     $masked = $maskObj->makeMask($width, $frame, (intval(QR_DEFAULT_MASK) % 8), $input->getErrorCorrectionLevel());
                 }
-            } else {
+            }else{
                 $masked = $maskObj->makeMask($width, $frame, $mask, $input->getErrorCorrectionLevel());
             }
             
@@ -3152,7 +3152,7 @@
                 if($this->bit == 0) {
                     $x--;
                     $this->bit++;
-                } else {
+                }else{
                     $x++;
                     $y += $this->dir;
                     $this->bit--;
@@ -3168,7 +3168,7 @@
                             $y = 9;
                         }
                     }
-                } else {
+                }else{
                     if($y == $w) {
                         $y = $w - 1;
                         $x -= 2;
@@ -3249,7 +3249,7 @@
 
             if($this->eightbit) {
                 $code->encodeString8bit($intext, $this->version, $this->level);
-            } else {
+            }else{
                 $code->encodeString($intext, $this->version, $this->level, $this->hint, $this->casesensitive);
             }
             
@@ -3263,15 +3263,15 @@
 
             if($this->eightbit) {
                 $code->encodeString8bit($intext, $this->version, $this->level);
-            } else {
+            }else{
                 $code->encodeString($intext, $this->version, $this->level, $this->hint, $this->casesensitive);
             }
             
             QRtools::markTime('after_encode');
             
-            if ($outfile!== false) {
+            if($outfile!== false) {
                 file_put_contents($outfile, join("\n", QRtools::binarize($code->data)));
-            } else {
+            }else{
                 return QRtools::binarize($code->data);
             }
         }
@@ -3286,7 +3286,7 @@
                 $err = ob_get_contents();
                 ob_end_clean();
                 
-                if ($err != '')
+                if($err != '')
                     QRtools::log($outfile, $err);
                 
                 $maxSize = (int)(QR_PNG_MAXIMUM_SIZE / (count($tab)+2*$this->margin));

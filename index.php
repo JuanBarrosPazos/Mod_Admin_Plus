@@ -62,8 +62,7 @@ function inittot(){
 			$text = "ARCHIVO DE CONEXIÓN ORIGINAL\n";
 			ini_log();
 			$_SESSION['inst'] = "noinst";
-			global $inst;
-			$inst = '';
+			global $inst;			$inst = '';
 	}else{
 		// SE INTENTA LA CONEXION A LA BBDD
 		// SI NO ES POSIBLE CONECTAR SE APLICAN LOS PARAMETROS "noinst"
@@ -286,7 +285,7 @@ function deldirua(){
 														{unlink($dir1.$file1);}
 													}
 											rmdir ($carpeta1);
-											} else { }
+											}else{ }
 											
 				$carpeta2 = "Users/".$rown['ref']."/log";
 				if(file_exists($carpeta2)){ $dir2 = $carpeta2."/";
@@ -296,7 +295,7 @@ function deldirua(){
 														{unlink($dir2.$file2);}
 													}
 											rmdir ($carpeta2);
-											} else { }
+											}else{ }
 
 				$carpeta3 = "Users/".$rown['ref']."/mrficha";
 				if(file_exists($carpeta3)){ $dir3 = $carpeta3."/";

@@ -11,21 +11,21 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
+if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
 
 	if(isset($_GET['ocultop'])){ process_pinqr();
 						  		//ayear();
 						  		errors();
 								}
 
-	elseif (isset($_POST['cancel'])) {	unset($_SESSION['usuarios']); }
+	elseif(isset($_POST['cancel'])) {	unset($_SESSION['usuarios']); }
 
 	else { process_pinqr();
 		   //ayear();
 		   errors();
 		 	}
 
-		} else { require '../Inclu/tabla_permisos.php'; }
+		}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -46,23 +46,21 @@ function process_pinqr(){
 	
 	$_SESSION['usuarios'] = strtolower($rp['ref']);
 	
-	if ($cp > 0){
+	if($cp > 0){
 		
-	ayear();	
-	
-	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+		ayear();	
+		
+		global $vname;
+		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		$vname = "`".$tabla1."_".date('Y')."`";
 
 			////////////////////		**********  		////////////////////
 
-	// FICHA ENTRADA O SALIDA.
-	
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
-	$q1 = mysqli_query($db, $sql1);
-	$count1 = mysqli_num_rows($q1);
+		// FICHA ENTRADA O SALIDA.
+		
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+		$q1 = mysqli_query($db, $sql1);
+		$count1 = mysqli_num_rows($q1);
 
 			////////////////////		**********  		////////////////////
 
@@ -70,9 +68,8 @@ function process_pinqr(){
 	
 	if($count1 < 1){
 		
-		global $din;
+		global $din;				$din = date('Y-m-d');
 		global $tin;
-		$din = date('Y-m-d');
 
 		/*
 			HORA ORIGINAL DE ENTRADA DEL SCRIPT
@@ -83,12 +80,9 @@ function process_pinqr(){
 
 			////////////////////		***********  		////////////////////
 
-		global $dout;
-		global $tout;
-		global $ttot;
-		$dout = '';
-		$tout = '00:00:00';
-		$ttot = '00:00:00';
+		global $dout;				$dout = '';
+		global $tout;				$tout = '00:00:00';
+		global $ttot;				$ttot = '00:00:00';
 		
 	$tabla = "<table align='center' style='margin-top:10px' width=300px >
 				<tr>
@@ -152,7 +146,7 @@ function process_pinqr(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 	
-		} else {print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
+		}else{print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
 					global $texerror;
 					$texerror = PHP_EOL."\t ".mysqli_error($db);
 				}
@@ -324,7 +318,7 @@ function process_pinqr(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 	
-	} else {print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
+	}else{print("* MODIFIQUE LA ENTRADA L.368: ".mysqli_error($db));
 					global $texerror;
 					$texerror = PHP_EOL."\t ".mysqli_error($db);
 				}
@@ -379,6 +373,7 @@ function suma_todo(){
 	$vname = $tabla1."_".$dyt;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 }
@@ -468,7 +463,7 @@ function tcl(){
 	if(mysqli_query($db, $tcl)){	global $dat4;
 									$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
 			
-				} else {	global $dat4;
+				}else{	global $dat4;
 							$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 							}
 	}

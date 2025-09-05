@@ -125,7 +125,7 @@ define('ACTINFO_2D',0);
 
 
 // Check if array_fill() exists
-if (!function_exists('array_fill')) {
+if(!function_exists('array_fill')) {
     function array_fill($iStart, $iLen, $vValue) {
         $aResult = array();
         for ($iCount = $iStart; $iCount < $iLen + $iStart; $iCount++) {

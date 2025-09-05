@@ -7,7 +7,7 @@
 									$defaults = $_POST;
 									//print("* ".$_SESSION['usuarios']);
 									}
-	elseif (isset($_SESSION['usuarios']) == '') {}
+	elseif(isset($_SESSION['usuarios']) == '') {}
 
 	global $db;
 	global $tablau;
@@ -27,7 +27,7 @@
 						</td>
 					</tr>
 				</table>");
-	} else {
+	}else{
 		print(" <table align='center' style='border:1; margin-top:2px' width='auto'>
 				
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
@@ -49,7 +49,7 @@
 
 			if(!$qu){
 					print("Modifique la entrada L.288: ".mysqli_error($db)."<br/>");
-			} else {
+			}else{
 
 			while($rowu = mysqli_fetch_assoc($qu)){
 
@@ -71,8 +71,8 @@
 
 			///////////////////////			**********  		///////////////////////
 	
-	if (isset($_POST['oculto1'])) {
-		if ($_SESSION['usuarios'] == '') { 
+	if(isset($_POST['oculto1'])) {
+		if($_SESSION['usuarios'] == '') { 
 						print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 									<tr align='center'>
 										<td>
@@ -84,7 +84,7 @@
 								</table>");
 					}
 		
-		if ($_SESSION['usuarios'] != '') {
+		if($_SESSION['usuarios'] != '') {
 
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";

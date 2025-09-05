@@ -39,11 +39,11 @@ abstract class Theme {
     *
     */   
     function SetupPlot($plot) {
-        if (is_array($plot)) {
+        if(is_array($plot)) {
             foreach ($plot as $obj) {
                 $this->ApplyPlot($obj);
             }
-        } else {
+        }else{
             $this->ApplyPlot($plot);
         }
     }
@@ -56,15 +56,15 @@ abstract class Theme {
         $this->graph = $graph;
         $method_name = '';
 
-        if (get_class($graph) == 'Graph') {
+        if(get_class($graph) == 'Graph') {
             $method_name = 'SetupGraph';
-        } else {
+        }else{
             $method_name = 'Setup' . get_class($graph);
         }
 
-        if (method_exists($this, $method_name)) {
+        if(method_exists($this, $method_name)) {
             $this->$method_name($graph);
-        } else {
+        }else{
             JpGraphError::RaiseL(30001, $method_name, $method_name); //Theme::%s() is not defined. \nPlease make %s(\$graph) function in your theme classs.
         }
     }
@@ -88,7 +88,7 @@ abstract class Theme {
         $i = 0;
         while (true) {
             for ($j = 0; $j < count($this->GetColorList()); $j++) {
-                if (++$count > $num) {
+                if(++$count > $num) {
                     break 2;
                 }
                 $result_list[] = $this->GetNextColor();
@@ -108,11 +108,11 @@ abstract class Theme {
         $color_list = $this->GetColorList();
 
         $color = null;
-        if (isset($color_list[$this->color_index])) {
+        if(isset($color_list[$this->color_index])) {
             $color = $color_list[$this->color_index];
-        } else {
+        }else{
             $color_count = count($color_list);
-            if ($color_count <= $this->color_index) {
+            if($color_count <= $this->color_index) {
                 $color_tmp = $color_list[$this->color_index % $color_count];
                 $brightness = 1.0 - intval($this->color_index / $color_count) * 0.2;
                 $rgb = new RGB();
@@ -120,7 +120,7 @@ abstract class Theme {
                 $color = $rgb->Color($color);
                 $alpha = array_pop($color);
                 $color = $rgb->tryHexConversion($color);
-                if ($alpha) {
+                if($alpha) {
                     $color .= '@' . $alpha;
                 }
             }

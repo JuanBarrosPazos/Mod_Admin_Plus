@@ -38,19 +38,19 @@ for ( $i = 0; $i < 864; $i++ ) {
   // stockage pressions 2 courbes pour les basses et hautes pressions
   $data[ 1 ] = str_replace( ",", ".", $data[ 1 ] ); // remplace les virgules par des points
   // Détermination des pression min et max
-  if ( $ws_pr_x < $data[ 1 ] )$ws_pr_x = $data[ 1 ]; //pression maX
-  if ( $ws_pr_n > $data[ 1 ] )$ws_pr_n = $data[ 1 ]; //pression miN
+  if( $ws_pr_x < $data[ 1 ] )$ws_pr_x = $data[ 1 ]; //pression maX
+  if( $ws_pr_n > $data[ 1 ] )$ws_pr_n = $data[ 1 ]; //pression miN
   // création des séries, la première, $ws_prb, pour les basses pressions, limitée à 1015 ; la seconde, $ws_prh, pour les hautes pressions 
-  if ( $data[ 1 ] > 1015 ) {
+  if( $data[ 1 ] > 1015 ) {
     $ws_prb[ $i ] = 1015;
     $ws_prh[ $i ] = $data[ 1 ];
-  } else {
+  }else{
     $ws_prb[ $i ] = $data[ 1 ];
     $ws_prh[ $i ] = $data[ 1 ];
   }
 } // fin de la lecture du fichier
 
-if ( $ws_pr_n > 1015 ) {
+if( $ws_pr_n > 1015 ) {
   $ws_pr_n = 1015;
 };
 $ws_pr_n = floor( $ws_pr_n - .4 );

@@ -1,17 +1,16 @@
 <?php
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
     master_index();
 
-    if(@$_POST['oculto2']){ show_form();
-                            global $InfoLog;
-                            $InfoLog = "** ADMIN FEEDBACK RECUPERADO ";
-                            UserLog();
-    }elseif($_POST['modifica']){    process_form();
-                                    global $InfoLog;
-                                    $InfoLog = " ";
+    global $InfoLog;
+    if(isset($_POST['oculto2'])){   show_form();
+                                    $InfoLog = "** ADMIN FEEDBACK RECUPERADO ";
                                     UserLog();
+    }elseif(isset($_POST['modifica'])){ process_form();
+                                        $InfoLog = " ";
+                                        UserLog();
     }else{ show_form(); }
 
 }else{ require '../Inclu/tabla_permisos.php'; }

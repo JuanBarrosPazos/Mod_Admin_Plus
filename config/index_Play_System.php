@@ -35,12 +35,12 @@ if(isset($_POST['oculto'])){
 	// FIN POST OCULTO
 }elseif(isset($_POST['ocultop'])){
 	if($form_errorsp = validate_formp()){
-				show_form2($form_errorsp);
-				if($_SESSION['showf'] == 68){
+			show_form2($form_errorsp);
+			if($_SESSION['showf'] == 68){
 					table_desblock();
-				}else{
-						show_form(@$form_errors);
-				}
+			}else{
+					show_form(@$form_errors);
+			}
 					show_visit();
 	}else{	process_pin();
 			//ayear();
@@ -1140,6 +1140,7 @@ function suma_todo(){
 	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;		$vname = "`".$tabla1."_".$dyt."`";
 
+	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';
 
 } // FIN FUNCTION suma_todo()

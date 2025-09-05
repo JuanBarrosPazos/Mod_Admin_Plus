@@ -8,7 +8,7 @@
 	if(!$qb){
 	print("<font color='#FF0000'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
 			
-	} else {
+	}else{
 		if(mysqli_num_rows($qb) == 0){
 			print ("<table align='center'>
 						<tr>
@@ -17,15 +17,15 @@
 							</td>
 						</tr>
 					</table>");
-	} else { 
+	}else{ 
 
     global $twhile;
     global $tdplus;
     global $pdm;
 
-    if (($_POST['dm'] != '')||($pdm == "pdm")){
+    if(($_POST['dm'] != '')||($pdm == "pdm")){
 
-		if ($_POST['dm'] != ''){botones();}else{}
+		if($_POST['dm'] != ''){ botones(); }else{ }
 
     print ("<table align='center'>
 					".$twhile."
@@ -104,10 +104,9 @@
 
 			print($formulariof."</tr>");
 			
-        } /* Fin del while.*/ 
-    }
+        } /* Fin del while.*/
 
-    elseif ($_POST['dm'] == ''){
+    }elseif($_POST['dm'] == ''){
 		
 		botones();
 

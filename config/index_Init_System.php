@@ -286,7 +286,7 @@ function deldirua(){
 														{unlink($dir1.$file1);}
 													}
 											rmdir ($carpeta1);
-											} else { }
+											}else{ }
 											
 				$carpeta2 = "Users/".$rown['ref']."/log";
 				if(file_exists($carpeta2)){ $dir2 = $carpeta2."/";
@@ -296,7 +296,7 @@ function deldirua(){
 														{unlink($dir2.$file2);}
 													}
 											rmdir ($carpeta2);
-											} else { }
+											}else{ }
 
 				$carpeta3 = "Users/".$rown['ref']."/mrficha";
 				if(file_exists($carpeta3)){ $dir3 = $carpeta3."/";

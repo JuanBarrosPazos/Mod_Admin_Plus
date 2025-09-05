@@ -63,7 +63,7 @@ if($Feedback==1){
 					<input type='hidden' name='oculto2' value=1 />
 					</form>
 					</td>";
-	} else {	
+	}else{	
 		global $formulariohe;
 		$formulariohe = "";
 			

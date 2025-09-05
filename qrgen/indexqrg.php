@@ -19,12 +19,12 @@
 	
 	global $num;		$num = count(glob("temp/{*}",GLOB_BRACE));
 
-	if($num > 1){ deletemp(); } else { }
+	if($num > 1){ deletemp(); }else{ }
 
 	global $num2;		$num2 = count(glob("qrimg/{*}",GLOB_BRACE));
 
 	//print($_SESSION['nuser']);
-	if($num2 >= ($_SESSION['nuser']*2+6)){ deleqrimg(); } else { }
+	if($num2 >= ($_SESSION['nuser']*2+6)){ deleqrimg(); }else{ }
 
 	if(isset($_POST['oculto'])){
 
@@ -60,7 +60,7 @@
 
 function qrsize(){
 
-	if (isset($_REQUEST['level']) && (in_array($_REQUEST['level'], array('L','M','Q','H')))){
+	if(isset($_REQUEST['level']) && (in_array($_REQUEST['level'], array('L','M','Q','H')))){
 		global $errorCorrectionLevel;
         $errorCorrectionLevel = $_REQUEST['level']; 
 	   
@@ -68,7 +68,7 @@ function qrsize(){
 			$errorCorrectionLevel = 'Q';
 	}
 
-    if (isset($_REQUEST['size'])){
+    if(isset($_REQUEST['size'])){
 		global $matrixPointSize;
         $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
 
@@ -107,17 +107,15 @@ function process_form(){
     $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
     
 	//html PNG location prefix
-	global $PNG_WEB_DIR;
-    $PNG_WEB_DIR = 'temp/';
+	global $PNG_WEB_DIR;			$PNG_WEB_DIR = 'temp/';
 
 	include "phpqrcode.php";
     
     //ofcourse we need rights to create temp dir
-    if (!file_exists($PNG_TEMP_DIR))
+    if(!file_exists($PNG_TEMP_DIR))
         mkdir($PNG_TEMP_DIR);
 	
-	global $filename;
-    $filename = $PNG_TEMP_DIR.'test.png';
+	global $filename;				$filename = $PNG_TEMP_DIR.'test.png';
     
     //processing form input
 	//remember to sanitize user input in real-life solution !!!
@@ -125,8 +123,8 @@ function process_form(){
 	global $errorCorrectionLevel;
 	global $matrixPointSize;
 
-    if ((isset($_REQUEST['metodo']))&&(isset($_REQUEST['usercod']))) { 
-		if ($_REQUEST['metodo'] == 'index.php?pin=' ){ 
+    if((isset($_REQUEST['metodo']))&&(isset($_REQUEST['usercod']))) { 
+		if($_REQUEST['metodo'] == 'index.php?pin=' ){ 
 			global $metodo;
 			$metodo = 'CONFIRM_';
 		}else{
@@ -136,7 +134,7 @@ function process_form(){
 		global $data;			$data = $_REQUEST['metodo'].$_REQUEST['usercod'];
 		//print ($data);
         //it's very important!
-        if (trim($data) == '')
+        if(trim($data) == '')
             die('data cannot be empty! <a href="?">back</a>');
             
         // user data
@@ -221,7 +219,7 @@ function Show_form($errors=[]){
 								'imgname' => isset($_REQUEST['imgname']),);
 	}
 
-	if ($errors){
+	if($errors){
 		global $a;		$a = 1;
 		print("<div class='centradiv'>
 				<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br/>");
@@ -311,7 +309,7 @@ function deletemp(){
 		$dir = $ruta."/";
 		$handle = opendir($dir);
 		while ($file = readdir($handle)){
-			if (is_file($dir.$file)){
+			if(is_file($dir.$file)){
 				unlink($dir.$file);}
 			}
 	}else{ }
@@ -328,7 +326,7 @@ function deleqrimg(){
 		$dir = $ruta."/";
 		$handle = opendir($dir);
 		while ($file = readdir($handle)){
-			if (is_file($dir.$file)){
+			if(is_file($dir.$file)){
 					unlink($dir.$file);
 			}
 		}
@@ -359,13 +357,13 @@ function listfiles(){
 			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
 		}
 		
-		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.8em;'>
 					NO HAY ARCHIVOS PARA DESCARGAR
 				</div>");
 
 	}else{
 		
-		if ($a == 0) {
+		if($a == 0) {
 			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' ></embed>");
 		}
 
@@ -378,7 +376,7 @@ function listfiles(){
 			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
 				print("<li style='min-height:2.1em; list-style-type:none;'>
 				<form name='delete' action='$_SERVER[PHP_SELF]' method='post' style='display:inline-block; float:left;'>
-					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+					<input type='hidden' name='downlRuta' value='".$ruta.$archivo."'>
 					<button type='submit' title='ELIMINAR' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='delete' value='1' >
 				</form>

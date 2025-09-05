@@ -302,7 +302,7 @@ class DigitalLED74
 
         if( $aFileName != '' ) {
             $number_img->Stream($aFileName);
-        } else {
+        }else{
             $number_img->Headers();
             $number_img->Stream();
         }

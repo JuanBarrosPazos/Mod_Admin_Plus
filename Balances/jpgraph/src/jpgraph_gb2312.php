@@ -1526,19 +1526,19 @@ class GB2312toUTF8 {
 
     function u2utf8($c) {
         $str='';
-        if ($c < 0x80) {
+        if($c < 0x80) {
             $str.=$c;
         }
-        else if ($c < 0x800) {
+        else if($c < 0x800) {
             $str.=chr(0xC0 | $c>>6);
             $str.=chr(0x80 | $c & 0x3F);
         }
-        else if ($c < 0x10000) {
+        else if($c < 0x10000) {
             $str.=chr(0xE0 | $c>>12);
             $str.=chr(0x80 | $c>>6 & 0x3F);
             $str.=chr(0x80 | $c & 0x3F);
         }
-        else if ($c < 0x200000) {
+        else if($c < 0x200000) {
             $str.=chr(0xF0 | $c>>18);
             $str.=chr(0x80 | $c>>12 & 0x3F);
             $str.=chr(0x80 | $c>>6 & 0x3F);

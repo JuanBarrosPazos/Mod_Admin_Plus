@@ -22,7 +22,7 @@ function validate_form(){
 	}/*elseif(!$tipo_correcto){
 		$errors [] = "Este tipo de archivo no esta admitido: ".$_FILES['myimg']['name'];
 		global $img2;			$img2 = 'untitled.png';
-	}*/elseif ($_FILES['myimg']['size'] > $limite){
+	}*/elseif($_FILES['myimg']['size'] > $limite){
 		$tamanho = $_FILES['myimg']['size'] / 1024;
 		$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
 		global $img2;			$img2 = 'untitled.png';

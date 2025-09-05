@@ -4,14 +4,13 @@ if /*(*/($_SESSION['Nivel'] == 'admin')/* || ($_SESSION['Nivel'] == 'plus'))*/{
 
     master_index();
 
-    if(@$_POST['oculto2']){ show_form();
-                            global $InfoLog;
-                            $InfoLog = "** ADMIN BORRAR SELECCIONADO ";
-                            UserLog();
-    }elseif($_POST['borrar']){	process_form();
-                                global $InfoLog;
-                                $InfoLog = "** ADMIN BORRADO ";
-                                UserLog();
+    global $InfoLog;
+    if(isset($_POST['oculto2'])){   show_form();
+                                    $InfoLog = "** ADMIN BORRAR SELECCIONADO ";
+                                    UserLog();
+    }elseif(isset($_POST['borrar'])){	process_form();
+                                         $InfoLog = "** ADMIN BORRADO ";
+                                         UserLog();
     }else{ show_form(); }
 
 }else{ require '../Inclu/tabla_permisos.php'; }

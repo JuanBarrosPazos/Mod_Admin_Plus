@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 				master_index();
 
@@ -31,7 +31,7 @@ if ($_SESSION['Nivel'] == 'admin'){
 											}
 					else {	listfiles();}
 								
-				} else { require '../Inclu/tabla_permisos.php'; }
+				}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -146,8 +146,7 @@ function info(){
 	
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."- RESPALDADO CREADO MANUALMENTE BBDD ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$datebbddx.".sql";
@@ -162,8 +161,7 @@ function info(){
 
 			////////////////////		**********  		////////////////////
 
-	global $dir2;
-	$dir2 = "bbdd_log";
+	global $dir2;				$dir2 = "bbdd_log";
 	
 	global $text2;
 	$text2 = PHP_EOL."- RESPALDADO CREADO MANUALMENTE BBDD POR: ".$_SESSION['ref']." ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$datebbddx.".sql";
@@ -187,8 +185,7 @@ function info_del(){
 	
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."- RESPALDO BORRADO MANUALMENTE BBDD ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$_POST['ruta'];
@@ -228,8 +225,7 @@ function info_downl(){
 	
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."- RESPALDO DESCARGADO MANUALMENTE BBDD ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$_POST['ruta'];

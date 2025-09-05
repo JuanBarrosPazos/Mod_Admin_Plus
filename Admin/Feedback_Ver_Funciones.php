@@ -30,8 +30,8 @@ function process_form(){
 	global $orden;
 	require '../Inclu/orden.php';
 		
-	if (strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
-	if (strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
+	if(strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
+	if(strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
 
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";
@@ -73,7 +73,7 @@ function ver_todo(){
 	global $db;
 	global $Feedback;		$Feedback = 1;
 
-	if (($_SESSION['Nivel'] == 'admin')){ 
+	if(($_SESSION['Nivel'] == 'admin')){ 
 
 		global $table_name_a;			$table_name_a = "`".$_SESSION['clave']."admin`";
 

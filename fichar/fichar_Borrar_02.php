@@ -18,17 +18,17 @@ $rowd = mysqli_fetch_assoc($qd);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
-					master_index();
+	master_index();
 
-						if($_POST['oculto2']){	info_01();
-												show_form();}
-						elseif($_POST['oculto']){							
-											process_form();
-											info_02();
-							} else {show_form();}
-					} else { require '../Inclu/tabla_permisos.php'; } 
+	if(isset($_POST['oculto2'])){	info_01();
+									show_form();
+	}elseif(isset($_POST['oculto'])){	process_form();
+										info_02();
+	}else{ show_form(); }
+
+}else{ require '../Inclu/tabla_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -56,6 +56,7 @@ function suma_todo(){
 	$vname = $tabla1."_".date('Y');
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 }
@@ -176,7 +177,7 @@ function process_form(){
 					fwrite($rmf, $rmftext);
 					fclose($rmf);
 
-				} else {
+				}else{
 				print("<font color='#FF0000'>
 						SE HA PRODUCIDO UN ERROR: </font>
 						</br>
@@ -195,20 +196,19 @@ function show_form(){
 	global $db;
 	global $db_name;
 	
-	if($_POST['oculto']){
+	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} elseif($_POST['oculto2']){
-				$defaults = array (	'id' => $_POST['id'],
-								    'ref' => $_SESSION['usuarios'],
-									'name1' => $_POST['name1'],
-									'name2' => $_POST['name2'],
-									'din' => $_POST['din'],
-									'tin' => $_POST['tin'],
-									'dout' => $_POST['dout'],
-									'tout' => $_POST['tout'],
-									'ttot' => $_POST['ttot']
-																);
-								}
+	}elseif(isset($_POST['oculto2'])){
+		$defaults = array (	'id' => $_POST['id'],
+						   'ref' => $_SESSION['usuarios'],
+							'name1' => $_POST['name1'],
+							'name2' => $_POST['name2'],
+							'din' => $_POST['din'],
+							'tin' => $_POST['tin'],
+							'dout' => $_POST['dout'],
+							'tout' => $_POST['tout'],
+							'ttot' => $_POST['ttot']);
+	}
 
 	print("<table align='center' style='margin-top:10px' width=300px >
 	
@@ -330,7 +330,7 @@ function feedback(){
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`, `dfeed`, `tfeed`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]', '$dfeed', '$tfeed')";
 		
 		if(mysqli_query($db, $sqla)){ 
-					} else {
+					}else{
 							print("* MODIFIQUE LA ENTRADA L.308: ".mysqli_error($db));
 									global $texerror;
 									$texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -381,8 +381,7 @@ function info_02(){
 
 		$ActionTime = date('H:i:s');
 
-		global $dir;
-		$dir = "../Users/".$_SESSION['usuarios']."/log";
+		global $dir;				$dir = "../Users/".$_SESSION['usuarios']."/log";
 	
 		global $text;
 		$text = PHP_EOL."- JORNADA LABORAL BORRAR 2 ".$ActionTime;

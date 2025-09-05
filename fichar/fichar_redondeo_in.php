@@ -36,7 +36,7 @@
         elseif($m <= 2){ $m = "00"; }
 
         // SI FALTAN 10 MINUTOS PARA EMPUNTO REDONDEO LA HORA A LA SIGUIENTE Y MINUTOS A 00
-            if ($m >= 50){  global $h;
+            if($m >= 50){  global $h;
                             $h = date('H')+1;
                             global $m;
                             $m = 00;

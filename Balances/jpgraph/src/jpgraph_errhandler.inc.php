@@ -271,7 +271,7 @@ class JpGraphErrObjectImg extends JpGraphErrObject {
         
         if( function_exists("imagetypes") ) {
             $supported = imagetypes();
-        } else {
+        }else{
             $supported = 0;
         }
 
@@ -350,9 +350,9 @@ class JpGraphErrObjectImg extends JpGraphErrObject {
         $txt->SetFont(FF_FONT1);
         $txt->Align("left","top");
         $txt->Stroke($img);
-        if ($this->iDest) {
+        if($this->iDest) {
             $img->Stream($this->iDest);
-        } else {
+        }else{
             $img->Headers();
             $img->Stream();
         }

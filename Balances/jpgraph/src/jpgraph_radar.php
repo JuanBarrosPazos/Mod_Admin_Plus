@@ -540,7 +540,7 @@ class RadarPlot {
         }
         if( $this->fill ) {
             $graph->legend->Add($this->legend,$this->fill_color,$this->mark);
-        } else {
+        }else{
             $graph->legend->Add($this->legend,$this->color,$this->mark);
         }
     }

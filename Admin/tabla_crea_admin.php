@@ -2,7 +2,7 @@
 
 	require 'Admin_Botonera.php';
 
-	if (isset($modifadmin)){ 
+	if(isset($modifadmin)){ 
 		global $title;
 		$title = "<img src='../Users/".$_SESSION['refcl']."/img_admin/".$_POST['myimg']."' height='44px' width='33px' />
 					</br>MODIFIQUE LOS DATOS DEL USUARIO";
@@ -17,7 +17,7 @@
 			<button type='submit' title='CERRAR VENTANA' class='botonrojo imgButIco CancelBlack' style='vertical-align:top;float:right;' ></button>
 				<input type='hidden' name='closewin' value=1 />
 			</form>"; 
-	}elseif (!isset($modifadmin)){ 
+	}elseif(!isset($modifadmin)){ 
 		global $title;
 		$title = "NUEVO ADMINISTRADOR";
 		global $title2;

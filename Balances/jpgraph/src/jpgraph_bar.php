@@ -364,7 +364,7 @@ class BarPlot extends Plot {
         for($i=0; $i < $numbars; ++$i) {
 
             // If value is NULL, or 0 then don't draw a bar at all
-            if ($this->coords[0][$i] === null || $this->coords[0][$i] === '' )
+            if($this->coords[0][$i] === null || $this->coords[0][$i] === '' )
             continue;
 
             if( $exist_x ) {
@@ -434,7 +434,7 @@ class BarPlot extends Plot {
             elseif( !empty($this->fill_color) ) {
                 if(is_array($this->fill_color)) {
                     $img->PushColor($this->fill_color[$i % count($this->fill_color)]);
-                } else {
+                }else{
                     $img->PushColor($this->fill_color);
                 }
                 $img->FilledPolygon($pts);
@@ -907,13 +907,13 @@ class AccBarPlot extends BarPlot {
             for($j=0; $j < $this->nbrplots; ++$j ) {
                 $img->SetColor($this->plots[$j]->color);
 
-                if ( $this->plots[$j]->coords[0][$i] >= 0) {
+                if( $this->plots[$j]->coords[0][$i] >= 0) {
                     $yt=$yscale->Translate($this->plots[$j]->coords[0][$i]+$accy);
                     $accyt=$yscale->Translate($accy);
                     $accy+=$this->plots[$j]->coords[0][$i];
                 }
                 else {
-                    //if ( $this->plots[$j]->coords[0][$i] < 0 || $accy_neg < 0 ) {
+                    //if( $this->plots[$j]->coords[0][$i] < 0 || $accy_neg < 0 ) {
                     $yt=$yscale->Translate($this->plots[$j]->coords[0][$i]+$accy_neg);
                     $accyt=$yscale->Translate($accy_neg);
                     $accy_neg+=$this->plots[$j]->coords[0][$i];
@@ -986,7 +986,7 @@ class AccBarPlot extends BarPlot {
 
 
                 // If value is NULL or 0, then don't draw a bar at all
-                if ($this->plots[$j]->coords[0][$i] == 0 ) continue;
+                if($this->plots[$j]->coords[0][$i] == 0 ) continue;
 
                 if( $this->plots[$j]->grad ) {
                     if( $grad === null ) {
@@ -1029,8 +1029,8 @@ class AccBarPlot extends BarPlot {
                                                $this->plots[$j]->grad_tocolor,
                                                $this->plots[$j]->grad_style);
                     }
-                } else {
-                    if (is_array($this->plots[$j]->fill_color) ) {
+                }else{
+                    if(is_array($this->plots[$j]->fill_color) ) {
                         $numcolors = count($this->plots[$j]->fill_color);
                         $fillcolor = $this->plots[$j]->fill_color[$i % $numcolors];
                         // If the bar is specified to be non filled then the fill color is false
@@ -1137,7 +1137,7 @@ class AccBarPlot extends BarPlot {
                 // We don't print 0 values in an accumulated bar plot
                 if( $this->plots[$j]->coords[0][$i] == 0 ) continue;
 
-                if ($this->plots[$j]->coords[0][$i] > 0) {
+                if($this->plots[$j]->coords[0][$i] > 0) {
                     $yt=$yscale->Translate($this->plots[$j]->coords[0][$i]+$accy);
                     $accyt=$yscale->Translate($accy);
                     if(  $this->plots[$j]->valuepos=='center' ) {
@@ -1162,7 +1162,7 @@ class AccBarPlot extends BarPlot {
                         $this->plots[$j]->value->SetAlign('center','top');
                         $this->plots[$j]->value->SetMargin(1);
                     }
-                } else {
+                }else{
                     $yt=$yscale->Translate($this->plots[$j]->coords[0][$i]+$accy_neg);
                     $accyt=$yscale->Translate($accy_neg);
                     $accy_neg+=$this->plots[$j]->coords[0][$i];

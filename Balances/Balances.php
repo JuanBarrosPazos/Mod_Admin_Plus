@@ -7,21 +7,21 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-$_SESSION['usuarios'] = '';
+	$_SESSION['usuarios'] = '';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 		master_index();
 
-			if(isset($_POST['todo'])){ show_form();							
-								ver_todo();
-								}
-			else {show_form();}
-	} else { require '../Inclu/tabla_permisos.php'; }
+		if(isset($_POST['todo'])){ show_form();							
+									ver_todo();
+		}else {show_form(); }
+
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -163,27 +163,26 @@ function ver_todo(){
 
 	global $dyt1;			global $dm1;
 	
-	if ($_POST['dy'] == ''){ $dy1 = date('Y');
-							 $dyt1 = date('Y');	
-							 $_SESSION['gyear'] = date('Y');} 
-							 				else {	$dy1 = "20".$_POST['dy'];
-													$dyt1 = "20".$_POST['dy'];
-													$_SESSION['gyear'] = "20".$_POST['dy'];									
-													}
+	if($_POST['dy'] == ''){ $dy1 = date('Y');
+							$dyt1 = date('Y');	
+							$_SESSION['gyear'] = date('Y');
+	}else{	$dy1 = "20".$_POST['dy'];
+			$dyt1 = "20".$_POST['dy'];
+			$_SESSION['gyear'] = "20".$_POST['dy'];									
+	}
 	
-	if ($_POST['dm'] == ''){ $dm1 = '';
-							 $_SESSION['gtime'] = '';} 
-							 				else {	//global $dd1;
-													//$dd1 = '';
-													$dm1 = "-".$_POST['dm']."-";
-													$_SESSION['gtime'] = $_POST['dm'];	
-													}
+	if($_POST['dm'] == ''){ $dm1 = '';
+							$_SESSION['gtime'] = '';
+	}else{	//global $dd1;
+			//$dd1 = '';
+			$dm1 = "-".$_POST['dm']."-";
+			$_SESSION['gtime'] = $_POST['dm'];	
+	}
 	
-	global $fil;												
-	$fil = "%".$dy1.$dm1."%";
+	global $fil;			$fil = "%".$dy1.$dm1."%";
 	
 	/*
-	if (($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = '';
+	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = '';
 													$dd1 = $_POST['dd'];
 													global $fil;
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
@@ -212,52 +211,39 @@ function ver_todo(){
 	
 			////////////////////		**********  		////////////////////
 
-	global $pdm;
-	$pdm = "";
-	global $name1;
-	$name1 = $_SESSION['Nombre'];
-	global $name2;
-	$name2 = $_SESSION['Apellidos'];
-	global $refses;
-	$refses = $_SESSION['ref'];
-	global $nodata;
-	$nodata = "NO HAY DATOS";
-	global $twhile;
-	if($_POST['dy'] == ''){ global $ycons;
-							$ycons = date('Y');
-	}else{ global $ycons;
-		   $ycons =	"20".$_POST['dy'];}
+	global $pdm;				$pdm = "";
+	global $name1;				$name1 = $_SESSION['Nombre'];
+	global $name2;				$name2 = $_SESSION['Apellidos'];
+	global $refses;				$refses = $_SESSION['ref'];
+	global $nodata;				$nodata = "NO HAY DATOS";
+	global $twhile;				global $ycons;
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy'];}
+
 	$twhile = "<tr><th colspan=6 class='BorderInf'>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</th></tr><tr><th colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES.</th></tr>";
 
-	global $tdplus;
-	$tdplus = "";
-	global $feedtot;
-	$feedtot = "";
-	global $formularioh;
-	$formularioh = "";
-	global $formulariof;
-	$formulariof = "";
-	global $colspana;
-	$colspana = "6";
-	global $colspanb;
-	$colspanb = "4";
+	global $tdplus;				$tdplus = "";
+	global $feedtot;			$feedtot = "";
+	global $formularioh;		$formularioh = "";
+	global $formulariof;		$formulariof = "";
+	global $colspana;			$colspana = "6";
+	global $colspanb;			$colspanb = "4";
 
 	require 'Inc_Fichar_While_Totalb.php';
 
 			////////////////////		**********  		////////////////////
 	
-	}	/* Final ver_todo(); */
+}	/* Final ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
-		require '../Inclu_MInd/rutabalances.php';
-		require '../Inclu_MInd/Master_Index.php';
+	require '../Inclu_MInd/rutabalances.php';
+	require '../Inclu_MInd/Master_Index.php';
 		
-				} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

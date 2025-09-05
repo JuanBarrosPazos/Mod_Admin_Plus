@@ -194,11 +194,11 @@ class Bezier {
             while ($nn >= 1) {
                 $blend *= $nn;
                 $nn--;
-                if ($kn > 1) {
+                if($kn > 1) {
                     $blend /= (double) $kn;
                     $kn--;
                 }
-                if ($nkn > 1) {
+                if($nkn > 1) {
                     $blend /= (double) $nkn;
                     $nkn--;
                 }

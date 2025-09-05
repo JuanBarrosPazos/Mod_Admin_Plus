@@ -47,7 +47,7 @@
         $s = "00";
 
         // SI PASAN MENOS DE 25 MINUTOS DE EMPUNTO REDONDEO LOS MINUTOS A 00
-            if ($m <= 25){  global $m;
+            if($m <= 25){  global $m;
                             $m = "00";
                                 }
         /* 
@@ -66,15 +66,15 @@
                                     }
                                 
     // SI LA HORA DE ENTRADA ES MENOR QUE LA DE REDONDEO
-        if ($verhorain < $h){ }
+        if($verhorain < $h){ }
     // SI LA HORA DE ENTRADA ES MAYOR QUE LA DE REDONDEO
-        elseif (($verhorain > $h)&&($verminuin == "00")){   global $h;
+        elseif(($verhorain > $h)&&($verminuin == "00")){   global $h;
                                                             $h = date('H')+1;
                                                             global $m;
                                                             $m = "00";
                                                             }
     // SI LA HORA DE ENTRADA ES MAYOR QUE LA DE REDONDEO
-        elseif (($verhorain == $h)&&($verminuin == "00")){  global $m;
+        elseif(($verhorain == $h)&&($verminuin == "00")){  global $m;
                                                             $m = "00";
                                                             }
     // SI LA HORA DE ENTRADA ES LA MISMA QUE EL REDONDEO

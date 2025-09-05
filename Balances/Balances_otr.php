@@ -7,26 +7,21 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-$_SESSION['usuarios'] = '';
+	$_SESSION['usuarios'] = '';
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
-					master_index();
+	master_index();
 
-								if(isset($_POST['todo'])){
-										show_form();							
-										ver_todo();
-										}
-									
-								else {
-										show_form();
-										}
+	if(isset($_POST['todo'])){	show_form();							
+								ver_todo();
+	}else{	show_form(); }
 								
-				} else { require '../Inclu/tabla_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -35,37 +30,27 @@ if ($_SESSION['Nivel'] == 'admin'){
 function show_form(){
 
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
-							$defaults = $_POST;
-							// print("* ".$_SESSION['usuarios']);
-							}
-	elseif(isset($_POST['todo'])){$_SESSION['usuarios'] = $_POST['usuarios'];
-							$defaults = $_POST;
-											} 
+									$defaults = $_POST;
+									// print("* ".$_SESSION['usuarios']);
+	}elseif(isset($_POST['todo'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
+									$defaults = $_POST;
+	} 
 	
-	$dm = array (	'' => 'MES TODOS',
-					'01' => 'ENERO',
-					'02' => 'FEBRERO',
-					'03' => 'MARZO',
-					'04' => 'ABRIL',
-					'05' => 'MAYO',
-					'06' => 'JUNIO',
-					'07' => 'JULIO',
-					'08' => 'AGOSTO',
-					'09' => 'SEPTIEMBRE',
-					'10' => 'OCTUBRE',
-					'11' => 'NOVIEMBRE',
-					'12' => 'DICIEMBRE');
+	$dm = array('' => 'MES TODOS','01' => 'ENERO','02' => 'FEBRERO',
+				'03' => 'MARZO','04' => 'ABRIL','05' => 'MAYO',
+				'06' => 'JUNIO','07' => 'JULIO','08' => 'AGOSTO',
+				'09' => 'SEPTIEMBRE','10' => 'OCTUBRE','11' => 'NOVIEMBRE',
+				'12' => 'DICIEMBRE');
 	
-	$ordenar = array (	'`din` ASC' => 'Fecha In Asc',
-						'`din` DESC' => 'Fecha In Desc',
-						'`dout` ASC' => 'Fecha Out Asc',
-						'`dout` DESC' => 'Fecha Out Desc');
+	$ordenar = array('`din` ASC' => 'Fecha In Asc',
+					'`din` DESC' => 'Fecha In Desc',
+					'`dout` ASC' => 'Fecha Out Asc',
+					'`dout` DESC' => 'Fecha Out Desc');
 	
 	print("<table align='center' style='border:1; margin-top:2px' width='auto'>
 				
 		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 			<input type='hidden' name='ref' value='".$_SESSION['usuarios']."' />
-			
 				<tr>
 					<td align='center'>
 							CONSULTA BALANCE OTROS USUARIOS
@@ -84,14 +69,13 @@ function show_form(){
 
 	global $db;
 	global $tablau;
-	$tablau = $_SESSION['clave']."admin";
-	$tablau = "`".$tablau."`";
+	$tablau = "`".$_SESSION['clave']."admin`";
 	
 	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
 	$qu = mysqli_query($db, $sqlu);
 	if(!$qu){
 			print("* ".mysqli_error($db)."<br/>");
-	} else {
+	}else{
 					
 		while($rowu = mysqli_fetch_assoc($qu)){
 					
@@ -111,8 +95,8 @@ function show_form(){
 		</form>	
 			</table>"); 
 
-	if (isset($_POST['oculto1']) || isset($_POST['todo'])) {
-		if ($_SESSION['usuarios'] == '') { 
+	if(isset($_POST['oculto1']) || isset($_POST['todo'])) {
+		if($_SESSION['usuarios'] == '') { 
 				print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 							<tr align='center'>
 								<td>
@@ -123,7 +107,7 @@ function show_form(){
 							</tr>
 						</table>");
 			}	
-	if ($_SESSION['usuarios'] != '') {
+	if($_SESSION['usuarios'] != '') {
 
 	require "../Users/".$_SESSION['usuarios']."/ayear.php";
 
@@ -259,7 +243,7 @@ function ver_todo(){
 	global $fil;			$fil = "%".$dy1.$dm1."%";
 	
 	/*
-	if (($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = '';
+	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){$dm1 = '';
 													$dd1 = $_POST['dd'];
 													global $fil;
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";

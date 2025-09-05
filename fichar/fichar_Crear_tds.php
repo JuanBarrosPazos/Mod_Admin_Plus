@@ -19,7 +19,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
+	if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
  					
 		master_index();
 
@@ -32,10 +32,10 @@ session_start();
 										errors();
 										info();
 								
-			} else {show_form();
+			}else{show_form();
 					errors();
 					}
-	} else { require '../Inclu/tabla_permisos.php'; } 
+	}else{ require '../Inclu/tabla_permisos.php'; } 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -100,7 +100,7 @@ function entrada(){
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	
-	if ($count1 > 0){ 
+	if($count1 > 0){ 
 		print("<table align='center' style='margin-top:10px' width=320px >
 					<tr>
 						<th colspan=4 class='BorderInf'>
@@ -134,7 +134,7 @@ function entrada(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 	
-			} else { print("* MODIFIQUE LA ENTRADA L.212: ".mysqli_error($db));
+			}else{ print("* MODIFIQUE LA ENTRADA L.212: ".mysqli_error($db));
 							show_form ();
 							global $texerror;
 							$texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -159,7 +159,7 @@ function show_form(){
 						$defaults = $_POST;
 						//print("* ".$_SESSION['usuarios']);
 	}else{
-		if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
+		if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
 			$sqlb =  "SELECT * FROM $table_name_a ORDER BY `id` ASC ";
 			$qb = mysqli_query($db, $sqlb);
 		}
@@ -167,7 +167,7 @@ function show_form(){
 		if(!$qb){
 			print("<font color='#FF0000'>Modifique la entrada L.265: </font></br>".mysqli_error($db)."</br>");
 				
-		} else {
+		}else{
 			if(mysqli_num_rows($qb)== 0){
 				print ("<table align='center'>
 							<tr>
@@ -175,7 +175,7 @@ function show_form(){
 							</tr>
 						</table>");
 										
-	} else {
+	}else{
 		unset($_SESSION['usuarios']);
 		print ("<table align='center'>
 					<tr>
@@ -232,15 +232,15 @@ function show_form(){
 	
 			////////////////////		**********  		////////////////////
 			
-	if (isset($_POST['oculto1'])) {
-		if ($_SESSION['usuarios'] == '') { 
+	if(isset($_POST['oculto1'])) {
+		if($_SESSION['usuarios'] == '') { 
 				print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 							<tr align='center'>
 								<td><font color='red'>SELECCIONE UN USUARIO</font></td>
 							</tr>
 						</table>");
 					}	
-		if ($_SESSION['usuarios'] != '') {
+		if($_SESSION['usuarios'] != '') {
 		
 	global $vname;
 	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
@@ -377,6 +377,7 @@ function suma_todo(){
 	global $vname;
 	$vname = "`".$tabla1."_".$dyt1."`";
 
+	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 }
@@ -421,7 +422,7 @@ function salida(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 
-	if (($ttoth > 9)||($ttotd > 0)){
+	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
@@ -519,7 +520,7 @@ function salida(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 
-			} else {
+			}else{
 					print("* MODIFIQUE LA ENTRADA L.763: ".mysqli_error($db));
 							show_form ();
 							global $texerror;

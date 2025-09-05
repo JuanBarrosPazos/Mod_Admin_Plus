@@ -73,7 +73,7 @@ class SoftyTheme extends Theme
         $graph->xaxis->SetTitleMargin(15);
 
         // y2~
-        if (isset($graph->y2axis)) {
+        if(isset($graph->y2axis)) {
             $graph->y2axis->title->SetColor($this->font_color);  
             $graph->y2axis->SetColor($this->axis_color, $this->font_color);    
             $graph->y2axis->SetTickSide(SIDE_LEFT);
@@ -83,7 +83,7 @@ class SoftyTheme extends Theme
         }
 
         // yn
-        if (isset($graph->y2axis)) {
+        if(isset($graph->y2axis)) {
             foreach ($graph->ynaxis as $axis) {
                 $axis->title->SetColor($this->font_color);  
                 $axis->SetColor($this->axis_color, $this->font_color);    
@@ -127,7 +127,7 @@ class SoftyTheme extends Theme
 
 
     function PreStrokeApply($graph) {
-        if ($graph->legend->HasItems()) {
+        if($graph->legend->HasItems()) {
             $img = $graph->img;
             $graph->SetMargin(
                 $img->raw_left_margin, 

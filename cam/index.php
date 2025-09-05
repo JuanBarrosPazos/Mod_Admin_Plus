@@ -14,7 +14,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){	
+if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){	
 
 	require '../Inclu_MInd/rutacam.php';
 	require '../Inclu_MInd/Master_Index.php';
@@ -27,7 +27,7 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
 										//errors();
 								}
 
-	elseif (isset($_POST['cancel'])) {	red(); }
+	elseif(isset($_POST['cancel'])) {	red(); }
 
 	elseif(isset($_GET['ocultop'])){ process_pin();
 							  		 //ayear();
@@ -128,7 +128,7 @@ function tcl(){
 					global $dat4;
 					$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
 			
-				} else {
+				}else{
 					
 					global $dat4;
 					$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
@@ -182,32 +182,32 @@ function validate_formp(){
 	
 	$errorsp = array();
 	
-	if (strlen(trim($_POST['pin'])) == 0){
+	if(strlen(trim($_POST['pin'])) == 0){
 		//$errorsp [] = "PIN: Campo obligatorio.";
 		$errorsp [] = "USER ACCES PIN ERROR";
 		}
 
-	elseif (strlen(trim($_POST['pin'])) < 8){
+	elseif(strlen(trim($_POST['pin'])) < 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
 		}
 
-	elseif (strlen(trim($_POST['pin'])) > 8){
+	elseif(strlen(trim($_POST['pin'])) > 8){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
 		}
 	
-	elseif (!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
+	elseif(!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
 		}
 	
 	/*
-	elseif (!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
+	elseif(!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 		}
 
-	elseif (!preg_match('/^[^a-z]+$/',$_POST['pin'])){
+	elseif(!preg_match('/^[^a-z]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 		}*/
 	
@@ -345,7 +345,7 @@ function process_pin(){
 	
 	global $qrp;
 	
-	if ((isset($_GET['ocultop']))  || (isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
+	if((isset($_GET['ocultop']))  || (isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
 	else{ $qrp = $_POST['pin']; }
 	
 	global $table_name_a;
@@ -359,13 +359,11 @@ function process_pin(){
 	$_SESSION['usuarios'] = $rp['ref'];
 	$_SESSION['ref'] = $rp['ref'];
 
-	if ($cp > 0){
+	if($cp > 0){
 	
 	global $vname;
-	$tabla1 = $_SESSION['clave'].$rp['ref'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".date('Y');
-	$vname = "`".$vname."`";
+	$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
+	$vname = "`".$tabla1."_".date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
 	
@@ -572,7 +570,7 @@ function pin_out(){
 	$ttotd = str_replace("-","",$ttotd);
 	
 
-	if (($ttoth > 9)||($ttotd > 0)){
+	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
@@ -683,7 +681,7 @@ function pin_out(){
 						</script>";
 			print($redir);
 	
-		} else {
+		}else{
 					print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
 							show_form2();
 							show_form ();
@@ -770,7 +768,7 @@ function pin_in(){
 						</script>";
 			print($redir);
 
-		} else {
+		}else{
 					print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
 							show_form2();
 							show_form ();
@@ -805,6 +803,7 @@ function suma_todo(){
 	$vname = $tabla1."_".$dyt;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 }
@@ -817,9 +816,9 @@ function show_form2($errorsp=''){
 	
 	if(isset($_POST['pin'])){
 		$defaults = $_POST;
-		} else {$defaults = array ('pin' => '');}
+		}else{$defaults = array ('pin' => '');}
 	
-	if ($errorsp){
+	if($errorsp){
 		print("	<table align='center'>
 					<tr>
 						<td style='text-align:center'>
@@ -884,6 +883,7 @@ function ver_todo(){
 	$vname = $tabla1."_".$dyt1;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
 
 //////////////////////////
@@ -894,7 +894,7 @@ function ver_todo(){
 	if(!$qb){
 			print("<font color='#FF0000'>Se ha producido un error L.773: </font></br>".mysqli_error($db)."</br>");
 			
-		} else {
+		}else{
 			
 			if(mysqli_num_rows($qb) == 0){
 							print ("<table align='center'>
@@ -908,7 +908,7 @@ function ver_todo(){
 									</table>");
 
 
-				} else { 	print ("<table align='center'>
+				}else{ 	print ("<table align='center'>
 									<tr>
 										<th colspan=6 class='BorderInf'>
 								".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref'].". "

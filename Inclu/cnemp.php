@@ -14,7 +14,7 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 	master_index();
 
@@ -25,11 +25,11 @@ if ($_SESSION['Nivel'] == 'admin'){
 						global $InfoLog;
 						$InfoLog = $_POST['nemp'];
 						UserLog(); }
-		} else { show_form();
+		}else{ show_form();
 				 global $InfoLog;
 				 $InfoLog = $_SESSION['nuser'];
 				 UserLog(); }
-	} else { require 'tabla_permisos.php'; } 
+	}else{ require 'tabla_permisos.php'; } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -86,9 +86,9 @@ function show_form($errors=[]){
 	
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} else {$defaults = array ( 'nemp' => $_SESSION['nuser']); }
+		}else{$defaults = array ( 'nemp' => $_SESSION['nuser']); }
 	
-	if ($errors){
+	if($errors){
 		print("<table align='center'>
 					<tr>
 						<th style='text-align:center'>

@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 		master_index();
 
@@ -24,11 +24,11 @@ if ($_SESSION['Nivel'] == 'admin'){
 								  	ver_todo();
 							  		listfiles();
 
-				} else {	show_form();
+				}else{	show_form();
 							listfiles();
 						}
 								
-			} else { require '../Inclu/tabla_permisos.php'; }
+			}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -107,7 +107,7 @@ function show_form(){
 	$qu = mysqli_query($db, $sqlu);
 	if(!$qu){
 			print("* 136".mysqli_error($db)."<br/>");
-	} else {
+	}else{
 					
 		while($rowu = mysqli_fetch_assoc($qu)){
 					
@@ -130,9 +130,9 @@ function show_form(){
 	
 			////////////////////		**********  		////////////////////
 
-	if ((isset($_POST['oculto1'])) || (isset($_POST['todo'])) ) {
+	if((isset($_POST['oculto1'])) || (isset($_POST['todo'])) ) {
 			
-	if ($_SESSION['tablas'] == '') { 
+	if($_SESSION['tablas'] == '') { 
 				print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 									<tr align='center'>
 										<td>
@@ -144,10 +144,10 @@ function show_form(){
 								</table>");
 					}	
 					
-	if ($_SESSION['tablas'] != '') {
+	if($_SESSION['tablas'] != '') {
 
 	global $nom; 	$nom = strtolower($_SESSION['tablas']);
-	if (strtolower($_SESSION['tablas']) == 'admin'){$nom = "%".$nom."%";}
+	if(strtolower($_SESSION['tablas']) == 'admin'){$nom = "%".$nom."%";}
 	else{$nom = "%".$nom."%";}
 	$nom = "LIKE '$nom'";
 	
@@ -159,7 +159,7 @@ function show_form(){
 	if(!$respuesta){
 	print("<font color='#FF0000'>194 Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
 		
-		} else {	print( "<table align='center'>
+		}else{	print( "<table align='center'>
 								<tr>
 									<th colspan=2 class='BorderInf'>
 								NUMERO DE TABLAS ".mysqli_num_rows($respuesta).".

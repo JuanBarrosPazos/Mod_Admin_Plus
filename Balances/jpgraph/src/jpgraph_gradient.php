@@ -296,7 +296,7 @@ class Gradient {
                         $this->img->Line($x,$yb,$xr,$y);
                         $x += $delta;
                     }
-                } else {
+                }else{
                     // height is greater than width -> use y-dimension for steps
                     $steps = $yb-$yt;
                     $delta = $yb>=$yt ? 1 : -1;
@@ -415,7 +415,7 @@ class Gradient {
         $adelta = ( $to_alpha - $from_alpha ) / $numcols ;
         for ($i=0; $i < $arr_size; ++$i) {
             $colnum = floor($colorsperstep*$i);
-            if ( $colnum == $prevcolnum ) {
+            if( $colnum == $prevcolnum ) {
                 $colors[$i] = $colidx;
             }
             else {

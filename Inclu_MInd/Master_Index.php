@@ -4,7 +4,7 @@
 	require $rutaindex.'Inclu/error_hidden.php';
 	global $db_name;
 
-	if (($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['mydni'])) {
+	if(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['mydni'])) {
 
 		global $topcat0;
 		$topcat0 = "style='margin-top:31px'";
@@ -37,9 +37,9 @@
 	}
 
 
-	if ($_SESSION['Nivel'] == 'admin') {	
+	if($_SESSION['Nivel'] == 'admin') {	
 		
-			if ($_SESSION['dni'] == $_SESSION['mydni']) { global $niv;
+			if($_SESSION['dni'] == $_SESSION['mydni']) { global $niv;
 														  $niv = 'Web Master';
 												}else{	global $niv;
 														$niv = 'Administrador';
@@ -61,7 +61,7 @@
 	<nav class='sidebar-nav'>
 		<ul>");
 
-if ($_SESSION['dni'] == $_SESSION['mydni']) {
+if($_SESSION['dni'] == $_SESSION['mydni']) {
 	
 	print("<li>
 			<a href='#'>
@@ -89,7 +89,7 @@ if ($_SESSION['dni'] == $_SESSION['mydni']) {
 
 	} // Fin condicional web master
 	
-	} elseif ($_SESSION['Nivel'] == 'plus') {
+	} elseif($_SESSION['Nivel'] == 'plus') {
 						
 	global $niv;
 	$niv = 'Usuario Plus';
@@ -98,7 +98,7 @@ if ($_SESSION['dni'] == $_SESSION['mydni']) {
 		print("<nav class='sidebar-nav'><ul>");
 	require 'index_admin.php';
 
-	}elseif ($_SESSION['Nivel'] == 'user') {
+	}elseif($_SESSION['Nivel'] == 'user') {
 						
 	global $niv;
 	$niv = 'Usuario';

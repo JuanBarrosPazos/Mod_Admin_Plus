@@ -103,7 +103,7 @@ class PastelTheme extends Theme
 
 
     function PreStrokeApply($graph) {
-        if ($graph->legend->HasItems()) {
+        if($graph->legend->HasItems()) {
             $img = $graph->img;
             $graph->SetMargin(
                 $img->raw_left_margin, 

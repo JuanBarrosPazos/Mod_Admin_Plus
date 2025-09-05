@@ -88,7 +88,7 @@ class PiePlot3D extends PiePlot {
         $coords.= ", $xp, $yp";
 
         //If on the front half, add the thickness offset
-        if ($sa >= M_PI && $sa <= 2*M_PI*1.01) {
+        if($sa >= M_PI && $sa <= 2*M_PI*1.01) {
             $yp = floor($yp+$thick);
             $coords.= ", $xp, $yp";
         }
@@ -97,9 +97,9 @@ class PiePlot3D extends PiePlot {
         $a=$sa+0.2;
         while ($a<$ea) {
             $xp = floor($width*cos($a)/2+$xc);
-            if ($a >= M_PI && $a <= 2*M_PI*1.01) {
+            if($a >= M_PI && $a <= 2*M_PI*1.01) {
                 $yp = floor($yc-($height*sin($a)/2)+$thick);
-            } else {
+            }else{
                 $yp = floor($yc-$height*sin($a)/2);
             }
             $coords.= ", $xp, $yp";
@@ -111,7 +111,7 @@ class PiePlot3D extends PiePlot {
         $yp = floor($yc-$height*sin($ea)/2);
 
 
-        if ($ea >= M_PI && $ea <= 2*M_PI*1.01) {
+        if($ea >= M_PI && $ea <= 2*M_PI*1.01) {
             $coords.= ", $xp, ".floor($yp+$thick);
         }
         $coords.= ", $xp, $yp";

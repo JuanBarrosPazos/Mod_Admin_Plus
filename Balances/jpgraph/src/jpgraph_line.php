@@ -98,7 +98,7 @@ class LinePlot extends Plot{
                 // In order to differentiate between gradients and cooors specified as an RGB triple
                 $graph->legend->Add($this->legend,$color,"",-2 /* -GRAD_HOR */,
                 $this->legendcsimtarget,$this->legendcsimalt,$this->legendcsimwintarget);
-            } else {
+            }else{
                 $graph->legend->Add($this->legend,
                 $this->color,$this->mark,$this->line_style,
                 $this->legendcsimtarget,$this->legendcsimalt,$this->legendcsimwintarget);
@@ -127,7 +127,7 @@ class LinePlot extends Plot{
             if( $this->center ) {
                 ++$this->numpoints;
                 $a=0.5; $b=0.5;
-            } else {
+            }else{
                 $a=0; $b=0;
             }
             $graph->xaxis->scale->ticks->SetXLabelOffset($a);
@@ -563,7 +563,7 @@ class AccLinePlot extends Plot {
             if( $this->center ) {
                 ++$this->numpoints;
                 $a=0.5; $b=0.5;
-            } else {
+            }else{
                 $a=0; $b=0;
             }
             $graph->xaxis->scale->ticks->SetXLabelOffset($a);

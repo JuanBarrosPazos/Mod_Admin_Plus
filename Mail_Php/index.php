@@ -32,11 +32,9 @@ function limita(elEvento, maximoCaracteres) {
   // Permitir borrar con la tecla Backspace y con la tecla Supr.
   if(codigoCaracter == 8 || codigoCaracter == 46) {
     return true;
-  }
-  else if(elemento.value.length >= maximoCaracteres ) {
+  }else if(elemento.value.length >= maximoCaracteres ) {
     return false;
-  }
-  else {
+  }else{
     return true;
   }
 }
@@ -47,26 +45,25 @@ function actualizaInfo(maximoCaracteres) {
  
   if(elemento.value.length >= maximoCaracteres ) {
     info.innerHTML = "Máximo "+maximoCaracteres+"caracteres";
-  }
-  else {
+  }else {
     info.innerHTML = "You can write up to "+(maximoCaracteres-elemento.value.length)+" additional characters";
   }
 }
 // Tendremos que dar el id que tenga el text area y añadir onkeypress="return limita(event, 200);" onkeyup="actualizaInfo(200)" para limitar los caracteres a 200 en este caso.
 function MM_validateForm() { 
-  if (document.getElementById){
+  if(document.getElementById){
     var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
     for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=document.getElementById(args[i]);
-      if (val) { nm=val.name; if ((val=val.value)!="") {
-        if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
-          if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
-        } else if (test!='R') { num = parseFloat(val);
-          if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
-          if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+      if(val) { nm=val.name; if((val=val.value)!="") {
+        if(test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+          if(p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+        } else if(test!='R') { num = parseFloat(val);
+          if(isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+          if(test.indexOf('inRange') != -1) { p=test.indexOf(':');
             min=test.substring(8,p); max=test.substring(p+1);
-            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
-      } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
-    } if (errors) alert('The following error(s) occurred:\n'+errors);
+            if(num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+      } } }else if(test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
+    } if(errors) alert('The following error(s) occurred:\n'+errors);
     document.MM_returnValue = (errors == '');
 } }
 
@@ -115,7 +112,7 @@ function MM_validateForm() {
 			if($form_errors = validate_form()){
 						show_form($form_errors);
 										
-			} else {process_Mail();
+			}else{process_Mail();
 					//show_form();
 					   }
 					}	/* Fin del if $_POST['oculto']*/
@@ -134,11 +131,11 @@ function MM_validateForm() {
 		$errors [] = "Nombre: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['nombre'])) < 3 ){
+	elseif(strlen(trim($_POST['nombre'])) < 3 ){
 		$errors [] = "Nombre: <font color='#FF0000'>Escriba más de tres carácteres.</font>";
 		}
 		
-	elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['nombre'])){
+	elseif(!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['nombre'])){
 		$errors [] = "Nombre: <font color='#FF0000'>Solo texto</font>";
 		}
 		
@@ -148,11 +145,11 @@ function MM_validateForm() {
 		$errors [] = "Apellidos: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['apellidos'])) < 3 ){
+	elseif(strlen(trim($_POST['apellidos'])) < 3 ){
 		$errors [] = "Apellidos: <font color='#FF0000'>Escriba más de tres carácteres.</font>";
 		}
 		
-	elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['apellidos'])){
+	elseif(!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['apellidos'])){
 		$errors [] = "Apellidos: <font color='#FF0000'>Solo texto</font>";
 		}
 
@@ -163,11 +160,11 @@ function MM_validateForm() {
 		$errors [] = "Mail: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['Email'])) < 5 ){
+	elseif(strlen(trim($_POST['Email'])) < 5 ){
 		$errors [] = "Mail: <font color='#FF0000'>Escriba más de cinco carácteres.</font>";
 		}
 		
-	elseif (!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
+	elseif(!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
 		$errors [] = "Mail: <font color='#FF0000'>Esta dirección no es válida.</font>";
 		}
 		
@@ -177,11 +174,11 @@ function MM_validateForm() {
 		$errors [] = "Asunto: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['asunto'])) < 3 ){
+	elseif(strlen(trim($_POST['asunto'])) < 3 ){
 		$errors [] = "Asunto: <font color='#FF0000'>Escriba más de tres carácteres.</font>";
 		}
 		
-	elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['asunto'])){
+	elseif(!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['asunto'])){
 		$errors [] = "Asunto: <font color='#FF0000'>Solo texto</font>";
 		}
 
@@ -191,11 +188,11 @@ function MM_validateForm() {
 		$errors [] = "Mensaje: <font color='#FF0000'>Este campo es obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['mensaje'])) < 3 ){
+	elseif(strlen(trim($_POST['mensaje'])) < 3 ){
 		$errors [] = "Mensaje: <font color='#FF0000'>Escriba más de tres carácteres.</font>";
 		}
 		
-	elseif (!preg_match('/^[^$<>\[\]\{\}]+$/',$_POST['mensaje'])){
+	elseif(!preg_match('/^[^$<>\[\]\{\}]+$/',$_POST['mensaje'])){
 		$errors [] = "Mensaje: <font color='#FF0000'>Caracteres no permitidos $<>[]{}</font>";
 		}
 
@@ -216,7 +213,7 @@ function show_form($errors=[]){
 									'mensaje' => isset($_POST['mensaje']));
 									}
 	
-	if ($errors){
+	if($errors){
 		
 	print("<table align='center'>
 				<tr>

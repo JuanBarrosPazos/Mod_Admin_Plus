@@ -13,7 +13,7 @@
     mysqli_report(MYSQLI_REPORT_OFF);
         global $db;
         @$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-    if (!$db){ echo("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
+    if(!$db){ echo("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
     }else{
         global $tablas;
         $tablas = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME LIKE '%'";

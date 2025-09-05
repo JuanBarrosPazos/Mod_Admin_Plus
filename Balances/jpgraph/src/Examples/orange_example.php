@@ -22,7 +22,7 @@ $data = array (
 $graph = new Graph(400,300);    
 
 $graph->SetScale("textlin");
-if ($theme) {
+if($theme) {
   $graph->SetTheme(new $theme());
 }
 $theme_class = new OrangeTheme;

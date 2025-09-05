@@ -167,8 +167,8 @@ define("_FORCE_IMGDIR",'/tmp/jpgimg/');
 // if they have not been previously specified
 //
 if(USE_CACHE) {
-    if (!defined('CACHE_DIR')) {
-        if ( strstr( PHP_OS, 'WIN') ) {
+    if(!defined('CACHE_DIR')) {
+        if( strstr( PHP_OS, 'WIN') ) {
             if( empty($_SERVER['TEMP']) ) {
                 $t = new ErrMsgText();
                 $msg = $t->Get(11,$file,$lineno);
@@ -177,7 +177,7 @@ if(USE_CACHE) {
             else {
                 define('CACHE_DIR', $_SERVER['TEMP'] . '/');
             }
-        } else {
+        }else{
             define('CACHE_DIR','/tmp/jpgraph_cache/');
         }
     }
@@ -189,8 +189,8 @@ elseif( !defined('CACHE_DIR') ) {
 //
 // Setup path for western/latin TTF fonts
 //
-if (!defined('TTF_DIR')) {
-    if (strstr( PHP_OS, 'WIN') ) {
+if(!defined('TTF_DIR')) {
+    if(strstr( PHP_OS, 'WIN') ) {
         $sroot = getenv('SystemRoot');
         if( empty($sroot) ) {
             $t = new ErrMsgText();
@@ -200,7 +200,7 @@ if (!defined('TTF_DIR')) {
         else {
             define('TTF_DIR', $sroot.'/fonts/');
         }
-    } else {
+    }else{
         define('TTF_DIR','/usr/share/fonts/truetype/');
     }
 }
@@ -208,8 +208,8 @@ if (!defined('TTF_DIR')) {
 //
 // Setup path for MultiByte TTF fonts (japanese, chinese etc.)
 //
-if (!defined('MBTTF_DIR')) {
-    if (strstr( PHP_OS, 'WIN') ) {
+if(!defined('MBTTF_DIR')) {
+    if(strstr( PHP_OS, 'WIN') ) {
         $sroot = getenv('SystemRoot');
         if( empty($sroot) ) {
             $t = new ErrMsgText();
@@ -219,7 +219,7 @@ if (!defined('MBTTF_DIR')) {
         else {
             define('MBTTF_DIR', $sroot.'/fonts/');
         }
-    } else {
+    }else{
         define('MBTTF_DIR','/usr/share/fonts/truetype/');
     }
 }
@@ -231,9 +231,9 @@ function CheckPHPVersion($aMinVersion) {
     list($majorC, $minorC, $editC) = preg_split('/[\/.-]/', PHP_VERSION);
     list($majorR, $minorR, $editR) = preg_split('/[\/.-]/', $aMinVersion);
 
-    if ($majorC < $majorR) return false;
+    if($majorC < $majorR) return false;
 
-    if ($majorC == $majorR) {
+    if($majorC == $majorR) {
         if($minorC < $minorR) return false;
 
         if($minorC == $minorR){
@@ -365,17 +365,17 @@ class DateLocale {
     }
 
     function Set($aLocale) {
-        if ( in_array($aLocale, array_keys($this->iDayAbb)) ){
+        if( in_array($aLocale, array_keys($this->iDayAbb)) ){
             $this->iLocale = $aLocale;
             return TRUE;  // already cached nothing else to do!
         }
 
         $pLocale = setlocale(LC_TIME, 0); // get current locale for LC_TIME
 
-        if (is_array($aLocale)) {
+        if(is_array($aLocale)) {
             foreach ($aLocale as $loc) {
                 $res = @setlocale(LC_TIME, $loc);
-                if ( $res ) {
+                if( $res ) {
                     $aLocale = $loc;
                     break;
                 }
@@ -385,7 +385,7 @@ class DateLocale {
             $res = @setlocale(LC_TIME, $aLocale);
         }
 
-        if ( ! $res ) {
+        if( ! $res ) {
             JpGraphError::RaiseL(25007,$aLocale);
             //("You are trying to use the locale ($aLocale) which your PHP installation does not support. Hint: Use '' to indicate the default locale for this geographic region.");
             return FALSE;
@@ -634,7 +634,7 @@ class Graph {
 
         $this->tabtitle = new GraphTabTitle();
 
-        if (!$this->isRunningClear) {
+        if(!$this->isRunningClear) {
             $this->inputValues = array();
             $this->inputValues['aWidth'] = $aWidth;
             $this->inputValues['aHeight'] = $aHeight;
@@ -643,7 +643,7 @@ class Graph {
             $this->inputValues['aInline'] = $aInline;
 
             $theme_class = DEFAULT_THEME_CLASS;
-            if (class_exists($theme_class)) {
+            if(class_exists($theme_class)) {
                 $this->graph_theme = new $theme_class();
             }
         }
@@ -781,7 +781,7 @@ class Graph {
             }
         }
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->SetupPlot($aPlot);
         }
     }
@@ -834,7 +834,7 @@ class Graph {
             $this->y2plots[] = $aPlot;
         }
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->SetupPlot($aPlot);
         }
     }
@@ -862,7 +862,7 @@ class Graph {
             $this->ynplots[$aN][] = $aPlot;
         }
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->SetupPlot($aPlot);
         }
     }
@@ -994,10 +994,10 @@ class Graph {
 
             $valid_formats = array('png', 'jpg', 'gif');
             $aImgFormat = strtolower($e[count($e)-1]);
-            if ($aImgFormat == 'jpeg')  {
+            if($aImgFormat == 'jpeg')  {
                 $aImgFormat = 'jpg';
             }
-            elseif (!in_array($aImgFormat, $valid_formats) )  {
+            elseif(!in_array($aImgFormat, $valid_formats) )  {
                 JpGraphError::RaiseL(25019,$aImgFormat);//('Unknown file extension ($aImgFormat) in Graph::SetBackgroundImage() for filename: '.$aFileName);
             }
         }
@@ -1116,14 +1116,14 @@ class Graph {
         $this->ygrid->Show();
 
 
-        if (!$this->isRunningClear) {
+        if(!$this->isRunningClear) {
             $this->inputValues['aAxisType'] = $aAxisType;
             $this->inputValues['aYMin'] = $aYMin;
             $this->inputValues['aYMax'] = $aYMax;
             $this->inputValues['aXMin'] = $aXMin;
             $this->inputValues['aXMax'] = $aXMax;
 
-            if ($this->graph_theme) {
+            if($this->graph_theme) {
                 $this->graph_theme->ApplyGraph($this);
             }
         }
@@ -1156,7 +1156,7 @@ class Graph {
         // Deafult position is the max x-value
         $this->y2grid = new Grid($this->y2axis);
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
           $this->graph_theme->ApplyGraph($this);
         }
     }
@@ -1187,7 +1187,7 @@ class Graph {
         $this->ynaxis[$aN]->scale->ticks->SetDirection(SIDE_LEFT);
         $this->ynaxis[$aN]->SetLabelSide(SIDE_RIGHT);
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->ApplyGraph($this);
         }
     }
@@ -1340,7 +1340,7 @@ class Graph {
                     @unlink($baseimg);
                 }
                 else {
-                    if ($fh = @fopen($basecsim, "r")) {
+                    if($fh = @fopen($basecsim, "r")) {
                         fpassthru($fh);
                         return true;
                     }
@@ -2053,7 +2053,7 @@ class Graph {
         // Setup pre-stroked adjustments and Legends
         $this->doPrestrokeAdjustments();
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->PreStrokeApply($this);
         }
 
@@ -2469,7 +2469,7 @@ class Graph {
         // Get file extension. This should be the LAST '.' separated part of the filename
         $e = explode('.',$aFile);
         $ext = strtolower($e[count($e)-1]);
-        if ($ext == "jpeg")  {
+        if($ext == "jpeg")  {
             $ext = "jpg";
         }
 
@@ -2986,18 +2986,18 @@ class Graph {
             $csim.= $p->GetCSIMareas();
         }
         $csim .= $this->legend->GetCSIMareas();
-        if (preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
+        if(preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
             $this->img->SetColor($this->csimcolor);
             $n = count($coords[0]);
             for ($i=0; $i < $n; $i++) {
-                if ( $coords[1][$i] == 'poly' ) {
+                if( $coords[1][$i] == 'poly' ) {
                     preg_match_all('/\s*([0-9]+)\s*,\s*([0-9]+)\s*,*/',$coords[2][$i],$pts);
                     $this->img->SetStartPoint($pts[1][count($pts[0])-1],$pts[2][count($pts[0])-1]);
                     $m = count($pts[0]);
                     for ($j=0; $j < $m; $j++) {
                         $this->img->LineTo($pts[1][$j],$pts[2][$j]);
                     }
-                } elseif ( $coords[1][$i] == 'rect' ) {
+                } elseif( $coords[1][$i] == 'rect' ) {
                     $pts = preg_split('/,/', $coords[2][$i]);
                     $this->img->SetStartPoint($pts[0],$pts[1]);
                     $this->img->LineTo($pts[2],$pts[1]);
@@ -3076,8 +3076,8 @@ class Graph {
         for($i=0; $i < $n; ++$i ) {
             list($xmax,$ymax)=$aPlots[$i]->Max();
             list($xmin,$ymin)=$aPlots[$i]->Min();
-            if (is_numeric($ymax)) $max=max($max,$ymax);
-            if (is_numeric($ymin)) $min=min($min,$ymin);
+            if(is_numeric($ymax)) $max=max($max,$ymax);
+            if(is_numeric($ymin)) $min=min($min,$ymin);
         }
         if( $min == '' ) $min = 0;
         if( $max == '' ) $max = 0;
@@ -3093,15 +3093,15 @@ class Graph {
         $has_bar  = false;
 
         foreach ($this->plots as $plot) {
-            if ($plot instanceof LinePlot) {
+            if($plot instanceof LinePlot) {
                 $has_line = true;
             }
-            if ($plot instanceof BarPlot) {
+            if($plot instanceof BarPlot) {
                 $has_bar = true;
             }
         }
 
-        if ($has_line && $has_bar) {
+        if($has_line && $has_bar) {
             return true;
         }
 
@@ -3110,13 +3110,13 @@ class Graph {
 
     function SetTheme($graph_theme) {
 
-        if (!($this instanceof PieGraph)) {
-            if (!$this->isAfterSetScale) {
+        if(!($this instanceof PieGraph)) {
+            if(!$this->isAfterSetScale) {
                 JpGraphError::RaiseL(25133);//('Use Graph::SetTheme() after Graph::SetScale().');
             }
         }
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->ClearTheme();
         }
         $this->graph_theme = $graph_theme;
@@ -3136,8 +3136,8 @@ class Graph {
                 $this->inputValues['aInline']
             );
  
-        if (!($this instanceof PieGraph)) {
-            if ($this->isAfterSetScale) {
+        if(!($this instanceof PieGraph)) {
+            if($this->isAfterSetScale) {
                 $this->SetScale(
                         $this->inputValues['aAxisType'],
                         $this->inputValues['aYMin'],
@@ -3152,10 +3152,10 @@ class Graph {
     }
 
     function SetSupersampling($do = false, $scale = 2) {
-        if ($do) {
+        if($do) {
             define('SUPERSAMPLING_SCALE', $scale);
            // $this->img->scale = $scale;
-        } else {
+        }else{
             define('SUPERSAMPLING_SCALE', 1);
             //$this->img->scale = 0;
         }
@@ -4507,7 +4507,7 @@ class LinearTicks extends Ticks {
         elseif( $this->label_formatstr != '' || $this->label_dateformatstr != '' ) {
             if( $this->label_usedateformat ) {
                 // Adjust the value to take daylight savings into account
-                if (date("I",$aVal)==1 && $this->iAdjustForDST ) {
+                if(date("I",$aVal)==1 && $this->iAdjustForDST ) {
                     // DST
                     $aVal+=3600;
                 }
@@ -4522,7 +4522,7 @@ class LinearTicks extends Ticks {
             else {
                 if( $this->label_dateformatstr !== '' ) {
                     // Adjust the value to take daylight savings into account
-                    if (date("I",$aVal)==1 && $this->iAdjustForDST ) {
+                    if(date("I",$aVal)==1 && $this->iAdjustForDST ) {
                         // DST
                         $aVal+=3600;
                     }
@@ -5220,9 +5220,9 @@ class LinearScale {
     function __get($name) {
         $variable_name = '_' . $name; 
 
-        if (isset($this->$variable_name)) {
+        if(isset($this->$variable_name)) {
             return $this->$variable_name * SUPERSAMPLING_SCALE;
-        } else {
+        }else{
             JpGraphError::RaiseL('25132', $name);
         } 
     }
@@ -5396,7 +5396,7 @@ class Plot {
             JpGraphError::RaiseL(25121);//("Empty input data array specified for plot. Must have at least one data point.");
         }
 
-        if (!$this->isRunningClear) {
+        if(!$this->isRunningClear) {
             $this->inputValues = array();
             $this->inputValues['aDatay'] = $aDatay;
             $this->inputValues['aDatax'] = $aDatax;

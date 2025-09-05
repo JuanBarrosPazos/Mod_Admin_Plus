@@ -91,19 +91,19 @@ function process_form(){
 
 	global $rf1;	global $rf2;	global $rf3;	global $rf4;
 
-	if (preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){	$rf1 = $ref1[1];
+	if(preg_match('/^(\w{1})/',$_POST['Nombre'],$ref1)){	$rf1 = $ref1[1];
 															$rf1 = trim($rf1);
 															/*print($ref1[1]."</br>");*/
 															}
-	if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
+	if(preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Nombre'],$ref2)){	$rf2 = $ref2[2];
 																	$rf2 = trim($rf2);
 															/*print($ref2[2]."</br>");*/
 															}
-	if (preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
+	if(preg_match('/^(\w{1})/',$_POST['Apellidos'],$ref3)){	$rf3 = $ref3[1];
 																$rf3 = trim($rf3);
 															/*print($ref3[1]."</br>");*/
 															}
-	if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2];
+	if(preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2];
 																		$rf4 = trim($rf4);
 															/*print($ref4[2]."</br>");*/
 															}
@@ -257,7 +257,7 @@ function crear_tablas(){
 		if( file_exists( $carpetaimg.'/'.$nombre) ){
 			unlink($carpetaimg."/".$nombre);
 		//	print("* El archivo ".$nombre." ya existe, seleccione otra imagen.</br>");
-		}elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
+		}elseif(move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){
 				// Renombrar el archivo:
 				$extension = substr($_FILES['myimg']['name'],-3);
 				// print($extension);

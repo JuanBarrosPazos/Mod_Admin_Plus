@@ -20,20 +20,21 @@ $rowd = mysqli_fetch_assoc($qd);
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 	master_index();
 
 	if(isset($_POST['oculto2'])){ info_01();
 								  show_form();
-	}elseif($_POST['oculto']){
-			if($form_errors = validate_form()){
+	}elseif(isset($_POST['oculto'])){
+		if($form_errors = validate_form()){
 					show_form($form_errors);
-			} else {process_form();
-					info_02();
-				}
-	} else {show_form();}
-		} else { require '../Inclu/tabla_permisos.php'; } 
+		}else{	process_form();
+				info_02();
+		}
+	}else{ show_form(); }
+
+}else{ require '../Inclu/tabla_permisos.php'; } 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -141,33 +142,33 @@ function validate_form(){
 	
 
 	/* VALIDAMOS QUE LOS DOS CAMPOS NO SON IGUALES */
-	if (($_POST['din'] == $_POST['dout']) && ($_POST['tin'] == $_POST['tout']) ){
+	if(($_POST['din'] == $_POST['dout']) && ($_POST['tin'] == $_POST['tout']) ){
 		$errors [] = "FECHA OUT / IN <font color='#FF0000'>MISMA HORA Y FECHA</font>";
 		}
 
 	/* VALIDAMOS LOS FORMATOS */
 	
-	elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/',$_POST['dout'])){
+	elseif(!preg_match('/^\d{4}-\d{2}-\d{2}$/',$_POST['dout'])){
 		$errors [] = "FECHA OUT <font color='#FF0000'>1 Formato incorrecto YYYY-MM-DD</font>";
 		}
 
-	elseif (!preg_match('/^[0-9\-\s]+$/',$_POST['dout'])){
+	elseif(!preg_match('/^[0-9\-\s]+$/',$_POST['dout'])){
 		$errors [] = "FECHA OUT <font color='#FF0000'>2 Formato incorrecto YYYY-MM-DD</font>";
 		}
 
-	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>´"·\(\)=¿?!¡\[\]\{\};,:\.\*\']+$/',$_POST['dout'])){
+	elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>´"·\(\)=¿?!¡\[\]\{\};,:\.\*\']+$/',$_POST['dout'])){
 		$errors [] = "FECHA OUT <font color='#FF0000'>Caracteres no permitidos.</font>";
 		}
 		
-	elseif (!preg_match('/^\d{2}:\d{2}:\d{2}$/',$_POST['tout'])){
+	elseif(!preg_match('/^\d{2}:\d{2}:\d{2}$/',$_POST['tout'])){
 		$errors [] = "TIME OUT <font color='#FF0000'>1 Formato incorrecto HH:MM:SS</font>";
 		}
 
-	elseif (!preg_match('/^[0-9:\s]+$/',$_POST['tout'])){
+	elseif(!preg_match('/^[0-9:\s]+$/',$_POST['tout'])){
 		$errors [] = "TIME OUT <font color='#FF0000'>2 Formato incorrecto HH:MM:SS</font>";
 		}
 	
-	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>-´"·\(\)=¿?!¡\[\]\{\};,\.\*\']+$/',$_POST['tout'])){
+	elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>-´"·\(\)=¿?!¡\[\]\{\};,\.\*\']+$/',$_POST['tout'])){
 		$errors [] = "TIME OUT <font color='#FF0000'>Caracteres no permitidos.</font>";
 		}
 
@@ -180,11 +181,11 @@ function validate_form(){
 		$errors [] = "FECHA OUT <font color='#FF0000'>Campo obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['dout'])) < 10){
+	elseif(strlen(trim($_POST['dout'])) < 10){
 		$errors [] = "FECHA OUT <font color='#FF0000'>Valores incorrectos YYYY-MM-DD</font>";
 		}
 		
-	elseif (strlen(trim($_POST['dout'])) > 10){
+	elseif(strlen(trim($_POST['dout'])) > 10){
 		$errors [] = "FECHA OUT <font color='#FF0000'>Valores incorrectos YYYY-MM-DD</font>";
 		}
 		
@@ -215,11 +216,11 @@ function validate_form(){
 		$errors [] = "TIME OUT <font color='#FF0000'>Campo obligatorio.</font>";
 		}
 	
-	elseif (strlen(trim($_POST['tout'])) < 8){
+	elseif(strlen(trim($_POST['tout'])) < 8){
 		$errors [] = "TIME OUT <font color='#FF0000'>Valores incorrectos HH:MM:SS</font>";
 		}
 	
-	elseif (strlen(trim($_POST['tout'])) > 8){
+	elseif(strlen(trim($_POST['tout'])) > 8){
 		$errors [] = "TIME OUT <font color='#FF0000'>Valores incorrectos HH:MM:SS</font>";
 		}
 /*	*/	
@@ -229,15 +230,15 @@ function validate_form(){
 		}
 	
 		/* (Si el día de salida es igual al de entrada y la hora de salida es inferior a la de entrada */
-	elseif (($doutd == $dind)AND($tinh > $touth)){
+	elseif(($doutd == $dind)AND($tinh > $touth)){
 			$errors [] = "TIME OUT <font color='#FF0000'>HORA NO PERMITIDA</font>";
 		}
 	
-	elseif ($_SESSION['ttotd'] > 0){
+	elseif($_SESSION['ttotd'] > 0){
 		$errors [] = "DATE OUT <font color='#FF0000'>MÁS DE 24 HORAS</font>";
 		}
 
-	elseif ($_SESSION['ttoth'] > 9){
+	elseif($_SESSION['ttoth'] > 9){
 		$errors [] = "TIME OUT <font color='#FF0000'>MÁS DE 10 HORAS</font>";
 		}
 	 }	// FIN ELSE SI TODOS LOS FORMATOS SON CORRECTOS
@@ -280,6 +281,7 @@ function suma_todo(){
 	$vname = $tabla1."_".$diny;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 	}
@@ -413,7 +415,7 @@ function process_form(){
 				fwrite($rmf, $rmftext);
 				fclose($rmf);
 
-			} else {print("* MODIFIQUE LA ENTRADA L.304: ".mysqli_error($db));
+			}else{print("* MODIFIQUE LA ENTRADA L.304: ".mysqli_error($db));
 					show_form ();
 					global $texerror;
 					$texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -429,22 +431,23 @@ function show_form($errors=[]){
 
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} elseif($_POST['oculto2']){
-				$defaults = array (	'id' => $_POST['id'],
-								    'ref' => $_SESSION['usuarios'],
-									'name1' => $_POST['name1'],
-									'name2' => $_POST['name2'],
-									'din' => $_POST['din'],
-									'tin' => $_POST['tin'],
-									'dout' => $_POST['dout'],
-									'tout' => $_POST['tout'],
-									'ttot' => $_POST['ttot']);
-					$_SESSION['edout'] = $_POST['dout'];
-					$_SESSION['etout'] = $_POST['tout'];
-					$_SESSION['ettot'] = $_POST['ttot'];
-								}
+	}elseif(isset($_POST['oculto2'])){
+		$defaults = array (	'id' => $_POST['id'],
+						    'ref' => $_SESSION['usuarios'],
+							'name1' => $_POST['name1'],
+							'name2' => $_POST['name2'],
+							'din' => $_POST['din'],
+							'tin' => $_POST['tin'],
+							'dout' => $_POST['dout'],
+							'tout' => $_POST['tout'],
+							'ttot' => $_POST['ttot']);
 
-	if ($errors){
+			$_SESSION['edout'] = $_POST['dout'];
+			$_SESSION['etout'] = $_POST['tout'];
+			$_SESSION['ettot'] = $_POST['ttot'];
+	}
+
+	if($errors){
 		print("<table align='center'>
 					<th style='text-align:center'>
 					<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
@@ -461,14 +464,13 @@ function show_form($errors=[]){
 				}
 		
 	print("<table align='center' style='margin-top:10px' width=240px >
-	
-	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 				<tr>
 					<td>
 						ID
 					</td>
 					<td>
-	<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
+	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+		<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
 					</td>
 				</tr>
 									
@@ -565,11 +567,11 @@ function info_01(){
 
 		global $ttot;
 		global $orden;
+		require '../Inclu/orden.php';
 
 		$ActionTime = date('H:i:s');
 
-		global $dir;
-		$dir = "../Users/".$_SESSION['ref']."/log";
+		global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 
 		global $text;
 		$text = PHP_EOL."- JORNADA LABORAL MODIFICAR SELECCIONADO ".$ActionTime;
@@ -603,8 +605,7 @@ function info_02(){
 
 		$ActionTime = date('H:i:s');
 
-		global $dir;
-		$dir = "../Users/".$_SESSION['ref']."/log";
+		global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
 	
 		global $text;
 		$text = PHP_EOL."- JORNADA LABORAL MODIFICAR 2 ".$ActionTime;
@@ -632,12 +633,12 @@ function info_02(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-		} /* Fin funcion master_index.*/
+} /* Fin funcion master_index.*/
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

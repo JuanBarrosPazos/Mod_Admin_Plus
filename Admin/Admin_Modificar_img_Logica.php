@@ -1,8 +1,8 @@
 <?php
 
-if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 
-        if (isset($_POST['oculto2'])){ 
+        if(isset($_POST['oculto2'])){ 
                 show_form();
                 global $nombre;
                 $nombre = $_POST['Nombre'];

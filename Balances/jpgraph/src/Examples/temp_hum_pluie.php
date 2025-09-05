@@ -31,21 +31,21 @@ for ( $i = 0; $i < 864; $i++ ) {
 
   // stockage températures
   $te = str_replace( ",", ".", $data[ 2 ] );
-  if ( $te < $te_min ) {
+  if( $te < $te_min ) {
     $te_min = $te;
   }
-  if ( $te > $te_max ) {
+  if( $te > $te_max ) {
     $te_max = $te;
   }
 
-  if ( $te >= 40 ) {
+  if( $te >= 40 ) {
     $te_40[ $i ] = $te;
     $te_30[ $i ] = 40;
     $te_20[ $i ] = 30;
     $te_10[ $i ] = 20;
     $te_0[ $i ] = 10;
     $te_neg[ $i ] = 0;
-  } elseif ( $te >= 30 ) {
+  } elseif( $te >= 30 ) {
     $te_40[ $i ] = 0;
     $te_30[ $i ] = $te;
     $te_20[ $i ] = 30;
@@ -53,7 +53,7 @@ for ( $i = 0; $i < 864; $i++ ) {
     $te_0[ $i ] = 10;
     $te_neg[ $i ] = 0;
   }
-  elseif ( $te >= 20 ) {
+  elseif( $te >= 20 ) {
     $te_40[ $i ] = 0;
     $te_30[ $i ] = 0;
     $te_20[ $i ] = $te;
@@ -61,7 +61,7 @@ for ( $i = 0; $i < 864; $i++ ) {
     $te_0[ $i ] = 10;
     $te_neg[ $i ] = 0;
   }
-  elseif ( $te >= 10 ) {
+  elseif( $te >= 10 ) {
     $te_40[ $i ] = 0;
     $te_30[ $i ] = 0;
     $te_20[ $i ] = 0;
@@ -69,7 +69,7 @@ for ( $i = 0; $i < 864; $i++ ) {
     $te_0[ $i ] = 10;
     $te_neg[ $i ] = 0;
   }
-  elseif ( $te > 0 ) {
+  elseif( $te > 0 ) {
     $te_40[ $i ] = 0;
     $te_30[ $i ] = 0;
     $te_20[ $i ] = 0;
@@ -95,7 +95,7 @@ for ( $i = 0; $i < 864; $i++ ) {
 
 } // fin de la lecture du fichier
 
-  if ( $te_min > 0 ) {
+  if( $te_min > 0 ) {
     $te_min = 0;
   }
 

@@ -15,10 +15,11 @@ session_start();
 
 if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){
  		
-	if (isset($_POST['salir'])){ UserLog();
-							  		 salir();
-	}elseif ($_POST['cerrar']){ master_index();
-								desconex(); }
+	if(isset($_POST['salir'])){ UserLog();
+							  	salir();
+	}elseif(isset($_POST['cerrar'])){ 	master_index();
+										desconex(); 
+	}
 
 }else{ require '../Inclu/tabla_permisos.php';}
 		

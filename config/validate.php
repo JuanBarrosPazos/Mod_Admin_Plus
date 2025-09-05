@@ -115,7 +115,6 @@ if(preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[2
 			$errors [] = "N&uacute;mero NIE/NIF: <font color='#F1BD2D'>Sin caracteres especiales</font>";
 		}elseif(!preg_match('/^[^a-z]+$/',$_POST['dni'])){
 		$errors [] = "N&uacute;mero NIE/NIF: <font color='#F1BD2D'>Solo mayusculas</font>";
-
 		}elseif($_POST['doc'] == 'NIE'){
 	/* SE VALIDAN LAS LETRAS DEL CAMPO NUMERO NIE/NIF */	
 			if(preg_match('/^[^XYZ]+$/',$_POST['dni'])){	// SOLO SE ADMINTE XYZ //

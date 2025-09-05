@@ -479,7 +479,7 @@ class RGB {
     // RGB triple.
 
     function Color($aColor) {
-        if (is_string($aColor)) {
+        if(is_string($aColor)) {
             $matches = array();
             // this regex will parse a color string and fill the $matches array as such:
             // 0: the full match if any

@@ -343,7 +343,7 @@ class Legend {
             if( !preg_match('/\n/',$p[0]) ) {
                 // Single line
                 $marky = ceil($y1-$this->mark_abs_vsize/2)-1;
-            } else {
+            }else{
                 // Paragraph
                 $marky = $y1 - $aImg->GetTextHeight($p[0])/2;
 
@@ -354,7 +354,7 @@ class Legend {
 
             $x1 += $this->mark_abs_hsize;
     
-            if ( !empty($p[2]) && $p[2]->GetType() > -1 ) {
+            if( !empty($p[2]) && $p[2]->GetType() > -1 ) {
 
 
                 // Make a plot mark legend. This is constructed with a mark which
@@ -395,7 +395,7 @@ class Legend {
                     }
                 }
             }
-            elseif ( !empty($p[2]) && (is_string($p[3]) || $p[3]>0 ) ) {
+            elseif( !empty($p[2]) && (is_string($p[3]) || $p[3]>0 ) ) {
                 // Draw a styled line
                 $aImg->SetColor($p[1]);
                 $aImg->SetLineStyle($p[3]);

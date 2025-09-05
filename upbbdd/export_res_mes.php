@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'admin'){
+if($_SESSION['Nivel'] == 'admin'){
 
 					master_index();
 
@@ -24,7 +24,7 @@ if ($_SESSION['Nivel'] == 'admin'){
 							listfiles();
 							}
 								
-				} else { require '../Inclu/tabla_permisos.php'; }
+				}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -82,7 +82,7 @@ function show_form(){
 	$qu = mysqli_query($db, $sqlu);
 	if(!$qu){
 			print("Modifique la entrada L.95 ".mysqli_error($db)."<br/>");
-	} else {
+	}else{
 					
 		while($rowu = mysqli_fetch_assoc($qu)){
 					

@@ -8,7 +8,7 @@
 	if(!$qb){
 	print("<font color='#FF0000'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
 			
-	} else {
+	}else{
 		if(mysqli_num_rows($qb) == 0){
 			print ("<table align='center'>
 						<tr>
@@ -17,13 +17,13 @@
 							</td>
 						</tr>
 					</table>");
-	} else { 
+	}else{ 
 
     global $twhile;
     global $tdplus;
     global $pdm;
 
-    if ((isset($_POST['dm']) != '')||($pdm == "pdm")){
+    if((isset($_POST['dm']) != '')||($pdm == "pdm")){
     print ("<table align='center'>
 					".$twhile."
 									
@@ -104,7 +104,7 @@
         } /* Fin del while.*/ 
     }
 
-    elseif ($_POST['dm'] == ''){
+    elseif($_POST['dm'] == ''){
         print ("<table align='center'>
                     <tr>
                         <th colspan=".$colspana." class='BorderInf'>

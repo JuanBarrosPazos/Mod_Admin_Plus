@@ -237,7 +237,7 @@ class LanguageConv {
         for ($i=0; $i < strlen($winline); $i++) {
             $thischar=substr($winline,$i,1);
             $charcode=ord($thischar);
-            if ($charcode==161 || $charcode==162) {
+            if($charcode==161 || $charcode==162) {
                 $uniline.="&#" . (740+$charcode). ";";
             }
             else {
@@ -491,18 +491,18 @@ class TTF {
 
             // check jpgraph/src/fonts dir
             $jpgraph_font_file = $jpgraph_font_dir . $font_file;
-            if (file_exists($jpgraph_font_file) === true && is_readable($jpgraph_font_file) === true) { 
+            if(file_exists($jpgraph_font_file) === true && is_readable($jpgraph_font_file) === true) { 
                 $font_file = $jpgraph_font_file;
                 break;
             }
 
             // check OS font dir
-            if ($family >= FF_MINCHO && $family <= FF_PGOTHIC) {
+            if($family >= FF_MINCHO && $family <= FF_PGOTHIC) {
                 $font_file = MBTTF_DIR.$font_file;
-            } else {
+            }else{
                 $font_file = TTF_DIR.$font_file;
             }
-            if (file_exists($font_file) === true && is_readable($font_file) === true) { 
+            if(file_exists($font_file) === true && is_readable($font_file) === true) { 
                 break;
             }
         }

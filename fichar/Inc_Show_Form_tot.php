@@ -98,7 +98,7 @@
 	$qu = mysqli_query($db, $sqlu);
 	if(!$qu){
 			print("Modifique la entrada L.142 ".mysqli_error($db)."<br/>");
-	} else {
+	}else{
 		while($rowu = mysqli_fetch_assoc($qu)){
 					print ("<option value='".$rowu['ref']."' ");
 					if($rowu['ref'] == @$defaults['usuarios']){
@@ -115,8 +115,8 @@
 						</tr>
 					</table>"); 
 
-	if ((isset($_POST['oculto1'])) || (isset($_POST['todo']))) {
-		if ($_SESSION['usuarios'] == '') { 
+	if((isset($_POST['oculto1'])) || (isset($_POST['todo']))) {
+		if($_SESSION['usuarios'] == '') { 
 						print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 									<tr align='center'>
 										<td>
@@ -127,7 +127,7 @@
 									</tr>
 								</table>");
 					}	
-		if ($_SESSION['usuarios'] != '') {
+		if($_SESSION['usuarios'] != '') {
 
 	require "../Users/".$_SESSION['usuarios']."/ayear.php";
 			

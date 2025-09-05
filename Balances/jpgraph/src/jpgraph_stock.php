@@ -51,7 +51,7 @@ class StockPlot extends Plot {
         if( $this->center ) {
             $a=0.5; $b=0.5;
             $this->numpoints++;
-        } else {
+        }else{
             $a=0; $b=0;
         }
         $graph->xaxis->scale->ticks->SetXLabelOffset($a);
@@ -87,11 +87,11 @@ class StockPlot extends Plot {
         for( $i=0; $i<$n; ++$i) {
 
             //If value is NULL, then don't draw a bar at all
-            if ($this->coords[0][$i*$ts] === null) continue;
+            if($this->coords[0][$i*$ts] === null) continue;
 
             if( $exist_x ) {
                 $x=$this->coords[1][$i];
-				if ($x === null) continue;
+				if($x === null) continue;
             }
             else {
                 $x=$i;

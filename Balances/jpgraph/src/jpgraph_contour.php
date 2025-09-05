@@ -278,8 +278,8 @@ class Contour {
      *
      */
     function CalculateColors() {
-        if ( $this->highcontrast ) {
-            if ( $this->highcontrastbw ) {
+        if( $this->highcontrast ) {
+            if( $this->highcontrastbw ) {
                 for ($ib = 0; $ib < $this->nbrIsobars; $ib++) {
                     $this->isobarColors[$ib] = 'black';
                 }
@@ -329,18 +329,18 @@ class Contour {
 
                     // Find out how many crossings around the edges
                     $n = 0;
-                    if ( $this->edges[HORIZ_EDGE][$row][$col] )   $neigh[$n++] = array($row,  $col,  HORIZ_EDGE);
-                    if ( $this->edges[HORIZ_EDGE][$row+1][$col] ) $neigh[$n++] = array($row+1,$col,  HORIZ_EDGE);
-                    if ( $this->edges[VERT_EDGE][$row][$col] )    $neigh[$n++] = array($row,  $col,  VERT_EDGE);
-                    if ( $this->edges[VERT_EDGE][$row][$col+1] )  $neigh[$n++] = array($row,  $col+1,VERT_EDGE);
+                    if( $this->edges[HORIZ_EDGE][$row][$col] )   $neigh[$n++] = array($row,  $col,  HORIZ_EDGE);
+                    if( $this->edges[HORIZ_EDGE][$row+1][$col] ) $neigh[$n++] = array($row+1,$col,  HORIZ_EDGE);
+                    if( $this->edges[VERT_EDGE][$row][$col] )    $neigh[$n++] = array($row,  $col,  VERT_EDGE);
+                    if( $this->edges[VERT_EDGE][$row][$col+1] )  $neigh[$n++] = array($row,  $col+1,VERT_EDGE);
 
-                    if ( $n == 2 ) {
+                    if( $n == 2 ) {
                         $n1=0; $n2=1;
                         $this->isobarCoord[$isobar][$ncoord++] = array(
                         $this->getCrossingCoord($neigh[$n1][0],$neigh[$n1][1],$neigh[$n1][2],$ib),
                         $this->getCrossingCoord($neigh[$n2][0],$neigh[$n2][1],$neigh[$n2][2],$ib) );
                     }
-                    elseif ( $n == 4 ) {
+                    elseif( $n == 4 ) {
                         // We must determine how to connect the edges either northwest->southeast or
                         // northeast->southwest. We do that by calculating the imaginary middle value of
                         // the cell by averaging the for corners. This will compared with the value of the
@@ -350,10 +350,10 @@ class Contour {
                         if( $midval == $ib ) {
                             // Orientation "+"
                             $n1=0; $n2=1; $n3=2; $n4=3;
-                        } elseif ( ($midval > $ib && $v > $ib) ||  ($midval < $ib && $v < $ib) ) {
+                        } elseif( ($midval > $ib && $v > $ib) ||  ($midval < $ib && $v < $ib) ) {
                             // Orientation of ridge/valley = "\"
                             $n1=0; $n2=3; $n3=2; $n4=1;
-                        } elseif ( ($midval > $ib && $v < $ib) ||  ($midval < $ib && $v > $ib) ) {
+                        } elseif( ($midval > $ib && $v < $ib) ||  ($midval < $ib && $v > $ib) ) {
                             // Orientation of ridge/valley = "/"
                             $n1=0; $n2=2; $n3=3; $n4=1;
                         }
@@ -419,7 +419,7 @@ class ContourPlot extends Plot {
         $this->isobar = $aIsobar;
         $this->interpFactor = $aFactor;
 
-        if ( $this->interpFactor > 1 ) {
+        if( $this->interpFactor > 1 ) {
 
             if( $this->interpFactor > 5 ) {
                 JpGraphError::RaiseL(28007);// ContourPlot interpolation factor is too large (>5)

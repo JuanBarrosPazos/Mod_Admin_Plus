@@ -31,7 +31,7 @@ class ErrorPlot extends Plot {
         if( $this->center ) {
             $a=0.5; $b=0.5;
             ++$this->numpoints;
-        } else {
+        }else{
             $a=0; $b=0;
         }
         $graph->xaxis->scale->ticks->SetXLabelOffset($a);

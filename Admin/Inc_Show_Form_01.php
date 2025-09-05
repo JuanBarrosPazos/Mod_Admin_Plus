@@ -25,7 +25,7 @@
                         '`Email` ASC' => 'Email Ascen',
                         '`Email` DESC' => 'Email Descen',);
 
-    if (($_SESSION['Nivel'] == 'admin')){ 
+    if(($_SESSION['Nivel'] == 'admin')){ 
 
     print(" <table class='centradiv'>
             <tr>

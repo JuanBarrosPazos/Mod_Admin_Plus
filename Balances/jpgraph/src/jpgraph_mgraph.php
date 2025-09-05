@@ -111,10 +111,10 @@ class MGraph {
 
         $valid_formats = array('png', 'jpg', 'gif');
         $aImgFormat = strtolower($e[count($e)-1]);
-        if ($aImgFormat == 'jpeg')  {
+        if($aImgFormat == 'jpeg')  {
             $aImgFormat = 'jpg';
         }
-        elseif (!in_array($aImgFormat, $valid_formats) )  {
+        elseif(!in_array($aImgFormat, $valid_formats) )  {
             JpGraphError::RaiseL(12003,$aImgFormat,$aFileName);
             //('Unknown file extension ($aImgFormat) in MGraph::SetBackgroundImage() for filename: '.$aFileName);
         }

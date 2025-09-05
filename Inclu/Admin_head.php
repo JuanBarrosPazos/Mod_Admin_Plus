@@ -4,7 +4,7 @@
 	
 <?php
 
-	if (isset($playinclu)){ global $rutarequir;
+	if(isset($playinclu)){ global $rutarequir;
 							$rutarequir = "";
 							global $rutameta;
 							$rutameta = "../";
@@ -12,7 +12,7 @@
 							$meta2 = "";
 							global $winini;
 							$winini = "";
-	} elseif (isset($playini)){ 
+	} elseif(isset($playini)){ 
 		global $rutameta;
 		$rutameta = "";
 		global $rutarequir;
@@ -27,7 +27,7 @@
 		DOWNLOAD THIS APP FREE AND MORE IN:<br/>
 		<a href=\"http://juanbarrospazos.blogspot.com.es/\" target=\"_blank\" >	
 		http://juanbarrospazos.blogspot.com.es/</a></div></div>";
-	} else { 
+	}else{ 
 			 if(isset($index)){	global $rutarequir;
 								$rutarequir = "Inclu/"; 
 								global $rutameta;
@@ -42,7 +42,7 @@
 			 global $winini;
 			 $winini = ""; }
 
-	if (isset($popup)){
+	if(isset($popup)){
 		global $meta3;
 		$meta3 = "<script src='".$rutameta."img_change_jscss/jquery-3.4.1.min.js'></script>
 		<script src='".$rutameta."img_change_jscss/inputfile-custom.js'></script>
@@ -68,10 +68,10 @@
 </head>
 	
 	<?php
-		if (isset($playini)){ 
+		if(isset($playini)){ 
 			echo "<body topmargin=\"0\" onload=\"hora()\">";
 			//echo $winini; 
-		} else { echo "<body topmargin=\"0\" >";} 
+		}else{ echo "<body topmargin=\"0\" >";} 
 	?>
 	
 	<div id="page" >
@@ -91,9 +91,9 @@
    <div style="margin-top:2px; text-align:center" id="headerTitulo">
    
 		<?php
-			if (isset($playini)){ 
+			if(isset($playini)){ 
 				echo "<font color=\"#59746A\"><span id=\"hora\">000000</span></font>";
-			} else { } 
+			}else{ } 
 		?>
     
 	</div>

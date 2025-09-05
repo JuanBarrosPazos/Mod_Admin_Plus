@@ -150,7 +150,7 @@ function show_form($errors=[]){
 		global $modifadmin;				$modifadmin = 1;
 		require 'tabla_crea_admin.php';
 	/*
-	if ($_SESSION['Nivel'] == 'admin'){
+	if($_SESSION['Nivel'] == 'admin'){
 		global $modifadmin;				$modifadmin = 1;
 		require 'tabla_crea_admin.php';
 	// FIN IF ADMIN

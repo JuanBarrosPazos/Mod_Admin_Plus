@@ -29,8 +29,8 @@ function process_form(){
 
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
-	if (strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
-	if (strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
+	if(strlen(trim($_POST['Apellidos'])) == 0){$ape = $nom;}
+	if(strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
 	
 	//$orden = $_POST['Orden'];
 	global $qb;

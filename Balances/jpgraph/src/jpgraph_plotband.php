@@ -595,7 +595,7 @@ class PlotBand {
             if( $this->max === 'max' ) $this->max = $aYScale->GetMaxVal();
 
             // Only draw the bar if it actually appears in the range
-            if ($this->min < $aYScale->GetMaxVal() && $this->max > $aYScale->GetMinVal()) {
+            if($this->min < $aYScale->GetMaxVal() && $this->max > $aYScale->GetMinVal()) {
                  
                 // Trucate to limit of axis
                 $this->min = max($this->min, $aYScale->GetMinVal());
@@ -614,7 +614,7 @@ class PlotBand {
             if( $this->max === 'max' ) $this->max = $aXScale->GetMaxVal();
 
             // Only draw the bar if it actually appears in the range
-            if ($this->min < $aXScale->GetMaxVal() && $this->max > $aXScale->GetMinVal()) {
+            if($this->min < $aXScale->GetMaxVal() && $this->max > $aXScale->GetMinVal()) {
                  
                 // Trucate to limit of axis
                 $this->min = max($this->min, $aXScale->GetMinVal());

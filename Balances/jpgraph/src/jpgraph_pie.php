@@ -185,7 +185,7 @@ class PiePlot {
         if( in_array($aTheme,array_keys($this->themearr)) ) {
             $this->theme = $aTheme;
             $this->is_using_plot_theme = true;
-        } else {
+        }else{
             JpGraphError::RaiseL(15001,$aTheme);//("PiePLot::SetTheme() Unknown theme: $aTheme");
         }
     }
@@ -409,7 +409,7 @@ class PiePlot {
             $this->adjusted_data = $this->AdjPercentage($this->data);
         }
 
-        if ($this->use_plot_theme_colors) {
+        if($this->use_plot_theme_colors) {
             $this->setslicecolors = null;
         }
 
@@ -1253,7 +1253,7 @@ class PieGraph extends Graph {
         $this->posy=$height/2;
         $this->SetColor(array(255,255,255));
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
           $this->graph_theme->ApplyGraph($this);
         }
     }
@@ -1275,23 +1275,23 @@ class PieGraph extends Graph {
             if( is_array($aObj) ) {
                 $n = count($aObj);
                 for($i=0; $i < $n; ++$i ) {
-                    //if ($aObj[$i]->theme) {
+                    //if($aObj[$i]->theme) {
                     //    $this->ClearTheme();
                     //}
                     $this->plots[] = $aObj[$i];
                 }
             }
             else {
-                //if ($aObj->theme) {
+                //if($aObj->theme) {
                 //    $this->ClearTheme();
                 //}
                 $this->plots[] = $aObj;
             }
         }
 
-        if ($this->graph_theme) {
+        if($this->graph_theme) {
             $this->graph_theme->SetupPlot($aObj);
-            if ($aObj->is_using_plot_theme) {
+            if($aObj->is_using_plot_theme) {
                 $aObj->UsePlotThemeColors();
             }
         }
@@ -1313,18 +1313,18 @@ class PieGraph extends Graph {
         }
         
         $csim.= $this->legend->GetCSIMareas();
-        if (preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
+        if(preg_match_all("/area shape=\"(\w+)\" coords=\"([0-9\, ]+)\"/", $csim, $coords)) {
             $this->img->SetColor($this->csimcolor);
             $n = count($coords[0]);
             for ($i=0; $i < $n; $i++) {
-                if ($coords[1][$i]=="poly") {
+                if($coords[1][$i]=="poly") {
                     preg_match_all('/\s*([0-9]+)\s*,\s*([0-9]+)\s*,*/',$coords[2][$i],$pts);
                     $this->img->SetStartPoint($pts[1][count($pts[0])-1],$pts[2][count($pts[0])-1]);
                     $m = count($pts[0]);
                     for ($j=0; $j < $m; $j++) {
                         $this->img->LineTo($pts[1][$j],$pts[2][$j]);
                     }
-                } else if ($coords[1][$i]=="rect") {
+                } else if($coords[1][$i]=="rect") {
                     $pts = preg_split('/,/', $coords[2][$i]);
                     $this->img->SetStartPoint($pts[0],$pts[1]);
                     $this->img->LineTo($pts[2],$pts[1]);

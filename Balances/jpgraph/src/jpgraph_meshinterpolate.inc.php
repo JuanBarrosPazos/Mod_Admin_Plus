@@ -36,7 +36,7 @@ class MeshInterpolate {
     * $param $aFactor In how many subsquare should we split this square. A value of 1 indicates that no action
     */
     function IntSquare( $aRow, $aCol, $aFactor ) {
-        if ( $aFactor <= 1 )
+        if( $aFactor <= 1 )
             return;
 
         $step = pow( 2, $aFactor-1 );
@@ -85,7 +85,7 @@ class MeshInterpolate {
         for ( $i = 0; $i < $new_rows; $i++ ) {
             for ( $j = 0; $j < $new_cols; $j++ ) {
                 $v = 0 ;
-                if ( ( $i % $step == 0 ) && ( $j % $step == 0 ) ) {
+                if( ( $i % $step == 0 ) && ( $j % $step == 0 ) ) {
                     $v = $aData[$i / $step][$j / $step];
                 }
                 $this->data[$i][$j] = $v;

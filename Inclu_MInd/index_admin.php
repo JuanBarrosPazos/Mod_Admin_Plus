@@ -1,6 +1,6 @@
 <?php
 
-	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')) {
+	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')) {
 
 	print("<li>
 				<a href='#'>
@@ -13,9 +13,9 @@
 					</a>
 				</li>
 				");
-	} else { }
+	}else{ }
 
-	if ($_SESSION['Nivel'] == 'admin') {
+	if($_SESSION['Nivel'] == 'admin') {
 		print("	<li>
 					<a href='".$rutaadmin."Feedback_Ver.php'>
 						<i class='ic ico19b'></i>GESTION BAJAS
@@ -24,9 +24,9 @@
 			</ul>
 		</li>
 			");
-	} else { print("</ul></li>"); }
+	}else{ print("</ul></li>"); }
 
-	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')) {
+	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')) {
 	print("
 		<li>
 			<a href='#'>
@@ -44,11 +44,11 @@
 					</a>
 				</li>
 			");
-	} else { }
+	}else{ }
 
-	if ($_SESSION['Nivel'] == 'user') { print("</ul></li>"); }
+	if($_SESSION['Nivel'] == 'user') { print("</ul></li>"); }
 
-	elseif (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')) {
+	elseif(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')) {
 	print("
 				<li>
 					<a href='".$rutafichar."fichar_Crear_tds.php'>
@@ -68,9 +68,9 @@
 			</ul>
 		</li>
 		");
-	} else { }
+	}else{ }
 
-	if ($_SESSION['Nivel'] == 'admin') {
+	if($_SESSION['Nivel'] == 'admin') {
 
 	print(" <li>
 			<a href='#'>
@@ -162,7 +162,7 @@
 			</ul>
 		</li>
 		");
-	} else { }
+	}else{ }
 
 	print("
 		<li>

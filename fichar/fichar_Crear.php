@@ -20,7 +20,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
+if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'plus')){
 
 	master_index();
 
@@ -33,10 +33,10 @@ if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'user') || ($_SESS
 							 	errors();
 								info();
 							
-					} else {show_form();
+					}else{show_form();
 							errors();
 							}
-	} else { require '../Inclu/tabla_permisos.php';} 
+	}else{ require '../Inclu/tabla_permisos.php';} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -111,7 +111,7 @@ function entrada(){
 				fwrite($rmf, $rmftext);
 				fclose($rmf);
 	
-		} else { print("* MODIFIQUE LA ENTRADA L.187: ".mysqli_error($db));
+		}else{ print("* MODIFIQUE LA ENTRADA L.187: ".mysqli_error($db));
 				 show_form ();
 				 global $texerror;
 				 $texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -254,6 +254,7 @@ function suma_todo(){
 	$vname = $tabla1."_".$dyt;
 	$vname = "`".$vname."`";
 
+	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 }
@@ -312,7 +313,7 @@ function salida(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
-	if (($ttoth > 9)||($ttotd > 0)){
+	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<table align='center' style='margin-top:10px' width=450px >
 				<tr>
@@ -404,7 +405,7 @@ function salida(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 	
-			} else {
+			}else{
 					print("* MODIFIQUE LA ENTRADA L.577: ".mysqli_error($db));
 							show_form ();
 							global $texerror;
@@ -421,8 +422,7 @@ function info(){
 
 		//$ActionTime = date('H:i:s');
 
-		global $dir;
-		$dir = "../Users/".$_SESSION['ref']."/log";
+		global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
 	
 		global $text;
 

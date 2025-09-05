@@ -186,15 +186,16 @@ function show_form(){
 		copy($imgorg, $ctemp."/".$_POST['myimg']);
 			}
 
-	if($_POST['oculto2']){	$_SESSION['sref'] = $_POST['ref'];
-							global $array_a; 	$array_a = 1;
-							require 'admin_array_total.php'; 
-				}
+	global $array_a;
+	if(isset($_POST['oculto2'])){	$_SESSION['sref'] = $_POST['ref'];
+									$array_a = 1;
+									require 'admin_array_total.php'; 
+	}
 
-	if(@$_POST['borrar']){  global $array_a; 	$array_a = 1;
-							require 'admin_array_total.php'; }
+	if(isset($_POST['borrar'])){  	$array_a = 1;
+									require 'admin_array_total.php'; }
 								   
-	print("<table class='TFormAdmin'>
+		print("<table class='TFormAdmin'>
 			<tr>
 				<th colspan=3>
 					<div style='display:inline-block; margin-top:0.4em; color:#F1BD2D;'>

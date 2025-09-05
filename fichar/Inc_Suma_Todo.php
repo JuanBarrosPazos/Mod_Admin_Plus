@@ -1,8 +1,8 @@
 <?php
 
 /* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
-	global $orden;
-	require '../Inclu/orden.php';
+	global $orden;		global $ruta;
+	require $ruta.'Inclu/orden.php';
 
 			///////////////////////			***********  		///////////////////////
 	
@@ -70,7 +70,7 @@
 				$vers = substr($vers['ttot'],-2).",";
 				$vers = str_replace(":","",$vers);
 				global $sumas;		@$sumas = $sumas + $vers;
-				}
+			}
 	}
 	//print ("</br>".$sumas);
 

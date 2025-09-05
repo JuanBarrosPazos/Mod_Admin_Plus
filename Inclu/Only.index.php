@@ -45,7 +45,7 @@ if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 				/* 	
 					if(password_verify($_POST['Password'], $row['Password'])){
 						//echo "* EL PASSWORD ES VÁLIDO";
-					} else {
+					}else{
 						//echo "* EL PASSWORD NO ES CORRECTO";
 					}
 				*/		

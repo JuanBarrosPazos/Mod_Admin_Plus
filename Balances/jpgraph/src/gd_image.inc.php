@@ -277,7 +277,7 @@ class Image {
                 // use internal font when php is configured without '--with-ttf'
                 $this->font_family = FF_FONT1;
 //                JpGraphError::RaiseL(25087);//('This PHP build has not been configured with TTF support. You need to recompile your PHP installation with FreeType support.');
-            } else {
+            }else{
                 $this->font_file = $this->ttf->File($this->font_family,$this->font_style);
             }
         }
@@ -1282,7 +1282,7 @@ class Image {
         }
 
         $dashed_line_method = 'DashedLine';
-        if ($from_grid_class) {
+        if($from_grid_class) {
             $dashed_line_method = 'DashedLineForGrid';
         }
 
@@ -1640,7 +1640,7 @@ class Image {
             die($msg);
         }
 
-        if ($this->expired) {
+        if($this->expired) {
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
             header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
             header("Cache-Control: no-cache, must-revalidate");
@@ -1690,7 +1690,7 @@ class Image {
 
     // Do SuperSampling using $scale
     function DoSupersampling() {
-        if (SUPERSAMPLING_SCALE <= 1) {
+        if(SUPERSAMPLING_SCALE <= 1) {
             return $this->img;
         }
 
@@ -1749,7 +1749,7 @@ class Image {
     * Draw Line
     */
     function DrawLine($im, $x1, $y1, $x2, $y2, $weight, $color) {
-        if ($weight == 1) {
+        if($weight == 1) {
             return imageline($im,$x1,$y1,$x2,$y2,$color);
         }
 
@@ -1779,7 +1779,7 @@ class Image {
 
           return imageline($this->img,$x1,$y1,$x2,$y2,$this->current_color);
       $weight = 8;
-        if ($weight <= 1) {
+        if($weight <= 1) {
           return imageline($this->img,$x1,$y1,$x2,$y2,$this->current_color);
         }
 
@@ -1787,7 +1787,7 @@ class Image {
 
         $weight /= 2;
 
-        if ($y2 - $y1 == 0) {
+        if($y2 - $y1 == 0) {
             // x line
             $pts = array();
             $pts[] = $x1; $pts[] = $y1 - $weight;
@@ -1795,7 +1795,7 @@ class Image {
             $pts[] = $x2; $pts[] = $y2 + $weight;
             $pts[] = $x2; $pts[] = $y2 - $weight;
 
-        } elseif ($x2 - $x1 == 0) {
+        } elseif($x2 - $x1 == 0) {
             // y line
             $pts = array();
             $pts[] = $x1 - $weight; $pts[] = $y1;
@@ -1803,7 +1803,7 @@ class Image {
             $pts[] = $x2 + $weight; $pts[] = $y2;
             $pts[] = $x2 - $weight; $pts[] = $y2;
 
-        } else {
+        }else{
             
             var_dump($x1, $x2, $y1, $y2);
             $length = sqrt(pow($x2 - $x1, 2) + pow($y2 - $y1, 2));
@@ -1824,7 +1824,7 @@ class Image {
         }
 
 //print_r($pts);exit;
-        if (count($pts)/2 < 3) {
+        if(count($pts)/2 < 3) {
             return;
         } 
 
@@ -1875,11 +1875,11 @@ class Image {
         imageSetPixel( $img, $cx, $cy + $cr, $draw );
         imageSetPixel( $img, $cx, $cy - $cr, $draw );
         while ( $ix <= $iy - 2 ) {
-            if ( $ig < 0 ) {
+            if( $ig < 0 ) {
                 $ig += $idgd;
                 $idgd -= 8;
                 $iy--;
-            } else {
+            }else{
                 $ig += $idgr;
                 $idgd -= 4;
             }
@@ -1896,7 +1896,7 @@ class Image {
             $filled = 0;
             for ( $xx = $ix - 0.45; $xx < $ix + 0.5; $xx += 0.2 ) {
                 for ( $yy = $iy - 0.45; $yy < $iy + 0.5; $yy += 0.2 ) {
-                    if ( sqrt( pow( $xx, 2 ) + pow( $yy, 2 ) ) < $cr ) $filled += 4;
+                    if( sqrt( pow( $xx, 2 ) + pow( $yy, 2 ) ) < $cr ) $filled += 4;
                 }
             }
             $draw = imageColorExactAlpha( $img, $color[ 'R' ], $color[ 'G' ], $color[ 'B' ], ( 100 - $filled ) );
@@ -1913,7 +1913,7 @@ class Image {
 
     function __get($name) {
 
-        if (strpos($name, 'raw_') !== false) {
+        if(strpos($name, 'raw_') !== false) {
             // if $name == 'raw_left_margin' , return $this->_left_margin;
             $variable_name = '_' . str_replace('raw_', '', $name);
             return $this->$variable_name;
@@ -1921,9 +1921,9 @@ class Image {
 
         $variable_name = '_' . $name; 
 
-        if (isset($this->$variable_name)) {
+        if(isset($this->$variable_name)) {
             return $this->$variable_name * SUPERSAMPLING_SCALE;
-        } else {
+        }else{
             JpGraphError::RaiseL('25132', $name);
         } 
     }
@@ -2211,7 +2211,7 @@ class ImgStreamCache {
 
             $aImage->Destroy();
             if( $aInline ) {
-                if ($fh = @fopen($aCacheFileName, "rb") ) {
+                if($fh = @fopen($aCacheFileName, "rb") ) {
                     $aImage->Headers();
                     fpassthru($fh);
                     return;
@@ -2230,7 +2230,7 @@ class ImgStreamCache {
 
     function IsValid($aCacheFileName) {
         $aCacheFileName = $this->cache_dir.$aCacheFileName;
-        if ( USE_CACHE && file_exists($aCacheFileName) ) {
+        if( USE_CACHE && file_exists($aCacheFileName) ) {
             $diff=time()-filemtime($aCacheFileName);
             if( $this->timeout>0 && ($diff > $this->timeout*60) ) {
                 return false;
@@ -2246,7 +2246,7 @@ class ImgStreamCache {
 
     function StreamImgFile($aImage,$aCacheFileName) {
         $aCacheFileName = $this->cache_dir.$aCacheFileName;
-        if ( $fh = @fopen($aCacheFileName, 'rb') ) {
+        if( $fh = @fopen($aCacheFileName, 'rb') ) {
             $lock = flock($fh, LOCK_SH);
             $aImage->Headers();
             fpassthru($fh);
