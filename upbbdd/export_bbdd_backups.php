@@ -13,25 +13,22 @@ session_start();
 
 if($_SESSION['Nivel'] == 'admin'){
 
-				master_index();
+	master_index();
 
-				if(isset($_POST['delete'])){	delete();
-											listfiles();
-											info_del();
-										}
-				elseif(isset($_POST['backupm'])){
-											manual_backup();
-											listfiles();
-											info();
-											}
-				elseif(isset($_POST['downl'])){
-											listfiles();
-											red();
-											info_downl();
-											}
-					else {	listfiles();}
+	if(isset($_POST['delete'])){	delete();
+									listfiles();
+									info_del();
+	}elseif(isset($_POST['backupm'])){
+									manual_backup();
+									listfiles();
+									info();
+	}elseif(isset($_POST['downl'])){
+									listfiles();
+									red();
+									info_downl();
+	}else{ listfiles(); }
 								
-				}else{ require '../Inclu/tabla_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -66,73 +63,67 @@ function manual_backup(){
 
 function listfiles(){
 
-	print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-					<td align='center'>
-						<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
-							<input type='submit' value='REALIZA UNA EXPORTACION MANUAL DE BBDD AHORA'  class='botonverde' />
-							<input type='hidden' name='backupm' value='1' >
-						</form>
-					</td>
-				</tr>
-			</table>");
+	print ("<div class='centradiv' style='padding:0.8em;'>
+				<div style='margin-bottom:0.4em;'>EXPORTACION MANUAL DE BBDD AHORA</div>
+				<a href='../Admin/Admin_Ver.php'>
+					<button type='button' title='INICIO GESTION ADMIN' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				</a>
+				<form name='delete' action='$_SERVER[PHP_SELF]' method='post' style='display:inline-block;'>
+					<button type='submit' title='REALIZA UNA EXPORTACION MANUAL DE BBDD AHORA' class='botonverde imgButIco InicioBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='backupm' value='1' >
+				</form>
+			</div>");
 
 	if(isset($_SESSION['tablas']) == ''){ $_SESSION['tablas'] = $_SESSION['ref']; }
 	//print("*".$_SESSION['tablas'].".</br>");
 
-	global $ruta;
-	$ruta ="bbdd_export_tot/";
+	global $ruta;			$ruta ="bbdd_export_tot/";
 	//print("RUTA: ".$ruta.".</br>");
 	
-	global $rutag;
-	$rutag = "bbdd_export_tot/{*}";
+	global $rutag;			$rutag = "bbdd_export_tot/{*}";
 	//print("RUTA G: ".$rutag.".</br>");
 		
 	$directorio = opendir($ruta);
-	global $num;
-	$num=count(glob($rutag,GLOB_BRACE));
+	global $num;			$num=count(glob($rutag,GLOB_BRACE));
 	if($num < 1){
-		
 		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
 				<tr>
 				<td align='center'>NO HAY ARCHIVOS PARA DESCARGAR</td>
 				</tr>");
 	}else{
 		
-	print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-					<td align='center' colspan='3' class='BorderInf'>
-						DESCARGAR BBDD BACKUP AUTO Y MANUAL .SQL
-					</td>
-				</tr>");
+	print ("<table class='TFormAdmin'>
+			<tr>
+				<th colspan='3'>GESTIONAR BACKUP BBDD TOTAL .SQL</th>
+			</tr>");
 
-	while($archivo = readdir($directorio)){
-		if($archivo != ',' && $archivo != '.' && $archivo != '..'){
-			print("<tr>
-			<td class='BorderInfDch'>
-				<form name='delete' action='$_SERVER[PHP_SELF]' method='POST'>
-					<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-					<input type='submit' value='ELIMINAR' class='botonrojo' />
-					<input type='hidden' name='delete' value='1' >
-				</form>
-			</td>
-			<td class='BorderInfDch'>
-				<form name='archivos' action='$_SERVER[PHP_SELF]' method='POST'>
-					<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-					<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-					<input type='submit' value='DESCARGAR' class='botonverde' />
-					<input type='hidden' name='downl' value='1' >
-				</form>
-			</td>
-			<td class='BorderInf'>".strtoupper($archivo)."</td>
-			");
-		}else{}
-	} // FIN DEL WHILE
+		while($archivo = readdir($directorio)){
+			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
+				print("<tr>
+				<td>
+					<form name='delete' action='$_SERVER[PHP_SELF]' method='POST'>
+						<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
+						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+				<button type='submit' title='ELIMINAR ".strtoupper($archivo)."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='delete' value='1' >
+					</form>
+				</td>
+				<td>
+					<form name='archivos' action='$_SERVER[PHP_SELF]' method='POST'>
+						<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
+						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco OpenBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='downl' value='1' >
+					</form>
+				</td>
+				<td>".strtoupper($archivo)."</td>");
+
+			}else{}
+		} // FIN DEL WHILE
 	}
 	closedir($directorio);
 	print("</table>");
-}
+} // Fin function listfiles()
 
 function delete(){unlink($_POST['ruta']);}
 
@@ -146,7 +137,7 @@ function info(){
 	
 	$ActionTime = date('H:i:s');
 
-	global $dir;				$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."- RESPALDADO CREADO MANUALMENTE BBDD ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$datebbddx.".sql";
@@ -200,8 +191,7 @@ function info_del(){
 
 			////////////////////		**********  		////////////////////
 
-	global $dir2;
-	$dir2 = "bbdd_log";
+	global $dir2;				$dir2 = "bbdd_log";
 	
 	global $text2;
 	$text2 = PHP_EOL."- RESPALDO BORRADO MANUALMENTE BBDD POR: ".$_SESSION['ref']." ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$_POST['ruta'];
@@ -240,8 +230,7 @@ function info_downl(){
 
 			////////////////////		**********  		////////////////////
 
-	global $dir2;
-	$dir2 = "bbdd_log";
+	global $dir2;				$dir2 = "bbdd_log";
 	
 	global $text2;
 	$text2 = PHP_EOL."- RESPALDO DESCARGADO MANUALMENTE BBDD POR: ".$_SESSION['ref']." ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$_POST['ruta'];
@@ -259,12 +248,12 @@ function info_downl(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function master_index(){
+function master_index(){
 		
 	require '../Inclu_MInd/rutaupbbdd.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-		} /* Fin funcion master_index.*/
+} /* Fin funcion master_index.*/
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -277,4 +266,5 @@ function info_downl(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

@@ -15,12 +15,12 @@
     //$db->select_db($db_name);
     $db->query("SET NAMES 'utf8'");
     $tablas = $db->query('SHOW TABLES');
-    while ($fila = $tablas->fetch_row()) {
+    while($fila = $tablas->fetch_row()){
         $tablas_respaldo[] = $fila[0];
     }
     $contenido = "SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\r\nSET time_zone = \"+00:00\";\r\n\r\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\r\n/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\r\n/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\r\n/*!40101 SET NAMES utf8 */;\r\n--\r\n-- Database: `" . $db_name . "`\r\n--\r\n\r\n";
-    foreach ($tablas_respaldo as $db_name_table) {
-        if(empty($db_name_table)) {
+    foreach($tablas_respaldo as $db_name_table){
+        if(empty($db_name_table)){
             continue;
         }
         $db_data_table = $db->query('SELECT * FROM `'.$db_name_table.'`');
@@ -29,21 +29,21 @@
         $esquemaDeTabla = $db->query('SHOW CREATE TABLE `'.$db_name_table.'`');
         $filatabla = $esquemaDeTabla->fetch_row();
         $contenido .= "\n\n" . $filatabla[1] . ";\n\n";
-        for ($i = 0, $contador = 0; $i < $numero_campos; $i++, $contador = 0) {
+        for($i = 0, $contador = 0; $i < $numero_campos; $i++, $contador = 0){
             while ($fila = $db_data_table->fetch_row()) {
                 //La primera y cada 100 veces
-                if($contador % 100 == 0 || $contador == 0) {
+                if($contador % 100 == 0 || $contador == 0){
                     $contenido .= "\nINSERT INTO " . $db_name_table . " VALUES";
                 }
                 $contenido .= "\n(";
-                for ($j = 0; $j < $numero_campos; $j++) {
+                for($j = 0; $j < $numero_campos; $j++){
                     $fila[$j] = str_replace("\n", "\\n", addslashes($fila[$j]));
-                    if(isset($fila[$j])) {
+                    if(isset($fila[$j])){
                         $contenido .= '"' . $fila[$j] . '"';
                     }else{
                         $contenido .= '""';
                     }
-                    if($j < ($numero_campos - 1)) {
+                    if($j < ($numero_campos - 1)){
                         $contenido .= ',';
                     }
                 }
@@ -69,19 +69,16 @@
     //$id = uniqid();
     # También la fecha
     $fecha = date("Y-m-d");
-    global $datebbddx;
-	$datebbddx = date("Ymd");
+    global $datebbddx;          $datebbddx = date("Ymd");
     # Crear un archivo que tendrá un nombre como respaldo_2018-10-22_asd123.sql
     //$file_name = sprintf('%s/respaldo_%s_%s.sql', $carpeta, $fecha, $id);
-    global $file_name;
-    $file_name = $carpeta."/".$db_name.'_'.$datebbddx.'.sql';
+    global $file_name;          $file_name = $carpeta."/".$db_name.'_'.$datebbddx.'.sql';
 
             ////////////////////		***********  		////////////////////
 
     $ActionTime = date('H:i:s');
 
-    global $dir;
-	$dir = "upbbdd/bbdd_log";
+    global $dir;                $dir = "upbbdd/bbdd_log";
 	
 	global $text;
 	$text = PHP_EOL."- RESPALDADO CREADO AUTOMATICO BBDD: ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$file_name;
@@ -104,4 +101,5 @@
 				 ////////////////////				  ///////////////////
 
 /* Creado por Juan Barros Pazos 2021/25 */
+
 ?>

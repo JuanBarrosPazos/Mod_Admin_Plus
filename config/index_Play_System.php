@@ -86,20 +86,20 @@ if(isset($_POST['oculto'])){
 
 function bbdd_backup(){
 	// RESPALDO BBDD AUTOMÁTICO...
-	global $db; 			global $db_name;
+	global $db; 				global $db_name;
 	
-	global $dated; 			$dated = date('d');
-	global $datem; 			$datem = date('m');
-	global $datey; 			$datey = date('Y'); 
-	global $datebbddx; 		$datebbddx = date("Ymd");
+	global $dated; 				$dated = date('d');
+	global $datem; 				$datem = date('m');
+	global $datey; 				$datey = date('Y'); 
+	global $datebbddx; 			$datebbddx = date("Ymd");
 	
 	// SI HAY MAS DE OCHO COPIAS DE SEGURIDAD BORRARLAS.
-	global $ruta; 			$ruta ="upbbdd/bbdd_export_tot"; 
+	global $ruta; 				$ruta ="upbbdd/bbdd_export_tot"; 
 	//print("RUTA: ".$ruta.".</br>");
-	global $rutag; 			$rutag = "upbbdd/bbdd_export_tot/{*}";
+	global $rutag; 				$rutag = "upbbdd/bbdd_export_tot/{*}";
 	//print("RUTA G: ".$rutag.".</br>");
 	$directorio = opendir($ruta);
-	global $num; 			$num=count(glob($rutag,GLOB_BRACE));
+	global $num; 				$num=count(glob($rutag,GLOB_BRACE));
 	
 	if($num > 8){
 		if(file_exists($ruta)){ 
@@ -131,9 +131,7 @@ function bbdd_backup(){
 			if(file_exists($dir.$name1)){copy($dir.$name1, "upbbdd/temp/".$name1);}else{ }
 			// Borra los archivos temporales
 			while($file = readdir($handle)){
-				if(is_file($dir.$file)){
-					unlink($dir.$file);
-				}
+				if(is_file($dir.$file)){ unlink($dir.$file); }
 			}
 		}else{ }
 		

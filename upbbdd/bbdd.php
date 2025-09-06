@@ -49,86 +49,76 @@ function show_form(){
 				<tr>
 					<td align='center'>
 							TABLAS EXPORTABLES PARA BBDD ".$_SESSION['ref'].".
-					</td>
+					</td> 
 				</tr>
 			</table>");	
 	}
 
 	if($_SESSION['Nivel'] == 'admin'){
-		print("<table align='center' style='border:1; margin-top:2px' width='auto'>
+		print("<table class='centradiv'>
 				<tr>
-					<td align='center'>
-							EXPORTE TABLAS BBDD.
-					</td>
+					<th>EXPORTE TABLAS BBDD<br>SELECCIONE UN USUARIO</th>
 				</tr>		
 				<tr>
 					<td>
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 				<input type='hidden' name='Orden' value='".@$defaults['Orden']."' />
 					<div style='float:left; margin-right:6px''>
-						<input type='submit' value='SELECCIONE USUARIO / TABLA' class='botonlila' />
+				<button type='submit' title='SELECCIONE USUARIO / TABLA' class='botonlila imgButIco InicioBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='oculto1' value=1 />
 					</div>
 					<div style='float:left'>
 						<select name='tablas'>
 				<!-- -->	<option value=''");
-					if(@$defaults['tablas'] == ''){
-							print ("selected = 'selected'");
-					}
-							print(">LAS TABLAS O USUARIO</option>
-							<option value = 'admin'");
-					if(@$defaults['tablas'] == 'admin'){
-							print ("selected = 'selected'");
-					}
-							/* */
-				print("> Tabla Admin Sistem </option>");
-							
-	global $db;
-	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-	$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
-	$qu = mysqli_query($db, $sqlu);
-	if(!$qu){
-			print("ERROR SQL L.88 ".mysqli_error($db)."<br>");
-	}else{
-		while($rowu = mysqli_fetch_assoc($qu)){
-			print ("<option value='".strtolower($_SESSION['clave'].$rowu['ref'])."' ");
-			if(strtolower($_SESSION['clave'].$rowu['ref']) == @$defaults['tablas']){
+		if(@$defaults['tablas'] == ''){
 					print ("selected = 'selected'");
-			}
-					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
 		}
-	}  
-		
-	print ("</select>
+					print(">LAS TABLAS O USUARIO</option>
+				<option value = 'admin'");
+		if(@$defaults['tablas'] == 'admin'){
+					print ("selected = 'selected'");
+		}
+							/* */
+					print("> Tabla Admin Sistem </option>");
+							
+		global $db;
+		global $tablau;				$tablau = "`".$_SESSION['clave']."admin`";
+		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+		$qu = mysqli_query($db, $sqlu);
+		if(!$qu){
+				print("ERROR SQL L.85 ".mysqli_error($db)."<br>");
+		}else{
+			while($rowu = mysqli_fetch_assoc($qu)){
+				print ("<option value='".strtolower($_SESSION['clave'].$rowu['ref'])."' ");
+				if(strtolower($_SESSION['clave'].$rowu['ref']) == @$defaults['tablas']){
+						print ("selected = 'selected'");
+				}
+						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+			}
+		}  
+		print ("</select>
 					</div>
 						</form>	
-				</td>
-			</tr>
+					</td>
+				</tr>
 			</table>"); 
-
 	}
 	
 			////////////////////		**********  		////////////////////
 
-	if((isset($_POST['oculto1']))||(isset($_POST['todo'])) ){
+	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 			
 		if($_SESSION['tablas'] == '') { 
-			print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
-					<tr align='center'>
-						<td>
-					<font color='red'>
+			print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6em;'>
 							SELECCIONE UNA TABLA O NOMBRE DE USUARIO
-					</font>
-						</td>
-					</tr>
-				</table>");
+					</div>");
 		}	
 					
 		if($_SESSION['tablas'] != ''){
 
-			global $nom; 	$nom = strtolower($_SESSION['tablas']);
-			if(strtolower($_SESSION['tablas']) == 'admin'){ $nom = "%".$nom."%"; }
-			else{$nom = "%".$nom."%";}
+			global $nom; 			$nom = strtolower($_SESSION['tablas']);
+			if(strtolower($_SESSION['tablas']) == 'admin'){ $nom = "%".$nom."%"; 
+			}else{ $nom = "%".$nom."%"; }
 			$nom = "LIKE '$nom'";
 	
 			/* Se busca las tablas en la base de datos */
@@ -137,23 +127,23 @@ function show_form(){
 			$consulta = "SHOW TABLES FROM $db_name $nom";
 			$respuesta = mysqli_query($db, $consulta);
 			if(!$respuesta){
-				print("<font color='#FF0000'>194 Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
+				print("ERROR SQL L.127 ".mysqli_error($db)."</br>");
 			}else{	
-				print("<table align='center'>
+				print("<table class='TFormAdmin'>
 						<tr>
-							<th colspan=2 class='BorderInf'>
-								NUMERO DE TABLAS ".mysqli_num_rows($respuesta).".
+							<th colspan=2>
+								TABLAS EXPORTABLES ".mysqli_num_rows($respuesta)."
 							</th>
 						</tr>");
 				while ($fila = mysqli_fetch_row($respuesta)){
 					if($fila[0]){
 						print("<tr>
-							<td class='BorderInfDch' style='text-align: right !important;'>".$fila[0]."</td>
-							<td class='BorderInf' style='text-align: left !important;'>
+							<td>".$fila[0]."</td>
+							<td>
 						<form name='exporta' action='$_SERVER[PHP_SELF]' method='POST'>
 							<input type='hidden' name='tablas' value='".$defaults['tablas']."' />
-							<input name='tabla' type='hidden' value='".$fila[0]."' />
-							<input type='submit' value='EXPORTA TABLA ".strtoupper($fila[0])."' class='botonverde' />
+							<input type='hidden' name='tabla' value='".$fila[0]."' />
+				<button type='submit' title='EXPORTA TABLA ".strtoupper($fila[0])."' class='botonverde imgButIco OpenBlack' style='vertical-align:top;' ></button>
 							<input type='hidden' name='oculto2' value=1 />
 						</form>
 							</td>
@@ -188,29 +178,29 @@ function listfiles(){
 	$directorio = opendir($ruta);
 	global $num;			$num=count(glob("bbdd/{*}",GLOB_BRACE));
 	if($num < 1){
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-			<tr><td align='center' class='BorderInf'>NO HAY ARCHIVOS PARA DESCARGAR</td></tr>");
+		print ("<table class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.8em;'>
+			<tr><td>NO HAY ARCHIVOS PARA DESCARGAR</td></tr>");
 	}else{
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-			<tr><td align='center' colspan='3' class='BorderInf'>ARCHIVOS RESPALDO BBDD </td></tr>");
+		print ("<table class='TFormAdmin'>
+			<tr><th align='center' colspan='3'>ARCHIVOS RESPALDO BBDD</th></tr>");
 		while($archivo = readdir($directorio)){
 			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
 				print("<tr>
-				<td class='BorderInfDch'>
+				<td>
 					<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
 						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
 						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-						<input type='submit' value='ELIMINAR' class='botonrojo' >
+				<button type='submit' title='ELIMINAR ".strtoupper($archivo)."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='delete' value='1' >
 					</form>
 				</td>
-				<td class='BorderInfDch'>
+				<td>
 					<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
 						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
-						<input type='submit' value='DESCARGAR'  class='botonverde' />
+				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco OpenBlack' style='vertical-align:top;' ></button>
 					</form>
 				</td>
-				<td class='BorderInf'>".strtoupper($archivo)."</td>");
+				<td>".strtoupper($archivo)."</td>");
 			}else{ }
 		} // FIN DEL WHILE
 	}

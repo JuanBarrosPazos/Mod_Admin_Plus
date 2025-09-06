@@ -3,9 +3,10 @@
 	global $db; 		global $db_name;
 	global $db_name_table; 		$db_name_table = strtolower($_POST['tabla']);
 	global $datein; 	$datein = date('Y.m.d_H.i.s');
-//	$datein = date('Y.m.d');
+    //	$datein = date('Y.m.d');
 	
-	print("* EXPORTADA TABLA: ".strtoupper($db_name." => ".$db_name_table).".");
+	print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.8em !important;'>
+            EXPORTADA TABLA: ".strtoupper($db_name." => ".$db_name_table)."</div>");
 
 				
 				   ////////////////////				   ////////////////////
