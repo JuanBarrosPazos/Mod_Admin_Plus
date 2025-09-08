@@ -2,17 +2,17 @@
 
 function validate_form(){
 	
-		/*
+	/*
 		global $sqld;
 		global $qd;
 		global $rowd;
-		*/
+	*/
 		
-		require '../Inclu/validate.php';	
+	require '../Inclu/validate.php';	
 		
-		return $errors;
+	return $errors;
 
-	} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -47,7 +47,9 @@ function process_form(){
 	$_SESSION['iniref'] = $rf;
 
 	/**************************************/
+
 		crear_tablas();
+
 	/**************************************/
 
 	// CREA IMAGEN DE USUARIO.
@@ -156,7 +158,7 @@ function modif(){
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);
 	fclose($fw2);
-	}
+}
 
 function crear_tablas(){
 	
@@ -180,7 +182,7 @@ function crear_tablas(){
 
 	require 'log_write.php';
 
-	} // FIN FUNCTION CREAR_TABLAS	
+} // FIN FUNCTION CREAR_TABLAS	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -201,30 +203,32 @@ function show_form($errors=[]){
 	global $array_nive_doc;		$array_nive_doc = 1;
 	require 'admin_array_total.php';
 
-////////////////////				////////////////////				////////////////////
-
 	global $db;				global $db_name;
 	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
-	$nu =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[mydni]'";
+	//$nu =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[mydni]'";
+	$nu =  "SELECT * FROM `$db_name`.$table_name_a";
 	$user = mysqli_query($db, $nu);
 	//$ruser = mysqli_fetch_assoc($user);
-	$nuser = mysqli_num_rows($user);
+	$nuser = (mysqli_num_rows($user))-1; // NO SE CUENTA EL WEBMASTER...
 	
 	if($nuser >= $_SESSION['nuser']){ 
-		print("<table class='centradiv'>
-				<tr align='center'>
-					<td>
-						<b>
-							<font color='red'>ACCESO RESTRINGIDO</font>	
-						</b>
+		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6em;'>
+					<font color='red'>ACCESO RESTRINGIDO</font>	
 				</br>
-		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].". Nº EMPLEADOS: ".$nuser.". PARA CONTINUAR:
-					</br>
-		ELIMINE ALGUN EMPLEADO EN BORRAR BAJAS O DAR DE BAJA.
-						</td> 
-					</tr>
-			</table>");
+		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].".<br>Nº EMPLEADOS: ".$nuser.".<br>
+		ELIMINE EMPLEADOS O LIMPIE<br> LA PAPELERA DE EMPLEADOS.
+				</div>");
+	
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='Admin_Ver.php';
+					}
+					setTimeout('redir()',8000);
+					</script>";
+		print($redir);
+
 	}else{
 		require 'tabla_crea_admin.php';
 	} // FIN CONDICIONAL NUMERO USUARIOS

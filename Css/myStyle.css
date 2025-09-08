@@ -533,8 +533,7 @@ img {
 
 	.imgtitle {		
 		display: block;
-		margin-left: auto;
-		margin-right: auto;
+		margin-left: 0.1em !important;
 		width: 40px;
 		height: 50px;
 		overflow: hidden;
@@ -543,11 +542,11 @@ img {
 
 	.ocultahead {
 		visibility: hidden;
-		display: block;
-		width: 0px !important;
-		height: 0px !important;
+		display: none;
+		width: 0.0em !important;
+		height: 0.0em !important;
 		overflow: hidden;
-			}
+	}
 
 	.centraWhileDatos{
 		width: 98%;
@@ -561,27 +560,34 @@ img {
 	/* ******   max-width:740px MEDIA SCREEN     ****** */
 	/* ******   INICIO ESTILOS MENU    ****** */
 
-  .app {
-    height: 354px !important;
-      }
+	.app {
+		height: 354px !important;
+    }
 
-  .sidebar {
-    position: absolute;
-    width: 6.2em !important;
-    height: 70px !important;
-      }
+	.sidebar {
+		position: absolute;
+		width: 6.2em !important;
+		height: 70px !important;
+    }
 
-  .sidebar:hover {
-    height: 100% !important;
-    width: 11.6em !important;
-        }
+	.sidebar:hover {
+		height: 100% !important;
+		width: 11.6em !important;
+	}
 
-  .sidebar header {
-    background-color: #343434;
-    width: auto;
-    display: block;
-    padding: 0.0em	0.5em;
-        }
+	.sidebar header {
+		background-color: #343434;
+		width: auto;
+		display: block;
+		padding: 0.0em	0.5em;
+	}
+
+	.icoh {
+		display: block;
+		width: fit-content;
+		margin-left: 0.8em !important;
+	}
+
 	/* ******   FIN ESTILOS MENU    ****** */
 
 } /* ******  FIN max-width:740px MEDIA SCREEN     ****** */
@@ -594,21 +600,21 @@ img {
 		height: 0px !important;
 		border: none !important;
 		overflow: hidden;
-			}
+	}
 
 	.ocultahead {
 		visibility: hidden;
-		display: block;
-		width: 0px !important;
-		height: 0px !important;
+		display: none;
+		width: 0.0em !important;
+		height: 0.0em !important;
 		overflow: hidden;
-			}
+	}
 
 	.borderhead {
 		display: block;
 		border: 0.1em #fff solid !important;
 		border-radius: 6px !important;
-			}
+	}
 
 	.CardWhileDatos{
 		width: 90%;
@@ -626,26 +632,32 @@ img {
 	/* ******   max-width:440px MEDIA SCREEN     ****** */
 	/* ******   INICIO ESTILOS MENU    ****** */
 
-  .app {
-      height: 302px !important;
-        }
-  .sidebar {
-      position: absolute;
-      width: 6.7em !important;
-      height: 25px !important;
-        }
+  	.app {
+		height: 302px !important;
+    }
+  	.sidebar {
+		position: absolute;
+		width: 6.7em !important;
+		height: 25px !important;
+    }
 
-  .sidebar:hover {
-      height: 100% !important;
-      width: 11.6em !important;
-        }
+  	.sidebar:hover {
+		height: 100% !important;
+		width: 11.6em !important;
+    }
 
-  .sidebar header {
-      background-color: #343434;
-      width: auto;
-      display: block;
-      padding: 0.0em	0.5em;
-        }
+  	.sidebar header {
+		background-color: #343434;
+		width: auto;
+		display: block;
+		padding: 0.0em	0.5em;
+    }
+
+	.icoh {
+		display: block;
+		width: fit-content;
+		margin-left: 0.2em !important;
+	}
 
 	/* ******   FIN max-width:440px MEDIA SCREEN     ****** */
 

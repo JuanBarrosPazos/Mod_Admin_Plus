@@ -22,14 +22,15 @@ print ("
     </div>
         <a href='#' class='ocultahead'>
             <form name='cerrar' action='".$rutaadmin."mcgexit.php' method='post'>
-                <input type='submit' value='CLOSE SESSION'  style='margin-top:2px;' class='botonverde' />
+		<button type='submit' title='CLOSE SESSION' class='botonrojo imgButIco CloseSessionBlack' style='vertical-align:top;' ></button>
                 <input type='hidden' name='cerrar' value=1 />
             </form>
         </a>
 
- <a href='#'><i class='ic icoh ocultahead'></i>
-		<span class='borderhead' style='color:#FFFFFF;vertical-align:middle'>MENU APP</span>
- </a>
+        <a href='#'>
+            <i class='ic icoh'></i>
+                <span class='borderhead ocultahead' style='color:#FFFFFF;vertical-align:middle'>MENU APP</span>
+        </a>
     </header> ");
     
 ?>

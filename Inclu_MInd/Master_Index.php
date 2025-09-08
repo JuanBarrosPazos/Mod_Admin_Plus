@@ -69,7 +69,7 @@ if($_SESSION['dni'] == $_SESSION['mydni']) {
 			</a>
 				<ul class='nav-flyout'>
 					<li>
-						<a href='".$rutainclu."cnemp.php'>
+						<a href='".$rutainclu."empleados.php'>
 							<i class='ic ico22'></i>Nª EMPLEADOS
 						</a>
 					</li>
