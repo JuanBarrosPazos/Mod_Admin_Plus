@@ -3,6 +3,10 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.09.09 2025/08/09
+	- Modificaciones en la presentación del menu app.
+	- Ajustes de código en número de empleados.
+----
 #### Mod_Admin_Plus V25.09.04 2025/08/04
 	- Eliminación de la librería geoclass...
 	- Bloqueo Ip: Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
