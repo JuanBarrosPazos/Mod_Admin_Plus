@@ -41,13 +41,14 @@
 
     		////////////////////		**********  		////////////////////
 	
+    global $name2;        global $name1;
 	if(!$sh){print(mysqli_error($db).".</br>");
 	}else{
         $qn1 = mysqli_query($db,$sh);
         $qn2 = mysqli_fetch_assoc($qn1);
-        global $name1;			$name1 = $qn2['Nombre'];
-        global $name2;			$name2 = $qn2['Apellidos'];
-		}
+		$name1 = $qn2['Nombre'];
+		$name2 = $qn2['Apellidos'];
+	}
 
     		////////////////////		**********  		////////////////////
         
@@ -57,12 +58,13 @@
 		$qh = mysqli_query($db, $sh);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
+		global $sumah;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;			@$sumah = $sumah + $verh;
-												}
+			@$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -88,12 +90,12 @@
 	//print ("</br>".$mintosec);	
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
+	global $sumas;	
 	if(!$sh){print(mysqli_error($db).".</br>");
 	}else{
 		$qs = mysqli_query($db, $sh);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
-		global $sumas;	
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
@@ -122,8 +124,8 @@
 	$segundos = $totsec-($horas*3600)-($minutos*60);
 
 	global $t;
-	if($dias == 1){  $t = " DIA LABORAL || ";}
-	elseif($dias != 1 ){ $t = " DIAS LABORALES || ";}
+	if($dias == 1){  $t = " DIA LABORAL || ";
+	}elseif($dias != 1 ){ $t = " DIAS LABORALES || ";}
 							
 	global $totaltime;
 	$totaltime = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";

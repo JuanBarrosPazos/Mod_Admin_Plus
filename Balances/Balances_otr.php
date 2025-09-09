@@ -19,7 +19,7 @@ if($_SESSION['Nivel'] == 'admin'){
 
 	if(isset($_POST['todo'])){	show_form();							
 								ver_todo();
-	}else{	show_form(); }
+	}else{ show_form(); }
 								
 }else{ require '../Inclu/tabla_permisos.php'; }
 
@@ -47,126 +47,82 @@ function show_form(){
 					'`dout` ASC' => 'Fecha Out Asc',
 					'`dout` DESC' => 'Fecha Out Desc');
 	
-	print("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				
-		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-			<input type='hidden' name='ref' value='".$_SESSION['usuarios']."' />
-				<tr>
-					<td align='center'>
-							CONSULTA BALANCE OTROS USUARIOS
-					</td>
-				</tr>		
-				<tr>
-					<td>
-					<div style='float:left; margin-right:6px'>
-						<input type='submit' value='SELECCIONE UN USUARIO' class='botonverde' />
-						<input type='hidden' name='oculto1' value=1 />
-					</div>
-					<div style='float:left'>
-
-						<select name='usuarios'>
-					<!-- <option value=''>SELECCIONE UN USUARIO</option> --> ");
-
-	global $db;
-	global $tablau;
-	$tablau = "`".$_SESSION['clave']."admin`";
+		global $db;		
+		global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
 	
-	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
-	$qu = mysqli_query($db, $sqlu);
+		$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
+		$qu = mysqli_query($db, $sqlu);
+
 	if(!$qu){
-			print("* ".mysqli_error($db)."<br>");
-	}else{
-					
-		while($rowu = mysqli_fetch_assoc($qu)){
-					
-					print ("<option value='".$rowu['ref']."' ");
-					
-					if($rowu['ref'] == @$defaults['usuarios']){
-										print ("selected = 'selected'");
-																		}
-						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
-		}
-	}  
+			print("ERROR SQL L.60 ".mysqli_error($db)."<br>");
+			global $redir;
+			$redir = "<script type='text/javascript'>
+						function redir(){
+							window.location.href='../Admin/Admin_Ver.php';
+						}
+						setTimeout('redir()',8000);
+					</script>";
+			print($redir);
 
-	print ("</select>
-					</div>
-				</td>
-			</tr>
-		</form>	
-			</table>"); 
+	}else{	print("<div class='centradiv' style='padding:0.6em;'>
+						CONSULTA BALANCE OTROS USUARIOS
+				<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+						<input type='hidden' name='ref' value='".$_SESSION['usuarios']."' />
+				<select name='usuarios'>
+							<!-- <option value=''>SELECCIONE UN USUARIO</option> --> ");
 
-	if(isset($_POST['oculto1']) || isset($_POST['todo'])) {
+			while($rowu = mysqli_fetch_assoc($qu)){
+				print ("<option value='".$rowu['ref']."' ");
+				if($rowu['ref'] == @$defaults['usuarios']){ print ("selected = 'selected'"); }
+					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+			}
+			print ("</select>
+				<button type='submit' title='SELECCIONE UN USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+					<input type='hidden' name='oculto1' value=1 />
+				</form>	
+					</div>");
+	}
+
+	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 		if($_SESSION['usuarios'] == '') { 
-				print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
-							<tr align='center'>
-								<td>
-									<font color='red'>
-								SELECCIONE UN USUARIO
-									</font>
-								</td>
-							</tr>
-						</table>");
-			}	
-	if($_SESSION['usuarios'] != '') {
+			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.6em;'>
+							SELECCIONE UN USUARIO
+					</div>");
+		}elseif($_SESSION['usuarios'] != ''){
 
-	require "../Users/".$_SESSION['usuarios']."/ayear.php";
+			require "../Users/".$_SESSION['usuarios']."/ayear.php";
 
-	print("	<table align='center' style=\"border:0px;margin-top:4px\">
-				<tr>
-					<th colspan=2 class='BorderSup'>
+			print("<div class='centradiv'>
 						CONSULTAR JORNADA DEL USUARIO ".$_SESSION['usuarios']."
-					</th>
-				</tr>
-				
 				<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-	
-		<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
-		
-				<tr>
-					<td align='center' class='BorderSup'>
-						<input type='submit' value='FILTRO BALANCES' class='botonverde' />
-						<input type='hidden' name='todo' value=1 />
-					</td>
-					
-					<td class='BorderSup'>	
-
-					<div style='float:left'>
-
-						<select name='Orden'>");
-						
-		foreach($ordenar as $option => $label){
-			print ("<option value='".$option."' ");
-			if($option == @$defaults['Orden']){print ("selected = 'selected'");}
-			 								  print ("> $label </option>");
-									}	
-	print ("</select>
-				</div>
-					<div style='float:left'>
-						<select name='dy'>");
-				foreach($dy as $optiondy => $labeldy){
-					print ("<option value='".$optiondy."' ");
-					if($optiondy == @$defaults['dy']){print ("selected = 'selected'");}
-													 print ("> $labeldy </option>");
-											}	
-																
-	print ("</select>
-				</div>
-					<div style='float:left'>
-						<select name='dm'>");
-				foreach($dm as $optiondm => $labeldm){
-					print ("<option value='".$optiondm."' ");
-					if($optiondm == @$defaults['dm']){print ("selected = 'selected'");}
-													 print ("> $labeldm </option>");
-							}	
-																
-	print ("</select>
-				</div>
+					<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
+				<select name='Orden'>");
+				foreach($ordenar as $option => $label){
+					print ("<option value='".$option."' ");
+					if($option == @$defaults['Orden']){ print ("selected = 'selected'");} 
+					print ("> $label </option>");
+				}	
+		print ("</select>
+				<select name='dy'>");
+					foreach($dy as $optiondy => $labeldy){
+						print ("<option value='".$optiondy."' ");
+						if($optiondy == @$defaults['dy']){print ("selected = 'selected'");}
+						print ("> $labeldy </option>");
+					}	
+		print ("</select>
+				<select name='dm'>");
+					foreach($dm as $optiondm => $labeldm){
+						print ("<option value='".$optiondm."' ");
+						if($optiondm == @$defaults['dm']){print ("selected = 'selected'");}
+						print ("> $labeldm </option>");
+					}	
+		print ("</select>
+				<button type='submit' title='FILTRO BALANCES' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+				<input type='hidden' name='todo' value=1 />
 			</form>											
-		</td>
-	</tr>
-		</table>"); /* Fin del print */
-	
-			} // fin 2º if
+		</div>"); /* Fin del print */
+
+		} // fin 2º if
 	} // fin 1º if
 
 }	/* Fin show_form(); */
@@ -177,31 +133,18 @@ function show_form(){
 
 function botones(){
 	
-	print("<table align='center' style=\"border:0px;margin-top:0px\">
-				<tr>
-		 			<td align='right' class='BorderInf'>
-
-<div style='float:left; margin-right:16px;  margin-left:155px; margin-top:-16px'>
-<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\">
-	
-	<input name='time' type='hidden' value='".@$_SESSION['time']."' />
-
-			<input type='submit' value='GRAFICA LINEAL' class='botonnaranja' />
+	print("<div class='centradiv' style='border:none !important'>
+		<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
+			<input name='time' type='hidden' value='".@$_SESSION['time']."' />
+			<button type='submit' title='VER GRAFICA LINEAL' class='botonverde imgButIco GrafLineBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 			<input type='hidden' name='grafico' value=1 />
-</form>	
-</div>					
-<div style='float:left; margin-top:-16px'>
-<form name='grafico2' action='grafico_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\">
-	
-	<input name='time' type='hidden' value='".@$_SESSION['time']."' />
-
-			<input type='submit' value='GRAFICA BARRAS' class='botonnaranja' />
+		</form>	
+		<form name='grafico2' action='grafico_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
+			<input name='time' type='hidden' value='".@$_SESSION['time']."' />
+			<button type='submit' title='VER GRAFICA DE BARRAS' class='botonverde imgButIco GrafBarBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 			<input type='hidden' name='grafico2' value=1 />
-</form>	
-</div>					
-					</td>
-				</tr>
-	</table>");
+		</form>	
+	</div>");
 
 }
 
@@ -325,6 +268,6 @@ function master_index(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
 
 ?>

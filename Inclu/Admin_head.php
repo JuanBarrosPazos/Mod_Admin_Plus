@@ -78,7 +78,7 @@
 
 	<div id="header"> 
 				<span style="font-size:18px">
-						JUAN BARROS PAZOS
+						© JUAN BARROS PAZOS
 				</span>
 		</br>
 				<span style="font-size:12px">

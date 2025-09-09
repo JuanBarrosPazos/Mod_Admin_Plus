@@ -12,7 +12,7 @@ print ("<table align='center'>
 					<h2>ACCESO RESTRINGIDO</h2>
 					<h4>
 						<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-								JUAN BARROS PAZOS
+								© JUAN BARROS PAZOS
 						</a>
 					</h4>
 				</td>
@@ -36,6 +36,6 @@ print($redir);
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
 
 ?>

@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Language" content="es-es">
 <meta name="Language" content="Spanish">
 <meta name="description" content="Modulo Administrador" />
-<meta name="keywords" content="Juan Barros Pazos, Programas gratis, Spain, Mallorca, Palma de Mallorca" />
+<meta name="keywords" content="© Juan Barros Pazos, Programas gratis, Spain, Mallorca, Palma de Mallorca" />
 <meta name="robots" content="all, index, follow" />
 <meta name="audience" content="All" />
-<title>Juan Manuel Barros Pazos</title>
+<title>© Juan Manuel Barros Pazos</title>
 
 <link href="Descargas.css" rel="stylesheet" type="text/css" />
 <link href="favicon.png" type='image/ico' rel='shortcut icon' />
@@ -76,7 +76,7 @@ function MM_validateForm() {
 
   <div id="header"> 
   			<span style="font-size:18px">
-			  		JUAN BARROS PAZOS
+			  		© JUAN BARROS PAZOS
             </span>
   	</br>
   			<span style="font-size:12px">
@@ -403,7 +403,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 								<tr>
 									<td align='center'>
 										<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-											Contactos Juan Barros
+											Contactos © Juan Barros
 										</a>
 									</td>
 								</tr>
@@ -424,7 +424,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 						<tr>
 							<td align='center'>
 								<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-									&copy; Juan Barr&oacute;s Pazos 2020/2025.
+									&copy; © Juan Barr&oacute;s Pazos 2020/2025.
 								</a>
 							</td>
 						</tr>
@@ -437,12 +437,12 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
 ?>
 
 	</div>
 	<div style="clear:both"></div>
-		<div id="footer">&copy; Juan Barr&oacute;s Pazos 2020/2025.</div>
+		<div id="footer">&copy; © Juan Barr&oacute;s Pazos 2020/2025.</div>
 	</div>
 </body>
 </html>

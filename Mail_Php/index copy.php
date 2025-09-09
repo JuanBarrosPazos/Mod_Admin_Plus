@@ -430,7 +430,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 								<tr>
 									<td align='center'>
 										<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
-											Contactos Juan Barros
+											Contactos © Juan Barros
 										</a>
 									</td>
 								</tr>
@@ -464,7 +464,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
 ?>
 
 </div>

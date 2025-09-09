@@ -15,11 +15,11 @@ session_start();
 
 if($_SESSION['Nivel'] == 'admin'){
 
-		master_index();
+	master_index();
 
-		if(isset($_POST['todo'])){ show_form();							
-									ver_todo();
-		}else{ show_form(); }
+	if(isset($_POST['todo'])){	show_form();							
+								ver_todo();
+	}else{ show_form(); }
 
 }else{ require '../Inclu/tabla_permisos.php'; }
 
@@ -44,51 +44,34 @@ function show_form(){
 					'`dout` ASC' => 'Fecha Out Asc',
 					'`dout` DESC' => 'Fecha Out Desc');
 	
-	print("<table align='center' style=\"border:0px;margin-top:4px\">
-			<tr>
-				<th colspan=3>GRAFICA DE HORARIOS</th>
-			</tr>
-			<tr>
-				<td align='center' class='BorderSup'>
-					<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-						<input type='submit' value='FILTRO BALANCES' class='botonverde' />
-						<input type='hidden' name='todo' value=1 />
-				</td>
-				<td class='BorderSup'>	
-					<div style='float:left'>
-						<select name='Orden'>");
-				foreach($ordenar as $option => $label){
-						print ("<option value='".$option."' ");
-						if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
-						print ("> $label </option>");
-				}	
-						
-				print("</select>
-					</div>
-					<div style='float:left'>
-						<select name='dy'>");
-				foreach($dy as $optiondy => $labeldy){
-						print ("<option value='".$optiondy."' ");
-						if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
-						print ("> $labeldy </option>");
-				}	
-																
-				print ("</select>
-						</div>
-						<div style='float:left'>
-							<select name='dm'>");
-				foreach($dm as $optiondm => $labeldm){
-						print ("<option value='".$optiondm."' ");
-						if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
-						print ("> $labeldm </option>");
-				}	
-																
-				print ("</select>
-							</div>
-						</form>											
-					</td>
-				</tr>
-			</table>"); /* Fin del print */
+	print("<div class='centradiv' style='padding:0.6em;'>
+			GRAFICA DE HORARIOS
+			<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
+				<select name='Orden'>");
+					foreach($ordenar as $option => $label){
+							print ("<option value='".$option."' ");
+							if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
+							print ("> $label </option>");
+					}	
+		print("</select>
+				<select name='dy'>");
+					foreach($dy as $optiondy => $labeldy){
+							print ("<option value='".$optiondy."' ");
+							if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
+							print ("> $labeldy </option>");
+					}	
+		print ("</select>
+				<select name='dm'>");
+					foreach($dm as $optiondm => $labeldm){
+							print ("<option value='".$optiondm."' ");
+							if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
+							print ("> $labeldm </option>");
+					}	
+		print ("</select>
+				<button type='submit' title='FILTRO BALANCES' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+					<input type='hidden' name='todo' value=1 />
+			</form>											
+		</div>"); /* Fin del print */
 	
 }	/* Fin show_form(); */
 
@@ -98,26 +81,18 @@ function show_form(){
 
 function botones(){
 	
-	print("<table align='center' style=\"border:0px;margin-top:4px\">
-			<tr>
-	 			<td align='right' class='BorderInf'>
-		<div style='float:left; margin-right:16px;  margin-left:155px; margin-top:-16px'>
-			<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\">
-				<input name='time' type='hidden' value='".@$_SESSION['time']."' />
-				<input type='submit' value='GRAFICA LINEAL' class='botonnaranja' />
+	print("<div class='centradiv' style='border:none !important'>
+			<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
+				<input type='hidden' name='time' value='".@$_SESSION['time']."' />
+				<button type='submit' title='VER GRAFICA LINEAL' class='botonverde imgButIco GrafLineBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 				<input type='hidden' name='grafico' value=1 />
 			</form>	
-		</div>					
-		<div style='float:left; margin-top:-16px'>
-			<form name='grafico2' action='grafico_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\">
-				<input name='time' type='hidden' value='".@$_SESSION['time']."' />
-				<input type='submit' value='GRAFICA BARRAS' class='botonnaranja' />
+			<form name='grafico2' action='grafico_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
+				<input type='hidden' name='time' value='".@$_SESSION['time']."' />
+				<button type='submit' title='VER GRAFICA DE BARRAS' class='botonverde imgButIco GrafBarBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 				<input type='hidden' name='grafico2' value=1 />
 			</form>	
-		</div>					
-				</td>
-			</tr>
-	</table>");
+		</div>");
 
 }
 
@@ -187,7 +162,10 @@ function ver_todo(){
 	global $twhile;				global $ycons;
 	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy'];}
 
-	$twhile = "<tr><th colspan=6 class='BorderInf'>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</th></tr><tr><th colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES.</th></tr>";
+	$twhile = "<tr>
+				<td colspan=6>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</td></tr><tr>
+				<td colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES</td>
+			</tr>";
 
 	global $tdplus;				$tdplus = "";
 	global $feedtot;			$feedtot = "";
@@ -223,6 +201,6 @@ function master_index(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
 
 ?>

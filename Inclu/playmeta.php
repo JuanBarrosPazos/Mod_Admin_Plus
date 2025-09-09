@@ -6,10 +6,10 @@ print("
 <meta http-equiv='Content-Language' content='es-es'>
 <meta name='Language' content='Spanish'>
 <meta name='description' content='Modulo Administrador' />
-<meta name='keywords' content='Juan Barros Pazos, Programas gratis, Spain, Mallorca, Palma de Mallorca' />
+<meta name='keywords' content='© Juan Barros Pazos, Programas gratis, Spain, Mallorca, Palma de Mallorca' />
 <meta name='robots' content='all, index, follow' />
 <meta name='audience' content='All' />
-<title>Juan Manuel Barros Pazos</title>
+<title>© Juan Manuel Barros Pazos</title>
 
 <link href='".$rutameta."Css/myStyle.css' rel='stylesheet' type='text/css' />
 <link href='".$rutameta."Css/MyStyleButtonIcos.css' rel='stylesheet' type='text/css' />

@@ -245,6 +245,34 @@
 }
 
 
+.GrafBarBlack{
+	background-image: url(../Images/BotonIcos/graf_bar_black.png);
+}
+.GrafBarGrey{
+	background-image: url(../Images/BotonIcos/graf_bar_grey.png);
+}
+.GrafBarWhite{
+	background-image: url(../Images/BotonIcos/graf_bar_white.png);
+}
+.GrafBarBlack:hover, .GrafBarGrey:hover, .GrafBarWhite:hover{
+	background-image: url(../Images/BotonIcos/graf_bar_grey.png);
+}
+
+
+.GrafLineBlack{
+	background-image: url(../Images/BotonIcos/graf_line_black.png);
+}
+.GrafLineGrey{
+	background-image: url(../Images/BotonIcos/graf_line_grey.png);
+}
+.GrafLineWhite{
+	background-image: url(../Images/BotonIcos/graf_line_white.png);
+}
+.GrafLineBlack:hover, .GrafLineGrey:hover, .GrafLineWhite:hover{
+	background-image: url(../Images/BotonIcos/graf_line_grey.png);
+}
+
+
 .HomeBlack{
 	background-image: url(../Images/BotonIcos/home_black.png);
 }
@@ -485,4 +513,4 @@
 /* ******                    ****** */
 /* ******************************** */
 
-  /* Creado por Juan Barros Pazos 2025 */
+  /* Creado por © Juan Barros Pazos 2025 */

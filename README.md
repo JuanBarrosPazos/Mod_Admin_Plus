@@ -169,5 +169,5 @@
 - Audio aplicacion.
 
 ----
-## Autor: Juan Manuel Barrós Pazos 2020/2025
+## Autor: © Juan Manuel Barrós Pazos 2020/2025 
 ----

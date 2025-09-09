@@ -1,8 +1,6 @@
 <?php
 
-	global $db;
-	global $db_name;
-	global $vname;
+	global $db;				global $db_name;			global $vname;
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -10,17 +8,14 @@
 
 /* ENERO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-01-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-01-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm1 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm1){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm1);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -28,9 +23,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -38,8 +33,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm1){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm1);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -47,9 +41,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -57,8 +51,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm1){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm1);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -66,16 +59,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -94,17 +86,14 @@
 
 /* FEBRERO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-02-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-02-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm2 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm2){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm2);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -112,9 +101,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -122,8 +111,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm2){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm2);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -131,9 +119,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -141,8 +129,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm2){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm2);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -150,16 +137,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -178,17 +164,14 @@
 
 /* MARZO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-03-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-03-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm3 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm3){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm3);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -196,9 +179,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -206,8 +189,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm3){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm3);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -215,9 +197,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -225,8 +207,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm3){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm3);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -234,16 +215,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -262,17 +242,14 @@
 
 /* ABRIL TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-04-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-04-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm4 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm4){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm4);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -280,9 +257,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -290,8 +267,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm4){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm4);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -299,9 +275,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -309,8 +285,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm4){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm4);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -318,16 +293,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;			$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -346,17 +320,14 @@
 
 /* MAYO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-05-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-05-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm5 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm5){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm5);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -364,9 +335,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		@$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			@$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -374,8 +345,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm5){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm5);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -383,9 +353,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		@$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			@$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -393,8 +363,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm5){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm5);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -402,16 +371,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		@$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			@$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -430,17 +398,14 @@
 	
 /* JUNIO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-06-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-06-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm6 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm6){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm6);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -448,9 +413,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -458,8 +423,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm6){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm6);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -467,9 +431,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -477,8 +441,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm6){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm6);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -486,16 +449,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -514,17 +476,14 @@
 	
 /* 	JULIO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-07-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-07-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm7 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm7){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm7);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -532,9 +491,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -542,8 +501,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm7){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm7);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -551,9 +509,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -561,8 +519,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm7){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm7);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -570,16 +527,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -598,17 +554,14 @@
 	
 /* 	AGOSTO TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-08-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-08-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm8 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm8){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm8);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -616,9 +569,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -626,8 +579,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm8){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm8);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -635,9 +587,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -645,8 +597,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm8){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm8);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -654,16 +605,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -682,17 +632,14 @@
 	
 /* 	SEPTIEMBRE TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-09-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;				$dm1ym = "-09-";
+	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm9 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm9){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm9);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -700,9 +647,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -710,8 +657,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm9){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm9);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -719,9 +665,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -729,8 +675,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm9){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm9);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -738,16 +683,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -766,17 +710,14 @@
 	
 /* 	OCTUBRE TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-10-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;				$dm1ym = "-10-";
+	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm10 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm10){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm10);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -784,9 +725,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -794,8 +735,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm10){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm10);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -803,9 +743,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -813,8 +753,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm10){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm10);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -822,16 +761,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;				$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -850,17 +788,14 @@
 	
 /* 	NOVIEMBRE TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-11-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-11-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm11 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm11){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm11);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -868,9 +803,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -878,8 +813,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm11){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm11);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -887,9 +821,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -897,8 +831,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm11){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm11);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -906,16 +839,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;			$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -934,17 +866,14 @@
 	
 /* 	DICIEMBRE TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 
-	global $dm1ym;
-	$dm1ym = "-12-";
-	global $filym;
-	$filym = "%".$dy1.$dm1ym."%";
+	global $dm1ym;			$dm1ym = "-12-";
+	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
 	$dm12 =  "SELECT * FROM $vname WHERE `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm12){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qh = mysqli_query($db, $dm12);
 		$qhr = mysqli_num_rows($qh);
 		$sumah = 0;
@@ -952,9 +881,9 @@
 			$verh = mysqli_fetch_array($qh);
 			$verh = substr($verh['ttot'],0,2).",";
 			$verh = str_replace(":","",$verh);
-		global $sumah;	
-		$sumah = $sumah + $verh;
-								}
+			global $sumah;	
+			$sumah = $sumah + $verh;
+		}
 	}
 	$hortosec = $sumah * 3600;	
 	//print ("</br>".$sumah);
@@ -962,8 +891,7 @@
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
 	if(!$dm12){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qm = mysqli_query($db, $dm12);
 		$qmr = mysqli_num_rows($qm);
 		$sumam = 0;
@@ -971,9 +899,9 @@
 			$verm = mysqli_fetch_array($qm);
 			$verm = substr($verm['ttot'],3,2).",";
 			$verm = str_replace(":","",$verm);
-		global $sumam;	
-		$sumam = $sumam + $verm;
-												}
+			global $sumam;	
+			$sumam = $sumam + $verm;
+		}
 	}
 	$mintosec = $sumam * 60;	
 	//print ("</br>".$sumam);
@@ -981,8 +909,7 @@
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
 	if(!$dm12){print(mysqli_error($db).".</br>");
-	}
-	else{
+	}else{
 		$qs = mysqli_query($db, $dm12);
 		$qsr = mysqli_num_rows($qs);
 		$sumas = 0;
@@ -990,16 +917,15 @@
 			$vers = mysqli_fetch_array($qs);
 			$vers = substr($vers['ttot'],-2).",";
 			$vers = str_replace(":","",$vers);
-		global $sumas;	
-		$sumas = $sumas + $vers;
-												}
+			global $sumas;	
+			$sumas = $sumas + $vers;
+		}
 	}
 	//print ("</br>".$sumas);
 
 /* SUMAMOS TODOS LOS SEGUNDOS. */	
 	
-	global $totsec;
-	$totsec = $hortosec + $mintosec + $sumas;
+	global $totsec;			$totsec = $hortosec + $mintosec + $sumas;
 	//print ("</br>".$totsec);
 	
 /* PASAMOS LOS SEGUNDOS A HORAS:MINUTOS:SEGUNDOS */
@@ -1028,5 +954,6 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2021/25 */
+
 ?>

@@ -16,7 +16,7 @@
 
 
 <!-- Inicio footer -->
-<div id="footer">&copy; Juan Barr&oacute;s Pazos 2020/2025.</div>
+<div id="footer">&copy; © Juan Barr&oacute;s Pazos 2020/2025.</div>
 <!-- Fin footer -->
 
 </div>
