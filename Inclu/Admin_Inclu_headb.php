@@ -30,7 +30,12 @@ require 'Inclu/misdatos.php';
 </head>
 
 <body topmargin="0">
+
 <div id="page" >
+
+		<a href='Licencia.pdf' target='_blanck'>
+			<img id='licencia' src='Images/CC-BY-NC-SA.jpg'>
+		</a>
 
   <div id="header"> 
   			<span style="font-size:18px">

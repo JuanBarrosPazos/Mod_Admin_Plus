@@ -1,8 +1,22 @@
+## © Juan M. Barrós Pazos. Bajo Licencia CC BY-NC-SA.
+
+### Reconocimiento: © Juan M. Barrós Pazos.
+### Contacto: juanbarrospazos@hotmail.es
+## Licencia CC BY-NC-SA.
+    Creative Commons Reconocimiento-NoComercial-CompartirIgual (CC BY-NC-SA).
+
+    Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
+----
+
 ## PENDIENTES...
 #### Ojo con sesión abierta al redireccionamiento fichar con usuario no admin o webmaster...
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.09.11A 2025/08/11
+	- Inclusión software bajo Licencia CC BY-NC-SA.
+	  Creative Commons Reconocimiento-NoComercial-CompartirIgual (CC BY-NC-SA).
+----
 #### Mod_Admin_Plus V25.09.10 2025/08/10
 	- Modificaciones en Balances...
 ----
@@ -172,5 +186,5 @@
 - Audio aplicacion.
 
 ----
-## Autor: © Juan Manuel Barrós Pazos 2020/2025 
+## Autor: © Juan Manuel Barrós Pazos 2020/25 Licencia CC BY-NC-SA
 ----

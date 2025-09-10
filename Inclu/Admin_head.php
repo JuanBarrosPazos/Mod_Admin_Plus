@@ -76,9 +76,15 @@
 	
 	<div id="page" >
 
+	<?php
+		echo "<a href='".$rutameta."Licencia.pdf' target='_blanck'>
+				<img id='licencia' src='".$rutameta."Images/CC-BY-NC-SA.jpg'>
+			</a>";
+	?>
+
 	<div id="header"> 
 				<span style="font-size:18px">
-						© JUAN BARROS PAZOS
+						© JUAN BARROS PAZOS. Licencia CC BY-NC-SA
 				</span>
 		</br>
 				<span style="font-size:12px">

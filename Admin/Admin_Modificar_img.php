@@ -17,5 +17,5 @@ session_start();
 	require '../Inclu/Admin_Inclu_footer.php';
 
 
-/* Creado por © Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 ?>

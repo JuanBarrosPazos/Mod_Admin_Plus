@@ -55,6 +55,6 @@ if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 		else { } // SI NO password_verify
 }// FIN IF ISSET
 
-/* Creado por © Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 
 ?>

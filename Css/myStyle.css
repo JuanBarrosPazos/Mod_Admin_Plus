@@ -401,6 +401,17 @@ img {
 	*/
 }
 
+#licencia{
+	position: fixed;
+	bottom: 1.2em;
+	right: 1.2em;
+	z-index:999;
+	width: 8.0em;
+	height: auto;
+	border: 0.2em solid #F1BD2D;
+}
+
+
 #footer  a {
 	color: #333333;
 	text-decoration: none;
@@ -667,4 +678,4 @@ img {
 /* ******                    ****** */
 /* ******************************** */
 
-/* Creado por © Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */

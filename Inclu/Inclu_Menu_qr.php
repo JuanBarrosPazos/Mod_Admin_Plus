@@ -191,6 +191,11 @@ border-radius: 4px;
 </div>
 -->
 	<div id="page" >
+
+		<a href='Licencia.pdf' target='_blanck'>
+			<img id='licencia' src='Images/CC-BY-NC-SA.jpg'>
+		</a>
+
   <div id="header"> 
   			<span style="font-size:18px">
   							<?php print(strtoupper($head_titulo));?>

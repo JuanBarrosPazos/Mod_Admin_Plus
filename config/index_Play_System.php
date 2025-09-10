@@ -1527,6 +1527,6 @@ function ini_log(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por © Juan Barros Pazos 2020/2025 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 
 ?>

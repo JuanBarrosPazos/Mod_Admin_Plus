@@ -464,7 +464,7 @@ print(" <table align='center' style=\"border:0px;margin_bottom:6px;margin-top:15
 			
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
-/* Creado por © Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 ?>
 
 </div>

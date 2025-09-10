@@ -35,6 +35,9 @@ require '../Inclu/misdatos.php';
 
 <body topmargin="0">
 <div>
+		<a href='../Licencia.pdf' target='_blanck'>
+			<img id='licencia' src='../Images/CC-BY-NC-SA.jpg'>
+		</a>
 
   <div style="clear:both"></div>
    

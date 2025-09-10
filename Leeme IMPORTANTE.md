@@ -101,6 +101,6 @@ ELIMINANDO TODAS LA TABLAS DE LA BBDD Y DIRECTORIOS DE USUARIOS
 
 ----
 
-## Autor: © Juan Manuel Barrós Pazos 2020/2025
+## Autor: © Juan Manuel Barrós Pazos 2020/25 Licencia CC BY-NC-SA
 
 ----

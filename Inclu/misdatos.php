@@ -9,11 +9,11 @@
 
 // <title>php print($meta_titulo);</title>
 global $meta_titulo;
-$meta_titulo = "© Juan Manuel Barros Pazos";
+$meta_titulo = "© Juan Manuel Barros Pazos. Licencia CC BY-NC-SA.";
 
 // <title>php print($meta_titulo);</title>
 global $meta_titulo_contac;
-$meta_titulo_contac = "© Juan Manuel Barros Pazos";
+$meta_titulo_contac = "© Juan Manuel Barros Pazos. Licencia CC BY-NC-SA.";
 
 // <meta name="description" content="" />
 global $meta_desc_cotent;
@@ -52,7 +52,7 @@ $meta_audience_cotent = "All";
 
 // Titulo header page
 global $head_titulo;
-$head_titulo = "© JUAN BARROS PAZOS";
+$head_titulo = "© JUAN BARROS PAZOS. Licencia CC BY-NC-SA."; 
 
 // Titulo 2 header page
 global $head_titulo2;
@@ -76,7 +76,7 @@ $head_telef = "Tlf: +69.696969696";
 
 // Titulo footer page
 global $head_footer;
-$head_footer = "&copy; © Juan Barr&oacute;s Pazos 2020/2025.";
+$head_footer = "© Juan Barr&oacute;s Pazos 2020/25 Licencia CC BY-NC-SA";
 
 
 						/////////////////////////////
@@ -127,6 +127,6 @@ $_SESSION['admin_url'] = $admin_url;
 /////////////////////////////				/////////////////////////////
 					/////////////////////////////
 
-/* Creado por © Juan Barros Pazos 2021/25 */
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 
 ?>
