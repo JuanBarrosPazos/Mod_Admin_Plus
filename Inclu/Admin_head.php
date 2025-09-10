@@ -83,11 +83,11 @@
 	?>
 
 	<div id="header"> 
-				<span style="font-size:18px">
-						© JUAN BARROS PAZOS. Licencia CC BY-NC-SA
-				</span>
-		</br>
-				<span style="font-size:12px">
+				<span style="font-size:1.4em">© JUAN BARROS PAZOS</span>
+			<br>
+				<span style="font-size: 0.8em;">Licencia CC BY-NC-SA</span>
+			</br>
+				<span style="font-size:1.1em">
 					Design & Programming in Palma de Mallorca
 				</span>
 	</div>
