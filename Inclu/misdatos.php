@@ -52,7 +52,10 @@ $meta_audience_cotent = "All";
 
 // Titulo header page
 global $head_titulo;
-$head_titulo = "© JUAN BARROS PAZOS. Licencia CC BY-NC-SA."; 
+$head_titulo = "© JUAN BARROS PAZOS.";
+
+global $head_licencia;
+$head_licencia = "Licencia CC BY-NC-SA.";
 
 // Titulo 2 header page
 global $head_titulo2;

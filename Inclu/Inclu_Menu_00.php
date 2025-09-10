@@ -186,14 +186,18 @@ border-radius: 4px;
 			<img id='licencia' src='Images/CC-BY-NC-SA.jpg'>
 		</a>
 
-  <div id="header"> 
-  			<span style="font-size:18px">
-  							<?php print(strtoupper($head_titulo));?>
-            </span>
-  	</br>
-  			<span style="font-size:12px">
-  							<?php print(strtoupper($head_titulo2));?>
-            </span>
+  	<div id="header"> 
+  		<span style="font-size:1.4em;">
+  				<?php print(strtoupper($head_titulo));?>
+        </span>
+		<br>
+		<span style="font-size: 0.8em;">
+				<?php print(strtoupper($head_licencia));?>
+		</span>
+		</br>
+  		<span style="font-size:1.1em;">
+  				<?php print(strtoupper($head_titulo2));?>
+        </span>
    </div>
 
   <div style="clear:both"></div>

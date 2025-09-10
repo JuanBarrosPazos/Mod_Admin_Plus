@@ -215,7 +215,7 @@ function ver_todo(){
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
-	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.308: </font>
+	if(!$qun){print("<font color='#F1BD2D'>Se ha producido un error L.308: </font>
 					</br>".mysqli_error($db)."</br>");
 	}else{
 		global $name1;			global $name2;

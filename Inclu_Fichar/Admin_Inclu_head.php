@@ -27,11 +27,14 @@ require '../Inclu/misdatos.php';
 <link href="../Css/menu.css" rel="stylesheet" type="text/css" />
 <link href="../Css/menuico.css" rel="stylesheet" type="text/css" />
 
-<link href="../Images/favicon.png" type='image/ico' rel='shortcut icon' />
+<?php
+	global $balances;
+	if($balances == 1){
+		echo "<link href='../Balances/graficasIndex/graficas.css' rel='stylesheet' type='text/css' />";
+	}else{ }
+?>
 
-					<!-- *************************** -->
-<!-- *************************** -->		<!-- *************************** -->
-					<!-- *************************** -->
+<link href="../Images/favicon.png" type='image/ico' rel='shortcut icon' />
 
     				<!-- *************************** -->
 <!-- *************************** -->		<!-- *************************** -->
@@ -45,17 +48,22 @@ require '../Inclu/misdatos.php';
 		<a href='../Licencia.pdf' target='_blanck'>
 			<img id='licencia' src='../Images/CC-BY-NC-SA.jpg'>
 		</a>
-  <div id="header"> 
-  			<span style="font-size:18px">
-  							<?php print(strtoupper($head_titulo));?>
-            </span>
-  	</br>
-  			<span style="font-size:12px">
-  							<?php print(strtoupper($head_titulo2));?>
-            </span>
+
+  	<div id="header"> 
+  		<span style="font-size:1.4em;">
+  				<?php print(strtoupper($head_titulo));?>
+        </span>
+		<br>
+		<span style="font-size: 0.8em;">
+				<?php print(strtoupper($head_licencia));?>
+		</span>
+		</br>
+  		<span style="font-size:1.1em;">
+				<?php print(strtoupper($head_titulo2));?>
+        </span>
    </div>
 
-			 	<div style="clear:both"></div>
+	<div style="clear:both"></div>
         
 <!--
 ////////////////////////////////

@@ -8,7 +8,7 @@
 	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
-	if(!$sh){print(mysqli_error($db).".</br>");
+	if(!$sh){ print(mysqli_error($db).".</br>");
 	}else{
         $datf = mysqli_query($db, $sh);
         $df = fopen('datosf.php','w+');
@@ -42,7 +42,7 @@
     		////////////////////		**********  		////////////////////
 	
     global $name2;        global $name1;
-	if(!$sh){print(mysqli_error($db).".</br>");
+	if(!$sh){ print(mysqli_error($db).".</br>");
 	}else{
         $qn1 = mysqli_query($db,$sh);
         $qn2 = mysqli_fetch_assoc($qn1);
@@ -53,7 +53,7 @@
     		////////////////////		**********  		////////////////////
         
 	/* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
-	if(!$sh){print(mysqli_error($db).".</br>");
+	if(!$sh){ print(mysqli_error($db).".</br>");
 	}else{
 		$qh = mysqli_query($db, $sh);
 		$qhr = mysqli_num_rows($qh);
@@ -124,8 +124,8 @@
 	$segundos = $totsec-($horas*3600)-($minutos*60);
 
 	global $t;
-	if($dias == 1){  $t = " DIA LABORAL || ";
-	}elseif($dias != 1 ){ $t = " DIAS LABORALES || ";}
+	if($dias == 1){  $t = " DIA || ";
+	}elseif($dias != 1 ){ $t = " DIAS || ";}
 							
 	global $totaltime;
 	$totaltime = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";

@@ -1,0 +1,194 @@
+ /* SETUP */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      list-style-type: none;
+    }
+    body { 
+      font-family: Helvetica, Arial, sans-serif; 
+      color: #333; 
+    }
+    a { 
+      color: #2D7BB2; 
+      text-decoration: none; 
+      font-weight: bold; 
+    }
+    .section a:hover { 
+      color: #0198ac !important; 
+    }
+    h2, h3, h4 { 
+      clear: both; 
+      margin: 0 0 0.6em 0;
+    }
+    h3 { 
+      color: #666; 
+    }
+    .section { 
+      /*
+      float: left;
+      clear: left;
+      */
+      padding: 0.2em 0.6em 0.2em 0.6em;
+      text-align: center;
+      /*border: 1px solid red;*/
+
+    }
+    
+    /* CHART LISTS */
+    .chartlist { 
+      /*
+      float: left; 
+      border-top: 1px solid #EEE; 
+      border: 1px solid red;
+      */
+      width: 100%;
+      margin: 0.1em auto -0.3em auto;
+    }
+    .chartlist li { 
+      position: relative;
+      display: block;  
+      /*border-bottom: 1px solid #EEE; */
+      margin: 0.2em;
+      _zoom: 1;
+    }
+    .chartlist li a { 
+      display: block; 
+      /*padding: 0.4em 4.5em 0.4em 0.5em;*/
+      position: relative; 
+      z-index: 2; 
+      margin: 0.2em auto 0.2em auto;
+      padding: 0.4em 0.2em 0.4em 0.2em;
+      height: 0.4em;
+    }
+    .chartlist .count { 
+      display: block; 
+      position: absolute; 
+      top: 0; 
+      right: 0; 
+      margin: 0.1em 0.4em 0.1em 0.4em; 
+      text-align: right; 
+      color: #999; 
+      font-weight: bold; 
+      font-size: 1.0em; 
+      width: max-content;
+      z-index: 1;
+      /*line-height: 2em;*/
+    }
+    .chartlist .index { 
+      display: block; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      height: 100%; 
+      background: #B8E4F5; 
+      text-indent: -9999px; 
+      overflow: hidden; 
+      line-height: 2em;
+      max-width: 80%;
+    }
+    .chartlist li:hover { 
+      background: #f9ffab !important; 
+    }
+    
+    /* TIMELINE CHARTS */
+    .timeline { 
+      text-align: center;
+      display: block;
+      font-size: 0.9em; 
+      height: 12em; 
+      width: max-content;
+      margin: auto;
+      padding: 0.1em 0.4em 0.1em 0.4em;
+      /*border: 1px solid green;*/
+    }
+    .timeline li { 
+      position: relative;
+      float: left;
+      width: 4.8em; 
+      margin: 0 0.5em;
+      height: 9.8em; 
+      /*border: 1px solid yellow;*/
+    }
+    
+    .TimeLine2 { 
+      width: 3.8em !important; 
+      font-size: 0.9em !important;
+    }
+
+    .timeline li a { 
+      display: block;
+      height: 50%;  
+    }
+    .timeline li .label { 
+      display: block; 
+      position: absolute; 
+      bottom: -2em; 
+      left: 0; 
+      background: #fff; 
+      width: 100%; 
+      height: 2.0em; 
+      line-height: 2em; 
+      text-align: center;
+    }
+    .timeline li a .count { 
+      display: block; 
+      position: absolute; 
+      bottom: 0; 
+      left: 0; 
+      height: 0; 
+      max-height: 100.0%;/**/
+      width: 100%; 
+      /*background: #2D7BB2; */
+      text-indent: -9999px; 
+      overflow: hidden; 
+    }
+    .bgcolori{
+      
+      background: #01c493 !important;
+    }
+    .bgcolorg{
+      background: #f1bd2d !important;
+    }
+    .bgcolord{
+      background: #90e5ff !important;
+    }
+    .bgcolorir{
+      background: #cc5fe7 !important;
+    }
+
+    .timeline li:hover { 
+      background: #343434; 
+    }
+    .timeline li a:hover .count { 
+      background: #f8ff94 !important; 
+    }
+    
+    /* SPARKLINES */
+    .sparkline { 
+      float: left; 
+      height: 1em;
+      margin: 0 0.5em;
+    }
+    .sparkline .index { 
+	    position: relative;
+      float: left; 
+      width: 2px; 
+      height: 100%; 
+    }
+    .sparkline .index .count { 
+      display: block; 
+      position: absolute; 
+      bottom: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 0; 
+      background: #AAA;
+      overflow: hidden; 
+      text-indent: -9999px;
+    }
+    
+    /* SPARKLINE LISTS */
+    .sparklist li { 
+      padding: 0.4em 0; 
+    }
+

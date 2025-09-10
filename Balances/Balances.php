@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-	require '../Inclu/error_hidden.php';
+	global $balances;	$balances = 1;
+	//require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
@@ -19,7 +20,7 @@ if($_SESSION['Nivel'] == 'admin'){
 
 	if(isset($_POST['todo'])){	show_form();							
 								ver_todo();
-	}else{ show_form(); }
+	}else{ show_form();	ver_todo(); }
 
 }else{ require '../Inclu/tabla_permisos.php'; }
 
@@ -140,8 +141,8 @@ function ver_todo(){
 													$dd1 = $_POST['dd'];
 													global $fil;
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
-																					}
-*/
+	}
+	*/
 	global $tabla1;			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
 	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
 
@@ -160,10 +161,10 @@ function ver_todo(){
 	global $refses;				$refses = $_SESSION['ref'];
 	global $nodata;				$nodata = "NO HAY DATOS";
 	global $twhile;				global $ycons;
-	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy'];}
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy']; }
 
 	$twhile = "<tr>
-				<td colspan=6>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</td></tr><tr>
+				<td colspan=6>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS</td></tr><tr>
 				<td colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES</td>
 			</tr>";
 

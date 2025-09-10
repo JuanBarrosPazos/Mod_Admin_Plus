@@ -613,7 +613,7 @@ img {
 		overflow: hidden;
 	}
 
-	.ocultahead {
+	.ocultahead, .ocultagraf {
 		visibility: hidden;
 		display: none;
 		width: 0.0em !important;
@@ -640,6 +640,9 @@ img {
 		/* border: #93D7BF solid 2px; */
 	}
 
+	.balresult{
+		font-size: 0.72em !important;
+	}
 	/* ******   max-width:440px MEDIA SCREEN     ****** */
 	/* ******   INICIO ESTILOS MENU    ****** */
 

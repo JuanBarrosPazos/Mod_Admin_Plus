@@ -80,14 +80,23 @@ function MM_validateForm() {
 </head>
 
 <body topmargin="0">
+
 <div id="page" >
+	
+		<a href='../Licencia.pdf' target='_blanck'>
+			<img id='licencia' src='../Images/CC-BY-NC-SA.jpg'>
+		</a>
 
   <div id="header" style="padding-bottom:12px; padding-top:6px">
-  			<font style="font-family:'Times New Roman', Times, serif; font-size:24px">
+  			<font style="font-family:'Times New Roman', Times, serif; font-size:1.4em;">
   							<?php print(strtoupper($head_titulo));?>
             </font>
   	<br />
-			<font style="font-family:'Times New Roman', Times, serif; font-size:16px">
+  			<font style="font-family:'Times New Roman', Times, serif; font-size: 0.8em;">
+  							<?php print(strtoupper($head_licencia));?>
+            </font>
+  	<br />
+			<font style="font-family:'Times New Roman', Times, serif; font-size:1.1em;">
   				<?php print("".$head_direc." / ".$head_email." / ".$head_telef."."); ?>
           	</font>
  </div>
