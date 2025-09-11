@@ -45,8 +45,8 @@ function show_form(){
 					'`dout` ASC' => 'Fecha Out Asc',
 					'`dout` DESC' => 'Fecha Out Desc');
 	
-	print("<div class='centradiv' style='padding:0.6em;'>
-			GRAFICA DE HORARIOS
+	print("<div class='centradiv filtroGraf' style='padding:0.6em;'>
+			FILTRO GRAFICAS DE HORARIOS
 			<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
 				<select name='Orden'>");
 					foreach($ordenar as $option => $label){
@@ -82,7 +82,7 @@ function show_form(){
 
 function botones(){
 	
-	print("<div class='centradiv' style='border:none !important'>
+	print("<div class='centradiv ocultagraf' style='border:none !important'>
 			<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
 				<input type='hidden' name='time' value='".@$_SESSION['time']."' />
 				<button type='submit' title='VER GRAFICA LINEAL' class='botonverde imgButIco GrafLineBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
@@ -95,7 +95,7 @@ function botones(){
 			</form>	
 		</div>");
 
-}
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

@@ -6,6 +6,7 @@
 
 		print ("<div style='clear:both'></div>
 				<div class='section centradiv ocultagraf' style='padding: 0.6em 0.2em 1.2em 0.2em;'>
+					GRAFICA HORAS MENSUALES ".$dyt1."
 					<ul class='timeline'>");
 			  
 			global $totaltime0; 	$totaltime0 = $horas.".".$minutos;
@@ -159,7 +160,7 @@
 
 
 		if($totaltime0 > 0){
-				$TotEi = ((abs($totaltime0))*100)/(abs($totaltime0)); 
+				$TotEi = ((abs($totaltime0))*100)/(abs($totaltime0));
 		}else{ 	$TotEi = 0.00; }
 
 		print("<!--	-->

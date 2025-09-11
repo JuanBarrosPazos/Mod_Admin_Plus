@@ -770,7 +770,7 @@ function process_pin(){
 						window.location.href='index.php';
 					}
 					setTimeout('redir()',6000);
-					</script>";
+				</script>";
 		print($redir);
 
 	}elseif($cp > 0){
@@ -953,7 +953,7 @@ function pin_out(){
 					</font>
 				</div>");
 		
-					$ttot = '68:68:68';
+					$ttot = '00:00:01';
 					$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 					$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
 					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;

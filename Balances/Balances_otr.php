@@ -84,7 +84,7 @@ function show_form(){
 	}
 
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
-		if($_SESSION['usuarios'] == '') { 
+		if($_SESSION['usuarios'] == ''){ 
 			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.6em;'>
 							SELECCIONE UN USUARIO
 					</div>");

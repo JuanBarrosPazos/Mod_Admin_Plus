@@ -125,7 +125,7 @@
 
 	global $t;
 	if($dias == 1){  $t = " DIA || ";
-	}elseif($dias != 1 ){ $t = " DIAS || ";}
+	}elseif($dias != 1 ){ $t = " DIAS || "; }
 							
 	global $totaltime;
 	$totaltime = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";

@@ -94,7 +94,7 @@ function ver_todo(){
 
 	global $sqlb;
 	global $qb;
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` = '68:68:68' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` = '00:00:01' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////

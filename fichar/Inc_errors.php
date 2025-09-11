@@ -1,8 +1,8 @@
 <?php
 
 	global $sesus;
-	if($sesus==''){ $sesus = $_SESSION['ref']; }
-	else{ /*$sesus = $_SESSION['webmaster'];*/ }	
+	if($sesus==''){ $sesus = $_SESSION['ref'];
+	}else{ /*$sesus = $_SESSION['webmaster'];*/ }	
 	
 	$tablae = $_SESSION['clave'].$sesus;
 	$tablae = strtolower($tablae);
@@ -11,7 +11,7 @@
 
 	// INICIO ERRORES FICHAR.
 		global $db;		global $db_name;
-	$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ttot` = '68:68:68' ";
+		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ttot` = '00:00:01' ";
 		$qe = mysqli_query($db, $sqle);
 		global $counte;
 		if(!$qe){
@@ -21,42 +21,35 @@
 		}
 
 	if($counte > 0){
-		
-		print("<table align='center' style='margin-top:10px' width=450px >
+		print("<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;' >
 				<tr>
-					<th colspan=5 class='BorderInf'>
-						<b>
-						<font color='#FF0000'>
+					<th colspan=5 class='BorderInfY'>
 							".$sesus." EXISTEN ERRORES EN SUS HORARIOS.
-						</font>
-						</b>
 					</th>
 				</tr>
 				<tr>
-					<td class='BorderInfDch'>ID</td>
-					<td class='BorderInfDch'>D. IN</td>
-					<td class='BorderInfDch'>T. IN</td>
-					<td class='BorderInfDch'>D. OUT</td>
-					<td class='BorderInf'>T. OUT</td>
+					<td class='BorderInfDchY'>ID</td>
+					<td class='BorderInfDchY'>D. IN</td>
+					<td class='BorderInfDchY'>T. IN</td>
+					<td class='BorderInfDchY'>D. OUT</td>
+					<td class='BorderInfY'>T. OUT</td>
 				</tr>");
 		
 		while($rowe = mysqli_fetch_assoc($qe)){
 			
-			print("	<tr>
-						<td class='BorderInfDch'>".$rowe['id']."</td>
-						<td class='BorderInfDch'>".$rowe['din']."</td>
-						<td class='BorderInfDch'>".$rowe['tin']."</td>
-						<td class='BorderInfDch'>".$rowe['dout']."</td>
-						<td class='BorderInf'>".$rowe['tout']."</td>
-					</tr>");
+			print("<tr>
+					<td class='BorderInfDchY'>".$rowe['id']."</td>
+					<td class='BorderInfDchY'>".$rowe['din']."</td>
+					<td class='BorderInfDchY'>".$rowe['tin']."</td>
+					<td class='BorderInfDchY'>".$rowe['dout']."</td>
+					<td class='BorderInfY'>".$rowe['tout']."</td>
+				</tr>");
 			
 				} // FIN DEL WHILE.
 		
-		print("		<tr>
-					<th colspan=5 class='BorderInf'>
-						<b>
-						<font color='#FF0000'>PONGASE EN CONTACTO CON ADMIN SYSTEM.</font>
-						</b>
+			print("<tr>
+					<th colspan=5>
+						PONGASE EN CONTACTO CON ADMIN SYSTEM
 					</th>
 				 </tr>
 				</table>");

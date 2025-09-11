@@ -226,7 +226,7 @@ function validate_form(){
 /*	*/	
 
 	elseif(($touth > $th)||($toutm > $thms)||($touts > $thms)){
-			$errors [] = "TIME OUT <font color='#FF0000'>HORA NO PERMITIDA MAX: 23:59:59</font>";
+			$errors [] = "TIME OUT <font color='#FF0000'>HORA NO PERMITIDA MAX: 00:00:01</font>";
 		}
 	
 		/* (Si el día de salida es igual al de entrada y la hora de salida es inferior a la de entrada */

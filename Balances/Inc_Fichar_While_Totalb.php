@@ -5,9 +5,7 @@
 
 	if(!$qb){
 		print("ERROR SQL ".mysqli_error($db)."</br>");
-			
 	}else{
-
 		global $twhile;			global $tdplus;			global $pdm;
 		if(mysqli_num_rows($qb) == 0){
 			print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
@@ -33,15 +31,15 @@
 				while($rowb = mysqli_fetch_assoc($qb)){
 
 					global $sty;		
-					if($rowb['ttot'] == "68:68:68"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
+					if($rowb['ttot'] == "00:00:01"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
 					}else{ $sty = ""; }
 
 					global $vname;				global $dyt1;
 					global $formularioh;		global $formulariof;
 					global $colspana;			global $colspanb;
 
-					print("<tr align='center'>".$formularioh."
-								<td class='BorderInfDch' align='center' ".$sty.">
+					print("<tr>".$formularioh."
+								<td class='BorderInfDch' ".$sty.">
 							<input type='hidden' id='dyt1' name='dyt1' value='".$dyt1."' />
 							<input type='hidden' id='ref' name='ref' value='".$refses."' />
 							<input type='hidden' id='name1' name='name1' value='".$rowb['Nombre']."' />
@@ -78,71 +76,74 @@
 
 			}elseif($_POST['dm'] == ''){
 			
-			botones();
+				botones();
 
-			print ("<table class='centradiv balresult'>
-					<tr>
-						<th colspan=".$colspana.">
-							".$name1." ".$name2." Ref: ".$refses."
-						</th>
-					</tr>
-					<tr>
-						<th colspan=".$colspana.">
-							".$dyt1." TOTALES ANUALES
-						</th>
-					</tr>
-					<tr>
-						<td style='text-align:right !important;'>ENERO: </td>
-						<td style='text-align:left !important;'>".$totaltime1."</td>
-						<td style='text-align:right !important;'>FEBRERO: </td>
-						<td style='text-align:left !important;'>".$totaltime2."</td>
-						<td style='text-align:right !important;'>MARZO: </td>
-						<td style='text-align:left !important;'>".$totaltime3."</td>
-					</tr>
-					<tr>
-						<td style='text-align:right !important;'>ABRIL: </td>
-						<td style='text-align:left !important;'>".$totaltime4."</td>
-						<td style='text-align:right !important;'>MAYO: </td>
-						<td style='text-align:left !important;'>".$totaltime5."</td>
-						<td style='text-align:right !important;'>JUNIO: </td>
-						<td style='text-align:left !important;'>".$totaltime6."</td>
-					</tr>
-					<tr>
-						<td style='text-align:right !important;'>JULIO: </td>
-						<td style='text-align:left !important;'>".$totaltime7."</td>
-						<td style='text-align:right !important;'>AGOSTO: </td>
-						<td style='text-align:left !important;'>".$totaltime8."</td>
-						<td style='text-align:right !important;'>SEPTIEMBRE: </td>
-						<td style='text-align:left !important;'>".$totaltime9."</td>
-					</tr>
-					<tr>
-						<td style='text-align:right !important;'>OCTUBRE: </td>
-						<td style='text-align:left !important;'>".$totaltime10."</td>
-						<td style='text-align:right !important;'>NOVIEMBRE: </td>
-						<td style='text-align:left !important;'>".$totaltime11."</td>
-						<td style='text-align:right !important;'>DICIEMBRE: </td>
-						<td style='text-align:left !important;'>".$totaltime12."</td>
-					</tr>");
-		} // FIN elseif($_POST['dm'] == '')
-
-		if($feedtot == "nofeed"){
-		}else{ print("<tr>
-							<td colspan='".$colspana."'></td>
+				print ("<table class='centradiv balresult'>
+						<tr>
+							<td colspan=".$colspana.">
+								".$name1." ".$name2." Ref: ".$refses."
+							</td>
 						</tr>
 						<tr>
-							<td colspan='2' align='right'>TOTALES</td>
-							<td colspan='".$colspanb."' align='left'>".$totaltime."</td>
+							<td colspan=".$colspana.">
+								".$dyt1." TOTALES ANUALES
+							</td>
+						</tr>
+						<tr>
+							<td>ENERO: </td>
+							<td>".$totaltime1."</td>
+							<td>FEBRERO: </td>
+							<td>".$totaltime2."</td>
+							<td>MARZO: </td>
+							<td>".$totaltime3."</td>
+						</tr>
+						<tr>
+							<td>ABRIL: </td>
+							<td>".$totaltime4."</td>
+							<td>MAYO: </td>
+							<td>".$totaltime5."</td>
+							<td>JUNIO: </td>
+							<td>".$totaltime6."</td>
+						</tr>
+						<tr>
+							<td>JULIO: </td>
+							<td>".$totaltime7."</td>
+							<td>AGOSTO: </td>
+							<td>".$totaltime8."</td>
+							<td>SEPTIEMBRE: </td>
+							<td>".$totaltime9."</td>
+						</tr>
+						<tr>
+							<td>OCTUBRE: </td>
+							<td>".$totaltime10."</td>
+							<td>NOVIEMBRE: </td>
+							<td>".$totaltime11."</td>
+							<td>DICIEMBRE: </td>
+							<td>".$totaltime12."</td>
 						</tr>");
-		}
-		print("</table>");
+			} // FIN elseif($_POST['dm'] == '')
 
+			if($feedtot == "nofeed"){
+			}else{ print("<tr>
+								<td colspan='".$colspana."'></td>
+							</tr>
+							<tr>
+								<td colspan='2'>TOTALES</td>
+								<td colspan='".$colspanb."'>".$totaltime."</td>
+							</tr>");
+			}
+			print("</table>");
 
-		if($_POST['dm'] == ''){
-			require 'graficasIndex/graficaIndex.php';
-		}else{ }
+			if($_POST['dm'] == ''){
+				require 'graficasIndex/graficaIndex.php';
+				require 'graficasIndex/calc_anu.php';
+			}else{ }
+
+			if(($_POST['dy']=='')&&($_POST['dm']=='')){
+					//require 'graficasIndex/calc_anu.php';
+			}else{ }
 		
 	} /* FIN segundo else anidado en if */
-
 
 } /* FIN de primer else . */
 

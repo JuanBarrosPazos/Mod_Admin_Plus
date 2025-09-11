@@ -272,17 +272,23 @@ img {
 /* ******   BORDES TABLAS    ****** */
 /* ******************************** */
 
-.BorderInf {
+.BorderInf, .BorderInfY {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #CCC;
 }
-.BorderSup {
+.BorderInfY {
+	border-bottom-color: #F1BD2D !important;
+}
+.BorderSup, .BorderSupY {
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: #CCC;
 }
-.BorderInfDch {
+.BorderSupY {
+	border-top-color: #F1BD2D !important;
+}
+.BorderInfDch, .BorderInfDchY {
 	border-right-width: 1px;
 	border-bottom-width: 1px;
 	border-right-style: solid;
@@ -290,10 +296,17 @@ img {
 	border-right-color: #CCC;
 	border-bottom-color: #CCC;
 }
-.BorderDch {
+.BorderInfDchY {
+	border-right-color: #F1BD2D !important;
+	border-bottom-color: #F1BD2D !important;
+}
+.BorderDch, .BorderDchY {
 	border-right-width: 1px;
 	border-right-style: solid;
 	border-right-color: #CCC;
+}
+.BorderDchY {
+	border-right-color: #F1BD2D !important;
 }
 
 /* ******************************** */
@@ -536,6 +549,16 @@ img {
 	border: none;
 }
 
+.balresult td:nth-child(even){
+	text-align: left !important;
+}
+.balresult td:nth-child(odd){
+	text-align: right !important;
+}
+.balresult td:only-child{
+	text-align: center !important;
+}
+
 /* ******************************** */
 /* ******   MEDIA SCREEN     ****** */
 /* ******************************** */
@@ -643,6 +666,23 @@ img {
 	.balresult{
 		font-size: 0.72em !important;
 	}
+	.filtroGraf, .filtroGraf select{
+		font-size: 0.9em !important;
+		padding: 0.3em !important;
+		border-radius: 0.4em;
+	}
+	.filtroGraf select{
+		margin-left: 0.0em !important;
+		margin-right: 0.0em !important;
+	}
+
+	#licencia{
+		bottom: 0.4em !important;
+		right: 0.4em !important;
+		width: 5.0em;
+		border: 0.2em solid #F1BD2D;
+	}
+	
 	/* ******   max-width:440px MEDIA SCREEN     ****** */
 	/* ******   INICIO ESTILOS MENU    ****** */
 
@@ -667,6 +707,9 @@ img {
 		padding: 0.0em	0.5em;
     }
 
+#header{
+	font-size: 0.8em !important;
+}
 	.icoh {
 		display: block;
 		width: fit-content;

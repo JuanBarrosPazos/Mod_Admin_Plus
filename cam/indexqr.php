@@ -198,7 +198,7 @@ function process_pinqr(){
 					<embed src='../audi/10horas.mp3' autostart='true' loop='false' ></embed>
 					-->");
 		
-		$ttot = '68:68:68';
+		$ttot = '00:00:01';
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
 		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
