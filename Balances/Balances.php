@@ -1,14 +1,21 @@
 <?php
 session_start();
 
-	global $balances;	$balances = 1;
-	//require '../Inclu/error_hidden.php';
+	// SE USA ESTE SCRIPT PARA CONSTRUIR TODOS LOS BALANCES...
+	// SE CAMBIA EL NOMBRE DE Balances_otr.php POR Balances.php
+	// SE CANCELA BalancesUser.php ANTES Balances.php...
+
+	global $balances;			$balances = 1;
+	global $balancesOtros;		$balancesOtros = 1;
+	
+	require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
 	$_SESSION['usuarios'] = '';
+	//unset($_SESSION['usuarios']);
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -20,8 +27,10 @@ if($_SESSION['Nivel'] == 'admin'){
 
 	if(isset($_POST['todo'])){	show_form();							
 								ver_todo();
-	}else{ show_form();	ver_todo(); }
-
+	}else{ 	show_form(); 
+			ver_todo(); 
+	}
+								
 }else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
@@ -30,10 +39,16 @@ if($_SESSION['Nivel'] == 'admin'){
 
 function show_form(){
 
-	if(isset($_POST['todo'])){ $defaults = $_POST; } 
+
+	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
+									$defaults = $_POST;
+									// print("* ".$_SESSION['usuarios']);
+	}elseif(isset($_POST['todo'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
+									$defaults = $_POST;
+	}else{
+		$_SESSION['usuarios'] = $_SESSION['ref'];
+	}
 	
-	require "../Users/".$_SESSION['ref']."/ayear.php";
-		
 	$dm = array('' => 'MES TODOS','01' => 'ENERO','02' => 'FEBRERO',
 				'03' => 'MARZO','04' => 'ABRIL','05' => 'MAYO',
 				'06' => 'JUNIO','07' => 'JULIO','08' => 'AGOSTO',
@@ -45,35 +60,62 @@ function show_form(){
 					'`dout` ASC' => 'Fecha Out Asc',
 					'`dout` DESC' => 'Fecha Out Desc');
 	
-	print("<div class='centradiv filtroGraf' style='padding:0.6em;'>
-			FILTRO GRAFICAS DE HORARIOS
-			<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-				<select name='Orden'>");
-					foreach($ordenar as $option => $label){
-							print ("<option value='".$option."' ");
-							if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
-							print ("> $label </option>");
-					}	
-		print("</select>
-				<select name='dy'>");
-					foreach($dy as $optiondy => $labeldy){
-							print ("<option value='".$optiondy."' ");
-							if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
-							print ("> $labeldy </option>");
-					}	
-		print ("</select>
-				<select name='dm'>");
-					foreach($dm as $optiondm => $labeldm){
-							print ("<option value='".$optiondm."' ");
-							if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
-							print ("> $labeldm </option>");
-					}	
-		print ("</select>
-				<button type='submit' title='FILTRO BALANCES' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-					<input type='hidden' name='todo' value=1 />
-			</form>											
-		</div>"); /* Fin del print */
-	
+	global $db;		
+	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
+	// $sqlu =  "SELECT * FROM $tablau WHERE (`ref` <> '$_SESSION[ref]' OR `dni` <> '$_SESSION[webmaster]') ORDER BY `ref` ASC ";
+	global $sqlu;
+	if($_SESSION['dni'] == $_SESSION['webmaster']){
+		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+	}else{
+		$sqlu =  "SELECT * FROM $tablau WHERE `dni` <> '$_SESSION[webmaster]' ORDER BY `ref` ASC ";
+	}
+
+	$qu = mysqli_query($db, $sqlu);
+
+	if(!$qu){
+		print("ERROR SQL L.68/70 ".mysqli_error($db)."<br>");
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='../Admin/Admin_Ver.php';
+					}
+				setTimeout('redir()',8000);
+				</script>";
+		print($redir);
+
+	}else{	print("<div class='centradiv' style='padding:0.6em;'>
+				<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+						<input type='hidden' name='ref' value='".$_SESSION['usuarios']."' />
+					<select name='usuarios'>
+						<!--  --> <option value=''>SELECCIONE USUARIO</option>");
+
+			while($rowu = mysqli_fetch_assoc($qu)){
+				print ("<option value='".$rowu['ref']."' ");
+				if($rowu['ref'] == @$defaults['usuarios']){ print ("selected = 'selected'"); }
+					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+			}
+			print ("</select>
+					<button type='submit' title='SELECCIONE UN USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+					<input type='hidden' name='oculto1' value=1 />
+				</form>	
+				</div>");
+	}
+
+	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
+
+		if($_SESSION['usuarios'] == ''){
+			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.6em;'>
+							ERROR SELECCIONE UN USUARIO
+					</div>");
+		}elseif($_SESSION['usuarios'] != ''){
+
+		require "../Users/".$_SESSION['usuarios']."/ayear.php";
+		global $Titulo;			$Titulo = "FILTRO GRAFICAS HORARIOS ".$_SESSION['usuarios'];
+		require 'Inc_Filtro_Balance.php';
+
+		} // fin 2º if
+	} // fin 1º if
+
 }	/* Fin show_form(); */
 
 				   ////////////////////				   ////////////////////
@@ -82,20 +124,8 @@ function show_form(){
 
 function botones(){
 	
-	print("<div class='centradiv ocultagraf' style='border:none !important'>
-			<form name='grafico' action='grafico_01.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
-				<input type='hidden' name='time' value='".@$_SESSION['time']."' />
-				<button type='submit' title='VER GRAFICA LINEAL' class='botonverde imgButIco GrafLineBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-				<input type='hidden' name='grafico' value=1 />
-			</form>	
-			<form name='grafico2' action='grafico_02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=1000px,height=600px')\" style='display:inline-block;'>
-				<input type='hidden' name='time' value='".@$_SESSION['time']."' />
-				<button type='submit' title='VER GRAFICA DE BARRAS' class='botonverde imgButIco GrafBarBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-				<input type='hidden' name='grafico2' value=1 />
-			</form>	
-		</div>");
-
-	}
+	require 'Inc_Graf_Button.php';
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -112,18 +142,16 @@ function ver_todo(){
 			clearstatcache ();
 	}
 
-	global $db;
+	global $db;			global $dyt1;			global $dm1;
 	global $orden;
 	require '../Inclu/orden.php';
-
-	global $dyt1;			global $dm1;
 	
 	if($_POST['dy'] == ''){ $dy1 = date('Y');
 							$dyt1 = date('Y');	
 							$_SESSION['gyear'] = date('Y');
 	}else{	$dy1 = "20".$_POST['dy'];
 			$dyt1 = "20".$_POST['dy'];
-			$_SESSION['gyear'] = "20".$_POST['dy'];									
+			$_SESSION['gyear'] = "20".$_POST['dy'];	
 	}
 	
 	if($_POST['dm'] == ''){ $dm1 = '';
@@ -141,45 +169,62 @@ function ver_todo(){
 													$dd1 = $_POST['dd'];
 													global $fil;
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
-	}
+																					}
 	*/
-	global $tabla1;			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	global $tabla1;			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
 
 	require 'calc_anu_mes.php';
+	
+			///////////////////////			***********  		///////////////////////
 			
 	require 'Inc_Suma_Todob.php';
 
-	global $qb;			global $sqlb;
+			///////////////////////			***********  		///////////////////////
+
+	global $sqlb;			global $qb;
 	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
 	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
-	global $pdm;				$pdm = "";
-	global $name1;				$name1 = $_SESSION['Nombre'];
-	global $name2;				$name2 = $_SESSION['Apellidos'];
-	global $refses;				$refses = $_SESSION['ref'];
-	global $nodata;				$nodata = "NO HAY DATOS";
-	global $twhile;				global $ycons;
-	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy']; }
+			////////////////////		**********  		////////////////////
 
-	$twhile = "<tr>
-				<td colspan=6>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS</td></tr><tr>
-				<td colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES</td>
-			</tr>";
+	global $refses;			$refses = $_SESSION['usuarios'];
 
-	global $tdplus;				$tdplus = "";
-	global $feedtot;			$feedtot = "";
-	global $formularioh;		$formularioh = "";
-	global $formulariof;		$formulariof = "";
-	global $colspana;			$colspana = "6";
-	global $colspanb;			$colspanb = "4";
+	global $tablau;
+	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
+	$qun = mysqli_query($db, $sqlun);
+	if(!$qun){print("<font color='#F1BD2D'>Se ha producido un error L.308: </font>
+					</br>".mysqli_error($db)."</br>");
+	}else{
+		global $name1;			global $name2;
+		while($rowun = mysqli_fetch_assoc($qun)){	
+					$name1 = $rowun['Nombre'];
+					$name2 = $rowun['Apellidos'];
+		}
+	}
+
+	global $pdm;			$pdm = "";
+	global $feedtot;		$feedtot = "";
+	global $nodata;			$nodata = "NO HAY DATOS PARA ".$_POST['usuarios'];
+	global $ycons;
+	if($_POST['dy'] == ''){ $ycons = date('Y');
+	}else{ $ycons =	"20".$_POST['dy'];}
+
+	global $twhile;
+	$twhile = "<tr><th colspan=6 class='BorderInf'>".$name1." ".$name2.". Ref: ".$refses." RESULTADOS.</th></tr><tr><th colspan=6 class='BorderInf'>".$ycons." / ".$_POST['dm']." - TOTALES.</th></tr>";
+
+	global $tdplus;			$tdplus = "";
+	global $formularioh;	$formularioh = "";
+	global $formulariof;	$formulariof = "";
+	global $colspana;		$colspana = "6";
+	global $colspanb;		$colspanb = "4";
 
 	require 'Inc_Fichar_While_Totalb.php';
 
 			////////////////////		**********  		////////////////////
 	
-}	/* Final ver_todo(); */
+}/* FIN ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -189,7 +234,7 @@ function master_index(){
 		
 	require '../Inclu_MInd/rutabalances.php';
 	require '../Inclu_MInd/Master_Index.php';
-		
+				
 } 
 
 				   ////////////////////				   ////////////////////

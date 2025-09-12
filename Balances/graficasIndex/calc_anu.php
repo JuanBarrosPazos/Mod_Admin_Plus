@@ -1,6 +1,7 @@
 <?php
 
-    global $db;         global $db_name;
+    global $db;             global $db_name;
+	global $balances;       global $balancesOtros;
 
 	/*************		CONSULTAMOS TODAS LAS TABLAS DE USUARIOS Y SISTEMA		***************/
 
@@ -19,7 +20,11 @@
 
 	/*************		 CONSULTA TODAS LAS TABLAS DEL USUARIO CON SESION INICIADA		***************/
     global $nom;
-    $nom = $_SESSION['clave'].$_SESSION['ref']."_%";
+    if($balancesOtros == 1){
+        $nom = $_SESSION['clave'].$_SESSION['usuarios']."_%";
+    }else{
+       $nom = $_SESSION['clave'].$_SESSION['ref']."_%";
+    }
     $nom = "LIKE '$nom'";
 	$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom";
     //echo $consulta."<br>";

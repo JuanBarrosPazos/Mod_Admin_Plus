@@ -81,20 +81,9 @@
 			</li>
 	
 			<li>
-				<a href='#'>
-					<i class='ic ico10'></i><span>BALANCES</span>
+				<a href='".$rutabalance."Balances.php'>
+					<i class='ic ico26'></i><span>BALANCES</span>
 				</a>
-				<ul class='nav-flyout'>
-					<li>
-						<a href='".$rutabalance."Balances.php' ".$topcat3.">
-							<i class='ic ico10b'></i>MIS BALANCES</a>
-					</li>
-					<li>
-						<a href='".$rutabalance."Balances_otr.php'>
-							<i class='ic ico10b'></i>OTROS USERS
-						</a>
-					</li>
-				</ul>
 			</li>
 		
 			<li>
@@ -126,7 +115,7 @@
 				<ul class='nav-flyout'>
 					<li>
 						<a href='".$rutaqrgen."indexqrg.php' ".$topcat5.">
-							<i class='ic ico20b'></i>QR GENERADOR
+							<i class='ic ico20b'></i>QR GENERAR
 						</a>
 					</li>
 					<li>

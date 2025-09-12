@@ -5,8 +5,9 @@
 }
 
 .icoh {
-  /*content: url(icos/ico00.png);*/
-  content: url(icos/ico02.png);
+  /* content: url(icos/ico00.png); */
+  /* content: url(icos/ico02.png); */
+  content: url(icos/ico27.png);
   margin: auto 1.2em auto -0.4em;
   padding-left: 0.0em;
   vertical-align: middle;
@@ -219,5 +220,21 @@
 
 .ico25b {
   content: url(icos/ico25.png);
+}
+
+.ico26 {
+  content: url(icos/ico26.png);
+}
+
+.ico26b {
+  content: url(icos/ico26.png);
+}
+
+.ico27 {
+  content: url(icos/ico27.png);
+}
+
+.ico27b {
+  content: url(icos/ico27.png);
 }
 
