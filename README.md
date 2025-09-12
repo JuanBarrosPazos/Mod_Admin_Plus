@@ -12,8 +12,11 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.12 2025/08/12
+#### Mod_Admin_Plus V25.09.12B 2025/08/12
 	- Ajustes de gráficos en Balances/
+		- SE CAMBIA EL NOMBRE DE Balances_otr.php POR Balances.php
+		- SE CANCELA BalancesUser.php ANTES Balances.php...
+
 ----
 #### Mod_Admin_Plus V25.09.11B 2025/08/11
 	- Inclusión software bajo Licencia CC BY-NC-SA.
