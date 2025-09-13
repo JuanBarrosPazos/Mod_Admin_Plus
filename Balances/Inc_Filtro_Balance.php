@@ -37,5 +37,4 @@
 			</form>											
 		</div>"); /* Fin del print */
 
-
 ?>

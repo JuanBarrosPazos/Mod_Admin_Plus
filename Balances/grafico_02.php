@@ -74,8 +74,8 @@ function process_form(){
 
 	global $mensaje;
 	if($_SESSION['usuarios'] == ''){
-		$mensaje = "\nGRAFICA PARA DEL USUARIO ".$_SESSION['ref'].".\n\n";}
-	elseif($_SESSION['usuarios'] != ''){
+		$mensaje = "\nGRAFICA PARA DEL USUARIO ".$_SESSION['ref'].".\n\n";
+	}elseif($_SESSION['usuarios'] != ''){
 		$mensaje = "\nGRAFICA PARA DEL USUARIO ".$_SESSION['usuarios'].".\n\n";}
 	
 	
@@ -83,18 +83,18 @@ function process_form(){
 		
 global $timemes;
 $timemes = trim($_SESSION['gtime']);
-if($timemes == '01'){$timemes = 'ENERO';}
-elseif($timemes == '02'){$timemes = 'FEBRERO';}
-elseif($timemes == '03'){$timemes = 'MARZO';}
-elseif($timemes == '04'){$timemes = 'ABRIL';}
-elseif($timemes == '05'){$timemes = 'MAYO';}
-elseif($timemes == '06'){$timemes = 'JUNIO';}
-elseif($timemes == '07'){$timemes = 'JULIO';}
-elseif($timemes == '08'){$timemes = 'AGOSTO';}
-elseif($timemes == '09'){$timemes = 'SEPTIEMBRE';}
-elseif($timemes == '10'){$timemes = 'OCTUBRE';}
-elseif($timemes == '11'){$timemes = 'NOVIEMBRE';}
-elseif($timemes == '12'){$timemes = 'DICIEMBRE';}
+if($timemes == '01'){$timemes = 'ENERO';
+}elseif($timemes == '02'){$timemes = 'FEBRERO';
+}elseif($timemes == '03'){$timemes = 'MARZO';
+}elseif($timemes == '04'){$timemes = 'ABRIL';
+}elseif($timemes == '05'){$timemes = 'MAYO';
+}elseif($timemes == '06'){$timemes = 'JUNIO';
+}elseif($timemes == '07'){$timemes = 'JULIO';
+}elseif($timemes == '08'){$timemes = 'AGOSTO';
+}elseif($timemes == '09'){$timemes = 'SEPTIEMBRE';
+}elseif($timemes == '10'){$timemes = 'OCTUBRE';
+}elseif($timemes == '11'){$timemes = 'NOVIEMBRE';
+}elseif($timemes == '12'){$timemes = 'DICIEMBRE';}
 
 if($_SESSION['gtime'] == ""){ 
 					global $timeanho;
@@ -113,11 +113,8 @@ elseif($_SESSION['gtime'] != ''){
 				global $timemes;
 				$titulo = 'MENSUAL '.$timemes." / ".$timeanho;
 			global $dat1;
-			global $dat1;
-			$dat1 = $dat1;
 			global $datf1;
 			global $dataf1;
-			$dataf1 = $dataf1;
 			$_SESSION['coor_x'] = $datf1;
 			$_SESSION['coor_xb'] = $datf1;
 								}

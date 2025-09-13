@@ -30,7 +30,7 @@ require '../Inclu/misdatos.php';
 <?php
 	global $balances;
 	if($balances == 1){
-		echo "<link href='../Balances/graficasIndex/graficas.css' rel='stylesheet' type='text/css' />";
+		echo "<link href='../Balances/graficasInit/graficas.css' rel='stylesheet' type='text/css' />";
 	}else{ }
 ?>
 

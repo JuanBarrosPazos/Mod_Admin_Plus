@@ -135,12 +135,12 @@
 			print("</table>");
 
 			if($_POST['dm'] == ''){
-				require 'graficasIndex/graficaIndex.php';
-				require 'graficasIndex/calc_anu.php';
+				require 'graficasInit/graficaIndex.php';
+				require 'graficasInit/calc_anu.php';
 			}else{ }
 
 			if(($_POST['dy']=='')&&($_POST['dm']=='')){
-					//require 'graficasIndex/calc_anu.php';
+					//require 'graficasInit/calc_anu.php';
 			}else{ }
 		
 	} /* FIN segundo else anidado en if */
