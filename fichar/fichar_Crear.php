@@ -57,25 +57,27 @@ function errors(){
 
 function entrada(){
 	
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=4 class='BorderInf'>
-						HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
-				</tr>
-			</table>
+	$tabla = "<ul class='centradiv'>
+			<li class='liCentra'>HA FICHADO LA ENTRADA</li>
+			<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
+			<li>
+				<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
+			</li>
+			<li>
+				<div>FECHA ENTRADA: </div><div>".$_POST['din']."</div>
+			</li>
+			<li>
+				<div>HORA ENTRADA: </div><div>".$_POST['tin']."</div>
+			</li>
+			<li class='liCentra'>
+				<a href='fichar_Crear.php' >
+					<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+				</a>
+			</li>
+				</ul>
 			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear_tds.php';}
+				function redir(){window.location.href='fichar_Crear.php';}
 					setTimeout('redir()',8000);
 			</script>";	
 		
@@ -146,28 +148,27 @@ function show_form(){
 		global $tout;			$tout = '00:00:00';
 		global $ttot;			$ttot = '00:00:00';
 		
-	print(" <table align='center' style=\"margin-top:10px\">
-				<th>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</th>
-
-				<tr>
-					<td valign='middle'  align='center'>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-				<input type='hidden' id='din' name='din' value='".$din."' />
-				<input type='hidden' id='tin' name='tin' value='".$tin."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-				<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-				<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
+	print("<ul class='centradiv'>
+			<li class='liCentra'>FICHE SU ENTRADA</li>
+			<li class='liCentra'>
+				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
+			</li>
+			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+			<li class='liCentra'>
+		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
+			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
+			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
+			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
+			<input type='hidden' id='din' name='din' value='".$din."' />
+			<input type='hidden' id='tin' name='tin' value='".$tin."' />
+			<input type='hidden' id='dout' name='dout' value='".$dout."' />
+			<input type='hidden' id='tout' name='tout' value='".$tout."' />
+			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 				<input type='hidden' name='entrada' value=1 />
-			</form>														
-					</td>
-				</tr>
-			</table>");
+		</form>														
+			</li>
+		</ul>"); 
 	
 	}elseif($count1 > 0){ // FICHA SALIDA.
 		global $dout;			$dout = date('Y-m-d');
@@ -181,26 +182,30 @@ function show_form(){
 
 			////////////////////		***********  		////////////////////
 
-		print("<table align='center' style=\"margin-top:10px\">
-				<th>
-					".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref']."
-				</th>
-
-				<tr>
-					<td valign='middle'  align='center'>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+		print("<ul class='centradiv'>
+		<li class='liCentra'>FICHE SU SALIDA</li>
+		<li class='liCentra'>
+			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
+		</li>
+		<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
+		<li class='liCentra'>
+			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
 				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
 				<input type='hidden' id='dout' name='dout' value='".$dout."' />
 				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-				<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-				<input type='hidden' name='salida' value=1 />
-			</form>														
-					</td>
-				</tr>
-			</table>"); 
+					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+					<input type='hidden' name='salida' value=1 />
+			</form>
+		</li>
+		</ul>"); 
 	}
+		
+	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+		global $ficharCrear;		$ficharCrear = 1;
+		require 'fichar_Crear_Botonera.php';
+	}else{ }
 	
 } // FIN function show_form
 
@@ -297,33 +302,36 @@ function salida(){
 	
 	////////////////////		**********  		////////////////////
 	
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=4 class='BorderInf'>
-						HA FICHADO LA SALIDA </br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$din."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$tin."</td>
-				</tr>
-				<tr>
-					<td>FECHA SALIDA</td><td>".$_POST['dout']."</td></tr>
-				<tr>
-					<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
-				</tr>
-				<tr>
-					<td>HORAS REALIZADAS</td><td>".$ttot."</td>
-				</tr>
-			</table>
-			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
+	$tabla = "<ul class='centradiv'>
+		<li class='liCentra'>HA FICHADO LA SALIDA</li>
+		<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
+		<li>
+			<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
+		</li>
+		<li>
+			<div>FECHA ENTRADA: </div><div>".$din."</div>
+		</li>
+		<li>
+			<div>HORA ENTRADA: </div><div>".$tin."</div>
+		</li>
+		<li>
+			<div>FECHA SALIDA: </div><div>".$_POST['dout']."</div>
+		</li>
+		<li>	
+			<div>HORA SALIDA: </div><div>".$_POST['tout']."</div>
+		</li>
+		<li>
+			<div>H. REALIZADAS: </div><div>".$ttot."</div>
+		</li>
+		<li class='liCentra'>
+			<a href='fichar_Crear.php'>
+				<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			</a>	
+		</li>
+				</ul>
+		<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear_tds.php';}
+				function redir(){window.location.href='fichar_Crear.php';}
 				setTimeout('redir()',8000);
 			</script>";	
 		

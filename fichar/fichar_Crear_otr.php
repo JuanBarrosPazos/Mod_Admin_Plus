@@ -145,7 +145,7 @@ function entrada(){
 
 function show_form(){
 	
-	global $titulo;			$titulo = "FICHAR JORNADA OTROS EMPLEADOS";
+	global $titulo;			$titulo = "FILTRO FICHAR JORNADA OTROS EMPLEADOS";
 
 	unset($_SESSION['usuarios']);
 

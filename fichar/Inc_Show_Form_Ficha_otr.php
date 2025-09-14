@@ -19,12 +19,12 @@
 						<td>
 							<font color='#FF0000'>
 								NO EXISTEN OTROS USUARIOS
-							</font>
+							</font> 
 						</td>
 					</tr>
 				</table>");
 	}else{
-		print(" <table align='center' style='border:1; margin-top:2px' width='auto'>
+		print("<table align='center' style='border:1; margin-top:2px' width='auto'>
 				<tr>
 					<td align='center'>".$titulo."</td>
 				</tr>		
@@ -53,7 +53,10 @@
 				</form>	
 						</td>
 					</tr>
-				</table>"); 
+				</table>");
+
+		global $ficharCrear;		$ficharCrear = 3;
+		require 'fichar_Crear_Botonera.php';
 
 			///////////////////////			**********  		///////////////////////
 	

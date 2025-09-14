@@ -399,6 +399,19 @@
 	background-image: url(../Images/BotonIcos/open_grey.png);
 }
 
+.Person1Black{
+	background-image: url(../Images/BotonIcos/person1_black.png);
+}
+.Person1Grey{
+	background-image: url(../Images/BotonIcos/person1_grey.png);
+}
+.Person1White{
+	background-image: url(../Images/BotonIcos/person1_white.png);
+}
+.Person1Black:hover, .Person1Grey:hover, .Person1White:hover{
+	background-image: url(../Images/BotonIcos/person1_grey.png);
+}
+
 
 .PersonAddBlack{
 	background-image: url(../Images/BotonIcos/person_add_black.png);

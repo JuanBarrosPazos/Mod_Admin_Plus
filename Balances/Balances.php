@@ -21,7 +21,6 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	
 	require 'Balances_Funciones.php';
 	require 'Balances_Logica.php';
 	require '../Inclu/Admin_Inclu_footer.php';

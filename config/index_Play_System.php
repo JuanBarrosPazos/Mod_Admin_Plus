@@ -729,7 +729,7 @@ function show_ficha(){
 					<input type='hidden' name='salida' value=1 />
 			</form>
 		</li>
-		</ul>"); 
+		</ul>");
 	}
 	
 } // FIN FUNCTION show_ficha()
@@ -1050,9 +1050,8 @@ function pin_out(){
 function pin_in(){
 	
 	$tabla = "<ul class='centradiv'>
-				<li class='liCentra'>
-					HA FICHADO LA ENTRADA</br>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."
-				</li>
+				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
+				<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
 				<li class='liCentra'>
 			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
 				</li>

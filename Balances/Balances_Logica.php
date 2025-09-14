@@ -12,5 +12,4 @@ if($_SESSION['Nivel'] == 'admin'){
 								
 }else{ require '../Inclu/tabla_permisos.php'; }
 
-
 ?>

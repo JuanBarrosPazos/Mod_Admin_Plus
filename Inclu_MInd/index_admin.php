@@ -8,42 +8,11 @@
 				</a>
 			</li>
 			<li>
-				<a href='#'>
+				<a href='".$rutafichar."fichar_Crear.php'>
 					<i class='ic ico12'></i><span>FICHAR IN / OUT</span>
 				</a>
-				<ul class='nav-flyout'>
-					<li>
-						<a href='".$rutafichar."fichar_Crear.php' ".$topcat1.">
-							<i class='ic ico13b'></i>FICHAR YO
-						</a>
-					</li>
-					<li>
-						<a href='".$rutafichar."fichar_Ver.php'>
-							<i class='ic ico15b'></i>CONSULTA YO
-						</a>
-					</li>");
-	}else{ }
-
-	if($_SESSION['Nivel'] == 'user'){ 
-		print("</ul></li>");
-	}elseif(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')) {
-		print("<li>
-					<a href='".$rutafichar."fichar_Crear_tds.php'>
-						<i class='ic ico02b'></i>FICHAR TODOS
-					</a>
-				</li>
-				<li>
-					<a href='".$rutafichar."fichar_Crear_otr.php'>
-						<i class='ic ico02b'></i>FICHAR OTR
-					</a>
-				</li>
-				<li>
-					<a href='".$rutafichar."fichar_Ver_otr.php'>
-						<i class='ic ico15b'></i>CONSULTA OTR
-					</a>
-				</li>
-			</ul>
-		</li>");
+			</li>
+					");
 	}else{ }
 
 	if($_SESSION['Nivel'] == 'admin') {

@@ -147,7 +147,7 @@ function entrada(){
 
 function show_form(){
 	
-	global $db; global $db_name;
+	global $db;			global $db_name;
 
 	global $table_name_a; 	$table_name_a = "`".$_SESSION['clave']."admin`";
 
@@ -172,8 +172,11 @@ function show_form(){
 								<td><font color='#FF0000'>NO HAY DATOS</font></td>
 							</tr>
 						</table>");
-										
 			}else{
+
+				global $ficharCrear;		$ficharCrear = 2;
+				require 'fichar_Crear_Botonera.php';
+
 				unset($_SESSION['usuarios']);
 				print ("<table align='center'>
 							<tr>
