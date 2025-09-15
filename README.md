@@ -8,14 +8,17 @@
     Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
 ----
 ## PENDIENTES...
-#### Ojo con sesión abierta al redireccionamiento fichar con usuario no admin o webmaster...
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.09.15 2025/08/15
+	- Ajustes generales en Fichar...
+----
 #### Mod_Admin_Plus V25.09.14B 2025/08/14
 	- Ajustes generales en Balances.php
 	- Se optimiza el menú de navegación.
 	- Fichar Crear botonera de navegación.
+	- Con sesión abierta redireccionamiento fichar con usuario no admin o webmaster...
 ----
 #### Mod_Admin_Plus V25.09.13 2025/08/13
 	- Ajustes de gráficos en Balances/

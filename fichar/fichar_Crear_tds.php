@@ -59,36 +59,8 @@ function errors(){
 
 function entrada(){
 	
-	global $tabla;
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=4 class='BorderInf'>
-						HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
-				</tr>
-				<tr>
-					<td colspan=2 class='BorderSup' align='center'>
-						<form name='fichatodos' action='$_SERVER[PHP_SELF]'>
-							<input type='submit' value='VOLVER PANTALLA INICIO' class='botonnaranja' />
-							<input type='hidden' name='volver' value=1 />
-						</form>
-					</td>
-				</tr>
-			</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
-			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear_tds.php';}
-					setTimeout('redir()',8000);
-			</script>";	
+	global $tablarin;
+	require 'tablas_resum_fichar.php';
 	
 	global $db; 			global $db_name;
 
@@ -101,37 +73,19 @@ function entrada(){
 	$count1 = mysqli_num_rows($q1);
 	
 	if($count1 > 0){ 
-		print("<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=4 class='BorderInf'>
-						<font color='#FF0000'>
-							ERROR YA HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
-						</font>
-					</th>
-				</tr>
-			</table>".$tabla);
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+					ERROR YA HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
+			</div>");
 	}else{
 	
 		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 			
 		if(mysqli_query($db, $sqla)){ 
 				
-			print($tabla); 
+			print($tablarin); 
 				
-			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
-
-			global $text;
-			$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
-			$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
-			$text = $text.PHP_EOL."** FICHA ENTRADA ".$_POST['din']." / ".$_POST['tin'];
-				
-			$rmfdocu = $_SESSION['usuarios'];
-			$rmfdate = date('Y_m');
-			$rmftext = $text.PHP_EOL;
-			$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-			$rmf = fopen($filename, 'ab+');
-			fwrite($rmf, $rmftext);
-			fclose($rmf);
+			global $dir;			global $text;
+			require 'log_fichar_in.php';
 		
 		}else{ 	print("* MODIFIQUE LA ENTRADA L.212: ".mysqli_error($db));
 				show_form ();
@@ -164,14 +118,12 @@ function show_form(){
 		}
 	
 		if(!$qb){
-			print("<font color='#FF0000'>Modifique la entrada L.265: </font></br>".mysqli_error($db)."</br>");
+			print("ERROR SQL L.162 ".mysqli_error($db)."</br>");
 		}else{
 			if(mysqli_num_rows($qb)== 0){
-				print ("<table align='center'>
-							<tr>
-								<td><font color='#FF0000'>NO HAY DATOS</font></td>
-							</tr>
-						</table>");
+				print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+							NO HAY DATOS<
+						</div>");
 			}else{
 
 				global $ficharCrear;		$ficharCrear = 2;
@@ -401,19 +353,11 @@ function salida(){
 	$ttotd = str_replace("-","",$ttotd);
 
 	if(($ttoth > 9)||($ttotd > 0)){
-		print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
-					<font color='#FF0000'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
-					</b>
-					</th>
-				 </tr>
-				</table>");
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+					NO PUEDE FICHAR MÁS DE 10 HORAS.
+					</br>
+					PONGASE EN CONTACTO CON ADMIN SYSTEM.
+				</div>");
 		
 		global $ttot;			$ttot = '00:00:01';
 		global $text;
@@ -428,44 +372,8 @@ function salida(){
 			$text = $text.PHP_EOL."  - N HORAS: ".$ttot;
 	} /* Fin else >9 */
 	
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=4 class='BorderInf'>
-						HA FICHADO LA SALIDA </br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$din."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$tin."</td>
-				</tr>
-				<tr>
-					<td>FECHA SALIDA</td><td>".$_POST['dout']."</td>
-				</tr>
-				<tr>
-					<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
-				</tr>
-				<tr>
-					<td>HORAS REALIZADAS</td><td>".$ttot."</td>
-				</tr>
-				<tr>
-					<td colspan=2 class='BorderSup' align='center'>
-						<form name='volver' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='VOLVER PANTALLA INICIO' class='botonnaranja' />
-							<input type='hidden' name='volver' value=1 />
-						</form>
-					</td>
-				</tr>
-			</table>
-			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
-			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear_tds.php';}
-				setTimeout('redir()',8000);
-			</script>";	
+	global $tablarout;
+	require 'tablas_resum_fichar.php';
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -475,24 +383,13 @@ function salida(){
 		
 	if(mysqli_query($db, $sqla)){ 
 			
-		print($tabla);
+		print($tablarout);
 		suma_todo();
 
-		global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
-			
-		global $sumatodo;
-		global $text;
-		$text = $text.PHP_EOL."** HORAS TOTALES MES: ".$sumatodo;
-		$text = $text.PHP_EOL."\t**********".PHP_EOL;
-		$rmfdocu = $_SESSION['usuarios'];
-		$rmfdate = date('Y_m');
-		$rmftext = $text.PHP_EOL;
-		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-		$rmf = fopen($filename, 'ab+');
-		fwrite($rmf, $rmftext);
-		fclose($rmf);
+		global $dir;		global $sumatodo;		global $text;
+		require 'log_fichar_out.php';
 
-	}else{	print("* MODIFIQUE LA ENTRADA L.471 ".mysqli_error($db));
+	}else{	print("ERROR SQL L.382 ".mysqli_error($db));
 			show_form ();
 			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
 	}

@@ -27,7 +27,10 @@
 		</a>";
     }
 
-	print("<div class='centradiv' style='border:none !important'>".$link1.$link2.$link3."</div>");
+    if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+	    print("<div class='centradiv' style='border:none !important'>".$link1.$link2.$link3."</div>");
+	}else{ }
+
 
 
 ?>

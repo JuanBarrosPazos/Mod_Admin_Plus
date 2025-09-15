@@ -1,11 +1,11 @@
 <?php
 
-	global $db;				global $db_name;
+	global $db;				global $db_name; 
 	
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
 									$defaults = $_POST;
 									//print("* ".$_SESSION['usuarios']);
-	}elseif(isset($_SESSION['usuarios']) == '') {}
+	}elseif(isset($_SESSION['usuarios']) == ''){ }
 
 	global $db;
 	global $tablau;				$tablau = "`".$_SESSION['clave']."admin`";
@@ -14,30 +14,15 @@
 	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
 	$qu = mysqli_query($db, $sqlu);
 	if(mysqli_num_rows($qu)== 0){
-		print ("<table align='center'>
-					<tr>
-						<td>
-							<font color='#FF0000'>
+		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
 								NO EXISTEN OTROS USUARIOS
-							</font> 
-						</td>
-					</tr>
-				</table>");
+				</div>");
 	}else{
-		print("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-					<td align='center'>".$titulo."</td>
-				</tr>		
-				<tr>
-					<td>
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-					<div style='float:left; margin-right:6px'>
-						<input type='submit' value='SELECCIONE UN USUARIO' class='botonlila' />
-						<input type='hidden' name='oculto1' value=1 />
-					</div>
-					<div style='float:left'>
+		print("<div class='centradiv' style='padding:0.6em;'>
+					<div style='margin: 0.3em auto'>".$titulo."</div>
+			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' >
 						<select name='usuarios'>
-					<!-- <option value=''>SELECCIONE UN USUARIO</option> --> ");
+					<!--  --><option value=''>SELECCIONE UN USUARIO</option> ");
 
 		if(!$qu){ print("Modifique la entrada L.288: ".mysqli_error($db)."<br>");
 		}else{
@@ -49,11 +34,10 @@
 		}  
 	
 		print ("</select>
-					</div>
+				<button type='submit' title='SELECCIONE UN USUARIO' class='botonverde imgButIco BuscaBlack' style='vertical-align:top;margin-top:-0.01em;' > </button>
+						<input type='hidden' name='oculto1' value=1 />
 				</form>	
-						</td>
-					</tr>
-				</table>");
+				</div>");
 
 		global $ficharCrear;		$ficharCrear = 3;
 		require 'fichar_Crear_Botonera.php';
@@ -62,15 +46,9 @@
 	
 	if(isset($_POST['oculto1'])){
 		if($_SESSION['usuarios'] == ''){ 
-			print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
-					<tr align='center'>
-						<td>
-							<font color='red'>
+			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
 								SELECCIONE UN USUARIO
-							</font>
-						</td>
-					</tr>
-				</table>");
+					</div>");
 		}
 		
 		if($_SESSION['usuarios'] != '') {
