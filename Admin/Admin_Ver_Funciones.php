@@ -113,7 +113,7 @@ function ver_todo(){
 		require 'Inc_While_Form.php';
 		global $rutaimg;			$rutaimg = "../Users/";
 		global $pagedest;			$pagedest = "Admin_Ver.php";
-		require 'Inc_While_Total.php';
+		require 'Inc_While_Total.php'; 
 
 			////////////////////		**********  		////////////////////
 		

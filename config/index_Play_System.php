@@ -849,7 +849,7 @@ function process_pin(){
 				<li class='liCentra'>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos'])."</li>
 				<li class='liCentra'>REFER: ".strtoupper($rp['ref'])."</li>
 				<li class='liCentra'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%'' >
+				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>
@@ -1053,7 +1053,7 @@ function pin_in(){
 				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
 				<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
 				<li class='liCentra'>
-			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' />
+			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' /> 
 				</li>
 				<li>
 					<div>REFERENCIA: </div><div>".$_POST['ref']."</div>

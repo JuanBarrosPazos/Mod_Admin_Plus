@@ -3,7 +3,7 @@ session_start();
 
 	require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
-
+	require '../Inclu/webmaster.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
@@ -281,7 +281,7 @@ function salida(){
 			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
 	}
 	
-}	
+} // FIN function salida()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -289,20 +289,20 @@ function salida(){
 
 function info(){
 
-		//$ActionTime = date('H:i:s');
+	//$ActionTime = date('H:i:s');
 
-		global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir;			$dir = "../Users/".$_SESSION['ref']."/log";
 	
-		global $text;
-		$logdocu = $_SESSION['ref'];
-		$logdate = date('Y-m-d');
-		$logtext = $text.PHP_EOL;
-		$filename = $dir."/".$logdate."_".$logdocu.".log";
-		$log = fopen($filename, 'ab+');
-		fwrite($log, $logtext);
-		fclose($log);
+	global $text;
+	$logdocu = $_SESSION['ref'];
+	$logdate = date('Y-m-d');
+	$logtext = $text.PHP_EOL;
+	$filename = $dir."/".$logdate."_".$logdocu.".log";
+	$log = fopen($filename, 'ab+');
+	fwrite($log, $logtext);
+	fclose($log);
 
-	}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

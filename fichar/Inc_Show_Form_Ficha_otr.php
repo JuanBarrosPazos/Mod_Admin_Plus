@@ -83,17 +83,21 @@
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 			
-			print("<table align='center' style=\"margin-top:10px\">
-					<tr>
-						<td  align='center' rowspan=2>
-				<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$uimg."' height='54px' width='38px' />
-						</td>
-						<td>".$name1o." ".$name2o.". Ref: ".$_SESSION['usuarios']."
-						</td>
-					</tr>
-					<tr>
-						<td valign='middle' align='center'>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+			print("<ul class='centradiv'>
+					<li class='liCentra'>FICHE SU ENTRADA</li>
+					<li class='liCentra'>
+						<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$uimg."' />
+					</li>
+					<li class='liCentra'>
+						".strtoupper($name1o)." ".strtoupper($name2o)."
+					</li>
+					<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
+					<li class='liCentra'>
+				<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='volver' value=1 />
+				</form>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 						<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
 						<input type='hidden' id='name1' name='name1' value='".$name1o."' />
 						<input type='hidden' id='name2' name='name2' value='".$name2o."' />
@@ -102,12 +106,11 @@
 						<input type='hidden' id='dout' name='dout' value='".$dout."' />
 						<input type='hidden' id='tout' name='tout' value='".$tout."' />
 						<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-						<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
+						<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
 						<input type='hidden' name='entrada' value=1 />
 				</form>														
-						</td>
-					</tr>
-			</table>");
+					</li>
+			</ul>");
 
 		}elseif($count1 > 0){
 			
@@ -122,29 +125,29 @@
 
 			require 'fichar_redondeo_out.php';
 
-			print("<table align='center' style=\"margin-top:10px\">
-					<tr>
-						<td  align='center' rowspan=2>
-				<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$uimg."' height='54px' width='38px' />
-						</td>
-						<td>".$name1o." ".$name2o.". Ref: ".$_SESSION['usuarios']."
-						</td>
-					</tr>
-
-					<tr>
-						<td valign='middle'  align='center'>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
+			print("<ul class='centradiv'>
+					<li class='liCentra'>FICHE SU SALIDA</li>
+					<li class='liCentra'>
+				<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$uimg."' />
+					</li>
+					<li class='liCentra'>".strtoupper($name1o)." ".strtoupper($name2o)."</li>
+					<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
+					<li class='liCentra'>
+				<form name='volver' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='volver' value=1 />
+				</form>
+				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 					<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
 					<input type='hidden' id='name1' name='name1' value='".$name1o."' />
 					<input type='hidden' id='name2' name='name2' value='".$name2o."' />
 					<input type='hidden' id='dout' name='dout' value='".$dout."' />
 					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<input type='submit' value='FICHAR SALIDA' class='botonverde' />
+						<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
 					<input type='hidden' name='salida' value=1 />
 				</form>														
-						</td>
-					</tr>
-				</table>"); 
+					</li>
+				</ul>"); 
 			}
 		} // fin 2º if
 	} // fin 1º if

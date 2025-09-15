@@ -3,7 +3,7 @@ session_start();
 
 	require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
-
+	require '../Inclu/webmaster.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
