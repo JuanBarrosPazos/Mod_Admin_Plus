@@ -18,7 +18,7 @@ h1 {
 }
 
 table, .centradiv {
-	border-spacing: -0.0em;
+	border-spacing: 0.0em;
     border: solid 0.1em #CCC;/*  */
 	border-radius: 0.8em !important;
 	margin: 1.0em auto 0.6em auto;

@@ -13,13 +13,14 @@
 			///////////////////////			***********  		///////////////////////
 
     /* SOLO PARA MODIFICAR 01 / FICHAR VER / FICHAR VER OTRO / BORRAR 01 */
+	global $name1;				global $name2;
     if(!$sh){print(mysqli_error($db).".</br>");
     }else{	$qn1 = mysqli_query($db,$sh);
 			$count = mysqli_num_rows($qn1);
 			if($count > 0){
 				$qn2 = mysqli_fetch_assoc($qn1);
-				global $name1;		$name1 = $qn2['Nombre'];
-				global $name2;		$name2 = $qn2['Apellidos'];
+				$name1 = strtoupper($qn2['Nombre']);
+				$name2 = strtoupper($qn2['Apellidos']);
 			}else{ }
     }
     /* SOLO PARA MODIFICAR 01 / FICHAR VER / FICHAR VER OTRO / BORRAR 01 */

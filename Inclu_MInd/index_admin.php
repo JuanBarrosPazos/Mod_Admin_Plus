@@ -17,12 +17,12 @@
 
 	if($_SESSION['Nivel'] == 'admin') {
 		print(" <li>
-				<a href='#'>
+				<a href='".$rutafichar."Reg_Fichar_Modificar.php'>
 					<i class='ic ico19'></i><span>REGISTROS IN / OUT</span>
 				</a>
 				<ul class='nav-flyout'>
 					<li>
-						<a href='".$rutafichar."Reg_Fichar_Modificar_01.php' ".$topcat2.">
+						<a href='".$rutafichar."Reg_Fichar_Modificar.php' ".$topcat2.">
 							<i class='ic ico19b'></i>MODIF. OUT
 						</a>
 					</li>

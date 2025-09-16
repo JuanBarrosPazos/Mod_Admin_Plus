@@ -105,35 +105,25 @@ function ver_todo(){
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
-	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.308: </font>
-					</br>".mysqli_error($db)."</br>");
-		}else{
-			while($rowun = mysqli_fetch_assoc($qun)){	
-					global $name1;
-					$name1 = $rowun['Nombre'];
-					global $name2;
-					$name2 = $rowun['Apellidos'];
-						}
-					}
+	global $name1;			global $name2;
+	if(!$qun){print("ERROR SQL L.106 ".mysqli_error($db)."</br>");
+	}else{
+		while($rowun = mysqli_fetch_assoc($qun)){	
+			$name1 = strtoupper($rowun['Nombre']);
+			$name2 = strtoupper($rowun['Apellidos']);
+		}
+	}
 
-	global $pdm;
-	$pdm = "pdm";
-	global $feedtot;
-	//$feedtot = "nofeed";
-	$feedtot = "";
-	global $nodata;
-	$nodata = "NO HAY DATOS";
-	if($_POST['dy'] == ''){ global $ycons;
-							$ycons = date('Y');
-	}else{ global $ycons;
-		   $ycons =	"20".$_POST['dy'];}
+	global $pdm;				$pdm = "pdm";
+	global $feedtot;			$feedtot = "";			//$feedtot = "nofeed";
+	global $ycons;
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy']; }
 	global $twhile;
 	$twhile = "<tr><th colspan=7 class='BorderInf'>
 				".$name1." ".$name2.". Ref: ".$refses."
 				.</th></tr>";
 
-	global $tdplus;
-	$tdplus = "<th class='BorderInfDch'></th>";
+	global $tdplus;				$tdplus = "<th class='BorderInfDch'></th>";
 	global $formularioh;
 	$formularioh = "<form name='modifica' action='Reg_Fichar_Modificar_02.php' method='POST'>";
 	global $formulariof;
@@ -143,16 +133,14 @@ function ver_todo(){
 					<input type='hidden' name='error' value=1 />
 					</td>
 					</form>";
-	global $colspana;
-	$colspana = "7";
-	global $colspanb;
-	$colspanb = "5";
+	global $colspana;			$colspana = "7";
+	global $colspanb;			$colspanb = "5";
 
 	require 'Inc_Fichar_While_Total.php';
 
 			////////////////////		**********  		////////////////////
 	
-	}	/* Final ver_todo(); */
+}	/* Final ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

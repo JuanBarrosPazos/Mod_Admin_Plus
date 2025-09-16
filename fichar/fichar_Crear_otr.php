@@ -71,7 +71,7 @@ function entrada(){
 	$count1 = mysqli_num_rows($q1);
 	
 	if($count1 > 0){ 
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 					ERROR YA HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
 				</div>");
 	}else{
@@ -169,7 +169,7 @@ function salida(){
 	$ttotd = str_replace("-","",$ttotd);
 	
 	if(($ttoth > 9)||($ttotd > 0)){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 							NO PUEDE FICHAR MÁS DE 10 HORAS.
 							</br>
 							PONGASE EN CONTACTO CON ADMIN SYSTEM.

@@ -14,7 +14,7 @@
 	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
 	$qu = mysqli_query($db, $sqlu);
 	if(mysqli_num_rows($qu)== 0){
-		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 								NO EXISTEN OTROS USUARIOS
 				</div>");
 	}else{
@@ -46,7 +46,7 @@
 	
 	if(isset($_POST['oculto1'])){
 		if($_SESSION['usuarios'] == ''){ 
-			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 								SELECCIONE UN USUARIO
 					</div>");
 		}

@@ -59,9 +59,9 @@ function process_form(){
 	
 	global $db;				global $db_name;	
 	
-	$tabla = "<table align='center' style='margin-top:10px' width=450px >
+	$tabla = "<table class='TFormAdmin'>
 				<tr>
-					<th colspan=4 class='BorderInf'>
+					<th colspan=2>
 						HA BORRADO ".$_POST['name1']." ".$_POST['name2']."
 					</th>
 				</tr>
@@ -86,7 +86,15 @@ function process_form(){
 				<tr>
 					<td>HORAS REALIZADAS</td><td>".$_POST['ttot']."</td>
 				</tr>
-			</table>";	
+				<tr>
+					<td colspan=2>".$_SESSION['modifeo']."</td>
+				</tr>
+			</table>
+			<embed src='../audi/delete_file.mp3' autostart='true' loop='false' ></embed>
+			<script type='text/javascript'>
+				function redir(){window.location.href='Reg_Fichar_Modificar.php';}
+				setTimeout('redir()',8000);
+			</script>";	
 		
 	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
@@ -121,12 +129,8 @@ function process_form(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 
-	}else{	print("<font color='#FF0000'>
-						SE HA PRODUCIDO UN ERROR: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db))."
-						</br>";
-						show_form ();
+	}else{	print("ERROR SQL ".mysqli_error($db))."</br>";
+			show_form ();
 	}
 	
 } // FIN fucntion process_form
@@ -151,70 +155,68 @@ function show_form(){
 							'ttot' => $_POST['ttot']);
 	}
 
-	print("<table align='center' style='margin-top:10px' width=300px >
+	print("<table class='TFormAdmin'>
 			<tr>
 				<td>ID</td>
 				<td>
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-			<input type='hidden' name='id' value='".$defaults['id']."' />".$defaults['id']."
+					".$defaults['id']."
 				</td>
 			</tr>
 			<tr>
 				<td>USER REF</td>
-				<td>
-			<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />".$_SESSION['usuarios']."
-				</td>
+				<td>".$_SESSION['usuarios']."</td>
 			</tr>
 			<tr>
 				<td>NOMBRE</td>
-				<td>
-		<input type='hidden' name='name1' value='".$defaults['name1']."' />".$defaults['name1']."
-				</td>
+				<td>".$defaults['name1']."</td>
+				
 			</tr>
 			<tr>
 				<td>APELLIDOS</td>
-				<td>
-		<input type='hidden' name='name2' value='".$defaults['name2']."' />".$defaults['name2']."
-				</td>
+				<td>".$defaults['name2']."</td>
 			</tr>
 			<tr>
 				<td>DATE IN</td>
-				<td>
-		<input name='din' type='hidden' value='".$defaults['din']."' />".$defaults['din']."
-				</td>
+				<td>".$defaults['din']."</td>
 			</tr>
 			<tr>
 				<td>TIME IN</td>
-				<td>
-		<input name='tin' type='hidden' value='".$defaults['tin']."' />".$defaults['tin']."
-				</td>
+				<td>".$defaults['tin']."</td>
+				
 			</tr>
 			<tr>
 				<td>DATE OUT</td>
-				<td>
-		<input name='dout' type='hidden' value='".$defaults['dout']."' />".$defaults['dout']."
-				</td>
+				<td>".$defaults['dout']."</td>
 			</tr>
 			<tr>
 				<td>TIME OUT</td>
-				<td>
-		<input name='tout' type='hidden' value='".$defaults['tout']."' />".$defaults['tout']."
-				</td>
+				<td>".$defaults['tout']."</td>
 			</tr>
 			<tr>
 				<td>TIME TOTAL</td>
-				<td>
-		<input name='ttot' type='hidden' value='".$defaults['ttot']."' />".$defaults['ttot']."
-				</td>
+				<td>".$defaults['ttot']."</td>
 			</tr>
 			<tr>
-				<td colspan='2' align='right' valign='middle'  class='BorderSup'>
-					<input type='submit' value='BORRAR DATOS ' class='botonrojo' />
+				<td colspan='2'>
+					<input type='hidden' name='id' value='".$defaults['id']."' />
+					<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
+					<input type='hidden' name='name1' value='".$defaults['name1']."' />
+					<input type='hidden' name='name2' value='".$defaults['name2']."' />
+					<input name='din' type='hidden' value='".$defaults['din']."' />
+					<input name='tin' type='hidden' value='".$defaults['tin']."' />
+					<input name='dout' type='hidden' value='".$defaults['dout']."' />
+					<input name='tout' type='hidden' value='".$defaults['tout']."' />
+					<input name='ttot' type='hidden' value='".$defaults['ttot']."' />
 					<input type='hidden' name='oculto' value=1 />
-		</form>														
+				<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+		</form>	
+			<a href='Reg_Fichar_Modificar.php'>
+				<button type='button' title='FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+			</a>												
 				</td>
 			</tr>
-			</table>"); 
+		</table>"); 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

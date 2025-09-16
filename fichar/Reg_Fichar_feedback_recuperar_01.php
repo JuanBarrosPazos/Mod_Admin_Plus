@@ -77,13 +77,14 @@ function ver_todo(){
 	global $vname;				$vname = "`".$tabla1."_feed`";
 
 	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
-	
+
+	global $name1;			global $name2;
 	if(!$sh){print("Modifique la entrada L.331".mysqli_error($db).".</br>");
 	}else{
 		$qn1 = mysqli_query($db,$sh);
 		$qn2 = mysqli_fetch_assoc($qn1);
-		global $name1;			$name1 = $qn2['Nombre'];
-		global $name2;			$name2 = $qn2['Apellidos'];
+		$name1 = strtoupper($qn2['Nombre']);
+		$name2 = strtoupper($qn2['Apellidos']);
 	}
 
 	global $qb;				global $sqlb;
@@ -97,18 +98,18 @@ function ver_todo(){
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
+	global $name1;			global $name2;
 	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.308: </font>
 					</br>".mysqli_error($db)."</br>");
 	}else{
 		while($rowun = mysqli_fetch_assoc($qun)){	
-				global $name1;			$name1 = $rowun['Nombre'];
-				global $name2;			$name2 = $rowun['Apellidos'];
+			$name1 = strtoupper($rowun['Nombre']);
+			$name2 = strtoupper($rowun['Apellidos']);
 		}
 	}
 
 	global $pdm;				$pdm = "pdm";
 	global $feedtot;			$feedtot = "nofeed";
-	global $nodata;				$nodata = "NO HAY DATOS";
 	global $ycons;
 	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{  $ycons =	"20".$_POST['dy']; }
 

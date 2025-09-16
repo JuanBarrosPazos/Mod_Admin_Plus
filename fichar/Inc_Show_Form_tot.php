@@ -33,123 +33,84 @@
 					'`id` ASC' => 'ID Asc',
 					'`id` DESC' => 'ID Desc');
 	
-	print("<table align='center' style='border:1; margin-top:2px' width='auto'>
-					<tr>
-						<td align='center'>".$titulo."</td>
-					</tr>		
-					<tr>
-						<td>
-					<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-						<input type='hidden' name='ref' value='".@$_SESSION['usuarios']."' />
-						<div style='float:left; margin-right:6px'>
-							<input type='submit' value='SELECCIONE UN USUARIO' class='botonlila' />
-							<input type='hidden' name='oculto1' value=1 />
-						</div>
-						<div style='float:left'>
-							<select name='usuarios'>
-						<!-- <option value=''>SELECCIONE UN USUARIO</option> --> ");
+	print("<div class='centradiv' style='padding:0.4em;'>
+			<div style='margin:0.2em auto 0.4em auto;'>GESTIONAR REGISTROS HORARIOS</div>
+		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='margin-right:6px'>
+			<input type='hidden' name='ref' value='".@$_SESSION['usuarios']."' />
+				<select name='usuarios' style='vertical-align:middle;'>
+					<!--  --><option value=''>SELECCIONE UN USUARIO</option> ");
 
-	global $db;
-	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-	global $sqlu;			$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
-	$qu = mysqli_query($db, $sqlu);
-	if(!$qu){
-			print("Modifique la entrada L.142 ".mysqli_error($db)."<br>");
-	}else{
-		while($rowu = mysqli_fetch_assoc($qu)){
-					print ("<option value='".$rowu['ref']."' ");
-					if($rowu['ref'] == @$defaults['usuarios']){
-										print ("selected = 'selected'");
-					}
-						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
-		}
-	}  
+		global $db;
+		global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
+		global $sqlu;			$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+		$qu = mysqli_query($db, $sqlu);
+		if(!$qu){
+				print("Modifique la entrada L.49 ".mysqli_error($db)."<br>");
+		}else{
+			while($rowu = mysqli_fetch_assoc($qu)){
+				print ("<option value='".$rowu['ref']."' ");
+				if($rowu['ref'] == @$defaults['usuarios']){
+									print ("selected = 'selected'");
+				}
+				print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+			}
+		}  
 
 		print ("</select>
-					</div>
-						</form>
-							</td>
-						</tr>
-					</table>"); 
+					<button type='submit' title='SELECCIONE UN USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:middle;display:inline-block;' ></button>
+				<input type='hidden' name='oculto1' value=1 />
+			</form>
+				</div>"); 
 
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 		if($_SESSION['usuarios'] == ''){ 
-						print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
-									<tr align='center'>
-										<td>
-											<font color='red'>
-										SELECCIONE UN USUARIO
-											</font>
-										</td>
-									</tr>
-								</table>");
+			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.4em;' >
+						SELECCIONE UN USUARIO
+					</div>");
 		}
 
 		if($_SESSION['usuarios'] != ''){
 			require "../Users/".$_SESSION['usuarios']."/ayear.php";
-			print("	<table align='center' style=\"border:0px;margin-top:4px\">
-						<tr>
-							<th colspan=2 class='BorderSup'>
+			print("<div class='centradiv' style='padding:0.4em;'>
+						<div style='margin:0.2em auto 0.4em auto;'>
 							".$titulo." ".$_SESSION['usuarios']."
-							</th>
-						</tr>");
+						</div>");
 						
-			///////////////////////			**********   		///////////////////////
-
-			print ("<tr>
-						<td align='center' class='BorderSup'>
-					<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
-							<input type='submit' value='TODAS JORNADAS LABORALES' class='botonlila' />
-							<input type='hidden' name='todo' value=1 />
-						</td>
-						<td class='BorderSup'>	
-						<div style='float:left'>
-							<select name='Orden'>");
-						
-			foreach($ordenar as $option => $label){
-						print ("<option value='".$option."' ");
-					if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
-					print ("> $label </option>");
-			}
-
-			print ("</select>
-						</div>
-							<div style='float:left'>
-								<select name='dy'>");
-			foreach($dy as $optiondy => $labeldy){
-						print ("<option value='".$optiondy."' ");
-					if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
-					print ("> $labeldy </option>");
-			}	
-																	
-			print ("</select>
-						</div>
-							<div style='float:left'>
-								<select name='dm'>");
-			foreach($dm as $optiondm => $labeldm){
-						print ("<option value='".$optiondm."' ");
-						if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
-						print ("> $labeldm </option>");
-			}	
-																
-			print ("</select>
-						</div>
-							<div style='float:left'>
-								<select name='dd'>");
-			foreach($dd as $optiondd => $labeldd){
-						print ("<option value='".$optiondd."' ");
-						if($optiondd == @$defaults['dd']){ print ("selected = 'selected'"); }
-						print ("> $labeldd </option>");
-			}	
-																
-			print ("</select>
-						</div>
-							</form>
-								</td>
-							</tr>
-						</table>"); /* Fin del print */
-		} // fin 2º if
-	} // fin 1º if
+			print ("<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
+						<select name='Orden'>");
+							foreach($ordenar as $option => $label){
+									print ("<option value='".$option."' ");
+									if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
+									print ("> $label </option>");
+							}
+				print ("</select>
+						<select name='dy'>");
+							foreach($dy as $optiondy => $labeldy){
+								print ("<option value='".$optiondy."' ");
+								if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
+								print ("> $labeldy </option>");
+							}	
+				print ("</select>
+						<select name='dm'>");
+							foreach($dm as $optiondm => $labeldm){
+								print ("<option value='".$optiondm."' ");
+								if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
+								print ("> $labeldm </option>");
+							}	
+				print ("</select>
+						<select name='dd'>");
+							foreach($dd as $optiondd => $labeldd){
+								print ("<option value='".$optiondd."' ");
+								if($optiondd == @$defaults['dd']){ print ("selected = 'selected'"); }
+								print ("> $labeldd </option>");
+							}	
+				print ("</select>
+						<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
+					<button type='submit' title='SELECCONAR USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+						<input type='hidden' name='todo' value=1 />
+					</form>
+						</div>"); /* FIN print */
+		} // FIN 2º if
+	} // FIN 1º if Nivel Usuarios
 
 ?>

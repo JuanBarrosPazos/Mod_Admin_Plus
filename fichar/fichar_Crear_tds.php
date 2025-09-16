@@ -69,7 +69,7 @@ function entrada(){
 	$count1 = mysqli_num_rows($q1);
 	
 	if($count1 > 0){ 
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 					ERROR YA HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
 			</div>");
 	}else{
@@ -135,12 +135,12 @@ function show_form(){
 				print ("<table class='centradiv'>
 						<tr>
 							<th colspan=4 style='color:#F1BD2D;' >
-								SELECCIONE SU USUARIO Y FICHE ENTRADA O SALIDA.
+								GESTIÓN HORARIOS
 							</th>
 						<tr>
 							<th></th>
-							<th>Referencia</th>
-							<th>Nombre</th>
+							<th>REFERENCIA</th>
+							<th>NOMBRE</th>
 							<th></th>
 						</tr>");
 
@@ -148,26 +148,23 @@ function show_form(){
 				while($rowb = mysqli_fetch_assoc($qb)){
 
 					if(($countbgc%2)==0){
-						$bgcolor ="style='background-color:#59746A;' ";
+						$bgcolor ="background-color:#59746A;";
 					}else{ $bgcolor =""; }
 
 					print("<tr>
-							<td ".$bgcolor." >
+							<td style='".$bgcolor."' >
 					<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+			<img src='../Users/".$rowb['ref']."/img_admin/".$rowb['myimg']."' style='height:4.0em; width:3.0em;vertical-align:middle;' />
+							</td>
+							<td style='".$bgcolor."' >".strtoupper($rowb['ref'])."</td>
+							<td style='".$bgcolor."'>".$rowb['Nombre']." ".$rowb['Apellidos']."</td>
+							<td style='".$bgcolor."'>
 						<input type='hidden' name='id' value='".$rowb['id']."' />
 						<input type='hidden' name='myimg' value='".$rowb['myimg']."' />
-			<img src='../Users/".$rowb['ref']."/img_admin/".$rowb['myimg']."' style='height:4.0em; width:3.0em;' />
-							</td>
-							<td ".$bgcolor." >
-						<input type='hidden' name='usuarios' value='".$rowb['ref']."' />".strtoupper($rowb['ref'])."
-							</td>
-							<td ".$bgcolor.">
+						<input type='hidden' name='usuarios' value='".$rowb['ref']."' />
 						<input type='hidden' name='name1' value='".$rowb['Nombre']."' />
 						<input type='hidden' name='name2' value='".$rowb['Apellidos']."' />						
-						".$rowb['Nombre']." ".$rowb['Apellidos']."
-							</td>
-							<td ".$bgcolor.">
-						<button type='submit' title='SELECCIONAR USUARIO ".strtoupper($rowb['ref'])."' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+							<button type='submit' title='FICHAR IN/OUT USUARIO ".strtoupper($rowb['ref'])."' class='botonverde imgButIco Clock1Black' style='vertical-align:middle;display:inline-block;' ></button>
 						<input type='hidden' name='oculto1' value=1 />
 					</form>
 							</td>
@@ -348,7 +345,7 @@ function salida(){
 	$ttotd = str_replace("-","",$ttotd);
 
 	if(($ttoth > 9)||($ttotd > 0)){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D'>
+		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
 					NO PUEDE FICHAR MÁS DE 10 HORAS.
 					</br>
 					PONGASE EN CONTACTO CON ADMIN SYSTEM.
