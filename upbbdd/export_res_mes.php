@@ -86,6 +86,9 @@ function show_form(){
 				</tr>
 			</table>"); 
 
+	global $ExportBotonera;		$ExportBotonera = 2;
+	require 'Export_Botonera.php';
+
 	}
 	
 } // FIN function show_form

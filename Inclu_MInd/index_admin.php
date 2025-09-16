@@ -56,43 +56,14 @@
 			</li>
 		
 			<li>
-				<a href='#'>
+				<a href='".$rutaupbbdd."bbdd.php'>
 					<i class='ic ico02'></i><span>RESPALDO DATOS</span>
 				</a>
-				<ul class='nav-flyout'>
-					<li>
-						<a href='".$rutaupbbdd."export_res_mes.php' ".$topcat4.">
-							<i class='ic ico02b'></i>HORARIOS .TXT
-						</a>
-					</li>
-					<li>
-						<a href='".$rutaupbbdd."bbdd.php'>
-							<i class='ic ico02b'></i>TABLAS BBDD
-						</a>
-					</li>
-					<li>
-						<a href='".$rutaupbbdd."export_log.php'>
-							<i class='ic ico02b'></i>SYSTEM .LOG
-						</a>
-					</li>
-				</ul>
 			</li>
 	
 			<li>
-				<a href='#'>
+				<a  href='".$rutaqrgen."indexqrg.php'>
 					<i class='ic ico20'></i><span>QR CODES</span></a>
-				<ul class='nav-flyout'>
-					<li>
-						<a href='".$rutaqrgen."indexqrg.php' ".$topcat5.">
-							<i class='ic ico20b'></i>QR GENERAR
-						</a>
-					</li>
-					<li>
-						<a href='".$rutacam."indexcam.php'>
-							<i class='ic ico20b'></i>QR SCANNER
-						</a>
-					</li>
-				</ul>
 			</li>");
 	}else{ }
 

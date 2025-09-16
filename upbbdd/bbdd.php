@@ -15,14 +15,12 @@ if($_SESSION['Nivel'] == 'admin'){
 
 	master_index();
 
-	if(isset($_POST['delete'])){
-						delete();
-						show_form();
-					 	listfiles();
+	if(isset($_POST['delete'])){ delete();
+								 show_form();
+								 listfiles();
 	}elseif(isset($_POST['oculto2'])){	show_form();
 								  		ver_todo();
 							  			listfiles();
-
 	}else{	show_form();
 			listfiles();
 	}
@@ -101,7 +99,11 @@ function show_form(){
 						</form>	
 					</td>
 				</tr>
-			</table>"); 
+			</table>");
+			
+	global $ExportBotonera;		$ExportBotonera = 1;
+	require 'Export_Botonera.php';
+
 	}
 	
 			////////////////////		**********  		////////////////////

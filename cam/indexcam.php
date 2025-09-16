@@ -22,6 +22,22 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
 	require '../Inclu_MInd/rutacam.php';
 	require '../Inclu_MInd/Master_Index.php';
 
+	print(" <div class='centradiv' style='border:none !important'>
+            <!--
+            <a href='indexcam.php'>
+                <button type='button' title='QR SCANNER READER' class='botonverde imgButIco FotoBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+            </a>
+            -->
+            <a href='../qrgen/indexqrg.php'>
+                <button type='button' title='QR USER CREATOR' class='botonverde imgButIco QrBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+            </a>
+            <a href='../Admin/Admin_Ver.php'>
+                <input type='hidden' name='time' value='".@$_SESSION['time']."' />
+                <button type='submit' title='FICHAR FILTRO DE EMPLEADOS' class='botonverde imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+                <input type='hidden' name='grafico2' value=1 />
+            </a>
+        </div>");
+
 }else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
@@ -36,6 +52,7 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
 
 
 <div style="text-align: center;">
+
 
 					<!-- *************************** -->
 <!-- *************************** -->		<!-- *************************** -->

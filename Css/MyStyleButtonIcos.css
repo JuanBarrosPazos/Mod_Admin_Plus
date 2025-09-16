@@ -49,6 +49,20 @@
 }
 
 
+.BbddBlack{
+	background-image: url(../Images/BotonIcos/bbdd_black.png);
+}
+.BbddGrey{
+	background-image: url(../Images/BotonIcos/bbdd_grey.png);
+}
+.BbddWhite{
+	background-image: url(../Images/BotonIcos/bbdd_white.png);
+}
+.BbddBlack:hover, .BbddGrey:hover, .BbddWhite:hover{
+	background-image: url(../Images/BotonIcos/bbdd_black.png);
+}
+
+
 .BuscaBlack{
 	background-image: url(../Images/BotonIcos/busca_black.png);
 }

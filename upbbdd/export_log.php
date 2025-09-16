@@ -85,7 +85,10 @@ function show_form(){
 			</tr>
 				</table>"); 
 	}
-	
+
+	global $ExportBotonera;		$ExportBotonera = 3;
+	require 'Export_Botonera.php';
+
 }	
 
 				   ////////////////////				   ////////////////////

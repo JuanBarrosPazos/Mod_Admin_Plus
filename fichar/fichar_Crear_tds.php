@@ -144,10 +144,10 @@ function show_form(){
 							<th></th>
 						</tr>");
 
-				$count = 0;
+				$countbgc = 0;
 				while($rowb = mysqli_fetch_assoc($qb)){
 
-					if($count%2==0){
+					if(($countbgc%2)==0){
 						$bgcolor ="style='background-color:#59746A;' ";
 					}else{ $bgcolor =""; }
 
@@ -172,7 +172,7 @@ function show_form(){
 					</form>
 							</td>
 					</tr>");
-					$count = $count+1;
+					$countbgc = $countbgc+1;
 				} // Fin while. 
 
 				print("</table>");
