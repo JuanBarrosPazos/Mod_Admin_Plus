@@ -40,7 +40,7 @@
 				</div>");
 
 		global $ficharCrear;		$ficharCrear = 3;
-		require 'fichar_Crear_Botonera.php';
+		require 'Fichar_Crear_Botonera.php';
 
 			///////////////////////			**********  		///////////////////////
 	
@@ -77,7 +77,7 @@
 				$tin = date('H:i:s');
 			*/
 
-			require 'fichar_redondeo_in.php';
+			require 'Fichar_Redondeo_in.php';
 
 			global $dout;			$dout = '';
 			global $tout;			$tout = '00:00:00';
@@ -123,7 +123,7 @@
 				$tout = date('H:i:s');
 			*/
 
-			require 'fichar_redondeo_out.php';
+			require 'Fichar_Redondeo_out.php';
 
 			print("<ul class='centradiv'>
 					<li class='liCentra'>FICHE SU SALIDA</li>

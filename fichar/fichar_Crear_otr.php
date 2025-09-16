@@ -59,7 +59,7 @@ function errors(){
 function entrada(){
 	
 	global $tablarin;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 
 	global $db;				global $db_name;
 
@@ -192,7 +192,7 @@ function salida(){
 			///////////////////////			*********   		///////////////////////
 	
 	global $tablarout;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

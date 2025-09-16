@@ -56,7 +56,7 @@ function errors(){
 function entrada(){
 	
 	global $tablarin;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 	
 	global $db; 			global $db_name;
 
@@ -114,7 +114,7 @@ function show_form(){
 		if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
 			
 			global $ficharCrear;		$ficharCrear = 2;
-			require 'fichar_Crear_Botonera.php';
+			require 'Fichar_Crear_Botonera.php';
 			require 'Paginacion_Head.php';
 
 			//$sqlb =  "SELECT * FROM $table_name_a ORDER BY `id` ASC ";
@@ -212,7 +212,7 @@ function show_form(){
 			$tin = date('H:i:s');
 		*/
 
-		require 'fichar_redondeo_in.php';
+		require 'Fichar_Redondeo_in.php';
 
 		global $dout; 			$dout = '';
 		global $tout; 			$tout = '00:00:00';
@@ -255,7 +255,7 @@ function show_form(){
 				$tout = date('H:i:s');
 			*/
 
-			require 'fichar_redondeo_out.php';
+			require 'Fichar_Redondeo_out.php';
 
 			print("<ul class='centradiv'>
 					<li class='liCentra'>FICHE SU SALIDA</li>
@@ -368,7 +368,7 @@ function salida(){
 	} /* Fin else >9 */
 	
 	global $tablarout;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

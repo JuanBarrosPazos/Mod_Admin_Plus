@@ -670,7 +670,7 @@ function show_ficha(){
 			$tin = date('H:i:s');
 		*/
 
-		require 'fichar/fichar_redondeo_in.php';
+		require 'fichar/Fichar_Redondeo_in.php';
 
 			////////////////////		***********  		////////////////////
 
@@ -685,7 +685,7 @@ function show_ficha(){
 			</li>
 			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
 			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
+		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
 			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
@@ -708,7 +708,7 @@ function show_ficha(){
 			HORA ORIGINAL DE SALIDA DEL SCRIPT
 			$tout = date('H:i:s');
 		*/
-		require 'fichar/fichar_redondeo_out.php';
+		require 'fichar/Fichar_Redondeo_out.php';
 
 		////////////////////		***********  		////////////////////
 
@@ -719,7 +719,7 @@ function show_ficha(){
 		</li>
 		<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
 		<li class='liCentra'>
-			<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
+			<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
 				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
@@ -790,7 +790,7 @@ function process_pin(){
 				HORA ORIGINAL DE ENTRADA DEL SCRIPT
 				$tin = date('H:i:s');
 			*/
-			require 'fichar/fichar_redondeo_in.php';
+			require 'fichar/Fichar_Redondeo_in.php';
 
 			////////////////////		***********  		////////////////////
 
@@ -837,7 +837,7 @@ function process_pin(){
 				HORA ORIGINAL DE SALIDA DEL SCRIPT
 				$tout = date('H:i:s');
 			*/
-			require 'fichar/fichar_redondeo_out.php';
+			require 'fichar/Fichar_Redondeo_out.php';
 
 			////////////////////		***********  		////////////////////
 

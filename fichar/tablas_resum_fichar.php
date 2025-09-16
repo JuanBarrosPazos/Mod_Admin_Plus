@@ -13,14 +13,14 @@
 				<div>HORA ENTRADA: </div><div>".$_POST['tin']."</div>
 			</li>
 			<li class='liCentra'>
-				<a href='fichar_Crear.php' >
+				<a href='Fichar_Crear.php' >
 					<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				</a>
 			</li>
 				</ul>
 			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear.php';}
+				function redir(){window.location.href='Fichar_Crear.php';}
 					setTimeout('redir()',8000);
 			</script>";	
 
@@ -47,14 +47,14 @@
 			<div>H. REALIZADAS: </div><div>".$ttot."</div>
 		</li>
 		<li class='liCentra'>
-			<a href='fichar_Crear.php'>
+			<a href='Fichar_Crear.php'>
 				<button type='button' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 			</a>	
 		</li>
 				</ul>
 		<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear.php';}
+				function redir(){window.location.href='Fichar_Crear.php';}
 				setTimeout('redir()',8000);
 			</script>";	
 

@@ -8,7 +8,7 @@
 				</a>
 			</li>
 			<li>
-				<a href='".$rutafichar."fichar_Crear.php'>
+				<a href='".$rutafichar."Fichar_Crear.php'>
 					<i class='ic ico12'></i><span>FICHAR IN / OUT</span>
 				</a>
 			</li>
@@ -22,27 +22,27 @@
 				</a>
 				<ul class='nav-flyout'>
 					<li>
-						<a href='".$rutafichar."fichar_Modificar_01.php' ".$topcat2.">
+						<a href='".$rutafichar."Reg_Fichar_Modificar_01.php' ".$topcat2.">
 							<i class='ic ico19b'></i>MODIF. OUT
 						</a>
 					</li>
 					<li>
-						<a href='".$rutafichar."fichar_Modificar_Error.php'>
+						<a href='".$rutafichar."Reg_Fichar_Modificar_Error.php'>
 							<i class='ic ico19b'></i>MODIF. ERROR
 						</a>
 					</li>
 					<li>
-						<a href='".$rutafichar."fichar_Borrar_01.php'>
+						<a href='".$rutafichar."Reg_Fichar_Borrar_01.php'>
 							<i class='ic ico19b'></i>BORRA REG.
 						</a>
 					</li>
 					<li>
-						<a href='".$rutafichar."fichar_feedback_recuperar_01.php'>
+						<a href='".$rutafichar."Reg_Fichar_feedback_recuperar_01.php'>
 							<i class='ic ico19b'></i>RECUPERA REG.
 						</a>
 					</li>
 					<li>
-						<a href='".$rutafichar."fichar_feedback_borrar_01.php'>
+						<a href='".$rutafichar."Reg_Fichar_feedback_borrar_01.php'>
 							<i class='ic ico19b'></i>ELIMINA REG.
 						</a>
 					</li>

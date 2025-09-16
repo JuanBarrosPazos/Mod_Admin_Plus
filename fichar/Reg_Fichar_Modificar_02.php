@@ -362,7 +362,7 @@ function process_form(){
 			</table>
 			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='fichar_Crear_tds.php';}
+				function redir(){window.location.href='Fichar_Crear_tds.php';}
 				setTimeout('redir()',8000);
 			</script>";	
 		

@@ -58,8 +58,8 @@ ELIMINANDO TODAS LA TABLAS DE LA BBDD Y DIRECTORIOS DE USUARIOS
 - DESDE LA VERSIÓN CLBasic_V.New11_F2.zip
 	- SE HAN CREADO UNOS ARCHIVOS DE REDONDEO DEL HORARIO DE ENTRADA / SALIDA.
 
-	- fichar/fichar_redondeo_in.php
-	- fichar/fichar_redondeo_out.php
+	- fichar/Fichar_Redondeo_in.php
+	- fichar/Fichar_Redondeo_out.php
 
 	- SE PUEDE COMENTAR EL REDONDEO Y DESCOMENTAR LA HORA ORIGINAL DE CALCULO
 
@@ -71,9 +71,9 @@ ELIMINANDO TODAS LA TABLAS DE LA BBDD Y DIRECTORIOS DE USUARIOS
 
 	- indexqr.php						L.74 & L.196
 	- cam/indexqr.php					L.91 & L.213
-	- fichar/fichar_Crear.php         L.254 & L.303
-	- fichar/fichar_Crear_otr.php     L.370 & L.427
-	- fichar/fichar_Crear_tds.php		L.407 & L.468
+	- fichar/Fichar_Crear.php         L.254 & L.303
+	- fichar/Fichar_Crear_otr.php     L.370 & L.427
+	- fichar/Fichar_Crear_tds.php		L.407 & L.468
 
 
 - SE PUEDE COMENTAR EL REQUIRE Y DESCOMENTAR LA HORA ORIGINAL DE CALCULO

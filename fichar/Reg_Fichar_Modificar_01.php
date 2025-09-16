@@ -33,7 +33,7 @@ function show_form(){
 
 	global $titulo;
 	$titulo = "MODIFICAR  REGISTRO JORNADA";
-	$_SESSION['modifeo'] = "<form name='volver' action='fichar_Modificar_01.php' \">
+	$_SESSION['modifeo'] = "<form name='volver' action='Reg_Fichar_Modificar_01.php' \">
 						<input type='submit' value='VOLVER A FICHAR MODIFICAR SALIDA' class='botonnaranja' />
 							</form>";
 
@@ -132,7 +132,7 @@ function ver_todo(){
 	global $tdplus;
 	$tdplus = "<th class='BorderInfDch'></th>";
 	global $formularioh;
-	$formularioh = "<form name='modifica' action='fichar_Modificar_02.php' method='POST'>";
+	$formularioh = "<form name='modifica' action='Reg_Fichar_Modificar_02.php' method='POST'>";
 	global $formulariof;
 	$formulariof = "<td class='BorderInfDch' align='right'>
 					<input type='submit' value='MODIF DATOS' class='botonnaranja' />

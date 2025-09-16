@@ -8,9 +8,7 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 if($_SESSION['Nivel'] == 'admin'){
 
@@ -23,26 +21,21 @@ if($_SESSION['Nivel'] == 'admin'){
 								
 }else{ require '../Inclu/tabla_permisos.php'; }
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 function show_form(){
 	
-	global $titulo;				$titulo = "RECUPERAR FEEDBACK JORNADA";
+	global $titulo;			$titulo = "BORRAR FEEDBACK JORNADA";
 
 	require 'Inc_Show_Form_tot.php';
 
 }	/* Fin show_form(); */
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ver_todo(){
 		
 	global $db;				global $db_name;
-
 	global $orden;
 	require '../Inclu/orden.php';
 
@@ -51,7 +44,7 @@ function ver_todo(){
 	if($_POST['dy'] == ''){ $dy1 = '';
 							 $dyt1 = date('Y');	
 							 $_SESSION['gyear'] = date('Y');
-	}else {	$dy1 = $_POST['dy'];
+	}else{	$dy1 = $_POST['dy'];
 			$dyt1 = "20".$_POST['dy'];
 			$_SESSION['gyear'] = "20".$_POST['dy'];									
 	}
@@ -63,7 +56,7 @@ function ver_todo(){
 			$_SESSION['gtime'] = $_POST['dm'];	
 	}
 
-	if($_POST['dd'] == ''){ $dd1 = '';}else{ $dd1 = $_POST['dd'];}
+	if($_POST['dd'] == ''){ $dd1 = '';}else{ $dd1 = $_POST['dd']; }
 	
 	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){ $dm1 = date('m');
 													$dd1 = $_POST['dd'];
@@ -74,11 +67,12 @@ function ver_todo(){
 	}
 
 	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;				$vname = "`".$tabla1."_feed`";
+	global $vname;
+	$vname = "`".$tabla1."_feed`";
 
 	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
-	if(!$sh){print("Modifique la entrada L.331".mysqli_error($db).".</br>");
+	if(!$sh){print("Modifique la entrada L.331 ".mysqli_error($db).".</br>");
 	}else{
 		$qn1 = mysqli_query($db,$sh);
 		$qn2 = mysqli_fetch_assoc($qn1);
@@ -86,13 +80,13 @@ function ver_todo(){
 		global $name2;			$name2 = $qn2['Apellidos'];
 	}
 
-	global $qb;				global $sqlb;
+	global $qb;			global $sqlb;
 	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			///////////////////////			***********  		///////////////////////
 
-	global $refses;			$refses = $_SESSION['usuarios'];
+	global $refses;				$refses = $_SESSION['usuarios'];
 
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
@@ -101,8 +95,8 @@ function ver_todo(){
 					</br>".mysqli_error($db)."</br>");
 	}else{
 		while($rowun = mysqli_fetch_assoc($qun)){	
-				global $name1;			$name1 = $rowun['Nombre'];
-				global $name2;			$name2 = $rowun['Apellidos'];
+				global $name1;				$name1 = $rowun['Nombre'];
+				global $name2;				$name2 = $rowun['Apellidos'];
 		}
 	}
 
@@ -110,34 +104,34 @@ function ver_todo(){
 	global $feedtot;			$feedtot = "nofeed";
 	global $nodata;				$nodata = "NO HAY DATOS";
 	global $ycons;
-	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{  $ycons =	"20".$_POST['dy']; }
-
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy']; }
 	global $twhile;
 	$twhile = "<tr><th colspan=8 class='BorderInf'>
 				".$name1." ".$name2.". Ref: ".$refses."
 				.</th></tr>";
+
 	global $tdplus;
 	$tdplus = "<th class='BorderInfDch'>DELETE</th>
 				<th class='BorderInfDch'></th>";
 	global $formularioh;
-	$formularioh = "<form name='modifica' action='fichar_feedback_recuperar_02.php' method='POST'>";
+	$formularioh = "<form name='modifica' action='Reg_Fichar_feedback_borrar_02.php' method='POST'>";
+	global $rowb;
 	global $formulariof;
 	$formulariof = "<td class='BorderInfDch' align='right'>
-						<input type='submit' value='RECUPERAR REG.' class='botonverde' />
+						<input type='submit' value='BORRAR REG.' class='botonrojo' />
 						<input type='hidden' name='oculto2' value=1 />
-					</td>";
-	global $colspana;				$colspana = "8";
-	global $colspanb;				$colspanb = "6";
+					</td>
+					</form>";
+	global $colspana;			$colspana = "8";
+	global $colspanb;			$colspanb = "6";
 
 	require 'Inc_Fichar_While_Total.php';
 
-			///////////////////////			***********  		///////////////////////
-		
-}	// FIN ver_todo();
+			////////////////////		**********  		////////////////////
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+}	/* Final ver_todo(); */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 	
 function master_index(){
 		
@@ -146,9 +140,7 @@ function master_index(){
 		
 } 
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function info(){
 
@@ -165,8 +157,8 @@ function info(){
 	require '../Inclu/orden.php';
 	
 	if(isset($_POST['todo'])){
-		$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS FEEDBACK RECUPERAR. ".$orden;
-		$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";
+					$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS FEEDBACK BORRAR. ".$orden;
+					$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";
 	}
 
 	$ActionTime = date('H:i:s');
@@ -174,7 +166,7 @@ function info(){
 	global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/log";
 	
 	global $text;
-	$text = PHP_EOL."- JL CONSULTAR TODOS FEEDBACK RECUPERAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
+	$text = PHP_EOL."- JL CONSULTAR TODOS FEEDBACK BORRAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
 	
 	$logdocu = $_SESSION['usuarios'];
 	$logdate = date('Y-m-d');
@@ -186,16 +178,10 @@ function info(){
 
 }
 
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 	require '../Inclu/Admin_Inclu_footer.php';
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
+		
 /* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 
 ?>

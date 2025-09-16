@@ -63,7 +63,7 @@ function process_pinqr(){
 				$tin = date('H:i:s');
 			*/
 
-			require 'fichar/fichar_redondeo_in.php';
+			require 'fichar/Fichar_Redondeo_in.php';
 
 			global $dout;			$dout = '';
 			global $tout;			$tout = '00:00:00';
@@ -128,7 +128,7 @@ function process_pinqr(){
 			$tout = date('H:i:s');
 		*/
 
-		require 'fichar/fichar_redondeo_out.php';
+		require 'fichar/Fichar_Redondeo_out.php';
 
 			////////////////////		***********  		////////////////////
 

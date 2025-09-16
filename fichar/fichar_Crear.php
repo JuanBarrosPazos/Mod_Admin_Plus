@@ -58,7 +58,7 @@ function errors(){
 function entrada(){
 	
 	global $tablarin;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 
 	global $db;				global $db_name;
 
@@ -107,7 +107,7 @@ function show_form(){
 			$tin = date('H:i:s');
 		*/
 
-		require 'fichar_redondeo_in.php';
+		require 'Fichar_Redondeo_in.php';
 
 			////////////////////		***********  		////////////////////
 
@@ -145,7 +145,7 @@ function show_form(){
 			$tout = date('H:i:s');
 		*/
 
-		require 'fichar_redondeo_out.php';
+		require 'Fichar_Redondeo_out.php';
 
 			////////////////////		***********  		////////////////////
 
@@ -170,7 +170,7 @@ function show_form(){
 	}
 
 		global $ficharCrear;		$ficharCrear = 1;
-		require 'fichar_Crear_Botonera.php';
+		require 'Fichar_Crear_Botonera.php';
 	
 } // FIN function show_form
 
@@ -260,7 +260,7 @@ function salida(){
 	////////////////////		**********  		////////////////////
 	
 	global $tablarout;
-	require 'tablas_resum_fichar.php';
+	require 'Tablas_Resum_Fichar.php';
 
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

@@ -254,7 +254,7 @@ function show_ficha(){
 			</li>
 			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
 			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
+		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
 			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
@@ -283,7 +283,7 @@ function show_ficha(){
 			</li>
 			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
 			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/fichar_Crear.php' enctype='multipart/form-data' style='display: inline-block; margin-right:10%;'>
+		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display: inline-block; margin-right:10%;'>
 			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
 			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
 			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
