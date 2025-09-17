@@ -4,7 +4,7 @@
     if($ExportBotonera==1){
         $link1 = "";
     }else{
-        $link1 = "<a href='Reg_Fichar_Modificar.php'>
+        $link1 = "<a href='Reg_Fichar_Ver.php'>
 			<button type='button' title='MODIFICAR HORARIOS SALIDA' class='botonverde imgButIco BbddBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 		</a>";
     }
@@ -12,7 +12,7 @@
     if($ExportBotonera==2){
         $link2 = "";
     }else{
-        $link2 = "<a href='Reg_Fichar_Modificar_Error.php'>
+        $link2 = "<a href='Reg_Fichar_Errors.php'>
 			<button type='button' title='MODIFICAR ERRORES HORARIOS' class='botonverde imgButIco Clock2Black' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 		</a>";
     }

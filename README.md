@@ -11,7 +11,7 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.15B 2025/08/15
+#### Mod_Admin_Plus V25.09.17B 2025/08/17
 	- Ajustes generales en Fichar...
 ----
 #### Mod_Admin_Plus V25.09.14B 2025/08/14

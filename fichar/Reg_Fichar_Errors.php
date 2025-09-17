@@ -121,7 +121,7 @@ function ver_todo(){
 
 	global $tdplus;				$tdplus = "<th class='BorderInfDch'></th>";
 	global $formularioh;
-	$formularioh = "<form name='modifica' action='Reg_Fichar_Modificar_02.php' method='POST'>";
+	$formularioh = "<form name='modifica' action='Reg_Fichar_Modificar.php' method='POST'>";
 	global $formulariof;
 	$formulariof = "<td class='BorderInfDch' align='right'>
 					<input type='submit' value='MODIF ERRORES' class='botonnaranja' />

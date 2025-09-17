@@ -1,6 +1,6 @@
 <?php
 
-	global $CheckDatos;
+	global $CheckDatos;		global $CheckBin;
 
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
 									$defaults = $_POST;
@@ -8,6 +8,7 @@
 	}elseif(isset($_POST['todo'])){
 
 		if(!isset($_POST['cherror'])){ $CheckDatos = ""; }else{ $CheckDatos = "checked='checked'"; }
+		if(!isset($_POST['chbin'])){ $CheckBin = ""; }else{ $CheckBin = "checked='checked'"; }
 		//echo "*** ".$_POST['cherror']." *** ".$CheckDatos."<br>";
 		$defaults = array ('id' => isset($_POST['id']),
 							'dy' => $_POST['dy'],
@@ -15,7 +16,8 @@
 							'dd' => $_POST['dd'],
 							'Orden' => @$_POST['Orden'],
 							'usuarios' => $_SESSION['usuarios'],
-							'cherror' => @$_POST['cherror'],);
+							'cherror' => @$_POST['cherror'],
+							'chbin' => @$_POST['chbin'],);
 	}
 	
 	$dm = array('' => 'MONTH','01' => 'ENERO','02' => 'FEBRER','03' => 'MARZO',
@@ -77,7 +79,7 @@
 			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
 		}
 
-		global $CheckDatos;
+		global $CheckDatos;		global $CheckBin;
 		if($_SESSION['usuarios'] != ''){
 			require "../Users/".$_SESSION['usuarios']."/ayear.php";
 			print("<div class='centradiv' style='padding:0.4em;'>
@@ -113,18 +115,32 @@
 								if($optiondd == @$defaults['dd']){ print ("selected = 'selected'"); }
 								print ("> $labeldd </option>");
 							}	
-				print ("</select>
+				print("</select>
 						<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
 					<button type='submit' title='SELECCONAR USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 						<input type='hidden' name='todo' value=1 />
 
-				<div style='text-align:left; margin: 0.2em 0.4em;'>
-					<font color='#F1BD2D'>* </font>
+				<div style='clear:both'></div>");
+
+				if(($CheckDatos!='')&&($CheckBin!='')){
+					print("<div class='centradiv alertdiv'>SELECCIONE ERRORES, PAPELERA O NADA</div>");
+					$CheckBin = '';			$CheckDatos = '';
+				}
+
+				print("
+					<div style='display:inline-block; margin: 0.2em 0.4em;'>
+						<font color='#F1BD2D'>* </font>
 					<input type='checkbox' name='cherror' value='".@$defaults['cherror']."' ".$CheckDatos." />
-						VER SÓLO ERRORES
-				</div>
-					</form>
-						</div>"); /* FIN print */
+							VER ERRORES
+					</div>
+					<div style='display:inline-block; margin: 0.2em 0.4em;'>
+						<font color='#F1BD2D'>* </font>
+						<input type='checkbox' name='chbin' value='".@$defaults['chbin']."' ".$CheckBin." />
+							VER PAPELERA
+					</div>
+				</form>
+			</div>"); /* FIN formulario */
+
 		} // FIN 2º if
 	} // FIN 1º if Nivel Usuarios
 

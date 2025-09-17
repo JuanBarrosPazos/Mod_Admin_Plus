@@ -59,9 +59,7 @@ function process_form(){
 	
 	$tabla = "<table class='TFormAdmin alertdiv'>
 				<tr>
-					<th colspan=2>
-						REGISTRO BORRADO
-					</th>
+					<th colspan=2>REGISTRO BORRADO</th>
 				</tr>
 				<tr>
 					<td>USER NAME</td>
@@ -90,7 +88,7 @@ function process_form(){
 				</tr>
 				<tr>
 					<td colspan=2>
-						<form name='volver' action='Reg_Fichar_Modificar.php'>
+						<form name='volver' action='Reg_Fichar_Ver.php'>
 				<button type='submit' title='INICIO FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 						</form>
 					</td>
@@ -98,7 +96,7 @@ function process_form(){
 			</table>
 			<embed src='../audi/delete_file.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
-				function redir(){window.location.href='Reg_Fichar_Modificar.php';}
+				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
 			</script>";
 	
@@ -157,7 +155,7 @@ function show_form(){
 		$defaults = $_POST;
 	}elseif(isset($_POST['oculto2'])){
 		$defaults = array (	'id' => $_POST['id'],
-						   'ref' => $_SESSION['usuarios'],
+						   	'ref' => $_SESSION['usuarios'],
 							'name1' => $_POST['name1'],
 							'name2' => $_POST['name2'],
 							'din' => $_POST['din'],
@@ -168,11 +166,11 @@ function show_form(){
 	}
 
 	print("<table class='TFormAdmin'>
-				<tr>
-					<td colspan=2 style='text-align:center !important;color:#F1BD2D;'>
-						BORRAR ENTRADA
-					</td>
-				</tr>
+			<tr>
+				<td colspan=2 style='text-align:center !important;color:#F1BD2D;'>
+					BORRAR ENTRADA
+				</td>
+			</tr>
 			<tr>
 				<td>ID</td>
 				<td>
@@ -226,7 +224,7 @@ function show_form(){
 					<input type='hidden' name='oculto' value=1 />
 				<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 		</form>	
-			<a href='Reg_Fichar_Modificar.php'>
+			<a href='Reg_Fichar_Ver.php'>
 				<button type='button' title='INICIO FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 			</a>											
 				</td>

@@ -16,9 +16,9 @@ if($_SESSION['Nivel'] == 'admin'){
 
 	master_index();
 
-	if(isset($_POST['todo'])){	show_form();							
-								ver_todo();
-								info();
+	if(isset($_POST['todo'])){ show_form();							
+							   ver_todo();
+							   info();
 	}else{ show_form(); }
 								
 }else{ require '../Inclu/tabla_permisos.php'; }
@@ -28,8 +28,8 @@ if($_SESSION['Nivel'] == 'admin'){
 				 ////////////////////				  ///////////////////
 
 function show_form(){
-	
-	global $titulo;				$titulo = "RECUPERAR FEEDBACK JORNADA";
+
+	global $titulo;			$titulo = "FILTRO REGISTROS ";
 
 	require 'Inc_Show_Form_tot.php';
 
@@ -41,111 +41,91 @@ function show_form(){
 
 function ver_todo(){
 		
-	global $db;				global $db_name;
-
+	global $db;
 	global $orden;
 	require '../Inclu/orden.php';
 
-	global $dyt1;
+	global $dyt1;		global $dy1;	global $dm1;		global $dd1;
 	
 	if($_POST['dy'] == ''){ $dy1 = '';
-							 $dyt1 = date('Y');	
-							 $_SESSION['gyear'] = date('Y');
-	}else {	$dy1 = $_POST['dy'];
+							$dyt1 = date('Y');	
+							$_SESSION['gyear'] = date('Y');
+	}else{	$dy1 = $_POST['dy'];
 			$dyt1 = "20".$_POST['dy'];
 			$_SESSION['gyear'] = "20".$_POST['dy'];									
 	}
 
 	if($_POST['dm'] == ''){ //$dm1 = '';
-							 $dm1 = "-".date('m')."-";
-							 $_SESSION['gtime'] = '';
+							$dm1 = "-".date('m')."-";
+							$dm1 = "-%-";
+							$_SESSION['gtime'] = '';
 	}else{	$dm1 = "-".$_POST['dm']."-";
 			$_SESSION['gtime'] = $_POST['dm'];	
 	}
 
-	if($_POST['dd'] == ''){ $dd1 = '';}else{ $dd1 = $_POST['dd'];}
+	if($_POST['dd'] == ''){ $dd1 = ''; }else{ $dd1 = $_POST['dd']; }
 	
-	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){ $dm1 = date('m');
+	global $fil;
+	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){	$dm1 = date('m');
 													$dd1 = $_POST['dd'];
-													global $fil;
 													$fil = $dy1."-%".$dm1."%-".$dd1."%";
-	}else{ 	global $fil;												
-			$fil = "%".$dy1.$dm1.$dd1."%";
-	}
+	}else{ $fil = "%".$dy1.$dm1.$dd1."%"; }
 
 	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;				$vname = "`".$tabla1."_feed`";
+	global $vname;		$vname = "`".$tabla1."_".$dyt1."`";
 
-	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	global $ruta;		$ruta = '../';
+	require 'Inc_Suma_Todo.php';
 
-	global $name1;			global $name2;
-	if(!$sh){print("Modifique la entrada L.331".mysqli_error($db).".</br>");
+	global $sqlb;		global $TablaTitulo;
+	if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
+		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `ttot` = '00:00:01' AND `del` = 'false') ORDER BY $orden ";
+		$TablaTitulo = "ERRORES ".$dyt1.": ";
+	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
+		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `del` = 'true') ORDER BY $orden ";
+		$TablaTitulo = "PAPELERA ".$dyt1.": ";
 	}else{
-		$qn1 = mysqli_query($db,$sh);
-		$qn2 = mysqli_fetch_assoc($qn1);
-		$name1 = strtoupper($qn2['Nombre']);
-		$name2 = strtoupper($qn2['Apellidos']);
+		$sqlb = "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
+		$TablaTitulo = "TODO: ";
 	}
-
-	global $qb;				global $sqlb;
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
+	echo "** ".$sqlb."<br>";
+	global $qb;
 	$qb = mysqli_query($db, $sqlb);
 	
-			///////////////////////			***********  		///////////////////////
+			////////////////////		**********  		////////////////////
 
 	global $refses;			$refses = $_SESSION['usuarios'];
 
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
-	global $name1;			global $name2;
-	if(!$qun){print("<font color='#FF0000'>Se ha producido un error L.308: </font>
-					</br>".mysqli_error($db)."</br>");
+
+	global $name1;		global $name2;
+	if(!$qun){ print("ERROR SQL L.97 ".mysqli_error($db)."</br>");
 	}else{
 		while($rowun = mysqli_fetch_assoc($qun)){	
-			$name1 = strtoupper($rowun['Nombre']);
-			$name2 = strtoupper($rowun['Apellidos']);
+				$name1 = strtoupper($rowun['Nombre']);
+				$name2 = strtoupper($rowun['Apellidos']);
 		}
 	}
 
-	global $pdm;				$pdm = "pdm";
-	global $feedtot;			$feedtot = "nofeed";
 	global $ycons;
-	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{  $ycons =	"20".$_POST['dy']; }
-
-	global $twhile;
-	$twhile = "<tr><th colspan=8 class='BorderInf'>
-				".$name1." ".$name2.". Ref: ".$refses."
-				.</th></tr>";
-	global $tdplus;
-	$tdplus = "<th class='BorderInfDch'>DELETE</th>
-				<th class='BorderInfDch'></th>";
-	global $formularioh;
-	$formularioh = "<form name='modifica' action='Reg_Fichar_feedback_recuperar_02.php' method='POST'>";
-	global $formulariof;
-	$formulariof = "<td class='BorderInfDch' align='right'>
-						<input type='submit' value='RECUPERAR REG.' class='botonverde' />
-						<input type='hidden' name='oculto2' value=1 />
-					</td>";
-	global $colspana;				$colspana = "8";
-	global $colspanb;				$colspanb = "6";
+	if($_POST['dy'] == ''){ $ycons = date('Y'); }else{ $ycons =	"20".$_POST['dy']; }
 
 	require 'Inc_Fichar_While_Total.php';
 
-			///////////////////////			***********  		///////////////////////
-		
-}	// FIN ver_todo();
+}	/* Final ver_todo(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-function master_index(){
+	function master_index(){
 		
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-} 
+		} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -156,7 +136,7 @@ function info(){
 	global $dd;
 	if($_POST['dd'] == ''){ $dd = "DIA TODOS"; }else{ $dd = $_POST['dd']; }
 	global $dm;
-	if($_POST['dm'] == ''){ $dm = "MES TODOS"; }else{ $dm = $_POST['dm']; }
+	if($_POST['dm'] == ''){ $dm = "MES ACTUAL"; }else{ $dm = $_POST['dm']; }
 	global $dy;
 	if($_POST['dy'] == ''){ $dy = date('Y'); }else{ $dy = "20".$_POST['dy']; }
 	
@@ -166,18 +146,19 @@ function info(){
 	require '../Inclu/orden.php';
 	
 	if(isset($_POST['todo'])){
-		$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS FEEDBACK RECUPERAR. ".$orden;
+		$filtro = PHP_EOL."\tFiltro => CONSULTAR TODOS MODIFICAR. ".$orden;
 		$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";
 	}
 
 	$ActionTime = date('H:i:s');
 
-	global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/log";
+	global $dir;
+	if($_SESSION['Nivel'] == 'admin'){ $dir = "../Users/".$_SESSION['ref']."/log"; }
 	
 	global $text;
-	$text = PHP_EOL."- JL CONSULTAR TODOS FEEDBACK RECUPERAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
+	$text = PHP_EOL."- CONSULTAR TODOS MODIFICAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
 	
-	$logdocu = $_SESSION['usuarios'];
+	$logdocu = $_SESSION['ref'];
 	$logdate = date('Y-m-d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate."_".$logdocu.".log";
@@ -185,7 +166,7 @@ function info(){
 	fwrite($log, $logtext);
 	fclose($log);
 
-}
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -198,5 +179,4 @@ function info(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
-
 ?>

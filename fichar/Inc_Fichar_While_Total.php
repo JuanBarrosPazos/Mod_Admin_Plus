@@ -9,7 +9,7 @@
 			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>");
 	}else{ 
 
-		if(($_POST['dd']=="")&&(!isset($_POST['cherror']))){
+		if(($_POST['dd']=="")&&(!isset($_POST['cherror'])&&(!isset($_POST['chbin'])))){
 			print ("<div class='centradiv alertdiv'>
 						".$name1." ".$name2." Ref: ".$refses."<br>
 						".$dyt1." TOTALES CONSULTA<br>
@@ -30,6 +30,19 @@
 						<td></td>
 					</tr>");
 		
+		global $action1;	global $action2;	global $botonTit1;		global $botonTit2;
+		if((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
+			$action1 = "Reg_Fichar_Bin_Recuperar.php";
+			$botonTit1 = "RECUPERAR REGISTRO";
+			$action2 = "Reg_Fichar_Bin_Borrar.php";
+			$botonTit2 = "BORRAR PAPELERA";
+		}else{
+			$action1 = "Reg_Fichar_Modificar.php";
+			$botonTit1 = "MODIFICAR REGISTROS";
+			$action2 = "Reg_Fichar_Borrar.php";
+			$botonTit2 = "BORRAR DATOS";
+		}
+		
 		$countbgc = 0;
 		while($rowb = mysqli_fetch_assoc($qb)){
 			global $sty;
@@ -45,7 +58,7 @@
 
 			print ("<tr>
 					<td align='center' style='".$sty.$bgcolor."'>
-				<form name='modifica' action='Reg_Fichar_Modificar_02.php' method='POST' style='display:inline-block;'>
+			<form name='modifica' action='".$action1."' method='POST' style='display:inline-block;'>
 					".$rowb['id']."
 					</td>
 					<td style='".$sty.$bgcolor."'>".$rowb['din']."</td>
@@ -57,14 +70,14 @@
 
 			require 'Inc_Input_Row_Total.php';
 
-			print("<button type='submit' title='MODIFICAR REGISTROS' class='botonverde imgButIco Clock2Black' style='vertical-align:middle;' ></button>
+			print("<button type='submit' title='".$botonTit1."' class='botonverde imgButIco Clock2Black' style='vertical-align:middle;' ></button>
 				</form>
 
-				<form name='modifica' action='Reg_Fichar_Borrar_02.php' method='POST' style='display:inline-block;'>");
+			<form name='modifica' action='".$action2."' method='POST' style='display:inline-block;'>");
 
 			require 'Inc_Input_Row_Total.php';
 
-			print("<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
+			print("<button type='submit' title='".$botonTit2."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
 				</form>
 					</td>
 				</tr>");

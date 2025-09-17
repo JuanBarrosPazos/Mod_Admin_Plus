@@ -33,7 +33,7 @@
     }else{
         $link4 = "<a href='../Admin/Admin_Ver.php'>
 			<input type='hidden' name='time' value='".@$_SESSION['time']."' />
-			<button type='submit' title='FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+			<button type='submit' title='INICIO EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 			<input type='hidden' name='grafico2' value=1 />
 		</a>";
     }
