@@ -704,7 +704,7 @@ function show_form($errors=[]){
 	}else{ $defaults = array('host' => '','user' => '','pass' => '','name' => '','clave' => '',); }
 
 	if($errors){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 					SOLUCIONE ESTOS ERRORES<br>");
 		global $text;
 		$text = "show_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
@@ -728,7 +728,7 @@ function show_form($errors=[]){
 	if($_SESSION['inst'] == "inst"){ 
 		print("<table class='centradiv'>".$link."</table>");		
 	}else{
-	print("<div class='centradiv' style='color: #F1BD2D; border-color:#F1BD2D;'>
+	print("<div class='centradiv alertdiv'>
 			INTRODUZCA LOS DATOS DE CONEXI&Oacute;N A LA BBDD.
 			<br>
 			SE CREAR&Aacute; EL ARCHIVO DE CONEXI&Oacute;N Y LAS TABLAS DE CONFIGURACI&Oacute;N.

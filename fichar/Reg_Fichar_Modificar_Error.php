@@ -34,10 +34,6 @@ function show_form(){
 	global $titulo;
 	$titulo = "BORRAR  REGISTRO ERROR JORNADA";
 
-	$_SESSION['modifeo'] = "<form name='volver' action='Reg_Fichar_Modificar_Error.php' \">
-							<input type='submit' value='VOLVER A FICHAR MODIFICAR ERROR' class='botonnaranja' />
-							</form>";
-
 	require 'Inc_Show_Form_tot.php';
 
 	}	/* Fin show_form(); */

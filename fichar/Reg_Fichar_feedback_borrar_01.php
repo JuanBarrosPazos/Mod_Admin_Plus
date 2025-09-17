@@ -140,7 +140,7 @@ function master_index(){
 	require '../Inclu_MInd/rutafichar.php';
 	require '../Inclu_MInd/Master_Index.php';
 		
-} 
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 

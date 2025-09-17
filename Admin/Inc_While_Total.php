@@ -8,7 +8,7 @@
 			show_form();	
 	}else{
 		if(mysqli_num_rows($qb)== 0){
-			print ("<div class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;padding-bottom:0.8em;'>
+			print ("<div class='centradiv alertdiv'>
 						<div style='margin:0.8em auto 0.8em auto;'>NO HAY DATOS</div>".$inicioadmincrear.$inciobajas."
 					</div>");
 		}else{ 	global $page;

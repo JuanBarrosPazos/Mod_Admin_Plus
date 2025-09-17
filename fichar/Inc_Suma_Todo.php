@@ -93,8 +93,8 @@
 	// TOTAL SEGUNDOS MENOS (HORAS X 36OOS/H) - (MINUTOS X 60M/H))
 	$segundos = $totsec-($horas*3600)-($minutos*60);
 
-	if($dias == 1){ global $t;			$t = " DIA LABORAL || ";
-	}elseif($dias != 1 ){ global $t;	$t = " DIAS LABORALES || "; }
+	if($dias == 1){ global $t;			$t = " DIA || ";
+	}elseif($dias != 1 ){ global $t;	$t = " DIAS || "; }
 							
 	global $sumatodo;
 	$sumatodo = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";

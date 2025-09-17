@@ -1,16 +1,22 @@
 <?php
 
+	global $CheckDatos;
+
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
 									$defaults = $_POST;
 									// print("* ".$_SESSION['usuarios']);
 	}elseif(isset($_POST['todo'])){
+
+		if(!isset($_POST['cherror'])){ $CheckDatos = ""; }else{ $CheckDatos = "checked='checked'"; }
+		//echo "*** ".$_POST['cherror']." *** ".$CheckDatos."<br>";
 		$defaults = array ('id' => isset($_POST['id']),
 							'dy' => $_POST['dy'],
 							'dm' => $_POST['dm'],
 							'dd' => $_POST['dd'],
-							'Orden' => isset($ordenar),
-							'usuarios' => $_SESSION['usuarios']);
-	} 
+							'Orden' => @$_POST['Orden'],
+							'usuarios' => $_SESSION['usuarios'],
+							'cherror' => @$_POST['cherror'],);
+	}
 	
 	$dm = array('' => 'MONTH','01' => 'ENERO','02' => 'FEBRER','03' => 'MARZO',
 				'04' => 'ABRIL','05' => 'MAYO','06' => 'JUNIO','07' => 'JULIO',
@@ -26,7 +32,7 @@
 				'24' => '24','25' => '25','26' => '26','27' => '27',
 				'28' => '28','29' => '29','30' => '30','31' => '31');
 										
-	$ordenar = array('`din` ASC' => 'Fecha In Asc',
+	$orden = array('`din` ASC' => 'Fecha In Asc',
 					'`din` DESC' => 'Fecha In Desc',
 					'`dout` ASC' => 'Fecha Out Asc',
 					'`dout` DESC' => 'Fecha Out Desc',
@@ -42,7 +48,10 @@
 
 		global $db;
 		global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-		global $sqlu;			$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+		global $sqlu;
+		//$sqlu =  "SELECT * FROM $tablau WHERE (`del` = 'false' AND `nivel` <> 'locked') ORDER BY `ref` ASC ";
+		$sqlu =  "SELECT * FROM $tablau WHERE `nivel` <> 'locked' ORDER BY `ref` ASC ";
+
 		$qu = mysqli_query($db, $sqlu);
 		if(!$qu){
 				print("Modifique la entrada L.49 ".mysqli_error($db)."<br>");
@@ -52,7 +61,7 @@
 				if($rowu['ref'] == @$defaults['usuarios']){
 									print ("selected = 'selected'");
 				}
-				print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+				print ("> ".$rowu['Apellidos'].", ".$rowu['Nombre']." </option>");
 			}
 		}  
 
@@ -61,14 +70,14 @@
 				<input type='hidden' name='oculto1' value=1 />
 			</form>
 				</div>"); 
-
+				
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
+
 		if($_SESSION['usuarios'] == ''){ 
-			print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.4em;' >
-						SELECCIONE UN USUARIO
-					</div>");
+			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
 		}
 
+		global $CheckDatos;
 		if($_SESSION['usuarios'] != ''){
 			require "../Users/".$_SESSION['usuarios']."/ayear.php";
 			print("<div class='centradiv' style='padding:0.4em;'>
@@ -78,7 +87,7 @@
 						
 			print ("<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
 						<select name='Orden'>");
-							foreach($ordenar as $option => $label){
+							foreach($orden as $option => $label){
 									print ("<option value='".$option."' ");
 									if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
 									print ("> $label </option>");
@@ -108,6 +117,12 @@
 						<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
 					<button type='submit' title='SELECCONAR USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 						<input type='hidden' name='todo' value=1 />
+
+				<div style='text-align:left; margin: 0.2em 0.4em;'>
+					<font color='#F1BD2D'>* </font>
+					<input type='checkbox' name='cherror' value='".@$defaults['cherror']."' ".$CheckDatos." />
+						VER SÓLO ERRORES
+				</div>
 					</form>
 						</div>"); /* FIN print */
 		} // FIN 2º if

@@ -2,7 +2,7 @@
 
 if(isset($_POST['oculto'])){
 	if($form_errors = validate_form()){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				NO SE HA ENVIADO EL FORMULARIO.<br>
 		<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
 				<button type='submit' title='CONTACTOS WEB MASTER' class='botonnaranja imgButIco WebBlack' style='vertical-align:top;' ></button>

@@ -213,7 +213,7 @@ function show_form($errors=[]){
 	$nuser = (mysqli_num_rows($user))-1; // NO SE CUENTA EL WEBMASTER...
 	
 	if($nuser >= $_SESSION['nuser']){ 
-		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6em;'>
+		print("<div class='centradiv alertdiv'>
 					<font color='red'>ACCESO RESTRINGIDO</font>	
 				</br>
 		EMPLEADOS PERMITIDOS: ".$_SESSION['nuser'].".<br>Nº EMPLEADOS: ".$nuser.".<br>

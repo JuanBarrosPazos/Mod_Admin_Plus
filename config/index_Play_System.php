@@ -160,7 +160,7 @@ function table_desblock(){
 	require 'Inclu/ipCliente.php';
 
 	global $table_desblock;
-	$table_desblock = print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6em;'>
+	$table_desblock = print("<div class='centradiv alertdiv'>
 							IP ".$ipCliente." BLOQUEADA HASTA LAS ".$_SESSION['desbloqh']."
 						<br>
 			<a href='Inclu/desblock_ip.php'>
@@ -645,7 +645,7 @@ function show_ficha(){
 	$rp = mysqli_fetch_assoc($q1);
 	
 	if($rp['del']=="true"){
-		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				ACCESO RESTRINGIDO POR EL WEB MASTER
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
@@ -757,7 +757,7 @@ function process_pin(){
 	$_SESSION['ref'] = $rp['ref'];
 	
 	if($rp['del']=="true"){
-		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				ACCESO RESTRINGIDO POR EL WEB MASTER
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
@@ -870,11 +870,9 @@ function process_pin(){
 	
 		ayear();
 		
-	}else{ print("<div class='centradiv' style='border-color:#F1BD2D;' >
-					<font color='#F1BD2D'>
+	}else{ print("<div class='centradiv alertdiv' >
 						NO EXISTE EL USUARIO.<br>
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
-					</font>
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
@@ -947,10 +945,8 @@ function pin_out(){
 	global $ttot;		global $text;
 	if(($ttoth > 9)||($ttotd > 0)){
 		
-		print("<div class='centradiv' style='border-color:#F1BD2D;'>
-					<font color='#F1BD2D'>
+		print("<div class='centradiv alertdiv'>
 						NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
 				</div>");
 		
 					$ttot = '00:00:01';
@@ -1358,7 +1354,7 @@ function show_form($errors=[]){
 	}
 								   
 	if($errors){	
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				<!--
 					SOLUCIONE ESTOS ERRORES<br>
 					ERROR ACCESO USER<br>
@@ -1480,9 +1476,8 @@ function salir(){
 	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
 	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
 	unset($_SESSION['Tlf2']);			unset($_SESSION['nclient']);
-	echo "<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
-					YOU HAVE CLOSE SESSION
-			</div>";
+	
+	echo "<div class='centradiv alertdiv'>YOU HAVE CLOSE SESSION</div>";
 }
 
 				   ////////////////////				   ////////////////////

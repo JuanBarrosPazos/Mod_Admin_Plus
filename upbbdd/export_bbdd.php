@@ -5,7 +5,7 @@
 	global $datein; 	$datein = date('Y.m.d_H.i.s');
     //	$datein = date('Y.m.d');
 	
-	print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.8em !important;'>
+	print("<div class='centradiv alertdiv'>
             EXPORTADA TABLA: ".strtoupper($db_name." => ".$db_name_table)."</div>");
 
 				

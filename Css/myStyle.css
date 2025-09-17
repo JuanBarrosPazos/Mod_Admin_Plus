@@ -35,7 +35,6 @@ table, .centradiv {
 	text-align: right !important;
 }
 
-
 embed {
 	display: none !important;
 	visibility: hidden !important;
@@ -63,6 +62,11 @@ embed {
 	padding: 0.1em;
 	width: fit-content;
   	/*border: solid 0.1em #CCC !important;*/
+}
+.alertdiv{
+	border-color:#F1BD2D;
+	color:#F1BD2D;
+	padding:0.4em;
 }
 .liCentra{
 	text-align: center !important;

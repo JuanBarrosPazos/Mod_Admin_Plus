@@ -8,15 +8,9 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-	/*	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
-	$sqld =  "SELECT * FROM $table_name_a WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
-	$qd = mysqli_query($db, $sqld);
-	$rowd = mysqli_fetch_assoc($qd);
-	*/
-
-///////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 if($_SESSION['Nivel'] == 'admin'){
 
@@ -30,7 +24,9 @@ if($_SESSION['Nivel'] == 'admin'){
 
 }else{ require '../Inclu/tabla_permisos.php'; } 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function suma_todo(){
 		
@@ -53,60 +49,74 @@ function suma_todo(){
 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function process_form(){
 	
 	global $db;				global $db_name;	
 	
-	$tabla = "<table class='TFormAdmin'>
+	$tabla = "<table class='TFormAdmin alertdiv'>
 				<tr>
 					<th colspan=2>
-						HA BORRADO ".$_POST['name1']." ".$_POST['name2']."
+						REGISTRO BORRADO
 					</th>
+				</tr>
+				<tr>
+					<td>USER NAME</td>
+					<td>".$_POST['name1']." ".$_POST['name2']."</td>
 				</tr>
 				<tr>
 					<td>ID</td><td>".$_POST['id']."</td>
 				</tr>
 				<tr>
-					<td>REFERENCIA</td><td>".$_SESSION['usuarios']."</td>
+					<td>USER REF</td><td>".$_SESSION['usuarios']."</td>
 				</tr>
 				<tr>
-					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
+					<td>DATE IN</td><td>".$_POST['din']."</td>
 				</tr>
 				<tr>
-					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
+					<td>TIME IN</td><td>".$_POST['tin']."</td>
 				</tr>
 				<tr>
-					<td>FECHA SALIDA</td><td>".$_POST['dout']."</td>
+					<td>DATE OUT</td><td>".$_POST['dout']."</td>
 				</tr>
 				<tr>
-					<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
+					<td>TIME OUT</td><td>".$_POST['tout']."</td>
 				</tr>
 				<tr>
-					<td>HORAS REALIZADAS</td><td>".$_POST['ttot']."</td>
+					<td>TIME TOTAL</td><td>".$_POST['ttot']."</td>
 				</tr>
 				<tr>
-					<td colspan=2>".$_SESSION['modifeo']."</td>
+					<td colspan=2>
+						<form name='volver' action='Reg_Fichar_Modificar.php'>
+				<button type='submit' title='INICIO FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+						</form>
+					</td>
 				</tr>
 			</table>
 			<embed src='../audi/delete_file.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Modificar.php';}
 				setTimeout('redir()',8000);
-			</script>";	
-		
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
-
-	$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id` = '$_POST[id]' LIMIT 1 ";
+			</script>";
 	
-	if(mysqli_query($db, $sql)){ 
-			feedback();
+	global $diny;			$diny = substr($_POST['din'],0,4);
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$diny ."`";
+	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1."_".date('Y')."`";
+
+	$FBaja = date('Y-m-d H:i:s');
+
+	$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+	echo "** ".$sql."<br>";
+	
+	if(mysqli_query($db, $sql)){
+
 			print($tabla);
 			suma_todo();
-			global $dir;
-			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 			global $nm;
 			$nm = substr($_POST['din'],5,2);
 			$nm = str_replace(":","",$nm);
@@ -129,13 +139,15 @@ function process_form(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 
-	}else{	print("ERROR SQL ".mysqli_error($db))."</br>";
+	}else{	print("ERROR SQL L.102 ".mysqli_error($db))."</br>";
 			show_form ();
 	}
 	
 } // FIN fucntion process_form
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function show_form(){
 
@@ -156,6 +168,11 @@ function show_form(){
 	}
 
 	print("<table class='TFormAdmin'>
+				<tr>
+					<td colspan=2 style='text-align:center !important;color:#F1BD2D;'>
+						BORRAR ENTRADA
+					</td>
+				</tr>
 			<tr>
 				<td>ID</td>
 				<td>
@@ -170,7 +187,6 @@ function show_form(){
 			<tr>
 				<td>NOMBRE</td>
 				<td>".$defaults['name1']."</td>
-				
 			</tr>
 			<tr>
 				<td>APELLIDOS</td>
@@ -183,7 +199,6 @@ function show_form(){
 			<tr>
 				<td>TIME IN</td>
 				<td>".$defaults['tin']."</td>
-				
 			</tr>
 			<tr>
 				<td>DATE OUT</td>
@@ -203,43 +218,26 @@ function show_form(){
 					<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
 					<input type='hidden' name='name1' value='".$defaults['name1']."' />
 					<input type='hidden' name='name2' value='".$defaults['name2']."' />
-					<input name='din' type='hidden' value='".$defaults['din']."' />
-					<input name='tin' type='hidden' value='".$defaults['tin']."' />
-					<input name='dout' type='hidden' value='".$defaults['dout']."' />
-					<input name='tout' type='hidden' value='".$defaults['tout']."' />
-					<input name='ttot' type='hidden' value='".$defaults['ttot']."' />
+					<input type='hidden' name='din' value='".$defaults['din']."' />
+					<input type='hidden' name='tin' value='".$defaults['tin']."' />
+					<input type='hidden' name='dout' value='".$defaults['dout']."' />
+					<input type='hidden' name='tout' value='".$defaults['tout']."' />
+					<input type='hidden' name='ttot' value='".$defaults['ttot']."' />
 					<input type='hidden' name='oculto' value=1 />
 				<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 		</form>	
 			<a href='Reg_Fichar_Modificar.php'>
-				<button type='button' title='FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-			</a>												
+				<button type='button' title='INICIO FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+			</a>											
 				</td>
 			</tr>
-		</table>"); 
+		</table>");
+
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-function feedback(){
-	
-	global $db;				global $db_name;
-	global $tfeed;			$dfeed = date('Y-m-d');
-	global $tfeed;			$tfeed = date('H:i:s');
-
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_feed`";
-
-	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`, `dfeed`, `tfeed`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]', '$dfeed', '$tfeed')";
-		
-	if(mysqli_query($db, $sqla)){ 
-	}else{	print("* MODIFIQUE LA ENTRADA L.308: ".mysqli_error($db));
-			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
-	}
-	
-}	
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function info_01(){
 
@@ -274,7 +272,9 @@ function info_01(){
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 function info_02(){
 
@@ -310,7 +310,9 @@ function info_02(){
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 	
 function master_index(){
 		
@@ -319,7 +321,9 @@ function master_index(){
 		
 } /* Fin funcion master_index.*/
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 	require '../Inclu/Admin_Inclu_footer.php';
 

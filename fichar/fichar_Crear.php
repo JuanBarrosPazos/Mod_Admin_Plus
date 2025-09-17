@@ -237,7 +237,7 @@ function salida(){
 	$ttotd = str_replace("-","",$ttotd);
 	
 	if(($ttoth > 9)||($ttotd > 0)){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;' >
+		print("<div class='centradiv alertdiv'>
 					NO PUEDE FICHAR MÁS DE 10 HORAS.
 					</br>
 					PONGASE EN CONTACTO CON ADMIN SYSTEM.

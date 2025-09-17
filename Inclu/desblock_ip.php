@@ -126,7 +126,7 @@ function show_form($errors=[]){
 	}
 	
 	if($errors){
-		print("<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<table class='centradiv alertdiv'>
 				<tr>
 					<th>SOLUCIONE ESTOS ERRORES</th>
 				</tr>
@@ -274,7 +274,7 @@ function desbloqueo(){
 
 	$desb = "UPDATE `$db_name`.$table_name_b SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' AND $table_name_b.`acceso` = 'x' OR $table_name_b.`acceso` = '0' ";
 	if(mysqli_query($db, $desb)){ $_SESSION['showf'] = 0;
-		print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6 em;'>
+		print("<div class='centradiv alertdiv'>
 						SU IP ".$ipCliente." HA SIDO DESBLOQUEADA
 						<br>
 					<a href='../index.php'>

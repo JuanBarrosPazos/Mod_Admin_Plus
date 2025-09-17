@@ -89,7 +89,7 @@ function desconex(){
 
 function salir() {	
 
-	print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+	print("<div class='centradiv alertdiv'>
 					HA CERRADO SESION
 			</div>
 	<embed src='../audi/sesion_close.mp3' autostart='true' loop='false' ></embed>");

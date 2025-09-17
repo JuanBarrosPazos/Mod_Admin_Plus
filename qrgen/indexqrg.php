@@ -355,9 +355,7 @@ function listfiles(){
 			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
 		}
 		
-		print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;padding:0.8em;'>
-					NO HAY ARCHIVOS PARA DESCARGAR
-				</div>");
+		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
 
 	}else{
 

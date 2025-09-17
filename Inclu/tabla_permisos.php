@@ -10,7 +10,7 @@
 					} setTimeout('redir()',4000);
 				</script>";
 
-	print("<table class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;'>
+	print("<table class='centradiv alertdiv'>
 				<tr align='center'>
 					<td>
 						ACCESO RESTRINGIDO

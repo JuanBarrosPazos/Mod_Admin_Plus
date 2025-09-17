@@ -8,7 +8,7 @@
 	}else{
 		global $twhile;			global $tdplus;			global $pdm;
 		if(mysqli_num_rows($qb) == 0){
-			print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+			print ("<div class='centradiv alertdiv'>
 						".$nodata."
 					</div>");
 		}else{

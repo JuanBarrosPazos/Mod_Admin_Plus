@@ -1,20 +1,26 @@
 <?php
 
-    global $name1;			global $name2;			global $refses;
+    global $name1;		global $name2;		global $refses;		global $TablaTitulo;
 
 	if(!$qb){
 		print("ERROR SQL ".mysqli_error($db)."</br>");
 	}else{
 		if(mysqli_num_rows($qb) == 0){
-			print ("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.4em;'>
-						NO HAY DATOS
-					</div>");
+			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>");
 	}else{ 
+
+		if(($_POST['dd']=="")&&(!isset($_POST['cherror']))){
+			print ("<div class='centradiv alertdiv'>
+						".$name1." ".$name2." Ref: ".$refses."<br>
+						".$dyt1." TOTALES CONSULTA<br>
+						".$sumatodo."
+					</div>");
+		}
 
 		print ("<table class='centradiv'>
 					<tr>
 						<td colspan=7 style='color:#F1BD2D;'>
-							".$name1." ".$name2.". Ref: ".$refses."
+							".$TablaTitulo.$name1." ".$name2.". Ref: ".$refses."
 						</td>
 					</tr>
 					<tr>
@@ -50,15 +56,16 @@
 					<td style='".$sty.$bgcolor."'>");
 
 			require 'Inc_Input_Row_Total.php';
+
 			print("<button type='submit' title='MODIFICAR REGISTROS' class='botonverde imgButIco Clock2Black' style='vertical-align:middle;' ></button>
 				</form>
+
 				<form name='modifica' action='Reg_Fichar_Borrar_02.php' method='POST' style='display:inline-block;'>");
-					require 'Inc_Input_Row_Total.php';
-					print("<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
+
+			require 'Inc_Input_Row_Total.php';
+
+			print("<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
 				</form>
-
-
-
 					</td>
 				</tr>");
 				
@@ -66,16 +73,8 @@
 
 		} /* FIN del while.*/
 
-		if(($_POST['dm'] == '')||($_POST['dd'])){
-			print ("<div class='centradiv' style='padding:0.4em;color:#F1BD2D;'>
-							".$name1." ".$name2." Ref: ".$refses."
-						<br>
-							".$dyt1." TOTALES ANUALES
-						<br>
-							TOTALES: ".$sumatodo."
-					</div>");
-		}
-	
+		print "</table>";
+
 	} /* FIN segundo else anidado en if */
 } /* FIN de primer else . */
 

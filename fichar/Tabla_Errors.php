@@ -1,7 +1,7 @@
 <?php
 
 	if($errors){
-		print("	<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("	<table class='centradiv alertdiv'>
 					<tr>
 						<th>SOLUCIONE ESTOS ERRORES</th>
 					</tr>

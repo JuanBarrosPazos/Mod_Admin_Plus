@@ -69,7 +69,7 @@ function entrada(){
 	$count1 = mysqli_num_rows($q1);
 	
 	if($count1 > 0){ 
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 					ERROR YA HA FICHADO LA ENTRADA </br>".$_POST['name1']." ".$_POST['name2']."
 			</div>");
 	}else{
@@ -126,9 +126,7 @@ function show_form(){
 			print("ERROR SQL L.121 ".mysqli_error($db)."</br>");
 		}else{
 			if(mysqli_num_rows($qb)== 0){
-				print ("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
-							NO HAY DATOS
-						</div>");
+				print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>");
 			}else{
 
 				unset($_SESSION['usuarios']);
@@ -345,7 +343,7 @@ function salida(){
 	$ttotd = str_replace("-","",$ttotd);
 
 	if(($ttoth > 9)||($ttotd > 0)){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 					NO PUEDE FICHAR MÁS DE 10 HORAS.
 					</br>
 					PONGASE EN CONTACTO CON ADMIN SYSTEM.

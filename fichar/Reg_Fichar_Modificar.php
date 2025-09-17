@@ -19,11 +19,9 @@ if($_SESSION['Nivel'] == 'admin'){
 	if(isset($_POST['todo'])){ show_form();							
 							   ver_todo();
 							   info();
-								}
+	}else{ show_form(); }
 								
-	else { show_form(); }
-								
-		}else{ require '../Inclu/tabla_permisos.php'; }
+}else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -32,9 +30,6 @@ if($_SESSION['Nivel'] == 'admin'){
 function show_form(){
 
 	global $titulo;			$titulo = "FILTRO REGISTROS ";
-	$_SESSION['modifeo'] = "<form name='volver' action='Reg_Fichar_Modificar.php' \">
-				<button type='submit' title='VOLVER A FICHAR MODIFICAR SALIDA' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-							</form>";
 
 	require 'Inc_Show_Form_tot.php';
 
@@ -46,12 +41,11 @@ function show_form(){
 
 function ver_todo(){
 		
-	global $db;			
+	global $db;
 	global $orden;
 	require '../Inclu/orden.php';
 
 	global $dyt1;		global $dy1;	global $dm1;		global $dd1;
-	global $fil;
 	
 	if($_POST['dy'] == ''){ $dy1 = '';
 							$dyt1 = date('Y');	
@@ -63,6 +57,7 @@ function ver_todo(){
 
 	if($_POST['dm'] == ''){ //$dm1 = '';
 							$dm1 = "-".date('m')."-";
+							$dm1 = "-%-";
 							$_SESSION['gtime'] = '';
 	}else{	$dm1 = "-".$_POST['dm']."-";
 			$_SESSION['gtime'] = $_POST['dm'];	
@@ -70,7 +65,7 @@ function ver_todo(){
 
 	if($_POST['dd'] == ''){ $dd1 = ''; }else{ $dd1 = $_POST['dd']; }
 	
-
+	global $fil;
 	if(($_POST['dm'] == '')&&($_POST['dd'] != '')){	$dm1 = date('m');
 													$dd1 = $_POST['dd'];
 													$fil = $dy1."-%".$dm1."%-".$dd1."%";
@@ -82,8 +77,15 @@ function ver_todo(){
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
-	global $sqlb;
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `dout` <> '' ORDER BY $orden ";
+	global $sqlb;		global $TablaTitulo;
+	if(isset($_POST['cherror'])){
+		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `dout` <> '' AND `ttot` = '00:00:01' AND `del` = 'false') ORDER BY $orden ";
+		$TablaTitulo = "ERRORES: ";
+	}else{
+		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
+		$TablaTitulo = "TODO: ";
+	}
+	echo "** ".$sqlb."<br>";
 	global $qb;
 	$qb = mysqli_query($db, $sqlb);
 	
@@ -141,7 +143,7 @@ function info(){
 	require '../Inclu/orden.php';
 	
 	if(isset($_POST['todo'])){
-		$filtro = PHP_EOL."\tFiltro => JL CONSULTAR TODOS MODIFICAR. ".$orden;
+		$filtro = PHP_EOL."\tFiltro => CONSULTAR TODOS MODIFICAR. ".$orden;
 		$filtro = $filtro.PHP_EOL."\tDATE: ".$dy."/".$dm."/".$dd.".";
 	}
 
@@ -151,7 +153,7 @@ function info(){
 	if($_SESSION['Nivel'] == 'admin'){ $dir = "../Users/".$_SESSION['ref']."/log"; }
 	
 	global $text;
-	$text = PHP_EOL."- JL CONSULTAR TODOS MODIFICAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
+	$text = PHP_EOL."- CONSULTAR TODOS MODIFICAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;
 	
 	$logdocu = $_SESSION['ref'];
 	$logdate = date('Y-m-d');

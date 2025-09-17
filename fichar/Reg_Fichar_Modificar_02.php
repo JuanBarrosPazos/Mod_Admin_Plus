@@ -8,14 +8,6 @@ session_start();
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
 
-/*
-global $table_name_a;
-$table_name_a = "`".$_SESSION['clave']."admin`";
-$sqld =  "SELECT * FROM $table_name_a WHERE `ref` = '$_SESSION[ref]' AND `Usuario` = '$_SESSION[Usuario]'";
-$qd = mysqli_query($db, $sqld);
-$rowd = mysqli_fetch_assoc($qd);
-*/
-
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -199,8 +191,7 @@ function suma_todo(){
 	$vname = $tabla1."_".date('Y');
 	 */
 	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;
-	$vname = "`".$tabla1."_".$diny."`";
+	global $vname;			$vname = "`".$tabla1."_".$diny."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -266,7 +257,11 @@ function process_form(){
 					<td>HORAS REALIZADAS</td><td>".$ttot."</td>
 				</tr>
 				<tr>
-					<td colspan=2>".$_SESSION['modifeo']."</td>
+					<td colspan=2>
+						<form name='volver' action='Reg_Fichar_Modificar.php'>
+				<button type='submit' title='VOLVER A FICHAR MODIFICAR SALIDA' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+						</form>					
+					</td>
 				</tr>
 			</table>
 			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>

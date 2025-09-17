@@ -111,9 +111,7 @@ function show_form(){
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 			
 		if($_SESSION['tablas'] == '') { 
-			print("<div class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.6em;'>
-							SELECCIONE UNA TABLA O NOMBRE DE USUARIO
-					</div>");
+			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O NOMBRE DE USUARIO</div>");
 		}	
 					
 		if($_SESSION['tablas'] != ''){
@@ -180,7 +178,7 @@ function listfiles(){
 	$directorio = opendir($ruta);
 	global $num;			$num=count(glob("bbdd/{*}",GLOB_BRACE));
 	if($num < 1){
-		print ("<table class='centradiv' style='border-color:#F1BD2D;color:#F1BD2D;padding:0.8em;'>
+		print ("<table class='centradiv alertdiv'>
 			<tr><td>NO HAY ARCHIVOS PARA DESCARGAR</td></tr>");
 	}else{
 		print ("<table class='TFormAdmin'>

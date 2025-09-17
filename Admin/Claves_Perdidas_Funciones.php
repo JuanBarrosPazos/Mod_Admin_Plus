@@ -87,7 +87,7 @@ function show_form($errors=[]){
 	}
 	
 	if($errors){
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				SOLUCIONE ESTOS ERRORES.<br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
@@ -143,7 +143,7 @@ function process_form(){
 			
 	}else{	
 		if(mysqli_num_rows($qc)== 0){
-			print ("<div class='centradiv' style='color:#F1BD2D;border-color:#F1BD2D;'>
+			print ("<div class='centradiv alertdiv'>
 						NO HAY DATOS
 					</div>");
 		}else{	
@@ -336,7 +336,7 @@ function process_form(){
 		<embed src='../audi/claves_lost_3.mp3' autostart='true' loop='false' ></embed>");
 
 	}else{
-		print("<div class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<div class='centradiv alertdiv'>
 				EL MENSAJE NO HA PODIDO ENVIARSE.
 					<br>
 				<a href='http://juanbarrospazos.blogspot.com.es/' target='_blank'>
@@ -350,7 +350,7 @@ function process_form(){
 
 		// SÓLO PARA CONFIRMAR LOS DATOS QUE SE ENVIAN...
 		/*
-		print("<table class='TFormAdmin' style='border-color:#F1BD2D; color:#F1BD2D;'>
+		print("<table class='TFormAdmin alertdiv'>
 				<tr>
 					<th colspan=2>".$_POST['Asunto']."</th>
 				</tr>

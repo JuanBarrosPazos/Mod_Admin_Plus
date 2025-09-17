@@ -21,10 +21,10 @@
 		}
 
 	if($counte > 0){
-		print("<table class='centradiv' style='border-color:#F1BD2D; color:#F1BD2D;' >
+		print("<table class='centradiv alertdiv'>
 				<tr>
 					<th colspan=5 class='BorderInfY'>
-							".$sesus." EXISTEN ERRORES EN SUS HORARIOS.
+							".$sesus." EXISTEN ERRORES EN SUS HORARIOS
 					</th>
 				</tr>
 				<tr>
