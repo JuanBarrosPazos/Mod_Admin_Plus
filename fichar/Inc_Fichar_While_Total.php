@@ -3,19 +3,20 @@
     global $name1;		global $name2;		global $refses;		global $TablaTitulo;
 
 	if(!$qb){
-		print("ERROR SQL ".mysqli_error($db)."</br>");
+		print("ERROR SQL L.82||85||88 Reg_Fichar_Ver.php".mysqli_error($db)."</br>");
 	}else{
 		if(mysqli_num_rows($qb) == 0){
-			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>");
-	}else{ 
+			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>
+					<embed src='../audi/no_files_for_query.mp3' autostart='true' loop='false' ></embed>");
 
+	}else{ 
 		if(($_POST['dd']=="")&&(!isset($_POST['cherror'])&&(!isset($_POST['chbin'])))){
 			print ("<div class='centradiv alertdiv'>
 						".$name1." ".$name2." Ref: ".$refses."<br>
 						".$dyt1." TOTALES CONSULTA<br>
 						".$sumatodo."
 					</div>");
-		}
+	}
 
 		print ("<table class='centradiv'>
 					<tr>
@@ -32,15 +33,30 @@
 		
 		global $action1;	global $action2;	global $botonTit1;		global $botonTit2;
 		if((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
-			$action1 = "Reg_Fichar_Bin_Recuperar.php";
+			//$action1 = "Reg_Fichar_Bin_Recuperar.php";
+			$action1 = "Reg_Fichar_Borrar.php";
 			$botonTit1 = "RECUPERAR REGISTRO";
-			$action2 = "Reg_Fichar_Bin_Borrar.php";
+			$input1 = "<input type='hidden' name='recupera' value='recupera' />";
+			//$action2 = "Reg_Fichar_Bin_Borrar.php";
+			$action2 = "Reg_Fichar_Borrar.php";
 			$botonTit2 = "BORRAR PAPELERA";
+			$input2 = "<input type='hidden' name='elimina' value='elimina' />";
+
+			print("<embed src='../audi/files_in_bin.mp3' autostart='true' loop='false' ></embed>");
+
 		}else{
 			$action1 = "Reg_Fichar_Modificar.php";
 			$botonTit1 = "MODIFICAR REGISTROS";
+			$input1 = "";
 			$action2 = "Reg_Fichar_Borrar.php";
 			$botonTit2 = "BORRAR DATOS";
+			$input2 = "";
+			if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
+				print("<embed src='../audi/files_in_errors.mp3' autostart='true' loop='false' ></embed>");
+			}else{
+				print("<embed src='../audi/files_for_you_query.mp3' autostart='true' loop='false' ></embed>");
+			}
+
 		}
 		
 		$countbgc = 0;
@@ -70,14 +86,14 @@
 
 			require 'Inc_Input_Row_Total.php';
 
-			print("<button type='submit' title='".$botonTit1."' class='botonverde imgButIco Clock2Black' style='vertical-align:middle;' ></button>
+			print($input1."<button type='submit' title='".$botonTit1."' class='botonverde imgButIco Clock2Black' style='vertical-align:middle;' ></button>
 				</form>
 
 			<form name='modifica' action='".$action2."' method='POST' style='display:inline-block;'>");
 
 			require 'Inc_Input_Row_Total.php';
-
-			print("<button type='submit' title='".$botonTit2."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
+			
+			print($input2."<button type='submit' title='".$botonTit2."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:middle;' ></button>
 				</form>
 					</td>
 				</tr>");

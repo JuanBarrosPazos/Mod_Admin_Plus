@@ -2,9 +2,16 @@
 
 	global $CheckDatos;		global $CheckBin;
 
-	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
-									$defaults = $_POST;
-									// print("* ".$_SESSION['usuarios']);
+	if(isset($_POST['oculto1'])){	
+		$_SESSION['usuarios'] = $_POST['usuarios'];
+		$defaults = $_POST;
+		// print("* ".$_SESSION['usuarios']);
+		if($_SESSION['usuarios'] == ''){ 
+			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>
+					<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+		}else{
+			print("<embed src='../audi/filter_query_date.mp3' autostart='true' loop='false' ></embed>");
+		}
 	}elseif(isset($_POST['todo'])){
 
 		if(!isset($_POST['cherror'])){ $CheckDatos = ""; }else{ $CheckDatos = "checked='checked'"; }
@@ -18,6 +25,8 @@
 							'usuarios' => $_SESSION['usuarios'],
 							'cherror' => @$_POST['cherror'],
 							'chbin' => @$_POST['chbin'],);
+	}else{
+		print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
 	}
 	
 	$dm = array('' => 'MONTH','01' => 'ENERO','02' => 'FEBRER','03' => 'MARZO',
@@ -40,7 +49,7 @@
 					'`dout` DESC' => 'Fecha Out Desc',
 					'`id` ASC' => 'ID Asc',
 					'`id` DESC' => 'ID Desc');
-	
+
 	print("<div class='centradiv' style='padding:0.4em;'>
 			<div style='margin:0.2em auto 0.4em auto;'>GESTIONAR REGISTROS HORARIOS</div>
 		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='margin-right:6px'>
@@ -74,10 +83,6 @@
 				</div>"); 
 				
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
-
-		if($_SESSION['usuarios'] == ''){ 
-			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
-		}
 
 		global $CheckDatos;		global $CheckBin;
 		if($_SESSION['usuarios'] != ''){

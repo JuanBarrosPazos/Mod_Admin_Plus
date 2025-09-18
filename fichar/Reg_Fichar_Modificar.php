@@ -229,7 +229,7 @@ function process_form(){
 	$tabla = "<table class='TFormAdmin'>
 				<tr>
 					<th colspan=2>
-						HA MODIFICADO LA SALIDA</br>
+						HA MODIFICADO LA SALIDA
 					</th>
 				</tr>
 				<tr>
@@ -265,7 +265,7 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
+			<embed src='../audi/file_modified.mp3' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
@@ -343,6 +343,7 @@ function show_form($errors=[]){
 		$_SESSION['edout'] = $_POST['dout'];
 		$_SESSION['etout'] = $_POST['tout'];
 		$_SESSION['ettot'] = $_POST['ttot'];
+		print("<embed src='../audi/file_for_modified.mp3' autostart='true' loop='false' ></embed>");
 	}
 
 	require 'Tabla_Errors.php';

@@ -55,11 +55,34 @@ function suma_todo(){
 
 function process_form(){
 	
-	global $db;				global $db_name;	
-	
+	global $db;				global $db_name;
+
+	global $diny;			$diny = substr($_POST['din'],0,4);
+	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1."_".$diny ."`";
+	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1."_".date('Y')."`";
+
+	global $FBaja;		$FBaja = date('Y-m-d');
+	global $TBaja;		$TBaja = date('H:i:s');
+	global $Titulo;		global $embed;
+	global $sql;
+	if(isset($_POST['recupera'])){
+		$Titulo = "RECUPERADO EL REGISTRO";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$embed = "<embed src='../audi/file_recovered.mp3' autostart='true' loop='false' ></embed>";
+	}elseif(isset($_POST['elimina'])){
+		$Titulo = "ELIMINADO EL REGISTRO";
+		$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$embed = "<embed src='../audi/file_deleted.mp3' autostart='true' loop='false' ></embed>";
+	}else{ 
+		$Titulo = "REGISTRO BORRADO";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$embed = "<embed src='../audi/file_bin.mp3' autostart='true' loop='false' ></embed>";
+	}
+
 	$tabla = "<table class='TFormAdmin alertdiv'>
 				<tr>
-					<th colspan=2>REGISTRO BORRADO</th>
+					<th colspan=2>".$Titulo."</th>
 				</tr>
 				<tr>
 					<td>USER NAME</td>
@@ -94,20 +117,12 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/delete_file.mp3' autostart='true' loop='false' ></embed>
+			".$embed."
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
 			</script>";
 	
-	global $diny;			$diny = substr($_POST['din'],0,4);
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$diny ."`";
-	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1."_".date('Y')."`";
-
-	$FBaja = date('Y-m-d H:i:s');
-
-	$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
 	echo "** ".$sql."<br>";
 	
 	if(mysqli_query($db, $sql)){
@@ -150,10 +165,42 @@ function process_form(){
 function show_form(){
 
 	global $db;				global $db_name;
-	
+	global $recupera;		global $elimina;		global $Titulo;
+	global $input1;			global $input2;			
+	global $ButtonIco;		global $ButtonColor;	global $defaults;
+
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
 	}elseif(isset($_POST['oculto2'])){
+
+		if(isset($_POST['recupera'])){
+			$recupera = $_POST['recupera'];
+			$elimina = "";
+			$input1 = "<input type='hidden' name='recupera' value='".$defaults['recupera']."' />";
+			$Titulo = "RECUPERAR REGISTRO";
+			$ButtonIco = "Clock2Black";
+			$ButtonColor = "botonverde";
+			print("<embed src='../audi/file_for_recovered.mp3' autostart='true' loop='false' ></embed>");
+		}elseif(isset($_POST['elimina'])){
+			$recupera = "";
+			$elimina = $_POST['elimina'];
+			$input2 = "<input type='hidden' name='elimina' value='".$defaults['elimina']."' />";
+			$Titulo = "ELIMINAR REGISTRO";
+			$ButtonIco = "DeleteBlack";
+			$ButtonColor = "botonrojo";
+			print("<embed src='../audi/file_for_deleted.mp3' autostart='true' loop='false' ></embed>");
+		}else{ 
+			$elimina = "";			$recupera = "";
+			$input1 = "";			$input2 = "";
+			$Titulo = "BORRAR ENTRADA";
+			$ButtonIco = "DeleteBlack";
+			$ButtonColor = "botonnaranja";
+			print("<embed src='../audi/file_for_bin.mp3' autostart='true' loop='false' ></embed>");
+		}
+
+		echo "<div class='centradiv'>** RECUPERAR: ".$_POST['recupera']."
+				<br>** ELIMINAR: ".$_POST['elimina']."</div>";
+
 		$defaults = array (	'id' => $_POST['id'],
 						   	'ref' => $_SESSION['usuarios'],
 							'name1' => $_POST['name1'],
@@ -162,13 +209,15 @@ function show_form(){
 							'tin' => $_POST['tin'],
 							'dout' => $_POST['dout'],
 							'tout' => $_POST['tout'],
-							'ttot' => $_POST['ttot']);
+							'ttot' => $_POST['ttot'],
+							'recupera' => $recupera,
+							'elimina' => $elimina,);
 	}
 
 	print("<table class='TFormAdmin'>
 			<tr>
 				<td colspan=2 style='text-align:center !important;color:#F1BD2D;'>
-					BORRAR ENTRADA
+					".$Titulo."
 				</td>
 			</tr>
 			<tr>
@@ -221,8 +270,9 @@ function show_form(){
 					<input type='hidden' name='dout' value='".$defaults['dout']."' />
 					<input type='hidden' name='tout' value='".$defaults['tout']."' />
 					<input type='hidden' name='ttot' value='".$defaults['ttot']."' />
+					".$input1.$input2."
 					<input type='hidden' name='oculto' value=1 />
-				<button type='submit' title='BORRAR DATOS' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
+				<button type='submit' title='".$Titulo."' class='".$ButtonColor." imgButIco ".$ButtonIco."' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 		</form>	
 			<a href='Reg_Fichar_Ver.php'>
 				<button type='button' title='INICIO FICHAR FILTRO DE EMPLEADOS' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
