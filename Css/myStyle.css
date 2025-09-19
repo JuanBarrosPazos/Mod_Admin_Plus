@@ -35,7 +35,7 @@ table, .centradiv {
 	text-align: right !important;
 }
 
-embed {
+embed, .embed {
 	display: none !important;
 	visibility: hidden !important;
 	height: 0.0em !important;
@@ -634,7 +634,7 @@ img {
 
 @media screen and (max-width:440px){
 
-	.imgtitle {	
+	.imgtitle {
 		width: 0px !important;
 		height: 0px !important;
 		border: none !important;

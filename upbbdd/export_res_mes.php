@@ -40,51 +40,45 @@ function show_form(){
 	}else{	unset($_SESSION['tablas']);
 				$defaults = array ('Orden' => '`id` ASC',
 								   'tablas' => '',);
+			print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
 	}
 
 	if($_SESSION['Nivel'] == 'admin'){
 		print("
-			<table align='center' style='border:1; margin-top:2px' width='auto'>
+			<table class='centradiv'>
 				<tr>
-					<td align='center'>
-							EXPORTE RESUMEN MENSUAL .TXT USUARIO:
-					</td>
+					<td>EXPORTE RESUMEN MENSUAL</td>
 				</tr>		
 				<tr>
 					<td>
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-			<input type='hidden' name='Orden' value='".$defaults['Orden']."' />
-					<div style='float:left; margin-right:6px''>
-						<input type='submit' value='SELECCIONE USUARIO' class='botonlila' />
-						<input type='hidden' name='oculto1' value=1 />
-					</div>
-					<div style='float:left'>
+				<input type='hidden' name='Orden' value='".$defaults['Orden']."' />
+				<select name='tablas' style='margin-right:0.4;vertical-align:middle;'>");
 
-						<select name='tablas'>");
+			global $db;
+			global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
 
-		global $db;
-		global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-
-		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
-		$qu = mysqli_query($db, $sqlu);
-		if(!$qu){
-				print("Modifique la entrada L.95 ".mysqli_error($db)."<br>");
-		}else{
-			while($rowu = mysqli_fetch_assoc($qu)){
-					print ("<option value='".$rowu['ref']."' ");
-					if($rowu['ref'] == $defaults['tablas']){
-										print ("selected = 'selected'");
-					}
-					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
-			}
-		}  
+			$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+			$qu = mysqli_query($db, $sqlu);
+			if(!$qu){
+					print("Modifique la entrada L.60 ".mysqli_error($db)."<br>");
+			}else{
+				while($rowu = mysqli_fetch_assoc($qu)){
+						print ("<option value='".$rowu['ref']."' ");
+						if($rowu['ref'] == $defaults['tablas']){
+											print ("selected = 'selected'");
+						}
+						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+				}
+			}  
 			
 		print ("</select>
-						</div>
+					<button type='submit' title='SELECCIONE RESUMEN MENSUAL' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
+					<input type='hidden' name='oculto1' value=1 />
 					</form>	
 					</td>
 				</tr>
-			</table>"); 
+			</table>");
 
 	global $ExportBotonera;		$ExportBotonera = 2;
 	require 'Export_Botonera.php';
@@ -98,6 +92,15 @@ function show_form(){
 				 ////////////////////				  ///////////////////
 
 function listfiles(){
+
+	echo "<div id='audiDescarga'></div>";
+	$embed = '<embed src="../audi/file_exp_ok.mp3" autostart="true" loop="false" ></embed>';
+	$FunEmbed = "<script type='text/javascript'>
+					function FunEmbed(){
+						document.getElementById('audiDescarga').innerHTML = '".$embed."';
+					}
+				</script>";
+	print($FunEmbed);
 	
 	if(@$_SESSION['tablas'] == ''){ $_SESSION['tablas'] = $_SESSION['ref']; }
 	//print("*".$_SESSION['tablas'].".</br>");
@@ -111,34 +114,45 @@ function listfiles(){
 	$directorio = opendir($ruta);
 	global $num;			$num=count(glob($rutag,GLOB_BRACE));
 	if($num < 1){
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-				<td align='center'>NO HAY ARCHIVOS PARA DESCARGAR</td>
-				</tr>");
+		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
+		if(!isset($_POST['delete'])){
+			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+		}
 	}else{
-		
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
-		<tr><td align='center' colspan='3' class='BorderInf'>".strtoupper($_SESSION['tablas'])." RESUMENES MENSUALES .TXT  </td></tr>");
+		if(isset($_POST['oculto1'])){
+			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' ></embed>");
+		}
+		print ("<table class='TFormAdmin' style='padding:0.2em;'>
+				<tr>
+					<th colspan='3'>".strtoupper($_SESSION['tablas'])." RESUMENES MES</th>
+				</tr>");
+
+		$countbgc = 0;
 		while($archivo = readdir($directorio)){
+
+			if(($countbgc%2)==0){
+				$bgcolor ="background-color:#59746A;";
+			}else{ $bgcolor =""; }
+
 			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
 				print("<tr>
-				<td class='BorderInfDch'>
-				<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
-				<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-				<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-				<input type='submit' value='ELIMINAR' class='botonrojo' />
-				<input type='hidden' name='delete' value='1' >
-				</form>
+				<td style='".$bgcolor."'>
+					<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
+						<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
+						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
+				<button type='submit' title='ELIMINAR ".strtoupper($archivo)."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='delete' value='1' >
+					</form>
 				</td>
-				<td class='BorderInfDch'>
-				<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
-				<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-				<input type='submit' value='DESCARGAR' class='botonverde' />
-				</form>
+				<td style='".$bgcolor."'>
+					<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
+						<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
+				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunEmbed()' ></button>
+					</form>
 				</td>
-				<td class='BorderInf'>".strtoupper($archivo)."</td>
-				");
+				<td style='".$bgcolor."'>".strtoupper($archivo)."</td>");
 			}else{}
+			$countbgc = $countbgc+1;
 		} // FIN DEL WHILE
 	}
 	closedir($directorio);
@@ -146,7 +160,9 @@ function listfiles(){
 
 } // FIN function listfiles
 
-function delete(){ unlink($_POST['ruta']); }
+function delete(){ unlink($_POST['ruta']);
+					print("<embed src='../audi/file_deleted.mp3' autostart='true' loop='false' ></embed>");
+}
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

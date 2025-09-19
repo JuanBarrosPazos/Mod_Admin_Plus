@@ -64,25 +64,27 @@ function process_form(){
 
 	global $FBaja;		$FBaja = date('Y-m-d');
 	global $TBaja;		$TBaja = date('H:i:s');
-	global $Titulo;		global $embed;
+	global $Titulo;		global $embedAudi;
 	global $sql;
 	if(isset($_POST['recupera'])){
 		$Titulo = "RECUPERADO EL REGISTRO";
 		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embed = "<embed src='../audi/file_recovered.mp3' autostart='true' loop='false' ></embed>";
+		$embedAudi = "file_recovered.mp3";
 	}elseif(isset($_POST['elimina'])){
 		$Titulo = "ELIMINADO EL REGISTRO";
 		$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embed = "<embed src='../audi/file_deleted.mp3' autostart='true' loop='false' ></embed>";
+		$embedAudi = "file_deleted.mp3";
 	}else{ 
 		$Titulo = "REGISTRO BORRADO";
 		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embed = "<embed src='../audi/file_bin.mp3' autostart='true' loop='false' ></embed>";
+		$embedAudi = "file_bin.mp3";
 	}
 
 	$tabla = "<table class='TFormAdmin alertdiv'>
 				<tr>
-					<th colspan=2>".$Titulo."</th>
+					<td colspan=2 style='text-align:center !important;color:#F1BD2D;'>
+						".$Titulo."
+					</td>
 				</tr>
 				<tr>
 					<td>USER NAME</td>
@@ -117,7 +119,7 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-			".$embed."
+				<embed src='../audi/".$embedAudi."' autostart='true' loop='false' ></embed>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
@@ -197,9 +199,6 @@ function show_form(){
 			$ButtonColor = "botonnaranja";
 			print("<embed src='../audi/file_for_bin.mp3' autostart='true' loop='false' ></embed>");
 		}
-
-		echo "<div class='centradiv'>** RECUPERAR: ".$_POST['recupera']."
-				<br>** ELIMINAR: ".$_POST['elimina']."</div>";
 
 		$defaults = array (	'id' => $_POST['id'],
 						   	'ref' => $_SESSION['usuarios'],
@@ -293,9 +292,7 @@ function info_01(){
 	require '../Inclu/orden.php';
 		
 	global $ttot;
-
 	$ActionTime = date('H:i:s');
-
 	global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/log";
 
 	global $text;
@@ -327,9 +324,7 @@ function info_01(){
 function info_02(){
 
 		global $ttot;
-
 		$ActionTime = date('H:i:s');
-
 		global $dir;				$dir = "../Users/".$_SESSION['usuarios']."/log";
 	
 		global $text;

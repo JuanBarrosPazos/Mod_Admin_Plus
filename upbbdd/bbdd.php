@@ -24,7 +24,7 @@ if($_SESSION['Nivel'] == 'admin'){
 	}else{	show_form();
 			listfiles();
 	}
-								
+	
 }else{ require '../Inclu/tabla_permisos.php'; }
 
 				   ////////////////////				   ////////////////////
@@ -40,33 +40,30 @@ function show_form(){
 					$defaults = array ('Orden' => isset($ordenar),
 								   	   'tablas' => strtolower($_POST['tablas']),);
 					// print($_SESSION['tablas']);
-	}else{ unset($_SESSION['tablas']); }
+		if($_SESSION['tablas'] == ''){ 
+			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O USUARIO</div>
+					<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
+		}
+	}else{ unset($_SESSION['tablas']);
+				print("<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
+}
 	
 	if($_SESSION['Nivel'] == 'user'){
-		print("<table align='center' style='border:1; margin-top:2px' width='auto'>
-				<tr>
-					<td align='center'>
-							TABLAS EXPORTABLES PARA BBDD ".$_SESSION['ref'].".
-					</td> 
-				</tr>
-			</table>");	
-	}
-
-	if($_SESSION['Nivel'] == 'admin'){
 		print("<table class='centradiv'>
 				<tr>
-					<th>EXPORTE TABLAS BBDD<br>SELECCIONE UN USUARIO</th>
+					<td>TABLAS EXPORTABLES PARA BBDD ".$_SESSION['ref']."</td>
+				</tr>
+			</table>");	
+	}elseif($_SESSION['Nivel'] == 'admin'){
+		print("<table class='centradiv'>
+				<tr>
+					<td>EXPORTE TABLAS BBDD<br>SELECCIONE UN USUARIO</td>
 				</tr>		
 				<tr>
 					<td>
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 				<input type='hidden' name='Orden' value='".@$defaults['Orden']."' />
-					<div style='float:left; margin-right:6px''>
-				<button type='submit' title='SELECCIONE USUARIO / TABLA' class='botonlila imgButIco InicioBlack' style='vertical-align:top;' ></button>
-						<input type='hidden' name='oculto1' value=1 />
-					</div>
-					<div style='float:left'>
-						<select name='tablas'>
+						<select name='tablas' style='margin-right:0.4;vertical-align:middle;'>
 				<!-- -->	<option value=''");
 		if(@$defaults['tablas'] == ''){
 					print ("selected = 'selected'");
@@ -92,17 +89,18 @@ function show_form(){
 						print ("selected = 'selected'");
 				}
 						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
-			}
-		}  
+			} // FIN WHILE
+		}
 		print ("</select>
-					</div>
+					<button type='submit' title='SELECCIONE USUARIO / TABLA' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
+						<input type='hidden' name='oculto1' value=1 />
 						</form>	
 					</td>
 				</tr>
 			</table>");
 			
-	global $ExportBotonera;		$ExportBotonera = 1;
-	require 'Export_Botonera.php';
+		global $ExportBotonera;		$ExportBotonera = 1;
+		require 'Export_Botonera.php';
 
 	}
 	
@@ -110,10 +108,6 @@ function show_form(){
 
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 			
-		if($_SESSION['tablas'] == '') { 
-			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O NOMBRE DE USUARIO</div>");
-		}	
-					
 		if($_SESSION['tablas'] != ''){
 
 			global $nom; 			$nom = strtolower($_SESSION['tablas']);
@@ -122,24 +116,30 @@ function show_form(){
 			$nom = "LIKE '$nom'";
 	
 			/* Se busca las tablas en la base de datos */
-
 			//$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES ";
 			$consulta = "SHOW TABLES FROM $db_name $nom";
 			$respuesta = mysqli_query($db, $consulta);
 			if(!$respuesta){
 				print("ERROR SQL L.127 ".mysqli_error($db)."</br>");
 			}else{	
-				print("<table class='TFormAdmin'>
+				print("<table class='TFormAdmin alertdiv'>
 						<tr>
 							<th colspan=2>
 								TABLAS EXPORTABLES ".mysqli_num_rows($respuesta)."
 							</th>
-						</tr>");
+						</tr>
+				<embed src='../audi/bbdd2.mp3' autostart='true' loop='false' ></embed>");
+
+				$countbgc = 0;
 				while ($fila = mysqli_fetch_row($respuesta)){
+					if(($countbgc%2)==0){
+						$bgcolor ="background-color: #59746a;";
+					}else{ $bgcolor =""; }
+
 					if($fila[0]){
 						print("<tr>
-							<td>".$fila[0]."</td>
-							<td>
+							<td style='".$bgcolor."'>".$fila[0]."</td>
+							<td style='".$bgcolor."'>
 						<form name='exporta' action='$_SERVER[PHP_SELF]' method='POST'>
 							<input type='hidden' name='tablas' value='".$defaults['tablas']."' />
 							<input type='hidden' name='tabla' value='".$fila[0]."' />
@@ -149,7 +149,8 @@ function show_form(){
 							</td>
 						<tr>");
 					}
-				}
+					$countbgc = $countbgc+1;
+				} // FIN WHILE
 			print("</table>");		
 			}
 		}
@@ -172,21 +173,39 @@ function ver_todo(){
 				 ////////////////////				  ///////////////////
 
 function listfiles(){
+
+	echo "<div id='audiDescarga'></div>";
+	$embed = '<embed src="../audi/bbdd4.mp3" autostart="true" loop="false" ></embed>';
+	$FunEmbed = "<script type='text/javascript'>
+					function FunEmbed(){
+						document.getElementById('audiDescarga').innerHTML = '".$embed."';
+					}
+				</script>";
+	print($FunEmbed);
 	
 	global $ruta;			$ruta ="bbdd/";
 	
 	$directorio = opendir($ruta);
 	global $num;			$num=count(glob("bbdd/{*}",GLOB_BRACE));
 	if($num < 1){
-		print ("<table class='centradiv alertdiv'>
-			<tr><td>NO HAY ARCHIVOS PARA DESCARGAR</td></tr>");
+		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>
+				<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
 	}else{
-		print ("<table class='TFormAdmin'>
-			<tr><th align='center' colspan='3'>ARCHIVOS RESPALDO BBDD</th></tr>");
+		print ("<table class='TFormAdmin' style='padding:0.2em;'>
+				<tr>
+					<th colspan='3'>ARCHIVOS RESPALDO BBDD</th>
+				</tr>");
+		
+		$countbgc = 0;
 		while($archivo = readdir($directorio)){
+			
+			if(($countbgc%2)==0){
+				$bgcolor ="background-color:#59746A;";
+			}else{ $bgcolor =""; }
+			
 			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
 				print("<tr>
-				<td>
+				<td style='".$bgcolor."' >
 					<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
 						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
 						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
@@ -194,21 +213,26 @@ function listfiles(){
 						<input type='hidden' name='delete' value='1' >
 					</form>
 				</td>
-				<td>
+				<td style='".$bgcolor."' >
 					<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
 						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
-				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco OpenBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunEmbed()' ></button>
+						<input type='hidden' name='descarga' value='1' >
 					</form>
 				</td>
-				<td>".strtoupper($archivo)."</td>");
+				<td style='".$bgcolor."' >".strtoupper($archivo)."</td>");
+
 			}else{ }
+			$countbgc = $countbgc+1;
 		} // FIN DEL WHILE
 	}
 	closedir($directorio);
 	print("</table>");
 }
 
-function delete(){ unlink($_POST['ruta']); }
+function delete(){ 	unlink($_POST['ruta']);
+					print("<embed src='../audi/bbdd5.mp3' autostart='true' loop='false' ></embed>");
+				}
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
