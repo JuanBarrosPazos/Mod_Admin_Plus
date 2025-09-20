@@ -370,7 +370,7 @@ function process_pin(){
 						</td>
 				</tr>
 			</table>
-				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>");
+				<audio src='../audi/conf_user_data.mp3' autoplay></audio>");
 
 			global $redir;
 			$redir = "<script type='text/javascript'>
@@ -415,7 +415,7 @@ function process_pin(){
 						</td>
 					</tr>
 				</table>
-				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false' ></embed>"); 
+				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
 		}
 		
 		ayear();
@@ -441,7 +441,7 @@ function process_pin(){
 						</td>
 					</tr>
 				</table>
-				<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+				<audio src='../audi/user_lost.mp3' autoplay></audio>");
 
 		global $redir;
 		$redir = "<script type='text/javascript'>
@@ -571,7 +571,7 @@ function pin_out(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>";	
+			<audio src='../audi/salida.mp3' autoplay></audio>";	
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -650,7 +650,7 @@ function pin_in(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>";	
+			<audio src='../audi/entrada.mp3' autoplay></audio>";	
 		
 	global $db;				global $db_name;
 	
@@ -752,7 +752,7 @@ function show_form2($errorsp=''){
 		print("<!--</td>
 				  </tr>-->
 		</table>
-			<embed src='../audi/pin_error.mp3' autostart='true' loop='false' ></embed>");
+			<audio src='../audi/pin_error.mp3' autoplay></audio>");
 		}
 	
 	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >

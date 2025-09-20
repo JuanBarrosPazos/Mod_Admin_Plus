@@ -207,7 +207,7 @@ function qrimg(){
 function Show_form($errors=[]){	
 
 	if(isset($_POST['downl'])){
-		print("<embed src='../audi/file_exp_ok.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='../audi/file_exp_ok.mp3' autoplay></audio>");
 	}
 
 	global $errorCorrectionLevel;			global $matrixPointSize;
@@ -227,7 +227,7 @@ function Show_form($errors=[]){
 				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."<br>");
 		}
 		print("</div>
-		<embed src='../audi/error_form.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/error_form.mp3' autoplay></audio>");
 
 	}else{	global $a;		$a = 0; }
 
@@ -352,7 +352,7 @@ function listfiles(){
 	if($num < 1){
 		
 		if($a == 0){
-			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/no_file.mp3' autoplay></audio>");
 		}
 		
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
@@ -360,7 +360,7 @@ function listfiles(){
 	}else{
 
 		if($a == 0){
-			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/files_for_exp.mp3' autoplay></audio>");
 		}
 
 		print("<div class='centradiv' style='border:none !important'>
@@ -428,7 +428,7 @@ function listfiles(){
 function delete(){
 	global $a;			$a = 1;
 	unlink($_POST['downlRuta']);
-	print("<embed src='../audi/deleteqr.mp3' autostart='true' loop='false'></embed>");
+	print("<audio src='../audi/deleteqr.mp3' autoplay></audio>");
 }
 	
 				   ////////////////////				   ////////////////////

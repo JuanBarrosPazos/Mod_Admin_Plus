@@ -7,7 +7,7 @@
 	}else{
 		if(mysqli_num_rows($qb) == 0){
 			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>
-					<embed src='../audi/no_files_for_query.mp3' autostart='true' loop='false' ></embed>");
+					<audio src='../audi/no_files_for_query.mp3' autoplay></audio>");
 
 	}else{ 
 		if(($_POST['dd']=="")&&(!isset($_POST['cherror'])&&(!isset($_POST['chbin'])))){
@@ -42,7 +42,7 @@
 			$botonTit2 = "BORRAR PAPELERA";
 			$input2 = "<input type='hidden' name='elimina' value='elimina' />";
 
-			print("<embed src='../audi/files_in_bin.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/files_in_bin.mp3' autoplay></audio>");
 
 		}else{
 			$action1 = "Reg_Fichar_Modificar.php";
@@ -52,9 +52,9 @@
 			$botonTit2 = "BORRAR DATOS";
 			$input2 = "";
 			if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
-				print("<embed src='../audi/files_in_errors.mp3' autostart='true' loop='false' ></embed>");
+				print("<audio src='../audi/files_in_errors.mp3' autoplay></audio>");
 			}else{
-				print("<embed src='../audi/files_for_you_query.mp3' autostart='true' loop='false' ></embed>");
+				print("<audio src='../audi/files_for_you_query.mp3' autoplay></audio>");
 			}
 
 		}

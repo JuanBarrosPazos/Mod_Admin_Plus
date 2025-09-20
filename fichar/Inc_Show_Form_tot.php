@@ -8,9 +8,9 @@
 		// print("* ".$_SESSION['usuarios']);
 		if($_SESSION['usuarios'] == ''){ 
 			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>
-					<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+					<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 		}else{
-			print("<embed src='../audi/filter_query_date.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/filter_query_date.mp3' autoplay></audio>");
 		}
 	}elseif(isset($_POST['todo'])){
 
@@ -26,7 +26,7 @@
 							'cherror' => @$_POST['cherror'],
 							'chbin' => @$_POST['chbin'],);
 	}else{
-		print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 	}
 	
 	$dm = array('' => 'MONTH','01' => 'ENERO','02' => 'FEBRER','03' => 'MARZO',

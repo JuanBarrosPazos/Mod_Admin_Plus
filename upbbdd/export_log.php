@@ -65,11 +65,11 @@ function listfiles(){
 	if($num < 1){
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
 		if(($_SESSION['tablas'] != '')&&((isset($_POST['oculto1'])))){
-			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/no_file.mp3' autoplay></audio>");
 		}
 	}else{
 		if(isset($_POST['oculto1'])){
-			print("<embed src='../audi/files_for_exp.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/files_for_exp.mp3' autoplay></audio>");
 		}
 		print ("<table class='TFormAdmin' style='padding:0.2em;'>
 				<tr>
@@ -84,7 +84,7 @@ function listfiles(){
 }
 
 function delete(){ unlink($_POST['ruta']);
-					print("<embed src='../audi/file_deleted.mp3' autostart='true' loop='false' ></embed>");
+					print("<audio src='../audi/file_deleted.mp3' autoplay></audio>");
 }
 	
 				   ////////////////////				   ////////////////////

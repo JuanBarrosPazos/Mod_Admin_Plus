@@ -8,7 +8,7 @@
 	}else{	unset($_SESSION['tablas']);
 			$defaults = array ('Orden' => '`id` ASC',
 								'tablas' => '',);
-			print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 	}
 
 	if($_SESSION['Nivel'] == 'admin'){

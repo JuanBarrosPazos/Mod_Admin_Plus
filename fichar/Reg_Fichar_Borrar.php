@@ -119,7 +119,7 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-				<embed src='../audi/".$embedAudi."' autostart='true' loop='false' ></embed>
+				<audio src='../audi/".$embedAudi."' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
@@ -182,7 +182,7 @@ function show_form(){
 			$Titulo = "RECUPERAR REGISTRO";
 			$ButtonIco = "Clock2Black";
 			$ButtonColor = "botonverde";
-			print("<embed src='../audi/file_for_recovered.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/file_for_recovered.mp3' autoplay></audio>");
 		}elseif(isset($_POST['elimina'])){
 			$recupera = "";
 			$elimina = $_POST['elimina'];
@@ -190,14 +190,14 @@ function show_form(){
 			$Titulo = "ELIMINAR REGISTRO";
 			$ButtonIco = "DeleteBlack";
 			$ButtonColor = "botonrojo";
-			print("<embed src='../audi/file_for_deleted.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/file_for_deleted.mp3' autoplay></audio>");
 		}else{ 
 			$elimina = "";			$recupera = "";
 			$input1 = "";			$input2 = "";
 			$Titulo = "BORRAR ENTRADA";
 			$ButtonIco = "DeleteBlack";
 			$ButtonColor = "botonnaranja";
-			print("<embed src='../audi/file_for_bin.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/file_for_bin.mp3' autoplay></audio>");
 		}
 
 		$defaults = array (	'id' => $_POST['id'],

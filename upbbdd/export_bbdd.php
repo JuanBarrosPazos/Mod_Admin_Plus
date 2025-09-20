@@ -8,7 +8,7 @@
 	print("<div class='centradiv alertdiv'>
                 EXPORTADA TABLA: ".strtoupper($db_name." => ".$db_name_table)."
             </div>
-            <embed src='../audi/bbdd4.mp3' autostart='true' loop='false' ></embed>");
+            <audio src='../audi/bbdd4.mp3' autoplay></audio>");
 				
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

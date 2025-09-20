@@ -22,7 +22,7 @@ if(isset($_POST['oculto'])){
 	}else{ print("<div class='centradiv' style=border-color:#0080C0;color:#0080C0;padding:0.6em;'>
 							PETICIÓN PROCESADA CORRECTAMENTE
 				</div>
-		<embed src='../audi/ip_confirm_unlock.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/ip_confirm_unlock.mp3' autoplay></audio>");
 			process_form();
 	}
 
@@ -153,10 +153,10 @@ function show_form($errors=[]){
 		print("</td>
 				</tr>
 			</table>
-		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/user_lost.mp3' autoplay></audio>");
 
 		}elseif(isset($_POST['oculto2']) != 1){
-			print("<embed src='../audi/ip_unlock_form.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/ip_unlock_form.mp3' autoplay></audio>");
 		}
 	
 	print("<table class='centradiv'>
@@ -281,7 +281,7 @@ function desbloqueo(){
 				<button type='button' title='VOLVER A ADMIN ACCESS' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					</a>
 				</div>
-		<embed src='../audi/ip_unlocked_ok.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/ip_unlocked_ok.mp3' autoplay></audio>");
 			
 			// PASO LOGS DE DESBLOQUEO
 			global $text;

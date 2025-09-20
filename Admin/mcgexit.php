@@ -79,7 +79,7 @@ function desconex(){
 					<input type='hidden' name='salir' value=1 />
 			</form>	
 		</div>
-	<embed src='../audi/sesion_close_confirm.mp3' autostart='true' loop='false' ></embed>");
+	<audio src='../audi/sesion_close_confirm.mp3' autoplay></audio>");
 	
 } 
 			
@@ -92,7 +92,7 @@ function salir() {
 	print("<div class='centradiv alertdiv'>
 					HA CERRADO SESION
 			</div>
-	<embed src='../audi/sesion_close.mp3' autostart='true' loop='false' ></embed>");
+	<audio src='../audi/sesion_close.mp3' autoplay></audio>");
 				
 	global $redir;
 	// 600000 microsegundos 10 minutos

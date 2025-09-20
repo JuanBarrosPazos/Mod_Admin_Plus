@@ -109,7 +109,7 @@ function show_form2($errorsp=''){
 			}
 		*/
 		print("</div>
-		<embed src='audi/pin_error.mp3' autostart='true' loop='false'></embed>");
+		<audio src='audi/pin_error.mp3' autoplay></audio>");
 	}else{ }
 	
 	print("<div class='centradiv' style='border:none;'>
@@ -131,7 +131,7 @@ function show_form2($errorsp=''){
 		global $embedDelay;
 		$embedDelay = "<script type='text/javascript'>
 					function embedDelay(){
-		document.getElementById('AudioQr').innerHTML = \"<embed src='audi/ScanYourQr.mp3' autostart='true' loop='false'></embed>\";
+		document.getElementById('AudioQr').innerHTML = \"<audio src='audi/ScanYourQr.mp3' autoplay></audio>\";
 					}
 					setTimeout('embedDelay()',3000);
 				</script>";

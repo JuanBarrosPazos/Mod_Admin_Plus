@@ -80,7 +80,7 @@ function process_pinqr(){
 					</form>
 						</li>
 					</ul>
-					<embed src='audi/entrada.mp3' autostart='true' loop='false' ></embed>
+					<audio src='audi/entrada.mp3' autoplay></audio>
 					<script type='text/javascript'>
 						function redir(){window.location.href='indexcamini.php';}
 						setTimeout('redir()',8000);
@@ -167,7 +167,7 @@ function process_pinqr(){
 						</font>
 					</div>
 					<!--
-					<embed src='audi/10horas.mp3' autostart='true' loop='false' ></embed>
+					<audio src='audi/10horas.mp3' autoplay></audio>
 					-->");
 		
 				global $ttot;				$ttot = '00:00:01';
@@ -201,7 +201,7 @@ function process_pinqr(){
 			</form>
 				</li>
 			</ul>
-			<embed src='audi/salida.mp3'  autostart='true' loop='false' ></embed>
+			<audio src='audi/salida.mp3'  autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='indexcamini.php';}
 				setTimeout('redir()',8000);
@@ -246,7 +246,7 @@ function process_pinqr(){
 				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 			</form>
 			</div>
-		<embed src='audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='audi/user_lost.mp3' autoplay></audio>");
 	}	
 	
 } // FIN function process_pinqr

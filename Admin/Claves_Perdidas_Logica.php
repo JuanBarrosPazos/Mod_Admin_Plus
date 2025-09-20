@@ -15,7 +15,7 @@ if(isset($_POST['oculto'])){
 					SE HA PROCESADO SU PETICION CORRECTAMENTE.<br>
 					CONFIRME EL ENVIO DE SUS DATOS VIA MAIL.
 				</div>
-		<embed src='../audi/claves_lost_2.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/claves_lost_2.mp3' autoplay></audio>");
 											
 		process_form();
 	}

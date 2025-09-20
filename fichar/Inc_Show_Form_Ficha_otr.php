@@ -7,10 +7,10 @@
 									//print("* ".$_SESSION['usuarios']);
 		if($_SESSION['usuarios'] == ''){ 
 			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
-			print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 		}
 	}elseif(!isset($_SESSION['usuarios'])){ 
-		print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 	}
 
 	global $db;
@@ -110,7 +110,7 @@
 				</form>														
 					</li>
 			</ul>
-			<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>");
+			<audio src='../audi/conf_user_data.mp3' autoplay></audio>");
 
 		}elseif($count1 > 0){
 			
@@ -148,7 +148,7 @@
 				</form>														
 					</li>
 				</ul>
-				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
+				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
 			}
 		} // fin 2º if
 	} // fin 1º if

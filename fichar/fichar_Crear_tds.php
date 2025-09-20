@@ -183,7 +183,7 @@ function show_form(){
 				} // Fin while. 
 
 				print("</table>
-				<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+				<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 
 				require 'Paginacion_Footter.php';
 
@@ -255,7 +255,7 @@ function show_form(){
 						</form>														
 					</li>
 				</ul>
-				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
+				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
 			}elseif($count1 > 0){
 			
 			global $dout;	$dout = date('Y-m-d'); 	global $tout; 	global $ttot;
@@ -289,7 +289,7 @@ function show_form(){
 				</form>														
 					</li>
 				</ul>
-				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
+				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
 			}
 		} // fin 2º if
 	} // fin 1º if

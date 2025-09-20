@@ -42,10 +42,10 @@ function show_form(){
 					// print($_SESSION['tablas']);
 		if(($_SESSION['tablas'] == '')&&(!isset($_POST['delete']))){
 			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O USUARIO</div>
-					<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
+					<audio src='../audi/bbdd1.mp3' autoplay></audio>");
 		}
 	}else{ 	unset($_SESSION['tablas']);
-			print("<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/bbdd1.mp3' autoplay></audio>");
 }
 	
 	if($_SESSION['Nivel'] == 'user'){
@@ -128,7 +128,7 @@ function show_form(){
 								TABLAS EXPORTABLES ".mysqli_num_rows($respuesta)."
 							</th>
 						</tr>
-				<embed src='../audi/bbdd2.mp3' autostart='true' loop='false' ></embed>");
+				<audio src='../audi/bbdd2.mp3' autoplay></audio>");
 
 				$countbgc = 0;
 				while ($fila = mysqli_fetch_row($respuesta)){
@@ -185,7 +185,7 @@ function listfiles(){
 	if($num < 1){
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
 		if(($_SESSION['tablas'] != '')&&(!isset($_POST['oculto1']))&&(!isset($_POST['delete']))){
-			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+			print("<audio src='../audi/no_file.mp3' autoplay></audio>");
 		}
 	}else{
 		print ("<table class='TFormAdmin' style='padding:0.2em;'>
@@ -203,7 +203,7 @@ function listfiles(){
 } // FIN function listfiles
 
 function delete(){ 	unlink($_POST['ruta']);
-					print("<embed src='../audi/bbdd5.mp3' autostart='true' loop='false' ></embed>");
+					print("<audio src='../audi/bbdd5.mp3' autoplay></audio>");
 				}
 	
 				   ////////////////////				   ////////////////////

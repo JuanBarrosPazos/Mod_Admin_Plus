@@ -96,10 +96,10 @@ function show_form($errors=[]){
 
 		print("DATOS INCORRECTOS<br>
 			</div>
-		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/user_lost.mp3' autoplay></audio>");
 
 	}elseif(isset($_POST['oculto2']) != 1){
-		print("<embed src='../audi/claves_lost_2.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='../audi/claves_lost_2.mp3' autoplay></audio>");
 	}
 	
 	print("<div class='centradiv'>
@@ -333,7 +333,7 @@ function process_form(){
 					<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				</a>
 			</div>
-		<embed src='../audi/claves_lost_3.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/claves_lost_3.mp3' autoplay></audio>");
 
 	}else{
 		print("<div class='centradiv alertdiv'>
@@ -346,7 +346,7 @@ function process_form(){
 					<button type='button' title='VOLVER AL INICIO' class='botonverde imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				</a>
 			</div>
-		<embed src='../audi/claves_lost_4.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/claves_lost_4.mp3' autoplay></audio>");
 
 		// SÓLO PARA CONFIRMAR LOS DATOS QUE SE ENVIAN...
 		/*

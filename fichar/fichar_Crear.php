@@ -136,7 +136,7 @@ function show_form(){
 		</form>														
 			</li>
 		</ul>
-		<embed src='../audi/confirm_sign_entry.mp3' autostart='true' loop='false'></embed>"); 
+		<audio src='../audi/confirm_sign_entry.mp3' autoplay></audio>"); 
 	
 	}elseif($count1 > 0){ // FICHA SALIDA.
 		global $dout;			$dout = date('Y-m-d');
@@ -168,7 +168,7 @@ function show_form(){
 			</form>
 		</li>
 		</ul>
-		<embed src='../audi/confirm_sign_exit.mp3' autostart='true' loop='false'></embed>"); 
+		<audio src='../audi/confirm_sign_exit.mp3' autoplay></audio>"); 
 	}
 
 		global $ficharCrear;		$ficharCrear = 1;

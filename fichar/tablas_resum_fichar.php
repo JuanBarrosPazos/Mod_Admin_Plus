@@ -18,7 +18,7 @@
 				</a>
 			</li>
 				</ul>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
+			<audio src='../audi/entrada.mp3' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Fichar_Crear.php';}
 					setTimeout('redir()',8000);
@@ -52,7 +52,7 @@
 			</a>	
 		</li>
 				</ul>
-		<embed src='../audi/salida.mp3' autostart='true' loop='false' ></embed>
+		<audio src='../audi/salida.mp3' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Fichar_Crear.php';}
 				setTimeout('redir()',8000);

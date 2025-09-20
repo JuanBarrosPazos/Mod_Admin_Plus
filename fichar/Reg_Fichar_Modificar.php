@@ -265,7 +265,7 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-			<embed src='../audi/file_modified.mp3' autostart='true' loop='false' ></embed>
+			<audio src='../audi/file_modified.mp3' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);
@@ -343,7 +343,7 @@ function show_form($errors=[]){
 		$_SESSION['edout'] = $_POST['dout'];
 		$_SESSION['etout'] = $_POST['tout'];
 		$_SESSION['ettot'] = $_POST['ttot'];
-		print("<embed src='../audi/file_for_modified.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='../audi/file_for_modified.mp3' autoplay></audio>");
 	}
 
 	require 'Tabla_Errors.php';

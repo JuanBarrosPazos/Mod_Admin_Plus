@@ -98,7 +98,7 @@ function process_pinqr(){
 						</td>
 					</tr>
 				</table>
-			<embed src='../audi/entrada.mp3' autostart='true' loop='false' ></embed>
+			<audio src='../audi/entrada.mp3' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='indexcam.php';}
 				setTimeout('redir()',10000);
@@ -195,7 +195,7 @@ function process_pinqr(){
 					</tr>
 					</table>
 					<!--
-					<embed src='../audi/10horas.mp3' autostart='true' loop='false' ></embed>
+					<audio src='../audi/10horas.mp3' autoplay></audio>
 					-->");
 		
 		$ttot = '00:00:01';
@@ -245,7 +245,7 @@ function process_pinqr(){
 						</td>
 					</tr>
 				</table>
-			<embed src='../audi/salida.mp3'  autostart='true' loop='false' ></embed>
+			<audio src='../audi/salida.mp3'  autoplay></audio>
 				<script type='text/javascript'>
 						function redir(){window.location.href='indexcam.php';}
 						setTimeout('redir()',10000);
@@ -301,7 +301,7 @@ function process_pinqr(){
 					</td>
 				</tr>
 			</table>
-		<embed src='../audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+		<audio src='../audi/user_lost.mp3' autoplay></audio>");
 	}
 	
 } // FIN FUNCTION 

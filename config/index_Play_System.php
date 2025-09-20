@@ -607,7 +607,7 @@ function process_form(){
 				bbdd_backup();
 		}else{ }
 
-		print("<embed src='audi/sesion_open.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='audi/sesion_open.mp3' autoplay></audio>");
 
 	}else{ require 'Inclu/tabla_permisos.php'; }
 }	
@@ -825,7 +825,7 @@ function process_pin(){
 				</form>
 				</li>
 			</ul>												
-			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false'></embed>");
+			<audio src='audi/conf_user_data.mp3' autoplay></audio>");
 
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
@@ -865,7 +865,7 @@ function process_pin(){
 				</form>
 				</li>	
 			</ul>														
-			<embed src='audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
+			<audio src='audi/conf_user_data.mp3' autoplay></audio>"); 
 		}
 	
 		ayear();
@@ -878,7 +878,7 @@ function process_pin(){
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			</div>
-			<embed src='audi/user_lost.mp3' autostart='true' loop='false' ></embed>");
+			<audio src='audi/user_lost.mp3' autoplay></audio>");
 
 	 	global $redir;
 		$redir = "<script type='text/javascript'>
@@ -994,7 +994,7 @@ function pin_out(){
 				</form>	
 			</li>
 		</ul>
-			<embed src='audi/salida.mp3' autostart='true' loop='false' ></embed>";
+			<audio src='audi/salida.mp3' autoplay></audio>";
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -1067,7 +1067,7 @@ function pin_in(){
 			</form>
 				</li>
 		</ul>
-			<embed src='audi/entrada.mp3' autostart='true' loop='false' ></embed>";	
+			<audio src='audi/entrada.mp3' autoplay></audio>";	
 		
 	global $db;  	global $db_name;
 	
@@ -1174,14 +1174,14 @@ function show_form2($errorsp=''){
 			}
 		*/
 		print("</div>
-		<embed src='audi/pin_error.mp3' autostart='true' loop='false'></embed>");
+		<audio src='audi/pin_error.mp3' autoplay></audio>");
 
 	}else{ }
 
 	global $embedDelay;
 	$embedDelay = "<script type='text/javascript'>
 					function embedDelay(){
-		document.getElementById('AudioQr').innerHTML = \"<embed src='audi/FrontPageOptions.mp3' autostart='true' loop='false'></embed>\";
+		document.getElementById('AudioQr').innerHTML = \"<audio src='audi/FrontPageOptions.mp3' autoplay></audio>\";
 					}
 					setTimeout('embedDelay()',3000);
 				</script>";
@@ -1325,7 +1325,7 @@ function bloqueo(){
 			$_SESSION['desbloqh'] = $bloqh.":".$bloqm.":00";
 		}
 
-		print("<embed src='audi/ip_block.mp3' autostart='true' loop='false' ></embed>");
+		print("<audio src='audi/ip_block.mp3' autoplay></audio>");
 
 		// PASO LOGS DE BLOQUEO
 		global $text;		
@@ -1378,7 +1378,7 @@ function show_form($errors=[]){
 		}
 
 		print("</div>
-			<embed src='audi/user_error.mp3' autostart='true' loop='false' ></embed>");
+			<audio src='audi/user_error.mp3' autoplay></audio>");
 
 	} // FIN if($errors)
 	
