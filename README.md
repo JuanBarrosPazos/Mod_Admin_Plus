@@ -11,8 +11,9 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.19 2025/08/19
+#### Mod_Admin_Plus V25.09.20 2025/08/20
 	- Ajustes generales...
+	- Sustitución de la etiqueta embed por audio
 ----
 #### Mod_Admin_Plus V25.09.14B 2025/08/14
 	- Ajustes generales en Balances.php
