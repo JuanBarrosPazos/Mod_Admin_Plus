@@ -40,12 +40,12 @@ function show_form(){
 					$defaults = array ('Orden' => isset($ordenar),
 								   	   'tablas' => strtolower($_POST['tablas']),);
 					// print($_SESSION['tablas']);
-		if($_SESSION['tablas'] == ''){ 
+		if(($_SESSION['tablas'] == '')&&(!isset($_POST['delete']))){
 			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O USUARIO</div>
 					<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
 		}
-	}else{ unset($_SESSION['tablas']);
-				print("<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
+	}else{ 	unset($_SESSION['tablas']);
+			print("<embed src='../audi/bbdd1.mp3' autostart='true' loop='false' ></embed>");
 }
 	
 	if($_SESSION['Nivel'] == 'user'){
@@ -174,58 +174,29 @@ function ver_todo(){
 
 function listfiles(){
 
-	echo "<div id='audiDescarga'></div>";
-	$embed = '<embed src="../audi/bbdd4.mp3" autostart="true" loop="false" ></embed>';
-	$FunEmbed = "<script type='text/javascript'>
-					function FunEmbed(){
-						document.getElementById('audiDescarga').innerHTML = '".$embed."';
-					}
-				</script>";
-	print($FunEmbed);
+	global $Audio;		$Audio = "bbdd4.mp3";
+	require 'AudiDescarga.php';
 	
 	global $ruta;			$ruta ="bbdd/";
 	
-	$directorio = opendir($ruta);
+	global $directorio;		$directorio = opendir($ruta);
 	global $num;			$num=count(glob("bbdd/{*}",GLOB_BRACE));
+
 	if($num < 1){
-		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>
-				<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
+		if(($_SESSION['tablas'] != '')&&(!isset($_POST['oculto1']))&&(!isset($_POST['delete']))){
+			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
+		}
 	}else{
 		print ("<table class='TFormAdmin' style='padding:0.2em;'>
 				<tr>
 					<th colspan='3'>ARCHIVOS RESPALDO BBDD</th>
 				</tr>");
 		
-		$countbgc = 0;
-		while($archivo = readdir($directorio)){
-			
-			if(($countbgc%2)==0){
-				$bgcolor ="background-color:#59746A;";
-			}else{ $bgcolor =""; }
-			
-			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
-				print("<tr>
-				<td style='".$bgcolor."' >
-					<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
-						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
-						<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-				<button type='submit' title='ELIMINAR ".strtoupper($archivo)."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
-						<input type='hidden' name='delete' value='1' >
-					</form>
-				</td>
-				<td style='".$bgcolor."' >
-					<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
-						<input type='hidden' name='tablas' value='".isset($_SESSION['tablas'])."' />
-				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunEmbed()' ></button>
-						<input type='hidden' name='descarga' value='1' >
-					</form>
-				</td>
-				<td style='".$bgcolor."' >".strtoupper($archivo)."</td>");
+		require 'ListFiles_While.php';
 
-			}else{ }
-			$countbgc = $countbgc+1;
-		} // FIN DEL WHILE
 	}
+
 	closedir($directorio);
 	print("</table>");
 }

@@ -48,7 +48,7 @@ function show_form(){
 		
 		print("<table class='centradiv'>
 				<tr>
-					<td>EXPORTE .LOG DE USUARIOS</td>
+					<td>EXPORT USER LOG</td>
 				</tr>		
 				<tr>
 					<td>
@@ -91,15 +91,10 @@ function show_form(){
 				 ////////////////////				  ///////////////////
 
 function listfiles(){
-	echo "<div id='audiDescarga'></div>";
-	$embed = '<embed src="../audi/file_exp_ok.mp3" autostart="true" loop="false" ></embed>';
-	$FunEmbed = "<script type='text/javascript'>
-					function FunEmbed(){
-						document.getElementById('audiDescarga').innerHTML = '".$embed."';
-					}
-				</script>";
-	print($FunEmbed);
-	
+
+	global $Audio;		$Audio = "file_exp_ok.mp3";
+	require 'AudiDescarga.php';
+
 	if(@$_SESSION['tablas'] == ''){ $_SESSION['tablas'] = $_SESSION['ref']; }
 	//print("*".$_SESSION['tablas'].".</br>");
 
@@ -109,11 +104,12 @@ function listfiles(){
 	global $rutag;			$rutag = "../Users/".$_SESSION['tablas']."/log/{*}";
 	//print("RUTA G: ".$rutag.".</br>");
 		
-	$directorio = opendir($ruta);
+	global $directorio;		$directorio = opendir($ruta);
 	global $num;			$num=count(glob($rutag,GLOB_BRACE));
+
 	if($num < 1){
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
-		if(!isset($_POST['delete'])){
+		if(($_SESSION['tablas'] != '')&&((isset($_POST['oculto1'])))){
 			print("<embed src='../audi/no_file.mp3' autostart='true' loop='false' ></embed>");
 		}
 	}else{
@@ -125,33 +121,8 @@ function listfiles(){
 					<th colspan='3'>".strtoupper($_SESSION['tablas'])." ARCHIVOS LOG</th>
 				</tr>");
 
-		$countbgc = 0;
-		while($archivo = readdir($directorio)){
+		require 'ListFiles_While.php';
 
-			if(($countbgc%2)==0){
-				$bgcolor ="background-color:#59746A;";
-			}else{ $bgcolor =""; }
-
-			if($archivo != ',' && $archivo != '.' && $archivo != '..'){
-				print("<tr>
-						<td style='".$bgcolor."'>
-							<form name='delete' action='$_SERVER[PHP_SELF]' method='post'>
-								<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-								<input type='hidden' name='ruta' value='".$ruta.$archivo."'>
-				<button type='submit' title='ELIMINAR ".strtoupper($archivo)."' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
-								<input type='hidden' name='delete' value='1' >
-							</form>
-						</td>
-						<td style='".$bgcolor."'>
-							<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
-								<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-				<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunEmbed()' ></button>
-							</form>
-						</td>
-						<td style='".$bgcolor."'>".strtoupper($archivo)."</td>");
-			}else{}
-			$countbgc = $countbgc+1;
-		} // FIN DEL WHILE
 	}
 	closedir($directorio);
 	print("</table>");
