@@ -19,7 +19,7 @@
 					<td style='".$bgcolor."'>
 						<form name='archivos' action='".$ruta.$archivo."' target='_blank' method='post'>
 							<input type='hidden' name='tablas' value='".$_SESSION['tablas']."' />
-			<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunEmbed()' ></button>
+			<button type='submit' title='DESCARGAR ".strtoupper($archivo)."' class='botonverde imgButIco DescargaBlack' style='vertical-align:top;' onclick='FunAudio()' ></button>
 						</form>
 					</td>
 					<td style='".$bgcolor."'>".strtoupper($archivo)."</td>");

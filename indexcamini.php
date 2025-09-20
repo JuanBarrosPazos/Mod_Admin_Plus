@@ -128,15 +128,15 @@ function show_form2($errorsp=''){
 			</div>
 		<div id='AudioQr' style='height:0.0em !important;'></div>");
 
-		global $embedDelay;
-		$embedDelay = "<script type='text/javascript'>
-					function embedDelay(){
+		global $AudioDelay;
+		$AudioDelay = "<script type='text/javascript'>
+					function AudioDelay(){
 		document.getElementById('AudioQr').innerHTML = \"<audio src='audi/ScanYourQr.mp3' autoplay></audio>\";
 					}
-					setTimeout('embedDelay()',3000);
+					setTimeout('AudioDelay()',3000);
 				</script>";
 
-		print ($embedDelay);
+		print ($AudioDelay);
 	
 } // FIN function show_form2
 

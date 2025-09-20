@@ -35,7 +35,7 @@ table, .centradiv {
 	text-align: right !important;
 }
 
-embed, .embed {
+audio, .audio {
 	display: none !important;
 	visibility: hidden !important;
 	height: 0.0em !important;

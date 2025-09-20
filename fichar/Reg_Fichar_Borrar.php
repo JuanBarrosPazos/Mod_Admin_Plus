@@ -64,20 +64,20 @@ function process_form(){
 
 	global $FBaja;		$FBaja = date('Y-m-d');
 	global $TBaja;		$TBaja = date('H:i:s');
-	global $Titulo;		global $embedAudi;
+	global $Titulo;		global $audioAudi;
 	global $sql;
 	if(isset($_POST['recupera'])){
 		$Titulo = "RECUPERADO EL REGISTRO";
 		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embedAudi = "file_recovered.mp3";
+		$audioAudi = "file_recovered.mp3";
 	}elseif(isset($_POST['elimina'])){
 		$Titulo = "ELIMINADO EL REGISTRO";
 		$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embedAudi = "file_deleted.mp3";
+		$audioAudi = "file_deleted.mp3";
 	}else{ 
 		$Titulo = "REGISTRO BORRADO";
 		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
-		$embedAudi = "file_bin.mp3";
+		$audioAudi = "file_bin.mp3";
 	}
 
 	$tabla = "<table class='TFormAdmin alertdiv'>
@@ -119,7 +119,7 @@ function process_form(){
 					</td>
 				</tr>
 			</table>
-				<audio src='../audi/".$embedAudi."' autoplay></audio>
+				<audio src='../audi/".$audioAudi."' autoplay></audio>
 			<script type='text/javascript'>
 				function redir(){window.location.href='Reg_Fichar_Ver.php';}
 				setTimeout('redir()',8000);

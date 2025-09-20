@@ -1,12 +1,12 @@
 <?php
 
 	echo "<div id='audiDescarga'></div>";
-	$embed = '<audio src="../audi/'.$Audio.'" autostart="true" loop="false" ></audio>';
-	$FunEmbed = "<script type='text/javascript'>
-					function FunEmbed(){
-						document.getElementById('audiDescarga').innerHTML = '".$embed."';
+	$Audio = '<audio src="../audi/'.$Audio.'" autostart="true" loop="false" ></audio>';
+	$FunAudio = "<script type='text/javascript'>
+					function FunAudio(){
+						document.getElementById('audiDescarga').innerHTML = '".$Audio."';
 					}
 				</script>";
-	print($FunEmbed);
+	print($FunAudio);
 
 ?>

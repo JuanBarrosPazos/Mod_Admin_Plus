@@ -1178,14 +1178,14 @@ function show_form2($errorsp=''){
 
 	}else{ }
 
-	global $embedDelay;
-	$embedDelay = "<script type='text/javascript'>
-					function embedDelay(){
+	global $AudioDelay;
+	$AudioDelay = "<script type='text/javascript'>
+					function AudioDelay(){
 		document.getElementById('AudioQr').innerHTML = \"<audio src='audi/FrontPageOptions.mp3' autoplay></audio>\";
 					}
-					setTimeout('embedDelay()',3000);
+					setTimeout('AudioDelay()',3000);
 				</script>";
-	print($embedDelay);
+	print($AudioDelay);
 
 	
 } // FIN FUNCTION show_form2()
