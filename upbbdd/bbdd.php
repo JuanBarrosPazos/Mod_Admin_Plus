@@ -178,10 +178,10 @@ function listfiles(){
 	require 'AudiDescarga.php';
 	
 	global $ruta;			$ruta ="bbdd/";
-	
+
 	global $directorio;		$directorio = opendir($ruta);
 	global $num;			$num=count(glob("bbdd/{*}",GLOB_BRACE));
-
+	
 	if($num < 1){
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
 		if(($_SESSION['tablas'] != '')&&(!isset($_POST['oculto1']))&&(!isset($_POST['delete']))){
@@ -199,7 +199,8 @@ function listfiles(){
 
 	closedir($directorio);
 	print("</table>");
-}
+
+} // FIN function listfiles
 
 function delete(){ 	unlink($_POST['ruta']);
 					print("<embed src='../audi/bbdd5.mp3' autostart='true' loop='false' ></embed>");

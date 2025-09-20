@@ -136,14 +136,26 @@ function show_form(){
 								GESTIÓN HORARIOS
 							</th>
 						<tr>
-							<th></th>
-							<th>REFERENCIA</th>
-							<th>NOMBRE</th>
-							<th></th>
+							<td></td>
+							<td>REFERENCIA</td>
+							<td>NOMBRE</td>
+							<td></td>
 						</tr>");
 
 				$countbgc = 0;
 				while($rowb = mysqli_fetch_assoc($qb)){
+
+					$tablaUser = "`".strtolower($_SESSION['clave'].$rowb['ref'])."_".date('Y')."`";
+					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE $tablaUser.`dout` = '' AND $tablaUser.`tout` = '00:00:00' LIMIT 1";
+					$qrUser = mysqli_query($db,$sqlUser);
+					$rowUser = mysqli_fetch_assoc($qrUser);
+					if(($rowUser['dout']=='')&&($rowUser['tout']=='00:00:00')){
+						$ButtonTitle = 'SING OUT USER ';
+						$ButtonClass = 'botonnaranja';
+					}else{
+						$ButtonTitle = 'SING IN USER ';
+						$ButtonClass = 'botonverde';
+					}
 
 					if(($countbgc%2)==0){
 						$bgcolor ="background-color:#59746A;";
@@ -162,7 +174,7 @@ function show_form(){
 						<input type='hidden' name='usuarios' value='".$rowb['ref']."' />
 						<input type='hidden' name='name1' value='".$rowb['Nombre']."' />
 						<input type='hidden' name='name2' value='".$rowb['Apellidos']."' />						
-							<button type='submit' title='FICHAR IN/OUT USUARIO ".strtoupper($rowb['ref'])."' class='botonverde imgButIco Clock1Black' style='vertical-align:middle;display:inline-block;' ></button>
+							<button type='submit' title='".$ButtonTitle." ".strtoupper($rowb['ref'])."' class='".$ButtonClass." imgButIco Clock1Black' style='vertical-align:middle;display:inline-block;' ></button>
 						<input type='hidden' name='oculto1' value=1 />
 					</form>
 							</td>
@@ -170,7 +182,8 @@ function show_form(){
 					$countbgc = $countbgc+1;
 				} // Fin while. 
 
-				print("</table>");
+				print("</table>
+				<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
 
 				require 'Paginacion_Footter.php';
 
@@ -199,51 +212,52 @@ function show_form(){
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);
 			
-		if($count1 < 1){
-			global $din;			$din = date('Y-m-d');
-			global $tin;
-		/*
-			HORA ORIGINAL DE ENTRADA DEL SCRIPT
-			$tin = date('H:i:s');
-		*/
+			if($count1 < 1){
+				global $din;			$din = date('Y-m-d');
+				global $tin;
+			/*
+				HORA ORIGINAL DE ENTRADA DEL SCRIPT
+				$tin = date('H:i:s');
+			*/
 
-		require 'Fichar_Redondeo_in.php';
+			require 'Fichar_Redondeo_in.php';
 
-		global $dout; 			$dout = '';
-		global $tout; 			$tout = '00:00:00';
-		global $ttot;			$ttot = '00:00:00';
+			global $dout; 			$dout = '';
+			global $tout; 			$tout = '00:00:00';
+			global $ttot;			$ttot = '00:00:00';
 		
-		print("<ul class='centradiv'>
-				<li class='liCentra'>FICHE SU ENTRADA</li>
-				<li class='liCentra'>
-					<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
-				</li>
-				<li class='liCentra'>
-					".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."
-				</li>
-				<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
-				<li class='liCentra'>
-					<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
-					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-						<input type='hidden' name='volver' value=1 />
-					</form>
-					<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
-						<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
-						<input type='hidden' id='name1' name='name1' value='".$_POST['name1']."' />
-						<input type='hidden' id='name2' name='name2' value='".$_POST['name2']."' />
-						<input type='hidden' id='din' name='din' value='".$din."' />
-						<input type='hidden' id='tin' name='tin' value='".$tin."' />
-						<input type='hidden' id='dout' name='dout' value='".$dout."' />
-						<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-							<td valign='middle'  align='center'>
-						<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-						<input type='hidden' name='entrada' value=1 />
-					</form>														
-				</li>
-			</ul>"); 
-		}elseif($count1 > 0){
-		
+			print("<ul class='centradiv'>
+					<li class='liCentra'>FICHE SU ENTRADA</li>
+					<li class='liCentra'>
+						<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
+					</li>
+					<li class='liCentra'>
+						".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."
+					</li>
+					<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
+					<li class='liCentra'>
+						<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
+						<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+							<input type='hidden' name='volver' value=1 />
+						</form>
+						<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+							<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
+							<input type='hidden' id='name1' name='name1' value='".$_POST['name1']."' />
+							<input type='hidden' id='name2' name='name2' value='".$_POST['name2']."' />
+							<input type='hidden' id='din' name='din' value='".$din."' />
+							<input type='hidden' id='tin' name='tin' value='".$tin."' />
+							<input type='hidden' id='dout' name='dout' value='".$dout."' />
+							<input type='hidden' id='tout' name='tout' value='".$tout."' />
+							<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+								<td valign='middle'  align='center'>
+							<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
+							<input type='hidden' name='entrada' value=1 />
+						</form>														
+					</li>
+				</ul>
+				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
+			}elseif($count1 > 0){
+			
 			global $dout;	$dout = date('Y-m-d'); 	global $tout; 	global $ttot;
 			/*
 				HORA ORIGINAL DE SALIDA DEL SCRIPT
@@ -274,7 +288,8 @@ function show_form(){
 					<input type='hidden' name='salida' value=1 />
 				</form>														
 					</li>
-				</ul>"); 
+				</ul>
+				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
 			}
 		} // fin 2º if
 	} // fin 1º if

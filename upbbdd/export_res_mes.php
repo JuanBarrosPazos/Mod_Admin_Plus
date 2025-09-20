@@ -30,60 +30,14 @@ if($_SESSION['Nivel'] == 'admin'){
 
 function show_form(){
 
-	global $db;
-	
-	if((isset($_POST['oculto1']))||(isset($_POST['delete']))){
-				$_SESSION['tablas'] = $_POST['tablas'];
-				$defaults = array ('Orden' => '`id` ASC',
-								   'tablas' => $_POST['tablas'],);
-		//print($_SESSION['tablas']);
-	}else{	unset($_SESSION['tablas']);
-				$defaults = array ('Orden' => '`id` ASC',
-								   'tablas' => '',);
-			print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
-	}
+	global $db;				global $db_name;
+	global $TablaTitulo;	$TablaTitulo = "EXPORTE RESUMEN MENSUAL";
+	global $ButtonTitulo;	$ButtonTitulo = "SELECCIONE RESUMEN MENSUAL";
 
-	if($_SESSION['Nivel'] == 'admin'){
-		print("
-			<table class='centradiv'>
-				<tr>
-					<td>EXPORTE RESUMEN MENSUAL</td>
-				</tr>		
-				<tr>
-					<td>
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-				<input type='hidden' name='Orden' value='".$defaults['Orden']."' />
-				<select name='tablas' style='margin-right:0.4;vertical-align:middle;'>");
-
-			global $db;
-			global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-
-			$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
-			$qu = mysqli_query($db, $sqlu);
-			if(!$qu){
-					print("Modifique la entrada L.60 ".mysqli_error($db)."<br>");
-			}else{
-				while($rowu = mysqli_fetch_assoc($qu)){
-						print ("<option value='".$rowu['ref']."' ");
-						if($rowu['ref'] == $defaults['tablas']){
-											print ("selected = 'selected'");
-						}
-						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
-				}
-			}  
-			
-		print ("</select>
-					<button type='submit' title='SELECCIONE RESUMEN MENSUAL' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
-					<input type='hidden' name='oculto1' value=1 />
-					</form>	
-					</td>
-				</tr>
-			</table>");
+	require 'ExportFiles_ShowForm.php';
 
 	global $ExportBotonera;		$ExportBotonera = 2;
 	require 'Export_Botonera.php';
-
-	}
 	
 } // FIN function show_form
 
@@ -101,7 +55,6 @@ function listfiles(){
 
 	global $ruta;			$ruta ="../Users/".$_SESSION['tablas']."/mrficha/";
 	//print("RUTA: ".$ruta.".</br>");
-	
 	global $rutag;			$rutag = "../Users/".$_SESSION['tablas']."/mrficha/{*}";
 	//print("RUTA G: ".$rutag.".</br>");
 		

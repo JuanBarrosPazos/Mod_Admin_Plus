@@ -135,7 +135,8 @@ function show_form(){
 				<input type='hidden' name='entrada' value=1 />
 		</form>														
 			</li>
-		</ul>"); 
+		</ul>
+		<embed src='../audi/confirm_sign_entry.mp3' autostart='true' loop='false'></embed>"); 
 	
 	}elseif($count1 > 0){ // FICHA SALIDA.
 		global $dout;			$dout = date('Y-m-d');
@@ -166,7 +167,8 @@ function show_form(){
 					<input type='hidden' name='salida' value=1 />
 			</form>
 		</li>
-		</ul>"); 
+		</ul>
+		<embed src='../audi/confirm_sign_exit.mp3' autostart='true' loop='false'></embed>"); 
 	}
 
 		global $ficharCrear;		$ficharCrear = 1;

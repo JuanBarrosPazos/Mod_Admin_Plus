@@ -5,7 +5,13 @@
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
 									$defaults = $_POST;
 									//print("* ".$_SESSION['usuarios']);
-	}elseif(isset($_SESSION['usuarios']) == ''){ }
+		if($_SESSION['usuarios'] == ''){ 
+			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
+			print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+		}
+	}elseif(!isset($_SESSION['usuarios'])){ 
+		print("<embed src='../audi/select_one_user.mp3' autostart='true' loop='false' ></embed>");
+	}
 
 	global $db;
 	global $tablau;				$tablau = "`".$_SESSION['clave']."admin`";
@@ -43,9 +49,6 @@
 			///////////////////////			**********  		///////////////////////
 	
 	if(isset($_POST['oculto1'])){
-		if($_SESSION['usuarios'] == ''){ 
-			print("<div class='centradiv alertdiv'>SELECCIONE UN USUARIO</div>");
-		}
 		
 		if($_SESSION['usuarios'] != '') {
 			global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
@@ -106,7 +109,8 @@
 						<input type='hidden' name='entrada' value=1 />
 				</form>														
 					</li>
-			</ul>");
+			</ul>
+			<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>");
 
 		}elseif($count1 > 0){
 			
@@ -143,7 +147,8 @@
 					<input type='hidden' name='salida' value=1 />
 				</form>														
 					</li>
-				</ul>"); 
+				</ul>
+				<embed src='../audi/conf_user_data.mp3' autostart='true' loop='false'></embed>"); 
 			}
 		} // fin 2º if
 	} // fin 1º if
