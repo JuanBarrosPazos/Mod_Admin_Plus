@@ -78,7 +78,7 @@ function ver_todo(){
 
 	global $sqlb;		global $TablaTitulo;
 	if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
-		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `ttot` = '00:00:01' AND `del` = 'false') ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `error` = 'true' AND `del` = 'false') ORDER BY $orden ";
 		$TablaTitulo = "ERRORES ".$dyt1.": ";
 	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
 		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `del` = 'true') ORDER BY $orden ";
@@ -87,7 +87,7 @@ function ver_todo(){
 		$sqlb = "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
 		$TablaTitulo = "TODO: ";
 	}
-	echo "** ".$sqlb."<br>";
+	//echo "** ".$sqlb."<br>";
 	global $qb;
 	$qb = mysqli_query($db, $sqlb);
 	

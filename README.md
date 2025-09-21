@@ -11,7 +11,15 @@
 #### Ojo modificar el contenido de los mensajes en los log de actividad de los Admin...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.20 2025/08/20
+#### Mod_Admin_Plus V25.09.21 2025/08/21
+	- Se modificar el construtor de las tablas de horarios de usuarios:
+			`error` varchar(5) NOT NULL default 'false',
+	- Se modifican las tablas de control de horario:
+			ALTER TABLE `map_abxxxxxxxxa_2025` ADD `error` VARCHAR(5) NOT NULL DEFAULT 'false' AFTER `ttot`;
+	- Se modifican las consultas sql en php...
+	- Ajustes generales...
+----
+#### Mod_Admin_Plus V25.09.20C 2025/08/20
 	- Ajustes generales...
 	- Sustitución de la etiqueta embed por audio
 ----

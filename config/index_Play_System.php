@@ -243,6 +243,10 @@ function tcl(){
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
+  `error` varchar(5) NOT NULL default 'false',
+  `del` varchar(5) NOT NULL default 'false',
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `tfeed` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
@@ -926,8 +930,8 @@ function pin_out(){
 	//print ($difer);
 	
 	global $ttot;			$ttot = $difer->format('%H:%i:%s');
+	global $terror;			$terror = 'false';
 	
-
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -942,17 +946,18 @@ function pin_out(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
-	global $ttot;		global $text;
+	global $text;
 	if(($ttoth > 9)||($ttotd > 0)){
 		
 		print("<div class='centradiv alertdiv'>
 						NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 				</div>");
 		
-					$ttot = '00:00:01';
-					$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-					$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-					$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+			global $ttot;			$ttot = '00:00:00';
+			global $terror;			$terror = 'true';
+			$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
+			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
+			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 		/* FIN if >9 */
 		}else{	$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
 				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
@@ -1001,7 +1006,7 @@ function pin_out(){
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
 	global $vname;
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -1013,9 +1018,7 @@ function pin_out(){
 					setTimeout('redir()',8000);
 					</script>";
 		print($redir);
-
 		print($tabla); 
-
 		suma_todo();
 
 		global $dir;			$dir = "Users/".$_POST['ref']."/mrficha";

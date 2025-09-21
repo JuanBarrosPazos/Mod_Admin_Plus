@@ -11,11 +11,11 @@
 
 	// INICIO ERRORES FICHAR.
 		global $db;		global $db_name;
-		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ttot` = '00:00:01' ";
+		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`error` = 'true' ";
 		$qe = mysqli_query($db, $sqle);
 		global $counte;
 		if(!$qe){
-			echo "* ERROR L.12 ".mysqli_error($db);
+			echo "* ERROR L.14 ".mysqli_error($db);
 		}else{
 			$counte = mysqli_num_rows($qe);
 		}

@@ -153,7 +153,7 @@ function validate_form(){
 		}elseif(strlen(trim($_POST['tout'])) > 8){
 			$errors [] = "TIME OUT Valores incorrectos HH:MM:SS";
 		}elseif(($touth > $th)||($toutm > $thms)||($touts > $thms)){
-				$errors [] = "TIME OUT HORA NO PERMITIDA MAX: 00:00:01";
+				$errors [] = "TIME OUT HORA NO PERMITIDA";
 		}elseif(($doutd == $dind)AND($tinh > $touth)){
 			/* (Si el día de salida es igual al de entrada y la hora de salida es inferior a la de entrada */
 				$errors [] = "TIME OUT HORA NO PERMITIDA";
@@ -225,6 +225,7 @@ function process_form(){
 	//print ($difer);
 	
 	global $ttot;			$ttot = $difer->format('%H:%i:%s');
+	global $terror;			$terror = 'false';
 
 	$tabla = "<table class='TFormAdmin'>
 				<tr>
@@ -275,7 +276,7 @@ function process_form(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`id` = '$_POST[id]' AND $vname.`ref` = '$_SESSION[usuarios]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`id` = '$_POST[id]' AND $vname.`ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		
 		if(mysqli_query($db, $sqla)){ 
 			

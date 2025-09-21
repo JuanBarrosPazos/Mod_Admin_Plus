@@ -106,8 +106,8 @@ $c4 = "ENGINE=InnoDB DEFAULT CHARSET=latin1".$numr;
 // EXPORTA LA TABLA CONTROL USUARIO //
 
 else{
-$campo = 'id,ref,Nombre,Apellidos,din,tin,dout,tout,ttot';
-$texc = '`id`, `ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`';
+$campo = 'id,ref,Nombre,Apellidos,din,tin,dout,tout,ttot,error,del,dfeed,tfeed';
+$texc = '`id`, `ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`, `error`, `del`, `dfeed`, `tfeed`';
 		$id = "`id`";
 $c3 = "\n\t  `id` int(4) NOT NULL auto_increment,
 \t`ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
@@ -118,6 +118,10 @@ $c3 = "\n\t  `id` int(4) NOT NULL auto_increment,
 \t`dout` varchar(10) collate utf16_spanish2_ci NULL,
 \t`tout` time NULL,
 \t`ttot` time NULL,
+\t`error` varchar(5) NOT NULL default 'false',
+\t`del` varchar(5) NOT NULL default 'false',
+\t`dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+\t`tfeed` time NULL,
 \tPRIMARY KEY  (`id`),
 \tUNIQUE KEY `id` (`id`)";
 	$sqlc =  "SELECT * FROM $valort ORDER BY $id ASC";

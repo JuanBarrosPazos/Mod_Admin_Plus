@@ -225,6 +225,7 @@ function salida(){
 	//print ($difer);
 	
 	global $ttot;			$ttot = $difer->format('%H:%i:%s');
+	global $terror;			$terror = 'false';
 
 			////////////////////		**********  		////////////////////
 	
@@ -238,6 +239,7 @@ function salida(){
 	$ttotd = substr($ttot2,0,2);
 	$ttotd = str_replace("-","",$ttotd);
 	
+	global $text;
 	if(($ttoth > 9)||($ttotd > 0)){
 		print("<div class='centradiv alertdiv'>
 					NO PUEDE FICHAR MÁS DE 10 HORAS.
@@ -245,15 +247,14 @@ function salida(){
 					PONGASE EN CONTACTO CON ADMIN SYSTEM.
 				</div>");
 		
-		global $ttot;			$ttot = '00:00:01';
-		global $text;
+		global $ttot;			$ttot = '00:00:00';
+		global $terror;			$terror = 'true';
 		$text = PHP_EOL."\t*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."** NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
 		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 	/* fin if >9 */
 	}else{	global $ttot;
-			global $text;
 			$text = PHP_EOL."** NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
 			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
@@ -268,7 +269,7 @@ function salida(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			

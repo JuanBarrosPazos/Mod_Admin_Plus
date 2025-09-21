@@ -147,6 +147,7 @@ function process_pinqr(){
 			//print ($difer);
 			
 			global $ttot;			$ttot = $difer->format('%H:%i:%s');
+			global $terror;			$terror = 'false';
 
 			$ttot1 = $difer->format('%H:%i:%s');
 			global $ttoth;
@@ -170,7 +171,8 @@ function process_pinqr(){
 					<audio src='audi/10horas.mp3' autoplay></audio>
 					-->");
 		
-				global $ttot;				$ttot = '00:00:01';
+				global $ttot;				$ttot = '00:00:00';
+				global $terror;				$terror = 'true';
 				global $text;
 				$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 				$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
@@ -211,7 +213,7 @@ function process_pinqr(){
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 							//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
 			if(mysqli_query($db, $sqla)){ 
 					
@@ -344,6 +346,10 @@ function tcl(){
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
+  `error` varchar(5) NOT NULL default 'false',
+  `del` varchar(5) NOT NULL default 'false',
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `tfeed` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 	

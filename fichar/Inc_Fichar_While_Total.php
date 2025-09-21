@@ -62,7 +62,7 @@
 		$countbgc = 0;
 		while($rowb = mysqli_fetch_assoc($qb)){
 			global $sty;
-			if($rowb['ttot'] == "00:00:01"){ 
+			if($rowb['error'] == "true"){ 
 					$sty = "color: #F1BD2D; font-weight: bold;";
 			}else{ $sty = ""; }
 

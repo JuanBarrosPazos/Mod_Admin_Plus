@@ -168,6 +168,7 @@ function process_pinqr(){
 		global $difer;			$difer = $fecha1->diff($fecha2);
 		//print ($difer);
 		global $ttot;			$ttot = $difer->format('%H:%i:%s');
+		global $terror;			$terror = 'false';
 
 		$ttot1 = $difer->format('%H:%i:%s');
 		global $ttoth;
@@ -179,7 +180,7 @@ function process_pinqr(){
 		$ttotd = substr($ttot2,0,2);
 		$ttotd = str_replace("-","",$ttotd);
 	
-		global $ttot;				global $text;
+		global $text;
 		if(($ttoth > 9)||($ttotd > 0)){
 			print("<table align='center' style='margin-top:10px' width=450px >
 					<tr>
@@ -198,14 +199,15 @@ function process_pinqr(){
 					<audio src='../audi/10horas.mp3' autoplay></audio>
 					-->");
 		
-		$ttot = '00:00:01';
-		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
-		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+			global $ttot;			$ttot = '00:00:00';
+			global $terror;			$terror = 'true';
+			$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
+			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
+			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 		/* fin if >9 */
 		}else{	
-				$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
-				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
+			$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
+			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
 		} /* Fin else >9 */
 	
 		$tabla = "<table align='center' style='margin-top:10px' width=300px >
@@ -255,7 +257,7 @@ function process_pinqr(){
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 							//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 			
 		if(mysqli_query($db, $sqla)){ 
 				
@@ -400,6 +402,10 @@ function tcl(){
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
   `tout` time NULL,
   `ttot` time NULL,
+  `error` varchar(5) NOT NULL default 'false',
+  `del` varchar(5) NOT NULL default 'false',
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `tfeed` time NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 	

@@ -31,7 +31,7 @@
 				while($rowb = mysqli_fetch_assoc($qb)){
 
 					global $sty;		
-					if($rowb['ttot'] == "00:00:01"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
+					if($rowb['error'] == "true"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
 					}else{ $sty = ""; }
 
 					global $vname;				global $dyt1;

@@ -59,7 +59,7 @@
         $filab = mysqli_fetch_row($respuestab);      
         for($i=0; $i<$countb; $i++){
 			if($filab[0]){
-                $sqlSumb = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalA' FROM `$filab[0]` WHERE (`ttot` <> '00:00:00' OR `ttot` <> '00:00:01')";
+                $sqlSumb = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalA' FROM `$filab[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sumb = mysqli_query($db, $sqlSumb);
                 $sumTotb = mysqli_fetch_assoc($Sumb);
 
@@ -85,7 +85,7 @@
 		while($fila = mysqli_fetch_row($respuesta)){
 			if($fila[0]){
 
-                $sqlSum = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$fila[0]` WHERE (`ttot` <> '00:00:00' OR `ttot` <> '00:00:01')";
+                $sqlSum = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$fila[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sum = mysqli_query($db, $sqlSum);
                 $sumTot = mysqli_fetch_assoc($Sum);
                 //echo "** ".$fila[0]." TOTAL SEGUNDOS: ".$sumTot['total']."<br>";
@@ -139,7 +139,7 @@
 		while($filac = mysqli_fetch_row($respuestac)){
 			if($filac[0]){
 
-                $sqlSumc = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$filac[0]` WHERE (`ttot` <> '00:00:00' OR `ttot` <> '00:00:01')";
+                $sqlSumc = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$filac[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sumc = mysqli_query($db, $sqlSumc);
                 $sumTotc = mysqli_fetch_assoc($Sumc);
                 //echo "** ".$filac[0]." TOTAL SEGUNDOS: ".$sumTot['total']."<br>";
