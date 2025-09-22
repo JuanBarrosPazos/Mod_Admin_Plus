@@ -214,6 +214,7 @@ function process_form(){
 	global $din;			$din = trim($_POST['din']);
 	global $tin;			$tin = trim($_POST['tin']);
 	global $in;				$in = $din." ".$tin;
+
 	global $dout;			$dout = trim($_POST['dout']);
 	global $tout;			$tout = trim($_POST['tout']);
 	global $out;			$out = $dout." ".$tout;
@@ -227,100 +228,62 @@ function process_form(){
 	global $ttot;			$ttot = $difer->format('%H:%i:%s');
 	global $terror;			$terror = 'false';
 
-	$tabla = "<table class='TFormAdmin'>
-				<tr>
-					<th colspan=2>
-						HA MODIFICADO LA SALIDA
-					</th>
-				</tr>
-				<tr>
-					<td>USER NAME</td>
-					<td>".$_POST['name1']." ".$_POST['name2']."</td>
-				</tr>
-				<tr>
-					<td>ID</td><td>".$_POST['id']."</td>
-				</tr>
-				<tr>
-					<td>USER REF</td><td>".$_SESSION['usuarios']."</td>
-				</tr>
-				<tr>
-					<td>DATE IN</td><td>".$_POST['din']."</td>
-				</tr>
-				<tr>
-					<td>TEME IN</td><td>".$_POST['tin']."</td>
-				</tr>
-				<tr>
-					<td>DATE OUT</td><td>".$_POST['dout']."</td>
-				</tr>
-				<tr>
-					<td>TIME OUT</td><td>".$_POST['tout']."</td>
-				</tr>
-				<tr>
-					<td>TIME TOTAL</td><td>".$ttot."</td>
-				</tr>
-				<tr>
-					<td colspan=2>
-						<form name='volver' action='Reg_Fichar_Ver.php'>
-				<button type='submit' title='VOLVER A FICHAR MODIFICAR SALIDA' class='botonazul imgButIco HomeBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
-						</form>					
-					</td>
-				</tr>
-			</table>
-			<audio src='../audi/file_modified.mp3' autoplay></audio>
-			<script type='text/javascript'>
-				function redir(){window.location.href='Reg_Fichar_Ver.php';}
-				setTimeout('redir()',8000);
-			</script>";	
-		
+	global $imgTabla;		$imgTabla = "";
+	global $rutaAudio;		$rutaAudio = "<audio src='../audi/salida.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "Reg_Fichar_Ver.php";
+	global $rutaRedir;		$rutaRedir = "Reg_Fichar_Ver.php";
+	global $tablaModif;		$tablaModif = 1;
+	global $TablaOut;
+	require 'Tablas_Resum_Fichar.php';
+
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
 	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`id` = '$_POST[id]' AND $vname.`ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		
-		if(mysqli_query($db, $sqla)){ 
+	if(mysqli_query($db, $sqla)){ 
 			
-			print($tabla); 
-			suma_todo();
+		print($TablaOut); 
+		suma_todo();
 			
-			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
+		global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 			
-			global $nm;
-			$nm = substr($_POST['din'],5,2);
-			$nm = str_replace(":","",$nm);
+		global $nm;
+		$nm = substr($_POST['din'],5,2);
+		$nm = str_replace(":","",$nm);
 
-			global $sumatodo;
-			global $text;
-			$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
-			$text = $text.PHP_EOL."** HORARIO INICIAL ERRONEO: ";
-			$text = $text.PHP_EOL."** ERROR ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-			$text = $text.PHP_EOL."** ERROR SALIDA: ".$_SESSION['edout']." / ".$_SESSION['etout'].".";
-			$text = $text.PHP_EOL."** ERROR TOTAL TIME: ".$_SESSION['ettot'].".";
+		global $sumatodo;
+		global $text;
+		$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
+		$text = $text.PHP_EOL."** HORARIO INICIAL ERRONEO: ";
+		$text = $text.PHP_EOL."** ERROR ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
+		$text = $text.PHP_EOL."** ERROR SALIDA: ".$_SESSION['edout']." / ".$_SESSION['etout'].".";
+		$text = $text.PHP_EOL."** ERROR TOTAL TIME: ".$_SESSION['ettot'].".";
 			
-			$text = $text.PHP_EOL."** HORARIO MODIFICADO: ".$_POST['din']." / ".$_POST['tin'].".";
-			$text = $text.PHP_EOL."** MODIF. ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-			$text = $text.PHP_EOL."** MODIF. SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
-			$text = $text.PHP_EOL."** MODIF. TOTAL TIME: ".$ttot.".";
+		$text = $text.PHP_EOL."** HORARIO MODIFICADO: ".$_POST['din']." / ".$_POST['tin'].".";
+		$text = $text.PHP_EOL."** MODIF. ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
+		$text = $text.PHP_EOL."** MODIF. SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
+		$text = $text.PHP_EOL."** MODIF. TOTAL TIME: ".$ttot.".";
 
-			$text = $text.PHP_EOL."** HORAS TOTALES MES ".$diny."-".$nm.": ".$sumatodo;
-			//$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
-			$text = $text.PHP_EOL."\t**********".PHP_EOL;
-			global $rmfdocu;		$rmfdocu = $_SESSION['usuarios'];
-			global $rmfdate;		$rmfdate = $diny."_".$nm;		//$rmfdate = date('Y_').$nm;
-			global $rmftext;		$rmftext = $text.PHP_EOL;
-			global $filename;		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
-			//if($diny == date('Y')){	}else{}
-			global $rmf;			$rmf = fopen($filename, 'ab+');
-			fwrite($rmf, $rmftext);
-			fclose($rmf);
+		$text = $text.PHP_EOL."** HORAS TOTALES MES ".$diny."-".$nm.": ".$sumatodo;
+		//$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
+		$text = $text.PHP_EOL."\t**********".PHP_EOL;
+		global $rmfdocu;		$rmfdocu = $_SESSION['usuarios'];
+		global $rmfdate;		$rmfdate = $diny."_".$nm;		//$rmfdate = date('Y_').$nm;
+		global $rmftext;		$rmftext = $text.PHP_EOL;
+		global $filename;		$filename = $dir."/".$rmfdate."_".$rmfdocu.".txt";
+		//if($diny == date('Y')){	}else{}
+		global $rmf;			$rmf = fopen($filename, 'ab+');
+		fwrite($rmf, $rmftext);
+		fclose($rmf);
 
-		}else{ 	print("* MODIFIQUE LA ENTRADA L.304: ".mysqli_error($db));
-				show_form ();
-				global $texerror;
-				$texerror = PHP_EOL."\t ".mysqli_error($db);
-		}
+	}else{ 	print("ERROR SQL L.243: ".mysqli_error($db));
+			show_form ();
+			global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
+	}
 
-	} 
+} 
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

@@ -64,28 +64,17 @@ function process_pinqr(){
 			global $dout;			$dout = '';
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
-
-			$tabla = "<ul class='centradiv'>
-						<li class='liCentra'>HA FICHADO LA ENTRADA</li>
-						<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
-						<li class='liCentra'>
+			
+			global $imgTabla;
+			$imgTabla = "<li class='liCentra'>
 							<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
-						</li>
-						<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
-						<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
-						<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
-						<li class='liCentra'>
-					<form name='cancel' action='indexcamini.php' >
-						<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
-					</form>
-						</li>
-					</ul>
-					<audio src='audi/entrada.mp3' autoplay></audio>
-					<script type='text/javascript'>
-						function redir(){window.location.href='indexcamini.php';}
-						setTimeout('redir()',8000);
-					</script>";	
-
+						</li>";
+			global $rutaAudio;		$rutaAudio = "";
+			global $rutaHome;		$rutaHome = "indexcamini.php";
+			global $rutaRedir;		$rutaRedir = "indexcamini.php";
+			global $TablaIn;
+			require 'fichar/Tablas_Resum_Fichar.php';
+			
 			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 			global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
@@ -93,7 +82,7 @@ function process_pinqr(){
 		
 			if(mysqli_query($db, $sqla)){
 
-				print($tabla);
+				print($TablaIn);
 				
 				global $dir;			$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 				global $text;			
@@ -110,7 +99,7 @@ function process_pinqr(){
 				fclose($rmf);
 	
 			}else{ 
-				print("* MODIFIQUE LA ENTRADA L.153: ".mysqli_error($db));
+				print("ERROR SQL L.92: ".mysqli_error($db));
 				global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
 			}
 		// FIN FICHA ENTRADA
@@ -131,83 +120,17 @@ function process_pinqr(){
 			$count1 = mysqli_num_rows($q1);
 			$row1 = mysqli_fetch_assoc($q1);
 			
-			global $din;			$din = trim($row1['din']);
-			global $tin;			$tin = trim($row1['tin']);
-			global $in;				$in = $din." ".$tin;
-	
-			global $dout;			$dout = trim($dout);
-			global $tout;			$tout = trim($tout);
-			
-			global $out;			$out = $dout." ".$tout;
+			require 'fichar/Fichar_Salida.php';
 
-			$fecha1 = new DateTime($in);//fecha inicial
-			$fecha2 = new DateTime($out);//fecha de cierre
-
-			global $difer;			$difer = $fecha1->diff($fecha2);
-			//print ($difer);
-			
-			global $ttot;			$ttot = $difer->format('%H:%i:%s');
-			global $terror;			$terror = 'false';
-
-			$ttot1 = $difer->format('%H:%i:%s');
-			global $ttoth;
-			$ttoth = substr($ttot1,0,2);
-			$ttoth = str_replace(":","",$ttoth);
-			
-			$ttot2 = $difer->format('%d-%H:%i:%s');
-			global $ttotd;
-			$ttotd = substr($ttot2,0,2);
-			$ttotd = str_replace("-","",$ttotd);
-	
-			if(($ttoth > 9)||($ttotd > 0)){
-				print("<div class='centradiv'>
-						<font color='#F1BD2D'>
-							NO PUEDE FICHAR MÁS DE 10 HORAS.
-							</br>
-							PONGASE EN CONTACTO CON ADMIN SYSTEM.
-						</font>
-					</div>
-					<!--
-					<audio src='audi/10horas.mp3' autoplay></audio>
-					-->");
-		
-				global $ttot;				$ttot = '00:00:00';
-				global $terror;				$terror = 'true';
-				global $text;
-				$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-				$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;
-				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-				/* fin if >9 */
-			}else{	
-				global $ttot;
-				global $text;
-				$text = PHP_EOL."** F. SALIDA ".$dout." / ".$tout;
-				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-	 		} /* Fin else >9 */
-	
-			$tabla = "<ul class='centradiv'>
-				<li class='liCentra'>HA FICHADO LA SALIDA</li>
-				<li class='liCentra'>".$rp['Nombre']." ".$rp['Apellidos']."</li>
-				<li class='liCentra'>
-					<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."'/>
-				</li>
-				<li><div>REFERENCIA: </div><div>".$rp['ref']."</div></li>
-				<li><div>FECHA ENTRADA: </div><div>".$din."</div></li>
-				<li><div>HORA ENTRADA: </div><div>".$tin."</div></li>
-				<li><div>FECHA SALIDA: </div><div>".$dout."</div></li>
-				<li><div>HORA SALIDA: </div><div>".$tout."</div></li>
-				<li><div>H. REALIZADAS: </div><div>".$ttot."</div></li>
-				<li class='liCentra'>
-			<form name='cancel' action='indexcamini.php' >
-				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top; margin-left:85%;' ></button>
-			</form>
-				</li>
-			</ul>
-			<audio src='audi/salida.mp3'  autoplay></audio>
-			<script type='text/javascript'>
-				function redir(){window.location.href='indexcamini.php';}
-				setTimeout('redir()',8000);
-			</script>";	
+			global $imgTabla;
+			$imgTabla = "<li class='liCentra'>
+							<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
+						</li>";
+			global $rutaAudio;		$rutaAudio = "";
+			global $rutaHome;		$rutaHome = "indexcamini.php";
+			global $rutaRedir;		$rutaRedir = "indexcamini.php";
+			global $TablaOut;
+			require 'fichar/Tablas_Resum_Fichar.php';
 
 		//print($in." / ".$out." / ".$ttot."</br>");
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -217,7 +140,7 @@ function process_pinqr(){
 		
 			if(mysqli_query($db, $sqla)){ 
 					
-				print($tabla);
+				print($TablaOut);
 				suma_todo();
 						
 				$dir = "Users/".$_SESSION['usuarios']."/mrficha";

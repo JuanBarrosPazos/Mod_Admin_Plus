@@ -57,7 +57,11 @@ function errors(){
 
 function entrada(){
 	
-	global $tablarin;
+	global $imgTabla;		$imgTabla = "";
+	global $rutaAudio;		$rutaAudio = "<audio src='../audi/entrada.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
+	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
+	global $TablaIn;
 	require 'Tablas_Resum_Fichar.php';
 
 	global $db;				global $db_name;
@@ -69,7 +73,7 @@ function entrada(){
 		
 	if(mysqli_query($db, $sqla)){ 
 		
-		print($tablarin);
+		print($TablaIn);
 		
 		global $dir;			global $text;
 		require 'log_fichar_in.php';
@@ -211,58 +215,14 @@ function salida(){
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
-	global $din;			$din = trim($row1['din']);
-	global $tin;			$tin = trim($row1['tin']);
-	global $in;				$in = $din." ".$tin;
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
-	global $out;			$out = $dout." ".$tout;
-	
-	$fecha1 = new DateTime($in);//fecha inicial
-	$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;			$difer = $fecha1->diff($fecha2);
-	//print ($difer);
-	
-	global $ttot;			$ttot = $difer->format('%H:%i:%s');
-	global $terror;			$terror = 'false';
+	require 'Fichar_Salida.php';
 
-			////////////////////		**********  		////////////////////
-	
-	$ttot1 = $difer->format('%H:%i:%s');
-	global $ttoth;
-	$ttoth = substr($ttot1,0,2);
-	$ttoth = str_replace(":","",$ttoth);
-	
-	$ttot2 = $difer->format('%d-%H:%i:%s');
-	global $ttotd;
-	$ttotd = substr($ttot2,0,2);
-	$ttotd = str_replace("-","",$ttotd);
-	
-	global $text;
-	if(($ttoth > 9)||($ttotd > 0)){
-		print("<div class='centradiv alertdiv'>
-					NO PUEDE FICHAR MÁS DE 10 HORAS.
-					</br>
-					PONGASE EN CONTACTO CON ADMIN SYSTEM.
-				</div>");
-		
-		global $ttot;			$ttot = '00:00:00';
-		global $terror;			$terror = 'true';
-		$text = PHP_EOL."\t*** ERROR CONSULTE ADMIN SYSTEM ***";
-		$text = $text.PHP_EOL."** NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
-		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-	/* fin if >9 */
-	}else{	global $ttot;
-			$text = PHP_EOL."** NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
-			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-	} /* Fin else >9 */
-	
-	////////////////////		**********  		////////////////////
-	
-	global $tablarout;
+	global $imgTabla;		$imgTabla = "";
+	global $rutaAudio;		$rutaAudio = "<audio src='../audi/salida.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
+	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
+	global $TablaOut;
 	require 'Tablas_Resum_Fichar.php';
 
 	//print($in." / ".$out." / ".$ttot."</br>");
@@ -273,7 +233,7 @@ function salida(){
 		
 	if(mysqli_query($db, $sqla)){ 
 			
-		print($tablarout); 
+		print($TablaOut); 
 		suma_todo();
 
 		global $dir;		global $sumatodo;		global $text;

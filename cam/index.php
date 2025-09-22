@@ -477,108 +477,19 @@ function pin_out(){
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
-	global $din;			$din = trim($row1['din']);
-	global $tin;			$tin = trim($row1['tin']);
-	global $in;				$in = $din." ".$tin;
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
-	global $out;			$out = $dout." ".$tout;
-	
-	$fecha1 = new DateTime($in);//fecha inicial
-	$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;			$difer = $fecha1->diff($fecha2);
-	//print ($difer);
-	global $ttot;			$ttot = $difer->format('%H:%i:%s');
-	global $terror;			$terror = 'false';
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	$ttot1 = $difer->format('%H:%i:%s');
-	global $ttoth;
-	$ttoth = substr($ttot1,0,2);
-	$ttoth = str_replace(":","",$ttoth);
-	
-	$ttot2 = $difer->format('%d-%H:%i:%s');
-	global $ttotd;
-	$ttotd = substr($ttot2,0,2);
-	$ttotd = str_replace("-","",$ttotd);
-	
-	if(($ttoth > 9)||($ttotd > 0)){
-		
-		print("<table align='center' style='margin-top:10px' width=450px >
-				<tr>
-					<th class='BorderInf'>
-					<b>
-					<font color='#FF0000'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.
-						</br>
-						PONGASE EN CONTACTO CON ADMIN SYSTEM.
-					</font>
-					</b>
-					</th>
-				 </tr>
-				</table>");
-		
-		global $ttot;			$ttot = '00:00:00';
-		global $terror;			$terror = 'true';
-		global $text;
-		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-		$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-	/* fin if >9 */
-	}else{	global $ttot;
-			global $text;
-			$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-	} /* Fin else >9 */
-	
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=2 class='BorderInf'>
-						HA FICHADO LA SALIDA</br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td colspan=2 align='center'>
+	require '../fichar/Fichar_Salida.php';
+	global $imgTabla;
+	$imgTabla = "<li class='liCentra'>
 		<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
-					</td>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$din."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$tin."</td>
-				</tr>
-				<tr>
-					<td>FECHA SALIDA</td><td>".$_POST['dout']."</td>
-				</tr>
-				<tr>
-					<td>HORA SALIDA</td><td>".$_POST['tout']."</td>
-				</tr>
-				<tr>
-					<td>HORAS REALIZADAS</td><td>".$ttot."</td>
-				</tr>
-				<tr>
-					<td colspan=2  valign='middle'  align='center'>
-						<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='VOLVER INICIO' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-						</form>	
-					</td>
-				</tr>
-			</table>
-			<audio src='../audi/salida.mp3' autoplay></audio>";	
-		
+				</li>";
+	global $rutaAudio;
+	$rutaAudio = "<audio src='../audi/salida.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "indexcam.php";
+	global $rutaRedir;		$rutaRedir = "indexcam.php";
+	global $TablaOut;
+	require '../fichar/Tablas_Resum_Fichar.php';
+	
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
@@ -587,7 +498,7 @@ function pin_out(){
 		
 	if(mysqli_query($db, $sqla)){ 
 			
-		print($tabla); 
+		print($TablaOut); 
 		suma_todo();
 
 		global $dir;			$dir = "../Users/".$_POST['ref']."/mrficha";
@@ -604,16 +515,7 @@ function pin_out(){
 		fwrite($rmf, $rmftext);
 		fclose($rmf);
 			
-		global $redir;
-		$redir = "<script type='text/javascript'>
-					function redir(){
-					window.location.href='indexcam.php';
-				}
-				setTimeout('redir()',8000);
-				</script>";
-		print($redir);
-	
-	}else{	print("* MODIFIQUE LA ENTRADA L.1054: ".mysqli_error($db));
+	}else{	print("ERROR SQL L.497: ".mysqli_error($db));
 			show_form2();
 			show_form ();
 			global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
@@ -627,37 +529,17 @@ function pin_out(){
 
 function pin_in(){
 	
-	$tabla = "<table align='center' style='margin-top:10px' width=320px >
-				<tr>
-					<th colspan=2 class='BorderInf'>
-						HA FICHADO LA ENTRADA</br>".$_POST['name1']." ".$_POST['name2']."
-					</th>
-				</tr>
-				<tr>
-					<td colspan=2 align='center'>
-	<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
-					</td>
-				</tr>
-				<tr>
-					<td>REFERENCIA</td><td>".$_POST['ref']."</td>
-				</tr>
-				<tr>
-					<td>FECHA ENTRADA</td><td>".$_POST['din']."</td>
-				</tr>
-				<tr>
-					<td>HORA ENTRADA</td><td>".$_POST['tin']."</td>
-				</tr>
-				<tr>
-					<td colspan=2  valign='middle'  align='center'>
-						<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='VOLVER INICIO' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-						</form>
-					</td>
-				</tr>
-			</table>
-			<audio src='../audi/entrada.mp3' autoplay></audio>";	
-		
+	global $imgTabla;
+	$imgTabla = "<li class='liCentra'>
+		<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+				</li>";
+	global $rutaAudio;
+	$rutaAudio = "<audio src='../audi/entrada.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "indexcam.php";
+	global $rutaRedir;		$rutaRedir = "indexcam.php";
+	global $TablaIn;
+	require '../fichar/Tablas_Resum_Fichar.php';
+	
 	global $db;				global $db_name;
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
@@ -670,7 +552,7 @@ function pin_in(){
 		
 	if(mysqli_query($db, $sqla)){ 
 		
-			print($tabla);
+			print($TablaIn);
 
 			global $dir;		$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 
@@ -687,15 +569,6 @@ function pin_in(){
 			fwrite($rmf, $rmftext);
 			fclose($rmf);
 		
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='indexcam.php';
-					}
-					setTimeout('redir()',8000);
-					</script>";
-		print($redir);
-
 	}else{ 	print("* MODIFIQUE LA ENTRADA L.1151: ".mysqli_error($db));
 			show_form2();
 			show_form ();

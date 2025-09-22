@@ -14,7 +14,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	require 'Inclu/ipCliente.php';
+	//require 'Inclu/ipCliente.php';
 
 	desbloqueo();
 	
@@ -913,94 +913,20 @@ function pin_out(){
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
-	global $din;			$din = trim($row1['din']);
-	global $tin;			$tin = trim($row1['tin']);
-	global $in;				$in = $din." ".$tin;
-	
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
-	
-	global $out;			$out = $dout." ".$tout;
-	
-	$fecha1 = new DateTime($in);//fecha inicial
-	$fecha2 = new DateTime($out);//fecha de cierre
 
-	global $difer;			$difer = $fecha1->diff($fecha2);
+	require 'fichar/Fichar_Salida.php';
 	
-	//print ($difer);
+	global $imgTabla;
+	$imgTabla = "<li class='liCentra'>
+					<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' />
+				</li>";
+	global $rutaAudio;
+	$rutaAudio = "<audio src='audi/salida.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "index.php";
+	global $rutaRedir;		$rutaRedir = "index.php";
+	global $TablaOut;
+	require 'fichar/Tablas_Resum_Fichar.php';
 	
-	global $ttot;			$ttot = $difer->format('%H:%i:%s');
-	global $terror;			$terror = 'false';
-	
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-	$ttot1 = $difer->format('%H:%i:%s');
-	global $ttoth;
-	$ttoth = substr($ttot1,0,2);
-	$ttoth = str_replace(":","",$ttoth);
-	
-	$ttot2 = $difer->format('%d-%H:%i:%s');
-	global $ttotd;
-	$ttotd = substr($ttot2,0,2);
-	$ttotd = str_replace("-","",$ttotd);
-	
-	global $text;
-	if(($ttoth > 9)||($ttotd > 0)){
-		
-		print("<div class='centradiv alertdiv'>
-						NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
-				</div>");
-		
-			global $ttot;			$ttot = '00:00:00';
-			global $terror;			$terror = 'true';
-			$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
-			$text = $text.PHP_EOL."\t- FICHA SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-			$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-		/* FIN if >9 */
-		}else{	$text = PHP_EOL."** F. SALIDA ".$_POST['dout']." / ".$_POST['tout'];
-				$text = $text.PHP_EOL."\t- N HORAS: ".$ttot;
-
-	} /* FIN else >9 */
-	
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-	
-		$tabla = "<ul class='centradiv' >
-			<li class='liCentra'>HA FICHADO LA SALIDA</li>
-			<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
-			<li class='liCentra'>
-				<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' />
-			</li>
-			<li>
-				<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
-			</li>
-			<li>
-				<div>FECHA ENTRADA: </div><div>".$din."</div>
-			</li>
-			<li>
-				<div>HORA ENTRADA: </div><div>".$tin."</div>
-			</li>
-			<li>
-				<div>FECHA SALIDA: </div><div>".$_POST['dout']."</div>
-			</li>
-			<li>
-				<div>HORA SALIDA: </div><div>".$_POST['tout']."</div>
-			</li>
-			<li>
-				<div>H. REALIZADAS: </div><div>".$ttot."</div>
-			</li>
-			<li class='liCentra'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;'>
-					<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-					<input type='hidden' name='cancel' value=1 />
-				</form>	
-			</li>
-		</ul>
-			<audio src='audi/salida.mp3' autoplay></audio>";
-		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
@@ -1010,15 +936,7 @@ function pin_out(){
 		
 	if(mysqli_query($db, $sqla)){ 
 			
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='index.php';
-					}
-					setTimeout('redir()',8000);
-					</script>";
-		print($redir);
-		print($tabla); 
+		print($TablaOut); 
 		suma_todo();
 
 		global $dir;			$dir = "Users/".$_POST['ref']."/mrficha";
@@ -1047,31 +965,18 @@ function pin_out(){
 				 ////////////////////				  ///////////////////
 
 function pin_in(){
-	
-	$tabla = "<ul class='centradiv'>
-				<li class='liCentra'>HA FICHADO LA ENTRADA</li>
-				<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
-				<li class='liCentra'>
+
+	global $imgTabla;
+	$imgTabla = "<li class='liCentra'>
 			<img src='Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='80.0em' width='64.0em' /> 
-				</li>
-				<li>
-					<div>REFERENCIA: </div><div>".$_POST['ref']."</div>
-				</li>
-				<li>
-					<div>FECHA ENTRADA: </div><div>".$_POST['din']."</div>
-				</li>
-				<li>
-					<div>HORA ENTRADA: </div><div>".$_POST['tin']."</div>
-				</li>
-				<li class='liCentra'>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='VOLVER INICIO' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
-				</li>
-		</ul>
-			<audio src='audi/entrada.mp3' autoplay></audio>";	
-		
+				</li>";
+	global $rutaAudio;
+	$rutaAudio = "<audio src='audi/entrada.mp3' autoplay></audio>";
+	global $rutaHome;		$rutaHome = "index.php";
+	global $rutaRedir;		$rutaRedir = "index.php";
+	global $TablaIn;
+	require 'fichar/Tablas_Resum_Fichar.php';
+
 	global $db;  	global $db_name;
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
@@ -1084,16 +989,8 @@ function pin_in(){
 		
 	if(mysqli_query($db, $sqla)){
 
-		global $redir;
-		$redir = "<script type='text/javascript'>
-						function redir(){
-						window.location.href='index.php';
-					}
-					setTimeout('redir()',8000);
-					</script>";
-		print($redir);
 		
-		print($tabla);
+		print($TablaIn);
 		
 		global $dir;				$dir = "Users/".$_SESSION['usuarios']."/mrficha";
 
@@ -1150,7 +1047,7 @@ function show_form2($errorsp=''){
 			$defaults = $_POST;
 	}else{ 	$defaults = array ('pin' => ''); }
 	
-	require 'Inclu/ipCliente.php';
+	//require 'Inclu/ipCliente.php';
 
 	print("<div class='centradiv' style='border:none;' >
 			<form name='pin' method='post' action='$_SERVER[PHP_SELF]'>	

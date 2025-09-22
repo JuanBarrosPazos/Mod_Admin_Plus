@@ -1,25 +1,37 @@
 <?php
 
 	global $ipCliente;
-
-	if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+	switch (true) {
+		case (!empty($_SERVER['HTTP_CLIENT_IP'])):
 			$ipCliente = $_SERVER['HTTP_CLIENT_IP'];
-	}elseif($_SERVER['REMOTE_ADDR'] == getenv("REMOTE_ADDR")){
+			break;
+		case ($_SERVER['REMOTE_ADDR'] == getenv("REMOTE_ADDR")):
 			$ipCliente = $_SERVER['REMOTE_ADDR'];
-	}elseif(!empty(getenv("REMOTE_ADDR"))){
+			break;
+		case (!empty(getenv("REMOTE_ADDR"))):
 			$ipCliente = getenv("REMOTE_ADDR");
-	}elseif(!empty($_SERVER['REMOTE_ADDR'])){
+			break;
+		case (!empty($_SERVER['REMOTE_ADDR'])):
 			$ipCliente = $_SERVER['REMOTE_ADDR'];
-	}elseif(getenv($_SERVER['HTTP_X-FORWARDED_FOR'])){
+			break;
+		case (getenv($_SERVER['HTTP_X-FORWARDED_FOR'])):
 			$ipCliente = $_SERVER['HTTP_X-FORWARDED_FOR'];
-	}elseif(getenv($_SERVER['HTTP_X_FORWARDED'])){
+			break;
+		case (getenv($_SERVER['HTTP_X_FORWARDED'])):
 			$ipCliente = $_SERVER['HTTP_X_FORWARDED'];
-	}elseif(getenv($_SERVER['HTTP_FORWARDED_FOR'])){
+			break;
+		case (getenv($_SERVER['HTTP_FORWARDED_FOR'])):
 			$ipCliente = $_SERVER['HTTP_FORWARDED_FOR'];
-	}elseif(getenv($_SERVER['HTTP_FORWARDED'])){
+			break;
+		case (getenv($_SERVER['HTTP_FORWARDED'])):
 			$ipCliente = $_SERVER['HTTP_FORWARDED'];
-	}else{	echo "NO SE DETECTA LA IP DEL CLIENTE"; }
-	
+			break;
+		default:
+			echo "NO SE DETECTA LA IP DEL CLIENTE";
+			$ipCliente = "10.0.0.0";
+			break;
+	} // FIN swhitch
+
    	//echo "\$ipCliente = ".$ipCliente."<br>";
 
 	/*
