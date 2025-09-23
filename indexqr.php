@@ -73,7 +73,7 @@ function process_pinqr(){
 			global $rutaHome;		$rutaHome = "indexcamini.php";
 			global $rutaRedir;		$rutaRedir = "indexcamini.php";
 			global $TablaIn;
-			require 'fichar/Tablas_Resum_Fichar.php';
+			require 'fichar/Fichar_Tablas_Resum.php';
 			
 			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 			global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
@@ -130,7 +130,7 @@ function process_pinqr(){
 			global $rutaHome;		$rutaHome = "indexcamini.php";
 			global $rutaRedir;		$rutaRedir = "indexcamini.php";
 			global $TablaOut;
-			require 'fichar/Tablas_Resum_Fichar.php';
+			require 'fichar/Fichar_Tablas_Resum.php';
 
 		//print($in." / ".$out." / ".$ttot."</br>");
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

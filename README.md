@@ -8,11 +8,13 @@
     Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
 ----
 ## PENDIENTES...
-#### Optimizar Formularios Confirme Fichar...
 #### Modificar el contenido de los mensajes en los log de actividad de los Admin...
 #### Confirmar mensajes: print("ERROR SQL L.92: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V25.09.23 2025/08/23
+	- Optimizar Formularios Confirme Fichar...
+----
 #### Mod_Admin_Plus V25.09.22 2025/08/22
 	- Ajustes generales en funciones Fichar...
 	- Sustitución del if else por switch case para detección de ip cliente...
@@ -49,7 +51,6 @@
 				$ipCliente = "10.0.0.0";
 				break;
 		} // FIN swhitch
-
 ----
 #### Mod_Admin_Plus V25.09.21 2025/08/21
 	- Se modificar el construtor de las tablas de horarios de usuarios:

@@ -676,33 +676,16 @@ function show_ficha(){
 
 		require 'fichar/Fichar_Redondeo_in.php';
 
-			////////////////////		***********  		////////////////////
-
 		global $dout;		$dout = '';
 		global $tout;		$tout = '00:00:00';
 		global $ttot;		$ttot = '00:00:00';
-		
-	print("<ul class='centradiv'>
-			<li class='liCentra'>FICHE SU ENTRADA</li>
-			<li class='liCentra'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
-			</li>
-			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
-			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-			<input type='hidden' id='din' name='din' value='".$din."' />
-			<input type='hidden' id='tin' name='tin' value='".$tin."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-				<input type='hidden' name='entrada' value=1 />
-		</form>														
-			</li>
-		</ul>"); 
+
+		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;			$rutaAudio = "";
+		require 'Fichar_Tablas_Form.php';
+		print($FichaIn);
 
 	}elseif($count1 > 0){ // FICHA SALIDA.
 
@@ -714,26 +697,14 @@ function show_ficha(){
 		*/
 		require 'fichar/Fichar_Redondeo_out.php';
 
-		////////////////////		***********  		////////////////////
+		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;
+		$rutaAudio = "<audio src='../audi/confirm_sign_exit.mp3' autoplay></audio>";
+		require 'fichar/Fichar_Tablas_Form.php';
+		print($FichaOut);
 
-		print("<ul class='centradiv'>
-		<li class='liCentra'>FICHE SU SALIDA</li>
-		<li class='liCentra'>
-			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
-		</li>
-		<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-		<li class='liCentra'>
-			<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
-				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='salida' value=1 />
-			</form>
-		</li>
-		</ul>");
 	}
 	
 } // FIN FUNCTION show_ficha()
@@ -786,7 +757,7 @@ function process_pin(){
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
-		// FICHA ENTRADA.
+		// FICHA ENTRADA
 		if($count1 < 1){
 			global $din;		$din = date('Y-m-d');	
 			global $tin;
@@ -796,42 +767,27 @@ function process_pin(){
 			*/
 			require 'fichar/Fichar_Redondeo_in.php';
 
-			////////////////////		***********  		////////////////////
-
 			global $dout;			$dout = '';
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
-		
-		print("<ul class='centradiv'>
-				<li class='liCentra'>FICHE SU ENTRADA</li>
-				<li class='liCentra'>
-					<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
-				</li>
-				<li class='liCentra'>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos'])."</li>
-				<li class='liCentra'>REFER: ".strtoupper($rp['ref'])."</li>
-				<li class='liCentra'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+
+			global $ImgFormIndex;		$ImgFormIndex = 1;
+			global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+			global $ImgForm;
+			$ImgForm = "<li class='liCentra'>
+							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+						</li>";
+			global $FormButtonHome;
+			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
-				</form>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
-					<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
-					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-					<input type='hidden' id='din' name='din' value='".$din."' />
-					<input type='hidden' id='tin' name='tin' value='".$tin."' />
-					<input type='hidden' id='dout' name='dout' value='".$dout."' />
-					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-						<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-						<input type='hidden' name='entrada' value=1 />
-				</form>
-				</li>
-			</ul>												
-			<audio src='audi/conf_user_data.mp3' autoplay></audio>");
+				</form>";
+			global $rutaAudio;
+			$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
+			require 'fichar/Fichar_Tablas_Form.php';
+			print($FichaIn);
 
-		// FICHA SALIDA.
+		// FICHA SALIDA
 		}elseif($count1 > 0){
 		
 			global $dout;			$dout = date('Y-m-d');
@@ -843,33 +799,22 @@ function process_pin(){
 			*/
 			require 'fichar/Fichar_Redondeo_out.php';
 
-			////////////////////		***********  		////////////////////
-
-			print("<ul class='centradiv'>
-				<li class='liCentra'>FICHE SU SALIDA</li>
-				<li class='liCentra'>
-					<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
-				</li>
-				<li class='liCentra'>".strtoupper($rp['Nombre'])." ".strtoupper($rp['Apellidos'])."</li>
-				<li class='liCentra'>REFER: ".strtoupper($rp['ref'])."</li>
-				<li class='liCentra'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
+			global $ImgFormIndex;		$ImgFormIndex = 1;
+			global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+			global $ImgForm;
+			$ImgForm = "<li class='liCentra'>
+							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+						</li>";
+			global $FormButtonHome;
+			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
-				</form>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display: inline-block;'>
-					<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
-					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-					<input type='hidden' id='dout' name='dout' value='".$dout."' />
-					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-						<input type='hidden' name='salida' value=1 />
-				</form>
-				</li>	
-			</ul>														
-			<audio src='audi/conf_user_data.mp3' autoplay></audio>"); 
+				</form>";
+			global $rutaAudio;
+			$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
+			require 'fichar/Fichar_Tablas_Form.php';
+			print($FichaOut);
+
 		}
 	
 		ayear();
@@ -925,7 +870,7 @@ function pin_out(){
 	global $rutaHome;		$rutaHome = "index.php";
 	global $rutaRedir;		$rutaRedir = "index.php";
 	global $TablaOut;
-	require 'fichar/Tablas_Resum_Fichar.php';
+	require 'fichar/Fichar_Tablas_Resum.php';
 	
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -975,7 +920,7 @@ function pin_in(){
 	global $rutaHome;		$rutaHome = "index.php";
 	global $rutaRedir;		$rutaRedir = "index.php";
 	global $TablaIn;
-	require 'fichar/Tablas_Resum_Fichar.php';
+	require 'fichar/Fichar_Tablas_Resum.php';
 
 	global $db;  	global $db_name;
 	

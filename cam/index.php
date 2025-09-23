@@ -234,6 +234,7 @@ function show_ficha(){
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 		</div>");
+
 		global $redir;
 		$redir = "<script type='text/javascript'>
 					function redir(){
@@ -243,63 +244,37 @@ function show_ficha(){
 					</script>";
 		print($redir);
 			
-	}elseif($count1 < 1){ // FICHA ENTRADA.
+	}elseif($count1 < 1){ // FICHA ENTRADA
 		
-		global $din;			$din = date('Y-m-d');
-		global $tin;			$tin = date('H:i:s');
-		global $dout;			$dout = '';
-		global $tout;			$tout = '00:00:00';
-		global $ttot;			$ttot = '00:00:00';
+		global $din;		$din = date('Y-m-d');
+		global $tin;		$tin = date('H:i:s');
+		global $dout;		$dout = '';
+		global $tout;		$tout = '00:00:00';
+		global $ttot;		$ttot = '00:00:00';
 		
-	print("<ul class='centradiv'>
-			<li class='liCentra'>FICHE SU ENTRADA</li>
-			<li class='liCentra'>
-				".mb_strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
-			</li>
-			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display:inline-block;'>
-			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-			<input type='hidden' id='din' name='din' value='".$din."' />
-			<input type='hidden' id='tin' name='tin' value='".$tin."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-				<input type='hidden' name='entrada' value=1 />
-		</form>														
-				</li>
-			</ul>"); 
+		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;			$rutaAudio = "";
+		require '../fichar/Fichar_Tablas_Form.php';
+		print($FichaIn);
 
-	}elseif($count1 > 0){
-	// FICHA SALIDA.
+	}elseif($count1 > 0){ // FICHA SALIDA
 
 		global $dout;		$dout = date('Y-m-d');
 		global $tout;		$tout = date('H:i:s');
 		global $ttot;
 
-	print("<ul class='centradiv'>
-			<li class='liCentra'>FICHE SU SALIDA</li>
-			<li class='liCentra'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
-			</li>
-			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-			<li class='liCentra'>
-		<form name='form_datos' method='post' action='fichar/Fichar_Crear.php' enctype='multipart/form-data' style='display: inline-block; margin-right:10%;'>
-			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-				<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-				<input type='hidden' name='salida' value=1 />
-		</form>														
-			</li>
-		</ul>"); 
+		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;			$rutaAudio = "";
+		require '../fichar/Fichar_Tablas_Form.php';
+		print($FichaOut);
+
 	}
-}	
+
+} // FIN show_ficha	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -488,7 +463,7 @@ function pin_out(){
 	global $rutaHome;		$rutaHome = "indexcam.php";
 	global $rutaRedir;		$rutaRedir = "indexcam.php";
 	global $TablaOut;
-	require '../fichar/Tablas_Resum_Fichar.php';
+	require '../fichar/Fichar_Tablas_Resum.php';
 	
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
@@ -538,7 +513,7 @@ function pin_in(){
 	global $rutaHome;		$rutaHome = "indexcam.php";
 	global $rutaRedir;		$rutaRedir = "indexcam.php";
 	global $TablaIn;
-	require '../fichar/Tablas_Resum_Fichar.php';
+	require '../fichar/Fichar_Tablas_Resum.php';
 	
 	global $db;				global $db_name;
 	

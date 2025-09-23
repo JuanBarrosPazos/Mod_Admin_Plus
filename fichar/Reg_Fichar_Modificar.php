@@ -234,7 +234,7 @@ function process_form(){
 	global $rutaRedir;		$rutaRedir = "Reg_Fichar_Ver.php";
 	global $tablaModif;		$tablaModif = 1;
 	global $TablaOut;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

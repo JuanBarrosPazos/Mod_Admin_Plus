@@ -60,7 +60,7 @@ function entrada(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaIn;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 	
 	global $db; 			global $db_name;
 
@@ -226,74 +226,49 @@ function show_form(){
 
 			require 'Fichar_Redondeo_in.php';
 
-			global $dout; 			$dout = '';
-			global $tout; 			$tout = '00:00:00';
-			global $ttot;			$ttot = '00:00:00';
-		
-			print("<ul class='centradiv'>
-					<li class='liCentra'>FICHE SU ENTRADA</li>
-					<li class='liCentra'>
-						<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
-					</li>
-					<li class='liCentra'>
-						".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."
-					</li>
-					<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
-					<li class='liCentra'>
-						<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
-						<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-							<input type='hidden' name='volver' value=1 />
-						</form>
-						<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
-							<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
-							<input type='hidden' id='name1' name='name1' value='".$_POST['name1']."' />
-							<input type='hidden' id='name2' name='name2' value='".$_POST['name2']."' />
-							<input type='hidden' id='din' name='din' value='".$din."' />
-							<input type='hidden' id='tin' name='tin' value='".$tin."' />
-							<input type='hidden' id='dout' name='dout' value='".$dout."' />
-							<input type='hidden' id='tout' name='tout' value='".$tout."' />
-							<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-								<td valign='middle'  align='center'>
-							<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-							<input type='hidden' name='entrada' value=1 />
-						</form>														
-					</li>
-				</ul>
-				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
+			global $dout; 		$dout = '';
+			global $tout; 		$tout = '00:00:00';
+			global $ttot;		$ttot = '00:00:00';
+
+			global $Action;		$Action = "action='$_SERVER[PHP_SELF]'";
+			global $ImgForm;
+			$ImgForm = "<li class='liCentra'>
+							<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
+						</li>";
+			global $FormButtonHome;
+			$FormButtonHome = "<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='volver' value=1 />
+				</form>";
+			global $rutaAudio;
+			$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
+			require 'Fichar_Tablas_Form.php';
+			print($FichaIn);
+
 			}elseif($count1 > 0){
 			
-			global $dout;	$dout = date('Y-m-d'); 	global $tout; 	global $ttot;
-			/*
-				HORA ORIGINAL DE SALIDA DEL SCRIPT
-				$tout = date('H:i:s');
-			*/
+				global $dout;	$dout = date('Y-m-d'); 	global $tout; 	global $ttot;
+				/*
+					HORA ORIGINAL DE SALIDA DEL SCRIPT
+					$tout = date('H:i:s');
+				*/
 
-			require 'Fichar_Redondeo_out.php';
+				require 'Fichar_Redondeo_out.php';
 
-			print("<ul class='centradiv'>
-					<li class='liCentra'>FICHE SU SALIDA</li>
-					<li class='liCentra'>
-				<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
-					</li>
-					<li class='liCentra'>".strtoupper($_POST['name1'])." ".strtoupper($_POST['name2'])."</li>
-					<li class='liCentra'>REFER: ".strtoupper($_SESSION['usuarios'])."</li>
-					<li class='liCentra'>
-				<form name='volver' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
-					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-					<input type='hidden' name='volver' value=1 />
-				</form>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block;' >
-					<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
-					<input type='hidden' id='name1' name='name1' value='".$_POST['name1']."' />
-					<input type='hidden' id='name2' name='name2' value='".$_POST['name2']."' />
-					<input type='hidden' id='dout' name='dout' value='".$dout."' />
-					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-						<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='salida' value=1 />
-				</form>														
-					</li>
-				</ul>
-				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
+				global $Action;		$Action = "action='$_SERVER[PHP_SELF]'";
+				global $ImgForm;
+				$ImgForm = "<li class='liCentra'>
+								<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$_POST['myimg']."' />
+							</li>";
+				global $FormButtonHome;
+				$FormButtonHome = "<form name='volver' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;' >
+						<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+							<input type='hidden' name='volver' value=1 />
+					</form>";
+				global $rutaAudio;
+				$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
+				require 'Fichar_Tablas_Form.php';
+				print($FichaOut);
 			}
 		} // fin 2º if
 	} // fin 1º if
@@ -344,7 +319,7 @@ function salida(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaOut;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

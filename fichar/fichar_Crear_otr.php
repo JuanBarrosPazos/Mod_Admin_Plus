@@ -63,7 +63,7 @@ function entrada(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaIn;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 
 	global $db;				global $db_name;
 
@@ -155,7 +155,7 @@ function salida(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaOut;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 		
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

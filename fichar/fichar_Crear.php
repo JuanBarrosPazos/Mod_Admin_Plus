@@ -62,7 +62,7 @@ function entrada(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaIn;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 
 	global $db;				global $db_name;
 
@@ -113,35 +113,18 @@ function show_form(){
 
 		require 'Fichar_Redondeo_in.php';
 
-			////////////////////		***********  		////////////////////
-
 		global $dout;			$dout = '';
 		global $tout;			$tout = '00:00:00';
 		global $ttot;			$ttot = '00:00:00';
+
+		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;
+		$rutaAudio = "<audio src='../audi/confirm_sign_entry.mp3' autoplay></audio>";
+		require 'Fichar_Tablas_Form.php';
+		print($FichaIn);
 		
-	print("<ul class='centradiv'>
-			<li class='liCentra'>FICHE SU ENTRADA</li>
-			<li class='liCentra'>
-				".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos']).".
-			</li>
-			<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-			<li class='liCentra'>
-		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
-			<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-			<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-			<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-			<input type='hidden' id='din' name='din' value='".$din."' />
-			<input type='hidden' id='tin' name='tin' value='".$tin."' />
-			<input type='hidden' id='dout' name='dout' value='".$dout."' />
-			<input type='hidden' id='tout' name='tout' value='".$tout."' />
-			<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-				<button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
-				<input type='hidden' name='entrada' value=1 />
-		</form>														
-			</li>
-		</ul>
-		<audio src='../audi/confirm_sign_entry.mp3' autoplay></audio>"); 
-	
 	}elseif($count1 > 0){ // FICHA SALIDA.
 		global $dout;			$dout = date('Y-m-d');
 		global $tout;			global $ttot;
@@ -152,27 +135,14 @@ function show_form(){
 
 		require 'Fichar_Redondeo_out.php';
 
-			////////////////////		***********  		////////////////////
+		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+		global $ImgForm;			$ImgForm = "";
+		global $FormButtonHome;		$FormButtonHome = "";
+		global $rutaAudio;
+		$rutaAudio = "<audio src='../audi/confirm_sign_exit.mp3' autoplay></audio>";
+		require 'Fichar_Tablas_Form.php';
+		print($FichaOut);
 
-		print("<ul class='centradiv'>
-		<li class='liCentra'>FICHE SU SALIDA</li>
-		<li class='liCentra'>
-			".strtoupper($_SESSION['Nombre'])." ".strtoupper($_SESSION['Apellidos'])."
-		</li>
-		<li class='liCentra'>REFER: ".strtoupper($_SESSION['ref'])."</li>
-		<li class='liCentra'>
-			<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' style='display:inline-block;'>
-				<input type='hidden' id='ref' name='ref' value='".$_SESSION['ref']."' />
-				<input type='hidden' id='name1' name='name1' value='".$_SESSION['Nombre']."' />
-				<input type='hidden' id='name2' name='name2' value='".$_SESSION['Apellidos']."' />
-				<input type='hidden' id='dout' name='dout' value='".$dout."' />
-				<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-					<input type='hidden' name='salida' value=1 />
-			</form>
-		</li>
-		</ul>
-		<audio src='../audi/confirm_sign_exit.mp3' autoplay></audio>"); 
 	}
 
 		global $ficharCrear;		$ficharCrear = 1;
@@ -223,7 +193,7 @@ function salida(){
 	global $rutaHome;		$rutaHome = "Fichar_Crear.php";
 	global $rutaRedir;		$rutaRedir = "Fichar_Crear.php";
 	global $TablaOut;
-	require 'Tablas_Resum_Fichar.php';
+	require 'Fichar_Tablas_Resum.php';
 
 	//print($in." / ".$out." / ".$ttot."</br>");
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');

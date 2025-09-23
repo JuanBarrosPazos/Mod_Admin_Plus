@@ -78,7 +78,7 @@ function process_pinqr(){
 		global $rutaHome;		$rutaHome = "indexcam.php";
 		global $rutaRedir;		$rutaRedir = "indexcam.php";
 		global $TablaIn;
-		require '../fichar/Tablas_Resum_Fichar.php';
+		require '../fichar/Fichar_Tablas_Resum.php';
 
 	global $db;				global $db_name;
 	
@@ -142,7 +142,7 @@ function process_pinqr(){
 		global $rutaHome;		$rutaHome = "indexcam.php";
 		global $rutaRedir;		$rutaRedir = "indexcam.php";
 		global $TablaOut;
-		require '../fichar/Tablas_Resum_Fichar.php';
+		require '../fichar/Fichar_Tablas_Resum.php';
 
 		//print($in." / ".$out." / ".$ttot."</br>");
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
