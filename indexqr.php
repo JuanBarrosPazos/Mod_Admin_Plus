@@ -69,7 +69,7 @@ function process_pinqr(){
 			$imgTabla = "<li class='liCentra'>
 							<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
 						</li>";
-			global $rutaAudio;		$rutaAudio = "";
+			global $rutaAudio;		$rutaAudio = "<audio src='audi/entrada.mp3' autoplay></audio>";
 			global $rutaHome;		$rutaHome = "indexcamini.php";
 			global $rutaRedir;		$rutaRedir = "indexcamini.php";
 			global $TablaIn;
@@ -126,7 +126,7 @@ function process_pinqr(){
 			$imgTabla = "<li class='liCentra'>
 							<img src='Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
 						</li>";
-			global $rutaAudio;		$rutaAudio = "";
+			global $rutaAudio;		$rutaAudio = "<audio src='audi/salida.mp3' autoplay></audio>";
 			global $rutaHome;		$rutaHome = "indexcamini.php";
 			global $rutaRedir;		$rutaRedir = "indexcamini.php";
 			global $TablaOut;

@@ -72,9 +72,9 @@ function process_pinqr(){
 		
 		global $imgTabla;
 		$imgTabla = "<li class='liCentra'>
-			<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+						<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
 					</li>";
-		global $rutaAudio;		$rutaAudio = "";
+		global $rutaAudio;		$rutaAudio = "<audio src='../audi/entrada.mp3' autoplay></audio>";
 		global $rutaHome;		$rutaHome = "indexcam.php";
 		global $rutaRedir;		$rutaRedir = "indexcam.php";
 		global $TablaIn;
@@ -124,8 +124,6 @@ function process_pinqr(){
 
 		require '../fichar/Fichar_Redondeo_out.php';
 
-			////////////////////		***********  		////////////////////
-
 		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
@@ -135,10 +133,9 @@ function process_pinqr(){
 
 		global $imgTabla;
 		$imgTabla = "<li class='liCentra'>
-			<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
+						<img src='../Users/".$_SESSION['usuarios']."/img_admin/".$rp['myimg']."' />
 					</li>";
-		global $rutaAudio;
-		$rutaAudio = "<audio src='../audi/salida.mp3'  autoplay></audio>";
+		global $rutaAudio;		$rutaAudio = "<audio src='../audi/salida.mp3' autoplay></audio>";
 		global $rutaHome;		$rutaHome = "indexcam.php";
 		global $rutaRedir;		$rutaRedir = "indexcam.php";
 		global $TablaOut;

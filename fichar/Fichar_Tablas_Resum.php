@@ -81,6 +81,7 @@
 	$TablaOut = "<ul class='centradiv'>
 			<li class='liCentra'>".$TablaTitulo."</li>
 			<li class='liCentra'>".strtoupper($name1)." ".strtoupper($name2)."</li>
+			".$imgTabla.$RegId."
 			<li>
 				<div>REFERENCIA: </div><div>".$ref."</div>
 			</li>
