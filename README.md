@@ -6,15 +6,20 @@
     Creative Commons Reconocimiento-NoComercial-CompartirIgual (CC BY-NC-SA).
 
     Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
+### DESCARGA DE RESPONSABILIDADES:
+  	Juan M. Barrós Pazos, no se hace responsable, en ningún caso, del uso de esta aplicación y de los daños o perjuicios ocasionados, en cualquiera de sus formas.
+    Por el uso de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
+
 ----
 ## PENDIENTES...
 #### Modificar el contenido de los mensajes en los log de actividad de los Admin...
-#### Confirmar mensajes: print("ERROR SQL L.92: ".mysqli_error($db));
+#### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 #### input text en formularios de filtro en fichar/
+#### Optimizar tablas Admin resultados y formularios...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.09.27 2025/08/27
-	- Ajustes generales en fichar/ ...
+#### Mod_Admin_Plus V25.10.27 2025/08/10
+	- Implementación de script para conocer la MAC del Servidor y del Cliente...
 ----
 #### Mod_Admin_Plus V25.09.23 2025/08/23
 	- Optimizar Formularios Confirme Fichar...

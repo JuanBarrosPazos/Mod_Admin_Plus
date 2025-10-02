@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+	// Obtiene la MAC del servidor y del cliente...
+	//require 'config/Mac_Cliente.php';
+
 	global $playini;		$playini = 1;
 
 	require 'Inclu/error_hidden.php';

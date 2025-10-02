@@ -27,4 +27,8 @@
     - Bajo esta licencia se permite que otras personas las usen en sus blogs o trabajos escolares,
       pero no pueden venderlas ni usarlas de forma comercial, en los términos que se han señalado con anterioridad.
 
+### DESCARGA DE RESPONSABILIDADES:
+  - Juan M. Barrós Pazos, no se hace responsable, en ningún caso, del uso de esta aplicación y de los daños o perjuicios ocasionados, en cualquiera de sus formas.
+    Por el uso de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
+
 ## © Juan M. Barrós Pazos
