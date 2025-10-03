@@ -163,8 +163,8 @@ function table_desblock(){
 
 	global $table_desblock;
 	$table_desblock = print("<div class='centradiv alertdiv'>
-							IP ".$ipCliente." BLOQUEADA HASTA LAS ".$_SESSION['desbloqh']."
-						<br>
+							BLOQUEADA: ".$ipCliente."<br>
+							DESBLOQUEO: ".$_SESSION['desbloqh']."<br>
 			<a href='Inclu/desblock_ip.php'>
 				<button type='button' title='FORMULARIO DESBLOQUEO IP' class='botonlila imgButIco Clock1Black' style='vertical-align:top;' ></button>
 			</a>
@@ -174,14 +174,16 @@ function table_desblock(){
 			<a href='Mail_Php/index.php' target='_blank'>
 				<button type='button' title='WEBMASTER @ CONTACTO' class='botonverde imgButIco MailBlack' style='vertical-align:top;' ></button>
 			</a>
-		</div>");
+		</div>
+		<audio src='audi/ip_block.mp3' autoplay></audio>");
 	
+	// Cada minuto redirecciona a index.php
 	global $redir;
 	$redir = "<script type='text/javascript'>
 				function redir(){
-					window.location.href='index.php';
+					window.location.href='index.php?redirIpBlock=1';
 				}
-				setTimeout('redir()',600000);
+				setTimeout('redir()',60000);
 				</script>";
 	print($redir);
 
@@ -1172,7 +1174,7 @@ function bloqueo(){
 			$_SESSION['desbloqh'] = $bloqh.":".$bloqm.":00";
 		}
 
-		print("<audio src='audi/ip_block.mp3' autoplay></audio>");
+		//print("<audio src='audi/ip_block.mp3' autoplay></audio>");
 
 		// PASO LOGS DE BLOQUEO
 		global $text;		
@@ -1323,6 +1325,7 @@ function salir(){
 	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
 	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
 	unset($_SESSION['Tlf2']);			unset($_SESSION['nclient']);
+	unset($_SESSION['GetMacAdd']);
 	
 	echo "<div class='centradiv alertdiv'>YOU HAVE CLOSE SESSION</div>";
 }

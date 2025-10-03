@@ -337,19 +337,13 @@ function ayear(){
 				 ////////////////////				  ///////////////////
 	
 function salir(){	
-	unset($_SESSION['id']);
-	unset($_SESSION['Nivel']);
-	unset($_SESSION['Nombre']);
-	unset($_SESSION['Apellidos']);
-	unset($_SESSION['doc']);
-	unset($_SESSION['dni']);
-	unset($_SESSION['ldni']);
-	unset($_SESSION['Email']);
-	unset($_SESSION['Usuario']);
-	unset($_SESSION['Password']);
-	unset($_SESSION['Direccion']);
-	unset($_SESSION['Tlf1']);
-	unset($_SESSION['Tlf2']);
+	unset($_SESSION['id']);				unset($_SESSION['Nivel']);
+	unset($_SESSION['Nombre']);			unset($_SESSION['Apellidos']);
+	unset($_SESSION['doc']);			unset($_SESSION['dni']);
+	unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+	unset($_SESSION['Tlf2']);			unset($_SESSION['GetMacAdd']);
 }
 	
 				   ////////////////////				   ////////////////////

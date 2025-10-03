@@ -1,8 +1,15 @@
 <?php
 
-	GetMACAdd();
 	global $GetMacAdd;
-	//echo $GetMacAdd."<br>";
+	// UTILIZO $_SESSION['GetMacAdd'] para llamar GetMacAdd solo una vez...
+	if((!isset($_SESSION['GetMacAdd'])||($_SESSION['GetMacAdd']==''))){
+		GetMacAdd();
+		//echo "* \$GetMacAdd = ".$GetMacAdd."<br>";
+		$_SESSION['GetMacAdd'] = $GetMacAdd;
+		//echo "* \$_SESSION['GetMacAdd'] = ".$_SESSION['GetMacAdd']."<br>";
+	}else{ 
+		//echo "* \$_SESSION['GetMacAdd'] = ".$_SESSION['GetMacAdd']."<br>"; 
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -10,6 +17,9 @@
 
 	global $ipCliente;
 	switch (true) {
+		case (isset($_SESSION['GetMacAdd'])):
+			$ipCliente = $_SESSION['GetMacAdd'];
+			break;
 		case (($GetMacAdd != "")&&(!empty($GetMacAdd))):
 			// Pasamos la MAC del cliente como identificador...
 			$ipCliente = $GetMacAdd;
@@ -44,7 +54,7 @@
 			break;
 	} // FIN swhitch
 
-   	//echo "\$ipCliente = ".$ipCliente."<br>";
+   	//echo "* \$ipCliente = ".$ipCliente."<br>";
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

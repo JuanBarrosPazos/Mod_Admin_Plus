@@ -23,7 +23,7 @@
 
 			////////////////////		************   		////////////////////
 
-	function GetMACAdd(){
+	function GetMacAdd(){
 
 		global $GetMacAdd;
 

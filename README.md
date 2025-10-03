@@ -20,10 +20,13 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.10.03 2025/10/03
+#### Mod_Admin_Plus V25.10.03B 2025/10/03
 	- Se modifican los terminos de la licencia, DESCARGO DE RESPONSABILIDADES...
+	- Se realizan los ajustes necesarios para el bloqueo y desbloqueo con MAC e IP.
+	- Redireccionamiento con bloqueo cada minuto...
 	- Inclu/Mac_Cliente.php Implementación de script para conocer la MAC del Servidor y del Cliente...
-		function GetMACAdd(){
+
+		function GetMacAdd(){
 			global $GetMacAdd;
 			$strGetMacAdd = exec('getmac');
 			$strGetMacAdd = str_replace(' ', '', $strGetMacAdd);
@@ -48,10 +51,20 @@
 	- Inclu/ipCliente.php Se integra la Mac como identificador para el bloqueo o la ip cliente...
 	- ANTERIORMENTE: 	- Eliminación de la librería geoclass...
 						- Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
-		GetMACAdd();
+		
 		global $GetMacAdd;
+		// Utilizo $_SESSION['GetMacAdd'] para llamar GetMacAdd solo una vez...
+		if((!isset($_SESSION['GetMacAdd'])||($_SESSION['GetMacAdd']==''))){
+			GetMacAdd();
+			//echo $GetMacAdd."<br>";
+			$_SESSION['GetMacAdd'] = $GetMacAdd;
+		}else{ }
+
 		global $ipCliente;
 		switch (true) {
+			case (isset($_SESSION['GetMacAdd'])):
+				$ipCliente = $_SESSION['GetMacAdd'];
+				break;
 			case (($GetMacAdd != "")&&(!empty($GetMacAdd))):
 				// Pasamos la MAC del cliente como identificador...
 				$ipCliente = $GetMacAdd;

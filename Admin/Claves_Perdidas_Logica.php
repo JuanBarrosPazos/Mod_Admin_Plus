@@ -24,8 +24,10 @@ if(isset($_POST['oculto'])){
 }elseif(isset($_POST['oculto2'])){
 			show_form();
 			process_Mail();
-			unset($_SESSION['']);
-
+			unset($_SESSION['L_Email']);
+			unset($_SESSION['L_dni']);
+			unset($_SESSION['L_ldni']);
+			
 }else{ show_form(); }
 
 ?>

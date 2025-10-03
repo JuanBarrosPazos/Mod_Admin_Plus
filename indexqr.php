@@ -336,7 +336,7 @@ function salir(){
 	unset($_SESSION['ldni']);			unset($_SESSION['Email']);
 	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
 	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
-	unset($_SESSION['Tlf2']);
+	unset($_SESSION['Tlf2']);			unset($_SESSION['GetMacAdd']);
 }
 	
 				   ////////////////////				   ////////////////////
