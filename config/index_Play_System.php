@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-	// Obtiene la MAC del servidor y del cliente...
-	//require 'config/Mac_Cliente.php';
-
 	global $playini;		$playini = 1;
 
 	require 'Inclu/error_hidden.php';
@@ -17,8 +14,10 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	//require 'Inclu/ipCliente.php';
+	// Obtiene la MAC del servidor y del cliente...
+	require 'Inclu//Mac_Cliente.php';
 
+	//require 'Inclu/ipCliente.php'; 
 	desbloqueo();
 	
 if(isset($_POST['oculto'])){
@@ -433,7 +432,7 @@ function suma_acces(){
 	if(mysqli_query($db, $sqla)){ 
 			print ('</br>');
 	}else{ 	print("<font color='#F1BD2D'>* Error: suma access</font>
-					</br>ERROR SQL L.433 ".mysqli_error($db)."</br>");
+					</br>ERROR SQL L.430 ".mysqli_error($db)."</br>");
 	}
 
 			////////////////////		************   		////////////////////

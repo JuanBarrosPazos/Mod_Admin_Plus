@@ -1,9 +1,11 @@
 <?php
 //session_start();
 
+	require 'Mac_Cliente.php';
+
 	global $playinclu;		$playinclu = 1;
 
-	//require 'error_hidden.php';
+	require 'error_hidden.php';
 	require 'Admin_head.php';
 	require 'webmaster.php';
 	require 'nemp.php';
@@ -225,7 +227,7 @@ function process_form(){
 
 			}else{ 
 				print ("<div class='centradiv'>
-					<div>SUS DATOS DE USUARIO</div>
+					<div>CONFIRME DESBLOQUEO IP</div>
 					<div>
 			<img src='../Users/".$rowqc['ref']."/img_admin/".$rowqc['myimg']."' height='60px' width='45px' />
 					</div>
@@ -332,4 +334,5 @@ function ini_log(){
 				 ////////////////////				  ///////////////////
 
 /* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
+
 ?>

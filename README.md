@@ -4,34 +4,58 @@
 ### Contacto: juanbarrospazos@hotmail.es
 ## Licencia CC BY-NC-SA.
     Creative Commons Reconocimiento-NoComercial-CompartirIgual (CC BY-NC-SA).
-
     Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
 ### DESCARGA DE RESPONSABILIDADES:
   	Juan M. Barrós Pazos, no se hace responsable, en ningún caso, del uso de esta aplicación y de los daños o perjuicios ocasionados, en cualquiera de sus formas.
     Por el uso de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
 
 ----
-## PENDIENTES...
+## CUESTIONES PENDIENTES...
+#### Modificar array nivel usuarios y modificar el modo de crear WebMaster...
+#### Limitar el número de WebMaster permitidos a x...
+#### Optimizar menu para @media screen and (max-width:440px){ }
+#### Optimizar tablas Admin resultados y formularios...
+#### input text en formularios de filtro en fichar/
 #### Modificar el contenido de los mensajes en los log de actividad de los Admin...
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
-#### input text en formularios de filtro en fichar/
-#### Optimizar tablas Admin resultados y formularios...
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V25.10.27 2025/08/10
-	- Implementación de script para conocer la MAC del Servidor y del Cliente...
-	- Se modifican los terminos de la licencia...
-----
-#### Mod_Admin_Plus V25.09.23 2025/08/23
-	- Optimizar Formularios Confirme Fichar...
-----
-#### Mod_Admin_Plus V25.09.22 2025/08/22
-	- Ajustes generales en funciones Fichar...
-	- Sustitución del if else por switch case para detección de ip cliente...
+#### Mod_Admin_Plus V25.10.03 2025/10/03
+	- Se modifican los terminos de la licencia, DESCARGO DE RESPONSABILIDADES...
+	- config/Mac_Cliente.php Implementación de script para conocer la MAC del Servidor y del Cliente...
+		function GetMACAdd(){
+			global $GetMacAdd;
+			$strGetMacAdd = exec('getmac');
+			$strGetMacAdd = str_replace(' ', '', $strGetMacAdd);
+			switch (true) {
+				case (($strGetMacAdd!='')&&(!empty($strGetMacAdd))):
+					$GetMacAdd = substr($strGetMacAdd, 0, 17);
+					break;
+				case (($strGetMacAdd=='')||(empty($strGetMacAdd))):
+					ob_start();
+					system('getmac');
+					$SystemGetMac = ob_get_contents();
+					ob_clean();
+					$GetMacAdd = substr($SystemGetMac, strpos($SystemGetMac,'\\')-20, 17);
+					break;
+				default:
+					$GetMacAdd = "";
+					break;
+			}
+			return $GetMacAdd;
+		}
+
+	- Inclu/ipCliente.php Se integra la Mac como identificador para el bloqueo o la ip cliente...
 	- ANTERIORMENTE: 	- Eliminación de la librería geoclass...
 						- Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
+		GetMACAdd();
+		global $GetMacAdd;
 		global $ipCliente;
 		switch (true) {
+			case (($GetMacAdd != "")&&(!empty($GetMacAdd))):
+				// Pasamos la MAC del cliente como identificador...
+				$ipCliente = $GetMacAdd;
+				break;
 			case (!empty($_SERVER['HTTP_CLIENT_IP'])):
 				$ipCliente = $_SERVER['HTTP_CLIENT_IP'];
 				break;
@@ -57,12 +81,29 @@
 				$ipCliente = $_SERVER['HTTP_FORWARDED'];
 				break;
 			default:
-				echo "NO SE DETECTA LA IP DEL CLIENTE";
+				echo "** NO SE DETECTA LA IP DEL CLIENTE<br>";
 				$ipCliente = "10.0.0.0";
 				break;
 		} // FIN swhitch
+
 ----
-#### Mod_Admin_Plus V25.09.21 2025/08/21
+#### Mod_Admin_Plus V25.09.23 2025/09/23
+	- Optimizar Formularios Confirme Fichar...
+----
+#### Mod_Admin_Plus V25.09.22 2025/09/22
+	- Ajustes generales en funciones Fichar...
+	- Sustitución del if else por switch case para detección de ip cliente...
+	- ANTERIORMENTE: 	- Eliminación de la librería geoclass...
+						- Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
+		global $ipCliente;
+		switch (true) {
+			case (!empty($_SERVER['HTTP_CLIENT_IP'])):
+				$ipCliente = $_SERVER['HTTP_CLIENT_IP'];
+				break;
+				.....
+		} // FIN swhitch
+----
+#### Mod_Admin_Plus V25.09.21 2025/09/21
 	- Se modificar el construtor de las tablas de horarios de usuarios:
 			`error` varchar(5) NOT NULL default 'false',
 	- Se modifican las tablas de control de horario:
@@ -70,35 +111,35 @@
 	- Se modifican las consultas sql en php...
 	- Ajustes generales...
 ----
-#### Mod_Admin_Plus V25.09.20C 2025/08/20
+#### Mod_Admin_Plus V25.09.20C 2025/09/20
 	- Ajustes generales...
 	- Sustitución de la etiqueta embed por audio
 ----
-#### Mod_Admin_Plus V25.09.14B 2025/08/14
+#### Mod_Admin_Plus V25.09.14B 2025/09/14
 	- Ajustes generales en Balances.php
 	- Se optimiza el menú de navegación.
 	- Fichar Crear botonera de navegación.
 	- Con sesión abierta redireccionamiento fichar con usuario no admin o webmaster...
 ----
-#### Mod_Admin_Plus V25.09.13 2025/08/13
+#### Mod_Admin_Plus V25.09.13 2025/09/13
 	- Ajustes de gráficos en Balances/
 		- SE CAMBIA EL NOMBRE DE Balances_otr.php POR Balances.php
 		- SE CANCELA BalancesUser.php ANTES Balances.php...
 		- Ajustes generales en el código
 ----
-#### Mod_Admin_Plus V25.09.11B 2025/08/11
+#### Mod_Admin_Plus V25.09.11B 2025/09/11
 	- Inclusión software bajo Licencia CC BY-NC-SA.
 	  Creative Commons Reconocimiento-NoComercial-CompartirIgual (CC BY-NC-SA).
 	- Ajustes de gráficos en Balances/
 ----
-#### Mod_Admin_Plus V25.09.10 2025/08/10
+#### Mod_Admin_Plus V25.09.10 2025/09/10
 	- Modificaciones en Balances...
 ----
-#### Mod_Admin_Plus V25.09.09 2025/08/09
+#### Mod_Admin_Plus V25.09.09 2025/09/09
 	- Modificaciones en la presentación del menu app.
 	- Ajustes de código en número de empleados.
 ----
-#### Mod_Admin_Plus V25.09.04 2025/08/04
+#### Mod_Admin_Plus V25.09.04 2025/09/04
 	- Eliminación de la librería geoclass...
 	- Bloqueo Ip: Sustitución de geoplugin.class.php $geoplugin->ip por Inclu/ipCliente.php
 			if(!empty($_SERVER['HTTP_CLIENT_IP'])){
@@ -109,15 +150,15 @@
 	- Ok: Embed ajustados parámetros por css...
 	- Ajustes generales de código...
 
-#### Mod_Admin_Plus V25.09.03 2025/08/03
+#### Mod_Admin_Plus V25.09.03 2025/09/03
 	- Ok: Desbloqueo ip
 
-#### Mod_Admin_Plus V25.09.02 2025/08/02
+#### Mod_Admin_Plus V25.09.02 2025/09/02
 	* EN GESTION DE ADMINISTRADORES:
 	- Ajustes generales...
 	- No se puede fichar si el usuario está locked y redirección...
 
-#### Mod_Admin_Plus V25.08.31 2025/08/31
+#### Mod_Admin_Plus V25.08.31 2025/09/31
 	* EN GESTION DE ADMINISTRADORES:
 	- Ajustes generales...
 	- Ok: Baja temporal de usuario sin eliminar las tablas de la bbdd, ni directorios (recuperable).

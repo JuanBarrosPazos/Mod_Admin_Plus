@@ -1,7 +1,19 @@
 <?php
 
+	GetMACAdd();
+	global $GetMacAdd;
+	//echo $GetMacAdd."<br>";
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
 	global $ipCliente;
 	switch (true) {
+		case (($GetMacAdd != "")&&(!empty($GetMacAdd))):
+			// Pasamos la MAC del cliente como identificador...
+			$ipCliente = $GetMacAdd;
+			break;
 		case (!empty($_SERVER['HTTP_CLIENT_IP'])):
 			$ipCliente = $_SERVER['HTTP_CLIENT_IP'];
 			break;
@@ -27,46 +39,17 @@
 			$ipCliente = $_SERVER['HTTP_FORWARDED'];
 			break;
 		default:
-			echo "NO SE DETECTA LA IP DEL CLIENTE";
+			echo "** NO SE DETECTA LA IP DEL CLIENTE<br>";
 			$ipCliente = "10.0.0.0";
 			break;
 	} // FIN swhitch
 
    	//echo "\$ipCliente = ".$ipCliente."<br>";
 
-	/*
-	if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-			$ipCliente = "1. ".$_SERVER['HTTP_CLIENT_IP'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if($_SERVER['REMOTE_ADDR'] == getenv("REMOTE_ADDR")){
-			$ipCliente = "2. ".$_SERVER['REMOTE_ADDR'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(!empty(getenv("REMOTE_ADDR"))){
-			$ipCliente = "3. ".getenv("REMOTE_ADDR");
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(!empty($_SERVER['REMOTE_ADDR'])){
-			$ipCliente = "4. ".$_SERVER['REMOTE_ADDR'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(getenv($_SERVER['HTTP_X-FORWARDED_FOR'])){
-			$ipCliente = "5. ".$_SERVER['HTTP_X-FORWARDED_FOR'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(getenv($_SERVER['HTTP_X_FORWARDED'])){
-			$ipCliente = "6. ".$_SERVER['HTTP_X_FORWARDED'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(getenv($_SERVER['HTTP_FORWARDED_FOR'])){
-			$ipCliente = "7. ".$_SERVER['HTTP_FORWARDED_FOR'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	if(getenv($_SERVER['HTTP_FORWARDED'])){
-			$ipCliente = "8. ".$_SERVER['HTTP_FORWARDED'];
-	}
-		echo "\$ipCliente = ".$ipCliente."<br>";
-	*/
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
 
 ?>
