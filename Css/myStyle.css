@@ -600,12 +600,12 @@ img {
 	/* ******   INICIO ESTILOS MENU    ****** */
 
 	.app {
-		height: 354px !important;
+		height: 374px !important;
     }
 
 	.sidebar {
 		position: absolute;
-		width: 6.2em !important;
+		width: 4.6em !important;
 		height: 70px !important;
     }
 
@@ -692,11 +692,11 @@ img {
 	/* ******   INICIO ESTILOS MENU    ****** */
 
   	.app {
-		height: 302px !important;
+		height: 312px !important;
     }
   	.sidebar {
 		position: absolute;
-		width: 6.7em !important;
+		width: 3.2em !important;
 		height: 25px !important;
     }
 

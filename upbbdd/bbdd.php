@@ -188,7 +188,7 @@ function listfiles(){
 			print("<audio src='../audi/no_file.mp3' autoplay></audio>");
 		}
 	}else{
-		print ("<table class='TFormAdmin' style='padding:0.2em;'>
+		print ("<table class='TFormAdmin balresult' style='padding:0.2em;'>
 				<tr>
 					<th colspan='3'>ARCHIVOS RESPALDO BBDD</th>
 				</tr>");

@@ -9,7 +9,7 @@
 				</li>
 				<li>
 					<a href='".$rutafichar."Fichar_Crear.php'>
-						<i class='ic ico12'></i><span>FICHAR IN / OUT</span>
+						<i class='ic ico12'></i><span>FICHAR</span>
 					</a>
 				</li>");
 		}else{ }
@@ -17,7 +17,7 @@
 	if($_SESSION['Nivel'] == 'admin') {
 		print(" <li>
 					<a href='".$rutafichar."Reg_Fichar_Ver.php'>
-						<i class='ic ico19'></i><span>REGISTROS IN / OUT</span>
+						<i class='ic ico19'></i><span>REGISTROS</span>
 					</a>
 				</li>
 				<li>
@@ -27,7 +27,7 @@
 				</li>
 				<li>
 					<a href='".$rutaupbbdd."bbdd.php'>
-						<i class='ic ico02'></i><span>RESPALDO DATOS</span>
+						<i class='ic ico02'></i><span>BACKUPS</span>
 					</a>
 				</li>
 		
