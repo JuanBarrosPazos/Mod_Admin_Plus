@@ -1,7 +1,7 @@
 <?php
 session_start();
  
-	require '../Inclu/error_hidden.php';
+	//require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Inclu/mydni.php';
 
@@ -213,81 +213,14 @@ function errors(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function show_ficha(){
-	
-	global $db;				global $db_name;
-	
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";;
-
-	// FICHA ENTRADA O SALIDA.
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
-	$q1 = mysqli_query($db, $sql1);
-	$count1 = mysqli_num_rows($q1);
-	$rp = mysqli_fetch_assoc($q1);
-	
-	if($rp['del']=="true"){
-		print("<div class='centradiv'>
-				ACCESO RESTRINGIDO POR EL WEB MASTER
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
-				<input type='hidden' name='cancel' value=1 />
-			</form>
-		</div>");
-
-		global $redir;
-		$redir = "<script type='text/javascript'>
-					function redir(){
-						window.location.href='../index.php';
-					}
-					setTimeout('redir()',6000);
-					</script>";
-		print($redir);
-			
-	}elseif($count1 < 1){ // FICHA ENTRADA
-		
-		global $din;		$din = date('Y-m-d');
-		global $tin;		$tin = date('H:i:s');
-		global $dout;		$dout = '';
-		global $tout;		$tout = '00:00:00';
-		global $ttot;		$ttot = '00:00:00';
-		
-		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
-		global $ImgForm;			$ImgForm = "";
-		global $FormButtonHome;		$FormButtonHome = "";
-		global $rutaAudio;			$rutaAudio = "";
-		require '../fichar/Fichar_Tablas_Form.php';
-		print($FichaIn);
-
-	}elseif($count1 > 0){ // FICHA SALIDA
-
-		global $dout;		$dout = date('Y-m-d');
-		global $tout;		$tout = date('H:i:s');
-		global $ttot;
-
-		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
-		global $ImgForm;			$ImgForm = "";
-		global $FormButtonHome;		$FormButtonHome = "";
-		global $rutaAudio;			$rutaAudio = "";
-		require '../fichar/Fichar_Tablas_Form.php';
-		print($FichaOut);
-
-	}
-
-} // FIN show_ficha	
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
 function process_pin(){
 	
 	global $db;					global $db_name;
 	
 	global $qrp;
 	
-	if((isset($_GET['ocultop']))||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
-	else{ $qrp = $_POST['pin']; }
+	if((isset($_GET['ocultop']))||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; 
+	}else{ $qrp = $_POST['pin']; }
 	
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
@@ -297,7 +230,7 @@ function process_pin(){
 	$rp = mysqli_fetch_assoc($qp);
 	
 	$_SESSION['usuarios'] = $rp['ref'];
-	$_SESSION['ref'] = $rp['ref'];
+	//$_SESSION['ref'] = $rp['ref'];
 
 	if($cp > 0){
 	
@@ -318,39 +251,22 @@ function process_pin(){
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 			
-			print("<table align='center' style=\"margin-top:6px\">
-					<tr>
-						<td>
-				<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-						</td>
-						<td>
-							".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-						</td>
-						<td valign='middle'  align='center'>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-					<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-					<input type='hidden' id='din' name='din' value='".$din."' />
-					<input type='hidden' id='tin' name='tin' value='".$tin."' />
-					<input type='hidden' id='dout' name='dout' value='".$dout."' />
-					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-					<input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
-							<input type='submit' value='FICHAR ENTRADA' class='botonverde' />
-							<input type='hidden' name='entrada' value=1 />
-				</form>														
-						</td>
-						<td valign='middle'  align='center'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
-							<input type='hidden' name='cancel' value=1 />
-				</form>
-						</td>
-				</tr>
-			</table>
-				<audio src='../audi/conf_user_data.mp3' autoplay></audio>");
-
+			global $ImgFormIndex;		$ImgFormIndex = 1;
+			global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+			global $ImgForm;
+			$ImgForm = "<li class='liCentra'>
+							<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+						</li>";
+			global $FormButtonHome;
+			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+					<input type='hidden' name='cancel' value=1 />
+				</form>";
+			global $rutaAudio;
+			$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
+			require '../fichar/Fichar_Tablas_Form.php';
+			print($FichaIn);
+			
 			global $redir;
 			$redir = "<script type='text/javascript'>
 								function redir(){
@@ -358,7 +274,7 @@ function process_pin(){
 							}
 							setTimeout('redir()',14000);
 							</script>";
-			print($redir);
+			//print($redir);
 		// FICHA SALIDA.
 		}elseif($count1 > 0){
 			
@@ -366,60 +282,35 @@ function process_pin(){
 			global $tout;			$tout = date('H:i:s');
 			global $ttot;
 
-			print("<table align='center' style=\"margin-top:6px\">
-					<tr>
-						<td>
-				<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' height='40px' width='30px' />
-						</td>
-						<td>
-							".$rp['Nombre']." ".$rp['Apellidos'].". Ref: ".$rp['ref']."
-						</td>
-						<td valign='middle'  align='center'>
-				<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-					<input name='myimg' type='hidden' value='".$rp['myimg']."' />
-					<input type='hidden' id='ref' name='ref' value='".$rp['ref']."' />
-					<input type='hidden' id='name1' name='name1' value='".$rp['Nombre']."' />
-					<input type='hidden' id='name2' name='name2' value='".$rp['Apellidos']."' />
-					<input type='hidden' id='dout' name='dout' value='".$dout."' />
-					<input type='hidden' id='tout' name='tout' value='".$tout."' />
-							<input type='submit' value='FICHAR SALIDA' class='botonverde' />
-							<input type='hidden' name='salida' value=1 />
-				</form>														
-						</td>
-						<td valign='middle'  align='center'>
-				<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
-					<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
+			global $ImgFormIndex;	$ImgFormIndex = 1;
+			global $Action;			$Action = "action='$_SERVER[PHP_SELF]'";
+			global $ImgForm;
+			$ImgForm = "<li class='liCentra'>
+							<img src='../Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
+						</li>";
+			global $FormButtonHome;
+			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
+					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
-				</form>
-						</td>
-					</tr>
-				</table>
-				<audio src='../audi/conf_user_data.mp3' autoplay></audio>"); 
+				</form>";
+			global $rutaAudio;
+			$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
+			require '../fichar/Fichar_Tablas_Form.php';
+			print($FichaOut);
+
 		}
 		
 		ayear();
 			
-	}else{ print("<table align='center' style='margin-top:10px' width=450px >
-					<tr>
-						<th class='BorderInf'>
-						<b>
-						<font color='#FF0000'>
+	}else{ print("<div class='centradiv alertdiv' >
 							NO EXISTE EL USUARIO.
 							</br>
 							PONGASE EN CONTACTO CON ADMIN SYSTEM.
-						</font>
-						</b>
-						</th>
-					</tr>
-					<tr>
-						<td valign='middle'  align='center'>
-						<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
+					<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' >
 							<input type='submit' value='CANCELAR Y VOLVER' class='botonnaranja' />
 							<input type='hidden' name='cancel' value=1 />
-						</form>
-						</td>
-					</tr>
-				</table>
+					</form>
+				</div>
 				<audio src='../audi/user_lost.mp3' autoplay></audio>");
 
 		global $redir;
@@ -429,7 +320,7 @@ function process_pin(){
 						}
 						setTimeout('redir()',4000);
 						</script>";
-		print($redir);
+		//print($redir);
 
 	}			
 		
@@ -456,7 +347,7 @@ function pin_out(){
 	require '../fichar/Fichar_Salida.php';
 	global $imgTabla;
 	$imgTabla = "<li class='liCentra'>
-		<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+					<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' />
 				</li>";
 	global $rutaAudio;
 	$rutaAudio = "<audio src='../audi/salida.mp3' autoplay></audio>";
@@ -506,7 +397,7 @@ function pin_in(){
 	
 	global $imgTabla;
 	$imgTabla = "<li class='liCentra'>
-		<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' height='40px' width='30px' />
+					<img src='../Users/".$_POST['ref']."/img_admin/".$_POST['myimg']."' />
 				</li>";
 	global $rutaAudio;
 	$rutaAudio = "<audio src='../audi/entrada.mp3' autoplay></audio>";
@@ -584,125 +475,28 @@ function show_form2($errorsp=''){
 	}else{$defaults = array ('pin' => '');}
 	
 	if($errorsp){
-		print("<table align='center'>
-				<tr>
-					<td style='text-align:center'>
+		print("<div class='centradiv alertdiv'>
 						<!--
-						<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br>
+						<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font><br>
 						-->
-						<font color='#FF0000'>ERROR ACCESO PIN</font>
-					</td>
-				</tr>
-				<!--
-				<tr>
-					<td style='text-align:left'>
-				-->");
+						<font color='#F1BD2D'>ERROR ACCESO PIN</font>");
 			
 		/*
 		for($a=0; $c=count($errorsp), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errorsp [$a]."<br>");
+			print("<font color='#F1BD2D'>**</font>  ".$errorsp [$a]."<br>");
 			}
 		*/
-		print("<!--</td>
-				  </tr>-->
-		</table>
-			<audio src='../audi/pin_error.mp3' autoplay></audio>");
-		}
+		print("</div>
+				<audio src='../audi/pin_error.mp3' autoplay></audio>");
+	}
 	
-	print("<table align='center' style=\"margin-top:2px; margin-bottom:2px\" >
-			<tr>
-				<th colspan=3 class='BorderSup' style='padding-top: 10px'>
+	print("<div class='centradiv' >
 					<a href='indexcam.php'>
 								GO TO QR SCANNER CAM
 						</a>
-				</th>
-			</tr>
-		</table>"); 
+			</div>"); 
 	
 }
-
-				   ////////////////////				   ////////////////////
-////////////////////				////////////////////				////////////////////
-				 ////////////////////				  ///////////////////
-
-function ver_todo(){
-		
-	global $db;				global $db_name;
-	
-	global $dyt1;			$dyt1 = date('Y');
-	global $dm1;			$dm1 = date('m');
-	global $dd1;			$dd1 = '';
-	global $fil;			$fil = "%".$dyt1."-%".$dm1."%-".$dd1."%";
-
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
-
-	global $ruta;			$ruta = '../';
-	require '../fichar/Inc_Suma_Todo.php';
-
-//////////////////////////
-	
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY  `din` ASC ";
-	$qb = mysqli_query($db, $sqlb);
-	
-	if(!$qb){
-			print("<font color='#FF0000'>Se ha producido un error L.773: </font></br>".mysqli_error($db)."</br>");
-	}else{
-		if(mysqli_num_rows($qb) == 0){
-			print ("<table align='center'>
-					<tr>
-						<td>
-							<font color='#FF0000'>
-								NO HAY DATOS ESTE MES ".date('Y/m')."
-							</font>
-						</td>
-					</tr>
-				</table>");
-
-		}else{
-			print ("<table align='center'>
-					<tr>
-						<th colspan=6 class='BorderInf'>
-						".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". Ref: ".$_SESSION['ref'].". "
-						   .mysqli_num_rows($qb)." RESULTADOS.
-						</th>
-					</tr>
-					<tr>
-						<th class='BorderInfDch'>ID</th>				
-						<th class='BorderInfDch'>DATE IN</th>
-						<th class='BorderInfDch'>TIME IN</th>
-						<th class='BorderInfDch'>DATE OUT</th>										
-						<th class='BorderInfDch'>TIME OUT</th>
-						<th class='BorderInfDch'>TIME TOT</th>
-					</tr>");
-
-			while($rowb = mysqli_fetch_assoc($qb)){
-				print ("<tr align='center'>
-							<td class='BorderInfDch' align='center'>".$rowb['id']."</td>
-							<td class='BorderInfDch' align='left'>".$rowb['din']."</td>
-							<td class='BorderInfDch' align='right'>".$rowb['tin']."</td>
-							<td class='BorderInfDch' align='right'>".$rowb['dout']."</td>
-							<td class='BorderInfDch' align='right'>".$rowb['tout']."</td>
-							<td class='BorderInfDch' align='right'>".$rowb['ttot']."</td>
-						</tr>");
-				} /* Fin del while.*/ 
-
-				print("<tr>
-							<td colspan='6' class='BorderInf'></td>
-						</tr>
-						<tr>
-							<td colspan='3' class='BorderInf' align='right'>
-								HORAS TOTALES:
-							</td>
-							<td colspan='3' class='BorderInf' align='left'>".$sumatodo."</td>
-						</tr>
-					</table>");
-		
-		} /* Fin segundo else anidado en if */
-	} /* Fin de primer else . */
-	
-}	/* Final ver_todo(); */
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

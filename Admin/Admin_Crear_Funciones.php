@@ -207,11 +207,12 @@ function show_form($errors=[]){
 	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	//$nu =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[mydni]'";
-	$nu =  "SELECT * FROM `$db_name`.$table_name_a";
+	//$nu =  "SELECT * FROM `$db_name`.$table_name_a";
+	$nu =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`Nivel` <> 'wmaster'";
 	$user = mysqli_query($db, $nu);
-	//$ruser = mysqli_fetch_assoc($user);
-	$nuser = (mysqli_num_rows($user))-1; // NO SE CUENTA EL WEBMASTER...
-	
+	//$nuser = (mysqli_num_rows($user))-1; // NO SE CUENTA EL WEBMASTER...
+	$nuser = (mysqli_num_rows($user)); // NO SE CUENTA NINGÚN WEBMASTER...
+
 	if($nuser >= $_SESSION['nuser']){ 
 		print("<div class='centradiv alertdiv'>
 					<font color='red'>ACCESO RESTRINGIDO</font>	

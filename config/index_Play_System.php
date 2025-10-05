@@ -182,7 +182,7 @@ function table_desblock(){
 				function redir(){
 					window.location.href='index.php?redirIpBlock=1';
 				}
-				setTimeout('redir()',60000);
+				setTimeout('redir()',120000);
 				</script>";
 	print($redir);
 
@@ -334,6 +334,7 @@ function show_visit(){
 
 	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
+
 	$sqlv =  "SELECT * FROM $table_name_c";
 	$qv = mysqli_query($db, $sqlv);
 	 
@@ -457,25 +458,22 @@ function suma_acces(){
 function suma_denegado(){
 
 	global $db;					global $db_name;
-	global $rowd;				global $sumadeneg;
+	global $rowd1;
 
 	global $table_name_c;		$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
-
-	$sqld =  "SELECT * FROM $table_name_c";
-	$qd = mysqli_query($db, $sqld);
-	$rowd = mysqli_fetch_assoc($qd);
+	echo "** ".$table_name_c."<br>";
 	
-	$_SESSION['deneg'] = $rowd['deneg'];
+	$sqld1 =  "SELECT * FROM $table_name_c";
+	$qd1 = mysqli_query($db, $sqld1);
+	$rowd1 = mysqli_fetch_assoc($qd1);
 	
-	$dng = $rowd['deneg'];
-	
+	$_SESSION['deneg'] = $rowd1['deneg'];
+	global $dng;				$dng = $rowd1['deneg'];
 	global $sumadeneg;			$sumadeneg = $dng + 1;
-
-	$idd = 68;
-
-	global $table_name_c;		$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
+	global $idd;				$idd = 68;
 
 	$sqld = "UPDATE `$db_name`.$table_name_c SET `deneg` = '$sumadeneg' WHERE $table_name_c.`idv` = '$idd' LIMIT 1 ";
+	echo "** ".$sqld."<br>";
 
 	if(mysqli_query($db, $sqld)){/*	print("	</br>");*/
 		
@@ -490,7 +488,7 @@ function suma_denegado(){
 	global $table_name_b;	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
 	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '$ipCliente', '1', '0', '$date', '$time')";
-
+	
 	if(mysqli_query($db, $sqlip)){ 
 		global $text;		$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$ipCliente.PHP_EOL;
 		ini_log();

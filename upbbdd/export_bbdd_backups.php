@@ -86,7 +86,7 @@ function listfiles(){
 	$directorio = opendir($ruta);
 	global $num;			$num=count(glob($rutag,GLOB_BRACE));
 	if($num < 1){
-		print ("<table align='center' style='border:1; margin-top:2px' width='auto'>
+		print ("<table class='centradiv alertdiv'>
 				<tr>
 				<td align='center'>NO HAY ARCHIVOS PARA DESCARGAR</td>
 				</tr>");

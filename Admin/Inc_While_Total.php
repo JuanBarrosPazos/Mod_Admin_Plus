@@ -1,11 +1,12 @@
 <?php
 
-	global $Feedback;
-	global $refrescaimg;
+	require 'Inc_WebMaster_Count.php';
+	
+	global $Feedback;			global $refrescaimg;
 	
 	if(!$qb){
 			print("SQL ERROR: ".mysqli_error($db)."</br>");
-			show_form();	
+			show_form();
 	}else{
 		if(mysqli_num_rows($qb)== 0){
 			print ("<div class='centradiv alertdiv'>
@@ -39,71 +40,71 @@
 			global $formulariohi;			global $formulariofi;
 			global $formulariohe;			global $formulariofe;
 
-		print ("<div class='CardWhileDatos'>
-			<div class='whiletotalaimg'>
-				<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' />
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>NOMBRE: </div><div class='Dato'>".$rowb['Nombre']."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>APELLIDO: </div><div class='Dato'>".$rowb['Apellidos']."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>NIVEL: </div><div class='Dato'>".$rowb['Nivel']."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>REF USER: </div><div class='Dato'>".$rowb['ref']."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>USER: </div><div class='Dato'>".$rowb['Usuario']."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
-			</div>");
+			print ("<div class='CardWhileDatos'>
+				<div class='whiletotalaimg'>
+					<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' />
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>NOMBRE: </div><div class='Dato'>".$rowb['Nombre']."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>APELLIDO: </div><div class='Dato'>".$rowb['Apellidos']."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>NIVEL: </div><div class='Dato'>".$rowb['Nivel']."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>REF USER: </div><div class='Dato'>".$rowb['ref']."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>USER: </div><div class='Dato'>".$rowb['Usuario']."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
+				</div>");
 
-		if($Feedback==1){
-			$BorradoD = substr($rowb['borrado'],0,10);
-			$BorradoT = substr($rowb['borrado'],-8);
-			print("
-			<div class='whiletotala'>
-				<div class='DatLabel'>Del Date: </div><div class='Dato'>".$BorradoD."</div>
-			</div>
-			<div class='whiletotala'>
-				<div class='DatLabel'>Del Time: </div><div class='Dato'>".$BorradoT."</div>
-			</div>");
-		}else{ }
-
-        print("<!-- AQUÍ VA LA BOTONERA -->
-			<div style='text-align:center;'>".$formularioh);
-
-			require 'rowbtotal.php';
-
-			print($formulariof.$formulariohg);
-
-			require 'rowbtotal.php';
-
-			print($formulariofg.$formulariohi);
-		
-			require 'rowbtotal.php';
-		
-			print($formulariofi.$formulariohe);
-
-		global $Feedback;
-		global $formulariohe;			global $formulariofe;
-		if($_SESSION['Nivel'] == 'admin'){ // NO ES WEB MASTER
-			
 			if($Feedback==1){
-				$formulariohe = '';
-				$formulariofe = '';
-			}else{
-				$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
-				$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
-					<input type='hidden' name='oculto2' value=1 />
-					</form>";
-			}
+				$BorradoD = substr($rowb['borrado'],0,10);
+				$BorradoT = substr($rowb['borrado'],-8);
+				print("
+				<div class='whiletotala'>
+					<div class='DatLabel'>Del Date: </div><div class='Dato'>".$BorradoD."</div>
+				</div>
+				<div class='whiletotala'>
+					<div class='DatLabel'>Del Time: </div><div class='Dato'>".$BorradoT."</div>
+				</div>");
+			}else{ }
 
-		}else{	$formulariohe = "";			$formulariofe = "";	}
+			print("<!-- AQUÍ VA LA BOTONERA -->
+				<div style='text-align:center;'>".$formularioh);
+
+				require 'rowbtotal.php';
+				print($formulariof.$formulariohg);
+
+				require 'rowbtotal.php';
+				print($formulariofg.$formulariohi);
+			
+				require 'rowbtotal.php';
+				if(($CountWM > 1)&&($rowb['Nivel']=='wmaster')){
+					print($formulariofi.$formulariohe);
+				}elseif($rowb['Nivel']!='wmaster'){
+					print($formulariofi.$formulariohe);
+				}else{ }
+
+			global $Feedback;		global $formulariohe;		global $formulariofe;
+
+			if((($_SESSION['Nivel']=='wmaster')||($_SESSION['Nivel']=='admin'))&&($rowb['Nivel']!='wmaster')){
+				
+				if($Feedback==1){
+					$formulariohe = '';			$formulariofe = '';
+				}else{
+					$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
+					$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+						<input type='hidden' name='oculto2' value=1 />
+						</form>";
+				}
+
+			}else{	$formulariohe = "";			$formulariofe = "";	}
 
 			print($formulariohe);
 				require 'rowbtotal.php';
