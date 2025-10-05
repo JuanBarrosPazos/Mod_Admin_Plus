@@ -91,8 +91,8 @@
 
 		global $Feedback;
 		global $formulariohe;			global $formulariofe;
-		if(($_SESSION['Nivel'] == 'admin')&&($rowb['dni'] != $_SESSION['webmaster'])){
-
+		if($_SESSION['Nivel'] == 'admin'){ // NO ES WEB MASTER
+			
 			if($Feedback==1){
 				$formulariohe = '';
 				$formulariofe = '';

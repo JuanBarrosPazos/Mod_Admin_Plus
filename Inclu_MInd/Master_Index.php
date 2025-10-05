@@ -4,46 +4,31 @@
 	require $rutaindex.'Inclu/error_hidden.php';
 	global $db_name;
 
-	if(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['mydni'])) {
+	global $topcat0;		global $topcat1;		global $topcat2;
+	global $topcat3;		global $topcat4;		global $topcat5;
 
-		global $topcat0;
+	if((($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin'))&&($_SESSION['dni'] == $_SESSION['mydni'])) {
 		$topcat0 = "style='margin-top:31px'";
-		global $topcat1;
 		$topcat1 = "style='margin-top:62px'";
-		global $topcat2;
 		$topcat2 = "style='margin-top:94px'";
-		global $topcat3;
 		$topcat3 = "style='margin-top:126px'";
-		global $topcat4;
 		$topcat4 = "style='margin-top:158px'";
-		global $topcat5;
 		$topcat5 = "style='margin-top:189px'";
-
 	}else{
-
-		global $topcat0;
 		$topcat0 = "";
-		global $topcat1;
 		$topcat1 = "style='margin-top:31px'";
-		global $topcat2;
 		$topcat2 = "style='margin-top:62px'";
-		global $topcat3;
 		$topcat3 = "style='margin-top:94px'";
-		global $topcat4;
 		$topcat4 = "style='margin-top:126px'";
-		global $topcat5;
 		$topcat5 = "style='margin-top:158px'";
 
 	}
 
 
-	if($_SESSION['Nivel'] == 'admin') {	
-		
-			if($_SESSION['dni'] == $_SESSION['mydni']) { global $niv;
-														  $niv = 'Web Master';
-												}else{	global $niv;
-														$niv = 'Administrador';
-														}
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')) {	
+			global $niv;
+			if($_SESSION['dni'] == $_SESSION['mydni']) { $niv = 'Web Master';
+			}else{	$niv = 'Administrador'; }
 	require $rutaindex.'Inclu_MInd/Master_Index_Header.php';
 	
 	print("

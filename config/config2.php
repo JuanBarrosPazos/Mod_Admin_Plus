@@ -148,12 +148,6 @@ function process_form(){
 	$sql = "INSERT INTO `$db_name`.$table_name_a (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Pass`, `Direccion`, `Tlf1`, `Tlf2`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$new_name', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$passwordhash', '$password', '$_POST[Direccion]', '$_POST[Tlf1]', '$tlf2')";
 		
 	if(mysqli_query($db, $sql)){
-		// CREA EL ARCHIVO MYDNI.TXT $_SESSION['webmaster'].
-		$filename = "../Inclu/webmaster.php";
-		$fw2 = fopen($filename, 'w+');
-		$mydni = '<?php $_SESSION[\'webmaster\'] = '.$_POST['dni'].'; ?>';
-		fwrite($fw2, $mydni);
-		fclose($fw2);
 
 		print( "<table class='TFormAdmin'>
 				<tr>

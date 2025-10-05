@@ -7,7 +7,6 @@
 
 	require 'error_hidden.php';
 	require 'Admin_head.php';
-	require 'webmaster.php';
 	require 'nemp.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';

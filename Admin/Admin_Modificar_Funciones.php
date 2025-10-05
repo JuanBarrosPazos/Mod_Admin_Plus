@@ -25,28 +25,18 @@ function process_form(){
 	global $passwordhash;
 	$passwordhash = password_hash($password, PASSWORD_DEFAULT, array ( "cost"=>10));
 
-	if($_SESSION['Nivel'] == 'admin'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		global $tlf2;
 		if(strlen(trim($_POST['Tlf2'])) == 0){ $tlf2 = 0; }else{ $tlf2 = $_POST['Tlf2']; }
 			
 		$sqlc = "UPDATE `$db_name`.$table_name_a SET `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `doc` = '$_POST[doc]', `dni` = '$_POST[dni]', `ldni` = '$_POST[ldni]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$passwordhash', `Pass` = '$password', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$tlf2' WHERE $table_name_a.`id` = '$_POST[id]' LIMIT 1 ";
 
 		if(mysqli_query($db, $sqlc)){ 	
-		
-			if(($_SESSION['dni'] == $_SESSION['webmaster'])&&($_SESSION['id'] == $_POST['id'])&&($_POST['dni'] != $_SESSION['webmaster'])){ 	
-				$_SESSION['dni'] = $_POST['dni'];
-				// CREA EL ARCHIVO MYDNI.TXT $_SESSION['webmaster'].
-				$filename = "../Inclu/webmaster.php";
-				$fw2 = fopen($filename, 'w+');
-				$mydni = '<?php $_SESSION[\'webmaster\'] = '.$_POST['dni'].'; ?>';
-				fwrite($fw2, $mydni);
-				fclose($fw2);
-			}elseif(($_SESSION['dni'] != $_SESSION['webmaster'])&&($_SESSION['id'] == $_POST['id'])&&($_POST['dni'] != $_SESSION['dni'])){ 
+			
+			if(($_SESSION['id'] == $_POST['id'])&&($_POST['dni'] != $_SESSION['dni'])){ 
 							$_SESSION['dni'] = $_POST['dni'];
 			}else{ }
 								 
-			require '../Inclu/webmaster.php';
-
 			print("<table class='TFormAdmin'>
 					<tr>
 						<th colspan=3>NUEVOS DATOS DEL USUARIO</th>
@@ -117,8 +107,6 @@ function process_form(){
 				 ////////////////////				  ///////////////////
 			
 function show_form($errors=[]){
-	
-	require '../Inclu/webmaster.php';
 
 	if(isset($_POST['oculto2'])){
 
@@ -150,7 +138,7 @@ function show_form($errors=[]){
 		global $modifadmin;				$modifadmin = 1;
 		require 'tabla_crea_admin.php';
 	/*
-	if($_SESSION['Nivel'] == 'admin'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		global $modifadmin;				$modifadmin = 1;
 		require 'tabla_crea_admin.php';
 	// FIN IF ADMIN

@@ -11,7 +11,7 @@
 			print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 	}
 
-	if($_SESSION['Nivel'] == 'admin'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print("<table class='centradiv'>
 				<tr>
 					<td>".$TablaTitulo."</td>

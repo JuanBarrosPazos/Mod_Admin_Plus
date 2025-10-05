@@ -1,6 +1,6 @@
 <?php
 
-if /*(*/($_SESSION['Nivel'] == 'admin')/* || ($_SESSION['Nivel'] == 'plus'))*/{
+if (($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')/*||($_SESSION['Nivel'] == 'plus')*/){
 
     master_index();
 

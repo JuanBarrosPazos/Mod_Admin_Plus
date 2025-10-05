@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if($_SESSION['Nivel'] == 'admin'){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	master_index();
 
@@ -54,7 +54,7 @@ function show_form(){
 					<td>TABLAS EXPORTABLES PARA BBDD ".$_SESSION['ref']."</td>
 				</tr>
 			</table>");	
-	}elseif($_SESSION['Nivel'] == 'admin'){
+	}elseif(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print("<table class='centradiv'>
 				<tr>
 					<td>EXPORTE TABLAS BBDD<br>SELECCIONE UN USUARIO</td>

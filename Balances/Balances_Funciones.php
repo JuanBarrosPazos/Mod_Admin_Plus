@@ -27,10 +27,10 @@ function show_form(){
 	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
 	// $sqlu =  "SELECT * FROM $tablau WHERE (`ref` <> '$_SESSION[ref]' OR `dni` <> '$_SESSION[webmaster]') ORDER BY `ref` ASC ";
 	global $sqlu;
-	if($_SESSION['dni'] == $_SESSION['webmaster']){
+	if($_SESSION['Nivel'] == 'wmaster'){
 		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
 	}else{
-		$sqlu =  "SELECT * FROM $tablau WHERE `dni` <> '$_SESSION[webmaster]' ORDER BY `ref` ASC ";
+		$sqlu =  "SELECT * FROM $tablau WHERE `Nivel` <> 'wmaster' ORDER BY `ref` ASC ";
 	}
 
 	$qu = mysqli_query($db, $sqlu);

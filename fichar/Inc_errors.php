@@ -1,8 +1,7 @@
 <?php
 
 	global $sesus;
-	if($sesus==''){ $sesus = $_SESSION['ref'];
-	}else{ /*$sesus = $_SESSION['webmaster'];*/ }	
+	if($sesus==''){ $sesus = $_SESSION['ref']; }else{ }	
 	
 	$tablae = $_SESSION['clave'].$sesus;
 	$tablae = strtolower($tablae);

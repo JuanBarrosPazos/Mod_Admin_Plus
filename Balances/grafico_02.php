@@ -15,7 +15,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if($_SESSION['Nivel'] == 'admin') {
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 				
 	if(isset($_POST['grafico2'])){	a();
 									process_form();

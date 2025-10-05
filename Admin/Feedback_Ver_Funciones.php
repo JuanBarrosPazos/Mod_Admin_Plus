@@ -73,7 +73,7 @@ function ver_todo(){
 	global $db;
 	global $Feedback;		$Feedback = 1;
 
-	if(($_SESSION['Nivel'] == 'admin')){ 
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){ 
 
 		global $table_name_a;			$table_name_a = "`".$_SESSION['clave']."admin`";
 

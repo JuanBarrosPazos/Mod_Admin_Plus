@@ -49,7 +49,7 @@
 		</a>";
     }
 
-    if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+    if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
         print("<div class='centradiv' style='border:none !important'>".$link1.$link2.$link3.$link4."</div>");
     }else{ }
 

@@ -12,7 +12,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if($_SESSION['Nivel'] == 'admin'){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	master_index();
 
@@ -152,7 +152,9 @@ function info(){
 	$ActionTime = date('H:i:s');
 
 	global $dir;
-	if($_SESSION['Nivel'] == 'admin'){ $dir = "../Users/".$_SESSION['ref']."/log"; }
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){ 
+		$dir = "../Users/".$_SESSION['ref']."/log";
+	}
 	
 	global $text;
 	$text = PHP_EOL."- CONSULTAR TODOS MODIFICAR ".$_SESSION['usuarios'].". ".$ActionTime.$filtro;

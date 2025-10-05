@@ -3,7 +3,6 @@ session_start();
 
 	require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
-	require '../Inclu/webmaster.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
@@ -20,7 +19,7 @@ $rowd = mysqli_fetch_assoc($qd);
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
 
 	master_index();
 

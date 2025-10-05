@@ -3,7 +3,6 @@ session_start();
 
 	require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
-	require '../Inclu/webmaster.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
@@ -12,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){
  					
 	master_index();
 
@@ -115,7 +114,7 @@ function show_form(){
 				$defaults = $_POST;
 				//print("* ".$_SESSION['usuarios']);
 	}else{
-		if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+		if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
 			
 			global $ficharCrear;		$ficharCrear = 2;
 			require 'Fichar_Crear_Botonera.php';

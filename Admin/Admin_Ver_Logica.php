@@ -5,7 +5,7 @@ if(($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){
 									ver_todo();
 									UserLog();
 
-}elseif($_SESSION['Nivel'] == 'admin'){
+}elseif(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	master_index();
 

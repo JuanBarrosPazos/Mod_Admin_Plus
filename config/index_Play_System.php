@@ -5,7 +5,6 @@ session_start();
 
 	require 'Inclu/error_hidden.php';
 	require 'Inclu/Admin_head.php';
-	require 'Inclu/webmaster.php';
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
 	require 'Inclu/my_bbdd_clave.php';
@@ -604,7 +603,7 @@ function process_form(){
 	
 	global $db;
 					
-	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')){	
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')){	
 		global $onlyindex; 
 		if($onlyindex == 1){
 				master_index();
@@ -1194,7 +1193,7 @@ function bloqueo(){
 function show_form($errors=[]){
 	
 	unset($_SESSION['usuarios']);		unset($_SESSION['ref']);
-	unset ($_SESSION['dni']);			unset ($_SESSION['webmaster']);
+	unset ($_SESSION['dni']);
 	
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
@@ -1276,17 +1275,17 @@ function ver_todo(){
 			$ref = $_SESSION['ref'];
 			$sqlb =  "SELECT * FROM $table_name_a WHERE `ref` = '$ref'";
 			$qb = mysqli_query($db, $sqlb);
-	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['webmaster'])){ 
+	}elseif($_SESSION['Nivel'] == 'wmaster'){ 
 			require 'Admin/Paginacion_Head.php';
 			//$orden = @$_POST['Orden'];
 			/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
 			$sqlb =  "SELECT * FROM $table_name_a  ORDER BY  `id` ASC $limit";
 			$qb = mysqli_query($db, $sqlb);
-	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] != $_SESSION['webmaster'])){ 
+	}elseif($_SESSION['Nivel'] == 'admin'){ 
 			require 'Admin/Paginacion_Head.php';
 			//$orden = @$_POST['Orden'];
 			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
-			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` ASC $limit";
+			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`Nivel` <> 'wmaster' ORDER BY  `id` ASC $limit";
 			$qb = mysqli_query($db, $sqlb);
 	}
 

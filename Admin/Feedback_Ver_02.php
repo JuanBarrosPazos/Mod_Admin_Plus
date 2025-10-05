@@ -12,7 +12,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if($_SESSION['Nivel'] == 'admin'){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 				
 	global $nombre;				$nombre = $_POST['Nombre'];
 	global $apellido;			$apellido = $_POST['Apellidos'];

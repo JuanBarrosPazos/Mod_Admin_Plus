@@ -1,6 +1,6 @@
 <?php
 
-	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')){
 
 		print("<li>
 					<a href='".$rutaadmin."Admin_Ver.php'>
@@ -14,7 +14,7 @@
 				</li>");
 		}else{ }
 
-	if($_SESSION['Nivel'] == 'admin') {
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print(" <li>
 					<a href='".$rutafichar."Reg_Fichar_Ver.php'>
 						<i class='ic ico19'></i><span>REGISTROS</span>

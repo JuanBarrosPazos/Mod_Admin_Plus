@@ -9,7 +9,7 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-if($_SESSION['Nivel'] == 'admin'){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	master_index();
 
@@ -53,11 +53,11 @@ function show_form(){
 
 	}
 
-	if($_SESSION['Nivel'] == 'admin'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print("table align='center' style='border:1; margin-top:2px' width='auto'>
 				<tr>
 					<td align='center'>
-							EXPORTE TABLAS BBDD.
+							EXPORTE TABLAS BBDD
 					</td>
 				</tr>		
 				<tr>

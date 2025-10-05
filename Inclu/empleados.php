@@ -5,7 +5,6 @@ session_start();
 
 	//require 'error_hidden.php';
 	require 'Admin_head.php';
-	require 'webmaster.php';
 	require 'nemp.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
@@ -15,7 +14,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if($_SESSION['Nivel'] == 'admin'){
+if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	master_index();
 
@@ -56,7 +55,7 @@ function validate_form(){
 
 function process_form(){
 	
-	// CREA EL ARCHIVO MYDNI.TXT $_SESSION['webmaster'].
+	// CREA EL ARCHIVO NUMERO DE EMPLEADOS.
 	$filename = "nemp.php";
 	$fw2 = fopen($filename, 'w+');
 	$mydni = '<?php $_SESSION[\'nuser\'] = '.$_POST['nemp'].'; ?>';

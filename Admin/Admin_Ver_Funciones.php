@@ -34,14 +34,12 @@ function process_form(){
 	
 	//$orden = $_POST['Orden'];
 	global $qb;
-	if(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] == $_SESSION['webmaster'])){
-
+	if($_SESSION['Nivel'] == 'wmaster'){
 		$sqlb =  "SELECT * FROM $table_name_a WHERE (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape') AND `del` = 'false' ORDER BY `Nombre` ASC  ";
 		$qb = mysqli_query($db, $sqlb);
-	
-	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] != $_SESSION['webmaster'])){ 
-
-		$sqlb =  "SELECT * FROM $table_name_a WHERE (`dni` <> '$_SESSION[webmaster]' AND  `Nombre` LIKE '$nom' OR `dni` <> '$_SESSION[webmaster]' AND `Apellidos` LIKE '$ape') AND `del` = 'false' ORDER BY `Nombre` ASC  ";
+	}elseif($_SESSION['Nivel'] == 'admin'){ 
+		//$sqlb =  "SELECT * FROM $table_name_a WHERE (`dni` <> '$_SESSION[webmaster]' AND  `Nombre` LIKE '$nom' OR `dni` <> '$_SESSION[webmaster]' AND `Apellidos` LIKE '$ape') AND `del` = 'false' ORDER BY `Nombre` ASC  ";
+		$sqlb =  "SELECT * FROM $table_name_a WHERE (`Nivel` <> 'wmaster' AND  `Nombre` LIKE '$nom' OR `Nivel` <> 'wmaster' AND `Apellidos` LIKE '$ape') AND `del` = 'false' ORDER BY `Nombre` ASC  ";
 		$qb = mysqli_query($db, $sqlb);
 	}
 
@@ -87,19 +85,18 @@ function ver_todo(){
 			$sqlb =  "SELECT * FROM $table_name_a WHERE `ref` = '$ref'";
 			$qb = mysqli_query($db, $sqlb);
 
-	}elseif(($_SESSION['Nivel'] == 'admin') && ($_SESSION['dni'] == $_SESSION['webmaster'])) { 
-
+	}elseif($_SESSION['Nivel'] == 'wmaster'){ 
 			require 'Paginacion_Head.php';
 			/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
 			//$sqlb =  "SELECT * FROM $table_name_a  ORDER BY `id` DESC $limit";
 			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'false' ORDER BY $orden $limit";
 			$qb = mysqli_query($db, $sqlb);
 
-	}elseif(($_SESSION['Nivel'] == 'admin')&&($_SESSION['dni'] != $_SESSION['webmaster'])){ 
+	}elseif($_SESSION['Nivel'] == 'admin'){ 
 			require 'Paginacion_Head.php';
 			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
 			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` DESC $limit";*/
-			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' AND $table_name_a.`del` = 'false'  ORDER BY  $orden $limit";
+			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`Nivel` <> 'wmaster' AND $table_name_a.`del` = 'false'  ORDER BY  $orden $limit";
 			$qb = mysqli_query($db, $sqlb);
 	}
 

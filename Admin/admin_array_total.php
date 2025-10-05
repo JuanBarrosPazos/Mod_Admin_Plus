@@ -92,16 +92,26 @@ if(isset($array_cero)){
 
 if(isset($array_nive_doc)){
 
-	if(isset($config2)){ $Nivel = array ('admin' => 'WEBMASTER',
-										 'admin' => 'WEBMASTER',);
-	}else{ $Nivel = array(	'' => 'NIVEL USUARIO',
+	if(isset($config2)){ 
+			$Nivel = array ('wmaster' => 'WEBMASTER',
+							'wmaster' => 'WEBMASTER',);
+
+	}elseif(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
+			$Nivel = array(	'' => 'NIVEL USUARIO',
+							'wmaster' => 'WEBMASTER',
+							'admin' => 'ADMINISTRADOR',
+							'plus' => 'USER PLUS',
+							'user' => 'USER',
+							'locked' => 'LOCKED',);
+
+	}else{	$Nivel = array(	'' => 'NIVEL USUARIO',
 							'admin' => 'ADMINISTRADOR',
 							'plus' => 'USER PLUS',
 							'user' => 'USER',
 							'locked' => 'LOCKED',);												
- 	}
+	}
 
-  $doctype = array ('DNI' => 'DNI/NIF Espa&ntilde;oles',
+	$doctype = array ('DNI' => 'DNI/NIF Espa&ntilde;oles',
 					'NIE' => 'NIE/NIF Extranjeros',
 					'NIFespecial' => 'Persona F&iacute;sica Especial',
 					/*

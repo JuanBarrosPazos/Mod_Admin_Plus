@@ -53,7 +53,7 @@ if($Feedback==1){
 		<input type='hidden' name='oculto2' value=1 />
 		</form>";
 	/* 
-	if($_SESSION['Nivel'] == 'admin'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 	global $formulariohe;
 	$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
