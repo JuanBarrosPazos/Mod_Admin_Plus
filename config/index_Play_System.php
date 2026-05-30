@@ -2,6 +2,7 @@
 session_start();
 
 	global $playini;		$playini = 1;
+	global $form_errors;
 
 	require 'Inclu/error_hidden.php';
 	require 'Inclu/Admin_head.php';
@@ -40,7 +41,7 @@ if(isset($_POST['oculto'])){
 			if($_SESSION['showf'] == 68){
 					table_desblock();
 			}else{
-					show_form(@$form_errors);
+					show_form($form_errors);
 			}
 					show_visit();
 	}else{	process_pin();
@@ -54,7 +55,7 @@ if(isset($_POST['oculto'])){
 					show_form2();
 					if($_SESSION['showf'] == 68){
 							table_desblock();
-					}else{	show_form(@$form_errors);
+					}else{	show_form($form_errors);
 							show_visit();
 					}
 					
@@ -74,7 +75,7 @@ if(isset($_POST['oculto'])){
 		if($_SESSION['showf'] == 68){
 				table_desblock();
 		}else{
-				show_form(@$form_errors);
+				show_form($form_errors);
 				show_visit();
 		}
 		suma_visit();
@@ -94,6 +95,9 @@ function bbdd_backup(){
 	global $datey; 				$datey = date('Y'); 
 	global $datebbddx; 			$datebbddx = date("Ymd");
 	
+	global $name0;				global $name1;
+	global $dir;
+	
 	// SI HAY MAS DE OCHO COPIAS DE SEGURIDAD BORRARLAS.
 	global $ruta; 				$ruta ="upbbdd/bbdd_export_tot"; 
 	//print("RUTA: ".$ruta.".</br>");
@@ -101,7 +105,6 @@ function bbdd_backup(){
 	//print("RUTA G: ".$rutag.".</br>");
 	$directorio = opendir($ruta);
 	global $num; 				$num=count(glob($rutag,GLOB_BRACE));
-	
 	if($num > 8){
 		if(file_exists($ruta)){ 
 			$dir = $ruta."/";
@@ -194,47 +197,77 @@ function table_desblock(){
 
 function modif(){
 									   							
-	$filename = "Users/".$_SESSION['ref']."/ayear.php";
-	$fw1 = fopen($filename, 'r+');
-	$contenido = fread($fw1,filesize($filename));
-	fclose($fw1);
-	
-	$contenido = explode("\n",$contenido);
-	$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-	$contenido = implode("\n",$contenido);
-	
-	//fseek($fw, 37);
-	$fw = fopen($filename, 'w+');
-	fwrite($fw, $contenido);
-	fclose($fw);
-	global $dat1;		$dat1 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
+	global $filename;		$filename = "config/ayear.php";
+	global $dat1;
+	$dat1 = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO DE ARRAY ANUAL ".$filename;
+
+	if(file_exists('config/ayear.php')){
+		//$filename = "config/ayear.php";
+		$fw1 = fopen($filename, 'r+');
+		$contenido = fread($fw1,filesize($filename));
+		fclose($fw1);
+		
+		$contenido = explode("\n",$contenido);
+		$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
+		$contenido = implode("\n",$contenido);
+		
+		//fseek($fw, 37);
+		$fw = fopen($filename, 'w+');
+		fwrite($fw, $contenido);
+		fclose($fw);
+
+		$dat1 = $dat1.PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/ayear.php";
+
+	}elseif(!file_exists('config/ayear.php')){
+		//$filename = "config/ayear.php";
+		$fw = fopen($filename, 'w+');
+		$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
+			fwrite($fw, $contenido);
+			//file_put_contents($fw, $contenido);
+			fclose($fw);
+
+		// Pasamos logs...
+		$dat1 = $dat1.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/ayear.php";
+	}else{
+		$dat1 = $dat1.PHP_EOL."\t* ERROR DESCONOCIDO ../config/ayear.php";
+	}
+
 }
 
 function modif2(){
 
-	$filename = "Users/".$_SESSION['ref']."/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-	global $dat2;		$dat2 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
-}
+	global $filename;		$filename = "config/year.txt";
+	global $dat2;
+	$dat2 = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO SI PROCEDE: ".$filename;
 
-function modif2b(){
+	if(file_exists('config/year.txt')){
+		//$filename = "config/year.txt";
+		$fw2 = fopen($filename, 'w+');
+		$date = "".date('Y')."";
+		fwrite($fw2, $date);
+		fclose($fw2);
 
-	$filename = "config/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-	global $dat3;		$dat3 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
+		$dat2 = $dat2.PHP_EOL."\tMODIFICADO Y ACTUALIZADO config/year.txt".$filename;
+
+	}elseif(!file_exists('config/year.txt')){
+			//$filename = "config/year.txt";
+			//file_put_contents($filename, "");
+			$dataYear = "".date('Y')."";
+			$configYear = fopen($filename, 'w+');
+			fwrite($configYear, $dataYear);
+			fclose($configYear);
+
+			$dat2 = $dat2.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+	}else{
+			$dat2 = $dat2.PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
+	}
 }
 
 function tcl(){
 	
 	global $db;			global $db_name;
 	
-	$vname = "`".$_SESSION['clave'].$_SESSION['ref']."_".date('Y')."`";
+	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
@@ -253,11 +286,11 @@ function tcl(){
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
-	global $dat4;
+	global $dat3;
 	if(mysqli_query($db , $tcl)){
-			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
+			$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
 	}else{
-			$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+			$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 	}
 
 } // FIN function tcl()
@@ -268,23 +301,42 @@ function tcl(){
 
 function ayear(){
 
-	$filename = "Users/".$_SESSION['ref']."/year.txt";
-	$fw2 = fopen($filename, 'r+');
-	$fget = fgets($fw2);
-	fclose($fw2);
-	
-	if($fget == date('Y')){
-		/*print(" <div style='clear:both'></div>
-				<div style='width:200px'>* EL AÑO ES EL MISMO</br>&nbsp;&nbsp;&nbsp;".date('Y')." == ".$fget."</div>"); */
-	}elseif($fget != date('Y')){ 
-		print(" <div style='clear:both'></div>
-				<div style='width:200px'>* EL AÑO HA CAMBIADO</div>");/*</br>&nbsp;&nbsp;&nbsp;".date('Y')." != ".$fget." */
-		modif();
-		modif2();
-		modif2b();
-		tcl();
-		global $dat1;	global $dat2;	global $dat3;	global $dat4;
-		global $datos;	$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;
+	global $dat1;	global $dat2;	global $dat3;
+	global $datos;
+	global $filename;		$filename = "config/year.txt";
+
+	if(file_exists('config/year.txt')){
+		//$filename = "config/year.txt";
+		$fw2 = fopen($filename, 'r+');
+		$fget = fgets($fw2);
+		fclose($fw2);
+		
+		if($fget == date('Y')){
+			/*print(" <div style='clear:both'></div>
+					<div style='width:200px'>
+						* EL AÑO ES EL MISMO</br>&nbsp;&nbsp;&nbsp;".date('Y')." == ".$fget."
+					</div>"); */
+		}elseif($fget != date('Y')){ 
+			print(" <div style='clear:both'></div>
+					<div style='width:200px'>* EL AÑO HA CAMBIADO</div>");
+					/*</br>&nbsp;&nbsp;&nbsp;".date('Y')." != ".$fget." */
+			modif();
+			modif2();
+			tcl();
+			$datos = $dat1.$dat2.$dat3.PHP_EOL;
+		}
+		
+	}elseif(!file_exists('config/year.txt')){
+		//$filename = "config/year.txt";
+		//file_put_contents($filename, "");
+		$dataYear = "".date('Y')."";
+		$configYear = fopen($filename, 'w+');
+		fwrite($configYear, $dataYear);
+		fclose($configYear);
+
+		$datos = PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+	}else{
+		$datos = PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
 	}
 
 } // FIN function ayear()

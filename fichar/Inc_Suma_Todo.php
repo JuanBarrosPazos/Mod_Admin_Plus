@@ -1,20 +1,21 @@
 <?php
 
+	global $fil;
 /* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 	global $orden;		global $ruta;
 	require $ruta.'Inclu/orden.php';
 
 			///////////////////////			***********  		///////////////////////
-	
     //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";
 	global $sh; 	global $db; 	global $db_name;	global $vname;
-	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$sh =  "SELECT * FROM $vname WHERE $vname.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 
 			///////////////////////			***********  		///////////////////////
 
     /* SOLO PARA MODIFICAR 01 / FICHAR VER / FICHAR VER OTRO / BORRAR 01 */
 	global $name1;				global $name2;
-    if(!$sh){print(mysqli_error($db).".</br>");
+    if(!$sh){
+		print(mysqli_error($db).".</br>");
     }else{	$qn1 = mysqli_query($db,$sh);
 			$count = mysqli_num_rows($qn1);
 			if($count > 0){
@@ -46,7 +47,8 @@
 	//print ("</br>".$hortosec);	
 	
 /* CALCULAMOS LOS MINUTOS TOTALES Y LOS PASAMOS A SEGUNDOS. */
-	if(!$sh){print(mysqli_error($db).".</br>");
+	if(!$sh){
+		print(mysqli_error($db).".</br>");
 	}else{	$qm = mysqli_query($db, $sh);
 			$qmr = mysqli_num_rows($qm);
 			$sumam = 0;
@@ -62,7 +64,8 @@
 	//print ("</br>".$mintosec);	
 
 /* CALCULAMOS LOS SEGUNDOS TOTALES. */
-	if(!$sh){print(mysqli_error($db).".</br>");
+	if(!$sh){
+		print(mysqli_error($db).".</br>");
 	}else{	$qs = mysqli_query($db, $sh);
 			$qsr = mysqli_num_rows($qs);
 			$sumas = 0;

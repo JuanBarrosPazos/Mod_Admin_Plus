@@ -7,10 +7,11 @@
     Esta licencia permite copiar, distribuir y modificar una obra (copyleft), pero exige que se reconozca la autoría (CC BY), que el uso no sea comercial (NC), y que cualquier obra derivada se comparta bajo la misma licencia o una compatible (SA).
 ### DESCARGA DE RESPONSABILIDADES:
   	Juan M. Barrós Pazos, no se hace responsable, en ningún caso, del uso de esta aplicación y de los daños o perjuicios ocasionados, en cualquiera de sus formas.
-    Por el uso de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
+    Por el uso o distribución de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
 
 ----
 ## CUESTIONES PENDIENTES...
+### Modificación de las bbdd para registro de entradas, a nivel anual y global para todos los empleados...
 #### Limitar el número de WebMaster permitidos a x...
 #### Audio error fichar pin desde pantalla bloqueo ip/Mac...
 #### Audio usuario locked...
@@ -20,6 +21,42 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V26.05.30.Beta 2026/05/30
+	* MODIFICADO:
+		- config/index_Init_System.php & index.php (inicial): config_one(), modif(), modif2()...
+		- fichar/Inc_errors.php
+
+		- Pendiente: Ok: ayear()
+		 config/index_Play_System.php, config/indexqr_Play_System, cam/index.php, indexcamini.php & indexqr.php:
+
+	
+	----
+	* TAREAS PENDIENTES:
+	- Modificación del nombre de las tablas en la bbdd para registro de entradas y salidas, 
+	  a nivel anual y global para todos los empleados...
+
+		Old: 	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
+				$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
+
+		"SELECT * FROM `$db_name`.$vname WHERE $vname. $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+										WHERE $vname.`ref` = '$_SESSION[usuarios]' AND...
+
+		New:	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
+							$_SESSION['clave']."horarios_";
+
+	- Exportar el código de la función...
+
+	- Modificación de la ruta del archivo de comprobación del año...
+		$filename = "config/year.txt";
+		- Si el archivo no existe, hacer una comprobación a bbdd Schemas... si coincide con el año actual...
+	
+	- Modificar las rutas para config/ayear.php en del mismo modo que el anterior... 
+	  o si no existe construirlo con una consulta a Schemas...
+
+	* COMPROBACIÓN DE LAS MODIFICACIONES:
+
+
+----
 #### Mod_Admin_Plus V25.10.05 2025/10/05
 	- Se modifica el array nivel usuarios y el modo de crear WebMaster...
 	- Se crea el nivel de usuario wmaster para $_SESSION['Nivel']...

@@ -3,14 +3,13 @@
 	global $sesus;
 	if($sesus==''){ $sesus = $_SESSION['ref']; }else{ }	
 	
-	$tablae = $_SESSION['clave'].$sesus;
-	$tablae = strtolower($tablae);
-	global $vname;		$vname = "`".$tablae."_".date('Y')."`";
+	$tablae = strtolower($_SESSION['clave']."horarios_");
+	global $vname;		$vname = "`".$tablae.date('Y')."`";
 	//echo "* ".$vname;
 
 	// INICIO ERRORES FICHAR.
 		global $db;		global $db_name;
-		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`error` = 'true' ";
+		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ref` = '$sesus' AND $vname.`error` = 'true' ";
 		$qe = mysqli_query($db, $sqle);
 		global $counte;
 		if(!$qe){
@@ -23,7 +22,7 @@
 		print("<table class='centradiv alertdiv'>
 				<tr>
 					<th colspan=5 class='BorderInfY'>
-							".$sesus." EXISTEN ERRORES EN SUS HORARIOS
+						".$sesus." EXISTEN ERRORES EN SUS HORARIOS
 					</th>
 				</tr>
 				<tr>
@@ -52,6 +51,6 @@
 					</th>
 				 </tr>
 				</table>");
-	} else{}
+	} else{ }
 
 ?>

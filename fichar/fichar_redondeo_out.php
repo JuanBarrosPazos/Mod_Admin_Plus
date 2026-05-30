@@ -16,7 +16,7 @@
 			////////////////////		***********  		////////////////////
             
 // SI NO QUIERO REDONDEO DE HORARIO COMENTAR DESDE AQUÍ ...
-
+    global $q1;
     // CALCULO LA HORA Y MINUTOS DE ENTRADA
         $qtimein = mysqli_fetch_assoc($q1);
         //print("* Time in: ".$qtimein['tin']);

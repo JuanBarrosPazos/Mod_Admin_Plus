@@ -1,5 +1,7 @@
 <?php
  
+	/* CREA LAS TABLAS BÁSICAS DEL SISTEMA */
+	
 	global $db;	 		global $db_host; 		global $db_user; 		global $db_pass;
 	global $db_name; 	global $dbconecterror;
 	
@@ -37,14 +39,15 @@
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `Usuario` (`Usuario`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
-if(mysqli_query($db , $admin)){
-		global $table1;		$table1 = "\t* OK TABLA ADMIN.".PHP_EOL;
-}else{
-		global $table1;		$table1 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
-}
 
-	/************* CREAMOS LA TABLA IP CONTROL****************/
+	global $table1;		
+	if(mysqli_query($db , $admin)){
+		$table1 = "\t* CREADA OK TABLA ADMIN.".PHP_EOL;
+	}else{
+		$table1 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+	}
+
+	/************* CREAMOS LA TABLA IP CONTROL ****************/
 
 	global $table_name_b;
 	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
@@ -60,12 +63,13 @@ if(mysqli_query($db , $admin)){
   `time` time collate utf16_spanish2_ci NOT NULL DEFAULT '00:00:00',
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
-if(mysqli_query($db, $ipcontrol)){
-	global $table2;			$table2 = "\t* OK TABLA IP CONTROL. \n";
-}else{
-	global $table2;			$table2 = "\t* NO OK TABLA IP CONTROL. ".mysqli_error($db)." \n";
-}
+
+	global $table2;		
+	if(mysqli_query($db, $ipcontrol)){
+		$table2 = "\t* OK TABLA IP CONTROL. \n";
+	}else{
+		$table2 = "\t* NO OK TABLA IP CONTROL. ".mysqli_error($db)." \n";
+	}
 					
 	/************* CREAMOS LA TABLA VISITAS ADMIN ****************/
 
@@ -80,27 +84,54 @@ if(mysqli_query($db, $ipcontrol)){
   `acceso` int(10) NOT NULL,
   PRIMARY KEY  (`idv`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-		
+
+global $table3;		global $table4;		
 if(mysqli_query($db, $visitas)){
 	global $link;
 	print ("<table align='center'>".$link."</table>");		
-
-	global $table3;		$table3 = "\t* OK TABLA VISITAS ADMIN.".PHP_EOL;
+			$table3 = "\t* CREADA OK TABLA VISITAS ADMIN.".PHP_EOL;
 
 	$vd = "INSERT INTO `$db_name`.$table_name_c (`idv`, `visita`, `admin`, `deneg`, `acceso`) VALUES
 	(69, 0, 0, 0, 0)";
 		if(mysqli_query($db, $vd)){
-				global $table4;
-				$table4 = "\t* OK INIT VALUES EN VISITAS ADMIN.".PHP_EOL;
-		}else{ 	global $table4;
-				$table4 = "\t* NO OK INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
+				$table4 = "\t* CREADOS OK INIT VALUES EN VISITAS ADMIN.".PHP_EOL;
+		}else{ 
+				$table4 = "\t* NO CREADOS INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
 		}
 
-}else{	global $table3;
-		$table3 = "\t* NO OK TABLA VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
-		global $table4;
-		$table4 = "\t* NO OK INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
+}else{	$table3 = "\t* NO CREADA TABLA VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
+		$table4 = "\t* NO CREADOS INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
 }
+
+
+	/************* CREAMOS LA TABLA REGISTRO HORARIOS ****************/
+
+	global $table_name_d;
+	$table_name_d = "`".$_SESSION['clave']."horarios_".date('Y')."`";
+	
+	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_d (
+  `id` int(4) NOT NULL auto_increment,
+  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
+  `tin` time NOT NULL,
+  `dout` varchar(10) collate utf16_spanish2_ci NULL,
+  `tout` time NULL,
+  `ttot` time NULL,
+  `error` varchar(5) NOT NULL default 'false',
+  `del` varchar(5) NOT NULL default 'false',
+  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `tfeed` time NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
+		
+	global $table5;
+	if(mysqli_query($db , $tcl)){
+		$table5 = "\t* CREADA OK TABLA REGISTRO HORARIOS.".PHP_EOL;
+	}else{
+		$table5 = "\t* NO CREADA TABLA REGISTRO HORARIOS".PHP_EOL;
+	}
 
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
@@ -116,7 +147,7 @@ if(mysqli_query($db, $visitas)){
 		$text = $text.PHP_EOL." * ".$db_user;
 		$text = $text.PHP_EOL." * ".$db_pass;
 		$text = $text.PHP_EOL.$dbconecterror;
-		$text = $text.PHP_EOL.$data0.$table1.$table2.$table3.$table4/*.$table5*/.PHP_EOL;
+		$text = $text.PHP_EOL.$data0.$table1.$table2.$table3.$table4.$table5.PHP_EOL;
 
 		ini_log();
 		

@@ -1,9 +1,12 @@
 <?php
 
+	global $db;	 		global $db_host; 		global $db_user; 		global $db_pass;
+	global $db_name; 	global $dbconecterror;
+
 	require 'Inclu/error_hidden.php';
 	global $index;		$index = 1;
 	require 'Inclu/Admin_head.php';
-
+	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -29,8 +32,7 @@
 				require 'Inclu/my_bbdd_clave.php';
 				require 'Conections/conection.php';
 				mysqli_report(MYSQLI_REPORT_OFF);
-				global $db;
-				@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
+				$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 				if(!$db){ 	global $dbconecterror; // PARA LOG
 							$dbconecterror = $db_name." * ".mysqli_connect_error();
 							global $text;
@@ -72,7 +74,6 @@ function inittot(){
 	require 'Inclu/error_hidden.php';
 	require 'Inclu/my_bbdd_clave.php';
 	require 'Conections/conection.php';
-	global $db;
 	mysqli_report(MYSQLI_REPORT_OFF);
 	$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 	if(!$db){ //print("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
@@ -207,7 +208,7 @@ function inittot(){
 		   	$link = "<tr>
 		   				<td>
 							<a href='config/config2.php'>
-		   						CREE EL USUARIO ADMINISTRADOR
+		   						CREAR EL USUARIO ADMINISTRADOR
 							</a>
 						</td>
 					</tr>";
@@ -227,37 +228,45 @@ function config_one(){
 	if(isset($_SESSION['showf'])){ unset($_SESSION['showf']); }
 	
 	$_SESSION['inst'] = "noinst";
-	global $data1;		global $data2;		global $data3;		global $data4;
-	if(file_exists('config/year.txt')){
-					unlink("config/year.txt");
-					$data1 = PHP_EOL."\tUNLINK config/year.txt";
-	}else{print("DON`T UNLINK config/year.txt </br>");
-					$data1 = PHP_EOL."\tDON'T UNLINK config/year.txt";}
-
-	if(file_exists('config/ayear.php')){unlink("config/ayear.php");
-					$data2 = PHP_EOL."\tUNLINK config/ayear.php";
-	}else{print("DON'T UNLINK config/ayear.php </br>");
-					$data2 = PHP_EOL."\tDON'T UNLINK config/ayear.php";}
-
-	if(!file_exists('config/year.txt')){
-		if(file_exists('config/year_Init_System.txt')){
-				copy("config/year_Init_System.txt", "config/year.txt");
-				$data3 = PHP_EOL."\tRENAME config/year_Init_System.txt TO config/year.txt";
-		}else{	print("DON'T RENAME config/year_Init_System.txt TO config/year.txt </br>");
-				$data3 = PHP_EOL."\tDON'T RENAME config/year_Init_System.txt TO config/year.txt";}
+	global $data1;		global $data2;
+	if((file_exists('config/year.txt'))||(!file_exists('config/year.txt'))){
+			$filename = "config/year.txt";
+			//file_put_contents($filename, "");
+			$dataYear = "".date('Y')."";
+			$configYear = fopen($filename, 'w+');
+			fwrite($configYear, $dataYear);
+			fclose($configYear);
+		// Pasamos logs...
+		if(file_exists('config/year.txt')){
+			$data1 = PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/year.txt";
+		}else{
+			$data1 = PHP_EOL."\t* CREADO: NO EXISTe EL ARCHIVO config/year.txt";
+		}
+	}else{ 
+			$data1 = PHP_EOL."\t* ERROR DESCONOCIDO config/year.txt";
 	}
 
-	if(!file_exists('config/ayear.php')){
-		if(file_exists('config/ayear_Init_System.php')){
-				copy("config/ayear_Init_System.php", "config/ayear.php");
-				$data4 = PHP_EOL."\tRENAME config/ayear_Init_System.php TO config/ayear.php";
-		}else{	print("DON'T RENAME config/ayear_Init_System.php TO config/ayear.php </br>");
-				$data4 = PHP_EOL."\tDON'T RENAME config/ayear_Init_System.php TO config/ayear.php";}
-	}
-			
-	global $text; global $textConfig;
-	$text = $textConfig."SUSTITUCION DE ARCHIVOS:".$data1.$data2.$data3.$data4;
-	ini_log();
+	if((file_exists('config/ayear.php'))||(!file_exists('config/ayear.php'))){
+
+			$filename = "config/ayear.php";
+			$fw = fopen($filename, 'w+');
+			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";
+			fwrite($fw, $contenido);
+			//file_put_contents($fw, $contenido);
+			fclose($fw);
+		// Pasamos logs...
+		if(file_exists('config/ayear.php')){
+			$data2 = PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/ayear.php";
+		}else{
+			$data2 = PHP_EOL."\t* CREADO: NO EXISTe EL ARCHIVO config/ayear.php";
+		}
+	}else{
+		$data2 = PHP_EOL."\t* ERROR DESCONOCIDO config/ayear.php";
+	 }
+
+		global $text; global $textConfig;
+		$text = $textConfig."SUSTITUCION DE ARCHIVOS:".$data1.$data2;
+		ini_log();
 
 	} // FIN FUNCTION
 
@@ -643,36 +652,72 @@ function crear_tablas(){
 
 function modif(){
 									   							
-	$filename = "config/ayear.php";
-	$fw1 = fopen($filename, 'r+');
-	$contenido = fread($fw1,filesize($filename));
-	fclose($fw1);
-	
-	$contenido = explode("\n",$contenido);
-	$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-	$contenido = implode("\n",$contenido);
-	
-	//fseek($fw, 37);
-	$fw = fopen($filename, 'w+');
-	fwrite($fw, $contenido);
-	fclose($fw);
-
+	global $filename;		$filename = "config/ayear.php";
 	global $text;
 	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO DE ARRAY ANUAL ".$filename;
+
+	if(file_exists('config/ayear.php')){
+		//$filename = "config/ayear.php";
+		$fw1 = fopen($filename, 'r+');
+		$contenido = fread($fw1,filesize($filename));
+		fclose($fw1);
+		
+		$contenido = explode("\n",$contenido);
+		$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
+		$contenido = implode("\n",$contenido);
+		
+		//fseek($fw, 37);
+		$fw = fopen($filename, 'w+');
+		fwrite($fw, $contenido);
+		fclose($fw);
+
+		$text = $text.PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/ayear.php";
+
+	}elseif(!file_exists('config/ayear.php')){
+		//$filename = "config/ayear.php";
+		$fw = fopen($filename, 'w+');
+		$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
+		fwrite($fw, $contenido);
+		//file_put_contents($fw, $contenido);
+		fclose($fw);
+
+		// Pasamos logs...
+		$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO config/ayear.php";
+	}else{
+		$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO config/ayear.php";
+	}
+
 	ini_log();
 
 } // FIN function modif
 
 function modif2(){
 
-	$filename = "config/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-
+	global $filename;		$filename = "config/year.txt";
 	global $text;
 	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO SI PROCEDE: ".$filename;
+
+	if(file_exists('config/year.txt')){
+		//$filename = "config/year.txt";
+		$fw2 = fopen($filename, 'w+');
+		$date = "".date('Y')."";
+		fwrite($fw2, $date);
+		fclose($fw2);
+		$text = $text.PHP_EOL."\tMODIFICADO Y ACTUALIZADO config/year.txt".$filename;
+
+	}elseif(!file_exists('config/year.txt')){
+		//$filename = "config/year.txt";
+		//file_put_contents($filename, "");
+		$dataYear = "".date('Y')."";
+		$configYear = fopen($filename, 'w+');
+		fwrite($configYear, $dataYear);
+		fclose($configYear);
+		// Pasamos logs...
+		$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+	}else{
+		$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
+	}
+	
 	ini_log();
 
 } // FIN function modif2
