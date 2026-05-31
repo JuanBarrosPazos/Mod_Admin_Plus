@@ -30,14 +30,14 @@
     }elseif(isset($_SESSION['ref'])){ $RefUser = $_SESSION['ref'];
     }else{ $RefUser = ""; }
 
-    global $ImgFormIndex;       global $InputImgIndex;
+    global $ImgFormIndex;       global $InputImgIndex;      global $rp;
     if($ImgFormIndex == 1){
         $InputImgIndex = "<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />";
     }else{
         $InputImgIndex = "";
     }
 
-    global $FichaIn;
+    global $FichaIn;    global $rutaAudio;
     $FichaIn = "<ul class='centradiv'>
                         <li class='liCentra'>FICHE SU ENTRADA</li>
                             ".$ImgForm."

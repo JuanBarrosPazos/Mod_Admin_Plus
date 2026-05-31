@@ -8,7 +8,7 @@
 			///////////////////////			***********  		///////////////////////
     //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";
 	global $sh; 	global $db; 	global $db_name;	global $vname;
-	$sh =  "SELECT * FROM $vname WHERE $vname.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 
 			///////////////////////			***********  		///////////////////////
 

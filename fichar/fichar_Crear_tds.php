@@ -63,11 +63,11 @@ function entrada(){
 	
 	global $db; 			global $db_name;
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	
@@ -148,8 +148,10 @@ function show_form(){
 				$countbgc = 0;
 				while($rowb = mysqli_fetch_assoc($qb)){
 
-					$tablaUser = "`".strtolower($_SESSION['clave'].$rowb['ref'])."_".date('Y')."`";
-					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE $tablaUser.`dout` = '' AND $tablaUser.`tout` = '00:00:00' LIMIT 1";
+					//$tablaUser = "`".strtolower($_SESSION['clave'].$rowb['ref'])."_".date('Y')."`";
+					$tablaUser = "`".strtolower($_SESSION['clave'])."horarios_".date('Y')."`";
+
+					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE `ref` = '$rowb[ref]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 					$qrUser = mysqli_query($db,$sqlUser);
 					$rowUser = mysqli_fetch_assoc($qrUser);
 					if(($rowUser['dout']=='')&&($rowUser['tout']=='00:00:00')){
@@ -207,10 +209,11 @@ function show_form(){
 
 		if($_SESSION['usuarios'] != ''){
 		
-			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-			global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+			$tabla1 = strtolower($_SESSION['clave']."horarios_");
+			global $vname;			$vname = "`".$tabla1.date('Y')."`";
 		
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1";
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);
@@ -241,7 +244,9 @@ function show_form(){
 				</form>";
 			global $rutaAudio;
 			$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
+
 			require 'Fichar_Tablas_Form.php';
+
 			print($FichaIn);
 
 			}elseif($count1 > 0){
@@ -286,9 +291,9 @@ function suma_todo(){
 	global $dd1; 			$dd1 = '';
 	global $fil; 			$fil = "%".$dyt1."-%".$dm1."%-".$dd1."%";
 
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
+	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$dyt1."`";
 
 	global $ruta;			$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -302,11 +307,11 @@ function suma_todo(){
 function salida(){
 	
 	global $db; 			global $db_name;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname; 			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname; 			$vname = "`".$tabla1.date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);

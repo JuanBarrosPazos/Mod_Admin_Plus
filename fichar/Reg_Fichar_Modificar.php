@@ -190,8 +190,9 @@ function suma_todo(){
 	PARA EL AÑO CORRIENTE
 	$vname = $tabla1."_".date('Y');
 	 */
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$diny."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$diny."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -208,8 +209,9 @@ function process_form(){
 	global $diny;
 
 	/* PARA EL AÑO CORRIENTE		$vname = $tabla1."_".date('Y'); */
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$diny."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$diny."`";
 
 	global $din;			$din = trim($_POST['din']);
 	global $tin;			$tin = trim($_POST['tin']);
@@ -240,7 +242,7 @@ function process_form(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`id` = '$_POST[id]' AND $vname.`ref` = '$_SESSION[usuarios]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `id` = '$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			

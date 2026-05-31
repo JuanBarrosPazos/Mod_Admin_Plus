@@ -2,7 +2,7 @@
 
 function show_form(){
 
-
+	global $defaults;
 	if(isset($_POST['oculto1'])){	$_SESSION['usuarios'] = $_POST['usuarios'];
 									$defaults = $_POST;
 									// print("* ".$_SESSION['usuarios']);
@@ -134,8 +134,9 @@ function ver_todo(){
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
 																					}
 	*/
-	global $tabla1;			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$dyt1."`";
+	global $tabla1;			$tabla1 = strtolower($_SESSION['clave']."horarios_");
+							//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;			$vname = "`".$tabla1.$dyt1."`";
 
 	require 'calc_anu_mes.php';
 	
@@ -147,7 +148,7 @@ function ver_todo(){
 
 	global $sqlb;			global $qb;
 	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////

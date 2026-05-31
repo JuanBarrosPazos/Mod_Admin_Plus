@@ -505,8 +505,9 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$dyt."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$dyt."`";
 
 	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';

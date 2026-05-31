@@ -76,10 +76,9 @@ function ver_todo(){
 													  $fil = "%".$dy1.$dm1.$dd1."%";
 														}
 	global $vname;
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	$vname = $tabla1."_".$dyt1;
-	$vname = "`".$vname."`";
+	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	$vname = "`".$tabla1.$dyt1."`";
 
 			///////////////////////			***********  		///////////////////////
 			
@@ -90,7 +89,7 @@ function ver_todo(){
 
 	global $sqlb;
 	global $qb;
-	$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `error` = 'true' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `error` = 'true' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////

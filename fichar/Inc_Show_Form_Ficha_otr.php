@@ -19,6 +19,8 @@
 	global $sqlu;
 	$sqlu =  "SELECT * FROM $tablau WHERE `ref` <> '$_SESSION[ref]' ORDER BY `ref` ASC ";
 	$qu = mysqli_query($db, $sqlu);
+	
+	global $titulo;		global $defaults;
 	if(mysqli_num_rows($qu)== 0){
 		print ("<div class='centradiv alertdiv'>NO EXISTEN OTROS USUARIOS</div>");
 	}else{
@@ -59,10 +61,11 @@
 			global $name2o;				$name2o = $rn['Apellidos'];
 			global $uimg;				$uimg = $rn['myimg'];
 	
-			$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-			global $vname;				$vname = "`".$tabla1."_".date('Y')."`";
+			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+			$tabla1 = strtolower($_SESSION['clave']."horarios_");
+			global $vname;				$vname = "`".$tabla1.date('Y')."`";
 		
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1";
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);
@@ -95,7 +98,7 @@
 				global $rutaAudio;
 				$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
 				require 'Fichar_Tablas_Form.php';
-				print($FichaIn);
+				global $FichaIn;		print($FichaIn);
 
 			}elseif($count1 > 0){
 			
@@ -123,7 +126,7 @@
 				global $rutaAudio;
 				$rutaAudio = "<audio src='../audi/conf_user_data.mp3' autoplay></audio>";
 				require 'Fichar_Tablas_Form.php';
-				print($FichaOut);
+				global $FichaOut;		print($FichaOut);
 
 			}
 		} // fin 2º if

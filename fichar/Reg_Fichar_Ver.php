@@ -70,21 +70,22 @@ function ver_todo(){
 													$fil = $dy1."-%".$dm1."%-".$dd1."%";
 	}else{ $fil = "%".$dy1.$dm1.$dd1."%"; }
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;		$vname = "`".$tabla1."_".$dyt1."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;		$vname = "`".$tabla1.$dyt1."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 	global $sqlb;		global $TablaTitulo;
 	if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
-		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `error` = 'true' AND `del` = 'false') ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `error` = 'true' AND `del` = 'false') ORDER BY $orden ";
 		$TablaTitulo = "ERRORES ".$dyt1.": ";
 	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
-		$sqlb =  "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `del` = 'true') ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `del` = 'true') ORDER BY $orden ";
 		$TablaTitulo = "PAPELERA ".$dyt1.": ";
 	}else{
-		$sqlb = "SELECT * FROM $vname WHERE (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
+		$sqlb = "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
 		$TablaTitulo = "TODO: ";
 	}
 	//echo "** ".$sqlb."<br>";

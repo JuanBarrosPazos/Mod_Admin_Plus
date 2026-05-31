@@ -4,8 +4,8 @@
 	require '../Inclu/orden.php';
 
 	/* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
-	
-	$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	global $vname;		global $fil;		global $db;
+	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
 	if(!$sh){ print(mysqli_error($db).".</br>");

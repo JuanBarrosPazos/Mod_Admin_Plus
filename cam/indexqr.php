@@ -46,11 +46,12 @@ function process_pinqr(){
 		
 		ayear();	
 		
-		$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		global $vname;				$vname = "`".$tabla1."_".date('Y')."`";
+		//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+		$tabla1 = strtolower($_SESSION['clave']."horarios_");
+		global $vname;				$vname = "`".$tabla1.date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
@@ -82,9 +83,8 @@ function process_pinqr(){
 
 	global $db;				global $db_name;
 	
-	$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -124,7 +124,7 @@ function process_pinqr(){
 
 		require '../fichar/Fichar_Redondeo_out.php';
 
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 		$row1 = mysqli_fetch_assoc($q1);
@@ -145,7 +145,7 @@ function process_pinqr(){
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 							//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 			
 		if(mysqli_query($db, $sqla)){ 
 				
@@ -209,8 +209,8 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$dyt."`";
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$dyt."`";
 
 	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';
@@ -278,7 +278,7 @@ function modif2b(){
 function tcl(){
 	
 	global $db;					global $db_name;
-	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
+	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,

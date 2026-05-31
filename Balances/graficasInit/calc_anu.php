@@ -21,14 +21,20 @@
     */
 
 	/*************		 CONSULTA TODAS LAS TABLAS DEL USUARIO CON SESION INICIADA		***************/
-    global $nom;
+    global $nom;    global $userBbdd;
     if($balancesOtros == 1){
-        $nom = $_SESSION['clave'].$_SESSION['usuarios']."_%";
+        //$nom = $_SESSION['clave'].$_SESSION['usuarios']."_%";
+        $nom = $_SESSION['clave']."horarios_%";
+        $userBbdd = $_SESSION['usuarios'];
+        // `ref` = '$userBbdd' AND
     }else{
-       $nom = $_SESSION['clave'].$_SESSION['ref']."_%";
+        //$nom = $_SESSION['clave'].$_SESSION['ref']."_%";
+        $nom = $_SESSION['clave']."horarios_%";
+        $userBbdd = $_SESSION['ref'];
     }
 
     $nom = "LIKE '$nom'";
+
 	$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom";
     //echo $consulta."<br>";
 	$respuesta = mysqli_query($db, $consulta);
@@ -59,7 +65,7 @@
         $filab = mysqli_fetch_row($respuestab);      
         for($i=0; $i<$countb; $i++){
 			if($filab[0]){
-                $sqlSumb = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalA' FROM `$filab[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
+                $sqlSumb = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalA' FROM `$filab[0]` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sumb = mysqli_query($db, $sqlSumb);
                 $sumTotb = mysqli_fetch_assoc($Sumb);
 
@@ -85,13 +91,13 @@
 		while($fila = mysqli_fetch_row($respuesta)){
 			if($fila[0]){
 
-                $sqlSum = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$fila[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
+                $sqlSum = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalB' FROM `$fila[0]` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sum = mysqli_query($db, $sqlSum);
                 $sumTot = mysqli_fetch_assoc($Sum);
                 //echo "** ".$fila[0]." TOTAL SEGUNDOS: ".$sumTot['total']."<br>";
 
                 global $totalHoras;         global $totalDias;
-                $totsec = $sumTot['total'];     // RESULTADO CONSULTA SUM() POR TABLA EN SEGUNDOS
+                $totsec = $sumTot['totalB'];     // RESULTADO CONSULTA SUM() POR TABLA EN SEGUNDOS
                 $dias = floor($totsec/28800);   // PARA LOS DIAS
                 $horas = floor($totsec/3600);   // PARA 1H 3600S
                 // TOTAL SEGUNDOS MENOS ((HORAS X 3600S/H) ENTRE 60M/H)
@@ -122,6 +128,7 @@
 		} // FIN WHILE
 
         // CONSTRUYO EL FINAL DE LA GRAFICA HORAS ANUALES
+        global $TotEi;
 		print("<li>
 				<a href='#' title='ANUAL TOT ".(abs($totalHoras))." Horas'>
 					<span class='label'>TOT<br>".(abs($totalHoras))."</span>
@@ -139,13 +146,13 @@
 		while($filac = mysqli_fetch_row($respuestac)){
 			if($filac[0]){
 
-                $sqlSumc = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'total' FROM `$filac[0]` WHERE (`ttot` <> '00:00:00' OR `error` <> 'true')";
+                $sqlSumc = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalC' FROM `$filac[0]` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' OR `error` <> 'true')";
                 $Sumc = mysqli_query($db, $sqlSumc);
                 $sumTotc = mysqli_fetch_assoc($Sumc);
                 //echo "** ".$filac[0]." TOTAL SEGUNDOS: ".$sumTot['total']."<br>";
 
                 global $totalHoras;         global $totalDias;
-                $totsecc = $sumTotc['total'];       // RESULTADO CONSULTA SUM() POR TABLA EN SEGUNDOS
+                $totsecc = $sumTotc['totalC'];       // RESULTADO CONSULTA SUM() POR TABLA EN SEGUNDOS
                 $diasc = floor($totsecc/28800);     // PARA LOS DIAS
                 $horasc = floor($totsecc/3600);     // PARA 1H 3600S
                 // TOTAL SEGUNDOS MENOS ((HORAS X 3600S/H) ENTRE 60M/H)

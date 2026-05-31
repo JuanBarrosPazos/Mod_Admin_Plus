@@ -41,8 +41,9 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
 	global $ruta;			$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -58,9 +59,10 @@ function process_form(){
 	global $db;				global $db_name;
 
 	global $diny;			$diny = substr($_POST['din'],0,4);
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1."_".$diny ."`";
-	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$diny ."`";
+	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1.date('Y')."`";
 
 	global $FBaja;		$FBaja = date('Y-m-d');
 	global $TBaja;		$TBaja = date('H:i:s');
@@ -68,15 +70,15 @@ function process_form(){
 	global $sql;
 	if(isset($_POST['recupera'])){
 		$Titulo = "RECUPERADO EL REGISTRO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' LIMIT 1 ";
 		$audioAudi = "file_recovered.mp3";
 	}elseif(isset($_POST['elimina'])){
 		$Titulo = "ELIMINADO EL REGISTRO";
-		$sql = "DELETE FROM `$db_name`.$vname WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$sql = "DELETE FROM `$db_name`.$vname WHERE `id`='$_POST[id]' LIMIT 1 ";
 		$audioAudi = "file_deleted.mp3";
 	}else{ 
 		$Titulo = "REGISTRO BORRADO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE $vname.`id`='$_POST[id]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' LIMIT 1 ";
 		$audioAudi = "file_bin.mp3";
 	}
 

@@ -5,7 +5,9 @@
     }else{ $userdir = $_SESSION['usuarios'];}
 
 	$dir = "../Users/".$userdir."/mrficha";
-		
+	
+	global $text;		global $sumatodo;
+	
 	$text = $text.PHP_EOL."** HORAS TOTALES MES: ".$sumatodo;
 	$text = $text.PHP_EOL."\t**********".PHP_EOL;
 	$rmfdocu = $userdir;
