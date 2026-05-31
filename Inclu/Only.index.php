@@ -3,15 +3,13 @@
 
 if((isset($_POST['Usuario'])&&(isset($_POST['Password'])))){
 
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
-
+	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $db;
+	
 	$sql =  "SELECT * FROM $table_name_a WHERE `Usuario` = '$_POST[Usuario]' AND `Pass` = '$_POST[Password]'";
 	$q = mysqli_query($db, $sql);
-	global $row;
-	$row = mysqli_fetch_assoc($q);
-	global $countq;
-	$countq = mysqli_num_rows($q);
+	global $row;		$row = mysqli_fetch_assoc($q);
+	global $countq;		$countq = mysqli_num_rows($q);
 	global $userid;
 	global $uservisita;
 

@@ -5,7 +5,7 @@
 	global $rutaHome;	global $rutaRedir;	global $rutaAudio;	global $imgTabla;
 
 	global $tablaModif;	global $TablaTitulo;	
-	
+
 	if($tablaModif == 1){
 		$TablaTitulo = "HA MODIFICADO LA SALIDA";
 	}else{
@@ -53,7 +53,7 @@
 					<div>ID: </div><div>".$_POST['id']."</div>
 				</li>";
 	}else{ $RegId = ""; }
-
+	
 	$TablaIn = "<ul class='centradiv'>
 			<li class='liCentra'>HA FICHADO LA ENTRADA</li>
 			<li class='liCentra'>".strtoupper($name1)." ".strtoupper($name2)."</li>
@@ -78,7 +78,7 @@
 					setTimeout('redir()',8000);
 			</script>".$rutaAudio;
 
-	$TablaOut = "<ul class='centradiv'>
+			$TablaOut = "<ul class='centradiv'>
 			<li class='liCentra'>".$TablaTitulo."</li>
 			<li class='liCentra'>".strtoupper($name1)." ".strtoupper($name2)."</li>
 			".$imgTabla.$RegId."

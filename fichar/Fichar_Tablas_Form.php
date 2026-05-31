@@ -7,7 +7,7 @@
 
     global $Action;         global $ImgForm;        global $FormButtonHome;
 
-    global $din;            global $tin;
+    global $din;            global $tin;            
     global $dout;           global $tout;           global $ttot;
 
     global $name1;          global $name1o;
@@ -30,9 +30,9 @@
     }elseif(isset($_SESSION['ref'])){ $RefUser = $_SESSION['ref'];
     }else{ $RefUser = ""; }
 
-    global $ImgFormIndex;       global $InputImgIndex;      global $rp;
+    global $ImgFormIndex;       global $InputImgIndex;
     if($ImgFormIndex == 1){
-        $InputImgIndex = "<input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />";
+        $InputImgIndex = "<input type='hidden' id='myimg' name='myimg' value='".@$rp['myimg']."' />";
     }else{
         $InputImgIndex = "";
     }

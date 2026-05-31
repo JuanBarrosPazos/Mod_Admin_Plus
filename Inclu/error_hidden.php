@@ -21,8 +21,10 @@
 
 // NO PASA NINGUN ERROR;
 
+/* ********    ********    ******* */
 /* DESACTIVADO TEMPORALMENTE */
-error_reporting (0);
+//error_reporting (0);
+/* ********    ********    ******* */
 
 
 // Lo mismo que error_reporting(E_ALL);

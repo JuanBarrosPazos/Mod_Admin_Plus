@@ -39,7 +39,7 @@ function process_pinqr(){
 	$_SESSION['usuarios'] = strtolower($rp['ref']);
 	
 	if($cp > 0){
-		
+	
 		ayear();	
 		
 		//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);

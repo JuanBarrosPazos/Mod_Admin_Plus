@@ -1,5 +1,6 @@
 <?php
 
+global $defaults; global $dt;	global $password;	global $password2;
 if(isset($array_cero)){
     $defaults = array ( 'Nombre' => '','Apellidos' => '','Nivel' => '',
                         'ref' => '','doc' => '','dni' => '',

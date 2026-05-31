@@ -44,14 +44,16 @@ function config_one(){
 	if(file_exists('../index.php')){unlink("../index.php");
 					$data1 = PHP_EOL."\t UNLINK ../index.php";
 	}else{ 	print("DON`T UNLINK ../index.php </br>");
-			$data1 = PHP_EOL."\t DON`T UNLINK ../index.php";}
+			$data1 = PHP_EOL."\t DON`T UNLINK ../index.php";
+	}
 
 	if(!file_exists('../index.php')){
 		if(file_exists('index_Play_System.php')){
 			copy("index_Play_System.php", "../index_Play_System.php");
 			$data2 = PHP_EOL."\t COPY ../index_Play_System.php";
 		}else{	print("DON`T COPY index_Play_System.php </br>");
-				$data2 = PHP_EOL."\t DON`T COPY index_Play_System.php";}
+				$data2 = PHP_EOL."\t DON`T COPY index_Play_System.php";
+		}
 	} 
 
 	if(file_exists('../index_Play_System.php')){
@@ -61,7 +63,7 @@ function config_one(){
 				$data3 = PHP_EOL."\t DON`T RENAME ../index_Play_System.php TO ../index.php";
 	}
 	
-	global $text; global $textConfig;
+	global $text;	global $textConfig;
 	$text = $textConfig."** SUSTITUCION DE ARCHIVOS:".$data1.$data2.$data3;
 	ini_log();
 	
@@ -74,7 +76,6 @@ function config_one(){
 function validate_form(){
 	
 	require 'validate.php';	
-		
 	return $errors;
 
 } 
@@ -225,7 +226,7 @@ function crear_tablas(){
 	
 	$datein = date('Y-m-d H:i:s');
 	global $text;
-	$text = PHP_EOL."** CONFIG INIT ".$datein.PHP_EOL."* ".$db_name.PHP_EOL."* ".$db_host.PHP_EOL.". * ".$db_user.PHP_EOL."* ".$db_pass.PHP_EOL.$dbconecterror.$data1.$data2.$data3.$data4.$data5.$data6.PHP_EOL;
+	$text = PHP_EOL."** CONFIG INIT ".$datein.PHP_EOL."* ".$db_name.PHP_EOL."* ".$db_host.PHP_EOL.". * ".$db_user.PHP_EOL."* ".$db_pass.PHP_EOL.$dbconecterror.$data1.$data2.$data3.$data4.PHP_EOL;
 	ini_log();
 
 	} // FIN FUNCTION crear_tablas()

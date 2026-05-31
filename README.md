@@ -21,7 +21,7 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.05.30.Beta 2026/05/30
+#### Mod_Admin_Plus V26.05.31.Beta2 2026/05/31
 	* MODIFICADO:
 		- config/index_Init_System.php & index.php (inicial): config_one(), modif(), modif2()...
 		- fichar/Inc_errors.php

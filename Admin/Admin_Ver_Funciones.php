@@ -6,9 +6,8 @@
 
 function validate_form(){
 		
-		require 'Inc_Show_Form_01_Val.php';
-		
-		return $errors;
+	require 'Inc_Show_Form_01_Val.php';
+	return $errors;
 
 } 
 		
@@ -18,14 +17,14 @@ function validate_form(){
 
 function process_form(){
 	
-	global $db;
-	global $nombre;				$nombre = $_POST['Nombre'];
-	global $apellido;			$apellido = $_POST['Apellidos'];
+	global $db;				global $db_name;		global $qb;
+	global $nombre;			$nombre = $_POST['Nombre'];
+	global $apellido;		$apellido = $_POST['Apellidos'];
 
 	show_form();
 		
-	$nom = "%".$_POST['Nombre']."%";
-	$ape = "%".$_POST['Apellidos']."%";
+	global $nom;			$nom = "%".$_POST['Nombre']."%";
+	global $ape;			$ape = "%".$_POST['Apellidos']."%";
 
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 
@@ -33,7 +32,7 @@ function process_form(){
 	if(strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape;}
 	
 	//$orden = $_POST['Orden'];
-	global $qb;
+
 	if($_SESSION['Nivel'] == 'wmaster'){
 		$sqlb =  "SELECT * FROM $table_name_a WHERE (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape') AND `del` = 'false' ORDER BY `Nombre` ASC  ";
 		$qb = mysqli_query($db, $sqlb);
@@ -76,6 +75,7 @@ function ver_todo(){
 	global $db;					global $db_name;
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 	global $Feedback;			$Feedback = 0;
+	global $qb;
 
 	global $orden;
 	require '../Inclu/orden.php';
@@ -89,15 +89,16 @@ function ver_todo(){
 			require 'Paginacion_Head.php';
 			/*$sqlb =  "SELECT * FROM $table_name_a ORDER BY $orden ";*/
 			//$sqlb =  "SELECT * FROM $table_name_a  ORDER BY `id` DESC $limit";
-			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`del` = 'false' ORDER BY $orden $limit";
-			$qb = mysqli_query($db, $sqlb);
+			$sqlb = "SELECT * FROM $table_name_a WHERE `del` = 'false' ORDER BY $orden $limit";
+			$qb = mysqli_query($db, $sqlb); 
 
 	}elseif($_SESSION['Nivel'] == 'admin'){ 
 			require 'Paginacion_Head.php';
 			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY $orden ";*/
 			/*$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`dni` <> '$_SESSION[webmaster]' ORDER BY  `id` DESC $limit";*/
-			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`Nivel` <> 'wmaster' AND $table_name_a.`del` = 'false'  ORDER BY  $orden $limit";
+			$sqlb =  "SELECT * FROM $table_name_a WHERE $table_name_a.`Nivel` <> 'wmaster' AND $table_name_a.`del` = 'false' ORDER BY  $orden $limit";
 			$qb = mysqli_query($db, $sqlb);
+			
 	}
 
 			////////////////////		**********  		////////////////////
@@ -110,7 +111,7 @@ function ver_todo(){
 		require 'Inc_While_Form.php';
 		global $rutaimg;			$rutaimg = "../Users/";
 		global $pagedest;			$pagedest = "Admin_Ver.php";
-		require 'Inc_While_Total.php'; 
+		require 'Inc_While_Total.php';
 
 			////////////////////		**********  		////////////////////
 		

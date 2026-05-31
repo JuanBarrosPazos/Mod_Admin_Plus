@@ -1,5 +1,7 @@
 <?php
 
+global $Feedback;		global $ruta; 
+
 if($Feedback==1){
 
 	global $formularioh;
@@ -73,6 +75,5 @@ if($Feedback==1){
 */	
 
 }
-
 
 ?>

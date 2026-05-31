@@ -72,52 +72,6 @@ function process_form(){
 	// FIN BORRA DIRECTORIOS DENTRO DEL USUARIO
 	// FIN BORRADO DATOS EN SUBDIRECTORIOS USUARIOS
 
-	/*************	BORRAMOS TODAS LAS TABLAS DEL USUARIO 	***************/
-
-	/* Se busca las tablas en la base de datos */
-	/* REFERENCIA DEL USUARIO O $_SESSION['iniref'] = $_POST['ref'] */
-	/* $nom PARA LA CLAVE USUARIO ACOMPAÑANDA DE _ O NO */
-	global $db;		global $db_name;
-	global $nom;	$nom = strtolower($_POST['ref']);
-	$nom = $_SESSION['clave'].$_POST['ref']."%"; // SOLO COINCIDEN AL PRINCIPIO
-	$nom = "LIKE '$nom'";
-	//$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME $nom ";
-	$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom ";
-	$respuesta = mysqli_query($db, $consulta);
-	//$count = mysqli_num_rows($respuesta);
-	//print("* NUMERO TABLAS: ".$count."<br>");
-	//print("* CLAVE TABLA USUARIO: ".$nom."<br>");
-
-	//global $fila;
-	//$fila = mysqli_fetch_row($respuesta);
-
-	global $tx1;		global $deletet2;
-
-	if(!$respuesta){
-		print("ERROR SQL L.85 ".mysqli_error($db)."</br>");
-	}else{ 
-		while($fila = mysqli_fetch_row($respuesta)){
-			if($fila[0]){
-		/* PROCEDEMOS A BORRAR LAS TABLAS DEL USUARIO */
-				global $sqlt1; 		$sqlt1 = "DROP TABLE `$db_name`.`$fila[0]` ";
-				if(mysqli_query($db, $sqlt1)){
-				// SE PASAN PARAMETROS A .LOG
-					$tx1 = "\t* HA BORRADO LA TABLA ".$fila[0]."\n";
-					$deletet2 = $deletet2.$tx1;
-				}else{
-					$tx1 = "\t* ".mysqli_error($db)."\n";
-					print ("<font color='#F1BD2D'>*** </font></br> ".mysqli_error($db).".</br>");
-					$deletet2 = $tx1;
-				} 
-		/* HASTA AQUI BORRA TABLAS Y PASA LOS LOG DE BBDD */
-			} // FIN IF $FILA[0]
-		} // FIN WHILE
-
-		// SE GRABAN LOS DATOS EN LOG DEL ADMIN
-		global $deletet;	$deletet = $dd1.$dd2."\n".$deletet2;
-		
-	} // FIN ELSE !$respuesta
-
 	// FIN PRIMER IF SI SE CUMPLE EL QUERY BORRA EL USER DE LA BBDD
 	}else{
 		// FIN BORRADO OK
@@ -148,6 +102,7 @@ function deletedir(){
 	global $refnorm; 	$refnorm = $_SESSION['iniref'];
 	$carpeta0 = "../Users/".$refnorm;
 
+	global $dd0;
 	if(file_exists($carpeta0)){ $dir0 = $carpeta0."/";
 								$handle0 = opendir($dir0);
 						while($file0 = readdir($handle0)){
@@ -156,7 +111,7 @@ function deletedir(){
 							}
 						}
 						//rmdir($carpeta0);
-						global $dd0;	$dd0 = "\t- BORRADO CONTENIDO: ".$carpeta0."/ \n";
+						$dd0 = "\t- BORRADO CONTENIDO: ".$carpeta0."/ \n";
 	}else{ print(""); }
 								
 	global $ddr;	$ddr = $dd0;

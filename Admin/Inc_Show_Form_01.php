@@ -25,6 +25,7 @@
                         '`Email` ASC' => 'Email Ascen',
                         '`Email` DESC' => 'Email Descen',);
 
+    global $boton;      global $titulo;
     if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){ 
 
         print(" <table class='centradiv'>

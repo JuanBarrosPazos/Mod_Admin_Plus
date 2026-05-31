@@ -65,8 +65,9 @@ function entrada(){
 
 	global $db;				global $db_name;
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
@@ -92,11 +93,12 @@ function show_form(){
 	
 	global $db;				global $db_name;
 	
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 
@@ -161,8 +163,9 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".$dyt."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.$dyt."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -177,10 +180,11 @@ function salida(){
 	
 	global $db;				global $db_name;
 
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[ref]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);

@@ -382,7 +382,7 @@ function admin_entrada(){
 function show_visit(){
 
 	global $db;					global $db_name;
-	global $rowv;				global $sumavisit;
+	global $sumavisit;
 
 	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
@@ -390,7 +390,7 @@ function show_visit(){
 	$sqlv =  "SELECT * FROM $table_name_c";
 	$qv = mysqli_query($db, $sqlv);
 	 
-	$rowv = mysqli_fetch_assoc($qv);
+	global $rowv;		$rowv = mysqli_fetch_assoc($qv);
 	
 	$_SESSION['admin'] = $rowv['admin'];
 	
@@ -426,13 +426,13 @@ function show_visit(){
 function suma_visit(){
 
 	global $db;					global $db_name;
-	global $rowv;				global $sumavisit;
+					global $sumavisit;
 	
 	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
 	$sqlv =  "SELECT * FROM $table_name_c";
 	$qv = mysqli_query($db, $sqlv);
-	$rowv = mysqli_fetch_assoc($qv);
+	global $rowv;		$rowv = mysqli_fetch_assoc($qv);
 	
 	$_SESSION['admin'] = $rowv['admin'];
 	
@@ -567,7 +567,6 @@ function validate_form(){
 	global $count;			$count = mysqli_num_rows($qp);
 
 	global $password;		$password = $_POST['Password'] ;
-	global $row;
 	global $hash;			$hash = @$row['Password'];
 	
 	//echo $row['Password']."<br>";
@@ -691,12 +690,13 @@ function show_ficha(){
 	
 	global $db; 		global $db_name;
 	
-	$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	global $vname;		$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;		$vname = "`".$tabla1.date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
 	
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$rp = mysqli_fetch_assoc($q1);
@@ -802,11 +802,13 @@ function process_pin(){
 		print($redir);
 
 	}elseif($cp > 0){
-		$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
-		global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+		//$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
+		$tabla1 = strtolower($_SESSION['clave']."horarios_");
+		global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
+		//echo "<br>".$sql1."<br>";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
@@ -904,10 +906,11 @@ function pin_out(){
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	global $vname;		$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;		$vname = "`".$tabla1.date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout`='' AND $vname.`tout`='00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout`='' AND `tout`='00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -980,8 +983,9 @@ function pin_in(){
 	$_SESSION['usuarios'] = $_POST['ref'];
 
 	global $vname;
-	$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	$vname = "`".$tabla1.date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		

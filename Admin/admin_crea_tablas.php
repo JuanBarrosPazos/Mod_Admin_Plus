@@ -1,5 +1,7 @@
 <?php
- 
+
+	global $trf;	global $rutCreaTablas;
+	
 	// CREA EL DIRECTORIO DE USUARIO.
 	global $carpeta;		$carpeta = "../Users/".$trf;
 
@@ -25,62 +27,6 @@
 		global $data1;			$data1 = $data1."\t* NO OK USER SYSTEM FILES".$carpeta."\n";
 		}
 
-	/************** CREAMOS LA TABLA CONTROL USUARIO ***************/
-
-	$vname1 = $_SESSION['clave'].$trf."_".date('Y');
-	$vname1 = "`".$vname1."`";
-	
-	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname1 (
-  `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
-  `tin` time NOT NULL,
-  `dout` varchar(10) collate utf16_spanish2_ci NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
-  `del` varchar(5) NOT NULL default 'false',
-  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
-  `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
-	if(mysqli_query($db , $tcl)){
-		global $data5;			$data5 = "\t* OK TABLA FICHAR ".$vname1.".\n";
-	}else{
-		global $data5;			$data5 = "\t* NO OK TABLA FICHAR. ".mysqli_error($db)." \n";
-	}
-
-	/************** CREAMOS LA TABLA FEEDBACK CONTROL USUARIO **************
-
-	$vname1 = $_SESSION['clave'].$trf."_feed";
-	$vname1 = "`".$vname1."`";
-	
-	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname1 (
-  `id` int(4) NOT NULL auto_increment,
-  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
-  `tin` time NOT NULL,
-  `dout` varchar(10) collate utf16_spanish2_ci NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
-  `del` varchar(5) NOT NULL default 'false',
-  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
-  `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-		
-if(mysqli_query($db , $tcl)){
-	global $data6;			$data6 = "\t* OK TABLA FEED FICHAR ".$vname1.".\n";
-}else{
-	global $data6;			$data6 = "\t* NO OK TABLA FEED FICHAR. ".mysqli_error($db)." \n";
-}
-*/
 	// CREA EL DIRECTORIO DE IMAGEN DE USUARIO.
 	$vn1 = "img_admin";
 	$carpetaimg = "../Users/".$trf."/".$vn1;

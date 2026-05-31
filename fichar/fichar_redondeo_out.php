@@ -16,17 +16,17 @@
 			////////////////////		***********  		////////////////////
             
 // SI NO QUIERO REDONDEO DE HORARIO COMENTAR DESDE AQUÍ ...
-    global $q1;
+
     // CALCULO LA HORA Y MINUTOS DE ENTRADA
         $qtimein = mysqli_fetch_assoc($q1);
         //print("* Time in: ".$qtimein['tin']);
     
-        $verhorain = substr($qtimein['tin'],0,2);
-        $verhorain = str_replace(":","",$verhorain);
+        @$verhorain = substr($qtimein['tin'],0,2);
+        @$verhorain = str_replace(":","",$verhorain);
         //print("<br>- Hora in: ".$verhorain);
 
-        $verminuin = substr($qtimein['tin'],3,2);
-        $verminuin = str_replace(":","",$verminuin);
+        @$verminuin = substr($qtimein['tin'],3,2);
+        @$verminuin = str_replace(":","",$verminuin);
         //print("<br>- Minuto in: ".$verminuin);
 
     // FIN CALCULO HORA Y MINUTOS ENTRADA

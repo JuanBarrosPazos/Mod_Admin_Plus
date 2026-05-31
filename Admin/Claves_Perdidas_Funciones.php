@@ -2,8 +2,7 @@
 
  function validate_form(){
 	  
-	global $db;			global $db_name;
-	global $q;			global $sql;			global $row;	
+	global $db;			global $db_name;	global $q;			global $sql;	
 	
 	$errors = array();
 		 
@@ -68,7 +67,7 @@
 
 function show_form($errors=[]){
 	
-	global $sql;		global $q;			global $row;
+	global $sql;		global $q;
 	
 	if(isset($_POST['oculto2'])){
 			$defaults = array (	'Asunto' => 'SUS CLAVES DE ACCESO',

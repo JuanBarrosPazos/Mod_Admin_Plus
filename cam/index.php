@@ -283,11 +283,12 @@ function process_pin(){
 
 	if($cp > 0){
 	
-	$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
-	global $vname;				$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 
@@ -385,10 +386,11 @@ function pin_out(){
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname = "`".$tabla1.date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -459,9 +461,8 @@ function pin_in(){
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	$tabla1 = $_SESSION['clave'].$_POST['ref'];
-	$tabla1 = strtolower($tabla1);
-	global $vname;			$vname ="`". $tabla1."_".date('Y')."`";
+	$tabla1 = strtolower($_SESSION['clave']."horarios_");
+	global $vname;			$vname ="`". $tabla1.date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		

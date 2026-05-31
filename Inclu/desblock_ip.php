@@ -111,8 +111,6 @@ if(isset($_POST['oculto'])){
 
 function show_form($errors=[]){
 	
-	global $sql;			global $q;			global $row;
-	
 	if(isset($_POST['oculto2'])){
 		$defaults = array (	'Asunto' => 'FORMULARIO DESBLOQUEO IP',
 							'Email' => $_POST['Email'],

@@ -2,12 +2,13 @@
 
 	require 'Inc_WebMaster_Count.php';
 	
-	global $Feedback;			global $refrescaimg;
-	
-	if(!$qb){
-			print("SQL ERROR: ".mysqli_error($db)."</br>");
-			show_form();
-	}else{
+	global $Feedback;		global $refrescaimg;	global $twhile;			global $rutaimg;
+	global $qb;				global $db;				global $ruta;			global $inicioadmincrear;
+	global $formulariohg;	global $formulariofg;	global $CountWM;
+
+	if(!$qb){ 
+				print("<br>SQL ERROR: " . mysqli_error($db) . "<br>"); 
+	} else{
 		if(mysqli_num_rows($qb)== 0){
 			print ("<div class='centradiv alertdiv'>
 						<div style='margin:0.8em auto 0.8em auto;'>NO HAY DATOS</div>".$inicioadmincrear.$inciobajas."
