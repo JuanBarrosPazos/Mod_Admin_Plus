@@ -22,38 +22,13 @@
 ----
 ## ULTIMAS MODIFICACIONES.
 #### Mod_Admin_Plus V26.05.31.Beta2 2026/05/31
-	* MODIFICADO:
-		- config/index_Init_System.php & index.php (inicial): config_one(), modif(), modif2()...
-		- fichar/Inc_errors.php
-
-		- Pendiente: Ok: ayear()
-		 config/index_Play_System.php, config/indexqr_Play_System, cam/index.php, indexcamini.php & indexqr.php:
-
-	
-	----
-	* TAREAS PENDIENTES:
-	- Modificación del nombre de las tablas en la bbdd para registro de entradas y salidas, 
-	  a nivel anual y global para todos los empleados...
-
-		Old: 	$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
-				$vname = "`".$_SESSION['clave'].$_SESSION['usuarios']."_".date('Y')."`";
-
-		"SELECT * FROM `$db_name`.$vname WHERE $vname. $vname.`dout` = '' AND $vname.`tout` = '00:00:00' ";
-										WHERE $vname.`ref` = '$_SESSION[usuarios]' AND...
-
-		New:	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
-							$_SESSION['clave']."horarios_";
-
-	- Exportar el código de la función...
-
-	- Modificación de la ruta del archivo de comprobación del año...
-		$filename = "config/year.txt";
-		- Si el archivo no existe, hacer una comprobación a bbdd Schemas... si coincide con el año actual...
-	
-	- Modificar las rutas para config/ayear.php en del mismo modo que el anterior... 
-	  o si no existe construirlo con una consulta a Schemas...
-
+	* MODIFICADO UNA ÚNICA TABLA ANUAL PARA LOS REGISTROS DE HORARIOS:
 	* COMPROBACIÓN DE LAS MODIFICACIONES:
+		- Instalación inicial.
+		- Creación del Webmaster.
+		- Creación del directorio y archivos de usuario...
+		- Fichar con pin de usuario desde index.php
+		- Modificar imagen del usuario...
 
 
 ----
