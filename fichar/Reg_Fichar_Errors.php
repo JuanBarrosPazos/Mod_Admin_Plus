@@ -77,8 +77,7 @@ function ver_todo(){
 														}
 	global $vname;
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	$vname = "`".$tabla1.$dyt1."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 			///////////////////////			***********  		///////////////////////
 			

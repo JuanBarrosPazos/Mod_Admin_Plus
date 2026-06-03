@@ -92,7 +92,7 @@ if(mysqli_query($db, $visitas)){
 			$table3 = "\t* CREADA OK TABLA VISITAS ADMIN.".PHP_EOL;
 
 	$vd = "INSERT INTO `$db_name`.$table_name_c (`idv`, `visita`, `admin`, `deneg`, `acceso`) VALUES
-	(69, 0, 0, 0, 0)";
+	(68, 0, 0, 0, 0)";
 		if(mysqli_query($db, $vd)){
 				$table4 = "\t* CREADOS OK INIT VALUES EN VISITAS ADMIN.".PHP_EOL;
 		}else{ 
@@ -106,14 +106,15 @@ if(mysqli_query($db, $visitas)){
 
 	/************* CREAMOS LA TABLA REGISTRO HORARIOS ****************/
 
+	global $table_name_fk;
+	$table_name_fk = "`".$_SESSION['clave']."admin`";
+	
 	global $table_name_d;
 	$table_name_d = "`".$_SESSION['clave']."horarios_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_d (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
@@ -123,7 +124,9 @@ if(mysqli_query($db, $visitas)){
   `del` varchar(5) NOT NULL default 'false',
   `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  KEY `ref` (`ref`),
+  FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $table5;

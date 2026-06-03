@@ -227,9 +227,9 @@ function modif(){
 			fclose($fw);
 
 		// Pasamos logs...
-		$dat1 = $dat1.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/ayear.php";
+		$dat1 = $dat1.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO config/ayear.php";
 	}else{
-		$dat1 = $dat1.PHP_EOL."\t* ERROR DESCONOCIDO ../config/ayear.php";
+		$dat1 = $dat1.PHP_EOL."\t* ERROR DESCONOCIDO config/ayear.php";
 	}
 
 }
@@ -257,23 +257,24 @@ function modif2(){
 			fwrite($configYear, $dataYear);
 			fclose($configYear);
 
-			$dat2 = $dat2.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+			$dat2 = $dat2.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO config/year.txt";
 	}else{
-			$dat2 = $dat2.PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
+			$dat2 = $dat2.PHP_EOL."\t* ERROR DESCONOCIDO config/year.txt";
 	}
 }
 
 function tcl(){
 	
-	global $db;			global $db_name;
+	global $db_name; 			global $db;
+	global $table_name_fk;		$table_name_fk = "`".$_SESSION['clave']."admin`";
 	
-	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
+  /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
@@ -283,14 +284,16 @@ function tcl(){
   `del` varchar(5) NOT NULL default 'false',
   `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  KEY `ref` (`ref`),
+  FOREIGN KEY (`ref`) REFERENCES `".$table_name_fk."`(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
 	if(mysqli_query($db , $tcl)){
-			$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
+		$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
 	}else{
-			$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+		$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 	}
 
 } // FIN function tcl()
@@ -425,7 +428,7 @@ function show_visit(){
 
 function suma_visit(){
 
-	global $db;					global $db_name;
+	global $db;		global $db_name;
 					global $sumavisit;
 	
 	global $table_name_c;	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
@@ -513,7 +516,7 @@ function suma_denegado(){
 	global $rowd1;
 
 	global $table_name_c;		$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
-	echo "** ".$table_name_c."<br>";
+	//echo "** ".$table_name_c."<br>";
 	
 	$sqld1 =  "SELECT * FROM $table_name_c";
 	$qd1 = mysqli_query($db, $sqld1);
@@ -567,8 +570,8 @@ function validate_form(){
 	global $count;			$count = mysqli_num_rows($qp);
 
 	global $password;		$password = $_POST['Password'] ;
-	global $hash;			$hash = @$row['Password'];
-	
+	global $hash;			
+	if(isset($row['Password'])){ $hash = @$row['Password']; }else { $hash = 0;}
 	//echo $row['Password']."<br>";
 	//echo $hash;
 
@@ -691,12 +694,13 @@ function show_ficha(){
 	global $db; 		global $db_name;
 	
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;		$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
-	
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
+	global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
+
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$rp = mysqli_fetch_assoc($q1);
@@ -733,10 +737,10 @@ function show_ficha(){
 		global $tout;		$tout = '00:00:00';
 		global $ttot;		$ttot = '00:00:00';
 
-		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
 		global $ImgForm;			$ImgForm = "";
 		global $FormButtonHome;		$FormButtonHome = "";
 		global $rutaAudio;			$rutaAudio = "";
+		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
 		require 'Fichar_Tablas_Form.php';
 		print($FichaIn);
 
@@ -750,11 +754,10 @@ function show_ficha(){
 		*/
 		require 'fichar/Fichar_Redondeo_out.php';
 
-		global $Action;				$Action = "action='fichar/Fichar_Crear.php'";
 		global $ImgForm;			$ImgForm = "";
 		global $FormButtonHome;		$FormButtonHome = "";
-		global $rutaAudio;
-		$rutaAudio = "<audio src='../audi/confirm_sign_exit.mp3' autoplay></audio>";
+		global $rutaAudio;			$rutaAudio = "";
+		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
 		require 'fichar/Fichar_Tablas_Form.php';
 		print($FichaOut);
 
@@ -803,11 +806,13 @@ function process_pin(){
 
 	}elseif($cp > 0){
 		//$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
-		$tabla1 = strtolower($_SESSION['clave']."horarios_");
-		global $vname;			$vname = "`".$tabla1.date('Y')."`";
+		global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
+	    global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
+
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$rp[ref]' AND hor.`ref` = '$rp[ref]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+
 		//echo "<br>".$sql1."<br>";
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
@@ -833,12 +838,12 @@ function process_pin(){
 							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
 						</li>";
 			global $FormButtonHome;
-			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display:inline-block; margin-right:10%;'>
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>";
-			global $rutaAudio;
-			$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
+			global $rutaAudio;		$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
+			global $Action;			$Action = "action='$_SERVER[PHP_SELF]'";
 			require 'fichar/Fichar_Tablas_Form.php';
 			print($FichaIn);
 
@@ -861,12 +866,11 @@ function process_pin(){
 							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
 						</li>";
 			global $FormButtonHome;
-			$FormButtonHome = "<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display: inline-block; margin-right:10%;' >
+			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display: inline-block; margin-right:10%;' >
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>";
-			global $rutaAudio;
-			$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
+			global $rutaAudio;		$rutaAudio = "<audio src='audi/conf_user_data.mp3' autoplay></audio>";
 			require 'fichar/Fichar_Tablas_Form.php';
 			print($FichaOut);
 
@@ -907,10 +911,12 @@ function pin_out(){
 	$_SESSION['usuarios'] = $_POST['ref'];
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;		$vname = "`".$tabla1.date('Y')."`";
+	global $vname;			$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout`='' AND `tout`='00:00:00' LIMIT 1 ";
+	global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
+
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -984,10 +990,9 @@ function pin_in(){
 
 	global $vname;
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
+	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
 	if(mysqli_query($db, $sqla)){
 
@@ -1031,8 +1036,7 @@ function suma_todo(){
 	global $dd;			$dd = '';
 	global $fil;		$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$dyt."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt."`";
 
 	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';

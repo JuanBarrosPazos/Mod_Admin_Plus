@@ -64,8 +64,7 @@ function entrada(){
 	global $db; 			global $db_name;
 
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 	$q1 = mysqli_query($db, $sql1);
@@ -210,8 +209,7 @@ function show_form(){
 		if($_SESSION['usuarios'] != ''){
 		
 			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-			$tabla1 = strtolower($_SESSION['clave']."horarios_");
-			global $vname;			$vname = "`".$tabla1.date('Y')."`";
+			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 		
 			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
@@ -292,8 +290,7 @@ function suma_todo(){
 	global $fil; 			$fil = "%".$dyt1."-%".$dm1."%-".$dd1."%";
 
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$dyt1."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 	global $ruta;			$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -308,8 +305,7 @@ function salida(){
 	
 	global $db; 			global $db_name;
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname; 			$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);

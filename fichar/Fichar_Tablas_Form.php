@@ -4,9 +4,7 @@
         OJO index_Play_System L.774 & 802 FORMULARIO FICHAR ENTRADA
         <input type='hidden' id='myimg' name='myimg' value='".$rp['myimg']."' />
     */
-
-    global $Action;         global $ImgForm;        global $FormButtonHome;
-
+    global $ImgForm;        global $FormButtonHome;
     global $din;            global $tin;            
     global $dout;           global $tout;           global $ttot;
 
@@ -37,7 +35,9 @@
         $InputImgIndex = "";
     }
 
-    global $FichaIn;    global $rutaAudio;
+    global $Action;         global $rutaAudio;
+    
+    global $FichaIn;    
     $FichaIn = "<ul class='centradiv'>
                         <li class='liCentra'>FICHE SU ENTRADA</li>
                             ".$ImgForm."
@@ -84,7 +84,6 @@
                             <input type='hidden' name='salida' value=1 />
                     </form>														
                         </li>
-                </ul>".$rutaAudio; 
-
+                </ul>".$rutaAudio;
 
 ?>

@@ -30,6 +30,35 @@
 		- Fichar con pin de usuario desde index.php
 		- Modificar imagen del usuario...
 
+    * Se modifica la relación de las tablas admin y horarios en la base de datos con clave foranea ref...
+
+    * Admin_Crear_Funciones.php y otros: 
+        - L.140/310: function y(), modif(), ayear(), tcl():
+			Se eliminan las funciones ya no son necesarias al modificar la estructura de la bbdd...
+    
+    * Actual consulta:
+        	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['ref']);
+	        $tabla1 = strtolower($_SESSION['clave']."horarios_");
+	        global $vname;		$vname = "`".$tabla1.date('Y')."`";
+
+	        // FICHA ENTRADA O SALIDA.
+	        $sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
+
+    * Propuesta Consulta:
+
+	    global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
+
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00'";
+
+            $sql1 =  "SELECT hor.*, ad.nombre, ad.apellido FROM `$db_name`.$vname hor INNER JOIN `$db_name`.$table_admin ON h.`ref` = a.`ref` AND h.`ref` = '$_SESSION[ref]' AND h.`dout` = '' AND h.`tout` = '00:00:00' ";
+
+                            ON h.`ref` = a.`ref` AND h.`ref` = '$_SESSION[ref]' AND h.`dout` = '' AND h.`tout` = '00:00:00'
+            Propuesta IA:   
+				ON h.`ref` = a.`ref` AND h.`ref` = '{$_SESSION['ref']}' AND h.`dout` = '' AND h.`tout` = '00:00:00'
+
+    * Orientación Consultas: 
+        SELECT h.*, a.nombre, a.apellido FROM horarios h INNER JOIN admin a ON h.ref = a.ref;
+        SELECT h.*, a.nombre, a.apellido FROM horarios h, admin a WHERE h.ref = a.ref;
 
 ----
 #### Mod_Admin_Plus V25.10.05 2025/10/05

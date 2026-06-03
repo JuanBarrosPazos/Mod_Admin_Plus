@@ -117,9 +117,9 @@ font-size: 18px;
 background: #990000;
 color: white;
 text-decoration: none;
-text-shadow: -1px -1px #990000;;
-border-bottom: 1px solid #990000;;
-border-left: 1px solid #990000;;
+text-shadow: -1px -1px #990000;
+border-bottom: 1px solid #990000;
+border-left: 1px solid #990000;
 }
 #ventana-flotante .contenido {
 padding: 15px;

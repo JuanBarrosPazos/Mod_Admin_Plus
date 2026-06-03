@@ -1,6 +1,6 @@
 <?php
 session_start();
- 
+
 	//require '../Inclu/error_hidden.php';
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Inclu/mydni.php';
@@ -8,7 +8,6 @@ session_start();
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
 	require '../Inclu/my_bbdd_clave.php';
-
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -264,9 +263,7 @@ function errors(){
 
 function process_pin(){
 	
-	global $db;					global $db_name;
-	
-	global $qrp;
+	global $db;			global $db_name;		global $qrp;
 	
 	if((isset($_GET['ocultop']))||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; 
 	}else{ $qrp = $_POST['pin']; }
@@ -284,8 +281,7 @@ function process_pin(){
 	if($cp > 0){
 	
 	//$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1."_".date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dout` = '' AND `tout` = '00:00:00' ";
@@ -387,8 +383,7 @@ function pin_out(){
 	$_SESSION['usuarios'] = $_POST['ref'];
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
@@ -461,8 +456,7 @@ function pin_in(){
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname ="`". $tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 		
@@ -507,8 +501,7 @@ function suma_todo(){
 	global $fil;			$fil = $dyt.$dm."%";
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$dyt."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt."`";
 
 	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';

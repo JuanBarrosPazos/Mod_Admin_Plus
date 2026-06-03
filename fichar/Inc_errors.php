@@ -3,8 +3,7 @@
 	global $sesus;
 	if($sesus==''){ $sesus = $_SESSION['ref']; }else{ }	
 	
-	$tablae = strtolower($_SESSION['clave']."horarios_");
-	global $vname;		$vname = "`".$tablae.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	//echo "* ".$vname;
 
 	// INICIO ERRORES FICHAR.

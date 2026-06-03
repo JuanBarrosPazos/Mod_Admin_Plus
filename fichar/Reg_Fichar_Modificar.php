@@ -191,8 +191,7 @@ function suma_todo(){
 	$vname = $tabla1."_".date('Y');
 	 */
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$diny."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$diny."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -210,8 +209,7 @@ function process_form(){
 
 	/* PARA EL AÑO CORRIENTE		$vname = $tabla1."_".date('Y'); */
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$diny."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$diny."`";
 
 	global $din;			$din = trim($_POST['din']);
 	global $tin;			$tin = trim($_POST['tin']);

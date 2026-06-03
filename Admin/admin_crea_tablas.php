@@ -1,7 +1,7 @@
 <?php
 
 	global $trf;	global $rutCreaTablas;
-	
+
 	// CREA EL DIRECTORIO DE USUARIO.
 	global $carpeta;		$carpeta = "../Users/".$trf;
 
@@ -20,8 +20,6 @@
 		copy($rutCreaTablas."year.txt", $carpeta."/year.txt");
 		copy($rutCreaTablas."SecureIndex2.php", $carpeta."/index.php");
 		global $data1;			$data1 = $data1."\t* OK USER SYSTEM FILES ".$carpeta."\n";
-		y();
-		modif();
 	}else{
 		print("* NO OK USER SYSTEM FILES ".$carpeta."\n");
 		global $data1;			$data1 = $data1."\t* NO OK USER SYSTEM FILES".$carpeta."\n";

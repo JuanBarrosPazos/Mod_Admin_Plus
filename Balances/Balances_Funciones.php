@@ -134,9 +134,8 @@ function ver_todo(){
 													$fil = "%".$dy1."-%".$dm1."%-".$dd1."%";
 																					}
 	*/
-	global $tabla1;			$tabla1 = strtolower($_SESSION['clave']."horarios_");
-							//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;			$vname = "`".$tabla1.$dyt1."`";
+	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 	require 'calc_anu_mes.php';
 	

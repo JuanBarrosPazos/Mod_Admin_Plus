@@ -42,8 +42,7 @@ function suma_todo(){
 	global $fil;			$fil = $dyt.$dm."%";
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	global $ruta;			$ruta = '../';
 	require 'Inc_Suma_Todo.php';
@@ -60,8 +59,7 @@ function process_form(){
 
 	global $diny;			$diny = substr($_POST['din'],0,4);
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$diny ."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$diny."`";
 	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1.date('Y')."`";
 
 	global $FBaja;		$FBaja = date('Y-m-d');

@@ -62,8 +62,7 @@
 			global $uimg;				$uimg = $rn['myimg'];
 	
 			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-			$tabla1 = strtolower($_SESSION['clave']."horarios_");
-			global $vname;				$vname = "`".$tabla1.date('Y')."`";
+			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 		
 			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);

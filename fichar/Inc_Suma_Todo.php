@@ -8,8 +8,12 @@
 			///////////////////////			***********  		///////////////////////
     //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";
 	global $sh; 	global $db; 	global $db_name;	global $vname;
-	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 
+	global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
+
+	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+
+	//echo "<br>".$sh;
 			///////////////////////			***********  		///////////////////////
 
     /* SOLO PARA MODIFICAR 01 / FICHAR VER / FICHAR VER OTRO / BORRAR 01 */

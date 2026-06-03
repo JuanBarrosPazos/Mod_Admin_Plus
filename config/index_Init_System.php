@@ -625,7 +625,7 @@ function crear_tablas(){
 
 	if(file_exists($carpeta)){
 		copy("config/index.php", $carpeta."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
 	}else{ }
 
 	global $carpetat;				$carpetat = "Users/temp";
@@ -638,7 +638,7 @@ function crear_tablas(){
 
 	if(file_exists($carpetat)){
 		copy("config/SecureIndex2.php", $carpetat."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
 	}else{ }
 
 	require 'Inclu/my_bbdd_clave.php';

@@ -47,8 +47,7 @@ function process_pinqr(){
 		ayear();	
 		
 		//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		$tabla1 = strtolower($_SESSION['clave']."horarios_");
-		global $vname;				$vname = "`".$tabla1.date('Y')."`";
+		global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 		// FICHA ENTRADA O SALIDA.
 		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' ";
@@ -83,8 +82,7 @@ function process_pinqr(){
 
 	global $db;				global $db_name;
 	
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -209,8 +207,7 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;			$vname = "`".$tabla1.$dyt."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt."`";
 
 	global $ruta;			$ruta = '../';
 	require '../fichar/Inc_Suma_Todo.php';

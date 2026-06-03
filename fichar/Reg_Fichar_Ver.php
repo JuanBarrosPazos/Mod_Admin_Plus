@@ -71,8 +71,7 @@ function ver_todo(){
 	}else{ $fil = "%".$dy1.$dm1.$dd1."%"; }
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-	global $vname;		$vname = "`".$tabla1.$dyt1."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';

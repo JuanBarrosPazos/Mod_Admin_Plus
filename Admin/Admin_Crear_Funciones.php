@@ -133,32 +133,6 @@ function process_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function y(){
-	
-	global $trf;
-	$trf = $_SESSION['iniref'];
-	$carpeta = "../Users/".$trf;
-	$filename = $carpeta."/ayear.php";
-	$fw1 = fopen($filename, 'r+');
-	$contenido = fread($fw1,filesize($filename));
-	fclose($fw1);
-	$contenido = explode("\n",$contenido);
-	$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-	$contenido = implode("\n",$contenido);
-	//fseek($fw, 37);
-	$fw = fopen($filename, 'w+');
-	fwrite($fw, $contenido);
-	fclose($fw);
-}
-
-function modif(){
-
-	$filename = "../Users/".$_SESSION['iniref']."/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-}
 
 function crear_tablas(){
 	

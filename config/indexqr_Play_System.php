@@ -43,8 +43,7 @@ function process_pinqr(){
 		ayear();	
 		
 		//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		$tabla1 = strtolower($_SESSION['clave']."horarios_");
-		global $vname;			$vname = "`".$tabla1.date('Y')."`";
+		global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 			////////////////////		**********  		////////////////////
 
@@ -81,8 +80,7 @@ function process_pinqr(){
 			global $TablaIn;
 			require 'fichar/Fichar_Tablas_Resum.php';
 
-			$tabla1 = strtolower($_SESSION['clave']."horarios_");
-			global $vname;			$vname = "`".$tabla1.date('Y')."`";
+			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
@@ -197,9 +195,7 @@ function suma_todo(){
 	global $dd;				$dd = '';
 	global $fil;			$fil = $dyt.$dm."%";
 
-	$tabla1 = strtolower($_SESSION['clave']."horarios_");
-
-	global $vname;			$vname = "`".$tabla1.$dyt."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt."`";
 
 	global $ruta;		$ruta = '';
 	require 'fichar/Inc_Suma_Todo.php';
@@ -292,15 +288,17 @@ function modif2(){
 
 function tcl(){
 
-	global $db;			global $db_name;
+	global $table_name_fk;
+	$table_name_fk = "`".$_SESSION['clave']."admin`";
 	
+	global $db;			global $db_name;
 	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
+  /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
@@ -310,7 +308,9 @@ function tcl(){
   `del` varchar(5) NOT NULL default 'false',
   `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  KEY `ref` (`ref`),
+  FOREIGN KEY (`ref`) REFERENCES `".$table_name_fk."`(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
@@ -373,9 +373,9 @@ function ayear(){
 		fwrite($configYear, $dataYear);
 		fclose($configYear);
 
-		$datos = PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+		$datos = PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO config/year.txt";
 	}else{
-		$datos = PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
+		$datos = PHP_EOL."\t* ERROR DESCONOCIDO config/year.txt";
 	}
 		
 } // FIN function ayear

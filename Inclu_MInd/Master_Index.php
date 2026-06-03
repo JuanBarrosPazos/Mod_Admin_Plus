@@ -1,5 +1,7 @@
 ﻿<?php
 
+	global $rutaindex;
+	
 	require $rutaindex.'Inclu/mydni.php';
 	require $rutaindex.'Inclu/error_hidden.php';
 	global $db_name;
