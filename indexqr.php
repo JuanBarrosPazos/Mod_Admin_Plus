@@ -43,11 +43,15 @@ function process_pinqr(){
 		ayear();	
 		
 		//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-		$tabla1 = strtolower($_SESSION['clave']."horarios_");
-		global $vname;			$vname = "`".$tabla1.date('Y')."`";
+		global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 							
 		// FICHA ENTRADA O SALIDA.
-		$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' ";
+		global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
+
+		//$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' ";
+
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
@@ -76,10 +80,9 @@ function process_pinqr(){
 			global $TablaIn;
 			require 'fichar/Fichar_Tablas_Resum.php';
 			
-			$tabla1 = strtolower($_SESSION['clave']."horarios_");
-			global $vname;			$vname = "`".$tabla1.date('Y')."`";
+			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$rp[Nombre]', '$rp[Apellidos]', '$din', '$tin', '$dout', '$tout', '$ttot')";
+			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$din', '$tin', '$dout', '$tout', '$ttot')";
 		
 			if(mysqli_query($db, $sqla)){
 
@@ -100,7 +103,7 @@ function process_pinqr(){
 				fclose($rmf);
 	
 			}else{ 
-				print("ERROR SQL L.92: ".mysqli_error($db));
+				print("ERROR SQL L.85: ".mysqli_error($db));
 				global $texerror;		$texerror = PHP_EOL."\t ".mysqli_error($db);
 			}
 		// FIN FICHA ENTRADA
@@ -116,7 +119,14 @@ function process_pinqr(){
 
 			require 'fichar/Fichar_Redondeo_out.php';
 
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
+			global $vname;			$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
+
+			global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
+
+			//$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
+
+			$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			$row1 = mysqli_fetch_assoc($q1);
@@ -131,6 +141,7 @@ function process_pinqr(){
 			global $rutaHome;		$rutaHome = "indexcamini.php";
 			global $rutaRedir;		$rutaRedir = "indexcamini.php";
 			global $TablaOut;
+			
 			require 'fichar/Fichar_Tablas_Resum.php';
 
 		//print($in." / ".$out." / ".$ttot."</br>");

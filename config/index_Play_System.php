@@ -633,7 +633,7 @@ function validate_formp(){
 	}elseif(!preg_match('/^[A-Z\d]+$/',$_POST['pin'])){
 		//$errorsp [] = "PIN: Incorrecto.";
 		$errorsp [] = "USER ACCES PIN ERROR";
-	}/*elseif(!preg_match('/^[^a-z@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
+	}/*elseif(!preg_match('/^[^a-z@´`\'áéíóú#$&%<br>:"·\(\)=¿?!¡\[\]\{\};,\/:\.\*]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
 	}elseif(!preg_match('/^[^a-z]+$/',$_POST['pin'])){
 		$errors [] = "PIN: Incorrecto.";
@@ -702,10 +702,14 @@ function show_ficha(){
 	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
 
 	$q1 = mysqli_query($db, $sql1);
-	$count1 = mysqli_num_rows($q1);
 	$rp = mysqli_fetch_assoc($q1);
-	
-	if($rp['del']=="true"){
+	$count1 = mysqli_num_rows($q1);
+
+	$sqlAcceso = "SELECT `del` FROM `$db_name`.$table_admin WHERE `ref` = '$_SESSION[ref]' LIMIT 1";
+	$queryAcceso = mysqli_query($db, $sqlAcceso);
+	$rowAcceso = mysqli_fetch_assoc($queryAcceso);
+
+	if($rowAcceso['del']=="true"){
 		print("<div class='centradiv alertdiv'>
 				ACCESO RESTRINGIDO POR EL WEB MASTER
 			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
@@ -713,14 +717,6 @@ function show_ficha(){
 				<input type='hidden' name='cancel' value=1 />
 		</form>
 			</div>");
-		global $redir;
-		$redir = "<script type='text/javascript'>
-					function redir(){
-						window.location.href='index.php';
-					}
-					setTimeout('redir()',6000);
-					</script>";
-		print($redir);
 
 	}elseif($count1 < 1){ // FICHA ENTRADA.
 		
@@ -740,8 +736,13 @@ function show_ficha(){
 		global $ImgForm;			$ImgForm = "";
 		global $FormButtonHome;		$FormButtonHome = "";
 		global $rutaAudio;			$rutaAudio = "";
-		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
-		require 'Fichar_Tablas_Form.php';
+		global $Action;				
+		if(isset($_SESSION['ref'])){
+			$Action = "action='fichar/Fichar_Crear.php'";
+		}else{
+			$Action = "action='$_SERVER[PHP_SELF]'";
+		}
+		require 'fichar/Fichar_Tablas_Form.php';
 		print($FichaIn);
 
 	}elseif($count1 > 0){ // FICHA SALIDA.
@@ -755,9 +756,14 @@ function show_ficha(){
 		require 'fichar/Fichar_Redondeo_out.php';
 
 		global $ImgForm;			$ImgForm = "";
-		global $FormButtonHome;		$FormButtonHome = "";
+		global $FormButtonHome;		$FormButtonHome = "Index758";
 		global $rutaAudio;			$rutaAudio = "";
-		global $Action;				$Action = "action='$_SERVER[PHP_SELF]'";
+		global $Action;				
+		if(isset($_SESSION['ref'])){
+			$Action = "action='fichar/Fichar_Salida.php'";
+		}else{
+			$Action = "action='$_SERVER[PHP_SELF]'";
+		}
 		require 'fichar/Fichar_Tablas_Form.php';
 		print($FichaOut);
 
@@ -938,8 +944,7 @@ function pin_out(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	global $vname;
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -988,7 +993,6 @@ function pin_in(){
 	
 	$_SESSION['usuarios'] = $_POST['ref'];
 
-	global $vname;
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 

@@ -1,7 +1,7 @@
 <?php
 
     global $userdir;
-    if($_SESSION['usuarios']==""){ $userdir = $_SESSION['ref'];
+    if(!isset($_SESSION['usuarios'])){ $userdir = $_SESSION['ref'];
     }else{ $userdir = $_SESSION['usuarios'];}
 
 	$dir = "../Users/".$userdir."/mrficha";

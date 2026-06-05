@@ -68,15 +68,15 @@ function process_form(){
 	global $sql;
 	if(isset($_POST['recupera'])){
 		$Titulo = "RECUPERADO EL REGISTRO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		$audioAudi = "file_recovered.mp3";
 	}elseif(isset($_POST['elimina'])){
 		$Titulo = "ELIMINADO EL REGISTRO";
-		$sql = "DELETE FROM `$db_name`.$vname WHERE `id`='$_POST[id]' LIMIT 1 ";
+		$sql = "DELETE FROM `$db_name`.$vname WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		$audioAudi = "file_deleted.mp3";
 	}else{ 
 		$Titulo = "REGISTRO BORRADO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		$audioAudi = "file_bin.mp3";
 	}
 

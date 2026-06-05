@@ -22,7 +22,7 @@ if($Feedback==1){
 				</form>";
 
 	global $formulariohi;
-	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='Feedback_Recuperar.php' method='POST'>";
+	$formulariohi = "<form style='display:inline-block;' name='modifica' action='Feedback_Recuperar.php' method='POST'>";
 
 	global $formulariofi;
 	$formulariofi = "<button type='submit' title='RECUPERAR BAJA' class='botonverde imgButIco RestoreBlack' style='vertical-align:top;' ></button>
@@ -48,7 +48,7 @@ if($Feedback==1){
 		</form>";
 
 	global $formulariohi;
-	$formulariohi = "<form style=\"display:inline-block;\" name='modifica' action='".@$ruta."Admin_Modificar.php' method='POST' target='popup' onsubmit=\"window.open('', 'popup', 'width=480px,height=680px')\">";
+	$formulariohi = "<form style='display:inline-block;' name='modifica' action='".@$ruta."Admin_Modificar.php' method='POST' target='popup' onsubmit=\"window.open('', 'popup', 'width=480px,height=680px')\" >";
 
 	global $formulariofi;
 	$formulariofi = "<button type='submit' title='MODIFICAR DATOS' class='botonnaranja imgButIco DatosBlack' style='vertical-align:top;' ></button>
@@ -71,7 +71,7 @@ if($Feedback==1){
 			
 		global $formulariofe;
 		$formulariofe = "";
-		}
+	}
 */	
 
 }

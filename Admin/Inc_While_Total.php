@@ -33,85 +33,93 @@
 
 			}else{ $refrescaimg = ""; }
 
-		print ("<div class='centraWhileDatos'>
-		<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas.$refrescaimg."<br>");
-		while($rowb = mysqli_fetch_assoc($qb)){
-    
-			global $formularioh;			global $formulariof;
-			global $formulariohi;			global $formulariofi;
-			global $formulariohe;			global $formulariofe;
+			print ("<div class='centraWhileDatos'>
+			<!--".$twhile.": ".mysqli_num_rows($qb).".-->".@$inicioadmincrear.@$inciobajas.$refrescaimg."<br>");
+			while($rowb = mysqli_fetch_assoc($qb)){
+		
+				global $formularioh;			global $formulariof;
+				global $formulariohi;			global $formulariofi;
+				global $formulariohe;			global $formulariofe;
 
-			print ("<div class='CardWhileDatos'>
-				<div class='whiletotalaimg'>
-					<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' />
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>NOMBRE: </div><div class='Dato'>".$rowb['Nombre']."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>APELLIDO: </div><div class='Dato'>".$rowb['Apellidos']."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>NIVEL: </div><div class='Dato'>".$rowb['Nivel']."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>REF USER: </div><div class='Dato'>".$rowb['ref']."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>USER: </div><div class='Dato'>".$rowb['Usuario']."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
-				</div>");
+				print ("<div class='CardWhileDatos'>
+					<div class='whiletotalaimg'>
+						<img src='".$rutaimg.$rowb['ref']."/img_admin/".$rowb['myimg']."' />
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>NOMBRE: </div><div class='Dato'>".$rowb['Nombre']."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>APELLIDO: </div><div class='Dato'>".$rowb['Apellidos']."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>NIVEL: </div><div class='Dato'>".$rowb['Nivel']."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>REF USER: </div><div class='Dato'>".$rowb['ref']."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>USER: </div><div class='Dato'>".$rowb['Usuario']."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>PASS: </div><div class='Dato'>".$rowb['Pass']."</div>
+					</div>");
 
-			if($Feedback==1){
-				$BorradoD = substr($rowb['borrado'],0,10);
-				$BorradoT = substr($rowb['borrado'],-8);
-				print("
-				<div class='whiletotala'>
-					<div class='DatLabel'>Del Date: </div><div class='Dato'>".$BorradoD."</div>
-				</div>
-				<div class='whiletotala'>
-					<div class='DatLabel'>Del Time: </div><div class='Dato'>".$BorradoT."</div>
-				</div>");
-			}else{ }
-
-			print("<!-- AQUÍ VA LA BOTONERA -->
-				<div style='text-align:center;'>".$formularioh);
-
-				require 'rowbtotal.php';
-				print($formulariof.$formulariohg);
-
-				require 'rowbtotal.php';
-				print($formulariofg.$formulariohi);
-			
-				require 'rowbtotal.php';
-				if(($CountWM > 1)&&($rowb['Nivel']=='wmaster')){
-					print($formulariofi.$formulariohe);
-				}elseif($rowb['Nivel']!='wmaster'){
-					print($formulariofi.$formulariohe);
+				if($Feedback==1){
+					$BorradoD = substr($rowb['borrado'],0,10);
+					$BorradoT = substr($rowb['borrado'],-8);
+					print("
+					<div class='whiletotala'>
+						<div class='DatLabel'>Del Date: </div><div class='Dato'>".$BorradoD."</div>
+					</div>
+					<div class='whiletotala'>
+						<div class='DatLabel'>Del Time: </div><div class='Dato'>".$BorradoT."</div>
+					</div>");
 				}else{ }
 
-			global $Feedback;		global $formulariohe;		global $formulariofe;
+				// AQUÍ VA LA BOTONERA
+				print("<div style='text-align:center;'>".$formularioh);
 
-			if((($_SESSION['Nivel']=='wmaster')||($_SESSION['Nivel']=='admin'))&&($rowb['Nivel']!='wmaster')){
+					require 'rowbtotal.php';
+					print($formulariof.$formulariohg);
+
+					require 'rowbtotal.php';
+					print($formulariofg.$formulariohi);
 				
-				if($Feedback==1){
-					$formulariohe = '';			$formulariofe = '';
-				}else{
-					$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
-					$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
-						<input type='hidden' name='oculto2' value=1 />
-						</form>";
-				}
+					require 'rowbtotal.php';
+					
+					if(($CountWM >= 1)&&($rowb['Nivel']=='wmaster')){
 
-			}else{	$formulariohe = "";			$formulariofe = "";	}
+						print($formulariofi/*.$formulariohe*/);
+						require 'rowbtotal.php';
 
-			print($formulariohe);
-				require 'rowbtotal.php';
-			print($formulariofe);
-            
-			print("</div></div>");// FIN div botonera y card datos.
+					}elseif($rowb['Nivel']!='wmaster'){
+
+						print($formulariofi/*.$formulariohe*/);
+						//require 'rowbtotal.php';
+						//print($formulariofe);
+					}else{ }
+
+
+				global $Feedback;		global $formulariohe;		global $formulariofe;
+
+				if((($_SESSION['Nivel']=='wmaster')||($_SESSION['Nivel']=='admin'))&&($rowb['Nivel']!='wmaster')){
+					
+					if($Feedback==1){
+						$formulariohe = '';			$formulariofe = '';
+					}else{
+						$formulariohe = "<form style=\"display:inline-block;\" name='borra' action='".@$ruta."Admin_Borrar.php' method='POST'>";
+						$formulariofe = "<button type='submit' title='DAR DE BAJA' class='botonrojo imgButIco DeleteBlack' style='vertical-align:top;' ></button>
+							<input type='hidden' name='oculto2' value=1 />
+							</form>";
+					}
+
+				}else{	$formulariohe = "";			$formulariofe = "";	}
+
+				print($formulariohe);
+					require 'rowbtotal.php';
+				print($formulariofe);
+				
+				print("</div></div>");// FIN div botonera y card datos.
 
 			}  // FIN DEL WHILE
 

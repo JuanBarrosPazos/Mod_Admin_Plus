@@ -152,7 +152,7 @@ function crear_tablas(){
 	$dir = "../Users/".$_SESSION['ref']."/log";
 
 	global $text;
-	$text = PHP_EOL."** NUEVO USUARIO CREADOS DIRECTORIOS. ".$datein.PHP_EOL." ".$dbconecterror.$data1.$data2.$data3.$data4.$data5.$data6.PHP_EOL;
+	$text = PHP_EOL."** NUEVO USUARIO CREADOS DIRECTORIOS. ".$datein.PHP_EOL." ".$dbconecterror.$data1.$data2.$data3.$data4.PHP_EOL;
 
 	require 'log_write.php';
 

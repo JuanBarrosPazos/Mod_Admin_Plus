@@ -7,11 +7,17 @@
 
 			///////////////////////			***********  		///////////////////////
     //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";
+	//$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+
 	global $sh; 	global $db; 	global $db_name;	global $vname;
 
 	global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
 
-	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	global $Sesion;
+	if(isset($_SESSION['usuarios'])){ $Sesion = $_SESSION['usuarios'];
+	}else{ $Sesion = $_SESSION['ref']; }
+
+	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 
 	//echo "<br>".$sh;
 			///////////////////////			***********  		///////////////////////

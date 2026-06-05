@@ -502,9 +502,15 @@
 		$limite = 500 * 1024;
 		
 		$ext_permitidas = array('jpg','JPG','gif','GIF','png','PNG','bmp','BMP');
-		$extension = substr(@$_FILES['myimg']['name'],-3);
+		// $extension = substr(@$_FILES['myimg']['name'],-3);
+		$extension = substr($_FILES['myimg']['name'] ?? '', -3);
+		// OPCIONES...
+		// $extension = pathinfo($_FILES['myimg']['name'], PATHINFO_EXTENSION);
+		
+		// $parts = explode('.', $_FILES['myimg']['name']);
+		// $extension = end($parts);
+
 		// print($extension);
-		// $extension = end(explode('.', $_FILES['myimg']['name']) );
 		$ext_correcta = in_array($extension, $ext_permitidas);
 
 		/* $tipo_correcto = preg_match('/^image\/(gif|png|jpg|bmp)$/', $_POST['myimg']); */
