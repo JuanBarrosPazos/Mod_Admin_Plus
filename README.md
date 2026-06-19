@@ -21,7 +21,7 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.05.31.Beta2 2026/05/31
+#### Mod_Admin_Plus V26.06.19.Beta2 2026/06/19
 	* MODIFICADO UNA ÚNICA TABLA ANUAL PARA LOS REGISTROS DE HORARIOS:
 	* COMPROBACIÓN DE LAS MODIFICACIONES:
 		- Instalación inicial.
@@ -29,6 +29,8 @@
 		- Creación del directorio y archivos de usuario...
 		- Fichar con pin de usuario desde index.php
 		- Modificar imagen del usuario...
+		- Fichar todos los usuarios...
+		- Numero de empleados permitidos...
 
     * Se modifica la relación de las tablas admin y horarios en la base de datos con clave foranea ref...
 

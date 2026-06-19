@@ -78,9 +78,10 @@ function process_form(){
 
 function show_form($errors=[]){
 	
+	global $defaults;
 	if(isset($_POST['oculto'])){
 			$defaults = $_POST;
-	}else{ $defaults = array ( 'nemp' => $_SESSION['nuser']); }
+	}else{ $defaults = array('nemp' => $_SESSION['nuser']); }
 	
 	require '../Admin/tabla_errors.php';
 

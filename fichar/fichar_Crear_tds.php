@@ -76,7 +76,7 @@ function entrada(){
 			</div>");
 	}else{
 	
-		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
+		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
 			
 		if(mysqli_query($db, $sqla)){ 
 				
@@ -85,7 +85,7 @@ function entrada(){
 			global $dir;			global $text;
 			require 'log_fichar_in.php';
 		
-		}else{ 	print("* MODIFIQUE LA ENTRADA L.212: ".mysqli_error($db));
+		}else{ 	print("* MODIFIQUE LA ENTRADA L.79: ".mysqli_error($db));
 				show_form ();
 				global $texerror;			$texerror = PHP_EOL."\t ".mysqli_error($db);
 		}
@@ -121,16 +121,15 @@ function show_form(){
 
 			//$sqlb =  "SELECT * FROM $table_name_a ORDER BY `id` ASC ";
 			$sqlb = "SELECT * FROM $table_name_a WHERE (`del` = 'false' AND `nivel` <> 'locked') ORDER BY $orden $limit ";
+			//echo "<br>".$sqlb."<br>";
 			$qb = mysqli_query($db, $sqlb);
-		}
 	
 		if(!$qb){
-			print("ERROR SQL L.121 ".mysqli_error($db)."</br>");
+			print("ERROR SQL L.123 ".mysqli_error($db)."</br>");
 		}else{
 			if(mysqli_num_rows($qb)== 0){
 				print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>");
 			}else{
-
 				unset($_SESSION['usuarios']);
 				print ("<table class='centradiv'>
 						<tr>
@@ -151,9 +150,11 @@ function show_form(){
 					$tablaUser = "`".strtolower($_SESSION['clave'])."horarios_".date('Y')."`";
 
 					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE `ref` = '$rowb[ref]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
+					//echo "<br>".$sqlUser."<br>";
+
 					$qrUser = mysqli_query($db,$sqlUser);
 					$rowUser = mysqli_fetch_assoc($qrUser);
-					if(($rowUser['dout']=='')&&($rowUser['tout']=='00:00:00')){
+					if((@$rowUser['dout']=='')&&(@$rowUser['tout']=='00:00:00')){
 						$ButtonTitle = 'SING OUT USER ';
 						$ButtonClass = 'botonnaranja';
 					}else{
@@ -193,6 +194,9 @@ function show_form(){
 
 			} // Fin else 3. 
 		} // Fin else 2.
+
+		}// Primer if anidado
+
 	} // Fin else 1.
 	
 			////////////////////		**********  		////////////////////

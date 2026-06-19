@@ -756,11 +756,11 @@ function show_ficha(){
 		require 'fichar/Fichar_Redondeo_out.php';
 
 		global $ImgForm;			$ImgForm = "";
-		global $FormButtonHome;		$FormButtonHome = "Index758";
+		global $FormButtonHome;		$FormButtonHome = "Index759";
 		global $rutaAudio;			$rutaAudio = "";
 		global $Action;				
 		if(isset($_SESSION['ref'])){
-			$Action = "action='fichar/Fichar_Salida.php'";
+			$Action = "action='fichar/Fichar_Crear.php'";
 		}else{
 			$Action = "action='$_SERVER[PHP_SELF]'";
 		}
