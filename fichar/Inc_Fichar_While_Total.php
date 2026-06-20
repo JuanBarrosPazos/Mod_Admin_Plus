@@ -1,6 +1,7 @@
 <?php
 
     global $name1;		global $name2;		global $refses;		global $TablaTitulo;
+	global $dy;			global $dyt1;		global $sumatodo;
 
 	if(!$qb){
 		print("ERROR SQL L.82||85||88 Reg_Fichar_Ver.php".mysqli_error($db)."</br>");

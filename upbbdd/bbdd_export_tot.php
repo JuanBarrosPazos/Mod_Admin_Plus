@@ -9,6 +9,7 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
+    global $db;
     set_time_limit(5000);
     $tablas_respaldo = [];
     //$db = new mysqli($db_host, $db_user, $db_pass, $db_name);

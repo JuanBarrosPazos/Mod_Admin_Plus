@@ -712,7 +712,7 @@ function show_ficha(){
 	if($rowAcceso['del']=="true"){
 		print("<div class='centradiv alertdiv'>
 				ACCESO RESTRINGIDO POR EL WEB MASTER
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 		</form>
@@ -790,13 +790,18 @@ function process_pin(){
 	$cp = mysqli_num_rows($qp);
 	$rp = mysqli_fetch_assoc($qp);
 	
-	$_SESSION['usuarios'] = $rp['ref'];
-	$_SESSION['ref'] = $rp['ref'];
-	
-	if($rp['del']=="true"){
+	//if($rp['ref']!=""){ $_SESSION['usuarios'] = strtolower($rp['ref']); }else{ $_SESSION['usuarios'] = ""; }
+	//$_SESSION['usuarios'] = strtolower($rp['ref'] ?? '');
+	$_SESSION['usuarios'] = (!empty($rp['ref'])) ? strtolower($rp['ref']) : "";
+
+	$_SESSION['ref'] = (!empty($rp['ref'])) ? strtolower($rp['ref']) : "";
+
+	global $rpDel;	$rpDel = (!empty($rp['del'])) ? strtolower($rp['del']) : "";
+
+	if($rpDel=="true"){
 		print("<div class='centradiv alertdiv'>
 				ACCESO RESTRINGIDO POR EL WEB MASTER
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-right:10%;'>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
@@ -844,7 +849,7 @@ function process_pin(){
 							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
 						</li>";
 			global $FormButtonHome;
-			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display:inline-block; margin-right:10%;'>
+			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display:inline-block;'>
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>";
@@ -872,7 +877,7 @@ function process_pin(){
 							<img src='Users/".$rp['ref']."/img_admin/".$rp['myimg']."' />
 						</li>";
 			global $FormButtonHome;
-			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display: inline-block; margin-right:10%;' >
+			$FormButtonHome = "<form name='fcancel' method='post' ".$Action." style='display:inline-block;' >
 					<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
 					<input type='hidden' name='cancel' value=1 />
 				</form>";
@@ -887,8 +892,8 @@ function process_pin(){
 	}else{ print("<div class='centradiv alertdiv' >
 						NO EXISTE EL USUARIO.<br>
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>
-			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='margin-left:85%;' >
-				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top;' ></button>
+			<form name='fcancel' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;' >
+				<button type='submit' title='CANCELAR Y VOLVER' class='botonlila imgButIco HomeBlack' style='vertical-align:top; text-align:center;' ></button>
 				<input type='hidden' name='cancel' value=1 />
 			</form>
 			</div>

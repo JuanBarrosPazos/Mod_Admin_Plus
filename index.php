@@ -250,7 +250,10 @@ function config_one(){
 	if((file_exists('config/ayear.php'))||(!file_exists('config/ayear.php'))){
 			$filename = "config/ayear.php";
 			$fw = fopen($filename, 'w+');
-			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";
+			/*$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";*/
+			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
+			//$contenido = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
+
 			fwrite($fw, $contenido);
 			//file_put_contents($fw, $contenido);
 			fclose($fw);

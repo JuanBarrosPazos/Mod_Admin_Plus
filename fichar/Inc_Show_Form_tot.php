@@ -84,9 +84,9 @@
 				
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 
-		global $CheckDatos;		global $CheckBin;
+		global $CheckDatos;		global $CheckBin;		global $titulo;		global $dy;
 		if($_SESSION['usuarios'] != ''){
-			require "../Users/".$_SESSION['usuarios']."/ayear.php";
+			require "../config/ayear.php";
 			print("<div class='centradiv' style='padding:0.4em;'>
 						<div style='margin:0.2em auto 0.4em auto;'>
 							".$titulo." ".$_SESSION['usuarios']."

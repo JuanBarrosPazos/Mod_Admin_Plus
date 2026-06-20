@@ -250,7 +250,8 @@ function config_one(){
 
 			$filename = "config/ayear.php";
 			$fw = fopen($filename, 'w+');
-			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";
+			/*$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";*/
+			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
 			fwrite($fw, $contenido);
 			//file_put_contents($fw, $contenido);
 			fclose($fw);

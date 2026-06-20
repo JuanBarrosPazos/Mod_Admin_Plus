@@ -11,6 +11,7 @@
 			print("<audio src='../audi/select_one_user.mp3' autoplay></audio>");
 	}
 
+	global $TablaTitulo;
 	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print("<table class='centradiv'>
 				<tr>
@@ -37,7 +38,7 @@
 					print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
 			}
 		}  
-			
+		global $ButtonTitulo;
 		print ("</select>
 					<button type='submit' title='".$ButtonTitulo."' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
 					<input type='hidden' name='oculto1' value=1 />

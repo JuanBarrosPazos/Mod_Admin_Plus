@@ -1,7 +1,7 @@
 <?php
 
 	global $sesus;
-	if($sesus==''){ $sesus = $_SESSION['ref']; }else{ }	
+	if($sesus==''){ $sesus = @$_SESSION['ref']; }else{ }	
 	
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	//echo "* ".$vname;

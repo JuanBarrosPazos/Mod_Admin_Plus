@@ -36,8 +36,10 @@ function process_pinqr(){
 	$cp = mysqli_num_rows($qp);
 	$rp = mysqli_fetch_assoc($qp);
 	
-	$_SESSION['usuarios'] = strtolower($rp['ref']);
-	
+	//if($rp['ref']!=""){ $_SESSION['usuarios'] = strtolower($rp['ref']);	}else{ $_SESSION['usuarios'] = ""; }
+	//$_SESSION['usuarios'] = strtolower($rp['ref'] ?? '');
+	$_SESSION['usuarios'] = (!empty($rp['ref'])) ? strtolower($rp['ref']) : "";
+
 	if($cp > 0){
 	
 		ayear();	
@@ -184,6 +186,14 @@ function process_pinqr(){
 			</form>
 			</div>
 		<audio src='audi/user_lost.mp3' autoplay></audio>");
+		global $redir;
+		$redir = "<script type='text/javascript'>
+					function redir(){
+						window.location.href='indexcamini.php';
+					}
+					setTimeout('redir()',6000);
+				</script>";
+		print($redir);
 	}	
 	
 } // FIN function process_pinqr

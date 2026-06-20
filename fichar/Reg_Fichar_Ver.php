@@ -71,20 +71,23 @@ function ver_todo(){
 	}else{ $fil = "%".$dy1.$dm1.$dd1."%"; }
 
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
+	global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
+	global $vname;			$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 	global $ruta;		$ruta = '../';
 	require 'Inc_Suma_Todo.php';
 
 	global $sqlb;		global $TablaTitulo;
 	if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
-		$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `error` = 'true' AND `del` = 'false') ORDER BY $orden ";
+		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`error` = 'true' AND hor.`del` = 'false')) ORDER BY $orden ";
 		$TablaTitulo = "ERRORES ".$dyt1.": ";
 	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
-		$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `del` = 'true') ORDER BY $orden ";
+		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`del` = 'true')) ORDER BY $orden ";
 		$TablaTitulo = "PAPELERA ".$dyt1.": ";
+				echo "<p style='text-align:center;'>ESTOY AQUÍ!!!</p>";
+
 	}else{
-		$sqlb = "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND (`din` LIKE '$fil' AND `dout` <> '' AND `del` = 'false') ORDER BY $orden ";
+		$sqlb = "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`dout` <> '' AND hor.`del` = 'false')) ORDER BY $orden ";
 		$TablaTitulo = "TODO: ";
 	}
 	//echo "** ".$sqlb."<br>";
@@ -97,6 +100,7 @@ function ver_todo(){
 
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
+	//echo "<p>".$sqlun."</p>";
 	$qun = mysqli_query($db, $sqlun);
 
 	global $name1;		global $name2;
