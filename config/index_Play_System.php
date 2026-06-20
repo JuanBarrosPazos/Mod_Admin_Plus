@@ -528,7 +528,7 @@ function suma_denegado(){
 	global $idd;				$idd = 68;
 
 	$sqld = "UPDATE `$db_name`.$table_name_c SET `deneg` = '$sumadeneg' WHERE $table_name_c.`idv` = '$idd' LIMIT 1 ";
-	echo "** ".$sqld."<br>";
+	//echo "** ".$sqld."<br>";
 
 	if(mysqli_query($db, $sqld)){/*	print("	</br>");*/
 		

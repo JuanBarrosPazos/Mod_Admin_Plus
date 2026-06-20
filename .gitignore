@@ -8,3 +8,7 @@ Web_CV.zip
 *.zip
 *.rar
 desktop.ini
+GenerarDatosPy/*
+GenerarDatosPy/*.sql
+GenerarDatosPy/*.py
+*.py
