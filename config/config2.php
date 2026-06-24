@@ -46,7 +46,7 @@ function config_one(){
 	}else{ 	print("DON`T UNLINK ../index.php </br>");
 			$data1 = PHP_EOL."\t DON`T UNLINK ../index.php";
 	}
-
+	global $data2;
 	if(!file_exists('../index.php')){
 		if(file_exists('index_Play_System.php')){
 			copy("index_Play_System.php", "../index_Play_System.php");
@@ -191,9 +191,7 @@ function process_form(){
 				 ////////////////////				  ///////////////////
 
 function y(){
-	global $trf;			$trf = $_SESSION['iniref'];
-	$carpeta = "../Users/".$trf;
-	$filename = $carpeta."/ayear.php";
+	$filename = "../config//ayear.php";
 	$fw1 = fopen($filename, 'r+');
 	$contenido = fread($fw1,filesize($filename));
 	fclose($fw1);
@@ -206,7 +204,7 @@ function y(){
 }
 
 function modif(){
-	$filename = "../Users/".$_SESSION['iniref']."/year.txt";
+	$filename = "../config/year.txt";
 	$fw2 = fopen($filename, 'w+');
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);

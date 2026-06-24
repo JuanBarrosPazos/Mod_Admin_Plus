@@ -16,8 +16,8 @@
 	if(file_exists($carpeta)){
 		copy("../Images/untitled.png", $carpeta."/untitled.png");
 		copy("../Images/pdf.png", $carpeta."/pdf.png");
-		copy($rutCreaTablas."ayear_Init_System.php", $carpeta."/ayear.php");
-		copy($rutCreaTablas."year.txt", $carpeta."/year.txt");
+		//copy($rutCreaTablas."ayear_Init_System.php", $carpeta."/ayear.php");
+		//copy($rutCreaTablas."year.txt", $carpeta."/year.txt");
 		copy($rutCreaTablas."SecureIndex2.php", $carpeta."/index.php");
 		global $data1;			$data1 = $data1."\t* OK USER SYSTEM FILES ".$carpeta."\n";
 	}else{

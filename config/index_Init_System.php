@@ -714,9 +714,9 @@ function modif2(){
 		fwrite($configYear, $dataYear);
 		fclose($configYear);
 		// Pasamos logs...
-		$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
+		$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO config/year.txt";
 	}else{
-		$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
+		$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO config/year.txt";
 	}
 	
 	ini_log();

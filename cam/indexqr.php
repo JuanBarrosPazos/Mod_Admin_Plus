@@ -233,7 +233,7 @@ function errors(){
 	
 function modif(){
 									   							
-	$filename = "../Users/".$_SESSION['usuarios']."/ayear.php";
+	$filename = "../config/ayear.php";
 	$fw1 = fopen($filename, 'r+');
 	$contenido = fread($fw1,filesize($filename));
 	fclose($fw1);
@@ -252,7 +252,7 @@ function modif(){
 
 function modif2(){
 
-	$filename = "../Users/".$_SESSION['usuarios']."/year.txt";
+	$filename = "../config/year.txt";
 	$fw2 = fopen($filename, 'w+');
 	$date = "".date('Y')."";
 	fwrite($fw2, $date);
@@ -261,27 +261,18 @@ function modif2(){
 	$dat2 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
 }
 
-function modif2b(){
-
-	$filename = "config/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-	global $dat3;
-	$dat3 = "\tMODIFICADO Y ACTUALIZADO ".$filename.PHP_EOL;
-}
-
 function tcl(){
 	
-	global $db;					global $db_name;
-	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
+	global $db_name; 			global $db;
+	global $table_name_fk;		$table_name_fk = "`".$_SESSION['clave']."admin`";
+	
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
+  /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
@@ -291,13 +282,17 @@ function tcl(){
   `del` varchar(5) NOT NULL default 'false',
   `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  KEY `ref` (`ref`),
+  FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
-	
-	global $dat4;
-	if(mysqli_query($db, $tcl)){
-			$dat4 = "\t* OK TABLA ADMIN ".$vname.PHP_EOL;
-	}else{	$dat4 = "\t* NO OK TABLA ADMIN. ".mysqli_error($db).PHP_EOL; }
+		
+	global $dat3;
+	if(mysqli_query($db , $tcl)){
+		$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
+	}else{
+		$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+	}
 
 }
 
@@ -307,7 +302,7 @@ function tcl(){
 	
 function ayear(){
 
-	$filename = "../Users/".$_SESSION['usuarios']."/year.txt";
+	$filename = "../config/year.txt";
 	$fw2 = fopen($filename, 'r+');
 	$fget = fgets($fw2);
 	fclose($fw2);
@@ -320,7 +315,6 @@ function ayear(){
 				<div style='width:200px'>* EL AÑO HA CAMBIADO</div>");/*</br>&nbsp;&nbsp;&nbsp;".date('Y')." != ".$fget." */
 		modif();
 		modif2();
-		modif2b();
 		tcl();
 		global $dat1;	global $dat2;	global $dat3;	global $dat4;
 		global $datos;			$datos = $dat1.$dat2.$dat3.$dat4.PHP_EOL;

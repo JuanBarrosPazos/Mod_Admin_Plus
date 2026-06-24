@@ -271,7 +271,7 @@ function tcl(){
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
-  `id` int(4) NOT NULL auto_increment,
+  `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
   /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
@@ -286,7 +286,7 @@ function tcl(){
   `tfeed` time NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
-  FOREIGN KEY (`ref`) REFERENCES `".$table_name_fk."`(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
+  FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
@@ -782,8 +782,7 @@ function process_pin(){
 	if((isset($_GET['ocultop'])) ||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
 	else{ $qrp = $_POST['pin']; }
 	
-	global $table_name_a;
-	$table_name_a = "`".$_SESSION['clave']."admin`";
+	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$sqlp =  "SELECT * FROM `$db_name`.$table_name_a WHERE $table_name_a.`dni` = '$qrp' ";
 	$qp = mysqli_query($db, $sqlp);
@@ -816,6 +815,9 @@ function process_pin(){
 		print($redir);
 
 	}elseif($cp > 0){
+		
+		ayear();
+
 		//$tabla1 = strtolower($_SESSION['clave'].$rp['ref']);
 		global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
@@ -887,8 +889,6 @@ function process_pin(){
 
 		}
 	
-		ayear();
-		
 	}else{ print("<div class='centradiv alertdiv' >
 						NO EXISTE EL USUARIO.<br>
 						PONGASE EN CONTACTO CON ADMIN SYSTEM.<br>

@@ -127,15 +127,16 @@ function modif2(){
 
 function tcl(){
 	
-	global $db;			global $db_name;
+	global $db_name; 			global $db;
+	global $table_name_fk;		$table_name_fk = "`".$_SESSION['clave']."admin`";
 	
-	$vname = "`".$_SESSION['clave']."horarios_".date('Y')."`";
+	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
-  `Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,
+  /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
+  /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,
   `dout` varchar(10) collate utf16_spanish2_ci NULL,
@@ -145,15 +146,18 @@ function tcl(){
   `del` varchar(5) NOT NULL default 'false',
   `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
   `tfeed` time NULL,
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  KEY `ref` (`ref`),
+  FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
 	if(mysqli_query($db , $tcl)){
-			$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
+		$dat3 = "\t* CREADA OK TABLA ADMIN ".$vname.PHP_EOL;
 	}else{
-			$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
+		$dat3 = "\t* NO CREADA TABLA ADMIN. ".mysqli_error($db).PHP_EOL;
 	}
+
 }
 					
 				   ////////////////////				   ////////////////////
