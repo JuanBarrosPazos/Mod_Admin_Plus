@@ -21,7 +21,7 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.06.20.Beta2 2026/06/20
+#### Mod_Admin_Plus V26.06.26.Beta2 2026/06/26
 	* MODIFICADO UNA ÚNICA TABLA ANUAL PARA LOS REGISTROS DE HORARIOS:
 	* COMPROBACIÓN DE LAS MODIFICACIONES:
 		- Ok Instalación inicial.
