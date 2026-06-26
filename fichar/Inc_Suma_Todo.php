@@ -17,7 +17,10 @@
 	if(isset($_SESSION['usuarios'])){ $Sesion = $_SESSION['usuarios'];
 	}else{ $Sesion = $_SESSION['ref']; }
 
-	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	//$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+
+	// SE AÑADE AND `error` = 'false' PARA NO INCLUIR LOS ERRORES
+	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND (hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false') ORDER BY $orden ";
 
 	//echo "<br>".$sh;
 			///////////////////////			***********  		///////////////////////

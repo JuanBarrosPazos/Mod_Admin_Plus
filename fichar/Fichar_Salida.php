@@ -38,10 +38,10 @@
 	global $text;
 	if(($ttoth > 9)||($ttotd > 0)){
 		print("<div class='centradiv alertdiv'>
-				NO PUEDE FICHAR MÁS DE 10 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
+				NO PUEDE FICHAR MÁS DE 9 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 		        </div>");
 		
-		global $ttot;				$ttot = '00:00:00';
+		//global $ttot;				$ttot = '00:00:00';
 		global $terror;				$terror = 'true';
 		$text = PHP_EOL."*** ERROR CONSULTE ADMIN SYSTEM ***";
 		$text = $text.PHP_EOL."\t- FICHA SALIDA ".$dout." / ".$tout;

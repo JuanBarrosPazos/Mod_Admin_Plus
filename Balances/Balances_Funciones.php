@@ -25,7 +25,8 @@ function show_form(){
 	
 	global $db;		
 	global $tablau;			$tablau = "`".$_SESSION['clave']."admin`";
-	// $sqlu =  "SELECT * FROM $tablau WHERE (`ref` <> '$_SESSION[ref]' OR `dni` <> '$_SESSION[webmaster]') ORDER BY `ref` ASC ";
+	//$sqlu =  "SELECT * FROM $tablau WHERE (`ref` <> '$_SESSION[ref]' OR `dni` <> '$_SESSION[webmaster]') ORDER BY `ref` ASC ";
+	
 	global $sqlu;
 	if($_SESSION['Nivel'] == 'wmaster'){
 		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
@@ -72,7 +73,7 @@ function show_form(){
 					</div>");
 		}elseif($_SESSION['usuarios'] != ''){
 
-		require "../Users/".$_SESSION['usuarios']."/ayear.php";
+		require "../config/ayear.php";
 		global $Titulo;			$Titulo = "FILTRO GRAFICAS HORARIOS ".$_SESSION['usuarios'];
 		require 'Inc_Filtro_Balance.php';
 
@@ -88,6 +89,7 @@ function show_form(){
 function botones(){
 	
 	require 'Inc_Graf_Button.php';
+
 }
 
 				   ////////////////////				   ////////////////////
@@ -105,8 +107,7 @@ function ver_todo(){
 			clearstatcache ();
 	}
 
-	global $db;			global $dyt1;			global $dm1;
-	global $orden;
+	global $db;			global $dyt1;			global $dm1;		global $orden;
 	require '../Inclu/orden.php';
 	
 	if($_POST['dy'] == ''){ $dy1 = date('Y');
@@ -135,12 +136,13 @@ function ver_todo(){
 																					}
 	*/
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
-	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
+	global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
+	global $vname;			$vname = "`".strtolower($_SESSION['clave']."horarios_").$dyt1."`";
 
 	require 'calc_anu_mes.php';
 	
 			///////////////////////			***********  		///////////////////////
-			
+		
 	require 'Inc_Suma_Todob.php';
 
 			///////////////////////			***********  		///////////////////////
@@ -148,8 +150,15 @@ function ver_todo(){
 	global $sqlb;			global $qb;
 	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
 	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
-	$qb = mysqli_query($db, $sqlb);
+
+	//$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false') ORDER BY $orden ";
 	
+	//echo "<br>".$sqlb."<br>";
+	$qb = mysqli_query($db, $sqlb);
+	if(!$qb){print("<font color='#F1BD2D'>* Balances/Balances_Funciones.php ERROR L.152: </font>
+					</br>".mysqli_error($db)."</br>");
+	}else{ }
+
 			////////////////////		**********  		////////////////////
 
 	global $refses;			$refses = $_SESSION['usuarios'];
@@ -157,7 +166,7 @@ function ver_todo(){
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
-	if(!$qun){print("<font color='#F1BD2D'>Se ha producido un error L.308: </font>
+	if(!$qun){print("<font color='#F1BD2D'>* Balances/Balances_Funciones.php ERROR L.164: </font>
 					</br>".mysqli_error($db)."</br>");
 	}else{
 		global $name1;			global $name2;

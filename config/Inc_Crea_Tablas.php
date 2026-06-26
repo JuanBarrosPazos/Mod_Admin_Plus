@@ -11,7 +11,7 @@
 	$table_name_a = "`".$_SESSION['clave']."admin`";
 
 	$admin = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_a (
-  `id` int(4) NOT NULL auto_increment,
+  `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
   `Nivel` varchar(8) collate utf16_spanish2_ci NOT NULL default 'amd',
   `Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,
@@ -29,7 +29,7 @@
   `Tlf2` int(9) NOT NULL default 0,
   `lastin` datetime collate utf16_spanish2_ci NOT NULL default CURRENT_TIMESTAMP,
   `lastout` datetime collate utf16_spanish2_ci NOT NULL default CURRENT_TIMESTAMP,
-  `visitadmin` int(4) collate utf16_spanish2_ci NOT NULL default '0',
+  `visitadmin` int collate utf16_spanish2_ci NOT NULL default '0',
   `del` varchar(5) NOT NULL default 'false',
   `borrado` datetime collate utf16_spanish2_ci NULL,
   `recuper` datetime collate utf16_spanish2_ci NULL,
@@ -53,7 +53,7 @@
 	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
 	$ipcontrol = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_b (
-  `id` int(4) NOT NULL auto_increment,
+  `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL default 'anonimo',
   `nivel` varchar(8) collate utf16_spanish2_ci NOT NULL default 'anonimo',
   `ipn` varchar(22) collate utf16_spanish2_ci NOT NULL default 'lost',
@@ -113,7 +113,7 @@ if(mysqli_query($db, $visitas)){
 	$table_name_d = "`".$_SESSION['clave']."horarios_".date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_d (
-  `id` int(4) NOT NULL auto_increment,
+  `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
   `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
   `tin` time NOT NULL,

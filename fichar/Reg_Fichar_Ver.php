@@ -84,22 +84,18 @@ function ver_todo(){
 	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
 		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`del` = 'true')) ORDER BY $orden ";
 		$TablaTitulo = "PAPELERA ".$dyt1.": ";
-				echo "<p style='text-align:center;'>ESTOY AQUÍ!!!</p>";
-
 	}else{
 		$sqlb = "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`dout` <> '' AND hor.`del` = 'false')) ORDER BY $orden ";
 		$TablaTitulo = "TODO: ";
 	}
 	//echo "** ".$sqlb."<br>";
-	global $qb;
-	$qb = mysqli_query($db, $sqlb);
+	global $qb;				$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////
 
 	global $refses;			$refses = $_SESSION['usuarios'];
 
-	global $tablau;
-	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
+	global $tablau;			$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	//echo "<p>".$sqlun."</p>";
 	$qun = mysqli_query($db, $sqlun);
 

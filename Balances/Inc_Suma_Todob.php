@@ -4,11 +4,11 @@
 	require '../Inclu/orden.php';
 
 	/* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
-	global $vname;		global $fil;		global $db;
-	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	global $vname;		global $fil;		global $db;		global $table_admin;
+	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
-	if(!$sh){ print(mysqli_error($db).".</br>");
+	if(!$sh){ print("* Balances/Inc_Suma_Todob.php ERROR \$sh L.8".mysqli_error($db).".</br>");
 	}else{
         $datf = mysqli_query($db, $sh);
         $df = fopen('datosf.php','w+');

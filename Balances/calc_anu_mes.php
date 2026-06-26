@@ -1,6 +1,6 @@
 <?php
 
-	global $db;				global $db_name;			global $vname;
+	global $db;				global $db_name;			global $vname;		global $table_admin;
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -10,12 +10,12 @@
 	global $dy1;			global $orden;
 	global $dm1ym;			$dm1ym = "-01-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
-	
-	$dm1 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+
+	$dm1 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS */
 	global $sumah;
-	if(!$dm1){print(mysqli_error($db).".</br>");
+	if(!$dm1){print("*******************ERROR: ".mysqli_error($db).".</br>");
 	}else{
 		$qh = mysqli_query($db, $dm1);
 		$qhr = mysqli_num_rows($qh);
@@ -89,7 +89,7 @@
 	global $dm1ym;			$dm1ym = "-02-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm2 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm2 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -167,7 +167,7 @@
 	global $dm1ym;			$dm1ym = "-03-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm3 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm3 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -245,7 +245,7 @@
 	global $dm1ym;			$dm1ym = "-04-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm4 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm4 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -323,7 +323,7 @@
 	global $dm1ym;			$dm1ym = "-05-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm5 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm5 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -401,7 +401,7 @@
 	global $dm1ym;			$dm1ym = "-06-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm6 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm6 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -479,7 +479,7 @@
 	global $dm1ym;			$dm1ym = "-07-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm7 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm7 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -557,7 +557,7 @@
 	global $dm1ym;			$dm1ym = "-08-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm8 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm8 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -635,7 +635,7 @@
 	global $dm1ym;				$dm1ym = "-09-";
 	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm9 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm9 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -713,7 +713,7 @@
 	global $dm1ym;				$dm1ym = "-10-";
 	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm10 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm10 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -791,7 +791,7 @@
 	global $dm1ym;			$dm1ym = "-11-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm11 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm11 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm11){print(mysqli_error($db).".</br>");
@@ -869,7 +869,7 @@
 	global $dm1ym;			$dm1ym = "-12-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm12 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	$dm12 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	

@@ -86,18 +86,15 @@ function ver_todo(){
 
 			///////////////////////			***********  		///////////////////////
 
-	global $sqlb;
-	global $qb;
+	global $sqlb;		global $qb;
 	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `error` = 'true' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////
 
-	global $refses;
-	$refses = $_SESSION['usuarios'];
+	global $refses;		$refses = $_SESSION['usuarios'];
 
-	global $tablau;
-	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
+	global $tablau;		$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
 	global $name1;			global $name2;
 	if(!$qun){print("ERROR SQL L.106 ".mysqli_error($db)."</br>");

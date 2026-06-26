@@ -45,12 +45,13 @@ if(isset($_POST['oculto'])){
 			}
 					show_visit();
 	}else{	process_pin();
+			errors();
 			//ayear();
 	}
 }elseif(isset($_POST['entrada'])){	pin_in();
-									//errors();
+									errors();
 }elseif(isset($_POST['salida'])){	pin_out();
-									//errors();
+									errors();
 }elseif(isset($_POST['cancel'])){	
 					show_form2();
 					if($_SESSION['showf'] == 68){
@@ -60,8 +61,8 @@ if(isset($_POST['oculto'])){
 					}
 					
 }elseif(isset($_GET['ocultop'])){ 	process_pin();
-							  		 	//ayear();
-							  		 	errors();
+							  		//ayear();
+							  		errors();
 
 }elseif(isset($_GET['pin']) != ''){ process_pin();
 								   	//ayear();

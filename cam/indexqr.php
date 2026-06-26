@@ -269,7 +269,7 @@ function tcl(){
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
-  `id` int(4) NOT NULL auto_increment,
+  `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
   /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/

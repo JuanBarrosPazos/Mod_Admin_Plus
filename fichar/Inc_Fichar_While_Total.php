@@ -15,7 +15,8 @@
 			print ("<div class='centradiv alertdiv'>
 						".$name1." ".$name2." Ref: ".$refses."<br>
 						".$dyt1." TOTALES CONSULTA<br>
-						".$sumatodo."
+						".$sumatodo."<br>
+						LOS ERRORES NO SUMAN
 					</div>");
 	}
 
