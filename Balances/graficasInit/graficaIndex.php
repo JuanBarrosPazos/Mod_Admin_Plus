@@ -158,7 +158,7 @@
 
 			print($li1.$li2.$li3.$li4.$li5.$li6.$li7.$li8.$li9.$li10.$li11.$li12);
 
-
+		global $TotEi;
 		if($totaltime0 > 0){
 				$TotEi = ((abs($totaltime0))*100)/(abs($totaltime0));
 		}else{ 	$TotEi = 0.00; }
@@ -172,8 +172,5 @@
 					</li>
 				</ul>
 				</div>");
-
-
-
 
 ?>

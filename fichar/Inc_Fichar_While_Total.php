@@ -2,6 +2,7 @@
 
     global $name1;		global $name2;		global $refses;		global $TablaTitulo;
 	global $dy;			global $dyt1;		global $sumatodo;
+	global $db;			global $qb;
 
 	if(!$qb){
 		print("ERROR SQL L.82||85||88 Reg_Fichar_Ver.php".mysqli_error($db)."</br>");
@@ -16,9 +17,9 @@
 						".$name1." ".$name2." Ref: ".$refses."<br>
 						".$dyt1." TOTALES CONSULTA<br>
 						".$sumatodo."<br>
-						LOS ERRORES NO SUMAN
+						LOS ERRORES NO COMPUTAN
 					</div>");
-	}
+		}
 
 		print ("<table class='centradiv'>
 					<tr>

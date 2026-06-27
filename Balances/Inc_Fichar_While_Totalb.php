@@ -2,6 +2,7 @@
 
     global $name1;			global $name2;
     global $refses;			global $nodata;
+	global $db;				global $qb;
 
 	if(!$qb){
 		print("ERROR SQL ".mysqli_error($db)."</br>");

@@ -151,8 +151,6 @@ function ver_todo(){
 	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
 	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
 
-	//$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false') ORDER BY $orden ";
-	
 	//echo "<br>".$sqlb."<br>";
 	$qb = mysqli_query($db, $sqlb);
 	if(!$qb){print("<font color='#F1BD2D'>* Balances/Balances_Funciones.php ERROR L.152: </font>
@@ -166,7 +164,7 @@ function ver_todo(){
 	global $tablau;
 	$sqlun =  "SELECT * FROM $tablau WHERE `ref` = '$refses' LIMIT 1 ";
 	$qun = mysqli_query($db, $sqlun);
-	if(!$qun){print("<font color='#F1BD2D'>* Balances/Balances_Funciones.php ERROR L.164: </font>
+	if(!$qun){print("<font color='#F1BD2D'>* Balances/Balances_Funciones.php ERROR L.165: </font>
 					</br>".mysqli_error($db)."</br>");
 	}else{
 		global $name1;			global $name2;

@@ -1,10 +1,12 @@
 <?php
 
     global $orden;
+	
 	require '../Inclu/orden.php';
 
 	/* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 	global $vname;		global $fil;		global $db;		global $table_admin;
+
 	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
@@ -124,8 +126,7 @@
 	$segundos = $totsec-($horas*3600)-($minutos*60);
 
 	global $t;
-	if($dias == 1){  $t = " DIA || ";
-	}elseif($dias != 1 ){ $t = " DIAS || "; }
+	if($dias == 1){  $t = " DIA || "; }elseif($dias != 1 ){ $t = " DIAS || "; }
 							
 	global $totaltime;
 	$totaltime = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";

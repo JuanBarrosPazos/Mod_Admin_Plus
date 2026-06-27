@@ -76,7 +76,7 @@ $head_telef = "Tlf: +69.696969696";
 
 // Titulo footer page
 global $head_footer;
-$head_footer = "© Juan Barr&oacute;s Pazos 2020/25 Licencia CC BY-NC-SA";
+$head_footer = "© Juan Barr&oacute;s Pazos 2020/26 Licencia CC BY-NC-SA";
 
 
 						/////////////////////////////
@@ -122,5 +122,5 @@ $_SESSION['admin_url'] = $admin_url;
 						/////////////////////////////
 
 
-/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
+/* Creado por © Juan Barros Pazos 2020/26 Licencia CC BY-NC-SA */
 ?>

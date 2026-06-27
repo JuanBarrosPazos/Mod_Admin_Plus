@@ -1,6 +1,6 @@
 <?php
 
-	global $db; 		global $db_name;
+	global $db; 		        global $db_name;
 	global $db_name_table; 		$db_name_table = strtolower($_POST['tabla']);
 	global $datein; 	$datein = date('Y.m.d_H.i.s');
     //	$datein = date('Y.m.d');
@@ -85,6 +85,6 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-		
-/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
+/* Creado por © Juan Barros Pazos 2020/26 Licencia CC BY-NC-SA */
+
 ?>

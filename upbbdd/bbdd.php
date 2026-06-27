@@ -41,23 +41,17 @@ function show_form(){
 								   	   'tablas' => strtolower($_POST['tablas']),);
 					// print($_SESSION['tablas']);
 		if(($_SESSION['tablas'] == '')&&(!isset($_POST['delete']))){
-			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA O USUARIO</div>
+			print("<div class='centradiv alertdiv'>SELECCIONE UNA TABLA</div>
 					<audio src='../audi/bbdd1.mp3' autoplay></audio>");
 		}
 	}else{ 	unset($_SESSION['tablas']);
 			print("<audio src='../audi/bbdd1.mp3' autoplay></audio>");
-}
+	}
 	
-	if($_SESSION['Nivel'] == 'user'){
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 		print("<table class='centradiv'>
 				<tr>
-					<td>TABLAS EXPORTABLES PARA BBDD ".$_SESSION['ref']."</td>
-				</tr>
-			</table>");	
-	}elseif(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
-		print("<table class='centradiv'>
-				<tr>
-					<td>EXPORTE TABLAS BBDD<br>SELECCIONE UN USUARIO</td>
+					<td>EXPORTE TABLAS BBDD</td>
 				</tr>		
 				<tr>
 					<td>
@@ -73,24 +67,36 @@ function show_form(){
 		if(@$defaults['tablas'] == 'admin'){
 					print ("selected = 'selected'");
 		}
-							/* */
-					print("> Tabla Admin Sistem </option>");
-							
+					print("> Tabla Admin Sistem </option>
+				<option value = 'horarios'");
+
+		if(@$defaults['tablas'] == 'horarios'){
+					print ("selected = 'selected'");
+		}
+					print("> Tablas Horarios </option>");
+
+		/*
 		global $db;
-		global $tablau;				$tablau = "`".$_SESSION['clave']."admin`";
-		$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+		//global $tablau;				$tablau = "`".$_SESSION['clave']."admin`";
+		//$sqlu =  "SELECT * FROM $tablau ORDER BY `ref` ASC ";
+		global $nom;	$nom = $_SESSION['clave']."horarios_%";		$nom = "LIKE '$nom'";
+
+		$sqlu = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom";
 		$qu = mysqli_query($db, $sqlu);
+
 		if(!$qu){
-				print("ERROR SQL L.85 ".mysqli_error($db)."<br>");
+				print("ERROR SQL L.84 ".mysqli_error($db)."<br>");
 		}else{
 			while($rowu = mysqli_fetch_assoc($qu)){
-				print ("<option value='".strtolower($_SESSION['clave'].$rowu['ref'])."' ");
-				if(strtolower($_SESSION['clave'].$rowu['ref']) == @$defaults['tablas']){
+				print ("<option value='".strtolower($rowu['TABLE_NAME'])."' ");
+				if(strtolower($rowu['TABLE_NAME']) == @$defaults['tablas']){
 						print ("selected = 'selected'");
 				}
-						print ("> ".$rowu['Nombre']." ".$rowu['Apellidos']." </option>");
+						print ("> ".str_replace('_', ' ', substr(strtoupper($rowu['TABLE_NAME']), 3))." </option>");
 			} // FIN WHILE
 		}
+		*/
+
 		print ("</select>
 					<button type='submit' title='SELECCIONE USUARIO / TABLA' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
 						<input type='hidden' name='oculto1' value=1 />
@@ -98,7 +104,7 @@ function show_form(){
 					</td>
 				</tr>
 			</table>");
-			
+		
 		global $ExportBotonera;		$ExportBotonera = 1;
 		require 'Export_Botonera.php';
 
@@ -120,7 +126,7 @@ function show_form(){
 			$consulta = "SHOW TABLES FROM $db_name $nom";
 			$respuesta = mysqli_query($db, $consulta);
 			if(!$respuesta){
-				print("ERROR SQL L.127 ".mysqli_error($db)."</br>");
+				print("ERROR SQL L.126 ".mysqli_error($db)."</br>");
 			}else{	
 				print("<table class='TFormAdmin alertdiv'>
 						<tr>
@@ -184,7 +190,7 @@ function listfiles(){
 	
 	if($num < 1){
 		print ("<div class='centradiv alertdiv'>NO HAY ARCHIVOS PARA DESCARGAR</div>");
-		if(($_SESSION['tablas'] != '')&&(!isset($_POST['oculto1']))&&(!isset($_POST['delete']))){
+		if((@$_SESSION['tablas'] != '')&&(!isset($_POST['oculto1']))&&(!isset($_POST['delete']))){
 			print("<audio src='../audi/no_file.mp3' autoplay></audio>");
 		}
 	}else{
@@ -227,6 +233,6 @@ function master_index(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
+	/* Creado por © Juan Barros Pazos 2020/26 Licencia CC BY-NC-SA */
 
 ?>

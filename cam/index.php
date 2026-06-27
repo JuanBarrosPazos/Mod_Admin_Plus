@@ -556,6 +556,6 @@ function show_form2($errorsp=''){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-/* Creado por © Juan Barros Pazos 2020/25 Licencia CC BY-NC-SA */
+/* Creado por © Juan Barros Pazos 2020/26 Licencia CC BY-NC-SA */
 
 ?>

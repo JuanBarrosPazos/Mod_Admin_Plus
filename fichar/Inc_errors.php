@@ -22,6 +22,8 @@
 				<tr>
 					<th colspan=6 class='BorderInfY'>
 						".$sesus." EXISTEN ERRORES EN SUS HORARIOS
+						<br>
+						NO SE COMPUTARÁN COMO HORAS REALIZADAS...
 					</th>
 				</tr>
 				<tr>
