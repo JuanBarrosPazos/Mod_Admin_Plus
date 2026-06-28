@@ -62,18 +62,18 @@ function show_form(){
 		if(@$defaults['tablas'] == ''){
 					print ("selected = 'selected'");
 		}
-					print(">SELECCIONE UNA TABLA</option>
+					print(">LAS TABLAS O USUARIO</option>
 				<option value = 'admin'");
 		if(@$defaults['tablas'] == 'admin'){
 					print ("selected = 'selected'");
 		}
-					print(">Tabla Usuarios</option>
+					print("> Tabla Admin Sistem </option>
 				<option value = 'horarios'");
 
 		if(@$defaults['tablas'] == 'horarios'){
 					print ("selected = 'selected'");
 		}
-					print(">Tablas Horarios</option>");
+					print("> Tablas Horarios </option>");
 
 		print ("</select>
 					<button type='submit' title='SELECCIONE USUARIO / TABLA' class='botonlila imgButIco InicioBlack' style='vertical-align:middle;' ></button>
@@ -95,16 +95,16 @@ function show_form(){
 		if($_SESSION['tablas'] != ''){
 
 			global $nom; 			$nom = strtolower($_SESSION['tablas']);
-			if(strtolower($_SESSION['tablas']) == 'admin'){ $nom = "%".$nom."%";
+			if(strtolower($_SESSION['tablas']) == 'admin'){ $nom = "%".$nom."%"; 
 			}else{ $nom = "%".$nom."%"; }
-			$nom = "LIKE '$nom' ";
+			$nom = "LIKE '$nom'";
 	
+			/* Se busca las tablas en la base de datos */
 			//$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES ";
-			$consulta = "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom AND TABLE_NAME NOT LIKE '%visitasadmin%'";
+			$consulta = "SHOW TABLES FROM $db_name $nom";
 			$respuesta = mysqli_query($db, $consulta);
-
 			if(!$respuesta){
-				print("* upbbdd/bbdd.php ERROR SQL L.103 ".mysqli_error($db)."</br>");
+				print("ERROR SQL L.126 ".mysqli_error($db)."</br>");
 			}else{	
 				print("<table class='TFormAdmin alertdiv'>
 						<tr>
@@ -135,7 +135,7 @@ function show_form(){
 					}
 					$countbgc = $countbgc+1;
 				} // FIN WHILE
-				print("</table>");		
+			print("</table>");		
 			}
 		}
 	}

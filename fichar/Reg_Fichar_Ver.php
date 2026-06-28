@@ -100,7 +100,7 @@ function ver_todo(){
 	$qun = mysqli_query($db, $sqlun);
 
 	global $name1;		global $name2;
-	if(!$qun){ print("ERROR SQL L.100 ".mysqli_error($db)."</br>");
+	if(!$qun){ print("* ERROR SQL L.100 ".mysqli_error($db)."</br>");
 	}else{
 		while($rowun = mysqli_fetch_assoc($qun)){
 				$name1 = strtoupper($rowun['Nombre']);

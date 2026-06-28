@@ -757,7 +757,7 @@ function show_ficha(){
 		require 'fichar/Fichar_Redondeo_out.php';
 
 		global $ImgForm;			$ImgForm = "";
-		global $FormButtonHome;		$FormButtonHome = "Index759";
+		global $FormButtonHome;		$FormButtonHome = "";
 		global $rutaAudio;			$rutaAudio = "";
 		global $Action;				
 		if(isset($_SESSION['ref'])){
