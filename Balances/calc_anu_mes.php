@@ -26,8 +26,8 @@ for ($mes = 1; $mes <= 12; $mes++) {
     $qh = mysqli_query($db, $sql);
     
     if (!$qh) {
-        print("*******************ERROR: " . mysqli_error($db) . ".</br>");
-        ${"totaltime" . $mes} = "0.0"; // Valor por defecto en caso de error
+        print("* ERROR: ".mysqli_error($db).".</br>");
+        ${"totaltime".$mes} = "0.0"; // Valor por defecto en caso de error
         $total_times_array[] = "0.0";
         continue;
     }

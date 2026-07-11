@@ -1,8 +1,10 @@
 <?php
 
-    global $name1;			global $name2;
-    global $refses;			global $nodata;
-	global $db;				global $qb;
+	global $db;				global $qb;			global $dyt1;
+    global $name1;			global $name2;		global $colspana;
+    global $refses;			global $nodata;		global $feedtot;
+	global $totaltime, $totaltime1, $totaltime2, $totaltime3, $totaltime4, $totaltime5, $totaltime6, $totaltime7, $totaltime8, $totaltime9, $totaltime10, $totaltime11, $totaltime12;
+
 
 	if(!$qb){
 		print("ERROR SQL ".mysqli_error($db)."</br>");
@@ -129,8 +131,7 @@
 								<td colspan='".$colspana."'></td>
 							</tr>
 							<tr>
-								<td colspan='2'>TOTALES</td>
-								<td colspan='".$colspanb."'>".$totaltime."</td>
+								<td colspan='".$colspana."'>".$totaltime."</td>
 							</tr>");
 			}
 			print("</table>");

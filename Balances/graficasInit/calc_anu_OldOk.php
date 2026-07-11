@@ -45,6 +45,13 @@
 	$respuestab = mysqli_query($db, $consultab);
 	$countb = mysqli_num_rows($respuestab);
 
+	$consultac = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom";
+    //echo $consulta."<br>";
+	$respuestac = mysqli_query($db, $consultac);
+	$countc = mysqli_num_rows($respuestac);
+	//print("* NUMERO TABLAS: ".$countc."<br>");
+	//print("* CLAVE TABLA USUARIO: ".$nom."<br>");
+
 	//global $fila;
 	//$fila = mysqli_fetch_row($respuesta);
     // echo " ".$fila[0]."<br>";
@@ -131,57 +138,48 @@
             </ul>
 		</div>");
 
-    // CONSTRUYO EL INCIO DE LA GRAFICA DIAS ANUALES PARA EL WHILE
-	$consultac = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $nom";
-    //echo $consulta."<br>";
-	$respuestac = mysqli_query($db, $consultac);
-	$countc = mysqli_num_rows($respuestac);
-	//print("* NUMERO TABLAS: ".$countc."<br>");
-	//print("* CLAVE TABLA USUARIO: ".$nom."<br>");
-
+        // CONSTRUYO EL INCIO DE LA GRAFICA DIAS ANUALES PARA EL WHILE
         print ("<div class='centradiv' style='display:inline-block; margin:0.2em 0.4em; padding: 0.6em 0.2em 1.2em 0.2em;'>
                     GRAFICA DIAS ANUALES
 					<ul class='timeline'>");
 
-        global $DVTotal;
 		while($filac = mysqli_fetch_row($respuestac)){
 			if($filac[0]){
 
-            ////////////////////////        ////////////////////////
+            ////////////////////////
 
-            	$sql = "SELECT COUNT(DISTINCT CASE WHEN `error` = 'false' THEN `din` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `error` = 'true' THEN `din` END) AS dias_error FROM `$filac[0]` WHERE `ref` = '$userBbdd' AND `ttot` <> '00:00:00'";
 
-                $resultado = mysqli_query($db, $sql);
 
-                global $DiasValidos;	global $DiasError;		global $DiasTotal;      global $DiasValidosTotal;
 
-                if ($resultado) {
-                    $fila = mysqli_fetch_assoc($resultado);
-                    $DiasValidos = $fila['dias_validos'];
-                    $DiasValidosTotal = $DiasValidos + $DiasValidosTotal;
-                    //echo $DiasValidosTotal." ";
-                    $DiasError = $fila['dias_error'];
-                    $DiasTotal = $DiasValidos + $DiasError;
-                    // Mostramos ambos resultados
-                    //echo "Total de días trabajados: ".$DiasValidos. "<br>";
-                    //echo "Total de días eliminados: ".$DiasError."<br>";
-                    //echo "Total días: ".$DiasTotal."<br>";
-                } else {
-                    echo "Error en la consulta: " . mysqli_error($db);
-                }
+            ////////////////////////
 
-            ////////////////////////        ////////////////////////
 
+                $sqlSumc = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalC' FROM `$filac[0]` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' OR `error` <> 'true')";
+                $Sumc = mysqli_query($db, $sqlSumc);
+                $sumTotc = mysqli_fetch_assoc($Sumc);
+                //echo "** ".$filac[0]." TOTAL SEGUNDOS: ".$sumTot['total']."<br>";
+
+                global $totalHoras;         global $totalDias;
+                $totsecc = $sumTotc['totalC'];       // RESULTADO CONSULTA SUM() POR TABLA EN SEGUNDOS
+                $diasc = floor($totsecc/28800);     // PARA LOS DIAS
+                $horasc = floor($totsecc/3600);     // PARA 1H 3600S
+                // TOTAL SEGUNDOS MENOS ((HORAS X 3600S/H) ENTRE 60M/H)
+                $minutosc = floor(($totsecc-($horasc*3600))/60);
+                // TOTAL SEGUNDOS MENOS (HORAS X 36OOS/H) - (MINUTOS X 60M/H))
+                $segundoss = $totsecc-($horasc*3600)-($minutosc*60);
                 // TOTAL HORAS Y MINUTOS DE CADA TABLA
+                //global $totalSuma;      $totalSuma = "DIAS: ".$diasc." || HORAS: ".$horasc.".".$minutosc;
                 $yrc = substr($filac[0], -4);
-                $DVTotal = $totalDias / $countc;
+                //echo "** AÑO: ".$yrc." TOTAL TIME: ".$totalSuma."<br>";
+                //echo "** TOTAL DIAS: ".$totalDias."<br>";
+                //echo "** TOTAL HORAS: ".$totalHoras."<br>";
 
-                if($DiasValidos > 0){
-                    $TotM2 = ($DiasValidos*100)/$DVTotal;
-                  
+                $totaltime2 = number_format($diasc ,2,".","");
+                if($totaltime2 > 0){
+                    $TotM2 = ($totaltime2*100)/$totalDias;
                     $li2 = "<li>
-                            <a href='#' title='AÑO ".$yrc." ".(abs($DiasValidos))." Dias'>
-                                <span class='label'>".$yrc."<br>".(abs($DiasValidos))."</span>
+                            <a href='#' title='AÑO ".$yrc." ".(abs($totaltime2))." Dias'>
+                                <span class='label'>".$yrc."<br>".(abs($totaltime2))."</span>
                                 <span class='count bgcolorir' style='height: ".$TotM2."%'>(".$TotM2.")</span>
                             </a>
                         </li>";
@@ -194,9 +192,9 @@
 
         // CONSTRUYO EL FINAL DE LA GRAFICA DIAS ANUALES
 		print("<li>
-				<a href='#' title='ANUAL TOT ".(abs($DiasValidosTotal))." Dias'>
-					<span class='label'>TOT<br>".(abs($DiasValidosTotal))."</span>
-					<span class='count bgcolori' style='height: ".$DVTotal."%'>(".$DVTotal.")</span>
+				<a href='#' title='ANUAL TOT ".(abs($totalDias))." Dias'>
+					<span class='label'>TOT<br>".(abs($totalDias))."</span>
+					<span class='count bgcolori' style='height: ".$TotEi."%'>(".$TotEi.")</span>
 				</a>
 			</li>
             </ul>
@@ -204,7 +202,7 @@
 
         // CIERRO DIV CENTRA TALBAS
         print("</div></div>");
-        
+
 } // FIN ELSE !$respuesta
 
 ?>

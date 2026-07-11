@@ -7,6 +7,30 @@
 	/* TOTALES HORAS MINUTOS Y SEGUNDOS DE LA CONSULTA*/
 	global $vname;		global $fil;		global $db;		global $table_admin;
 
+	//////////////////////////////
+
+	// CONSULTA ÚNICA PARA CONTAR DÍAS VÁLIDOS Y DÍAS ERROR...
+	$sql = "SELECT COUNT(DISTINCT CASE WHEN `error` = 'false' THEN `din` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `error` = 'true' THEN `din` END) AS dias_error FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00'";
+
+	$resultado = mysqli_query($db, $sql);
+
+	global $DiasValidos;	global $DiasError;		global $DiasTotal;		
+
+	if ($resultado) {
+		$fila = mysqli_fetch_assoc($resultado);
+		$DiasValidos = $fila['dias_validos'];
+		$DiasError = $fila['dias_error'];
+		$DiasTotal = $DiasValidos + $DiasError;
+		// Mostramos ambos resultados
+		echo "Total de días trabajados: ".$DiasValidos. "<br>";
+		echo "Total de días eliminados: ".$DiasError."<br>";
+		echo "Total días: ".$DiasTotal."<br>";
+	} else {
+		echo "Error en la consulta: " . mysqli_error($db);
+	}
+
+	//////////////////////////////
+
 	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
@@ -129,8 +153,9 @@
 	if($dias == 1){  $t = " DIA || "; }elseif($dias != 1 ){ $t = " DIAS || "; }
 							
 	global $totaltime;
-	$totaltime = "".$dias.$t.$horas." Horas / ".$minutos." Min / ".$segundos." Segs.";
+	$totaltime = "DIAS VALIDOS: ".$DiasValidos." || DIAS ERROR: ".$DiasError." || DIAS TOTALES: ".$DiasTotal."<br> HORAS: ".$horas." || MINUTOS: ".$minutos." || SEGUNDOS: ".$segundos;
 	//print("</br>".$totaltime);
+
 
 			///////////////////////			***********  		///////////////////////
 
