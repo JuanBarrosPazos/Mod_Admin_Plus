@@ -146,11 +146,13 @@
       overflow: hidden; 
     }
     .bgcolori{
-      
       background: #01c493 !important;
     }
     .bgcolorg{
       background: #f1bd2d !important;
+    }
+    .bgcolorr{
+      background: #ca1616 !important;
     }
     .bgcolord{
       background: #90e5ff !important;

@@ -22,9 +22,9 @@
 		$DiasError = $fila['dias_error'];
 		$DiasTotal = $DiasValidos + $DiasError;
 		// Mostramos ambos resultados
-		echo "Total de días trabajados: ".$DiasValidos. "<br>";
-		echo "Total de días eliminados: ".$DiasError."<br>";
-		echo "Total días: ".$DiasTotal."<br>";
+		//echo "Total de días trabajados: ".$DiasValidos. "<br>";
+		//echo "Total de días eliminados: ".$DiasError."<br>";
+		//echo "Total días: ".$DiasTotal."<br>";
 	} else {
 		echo "Error en la consulta: " . mysqli_error($db);
 	}
