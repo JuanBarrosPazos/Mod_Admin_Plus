@@ -21,7 +21,26 @@
 #### Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.06.27 2026/06/27
+#### Mod_Admin_Plus V26.08.27 2026/08/27
+	- Se actualizan archivos desde MCGestion2026/Mod_Admin_Plus/
+	- config/config2.php Creación del Webmaster en la instalación...
+	- config/Inc_Crea_Tablas.php Creación de las tablas del sistema en la instalación...
+	- config/index_Play_System.php que pasa a ser index.php tras la creación del Webmaster...
+	- Admin/admin_crea_dir.php
+	- Admin/Admin_Crear_Funciones.php
+	- Admin/Admin_Ver_Funciones.php
+	- Admin/Inc_Show_Form_01_Val.php
+	- Admin/Inc_While_Total.php
+	- Admin/mcgexit.php
+	- Balances/Balances_Logica.php
+    - Balances/Balances.php -> Balances_Funciones.php...
+        -  select name='usuarios' consulta a bbdd x <datalist id='list_usuarios'> consulta a bbdd
+	- Inclu_MInd/index_admin.php
+	- Inclu_MInd/Master_Index.php
+	- upbbdd/bbdd_export_tot.php
+	- 
+
+#### Mod_Admin_Plus V26.07.12 2026/07/12
 	* MODIFICADO UNA ÚNICA TABLA ANUAL PARA LOS REGISTROS DE HORARIOS:
 	* COMPROBACIÓN DE LAS MODIFICACIONES:
 		- Ok Instalación inicial.
@@ -118,7 +137,7 @@
 					system('getmac');
 					$SystemGetMac = ob_get_contents();
 					ob_clean();
-					$GetMacAdd = substr($SystemGetMac, strpos($SystemGetMac,'\\')-20, 17);
+					$GetMacAdd = substr($SystemGetMac, strpos($SystemGetMac,'//')-20, 17);
 					break;
 				default:
 					$GetMacAdd = "";

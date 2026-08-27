@@ -17,7 +17,7 @@ function validate_form(){
 
 function process_form(){
 	
-	global $db;				global $db_name;		global $qb;
+	global $db, $db_name;
 	global $nombre;			$nombre = $_POST['Nombre'];
 	global $apellido;		$apellido = $_POST['Apellidos'];
 
@@ -63,7 +63,7 @@ function show_form($errors=''){
 	global $boton;				$boton = "VER TODOS";
 
 	require 'Inc_Show_Form_01.php';
-	
+
 	}	
 
 				   ////////////////////				   ////////////////////
@@ -72,10 +72,9 @@ function show_form($errors=''){
 
 function ver_todo(){
 		
-	global $db;					global $db_name;
+	global $db, $db_name;
 	global $table_name_a;		$table_name_a = "`".$_SESSION['clave']."admin`";
 	global $Feedback;			$Feedback = 0;
-	global $qb;
 
 	global $orden;
 	require '../Inclu/orden.php';

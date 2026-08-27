@@ -62,7 +62,7 @@ function config_one(){
 	}else{print("DON`T RENAME ../index_Play_System.php TO ../index.php </br>");
 				$data3 = PHP_EOL."\t DON`T RENAME ../index_Play_System.php TO ../index.php";
 	}
-	
+
 	global $text;	global $textConfig;
 	$text = $textConfig."** SUSTITUCION DE ARCHIVOS:".$data1.$data2.$data3;
 	ini_log();
@@ -218,7 +218,7 @@ function crear_tablas(){
 	global $trf; 	$trf = $_SESSION['iniref'];
 	
 	global $rutCreaTablas; 	$rutCreaTablas = "";
-	require '../Admin/admin_crea_tablas.php';
+	require '../Admin/admin_crea_dir.php';
 		
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	

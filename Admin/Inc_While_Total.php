@@ -2,12 +2,12 @@
 
 	require 'Inc_WebMaster_Count.php';
 	
-	global $Feedback;		global $refrescaimg;	global $twhile;			global $rutaimg;
-	global $qb;				global $db;				global $ruta;			global $inicioadmincrear;
+	global $Feedback;		global $refrescaimg;	global $twhile;				global $rutaimg;
+	global $db, $db_name;	global $ruta;			global $inicioadmincrear;
 	global $formulariohg;	global $formulariofg;	global $CountWM;
 
 	if(!$qb){ 
-				print("<br>SQL ERROR: " . mysqli_error($db) . "<br>"); 
+				print("<br>*SQL ERROR: " . mysqli_error($db) . "<br>"); 
 	} else{
 		if(mysqli_num_rows($qb)== 0){
 			print ("<div class='centradiv alertdiv'>
@@ -98,7 +98,6 @@
 						//require 'rowbtotal.php';
 						//print($formulariofe);
 					}else{ }
-
 
 				global $Feedback;		global $formulariohe;		global $formulariofe;
 

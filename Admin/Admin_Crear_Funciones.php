@@ -1,7 +1,7 @@
 <?php
 
 function validate_form(){
-	
+
 	/*
 		global $sqld;
 		global $qd;
@@ -133,7 +133,6 @@ function process_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-
 function crear_tablas(){
 	
 	global $db;	 		global $db_name; 	global $db_host;	global $db_user;
@@ -142,7 +141,7 @@ function crear_tablas(){
 	global $trf; 	$trf = $_SESSION['iniref'];
 	
 	global $rutCreaTablas; 	$rutCreaTablas = "../config/";
-	require 'admin_crea_tablas.php';
+	require 'admin_crea_dir.php';
 	
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	

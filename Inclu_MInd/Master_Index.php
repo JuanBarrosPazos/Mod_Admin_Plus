@@ -1,7 +1,7 @@
 ﻿<?php
 
-	global $rutaindex;
-	
+	global $rutaindex;		global $rutainclu;		global $rutaupbbdd;
+
 	require $rutaindex.'Inclu/mydni.php';
 	require $rutaindex.'Inclu/error_hidden.php';
 	global $db_name;
@@ -23,9 +23,7 @@
 		$topcat3 = "style='margin-top:94px'";
 		$topcat4 = "style='margin-top:126px'";
 		$topcat5 = "style='margin-top:158px'";
-
 	}
-
 
 	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')) {	
 			global $niv;

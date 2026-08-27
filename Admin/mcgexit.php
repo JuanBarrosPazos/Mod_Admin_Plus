@@ -8,7 +8,7 @@ session_start();
 	require '../Inclu/my_bbdd_clave.php';
 
 	global $userid;			$userid = $_SESSION['id'];
-	
+
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -87,23 +87,39 @@ function desconex(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function salir() {	
+function salir() {
 
 	print("<div class='centradiv alertdiv'>
 					HA CERRADO SESION
 			</div>
-	<audio src='../audi/sesion_close.mp3' autoplay></audio>");
+			<audio src='../audi/sesion_close.mp3' autoplay></audio>");
 				
+	unset($_SESSION['id']);				unset($_SESSION['Nivel']);
+	unset($_SESSION['Nombre']);			unset($_SESSION['Apellidos']);
+	unset($_SESSION['doc']);			unset($_SESSION['dni']);
+	unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+	unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+	unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+	unset($_SESSION['Tlf2']);			unset($_SESSION['GetMacAdd']);
+
+	global $rutaIndexAdmin;	
+	if(file_exists("../../Mod_Gestion/index.php")){
+		$rutaIndexAdmin ="../../Mod_Gestion/index.php";
+	}else{
+		$rutaIndexAdmin ="../index.php?salir=1'";
+	}
+
 	global $redir;
 	// 600000 microsegundos 10 minutos
 	// 60000 microsegundos 1 minuto
 	$redir = "<script type='text/javascript'>
 				function redir(){
-					window.location.href='../index.php?salir=1';
+					window.location.href='".$rutaIndexAdmin."';
 				}
-				setTimeout('redir()',3000);
+				setTimeout('redir()',6000);
 			</script>";
 	print($redir);
+
 }
 
 				   ////////////////////				   ////////////////////

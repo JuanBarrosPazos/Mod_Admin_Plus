@@ -9,7 +9,7 @@
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-    global $db;
+    global $db, $db_name;
     set_time_limit(5000);
     $tablas_respaldo = [];
     //$db = new mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -38,7 +38,8 @@
                 }
                 $contenido .= "\n(";
                 for($j = 0; $j < $numero_campos; $j++){
-                    $fila[$j] = str_replace("\n", "\\n", addslashes($fila[$j]));
+                    //$fila[$j] = str_replace("\n", "\\n", addslashes($fila[$j]));
+                    $fila[$j] = str_replace("\n", "\\n", addslashes($fila[$j] ?? ''));
                     if(isset($fila[$j])){
                         $contenido .= '"' . $fila[$j] . '"';
                     }else{
