@@ -103,8 +103,8 @@ function salir() {
 	unset($_SESSION['Tlf2']);			unset($_SESSION['GetMacAdd']);
 
 	global $rutaIndexAdmin;	
-	if(file_exists("../../Mod_Gestion/index.php")){
-		$rutaIndexAdmin ="../../Mod_Gestion/index.php";
+	if(file_exists("../index.php")){
+		$rutaIndexAdmin ="../index.php";
 	}else{
 		$rutaIndexAdmin ="../index.php?salir=1'";
 	}

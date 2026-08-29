@@ -229,49 +229,8 @@ function config_one(){
 	if(isset($_SESSION['showf'])){ unset($_SESSION['showf']); }
 	
 	$_SESSION['inst'] = "noinst";
-	global $data1;		global $data2;
-	if((file_exists('config/year.txt'))||(!file_exists('config/year.txt'))){
-			$filename = "config/year.txt";
-			//file_put_contents($filename, "");
-			$dataYear = "".date('Y')."";
-			$configYear = fopen($filename, 'w+');
-			fwrite($configYear, $dataYear);
-			fclose($configYear);
-		// Pasamos logs...
-		if(file_exists('config/year.txt')){
-			$data1 = PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/year.txt";
-		}else{
-			$data1 = PHP_EOL."\t* CREADO: NO EXISTe EL ARCHIVO config/year.txt";
-		}
-	}else{ 
-			$data1 = PHP_EOL."\t* ERROR DESCONOCIDO config/year.txt";
-	}
 
-	if((file_exists('config/ayear.php'))||(!file_exists('config/ayear.php'))){
-			$filename = "config/ayear.php";
-			$fw = fopen($filename, 'w+');
-			/*$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n);\n?>";*/
-			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
-			//$contenido = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-
-			fwrite($fw, $contenido);
-			//file_put_contents($fw, $contenido);
-			fclose($fw);
-		// Pasamos logs...
-		if(file_exists('config/ayear.php')){
-			$data2 = PHP_EOL."\t* MODIFICADO: EXISTE EL ARCHIVO config/ayear.php";
-		}else{
-			$data2 = PHP_EOL."\t* CREADO: NO EXISTe EL ARCHIVO config/ayear.php";
-		}
-	}else{
-		$data2 = PHP_EOL."\t* ERROR DESCONOCIDO config/ayear.php";
-	 }
-
-		global $text; global $textConfig;
-		$text = $textConfig."SUSTITUCION DE ARCHIVOS:".$data1.$data2;
-		ini_log();
-
-	} // FIN FUNCTION
+} // FIN FUNCTION
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -653,89 +612,22 @@ function crear_tablas(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function modif(){
+function tcl(){
 	
-	global $filename;		$filename = "config/ayear.php";
-	global $text;
-	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO DE ARRAY ANUAL ".$filename;
+	require 'config/ConfigTcl.php';
 
-	if(file_exists('config/ayear.php')){
-		//$filename = "config/ayear.php";
-		$fw1 = fopen($filename, 'r+');
-		$contenido = fread($fw1,filesize($filename));
-		fclose($fw1);
-		
-		$contenido = explode("\n",$contenido);
-		$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-		$contenido = implode("\n",$contenido);
-		
-		//fseek($fw, 37);
-		$fw = fopen($filename, 'w+');
-		fwrite($fw, $contenido);
-		fclose($fw);
+} // FIN function tcl()
 
-	}elseif(!file_exists('config/ayear.php')){
-			//$filename = "config/ayear.php";
-			$fw = fopen($filename, 'w+');
-			$contenido = "<?php\n\$dy = array (\n'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',\n);\n?>";
-			fwrite($fw, $contenido);
-			//file_put_contents($fw, $contenido);
-			fclose($fw);
-
-		// Pasamos logs...
-			$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/ayear.php";
-	}else{
-			$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO ../config/ayear.php";
-	}
-
-	ini_log();
-
-} // FIN function modif
-
-function modif2(){
-
-	global $filename;		$filename = "config/year.txt";
-	global $text;
-	$text = "SE COMPRUEBA EL CAMBIO DE AÑO Y SE MODIFICA EL ARCHIVO SI PROCEDE: ".$filename;
-
-	if(file_exists('config/year.txt')){
-		//$filename = "config/year.txt";
-		$fw2 = fopen($filename, 'w+');
-		$date = "".date('Y')."";
-		fwrite($fw2, $date);
-		fclose($fw2);
-		$text = $text.PHP_EOL."\tMODIFICADO Y ACTUALIZADO config/year.txt".$filename;
-
-	}elseif(!file_exists('config/year.txt')){
-			//$filename = "config/year.txt";
-			//file_put_contents($filename, "");
-			$dataYear = "".date('Y')."";
-			$configYear = fopen($filename, 'w+');
-			fwrite($configYear, $dataYear);
-			fclose($configYear);
-		// Pasamos logs...
-			$text = $text.PHP_EOL."\t* CREADO: NO EXISTE EL ARCHIVO ../config/year.txt";
-	}else{
-			$text = $text.PHP_EOL."\t* ERROR DESCONOCIDO ../config/year.txt";
-	}
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 	
-	ini_log();
-
-} // FIN function modif2
 
 function ayear(){
-	$filename = "config/year.txt";
-	$fw2 = fopen($filename, 'r+');
-	$fget = fgets($fw2);
-	fclose($fw2);
-	
-	if($fget == date('Y')){ 
-	}elseif($fget != date('Y')){ 	
-				modif();
-				modif2();
-	}
 
-} // FIN function ayear
+	require 'config/ConfigYear.php';
+
+} // FIN function ayear()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

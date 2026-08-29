@@ -190,30 +190,10 @@ function process_form(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function y(){
-	$filename = "../config//ayear.php";
-	$fw1 = fopen($filename, 'r+');
-	$contenido = fread($fw1,filesize($filename));
-	fclose($fw1);
-	$contenido = explode("\n",$contenido);
-	$contenido[2] = "'' => 'YEAR',\n'".date('y')."' => '".date('Y')."',";
-	$contenido = implode("\n",$contenido);
-	$fw = fopen($filename, 'w+');
-	fwrite($fw, $contenido);
-	fclose($fw);
-}
-
-function modif(){
-	$filename = "../config/year.txt";
-	$fw2 = fopen($filename, 'w+');
-	$date = "".date('Y')."";
-	fwrite($fw2, $date);
-	fclose($fw2);
-}
-
 function crear_tablas(){
-	global $db;	 		global $db_name; 	global $db_host;	global $db_user;
-	global $db_pass; 	global $dbconecterror;
+
+	global $db, $db_name, $db_host, $db_user, $db_pass;
+	global $dbconecterror;
 	
 	global $trf; 	$trf = $_SESSION['iniref'];
 	

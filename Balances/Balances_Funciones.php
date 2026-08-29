@@ -38,7 +38,7 @@ function show_form(){
 	$qu = mysqli_query($db, $sqlu);
 
 	if(!$qu){
-		print("ERROR SQL L.68/70 ".mysqli_error($db)."<br>");
+		print("ERROR SQL L.33/35 ".mysqli_error($db)."<br>");
 		global $redir;
 		$redir = "<script type='text/javascript'>
 					function redir(){
@@ -133,7 +133,6 @@ function show_form(){
 					</div>");
 		}elseif($_SESSION['usuarios'] != ''){
 
-		require "../config/ayear.php";
 		global $Titulo;			$Titulo = "FILTRO GRAFICAS HORARIOS ".$_SESSION['usuarios'];
 		require 'Inc_Filtro_Balance.php';
 

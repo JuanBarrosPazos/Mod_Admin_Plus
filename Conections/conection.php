@@ -9,6 +9,6 @@ global $db_name;
 $db_host = 'localhost'; 
 $db_user = 'juancho'; 
 $db_pass = 'juancho'; 
-$db_name = 'adminplus'; 
+$db_name = 'modadminplus'; 
 
 ?>

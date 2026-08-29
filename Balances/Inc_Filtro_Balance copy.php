@@ -17,11 +17,15 @@
 							if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
 							print ("> $label </option>");
 					}	
-		print("</select>");
-
-		require '../config/SelectAnhos.php';
-
-		print("<select name='dm'>");
+		print("</select>
+				<select name='dy'>");
+					foreach($dy as $optiondy => $labeldy){
+							print ("<option value='".$optiondy."' ");
+							if($optiondy == @$defaults['dy']){ print ("selected = 'selected'"); }
+							print ("> $labeldy </option>");
+					}	
+		print ("</select>
+				<select name='dm'>");
 					foreach($dm as $optiondm => $labeldm){
 							print ("<option value='".$optiondm."' ");
 							if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }

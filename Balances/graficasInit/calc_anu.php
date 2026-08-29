@@ -1,6 +1,6 @@
 <?php
 
-    global $db;             global $db_name;
+    global $db, $db_name;
 	global $balances;       global $balancesOtros;
 
 	/*************		 CONSULTA TODAS LAS TABLAS DEL USUARIO CON SESION INICIADA		***************/
