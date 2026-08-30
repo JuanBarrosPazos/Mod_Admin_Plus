@@ -443,30 +443,32 @@ function deltablesb(){
 
 function rewrite(){
 
-/*	unlink("Conections/conection.php");*/
+    /*	unlink("Conections/conection.php");*/
 
-	$bddata = '<?php
-	global $cero_conection;
-	$cero_conection = 1;
-	global $db_host;
-	global $db_user;
-	global $db_pass;
-	global $db_name;
-	$db_host = ""; 
-	$db_user = ""; 
-	$db_pass = ""; 
-	$db_name = ""; 
-	?>';
+    // Optimizado: Usamos comillas dobles y escapamos los $ que deben ser texto literal
+    $bddata = "<?php
+	global \$cero_conection;
+	\$cero_conection = 1;
+	\$_SESSION[\"clave\"] = \"\";
+	global \$db_host;
+	global \$db_user;
+	global \$db_pass;
+	global \$db_name;
+	\$db_host = \"\"; 
+	\$db_user = \"\"; 
+	\$db_pass = \"\"; 
+	\$db_name = \"\"; 
+	?>";
 
-	$filename = "Conections/conection.php";
-	$config = fopen($filename, 'w+');
-	fwrite($config, $bddata);
-	fclose($config);
-	global $data5;			$data5 = PHP_EOL."\tREWRITE Conections/conection.php";
+    // Optimizado: file_put_contents reemplaza fopen, fwrite y fclose en una sola línea
+    $filename = "Conections/conection.php";
+    file_put_contents($filename, $bddata);
+
+    global $data5;		$data5 = PHP_EOL."\tREWRITE Conections/conection.php";
 	
-	// SE GRABAN LOS DATOS EN LOG
-	global $text;			$text = "SE SOBRE ESCRIBE EL ARCHIVO DE CONEXIONES COMO ORIGINAL.";
-	ini_log();
+    // SE GRABAN LOS DATOS EN LOG
+    global $text;		$text = "SE SOBRE ESCRIBE EL ARCHIVO DE CONEXIONES COMO ORIGINAL.";
+    ini_log();
 
 } // FIN FUNCTION rewrite()
 
@@ -489,22 +491,24 @@ function process_form(){
 	
 	/************** CREAMOS EL ARCHIVO DE CONFIGURACIÓN **************/
 
+	// Mantenemos tus variables con las comillas simples añadidas
 	$host = "'".$_POST['host']."'";
 	$user = "'".$_POST['user']."'";
 	$pass = "'".$_POST['pass']."'";
 	$name = "'".$_POST['name']."'";
 	$clave = "'".$_POST['clave']."'";
 
-	$bddata = '<?php
-	global $db_host;
-	global $db_user;
-	global $db_pass;
-	global $db_name;
-	$db_host = '.$host.'; 
-	$db_user = '.$user.'; 
-	$db_pass = '.$pass.'; 
-	$db_name = '.$name.'; 
-	?>';
+	// Corregido: Usamos comillas dobles externas y escapamos los $ que deben ser literales
+	$bddata = "<?php
+	global \$db_host;
+	global \$db_user;
+	global \$db_pass;
+	global \$db_name;
+	\$db_host = ".$host."; 
+	\$db_user = ".$user."; 
+	\$db_pass = ".$pass."; 
+	\$db_name = ".$name."; 
+	?>";
 
 	/* CREA EL ARCHIVO DE CONEXIONES */
 	$filename = "Conections/conection.php";

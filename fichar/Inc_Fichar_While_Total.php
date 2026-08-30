@@ -10,7 +10,6 @@
 		if(mysqli_num_rows($qb) == 0){
 			print ("<div class='centradiv alertdiv'>NO HAY DATOS</div>
 					<audio src='../audi/no_files_for_query.mp3' autoplay></audio>");
-
 		}else{ 
 			if(($_POST['dd']=="")&&(!isset($_POST['cherror'])&&(!isset($_POST['chbin'])))){
 				print ("<div class='centradiv alertdiv'>

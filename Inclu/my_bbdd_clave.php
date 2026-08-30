@@ -1,1 +1,1 @@
-<?php $_SESSION['clave'] = "adm_"; ?>
+<?php $_SESSION['clave'] = "map_"; ?>

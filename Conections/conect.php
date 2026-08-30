@@ -1,10 +1,8 @@
 <?php
 
-global $db;	 		global $db_host; 		global $db_user; 		global $db_pass;
-global $db_name; 	global $dbconecterror;
+global $db, $db_host, $db_user, $db_pass, $db_name, $dbconecterror;
 
 $db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-if(!$db){ die ("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
-            }
+if(!$db){ die ("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error()); }
             
 ?>

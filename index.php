@@ -61,11 +61,10 @@ function inittot(){
 	require 'Conections/conection.php';
 	if(isset($cero_conection)){
 		// EL ARCHIVO DE CONEXIÓN ES EL ORIGINAL O SE HA SOBREESCRITO
-			global $text;
-			$text = "ARCHIVO DE CONEXIÓN ORIGINAL\n";
+			global $text;		$text = "ARCHIVO DE CONEXIÓN ORIGINAL\n";
 			ini_log();
 			$_SESSION['inst'] = "noinst";
-			global $inst;			$inst = '';
+			global $inst;		$inst = '';
 	}else{
 		// SE INTENTA LA CONEXION A LA BBDD
 		// SI NO ES POSIBLE CONECTAR SE APLICAN LOS PARAMETROS "noinst"
@@ -74,17 +73,15 @@ function inittot(){
 	require 'Inclu/error_hidden.php';
 	require 'Inclu/my_bbdd_clave.php';
 	require 'Conections/conection.php';
-	global $db;
 	mysqli_report(MYSQLI_REPORT_OFF);
-	$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
+	global $db;
+	@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 	if(!$db){ //print("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
 				$_SESSION['inst'] = "noinst";
-				global $inst;
-				$inst = '';
+				global $inst;		$inst = '';
 	}else{
 		//echo "HA CONECTADO CON LA BBDD<br>";
-	global $inst;
-	$inst = 1;
+	global $inst;		$inst = 1;
 
 	/* VERIFICO LAS TABLAS CON LA CLAVE EN LA BBDD */
 	require 'config/num_tab_clave_bd.php';
@@ -444,30 +441,32 @@ function deltablesb(){
 
 function rewrite(){
 
-/*	unlink("Conections/conection.php");*/
+    /*	unlink("Conections/conection.php");*/
 
-	$bddata = '<?php
-	global $cero_conection;
-	$cero_conection = 1;
-	global $db_host;
-	global $db_user;
-	global $db_pass;
-	global $db_name;
-	$db_host = ""; 
-	$db_user = ""; 
-	$db_pass = ""; 
-	$db_name = ""; 
-	?>';
+    // Optimizado: Usamos comillas dobles y escapamos los $ que deben ser texto literal
+	$bddata = "<?php
+	global \$cero_conection;
+	\$cero_conection = 1;
+	\$_SESSION[\"clave\"] = \"\";
+	global \$db_host;
+	global \$db_user;
+	global \$db_pass;
+	global \$db_name;
+	\$db_host = \"\"; 
+	\$db_user = \"\"; 
+	\$db_pass = \"\"; 
+	\$db_name = \"\"; 
+	?>";
 
-	$filename = "Conections/conection.php";
-	$config = fopen($filename, 'w+');
-	fwrite($config, $bddata);
-	fclose($config);
-	global $data5;			$data5 = PHP_EOL."\tREWRITE Conections/conection.php";
+    // Optimizado: file_put_contents reemplaza fopen, fwrite y fclose en una sola línea
+    $filename = "Conections/conection.php";
+    file_put_contents($filename, $bddata);
+
+    global $data5;		$data5 = PHP_EOL."\tREWRITE Conections/conection.php";
 	
-	// SE GRABAN LOS DATOS EN LOG
-	global $text;			$text = "SE SOBRE ESCRIBE EL ARCHIVO DE CONEXIONES COMO ORIGINAL.";
-	ini_log();
+    // SE GRABAN LOS DATOS EN LOG
+    global $text;		$text = "SE SOBRE ESCRIBE EL ARCHIVO DE CONEXIONES COMO ORIGINAL.";
+    ini_log();
 
 } // FIN FUNCTION rewrite()
 
@@ -490,22 +489,24 @@ function process_form(){
 	
 	/************** CREAMOS EL ARCHIVO DE CONFIGURACIÓN **************/
 
+	// Mantenemos tus variables con las comillas simples añadidas
 	$host = "'".$_POST['host']."'";
 	$user = "'".$_POST['user']."'";
 	$pass = "'".$_POST['pass']."'";
 	$name = "'".$_POST['name']."'";
 	$clave = "'".$_POST['clave']."'";
 
-	$bddata = '<?php
-	global $db_host;
-	global $db_user;
-	global $db_pass;
-	global $db_name;
-	$db_host = '.$host.'; 
-	$db_user = '.$user.'; 
-	$db_pass = '.$pass.'; 
-	$db_name = '.$name.'; 
-	?>';
+	// Corregido: Usamos comillas dobles externas y escapamos los $ que deben ser literales
+	$bddata = "<?php
+	global \$db_host;
+	global \$db_user;
+	global \$db_pass;
+	global \$db_name;
+	\$db_host = ".$host."; 
+	\$db_user = ".$user."; 
+	\$db_pass = ".$pass."; 
+	\$db_name = ".$name."; 
+	?>";
 
 	/* CREA EL ARCHIVO DE CONEXIONES */
 	$filename = "Conections/conection.php";
