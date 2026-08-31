@@ -99,7 +99,7 @@ function entrada(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-function show_form(){
+function show_form(){ 
 	
 	global $titulo;			$titulo = "FILTRO FICHAR EMPLEADOS";
 

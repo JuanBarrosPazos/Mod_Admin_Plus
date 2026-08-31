@@ -23,14 +23,14 @@
 			global $nombre_archivo;		$nombre_archivo = "reporte_consultas.csv";
 			global $ruta_csv;			$ruta_csv = __DIR__ . '/' . $nombre_archivo;
 
-			print "<div class='centradiv'>";
-			if (file_exists($ruta_csv)){
+			if(file_exists($ruta_csv)){
 
-			print "<a href='".$nombre_archivo."' download='Reporte_".$name1."_".$name2."_".date('Y-m-d').".csv'>
+			print "<div class='centradiv'>
+				<a href='".$nombre_archivo."' download='Reporte_".$name1."_".$name2."_".date('Y-m-d').".csv'>
 						Descargar CSV
-					</a>";
+					</a>
+				</div>";
 			}
-			print "</div>";
 
 			print ("<table class='centradiv'>
 						<tr>
@@ -162,14 +162,13 @@
 		fclose($archivo_csv);
 		
 		// 6. Interfaz Web: Botón de descarga y visualización de resultados
-		print "<div class='centradiv'>";
-			if (file_exists($ruta_csv)){
-
-				print "<a href='".$nombre_archivo."' download='Reporte_".$name1."_".$name2."_".date('Y-m-d').".csv'>
-							Descargar CSV
-						</a>";
+		if(file_exists($ruta_csv)){
+			print "<div class='centradiv'>
+					<a href='".$nombre_archivo."' download='Reporte_".$name1."_".$name2."_".date('Y-m-d').".csv'>
+						Descargar CSV
+					</a>
+				</div>";
 			}
-		print "</div>";
 
 	} /* FIN segundo else anidado en if */
 

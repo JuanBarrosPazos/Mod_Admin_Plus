@@ -61,11 +61,11 @@
 
 		$qu = mysqli_query($db, $sqlu);
 		if(!$qu){
-				print("Modifique la entrada L.64 ".mysqli_error($db)."<br>");
-	}else{
-		// Función interna para normalizar texto eliminando tildes/acentos
-		if (!function_exists('quitarAcentos')) {
-			function quitarAcentos($cadena) {
+				print("Modifique la entrada L.60 ".mysqli_error($db)."<br>");
+		}else{
+			// Función interna para normalizar texto eliminando tildes/acentos
+			if (!function_exists('quitarAcentos')) {
+				function quitarAcentos($cadena) {
 				$unwanted_array = array(
 					'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
 					'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
@@ -137,7 +137,9 @@
 				</script>
 				</div>");
 	}
-				
+
+			///////////////////////			**********  		///////////////////////
+
 	if((isset($_POST['oculto1']))||(isset($_POST['todo']))){
 
 		global $CheckDatos;		global $CheckBin;		global $titulo;		global $dy;
@@ -151,7 +153,7 @@
 						<select name='Orden'>");
 							foreach($orden as $option => $label){
 									print ("<option value='".$option."' ");
-									if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
+									if($option == ($defaults['Orden'] ?? '')){ print ("selected = 'selected'"); }
 									print ("> $label </option>");
 							}
 				print ("</select>");
@@ -161,18 +163,18 @@
 				print ("<select name='dm'>");
 							foreach($dm as $optiondm => $labeldm){
 								print ("<option value='".$optiondm."' ");
-								if($optiondm == @$defaults['dm']){ print ("selected = 'selected'"); }
+								if($optiondm == ($defaults['dm'] ?? '')){ print ("selected = 'selected'"); }
 								print ("> $labeldm </option>");
 							}	
 				print ("</select>
 						<select name='dd'>");
 							foreach($dd as $optiondd => $labeldd){
 								print ("<option value='".$optiondd."' ");
-								if($optiondd == @$defaults['dd']){ print ("selected = 'selected'"); }
+								if($optiondd == ($defaults['dd'] ?? '')){ print ("selected = 'selected'"); }
 								print ("> $labeldd </option>");
 							}	
 				print("</select>
-						<input type='hidden' name='usuarios' value='".$defaults['usuarios']."' />
+				<input type='hidden' name='usuarios' value='".htmlspecialchars($defaults['usuarios'] ?? '')."' />
 					<button type='submit' title='SELECCONAR USUARIO' class='botonverde imgButIco InicioBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 						<input type='hidden' name='todo' value=1 />
 
@@ -186,16 +188,17 @@
 				print("
 					<div style='display:inline-block; margin: 0.2em 0.4em;'>
 						<font color='#F1BD2D'>* </font>
-					<input type='checkbox' name='cherror' value='".@$defaults['cherror']."' ".$CheckDatos." />
+				<input type='checkbox' name='cherror' value='".htmlspecialchars($defaults['cherror'] ?? '')."' ".$CheckDatos." />
 							VER ERRORES
 					</div>
 					<div style='display:inline-block; margin: 0.2em 0.4em;'>
 						<font color='#F1BD2D'>* </font>
-						<input type='checkbox' name='chbin' value='".@$defaults['chbin']."' ".$CheckBin." />
+				<input type='checkbox' name='chbin' value='".htmlspecialchars($defaults['chbin'] ?? '')."' ".$CheckBin." />
 							VER PAPELERA
 					</div>
 				</form>
 			</div>"); /* FIN formulario */
+
 
 		} // FIN 2º if
 	} // FIN 1º if Nivel Usuarios

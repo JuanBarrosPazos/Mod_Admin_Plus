@@ -494,11 +494,11 @@ function process_form(){
 	$user = "'".$_POST['user']."'";
 	$pass = "'".$_POST['pass']."'";
 	$name = "'".$_POST['name']."'";
-	$clave = "'".$_POST['clave']."'";
+	$clave = "'".$_POST['clave']."_'";
 
 	// Corregido: Usamos comillas dobles externas y escapamos los $ que deben ser literales
 	$bddata = "<?php
-	\$_SESSION['clave'] = ".$clave.";
+	\$_SESSION['clave'] = ".strtolower($clave).";
 	global \$db_host;
 	global \$db_user;
 	global \$db_pass;
@@ -557,16 +557,6 @@ function process_form(){
 				</tr>
 		</table>";
 
-	$_SESSION["clave"] = strtolower($_POST['clave'])."_";
-	// CREA EL ARCHIVO my_bbdd_clave.php $_SESSION['clave'].
-	$filenameb = "Inclu/my_bbdd_clave.php";
-	$fw2b = fopen($filenameb, 'w+');
-	$myclave = '<?php $_SESSION[\'clave\'] = "'.$_SESSION["clave"].'"; ?>';
-	fwrite($fw2b, $myclave);
-	fclose($fw2b);
-	// IMPRIMO LOG
-	global $text;
-	$text = "SE CREA EL ARCHIVO DE BBDD CLAVE ".$filenameb."\n CON BBDD CLAVE: ".$_SESSION["clave"];
 	ini_log();
 
 } // FIN FUNCTION

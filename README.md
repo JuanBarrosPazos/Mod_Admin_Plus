@@ -22,8 +22,10 @@
 
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.08.31 Beta3 2026/08/31
+#### Mod_Admin_Plus V26.08.31B Beta3 2026/08/31
 	- Se prescinde de Inclu/my_bbdd_clave.php y se eliminan todas las llamadas al script...
+	- fichar\Inc_Show_Form_tot.php se sustituye...
+		-  select name='usuarios' consulta a bbdd x <datalist id='list_usuarios'> consulta a bbdd
 
 ----
 #### Mod_Admin_Plus V26.08.30 Beta2 2026/08/30
