@@ -5,7 +5,7 @@ session_start();
 	require 'Inclu/Inclu_Menu_qr.php';
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
-	require 'Inclu/my_bbdd_clave.php';
+	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

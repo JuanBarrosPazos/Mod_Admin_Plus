@@ -4,7 +4,7 @@
 	require '../Inclu/Admin_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	//require '../Inclu/Admin_Inclu_head.php';
 

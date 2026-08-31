@@ -38,10 +38,28 @@
 					<a  href='".$rutaqrgen."indexqrg.php'>
 						<i class='ic ico20'></i><span>QR CODES</span></a>
 				</li>
-
+	
 				<li>
-					<a href='".$rutaindex."Mail_Php/index.php' target='_blank'>
-						<i class='ic ico16'></i>CONTACTO</span></a>
+					<a href='#'>
+						<i class='ic ico22'></i><span>OTRAS APP</span>
+					</a>
+						<ul class='nav-flyout'>
+							<li>
+								<a href='".$rutaindex."../Mod_Conta/index.php'".$topcat4.">
+									<i class='ic ico22'></i>MOD_CONTA
+								</a>
+							</li>
+							<li>
+								<a href='".$rutaindex."../Mod_Gestion/Admin_index.php'>
+									<i class='ic ico22'></i>MOD_GESTION
+								</a>
+							</li>
+							<li>
+								<a href='".$rutaindex."Mail_Php/index.php' target='_blank'>
+									<i class='ic ico16'></i>CONTACTO
+								</a>
+							</li>
+						</ul>
 				</li>");
 		}else{ }
 

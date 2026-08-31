@@ -12,7 +12,7 @@ session_start();
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	$_SESSION['usuarios'] = '';
 	//unset($_SESSION['usuarios']);

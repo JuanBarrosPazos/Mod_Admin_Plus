@@ -8,7 +8,7 @@ session_start();
 	require 'nemp.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require 'my_bbdd_clave.php';
+	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

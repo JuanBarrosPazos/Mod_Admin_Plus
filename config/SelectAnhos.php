@@ -3,7 +3,7 @@
 	require '../Inclu/error_hidden.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 global $db, $db_name;
 global $nom;        

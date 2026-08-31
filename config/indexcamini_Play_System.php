@@ -9,7 +9,7 @@ session_start();
 
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
-	require 'Inclu/my_bbdd_clave.php';
+	
 
 	unset($_SESSION['usuarios']);
 

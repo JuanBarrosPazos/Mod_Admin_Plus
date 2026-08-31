@@ -5,7 +5,7 @@ session_start();
 	require '../Inclu_Fichar/Admin_Inclu_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 /*
 global $table_name_a;

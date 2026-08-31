@@ -6,7 +6,7 @@ session_start();
 
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	require 'Feedback_Borrar_Funciones.php';
 	require 'Feedback_Borrar_Logica.php';

@@ -29,7 +29,7 @@
 		if($form_errors = validate_form()){
 					show_form($form_errors);
 		}else{ 	process_form();
-				require 'Inclu/my_bbdd_clave.php';
+				
 				require 'Conections/conection.php';
 				mysqli_report(MYSQLI_REPORT_OFF);
 				$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
@@ -72,7 +72,7 @@ function inittot(){
 		// SI CONSIGUE CONECTAR MUESTRA LAS OPCIONES DISPONIBLES AL USUARIO
 
 	require 'Inclu/error_hidden.php';
-	require 'Inclu/my_bbdd_clave.php';
+	
 	require 'Conections/conection.php';
 	mysqli_report(MYSQLI_REPORT_OFF);
 	$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
@@ -237,7 +237,7 @@ function config_one(){
 
 function deldirua(){
 
-	require 'Inclu/my_bbdd_clave.php';
+	
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
 
@@ -302,7 +302,7 @@ function deldirub(){
 								rmdir ($carpetat);
 	}else{ }
 
-		require 'Inclu/my_bbdd_clave.php';
+		
 		require 'Conections/conection.php';
 		require 'Conections/conect.php';
 
@@ -352,7 +352,7 @@ function deldiruc(){
 	
 function deltables(){
 
-	require 'Inclu/my_bbdd_clave.php';
+	
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
 
@@ -409,7 +409,7 @@ function deltablesb(){
 	require 'Conections/conection.php';
 	$db = @mysqli_connect($db_host,$db_user,$db_pass,$db_name);
 
-	require 'Inclu/my_bbdd_clave.php';
+	
 
 	/*************	BORRAMOS LAS TABLAS DEL SISTEMA 	***************/
 
@@ -447,9 +447,9 @@ function rewrite(){
 
     // Optimizado: Usamos comillas dobles y escapamos los $ que deben ser texto literal
     $bddata = "<?php
+	\$_SESSION[\"clave\"] = \"\";
 	global \$cero_conection;
 	\$cero_conection = 1;
-	\$_SESSION[\"clave\"] = \"\";
 	global \$db_host;
 	global \$db_user;
 	global \$db_pass;
@@ -500,6 +500,7 @@ function process_form(){
 
 	// Corregido: Usamos comillas dobles externas y escapamos los $ que deben ser literales
 	$bddata = "<?php
+	\$_SESSION['clave'] = ".$clave.";
 	global \$db_host;
 	global \$db_user;
 	global \$db_pass;
@@ -606,7 +607,7 @@ function crear_tablas(){
 		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
 	}else{ }
 
-	require 'Inclu/my_bbdd_clave.php';
+	
 	require 'config/Inc_Crea_Tablas.php'; 
 
 } //FIN function crear_tablas

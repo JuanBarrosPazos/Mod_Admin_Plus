@@ -6,7 +6,7 @@ session_start();
 
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	require 'Feedback_Recuperar_Funciones.php';
 	require 'Feedback_Recuperar_Logica.php';

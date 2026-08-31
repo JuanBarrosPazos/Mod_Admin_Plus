@@ -8,7 +8,7 @@
 
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	require '../Inclu_MInd/rutaqrgen.php';
 	require '../Inclu_MInd/Master_Index.php';

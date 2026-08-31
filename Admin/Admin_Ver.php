@@ -5,7 +5,7 @@ session_start();
 	require '../Inclu/Admin_head.php';
 	require '../Conections/conection.php';
 	require '../Conections/conect.php';
-	require '../Inclu/my_bbdd_clave.php';
+	
 
 	require 'Admin_Ver_Funciones.php';
 

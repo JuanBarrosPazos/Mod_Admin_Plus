@@ -22,6 +22,10 @@
 
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V26.08.31 Beta3 2026/08/31
+	- Se prescinde de Inclu/my_bbdd_clave.php y se eliminan todas las llamadas al script...
+
+----
 #### Mod_Admin_Plus V26.08.30 Beta2 2026/08/30
 	- config\validate_Init_System.php Se depura el código...
 	- index.php Se optimiza: function process_form(), function rewrite(), function validate_form().
