@@ -1,7 +1,7 @@
 <?php
 
-	global $db;	 		global $db_host; 		global $db_user; 		global $db_pass;
-	global $db_name; 	global $dbconecterror;
+	global $db, $db_host, $db_user, $db_pass, $db_name;
+	global $dbconecterror;
 
 	require 'Inclu/error_hidden.php';
 	global $index;		$index = 1;
@@ -29,24 +29,37 @@
 		if($form_errors = validate_form()){
 					show_form($form_errors);
 		}else{ 	process_form();
-				
 				require 'Conections/conection.php';
-				mysqli_report(MYSQLI_REPORT_OFF);
-				global $db;
-				@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-				if(!$db){ 	global $dbconecterror; // PARA LOG
-							$dbconecterror = $db_name." * ".mysqli_connect_error();
-							global $text;
-							$text = $dbconecterror;
-							ini_log();
-							print("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
-							show_form();
-				}elseif($db){ 	config_one();
-								crear_tablas();
-								ayear();
-								global $tablepf;
-								print($tablepf);
+
+				global $db;		global $tablepf;
+
+				try{
+					// Activamos reporte de errores mediante excepciones para capturar el fallo en el catch
+					mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+					$db = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+					// Restauramos el reporte a OFF para no alterar el resto del sistema
+					mysqli_report(MYSQLI_REPORT_OFF);
+
+					config_one();
+					crear_tablas();
+					ayear();
+					print($tablepf);
+				    // Activamos reporte de errores mediante excepciones para capturar el fallo en el catch
+					mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+					$db = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+					// Restauramos el reporte a OFF para no alterar el resto del sistema
+					mysqli_report(MYSQLI_REPORT_OFF);
+
+				}catch(mysqli_sql_exception $e){
+					global $dbconecterror; // PARA LOG
+					$dbconecterror = $db_name." * ".mysqli_connect_error();
+					global $text;		$text = $text.$dbconecterror;
+					ini_log();
+					print("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
+					show_form();
 				}
+
+				
 			} // Fin else process_form()
 		}else{ 	inittot();
 				show_form();
@@ -70,152 +83,169 @@ function inittot(){
 		// SI NO ES POSIBLE CONECTAR SE APLICAN LOS PARAMETROS "noinst"
 		// SI CONSIGUE CONECTAR MUESTRA LAS OPCIONES DISPONIBLES AL USUARIO
 
-	require 'Inclu/error_hidden.php';
+		require 'Inclu/error_hidden.php';
+		
+		require 'Conections/conection.php';
+
+		global $db, $db_name;		global $link;		global $text;
+
+		try{
+			// Activamos reporte de errores mediante excepciones para capturar el fallo en el catch
+			mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+			$db = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+			// Restauramos el reporte a OFF para no alterar el resto del sistema
+			mysqli_report(MYSQLI_REPORT_OFF);
+
+			//echo "HA CONECTADO CON LA BBDD<br>";
+			global $inst;		$inst = 1;
+
+			/* VERIFICO LAS TABLAS CON LA CLAVE EN LA BBDD */
+			require 'config/num_tab_clave_bd.php';
+			/* VERIFICO SI EXISTEN TABLAS EN LA BBDD */
+			require 'config/num_tab_bd.php';
+
+			/* DETECTA LA CONEXIÓN SIN TABLAS CON CLAVE COINCIDENTE O SIN TABLA ADMIN */
+			if(($inst == 1)&&(($countcl < 1)||($countcl < 4)||($countbamd < 1))){
+				$_SESSION['inst'] = "inst";
+				$link = "<tr>
+							<th align='center' class='BorderInf'>
+								<font color='#F1BD2D'>
+					0 EXISTE UNA INSTALACION ERRONEA EN BBDD ".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
+								</font>
+							</th>
+						</tr>
+						<tr>
+							<th align='center'>
+								INICIAR UNA INSTALACIÓN LIMPIA
+							</th>
+						</tr>
+						<tr>
+					<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
+						<td  align='center'>
+					<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
+					<input type='hidden' name='limpia' value=1 />
+					</br></br>
+						</td>
+					</fomr>
+						</tr>";
+				$text = "FORMULARIO CONFIG: EXISTE UNA INSTALACION ERRONEA EN LA BBDD";
+				ini_log();
+
+			}elseif(($inst == 1)&&($countadm < 1)){
+				/* DETECTA LA CONEXIÓN Y UNA INSTALACIÓN INCOMPLETA SIN ADMINISTRADOR */
+				$_SESSION['inst'] = "inst";
+				$link = "<tr>
+							<th align='center' class='BorderInf'>
+								<font color='#F1BD2D'>
+									1 EXISTE UNA INSTALACION INCOMPLETA
+									<br>
+									SIN ADMINISTRADOR
+									".$infoAdm.$infoTClave.$infoTBbdd."
+								</font>
+							</th>
+						</tr>
+						<tr>
+							<th align='center'>
+								CONTINUAR CON ESTA INSTALACIÓN
+							</th>
+						</tr>
+						<tr>
+							<td align='center' class='BorderInf'>
+								<a href='config/config2.php'>
+									CREE EL USUARIO ADMINISTRADOR
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<th align='center'>
+								INICIAR UNA INSTALACIÓN LIMPIA
+							</th>
+						</tr>
+						<tr>
+					<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
+						<td  align='center'>
+					<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
+					<input type='hidden' name='limpia' value=1 />
+						</td>
+					</fomr>
+						</tr>";
+				$text = "FORMULARIO CONFIG: EXISTE UNA INSTALACION INCOMPLETA";
+				ini_log();
+
+			}elseif(($inst == 1)&&(($countcl >= 4)||($totTablas >= 4))){
+				/* DETECTA LAS TABLAS CON CLAVE Y LAS DE LA BBDD */
+				$_SESSION['inst'] = "inst";
+				$link = "<tr>
+							<th align='center' class='BorderInf'>
+								<font color='#F1BD2D'>
+								2 EXISTE UNA INSTALACION ANTERIOR
+								".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
+								</font>
+							</th>
+						</tr>
+						<tr>
+							<th align='center'>
+								MANTENER TABLAS Y DIRECTORIOS
+							</th>
+						</tr>
+						<tr>
+					<form name='inscancel' action='config/config2.php' method='post' >
+							<td align='center' class='BorderInf'>
+					<input type='submit' value='CONTINUE CON LA CONFIGURACIÓN ACTUAL' class='botonverde' />
+					<input type='hidden' name='inscancel' value=1 />
+					</br></br>
+							</td>
+					</form>
+						</tr>
+						<tr>
+							<th align='center'>
+								INICIAR UNA INSTALACIÓN LIMPIA
+							</th>
+						</tr>
+						<tr>
+					<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
+						<td  align='center'>
+					<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
+					<input type='hidden' name='limpia' value=1 />
+					</br></br>
+						</td>
+					</fomr>
+						</tr>";
+				$text = "FORMULARIO CONFIG: EXISTE UNA INSTALACION ANTERIOR";
+				ini_log();
+
+			}else{ 	$_SESSION['inst'] = "noinst";
+				$link = "<tr>
+							<td>
+								<a href='config/config2.php'>
+									CREE EL USUARIO ADMINISTRADOR
+								</a>
+							</td>
+						</tr>";
+			} // FIN NO HAY DATOS EN LA BBDD
+		// FIN TRY CONECTO A LA BBDD
+		}catch (mysqli_sql_exception $e){ 
+			// Restauramos el reporte a OFF
+			mysqli_report(MYSQLI_REPORT_OFF);
+
+			// En un fallo de conexión, $db se asegura como false/null
+			$db = false;
+
+			// ERROR: Se ejecuta la misma lógica de manejo de errores e historial
+			global $text;
+			$text = "Es imposible conectar con la bbdd ".$db_name."<br>".$e->getMessage();
+			echo "* ".$text."<br>";
+
+			//print("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
+			$_SESSION['inst'] = "noinst";
+			global $inst;		$inst = '';
+
+			ini_log();
+
+		} // FIN CATCH...
+	} // FIN PRIMER ELSE...
 	
-	require 'Conections/conection.php';
-	mysqli_report(MYSQLI_REPORT_OFF);
-	global $db;
-	@$db = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
-	if(!$db){ //print("Es imposible conectar con la bbdd ".$db_name."</br>".mysqli_connect_error());
-				$_SESSION['inst'] = "noinst";
-				global $inst;		$inst = '';
-	}else{
-		//echo "HA CONECTADO CON LA BBDD<br>";
-	global $inst;		$inst = 1;
-
-	/* VERIFICO LAS TABLAS CON LA CLAVE EN LA BBDD */
-	require 'config/num_tab_clave_bd.php';
-	/* VERIFICO SI EXISTEN TABLAS EN LA BBDD */
-	require 'config/num_tab_bd.php';
-
-	/* DETECTA LA CONEXIÓN SIN TABLAS CON CLAVE COINCIDENTE O SIN TABLA ADMIN */
-	if(($inst == 1)&&(($countcl < 1)||($countcl < 4)||($countbamd < 1))){
-		$_SESSION['inst'] = "inst";
-		global $link;
-		$link = "<tr>
-					<th align='center' class='BorderInf'>
-						<font color='#F1BD2D'>
-							0 EXISTE UNA INSTALACION ERRONEA EN BBDD".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
-						</font>
-					</th>
-				</tr>
-				<tr>
-					<th align='center'>
-						INICIAR UNA INSTALACIÓN LIMPIA
-					</th>
-				</tr>
-				<tr>
-			<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
-				<td  align='center'>
-			<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
-			<input type='hidden' name='limpia' value=1 />
-			</br></br>
-				</td>
-			</fomr>
-				</tr>";
-		global $text;
-		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION ERRONEA EN LA BBDD";
-		ini_log();
-	}elseif(($inst == 1)&&($countadm < 1)){
-	/* DETECTA LA CONEXIÓN Y UNA INSTALACIÓN INCOMPLETA SIN ADMINISTRADOR */
-		$_SESSION['inst'] = "inst";
-		global $link;
-		$link = "<tr>
-					<th align='center' class='BorderInf'>
-						<font color='#F1BD2D'>
-							1 EXISTE UNA INSTALACION INCOMPLETA
-							<br>
-							SIN ADMINISTRADOR
-							".$infoAdm.$infoTClave.$infoTBbdd."
-						</font>
-					</th>
-				</tr>
-				<tr>
-					<th align='center'>
-						CONTINUAR CON ESTA INSTALACIÓN
-					</th>
-				</tr>
-				<tr>
-					<td align='center' class='BorderInf'>
-						<a href='config/config2.php'>
-							CREE EL USUARIO ADMINISTRADOR
-			 			</a>
-					</td>
-				</tr>
-				<tr>
-					<th align='center'>
-						INICIAR UNA INSTALACIÓN LIMPIA
-					</th>
-				</tr>
-				<tr>
-			<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
-				<td  align='center'>
-			<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
-			<input type='hidden' name='limpia' value=1 />
-				</td>
-			</fomr>
-				</tr>";
-		global $text;
-		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION INCOMPLETA";
-		ini_log();
-	}elseif(($inst == 1)&&(($countcl >= 4)||($totTablas >= 4))){
-	/* DETECTA LAS TABLAS CON CLAVE Y LAS DE LA BBDD */
-			$_SESSION['inst'] = "inst";
-			global $link;
-			$link = "<tr>
-						<th align='center' class='BorderInf'>
-							<font color='#F1BD2D'>
-							2 EXISTE UNA INSTALACION ANTERIOR
-							".$infoAdm.$infoTAdmin.$infoTClave.$infoTBbdd."
-							</font>
-						</th>
-					</tr>
-					<tr>
-						<th align='center'>
-							MANTENER TABLAS Y DIRECTORIOS
-						</th>
-					</tr>
-					<tr>
-				<form name='inscancel' action='config/config2.php' method='post' >
-						<td align='center' class='BorderInf'>
-				<input type='submit' value='CONTINUE CON LA CONFIGURACIÓN ACTUAL' class='botonverde' />
-				<input type='hidden' name='inscancel' value=1 />
-				</br></br>
-						</td>
-				</form>
-					</tr>
-					<tr>
-						<th align='center'>
-							INICIAR UNA INSTALACIÓN LIMPIA
-						</th>
-					</tr>
-					<tr>
-				<form name='limpia' action='$_SERVER[PHP_SELF]' method='post' >
-					<td  align='center'>
-				<input type='submit' value='ELIMINE TODOS LOS DATOS DEL SISTEMA' class='botonrojo' />
-				<input type='hidden' name='limpia' value=1 />
-				</br></br>
-					</td>
-				</fomr>
-					</tr>";
-		global $text;
-		$text ="FORMULARIO CONFIG: EXISTE UNA INSTALACION ANTERIOR";
-		ini_log();
-	}else{ 	$_SESSION['inst'] = "noinst";
-			global $link;
-		   	$link = "<tr>
-		   				<td>
-							<a href='config/config2.php'>
-		   						CREE EL USUARIO ADMINISTRADOR
-							</a>
-						</td>
-					</tr>";
-				} // FIN NO HAY DATOS EN LA BBDD
-			} // FIN CONDICIONAL SI CONECTO A LA BBDD
-
-	} // FIN PRIMER ELSE
-
-}	// FIN FUNCTION
+}	// FIN FUNCTION...
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -235,7 +265,7 @@ function config_one(){
 
 function deldirua(){
 
-	
+	$text = 
 	require 'Conections/conection.php';
 	require 'Conections/conect.php';
 
@@ -638,7 +668,7 @@ function show_form($errors=[]){
 		print("<div class='centradiv alertdiv'>
 					SOLUCIONE ESTOS ERRORES<br>");
 		global $text;
-		$text = "show_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
+		$text = $text."\nshow_form(); ERRORES VALIDACION FORMULARIO CONEXIONES BBDD";
 		ini_log();
 
 		for($a=0; $c=count($errors), $a<$c; $a++){
