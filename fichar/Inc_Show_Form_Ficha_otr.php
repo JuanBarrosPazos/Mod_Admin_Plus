@@ -24,6 +24,9 @@
 	if(!$qu){ print("Modifique la entrada L.60 ".mysqli_error($db)."<br>");
 	}elseif(mysqli_num_rows($qu)== 0){
 		print ("<div class='centradiv alertdiv'>NO EXISTEN OTROS USUARIOS</div>");
+				global $ficharCrear;		$ficharCrear = 1;
+		require 'Fichar_Crear_Botonera.php';
+
 	}else{
 		print("<div class='centradiv' style='padding:0.6em;'>
 				<div style='margin: 0.3em auto'>".$titulo."</div>");
@@ -124,7 +127,7 @@
 			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 		
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);
@@ -140,7 +143,7 @@
 
 				require 'Fichar_Redondeo_in.php';
 
-				global $dout;			$dout = '';
+				global $dout;			$dout = ($dout === '') ? null : $dout;
 				global $tout;			$tout = '00:00:00';
 				global $ttot;			$ttot = '00:00:00';
 				

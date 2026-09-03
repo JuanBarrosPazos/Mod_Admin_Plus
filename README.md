@@ -22,10 +22,13 @@
 
 ----
 ## ULTIMAS MODIFICACIONES.
-#### Mod_Admin_Plus V26.09.03 Beta4 2026/09/03
+#### Mod_Admin_Plus V26.09.03 Beta4B 2026/09/03
+	- Ajustes generales en la bbdd y scripts...
 	- Se integran en GitHub los .py para generar datos aleatorios...
 	- config\num_tab_bd.php e index.php...
 		- Se implementa la estructura try cacht para $db...
+	- Se modifica la estructura:
+		- `din` DATE NOT NULL DEFAULT (CURRENT_DATE()), `dout` DATE NULL, `dfeed` DATE NULL,
 
 ----
 #### Mod_Admin_Plus V26.08.31B Beta3 2026/08/31

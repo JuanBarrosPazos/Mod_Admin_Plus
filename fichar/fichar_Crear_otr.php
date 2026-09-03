@@ -69,7 +69,7 @@ function entrada(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	
@@ -140,7 +140,7 @@ function salida(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -159,7 +159,7 @@ function salida(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			

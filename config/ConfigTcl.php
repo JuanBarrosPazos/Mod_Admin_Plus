@@ -12,14 +12,14 @@
   `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
   /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
   /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
-  `din` varchar(10) collate utf16_spanish2_ci NOT NULL,
+  `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
   `tin` time NOT NULL,
-  `dout` varchar(10) collate utf16_spanish2_ci NULL,
+  `dout` DATE DEFAULT NULL,
   `tout` time NULL,
   `ttot` time NULL,
   `error` varchar(5) NOT NULL default 'false',
   `del` varchar(5) NOT NULL default 'false',
-  `dfeed` varchar(10) collate utf16_spanish2_ci NULL,
+  `dfeed` DATE DEFAULT NULL,
   `tfeed` time NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),

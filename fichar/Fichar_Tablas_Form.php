@@ -61,29 +61,29 @@
                         <input type='hidden' name='entrada' value=1 />
                     </form>														
                         </li>
-                </ul>".$rutaAudio; 
+                </ul>".$rutaAudio;
 
     global $FichaOut;
     $FichaOut = "<ul class='centradiv'>
-                        <li class='liCentra'>FICHE SU SALIDA</li>
-                            ".$ImgForm."
-                        <li class='liCentra'>
-                            ".strtoupper($name1)." ".strtoupper($name2)."
-                        </li>
-                        <li class='liCentra'>REFER: ".strtoupper($RefUser)."</li>
-                        <li class='liCentra'>
-                            ".$FormButtonHome."
-                    <form name='form_datos' method='post' ".$Action." style='display: inline-block;'>
-                        ".$InputImgIndex."
-                        <input type='hidden' id='ref' name='ref' value='".$RefUser."' />
-                        <input type='hidden' id='name1' name='name1' value='".$name1."' />
-                        <input type='hidden' id='name2' name='name2' value='".$name2."' />
-                        <input type='hidden' id='dout' name='dout' value='".$dout."' />
-                        <input type='hidden' id='tout' name='tout' value='".$tout."' />
-                            <button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
-                            <input type='hidden' name='salida' value=1 />
-                    </form>														
-                        </li>
-                </ul>".$rutaAudio;
+                    <li class='liCentra'>FICHE SU SALIDA</li>
+                        ".$ImgForm."
+                    <li class='liCentra'>
+                        ".strtoupper($name1)." ".strtoupper($name2)."
+                    </li>
+                    <li class='liCentra'>REFER: ".strtoupper($RefUser)."</li>
+                    <li class='liCentra'>
+                        ".$FormButtonHome."
+                <form name='form_datos' method='post' ".$Action." style='display: inline-block;'>
+                    ".$InputImgIndex."
+                    <input type='hidden' id='ref' name='ref' value='".$RefUser."' />
+                    <input type='hidden' id='name1' name='name1' value='".$name1."' />
+                    <input type='hidden' id='name2' name='name2' value='".$name2."' />
+                    <input type='hidden' id='dout' name='dout' value='".$dout."' />
+                    <input type='hidden' id='tout' name='tout' value='".$tout."' />
+                        <button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
+                        <input type='hidden' name='salida' value=1 />
+                </form>														
+                    </li>
+            </ul>".$rutaAudio;
 
 ?>

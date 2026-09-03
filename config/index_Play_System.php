@@ -521,9 +521,9 @@ function validate_formp(){
 
 function process_form(){
 	
-	global $db;
+	global $db, $db_name;
 					
-	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')){	
+	if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')){
 		global $onlyindex; 
 		if($onlyindex == 1){
 				master_index();
@@ -545,7 +545,7 @@ function process_form(){
 
 function errors(){
 	
-	global $db; 		global $db_name;
+	global $db, $db_name;
 	
 	global $sesus; 		$sesus = $_SESSION['ref'];
 
@@ -567,7 +567,8 @@ function show_ficha(){
 	// FICHA ENTRADA O SALIDA.
 	global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
 
-	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
+	//echo "<br>".$sql1;
 
 	$q1 = mysqli_query($db, $sql1);
 	$rp = mysqli_fetch_assoc($q1);
@@ -597,7 +598,7 @@ function show_ficha(){
 
 		require 'fichar/Fichar_Redondeo_in.php';
 
-		global $dout;		$dout = '';
+		global $dout;		$dout = ($dout === '') ? null : $dout;
 		global $tout;		$tout = '00:00:00';
 		global $ttot;		$ttot = '00:00:00';
 
@@ -645,10 +646,11 @@ function show_ficha(){
 
 function process_pin(){
 	
-	global $db; 		global $db_name;		global $qrp;
+	global $db, $db_name;		global $qrp;
 	
-	if((isset($_GET['ocultop'])) ||(isset($_GET['pin']) != '')){ $qrp = $_GET['pin']; }
-	else{ $qrp = $_POST['pin']; }
+	if((isset($_GET['ocultop'])) ||(isset($_GET['pin']) != '')){ 
+		$qrp = $_GET['pin']; 
+	}else{ $qrp = $_POST['pin']; }
 	
 	global $table_name_a;	$table_name_a = "`".$_SESSION['clave']."admin`";
 
@@ -692,9 +694,9 @@ function process_pin(){
 		// FICHA ENTRADA O SALIDA.
 	    global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
 
-		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$rp[ref]' AND hor.`ref` = '$rp[ref]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
-
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$rp[ref]' AND hor.`ref` = '$rp[ref]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
 		//echo "<br>".$sql1."<br>";
+		
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
 
@@ -708,7 +710,7 @@ function process_pin(){
 			*/
 			require 'fichar/Fichar_Redondeo_in.php';
 
-			global $dout;			$dout = '';
+			global $dout;			$dout = ($dout === '') ? null : $dout;
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 
@@ -794,7 +796,7 @@ function pin_out(){
 
 	global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
 
-	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
 
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
@@ -817,7 +819,7 @@ function pin_out(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` = '' AND $vname.`tout` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` IS NULL AND $vname.`ttot` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -869,7 +871,7 @@ function pin_in(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
+	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[ttot]')";
 		
 	if(mysqli_query($db, $sqla)){
 

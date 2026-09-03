@@ -52,7 +52,7 @@ function process_pinqr(){
 
 		//$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' ";
 
-		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
 
 		$q1 = mysqli_query($db, $sql1);
 		$count1 = mysqli_num_rows($q1);
@@ -68,7 +68,7 @@ function process_pinqr(){
 
 			require 'fichar/Fichar_Redondeo_in.php';
 
-			global $dout;			$dout = '';
+			global $dout;			$dout = ($dout === '') ? null : $dout;
 			global $tout;			$tout = '00:00:00';
 			global $ttot;			$ttot = '00:00:00';
 			
@@ -84,7 +84,7 @@ function process_pinqr(){
 			
 			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_SESSION[usuarios]', '$din', '$tin', '$dout', '$tout', '$ttot')";
+			$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `ttot`) VALUES ('$_SESSION[usuarios]', '$din', '$tin', '$ttot')";
 		
 			if(mysqli_query($db, $sqla)){
 
@@ -127,7 +127,7 @@ function process_pinqr(){
 
 			//$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
 
-			$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` = '' AND hor.`tout` = '00:00:00' ";
+			$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
 
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
@@ -150,7 +150,7 @@ function process_pinqr(){
 		//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 							//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` = '' AND `tout` = '00:00:00' LIMIT 1 ";
+		$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$dout', `tout` = '$tout', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1 ";
 		
 			if(mysqli_query($db, $sqla)){ 
 					
