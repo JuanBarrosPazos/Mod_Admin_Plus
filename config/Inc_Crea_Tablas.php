@@ -37,7 +37,7 @@
   UNIQUE KEY `dni` (`dni`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `Usuario` (`Usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table1;		
 	if(mysqli_query($db , $admin)){
@@ -61,7 +61,7 @@
   `date` date NOT NULL DEFAULT '2021-12-20',
   `time` time NOT NULL DEFAULT '00:00:00',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table2;		
 	if(mysqli_query($db, $ipcontrol)){
@@ -126,7 +126,7 @@ if(mysqli_query($db, $visitas)){
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $table5;
 	if(mysqli_query($db , $tcl)){
@@ -135,10 +135,37 @@ if(mysqli_query($db, $visitas)){
 		$table5 = "\t* NO CREADA TABLA REGISTRO HORARIOS".PHP_EOL;
 	}
 
+	/************* CREAMOS LA TABLA INTERMEDIA HISTÓRICA JORNADAS ****************/
+
+	global $table_name_fk;
+	$table_name_fk = "`".$_SESSION['clave']."admin`";
+	
+	global $table_name_js;
+	$table_name_js = "`".$_SESSION['clave']."jornadas_users`";
+	
+	$tjs = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_js (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `uref` INT NOT NULL,
+    `jornadain` TIME NOT NULL,
+    `jornadaout` TIME NOT NULL,
+    `jornadahoras` DECIMAL(4,2) NOT NULL,
+    `fecha_inicio` DATE NOT NULL DEFAULT (CURRENT_DATE),
+    `fecha_fin` DATE DEFAULT NULL,
+	KEY `uref` (`uref`),
+	FOREIGN KEY (`uref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE CASCADE ON UPDATE CASCADE
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+
+	global $table6;
+	if(mysqli_query($db , $tjs)){
+		$table6 = "\t* CREADA OK TABLA HISTÓRICA JORNADAS.".PHP_EOL;
+	}else{
+		$table6 = "\t* NO CREADA TABLA HISTÓRICA JORNADAS".PHP_EOL;
+	}
+
+
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
-		global $data0;
-		global $cfone;
+		global $data0, $cfone;		
 		$datein = date('Y-m-d/H:i:s');
 
 		global $text;
@@ -149,7 +176,7 @@ if(mysqli_query($db, $visitas)){
 		$text = $text.PHP_EOL." * ".$db_user;
 		$text = $text.PHP_EOL." * ".$db_pass;
 		$text = $text.PHP_EOL.$dbconecterror;
-		$text = $text.PHP_EOL.$data0.$table1.$table2.$table3.$table4.$table5.PHP_EOL;
+		$text = $text.PHP_EOL.$data0.$table1.$table2.$table3.$table4.$table5.$table6.PHP_EOL;
 
 		ini_log();
 

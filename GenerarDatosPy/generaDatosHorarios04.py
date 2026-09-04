@@ -32,7 +32,7 @@ for año in años:
     # 1. Definición de la estructura de la tabla
     create_table_sql = f"""CREATE TABLE IF NOT EXISTS `{tabla}` (
   `id` int NOT NULL auto_increment,
-  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
+  `ref` varchar(20) collate utf8mb4_spanish2_ci NOT NULL,
   `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
   `tin` time NOT NULL,
   `dout` DATE NULL,
@@ -45,7 +45,7 @@ for año in años:
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES `mcg_admin`(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1;
 
 """
     sql_output.append(create_table_sql)

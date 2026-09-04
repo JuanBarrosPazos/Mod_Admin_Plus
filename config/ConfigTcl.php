@@ -9,9 +9,9 @@
 	
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$vname (
   `id` int NOT NULL auto_increment,
-  `ref` varchar(20) collate utf16_spanish2_ci NOT NULL,
-  /*`Nombre` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
-  /*`Apellidos` varchar(25) collate utf16_spanish2_ci NOT NULL,*/
+  `ref` varchar(20) collate utf8mb4_spanish2_ci NOT NULL,
+  /*`Nombre` varchar(25) collate utf8mb4_spanish2_ci NOT NULL,*/
+  /*`Apellidos` varchar(25) collate utf8mb4_spanish2_ci NOT NULL,*/
   `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
   `tin` time NOT NULL,
   `dout` DATE DEFAULT NULL,
@@ -24,7 +24,7 @@
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
 	if(mysqli_query($db , $tcl)){
