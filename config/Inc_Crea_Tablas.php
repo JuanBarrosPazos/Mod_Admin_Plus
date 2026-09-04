@@ -140,10 +140,10 @@ if(mysqli_query($db, $visitas)){
 	global $table_name_fk;
 	$table_name_fk = "`".$_SESSION['clave']."admin`";
 	
-	global $table_name_js;
-	$table_name_js = "`".$_SESSION['clave']."jornadas_users`";
+	global $table_name_ju;
+	$table_name_ju = "`".$_SESSION['clave']."jornadas_users`";
 	
-	$tjs = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_js (
+	$tju = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_ju (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `uref` INT NOT NULL,
     `jornadain` TIME NOT NULL,
@@ -156,7 +156,7 @@ if(mysqli_query($db, $visitas)){
 	) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table6;
-	if(mysqli_query($db , $tjs)){
+	if(mysqli_query($db, $tju)){
 		$table6 = "\t* CREADA OK TABLA HISTÓRICA JORNADAS.".PHP_EOL;
 	}else{
 		$table6 = "\t* NO CREADA TABLA HISTÓRICA JORNADAS".PHP_EOL;
