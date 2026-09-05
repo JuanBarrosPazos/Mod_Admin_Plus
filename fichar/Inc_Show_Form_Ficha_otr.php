@@ -127,7 +127,7 @@
 			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 		
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);

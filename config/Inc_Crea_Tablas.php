@@ -37,7 +37,7 @@
   UNIQUE KEY `dni` (`dni`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `Usuario` (`Usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table1;		
 	if(mysqli_query($db , $admin)){
@@ -56,18 +56,18 @@
   `ref` varchar(20) NOT NULL default 'anonimo',
   `nivel` varchar(8) NOT NULL default 'anonimo',
   `ipn` varchar(22) NOT NULL default 'lost',
-  `error`varchar(4) NOT NULL default '1',
+  `errorhourstot`varchar(4) NOT NULL default '1',
   `acceso` varchar(4) NOT NULL default '0',
   `date` date NOT NULL DEFAULT '2021-12-20',
   `time` time NOT NULL DEFAULT '00:00:00',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table2;		
 	if(mysqli_query($db, $ipcontrol)){
-		$table2 = "\t* OK TABLA IP CONTROL. \n";
+		$table2 = "\t* CREADA OK TABLA IP CONTROL. \n";
 	}else{
-		$table2 = "\t* NO OK TABLA IP CONTROL. ".mysqli_error($db)." \n";
+		$table2 = "\t* NO CREADA TABLA IP CONTROL. ".mysqli_error($db)." \n";
 	}
 					
 	/************* CREAMOS LA TABLA VISITAS ADMIN ****************/
@@ -98,9 +98,7 @@ if(mysqli_query($db, $visitas)){
 				$table4 = "\t* NO CREADOS INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
 		}
 
-}else{	$table3 = "\t* NO CREADA TABLA VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
-		$table4 = "\t* NO CREADOS INIT VALUES EN VISITAS ADMIN. ".mysqli_error($db).PHP_EOL;
-}
+}else{	$table3 = "\t* NO CREADA TABLA VISITAS ADMIN. ".mysqli_error($db).PHP_EOL; }
 
 
 	/************* CREAMOS LA TABLA REGISTRO HORARIOS ****************/
@@ -110,29 +108,29 @@ if(mysqli_query($db, $visitas)){
 	
 	global $table_name_d;
 	$table_name_d = "`".$_SESSION['clave']."horarios_".date('Y')."`";
-	
+
 	$tcl = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_d (
   `id` int NOT NULL auto_increment,
   `ref` varchar(20) NOT NULL,
-  `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
-  `tin` time NOT NULL,
-  `dout` DATE DEFAULT NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
+  `datein` DATE NOT NULL DEFAULT (CURRENT_DATE()),
+  `timein` time NOT NULL,
+  `dateout` DATE DEFAULT NULL,
+  `timeout` time DEFAULT NULL,
+  `hourstot` time DEFAULT NULL,
+  `errorhourstot` varchar(5) NOT NULL default 'false',
   `del` varchar(5) NOT NULL default 'false',
-  `dfeed` DATE DEFAULT NULL,
-  `tfeed` time NULL,
+  `deldate` DATE DEFAULT NULL,
+  `deltime` time DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
-		
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+
 	global $table5;
 	if(mysqli_query($db , $tcl)){
 		$table5 = "\t* CREADA OK TABLA REGISTRO HORARIOS.".PHP_EOL;
 	}else{
-		$table5 = "\t* NO CREADA TABLA REGISTRO HORARIOS".PHP_EOL;
+		$table5 = "\t* NO CREADA TABLA REGISTRO HORARIOS".mysqli_error($db).PHP_EOL;
 	}
 
 	/************* CREAMOS LA TABLA INTERMEDIA HISTÓRICA JORNADAS ****************/
@@ -145,21 +143,23 @@ if(mysqli_query($db, $visitas)){
 	
 	$tju = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_ju (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `uref` INT NOT NULL,
+    `uref` varchar(20) NOT NULL,
     `jornadain` TIME NOT NULL,
     `jornadaout` TIME NOT NULL,
+	`jornadain2` TIME DEFAULT NULL,
+    `jornadaout2` TIME DEFAULT NULL,
     `jornadahoras` DECIMAL(4,2) NOT NULL,
     `fecha_inicio` DATE NOT NULL DEFAULT (CURRENT_DATE),
     `fecha_fin` DATE DEFAULT NULL,
 	KEY `uref` (`uref`),
 	FOREIGN KEY (`uref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE CASCADE ON UPDATE CASCADE
-	) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 
 	global $table6;
 	if(mysqli_query($db, $tju)){
 		$table6 = "\t* CREADA OK TABLA HISTÓRICA JORNADAS.".PHP_EOL;
 	}else{
-		$table6 = "\t* NO CREADA TABLA HISTÓRICA JORNADAS".PHP_EOL;
+		$table6 = "\t* NO CREADA TABLA HISTÓRICA JORNADAS".mysqli_error($db).PHP_EOL;
 	}
 
 
@@ -185,13 +185,15 @@ if(mysqli_query($db, $visitas)){
 	global $tablasAgendaLog; 
 	if(file_exists("../Mod_Agenda/Integra_Admin/CreaTablasAgenda.php")){
 		require "../Mod_Agenda/Integra_Admin/CreaTablasAgenda.php";
-	}else{ $tablasAgendaLog = "\tNO EXISTE EL MODULO AGENDA\n"; }
+		$tablasAgendaLog = "\t** SE CREA EL MODULO AGENDA: ../Mod_Agenda/Integra_Admin/".PHP_EOL;
+	}else{ $tablasAgendaLog = "\t** NO EXISTE EL MODULO AGENDA\n"; }
 
 	/************	COMPROBAMOS LAS TABLAS CONTACTO	*****************/
 
 	global $tablasContactoLog; 
 	if(file_exists("../Mod_Contacto/Integra_Admin/CreaTablasContacto.php")){
 		require "../Mod_Contacto/Integra_Admin/CreaTablasContacto.php";
+		$tablasContactoLog = "\t** SE CREA EL MODULO CONTACTO: ../Mod_Contacto/Integra_Admin/".PHP_EOL;
 	}else{ $tablasContactoLog = "\t** NO EXISTE EL MODULO CONTACTO\n"; }
 
 	/************	COMPROBAMOS LAS TABLAS CONTA BASIC	*****************/
@@ -199,26 +201,24 @@ if(mysqli_query($db, $visitas)){
 	global $tablasContaLog;
 	if(file_exists("../Mod_Conta/Integra_Admin/CreaTablasConta.php")){
 		require "../Mod_Conta/Integra_Admin/CreaTablasConta.php";
-		global $text;
-		$tablasContaLog = "\t** SE CREAN LOS LOG DEL CBJ EN: ../Mod_Conta/config/logs/".PHP_EOL.$text.PHP_EOL;
-	}else{ $tablasContaLog = "\tNO EXISTE EL MODULO CONTA BASIC\n"; } 
+		$tablasContaLog = "\t** SE CREA EL MODULO CONTA BASIC: ../Mod_Conta/config/logs/".PHP_EOL;
+	}else{ $tablasContaLog = "\t** NO EXISTE EL MODULO CONTA BASIC\n"; } 
 
 	/************	SI EXISTE EL CONSTRUCTOR DE TABLAS ARTICULOS	*****************/
 	
 	global $tblArtic;		
 	if(file_exists('../Mod_Contenidos/Integra_Admin/CreaTablasContenido.php')){
 		require '../Mod_Contenidos/Integra_Admin/CreaTablasContenido.php';
-		global $text;
-		$tblArtic = $text.PHP_EOL;
-	}else{ /* NO EXISTE EL ARCHIVO */ $tblArtic = "\t** NO EXISTE EL MODULO ARTICULOS\n";}
+		$tblArtic = "\t** SE CREA EL MODULO ARTICULOS: ../Mod_Contenidos/Integra_Admin/".PHP_EOL;
+	}else{ $tblArtic = "\t** NO EXISTE EL MODULO ARTICULOS\n";}
 
 	/************	SI EXISTE EL CONSTRUCTOR DE TABLAS MCGESTION	*****************/
 	
 	global $tblMCGest;		
 	if(file_exists('../Mod_Gestion/Integra_Admin/CreaTablasGestion.php')){
 		require '../Mod_Gestion/Integra_Admin/CreaTablasGestion.php';
-		$tblMCGest= "\t** EXISTE ../Mod_Gestion/Integra_Admin/CreaTablasGestion.php\n";
-	}else{ $tblMCGest = "\t** NO EXISTE ../Mod_Gestion/Integra_Admin/CreaTablasGestion.php\n";}
+		$tblMCGest= "\t** SE CREA EL MODULO MCGESTION: ../Mod_Gestion/Integra_Admin/CreaTablasGestion.php\n";
+	}else{ $tblMCGest = "\t** NO EXISTE EL MODULO MCGESTION\n";}
 
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 

@@ -66,7 +66,7 @@ function entrada(){
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	
@@ -76,7 +76,7 @@ function entrada(){
 			</div>");
 	}else{
 	
-		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[ttot]')";
+		$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `datein`, `timein`, `hourstot`) VALUES ('$_POST[ref]', '$_POST[datein]', '$_POST[timein]', '$_POST[hourstot]')";
 			
 		if(mysqli_query($db, $sqla)){ 
 				
@@ -149,12 +149,12 @@ function show_form(){
 					//$tablaUser = "`".strtolower($_SESSION['clave'].$rowb['ref'])."_".date('Y')."`";
 					$tablaUser = "`".strtolower($_SESSION['clave'])."horarios_".date('Y')."`";
 
-					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE `ref` = '$rowb[ref]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
+					$sqlUser =  "SELECT * FROM `$db_name`.$tablaUser WHERE `ref` = '$rowb[ref]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1";
 					//echo "<br>".$sqlUser."<br>";
 
 					$qrUser = mysqli_query($db,$sqlUser);
 					$rowUser = mysqli_fetch_assoc($qrUser);
-					if ((($rowUser['dout'] ?? '') === '') && (($rowUser['ttot'] ?? '') === '00:00:00')){
+					if ((($rowUser['dateout'] ?? '') === '') && (($rowUser['hourstot'] ?? '') === '00:00:00')){
 						$ButtonTitle = 'SING OUT USER ';
 						$ButtonClass = 'botonnaranja';
 					}else{
@@ -215,7 +215,7 @@ function show_form(){
 			//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 			global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 		
-			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1";
+			$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1";
 			$q1 = mysqli_query($db, $sql1);
 			$count1 = mysqli_num_rows($q1);
 			//print($count1);
@@ -311,7 +311,7 @@ function salida(){
 	//$tabla1 = $_SESSION['clave'].$_SESSION['usuarios'];
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -329,7 +329,7 @@ function salida(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dout` IS NULL AND `ttot` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dateout` = '$_POST[dateout]', `timeout` = '$_POST[timeout]', `hourstot` =  '$ttot', `errorhourstot` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			

@@ -1,16 +1,16 @@
 <?php
 
-	global $din;			$din = trim($row1['din']);
-	global $tin;			$tin = trim($row1['tin']);
+	global $din;			$din = trim($row1['datein']);
+	global $tin;			$tin = trim($row1['timein']);
 	global $in;				$in = $din." ".$tin;
 	
     global $dout;
-    if(isset($_POST['dout'])){  $dout = trim($_POST['dout']);
+    if(isset($_POST['dateout'])){  $dout = trim($_POST['dateout']);
     }elseif($dout != ""){  $dout = trim($dout);
     }else{ $dout = ""; }
 				
 	global $tout;
-    if(isset($_POST['tout'])){ $tout = trim($_POST['tout']);
+    if(isset($_POST['timeout'])){ $tout = trim($_POST['timeout']);
     }elseif($tout != ""){  $tout = trim($tout);
     }else{ $tout = ""; }
     
@@ -38,7 +38,7 @@
 	global $text;
 	if(($ttoth > 9)||($ttotd > 0)){
 		print("<div class='centradiv alertdiv'>
-				NO PUEDE FICHAR MÁS DE 9 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
+				NO PUEDE FICHAR MÁS DE 09 HORAS.<br>PONGASE EN CONTACTO CON ADMIN SYSTEM.
 		        </div>");
 		
 		//global $ttot;				$ttot = '00:00:00';

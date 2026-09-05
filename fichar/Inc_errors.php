@@ -8,7 +8,7 @@
 
 	// INICIO ERRORES FICHAR.
 		global $db;		global $db_name;
-		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ref` = '$sesus' AND $vname.`error` = 'true' ";
+		$sqle =  "SELECT * FROM `$db_name`.$vname WHERE $vname.`ref` = '$sesus' AND $vname.`errorhourstot` = 'true' ";
 		$qe = mysqli_query($db, $sqle);
 		global $counte;
 		if(!$qe){
@@ -39,11 +39,11 @@
 			
 			print("<tr>
 					<td class='BorderInfDchY'>".$rowe['id']."</td>
-					<td class='BorderInfDchY'>".$rowe['din']."</td>
-					<td class='BorderInfDchY'>".$rowe['tin']."</td>
-					<td class='BorderInfDchY'>".$rowe['dout']."</td>
-					<td class='BorderInfDchY'>".$rowe['tout']."</td>
-					<td class='BorderInfY'>".$rowe['ttot']."</td>
+					<td class='BorderInfDchY'>".$rowe['datein']."</td>
+					<td class='BorderInfDchY'>".$rowe['timein']."</td>
+					<td class='BorderInfDchY'>".$rowe['dateout']."</td>
+					<td class='BorderInfDchY'>".$rowe['timeout']."</td>
+					<td class='BorderInfY'>".$rowe['hourstot']."</td>
 				</tr>");
 			
 				} // FIN DEL WHILE.

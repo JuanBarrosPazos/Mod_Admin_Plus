@@ -8,7 +8,6 @@
 ### DESCARGA DE RESPONSABILIDADES:
   	Juan M. Barrós Pazos, no se hace responsable, en ningún caso, del uso de esta aplicación y de los daños o perjuicios ocasionados, en cualquiera de sus formas.
     Por el uso o distribución de la misma, tal y como se presenta en el repositorio, o por la modificación y distribución de la misma por terceros.
-
 ----
 ## CUESTIONES PENDIENTES...
 	- Implementación de horarios personalizados para cada empleado bbdd & php8...
@@ -20,26 +19,36 @@
 	- input text en formularios de filtro en fichar/
 	- Modificar el contenido de los mensajes en los log de actividad de los Admin...
 	- Confirmar mensajes: print("ERROR SQL L.xxx: ".mysqli_error($db));
-
 ----
 ## ULTIMAS MODIFICACIONES.
+#### Mod_Admin_Plus V26.09.05 Beta6 2026/09/04
+	- Se modifica en las tablas de registro de horarios:
+		- (`error` -> `errorttot`) `errorttot` -> `errorhourstot`, `dfeed` -> `deldate`, `tfeed` -> `deltime`,
+		  `din` -> `datein`, `tin` -> `timein`, `dout` -> `dateout`, `tout` -> `timeout`, `ttot` -> `hourstot`,
+	- Archivo log de instalación, se ajusta la configuración. Server/config/logs/ini_log_date.log
+	- Instalación desde 0  Ok..
+
+----
 #### Mod_Admin_Plus V26.09.04 Beta5 2026/09/04
 	- Se modifica el cotejamiento de la bbdd de utf16_spanish2_ci -> utf8mb4_spanish2_ci...
 		- Modificados todos los cotejamientos de bbdd en los scripts de generación de tablas o datos...
 	- Se crea la tabla intermedia $table_name_ju = "`".$_SESSION['clave']."jornadas_users`";
 		- Registrará la hora de entrada y salida de cada empleado y las horas de la jornada...
 		- La fecha de inicio de este horario y la fecha de fin NULL, aplica horario activo...
-	- 	$tju = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_ju (
-				`id` INT AUTO_INCREMENT PRIMARY KEY,
-				`uref` INT NOT NULL,
-				`jornadain` TIME NOT NULL,
-				`jornadaout` TIME NOT NULL,
-				`jornadahoras` DECIMAL(4,2) NOT NULL,
-				`fecha_inicio` DATE NOT NULL DEFAULT (CURRENT_DATE),
-				`fecha_fin` DATE DEFAULT NULL,
-				KEY `uref` (`uref`),
-				FOREIGN KEY (`uref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE CASCADE ON UPDATE CASCADE
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+	- 		$tju = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_ju (
+					`id` INT AUTO_INCREMENT PRIMARY KEY,
+					`uref` INT NOT NULL,
+					`jornadain` TIME NOT NULL,
+					`jornadaout` TIME NOT NULL,
+					`jornadain2` TIME DEFAULT NULL,
+					`jornadaout2` TIME DEFAULT NULL,
+					`jornadahoras` DECIMAL(4,2) NOT NULL,
+					`fecha_inicio` DATE NOT NULL DEFAULT (CURRENT_DATE),
+					`fecha_fin` DATE DEFAULT NULL,
+					KEY `uref` (`uref`),
+					FOREIGN KEY (`uref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+
 
 ----
 #### Mod_Admin_Plus V26.09.03 Beta4B 2026/09/03
@@ -69,7 +78,8 @@
 		- Se crea config/ConfigYear.php con la configuración del cambio de año mediante consulta a schemas y llamar function tcl()...
 		- Se crea config/ConfigTcl.php configuración de la function tcl()...
 		- function modif2() y  function modif() se elimina ya no son necesarias...
-		- En: index.php, indexqr.php, cam/index.php, cam/indexqr.php, config/index_Init_System.php, config/index_Play_System.php, config/indexqr_Play_System.php
+			-> En: index.php, indexqr.php, cam/index.php, cam/indexqr.php, config/index_Init_System.php,
+					config/index_Play_System.php, config/indexqr_Play_System.php
 
 	- Se eliminan los archivos ayear.php ayear.txt y sus llamadas en los scripts...
 

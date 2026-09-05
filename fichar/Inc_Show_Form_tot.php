@@ -43,10 +43,10 @@
 				'24' => '24','25' => '25','26' => '26','27' => '27',
 				'28' => '28','29' => '29','30' => '30','31' => '31');
 										
-	$orden = array('`din` ASC' => 'Fecha In Asc',
-					'`din` DESC' => 'Fecha In Desc',
-					'`dout` ASC' => 'Fecha Out Asc',
-					'`dout` DESC' => 'Fecha Out Desc',
+	$orden = array('`datein` ASC' => 'Fecha In Asc',
+					'`datein` DESC' => 'Fecha In Desc',
+					'`dateout` ASC' => 'Fecha Out Asc',
+					'`dateout` DESC' => 'Fecha Out Desc',
 					'`id` ASC' => 'ID Asc',
 					'`id` DESC' => 'ID Desc');
 

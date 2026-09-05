@@ -76,7 +76,7 @@
 			$countbgc = 0;
 			while($rowb = mysqli_fetch_assoc($qb)){
 				global $sty;
-				if($rowb['error'] == "true"){ 
+				if($rowb['errorhourstot'] == "true"){ 
 						$sty = "color: #F1BD2D; font-weight: bold;";
 				}else{ $sty = ""; }
 
@@ -91,11 +91,11 @@
 				<form name='modifica' action='".$action1."' method='POST' style='display:inline-block;'>
 						".$rowb['id']."
 						</td>
-						<td style='".$sty.$bgcolor."'>".$rowb['din']."</td>
-						<td style='".$sty.$bgcolor."'>".$rowb['tin']."</td>
-						<td style='".$sty.$bgcolor."'>".$rowb['dout']."</td>
-						<td style='".$sty.$bgcolor."'>".$rowb['tout']."</td>
-						<td style='".$sty.$bgcolor."'>".$rowb['ttot']."</td>
+						<td style='".$sty.$bgcolor."'>".$rowb['datein']."</td>
+						<td style='".$sty.$bgcolor."'>".$rowb['timein']."</td>
+						<td style='".$sty.$bgcolor."'>".$rowb['dateout']."</td>
+						<td style='".$sty.$bgcolor."'>".$rowb['timeout']."</td>
+						<td style='".$sty.$bgcolor."'>".$rowb['hourstot']."</td>
 						<td style='".$sty.$bgcolor."'>");
 				
 				require 'Inc_Input_Row_Total.php';
@@ -147,11 +147,11 @@
 			// 4. Preparar la estructura de datos que solicitaste
 			$linea_csv = [
 				$rowb['id'],
-				$rowb['din'],
-				$rowb['tin'],
-				$rowb['dout'],
-				$rowb['tout'],
-				$rowb['ttot']
+				$rowb['datein'],
+				$rowb['timein'],
+				$rowb['dateout'],
+				$rowb['timeout'],
+				$rowb['hourstot']
 			];
 			
 			// 5. Guardar automáticamente la línea en el archivo CSV

@@ -368,7 +368,7 @@ function suma_acces(){
 
 	global $table_name_b;			$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
-	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('$_SESSION[ref]', '$_SESSION[Nivel]', '$ipCliente', '0', '1', '$date', '$time')";
+	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `errorhourstot`, `acceso`, `date`, `time`) VALUES ('$_SESSION[ref]', '$_SESSION[Nivel]', '$ipCliente', '0', '1', '$date', '$time')";
 
 	if(mysqli_query($db, $sqlip)){ }else{ print("* ERROR SQL L.456: ".mysqli_error($db)); }
 
@@ -410,7 +410,7 @@ function suma_denegado(){
 
 	global $table_name_b;	$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
-	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `error`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '$ipCliente', '1', '0', '$date', '$time')";
+	$sqlip = "INSERT INTO `$db_name`.$table_name_b (`ref`, `nivel`, `ipn`, `errorhourstot`, `acceso`, `date`, `time`) VALUES ('anonimo', 'anonimo', '$ipCliente', '1', '0', '$date', '$time')";
 	
 	if(mysqli_query($db, $sqlip)){ 
 		global $text;		$text = "!! ACCESO DENEGADO A ADMIN SING IN => IP: ".$ipCliente.PHP_EOL;
@@ -567,7 +567,7 @@ function show_ficha(){
 	// FICHA ENTRADA O SALIDA.
 	global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
 
-	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[ref]' AND hor.`ref` = '$_SESSION[ref]' AND hor.`dateout` IS NULL AND hor.`hourstot` = '00:00:00' ";
 	//echo "<br>".$sql1;
 
 	$q1 = mysqli_query($db, $sql1);
@@ -694,7 +694,7 @@ function process_pin(){
 		// FICHA ENTRADA O SALIDA.
 	    global $table_admin;		$table_admin = "`".$_SESSION['clave']."admin`";
 
-		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$rp[ref]' AND hor.`ref` = '$rp[ref]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
+		$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$rp[ref]' AND hor.`ref` = '$rp[ref]' AND hor.`dateout` IS NULL AND hor.`hourstot` = '00:00:00' ";
 		//echo "<br>".$sql1."<br>";
 		
 		$q1 = mysqli_query($db, $sql1);
@@ -796,7 +796,7 @@ function pin_out(){
 
 	global $table_admin;	$table_admin = "`".$_SESSION['clave']."admin`";
 
-	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dout` IS NULL AND hor.`ttot` = '00:00:00' ";
+	$sql1 =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND hor.`ref` = '$_SESSION[usuarios]' AND hor.`dateout` IS NULL AND hor.`hourstot` = '00:00:00' ";
 
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
@@ -819,7 +819,7 @@ function pin_out(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 	//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` IS NULL AND $vname.`ttot` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dateout` = '$_POST[dateout]', `timeout` = '$_POST[timeout]', `hourstot` =  '$ttot', `errorhourstot` = '$terror' WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dateout` IS NULL AND $vname.`hourstot` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -871,7 +871,7 @@ function pin_in(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `din`, `tin`, `ttot`) VALUES ('$_POST[ref]', '$_POST[din]', '$_POST[tin]', '$_POST[ttot]')";
+	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `datein`, `timein`, `hourstot`) VALUES ('$_POST[ref]', '$_POST[datein]', '$_POST[timein]', '$_POST[hourstot]')";
 		
 	if(mysqli_query($db, $sqla)){
 
@@ -883,7 +883,7 @@ function pin_in(){
 		global $text;
 		$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 		$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
-		$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
+		$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['datein']." / ".$_POST['timein'];
 			
 		$rmfdocu = $_POST['ref'];
 		$rmfdate = date('Y_m');
@@ -1022,7 +1022,7 @@ function desbloqueo(){
 		$_SESSION['showf'] = 68;
 	}elseif((($cx >= 1)&&(@$rowx['error'] <= $timex))||((strlen(trim(@$rowx['error'] >= 3)))&&(@$rowx['error'] <= $timex))){ 
 	// DESBLOQUEO TODAS LAS IPs IGUALES A LA MIA
-	$desb = "UPDATE `$db_name`.$table_name_b SET `error` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' ";
+	$desb = "UPDATE `$db_name`.$table_name_b SET `errorhourstot` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' ";
 	$_SESSION['showf'] = 0;	
 		if(mysqli_query($db, $desb)){ 
 			// PASO LOGS DE DESBLOQUEO
@@ -1060,7 +1060,7 @@ function bloqueo(){
 	// SELECCIONO LAS IPs == A LA MIA, CON MÁS DE TRES ACCESOS DENEGADOS.
 	global $table_name_b;		$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
-	$sqlip =  "SELECT * FROM $table_name_b WHERE `ipn` = '$ipCliente' AND `error` = '1' AND `acceso` = '0' AND `date` = '$date' ORDER BY `id` DESC ";
+	$sqlip =  "SELECT * FROM $table_name_b WHERE `ipn` = '$ipCliente' AND `errorhourstot` = '1' AND `acceso` = '0' AND `date` = '$date' ORDER BY `id` DESC ";
 	$qip = mysqli_query($db, $sqlip);
 	global $cip;		$cip = mysqli_num_rows($qip);		$_SESSION['cip'] = $cip;
 	$rowip = mysqli_fetch_assoc($qip);
@@ -1098,7 +1098,7 @@ function bloqueo(){
 	// MARCO LA ULTIMA ENTRADA ERROR CON "ERROR HORA BBDD+1" Y "ACCESO x" PARA BLOQUEAR LA IP
 	if($_SESSION['cip'] >= 3){
 
-		$emarc = "UPDATE `$db_name`.$table_name_b SET `error` = '$_SESSION[bloqh]', `acceso` = 'x' WHERE $table_name_b.`id` = '$_SESSION[ipid]' LIMIT 1 ";
+		$emarc = "UPDATE `$db_name`.$table_name_b SET `errorhourstot` = '$_SESSION[bloqh]', `acceso` = 'x' WHERE $table_name_b.`id` = '$_SESSION[ipid]' LIMIT 1 ";
 
 		$_SESSION['showf'] = 68;
 		global $bloqh;		global $bloqm;

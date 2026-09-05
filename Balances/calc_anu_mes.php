@@ -11,7 +11,7 @@
 	global $dm1ym;			$dm1ym = "-01-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 
-	$dm1 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm1 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS */
 	global $sumah;
@@ -22,7 +22,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -40,7 +40,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -58,7 +58,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -89,7 +89,7 @@
 	global $dm1ym;			$dm1ym = "-02-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm2 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm2 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -100,7 +100,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -118,7 +118,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -136,7 +136,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -167,7 +167,7 @@
 	global $dm1ym;			$dm1ym = "-03-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm3 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm3 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -178,7 +178,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -196,7 +196,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -214,7 +214,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -245,7 +245,7 @@
 	global $dm1ym;			$dm1ym = "-04-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm4 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm4 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -256,7 +256,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -274,7 +274,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -292,7 +292,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -323,7 +323,7 @@
 	global $dm1ym;			$dm1ym = "-05-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm5 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm5 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -334,7 +334,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			@$sumah = $sumah + $verh;
 		}
@@ -352,7 +352,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			@$sumam = $sumam + $verm;
 		}
@@ -370,7 +370,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			@$sumas = $sumas + $vers;
 		}
@@ -401,7 +401,7 @@
 	global $dm1ym;			$dm1ym = "-06-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm6 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm6 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -412,7 +412,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -430,7 +430,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -448,7 +448,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -479,7 +479,7 @@
 	global $dm1ym;			$dm1ym = "-07-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm7 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm7 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -490,7 +490,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -508,7 +508,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -526,7 +526,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -557,7 +557,7 @@
 	global $dm1ym;			$dm1ym = "-08-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm8 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm8 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -568,7 +568,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -586,7 +586,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -604,7 +604,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -635,7 +635,7 @@
 	global $dm1ym;				$dm1ym = "-09-";
 	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm9 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm9 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -646,7 +646,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -664,7 +664,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -682,7 +682,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -713,7 +713,7 @@
 	global $dm1ym;				$dm1ym = "-10-";
 	global $filym;				$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm10 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm10 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -724,7 +724,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -742,7 +742,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -760,7 +760,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -791,7 +791,7 @@
 	global $dm1ym;			$dm1ym = "-11-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm11 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm11 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	if(!$dm11){print(mysqli_error($db).".</br>");
@@ -802,7 +802,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -820,7 +820,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -838,7 +838,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -869,7 +869,7 @@
 	global $dm1ym;			$dm1ym = "-12-";
 	global $filym;			$filym = "%".$dy1.$dm1ym."%";
 	
-	$dm12 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$filym' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$dm12 =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$filym' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 /* CALCULAMOS LAS HORAS TOTALES Y LAS PASAMOS A SEGUNDOS. */
 	global $sumah;	
@@ -880,7 +880,7 @@
 		$sumah = 0;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			$sumah = $sumah + $verh;
 		}
@@ -898,7 +898,7 @@
 		$sumam = 0;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			$sumam = $sumam + $verm;
 		}
@@ -916,7 +916,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			$sumas = $sumas + $vers;
 		}
@@ -943,7 +943,7 @@
 				 ////////////////////				  ///////////////////
 
 	$dym = fopen('datosym.php','w+');
-	//$l5 = substr($r2['ttot'],0,5).",";
+	//$l5 = substr($r2['hourstot'],0,5).",";
 	//$l5 = str_replace(":",".",$l5);
 	global $totym;
 	$totym = $totaltime1.",".$totaltime2.",".$totaltime3.",".$totaltime4.",".$totaltime5.",".$totaltime6.",".$totaltime7.",".$totaltime8.",".$totaltime9.",".$totaltime10.",".$totaltime11.",".$totaltime12.",";

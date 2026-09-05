@@ -38,11 +38,11 @@
 							global $text;
 							$text = $dbconecterror;
 							ini_log();
-							print("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
+							print("** NO CONECTA A BBDD ".$db_name.": ".mysqli_connect_error());
 							show_form();
 				}elseif($db){ 	config_one();
 								crear_tablas();
-								ayear();
+								//ayear();
 								global $tablepf;
 								print($tablepf);
 				}
@@ -581,7 +581,7 @@ function crear_tablas(){
 
 	if(file_exists($carpeta)){
 		copy("config/index.php", $carpeta."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP: ".$carpeta."/index.php".PHP_EOL;
 	}else{ }
 
 	global $carpetat;				$carpetat = "Users/temp";
@@ -594,9 +594,8 @@ function crear_tablas(){
 
 	if(file_exists($carpetat)){
 		copy("config/SecureIndex2.php", $carpetat."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP: ".$carpetat."/index.php".PHP_EOL;
 	}else{ }
-
 	
 	require 'config/Inc_Crea_Tablas.php'; 
 

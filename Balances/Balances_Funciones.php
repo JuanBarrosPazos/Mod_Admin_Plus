@@ -19,10 +19,10 @@ function show_form(){
 				'09' => 'SEPTIEMBRE','10' => 'OCTUBRE','11' => 'NOVIEMBRE',
 				'12' => 'DICIEMBRE');
 	
-	$ordenar = array('`din` ASC' => 'Fecha In Asc',
-					'`din` DESC' => 'Fecha In Desc',
-					'`dout` ASC' => 'Fecha Out Asc',
-					'`dout` DESC' => 'Fecha Out Desc');
+	$ordenar = array('`datein` ASC' => 'Fecha In Asc',
+					'`datein` DESC' => 'Fecha In Desc',
+					'`dateout` ASC' => 'Fecha Out Asc',
+					'`dateout` DESC' => 'Fecha Out Desc');
 	
 	global $db;		
 	global $tablau;			
@@ -207,8 +207,8 @@ function ver_todo(){
 			///////////////////////			***********  		///////////////////////
 
 	global $sqlb;			global $qb;
-	//$sqlb =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' ORDER BY $orden ";
-	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	//$sqlb =  "SELECT * FROM $vname WHERE `datein` LIKE '$fil' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$fil' AND `hourstot` <> '00:00:00' ORDER BY $orden ";
 
 	//echo "<br>".$sqlb."<br>";
 	$qb = mysqli_query($db, $sqlb);

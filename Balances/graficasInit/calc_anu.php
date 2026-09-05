@@ -38,7 +38,7 @@
 
         // 1. PRIMER BUCLE: Cálculo de totales acumulados
         foreach($tablas as $tabla_nombre){
-            $sqlSumb = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalA' FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' AND `error` = 'false')";
+            $sqlSumb = "SELECT SUM(TIME_TO_SEC(`hourstot`)) AS 'totalA' FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND (`hourstot` <> '00:00:00' AND `errorhourstot` = 'false')";
             $Sumb = mysqli_query($db, $sqlSumb);
             $sumTotb = mysqli_fetch_assoc($Sumb);
 
@@ -61,7 +61,7 @@
 
         // 2. SEGUNDO BUCLE: Renderizado de gráfica de horas
 		foreach($tablas as $tabla_nombre){
-            $sqlSum = "SELECT SUM(TIME_TO_SEC(`ttot`)) AS 'totalB' FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND (`ttot` <> '00:00:00' AND `error` = 'false')";
+            $sqlSum = "SELECT SUM(TIME_TO_SEC(`hourstot`)) AS 'totalB' FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND (`hourstot` <> '00:00:00' AND `errorhourstot` = 'false')";
             $Sum = mysqli_query($db, $sqlSum);
             $sumTot = mysqli_fetch_assoc($Sum);
 
@@ -114,7 +114,7 @@
         
         // 3. TERCER BUCLE: Renderizado de gráfica de días trabajado/error
 		foreach($tablas as $tabla_nombre){
-            $sql = "SELECT COUNT(DISTINCT CASE WHEN `error` = 'false' THEN `din` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `error` = 'true' THEN `din` END) AS dias_error FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND `ttot` <> '00:00:00'";
+            $sql = "SELECT COUNT(DISTINCT CASE WHEN `errorhourstot` = 'false' THEN `datein` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `errorhourstot` = 'true' THEN `datein` END) AS dias_error FROM `$tabla_nombre` WHERE `ref` = '$userBbdd' AND `hourstot` <> '00:00:00'";
             $resultado = mysqli_query($db, $sql);
 
             global $DiasValidos;        global $DiasValidosTotal;

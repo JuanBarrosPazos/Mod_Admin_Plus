@@ -19,13 +19,13 @@
 
     // CALCULO LA HORA Y MINUTOS DE ENTRADA
         $qtimein = mysqli_fetch_assoc($q1);
-        //print("* Time in: ".$qtimein['tin']);
+        //print("* Time in: ".$qtimein['timein']);
     
-        @$verhorain = substr($qtimein['tin'],0,2);
+        @$verhorain = substr($qtimein['timein'],0,2);
         @$verhorain = str_replace(":","",$verhorain);
         //print("<br>- Hora in: ".$verhorain);
 
-        @$verminuin = substr($qtimein['tin'],3,2);
+        @$verminuin = substr($qtimein['timein'],3,2);
         @$verminuin = str_replace(":","",$verminuin);
         //print("<br>- Minuto in: ".$verminuin);
 

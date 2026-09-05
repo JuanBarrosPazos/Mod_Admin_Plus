@@ -32,20 +32,20 @@
 		$ref = $_SESSION['usuarios'];
 	}else{ $ref = $_SESSION['ref']; }
 
-	if(isset($_POST['din'])){
-		$din = $_POST['din'];
+	if(isset($_POST['datein'])){
+		$din = $_POST['datein'];
 	}
 
-	if(isset($_POST['tin'])){
-		$tin = $_POST['tin'];
+	if(isset($_POST['timein'])){
+		$tin = $_POST['timein'];
 	}
 
-	if(isset($_POST['dout'])){
-		$dout = $_POST['dout'];
+	if(isset($_POST['dateout'])){
+		$dout = $_POST['dateout'];
 	}
 
-	if(isset($_POST['tout'])){
-		$tout = $_POST['tout'];
+	if(isset($_POST['timeout'])){
+		$tout = $_POST['timeout'];
 	}
 
 	if(isset($_POST['id'])){

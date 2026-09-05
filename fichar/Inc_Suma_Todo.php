@@ -6,8 +6,8 @@
 	require $ruta.'Inclu/orden.php';
 
 			///////////////////////			***********  		///////////////////////
-    //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `din` LIKE '$fil' ";
-	//$sh =  "SELECT * FROM $vname WHERE `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+    //$sh =  "SELECT * FROM `$db_name`.$vname WHERE `datein` LIKE '$fil' ";
+	//$sh =  "SELECT * FROM $vname WHERE `datein` LIKE '$fil' AND `hourstot` <> '00:00:00' ORDER BY $orden ";
 
 	global $sh; 	global $db; 	global $db_name;	global $vname;
 
@@ -17,10 +17,10 @@
 	if(isset($_SESSION['usuarios'])){ $Sesion = $_SESSION['usuarios'];
 	}else{ $Sesion = $_SESSION['ref']; }
 
-	//$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' ORDER BY $orden ";
+	//$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND hor.`ref` = '$Sesion' AND `datein` LIKE '$fil' AND `hourstot` <> '00:00:00' ORDER BY $orden ";
 
-	// SE AÑADE AND `error` = 'false' PARA NO INCLUIR LOS ERRORES
-	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND (hor.`ref` = '$Sesion' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false') ORDER BY $orden ";
+	// SE AÑADE AND `errorhourstot` = 'false' PARA NO INCLUIR LOS ERRORES
+	$sh =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$Sesion' AND (hor.`ref` = '$Sesion' AND `datein` LIKE '$fil' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false') ORDER BY $orden ";
 
 	//echo "<br>".$sh;
 			///////////////////////			***********  		///////////////////////
@@ -49,10 +49,10 @@
 			$qhr = mysqli_num_rows($qh);
 			$sumah = 0;
 			for($i=0; $i<$qhr; $i++){
-				$verh = mysqli_fetch_array($qh);
-				$verh = substr($verh['ttot'],0,2).",";
+				$filah = mysqli_fetch_array($qh);
+				$verh = substr($filah['hourstot'], 0, 2);
 				$verh = str_replace(":","",$verh);
-				global $sumah;		@$sumah = $sumah + $verh;
+				global $duamh;		$sumah = (int)$sumah + (int)$verh;
 			}
 	}
 	$hortosec = $sumah * 3600;	
@@ -66,10 +66,11 @@
 			$qmr = mysqli_num_rows($qm);
 			$sumam = 0;
 			for($i=0; $i<$qmr; $i++){
-				$verm = mysqli_fetch_array($qm);
-				$verm = substr($verm['ttot'],3,2).",";
+				$filam = mysqli_fetch_array($qm);
+				$verm = substr($filam['hourstot'], 3, 2);
 				$verm = str_replace(":","",$verm);
-				global $sumam;		@$sumam = $sumam + $verm;
+
+				global $sumam;		$sumam = (int)$sumam + (int)$verm;
 			}
 	}
 	$mintosec = $sumam * 60;	
@@ -84,7 +85,7 @@
 			$sumas = 0;
 			for($i=0; $i<$qsr; $i++){
 				$vers = mysqli_fetch_array($qs);
-				$vers = substr($vers['ttot'],-2).",";
+				$vers = substr($vers['hourstot'],-2).",";
 				$vers = str_replace(":","",$vers);
 				global $sumas;		@$sumas = $sumas + $vers;
 			}

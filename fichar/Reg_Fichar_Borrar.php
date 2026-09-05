@@ -33,7 +33,7 @@ function suma_todo(){
 	global $db;				global $db_name;
 	
 	global $nm;
-	$nm = substr($_POST['din'],5,2);
+	$nm = substr($_POST['datein'],5,2);
 	$nm = str_replace(":","",$nm);
 
 	global $dyt;			$dyt = date('Y');
@@ -57,7 +57,7 @@ function process_form(){
 	
 	global $db;				global $db_name;
 
-	global $diny;			$diny = substr($_POST['din'],0,4);
+	global $diny;			$diny = substr($_POST['datein'],0,4);
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$diny."`";
 	// SOLO EL AÑO ACTUAL		$vname = "`".$tabla1.date('Y')."`";
@@ -68,7 +68,7 @@ function process_form(){
 	global $sql;
 	if(isset($_POST['recupera'])){
 		$Titulo = "RECUPERADO EL REGISTRO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='false',`deldate`='$FBaja',`deltime`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		$audioAudi = "file_recovered.mp3";
 	}elseif(isset($_POST['elimina'])){
 		$Titulo = "ELIMINADO EL REGISTRO";
@@ -76,7 +76,7 @@ function process_form(){
 		$audioAudi = "file_deleted.mp3";
 	}else{ 
 		$Titulo = "REGISTRO BORRADO";
-		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`dfeed`='$FBaja',`tfeed`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
+		$sql = "UPDATE `$db_name`.$vname SET `del`='true',`deldate`='$FBaja',`deltime`='$TBaja' WHERE `id`='$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		$audioAudi = "file_bin.mp3";
 	}
 
@@ -97,19 +97,19 @@ function process_form(){
 					<td>USER REF</td><td>".$_SESSION['usuarios']."</td>
 				</tr>
 				<tr>
-					<td>DATE IN</td><td>".$_POST['din']."</td>
+					<td>DATE IN</td><td>".$_POST['datein']."</td>
 				</tr>
 				<tr>
-					<td>TIME IN</td><td>".$_POST['tin']."</td>
+					<td>TIME IN</td><td>".$_POST['timein']."</td>
 				</tr>
 				<tr>
-					<td>DATE OUT</td><td>".$_POST['dout']."</td>
+					<td>DATE OUT</td><td>".$_POST['dateout']."</td>
 				</tr>
 				<tr>
-					<td>TIME OUT</td><td>".$_POST['tout']."</td>
+					<td>TIME OUT</td><td>".$_POST['timeout']."</td>
 				</tr>
 				<tr>
-					<td>TIME TOTAL</td><td>".$_POST['ttot']."</td>
+					<td>TIME TOTAL</td><td>".$_POST['hourstot']."</td>
 				</tr>
 				<tr>
 					<td colspan=2>
@@ -133,16 +133,16 @@ function process_form(){
 			suma_todo();
 			global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 			global $nm;
-			$nm = substr($_POST['din'],5,2);
+			$nm = substr($_POST['datein'],5,2);
 			$nm = str_replace(":","",$nm);
 
 			global $sumatodo;
 			global $text;
 			$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
 			$text = $text.PHP_EOL."** HORARIO ELIMINADO: ";
-			$text = $text.PHP_EOL."** ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-			$text = $text.PHP_EOL."** SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
-			$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['ttot'].".";
+			$text = $text.PHP_EOL."** ENTRADA: ".$_POST['datein']." / ".$_POST['timein'].".";
+			$text = $text.PHP_EOL."** SALIDA: ".$_POST['dateout']." / ".$_POST['timeout'].".";
+			$text = $text.PHP_EOL."** TOTAL TIME: ".$_POST['hourstot'].".";
 			
 			$text = $text.PHP_EOL."** HORAS TOTALES MES ".date('Y')."-".$nm.": ".$sumatodo;
 			$text = $text.PHP_EOL."\t**********".PHP_EOL;
@@ -204,11 +204,11 @@ function show_form(){
 						   	'ref' => $_SESSION['usuarios'],
 							'name1' => $_POST['name1'],
 							'name2' => $_POST['name2'],
-							'din' => $_POST['din'],
-							'tin' => $_POST['tin'],
-							'dout' => $_POST['dout'],
-							'tout' => $_POST['tout'],
-							'ttot' => $_POST['ttot'],
+							'datein' => $_POST['datein'],
+							'timein' => $_POST['timein'],
+							'dateout' => $_POST['dateout'],
+							'timeout' => $_POST['timeout'],
+							'hourstot' => $_POST['hourstot'],
 							'recupera' => $recupera,
 							'elimina' => $elimina,);
 	}
@@ -240,23 +240,23 @@ function show_form(){
 			</tr>
 			<tr>
 				<td>DATE IN</td>
-				<td>".$defaults['din']."</td>
+				<td>".$defaults['datein']."</td>
 			</tr>
 			<tr>
 				<td>TIME IN</td>
-				<td>".$defaults['tin']."</td>
+				<td>".$defaults['timein']."</td>
 			</tr>
 			<tr>
 				<td>DATE OUT</td>
-				<td>".$defaults['dout']."</td>
+				<td>".$defaults['dateout']."</td>
 			</tr>
 			<tr>
 				<td>TIME OUT</td>
-				<td>".$defaults['tout']."</td>
+				<td>".$defaults['timeout']."</td>
 			</tr>
 			<tr>
 				<td>TIME TOTAL</td>
-				<td>".$defaults['ttot']."</td>
+				<td>".$defaults['hourstot']."</td>
 			</tr>
 			<tr>
 				<td colspan='2'>
@@ -264,11 +264,11 @@ function show_form(){
 					<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
 					<input type='hidden' name='name1' value='".$defaults['name1']."' />
 					<input type='hidden' name='name2' value='".$defaults['name2']."' />
-					<input type='hidden' name='din' value='".$defaults['din']."' />
-					<input type='hidden' name='tin' value='".$defaults['tin']."' />
-					<input type='hidden' name='dout' value='".$defaults['dout']."' />
-					<input type='hidden' name='tout' value='".$defaults['tout']."' />
-					<input type='hidden' name='ttot' value='".$defaults['ttot']."' />
+					<input type='hidden' name='datein' value='".$defaults['datein']."' />
+					<input type='hidden' name='timein' value='".$defaults['timein']."' />
+					<input type='hidden' name='dateout' value='".$defaults['dateout']."' />
+					<input type='hidden' name='timeout' value='".$defaults['timeout']."' />
+					<input type='hidden' name='hourstot' value='".$defaults['hourstot']."' />
 					".$input1.$input2."
 					<input type='hidden' name='oculto' value=1 />
 				<button type='submit' title='".$Titulo."' class='".$ButtonColor." imgButIco ".$ButtonIco."' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
@@ -301,10 +301,10 @@ function info_01(){
 	$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
 	$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
 	$text = $text.PHP_EOL."\tID: ".$_POST['id'];
-	$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
-	$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
-	$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
-	$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
+	$text = $text.PHP_EOL."\tDATE IN: ".$_POST['datein'];
+	$text = $text.PHP_EOL."\tTIME IN: ".$_POST['timein'];
+	$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dateout'];
+	$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['timeout'];
 	$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
 
 	$logdocu = $_SESSION['usuarios'];
@@ -333,10 +333,10 @@ function info_02(){
 		$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
 		$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
 		$text = $text.PHP_EOL."\tID: ".$_POST['id'];
-		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
-		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
-		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
-		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
+		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['datein'];
+		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['timein'];
+		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dateout'];
+		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['timeout'];
 		$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
 
 		$logname = $_SESSION['Nombre'];	

@@ -12,7 +12,7 @@ meses_por_año = {
     2023: list(range(1, 13)),
     2024: list(range(1, 13)),
     2025: list(range(1, 13)),
-    2026: list(range(1, 7)) # Transcurrido del 2026 (hasta junio)
+    2026: list(range(1, 9)) # Transcurrido del 2026 (hasta junio)
 }
 
 TAMANO_LOTE = 150 # Máximo de entradas por cada sentencia INSERT
@@ -26,19 +26,19 @@ for año in años:
     create_table_sql = f"""CREATE TABLE IF NOT EXISTS `{tabla}` (
   `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf8mb4_spanish2_ci NOT NULL,
-  `din` varchar(10) collate utf8mb4_spanish2_ci NOT NULL,
-  `tin` time NOT NULL,
-  `dout` varchar(10) collate utf8mb4_spanish2_ci NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
+  `datein` varchar(10) collate utf8mb4_spanish2_ci NOT NULL,
+  `timein` time NOT NULL,
+  `dateout` varchar(10) collate utf8mb4_spanish2_ci NULL,
+  `timeout` time NULL,
+  `hourstot` time NULL,
+  `errorhourstot` varchar(5) NOT NULL default 'false',
   `del` varchar(5) NOT NULL default 'false',
-  `dfeed` varchar(10) collate utf8mb4_spanish2_ci NULL,
-  `tfeed` time NULL,
+  `deldate` varchar(10) collate utf8mb4_spanish2_ci NULL,
+  `deltime` time NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES `adm_admin` (`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1;
 
 """
     sql_output.append(create_table_sql)
@@ -83,14 +83,14 @@ for año in años:
                 
                 # Si alcanzamos el límite de 150 registros, empaquetamos y escribimos el INSERT masivo
                 if len(valores_acumulados) == TAMANO_LOTE:
-                    insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `din`, `tin`, `dout`, `tout`, `ttot`, `error`, `del`, `dfeed`, `tfeed`) VALUES \n"
+                    insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `datein`, `timein`, `dateout`, `timeout`, `hourstot`, `errorhourstot`, `del`, `deldate`, `deltime`) VALUES \n"
                     sql_completo = insert_base + ",\n".join(valores_acumulados) + ";"
                     sql_output.append(sql_completo)
                     valores_acumulados = [] # Vaciar el lote
 
     # Al salir de los bucles, si quedaron registros pendientes (< 150), los empaquetamos también
     if valores_acumulados:
-        insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `din`, `tin`, `dout`, `tout`, `ttot`, `error`, `del`, `dfeed`, `tfeed`) VALUES \n"
+        insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `datein`, `timein`, `dateout`, `timeout`, `hourstot`, `errorhourstot`, `del`, `deldate`, `deltime`) VALUES \n"
         sql_completo = insert_base + ",\n".join(valores_acumulados) + ";"
         sql_output.append(sql_completo)
 

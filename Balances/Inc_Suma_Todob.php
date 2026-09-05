@@ -10,7 +10,7 @@
 	//////////////////////////////
 
 	// CONSULTA ÚNICA PARA CONTAR DÍAS VÁLIDOS Y DÍAS ERROR...
-	$sql = "SELECT COUNT(DISTINCT CASE WHEN `error` = 'false' THEN `din` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `error` = 'true' THEN `din` END) AS dias_error FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00'";
+	$sql = "SELECT COUNT(DISTINCT CASE WHEN `errorhourstot` = 'false' THEN `datein` END) AS dias_validos, COUNT(DISTINCT CASE WHEN `errorhourstot` = 'true' THEN `datein` END) AS dias_error FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$fil' AND `hourstot` <> '00:00:00'";
 
 	$resultado = mysqli_query($db, $sql);
 
@@ -31,7 +31,7 @@
 
 	//////////////////////////////
 
-	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `ttot` <> '00:00:00' AND `error` = 'false' ORDER BY $orden ";
+	$sh =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$fil' AND `hourstot` <> '00:00:00' AND `errorhourstot` = 'false' ORDER BY $orden ";
 	
 	/* GRABAMOS LAS FECHAS. */
 	if(!$sh){ print("* Balances/Inc_Suma_Todob.php ERROR \$sh L.8".mysqli_error($db).".</br>");
@@ -40,10 +40,10 @@
         $df = fopen('datosf.php','w+');
         $i=0;
 		while($r1 = mysqli_fetch_array($datf)){
-			$l1 = substr($r1['din'],7,3).",";
+			$l1 = substr($r1['datein'],7,3).",";
 			$l1 = str_replace("-","D.",$l1);
 			fwrite($df, $l1);
-			$tot1[$i] = $r1['din'];
+			$tot1[$i] = $r1['datein'];
 			$i++;
 		}
 		fclose($df);
@@ -56,10 +56,10 @@
         $d = fopen('datos.php','w+');
         $i=0;
 		while($r2 = mysqli_fetch_array($dat)){
-			$l2 = substr($r2['ttot'],0,5).",";
+			$l2 = substr($r2['hourstot'],0,5).",";
 			$l2 = str_replace(":",".",$l2);
 			fwrite($d, $l2);
-			$tot2[$i] = $r2['ttot'];
+			$tot2[$i] = $r2['hourstot'];
 			$i++;
 		}
 		fclose($d);
@@ -87,7 +87,7 @@
 		global $sumah;
 		for($i=0; $i<$qhr; $i++){
 			$verh = mysqli_fetch_array($qh);
-			$verh = substr($verh['ttot'],0,2).",";
+			$verh = substr($verh['hourstot'],0,2).",";
 			$verh = str_replace(":","",$verh);
 			@$sumah = $sumah + $verh;
 		}
@@ -105,7 +105,7 @@
 		global $sumam;
 		for($i=0; $i<$qmr; $i++){
 			$verm = mysqli_fetch_array($qm);
-			$verm = substr($verm['ttot'],3,2).",";
+			$verm = substr($verm['hourstot'],3,2).",";
 			$verm = str_replace(":","",$verm);
 			@$sumam = $sumam + $verm;
 		}
@@ -124,7 +124,7 @@
 		$sumas = 0;
 		for($i=0; $i<$qsr; $i++){
 			$vers = mysqli_fetch_array($qs);
-			$vers = substr($vers['ttot'],-2).",";
+			$vers = substr($vers['hourstot'],-2).",";
 			$vers = str_replace(":","",$vers);
 			@$sumas = $sumas + $vers;
 		}

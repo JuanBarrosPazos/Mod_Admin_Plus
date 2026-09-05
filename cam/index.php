@@ -157,7 +157,7 @@ function process_pin(){
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
 	// FICHA ENTRADA O SALIDA.
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dout` IS NULL AND `ttot` = '00:00:00' ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$rp[ref]' AND `dateout` IS NULL AND `hourstot` = '00:00:00' ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 
@@ -258,7 +258,7 @@ function pin_out(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_POST['ref']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dout` IS NULL AND $vname.`ttot` = '00:00:00' LIMIT 1 ";
+	$sql1 =  "SELECT * FROM `$db_name`.$vname WHERE `ref` = '$_SESSION[usuarios]' AND $vname.`dateout` IS NULL AND $vname.`hourstot` = '00:00:00' LIMIT 1 ";
 	$q1 = mysqli_query($db, $sql1);
 	$count1 = mysqli_num_rows($q1);
 	$row1 = mysqli_fetch_assoc($q1);
@@ -279,7 +279,7 @@ function pin_out(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE $vname.`dout` IS NULL AND $vname.`ttot` = '00:00:00' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dateout` = '$_POST[dateout]', `timeout` = '$_POST[timeout]', `hourstot` =  '$ttot', `errorhourstot` = '$terror' WHERE $vname.`dateout` IS NULL AND $vname.`hourstot` = '00:00:00' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -331,7 +331,7 @@ function pin_in(){
 
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").date('Y')."`";
 
-	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `din`, `tin`, `dout`, `tout`, `ttot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[din]', '$_POST[tin]', '$_POST[dout]', '$_POST[tout]', '$_POST[ttot]')";
+	$sqla = "INSERT INTO `$db_name`.$vname (`ref`, `Nombre`, `Apellidos`, `datein`, `timein`, `dateout`, `timeout`, `hourstot`) VALUES ('$_POST[ref]', '$_POST[name1]', '$_POST[name2]', '$_POST[datein]', '$_POST[timein]', '$_POST[dateout]', '$_POST[timeout]', '$_POST[hourstot]')";
 		
 	if(mysqli_query($db, $sqla)){ 
 		
@@ -342,7 +342,7 @@ function pin_in(){
 			global $text;
 			$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 			$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
-			$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['din']." / ".$_POST['tin'];
+			$text = $text.PHP_EOL."** F. ENTRADA ".$_POST['datein']." / ".$_POST['timein'];
 			
 			$rmfdocu = $_POST['ref'];
 			$rmfdate = date('Y_m');

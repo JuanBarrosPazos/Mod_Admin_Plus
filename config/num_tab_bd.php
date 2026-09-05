@@ -36,9 +36,9 @@
         $db = false;
 
         // ERROR: Se ejecuta la misma lógica de manejo de errores e historial
-        global $text;       $text = $db_name . " * " . $e->getMessage();
+        global $text;       $text = $db_name."* ".$e->getMessage();
 
-        print("** NO CONECTA A BBDD " . $db_name . "</br>" . $e->getMessage());
+        print("<br>** NO CONECTA A BBDD ".$db_name.": ".$e->getMessage());
 		ini_log();
 
     }

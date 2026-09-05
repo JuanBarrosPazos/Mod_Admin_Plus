@@ -87,7 +87,7 @@ function ver_todo(){
 			///////////////////////			***********  		///////////////////////
 
 	global $sqlb;		global $qb;
-	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `din` LIKE '$fil' AND `error` = 'true' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $vname WHERE `ref` = '$_SESSION[usuarios]' AND `datein` LIKE '$fil' AND `errorhourstot` = 'true' ORDER BY $orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 			////////////////////		**********  		////////////////////
@@ -121,7 +121,7 @@ function ver_todo(){
 	$formulariof = "<td class='BorderInfDch' align='right'>
 					<input type='submit' value='MODIF ERRORES' class='botonnaranja' />
 					<input type='hidden' name='oculto2' value=1 />
-					<input type='hidden' name='error' value=1 />
+					<input type='hidden' name='errorhourstot' value=1 />
 					</td>
 					</form>";
 	global $colspana;			$colspana = "7";

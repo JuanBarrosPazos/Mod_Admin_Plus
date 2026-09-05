@@ -8,7 +8,7 @@
 	$dir = "../Users/".$userdir."/mrficha";
 	$text = PHP_EOL."\t- NOMBRE: ".$_POST['name1']." ".$_POST['name2'];
 	$text = $text.PHP_EOL."\t- USER REF: ".$_POST['ref'];
-	$text = $text.PHP_EOL."** FICHA ENTRADA ".$_POST['din']." / ".$_POST['tin'];
+	$text = $text.PHP_EOL."** FICHA ENTRADA ".$_POST['datein']." / ".$_POST['timein'];
 				
 	$rmfdocu = $userdir;
 	$rmfdate = date('Y_m');

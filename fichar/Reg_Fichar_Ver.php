@@ -40,7 +40,7 @@ function show_form(){
 
 function ver_todo(){
 		
-	global $db;
+	global $db, $db_name;
 	global $orden;
 	require '../Inclu/orden.php';
 
@@ -79,17 +79,18 @@ function ver_todo(){
 
 	global $sqlb;		global $TablaTitulo;
 	if((isset($_POST['cherror']))&&(!isset($_POST['chbin']))){
-		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`error` = 'true' AND hor.`del` = 'false')) ORDER BY $orden ";
+		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`datein` LIKE '$fil' AND hor.`errorhourstot` = 'true' AND hor.`del` = 'false')) ORDER BY $orden ";
 		$TablaTitulo = "ERRORES ".$dyt1.": ";
 	}elseif((isset($_POST['chbin']))&&(!isset($_POST['cherror']))){
-		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`del` = 'true')) ORDER BY $orden ";
+		$sqlb =  "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`datein` LIKE '$fil' AND hor.`del` = 'true')) ORDER BY $orden ";
 		$TablaTitulo = "PAPELERA ".$dyt1.": ";
 	}else{
-		$sqlb = "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`din` LIKE '$fil' AND hor.`dout` <> '' AND hor.`del` = 'false')) ORDER BY $orden ";
+		$sqlb = "SELECT hor.*, ad.`Nombre`, ad.`Apellidos` FROM `$db_name`.$vname AS hor, `$db_name`.$table_admin AS ad WHERE ad.`ref` = '$_SESSION[usuarios]' AND (hor.`ref` = '$_SESSION[usuarios]' AND (hor.`datein` LIKE '$fil' AND hor.`dateout` IS NOT NULL AND hor.`del` = 'false')) ORDER BY $orden ";
 		$TablaTitulo = "TODO: ";
 	}
 	//echo "** ".$sqlb."<br>";
 	global $qb;				$qb = mysqli_query($db, $sqlb);
+	if(!$qb){ print("* ERROR SQL L.100 ".mysqli_error($db)."</br>"); }
 	
 			////////////////////		**********  		////////////////////
 

@@ -55,7 +55,7 @@
 					$dbconecterror = $db_name." * ".mysqli_connect_error();
 					global $text;		$text = $text.$dbconecterror;
 					ini_log();
-					print("** NO CONECTA A BBDD ".$db_name."</br>".mysqli_connect_error());
+					print("** NO CONECTA A BBDD ".$db_name.": ".mysqli_connect_error());
 					show_form();
 				}
 
@@ -547,7 +547,6 @@ function process_form(){
 
 	global $text;
 	$text ="SE CREA EL ARCHIVO DE CONEXIONES ".$filename."\n\$db_host = ".$host."\n\$db_user = ".$user."\n\$db_pass = ".$pass."\n\$db_name = ".$name;
-	ini_log();
 
 	global $tablepf;
 	$tablepf = "<table class='TFormAdmin'>
@@ -609,7 +608,7 @@ function crear_tablas(){
 
 	if(file_exists($carpeta)){
 		copy("config/index.php", $carpeta."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP: ".$carpeta."/index.php".PHP_EOL;
 	}else{ }
 
 	global $carpetat;				$carpetat = "Users/temp";
@@ -622,7 +621,7 @@ function crear_tablas(){
 
 	if(file_exists($carpetat)){
 		copy("config/SecureIndex2.php", $carpetat."/index.php");
-		$data0 = $data0."\t* OK SECURE INDEX.PHP".PHP_EOL;
+		$data0 = $data0."\t* OK SECURE INDEX.PHP: ".$carpetat."/index.php".PHP_EOL;
 	}else{ }
 
 	

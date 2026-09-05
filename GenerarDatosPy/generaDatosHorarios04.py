@@ -15,7 +15,7 @@ años = [2023, 2024, 2025, 2026]
 TAMANO_LOTE = 150  # Máximo de entradas por cada sentencia INSERT
 
 # Define aquí las horas a partir de las cuales se considerará error (ej: 8, 9, 10...)
-LIMITE_HORAS_ERROR = 9 
+LIMITE_HORAS_ERROR = 10
 # ==========================================
 
 # Corrección aquí: Usando el módulo completo
@@ -33,19 +33,19 @@ for año in años:
     create_table_sql = f"""CREATE TABLE IF NOT EXISTS `{tabla}` (
   `id` int NOT NULL auto_increment,
   `ref` varchar(20) collate utf8mb4_spanish2_ci NOT NULL,
-  `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
-  `tin` time NOT NULL,
-  `dout` DATE NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
+  `datein` DATE NOT NULL DEFAULT (CURRENT_DATE()),
+  `timein` time NOT NULL,
+  `dateout` DATE NULL,
+  `timeout` time NULL,
+  `hourstot` time NULL,
+  `errorhourstot` varchar(5) NOT NULL default 'false',
   `del` varchar(5) NOT NULL default 'false',
-  `dfeed` DATE NULL,
-  `tfeed` time NULL,
+  `deldate` DATE NULL,
+  `deltime` time NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES `mcg_admin`(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1;
 
 """
     sql_output.append(create_table_sql)
@@ -124,13 +124,13 @@ for año in años:
                 id_counter += 1
                 
                 if len(valores_acumulados) == TAMANO_LOTE:
-                    insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `din`, `tin`, `dout`, `tout`, `ttot`, `error`, `del`, `dfeed`, `tfeed`) VALUES \n"
+                    insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `datein`, `timein`, `dateout`, `timeout`, `hourstot`, `errorhourstot`, `del`, `deldate`, `deltime`) VALUES \n"
                     sql_completo = insert_base + ",\n".join(valores_acumulados) + ";"
                     sql_output.append(sql_completo)
                     valores_acumulados = []
 
     if valores_acumulados:
-        insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `din`, `tin`, `dout`, `tout`, `ttot`, `error`, `del`, `dfeed`, `tfeed`) VALUES \n"
+        insert_base = f"INSERT INTO `{tabla}` (`id`, `ref`, `datein`, `timein`, `dateout`, `timeout`, `hourstot`, `errorhourstot`, `del`, `deldate`, `deltime`) VALUES \n"
         sql_completo = insert_base + ",\n".join(valores_acumulados) + ";"
         sql_output.append(sql_completo)
 

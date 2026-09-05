@@ -34,7 +34,7 @@
 				while($rowb = mysqli_fetch_assoc($qb)){
 
 					global $sty;		
-					if($rowb['error'] == "true"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
+					if($rowb['errorhourstot'] == "true"){ $sty = "style=\"color: #F1BD2D; font-weight: bold;\"";
 					}else{ $sty = ""; }
 
 					global $vname;				global $dyt1;
@@ -50,26 +50,26 @@
 							<input type='hidden' name='id' value='".$rowb['id']."' />".$rowb['id']."
 								</td>
 								<td class='BorderInfDch' align='left' ".$sty.">
-							<input type='hidden' name='din' value='".$rowb['din']."' />".$rowb['din']."
+							<input type='hidden' name='datein' value='".$rowb['datein']."' />".$rowb['datein']."
 								</td>
 								<td class='BorderInfDch' align='right' ".$sty.">
-							<input type='hidden' name='tin' value='".$rowb['tin']."' />".$rowb['tin']."
+							<input type='hidden' name='timein' value='".$rowb['timein']."' />".$rowb['timein']."
 								</td>
 								<td class='BorderInfDch' align='right' ".$sty.">
-							<input type='hidden' name='dout' value='".$rowb['dout']."' />".$rowb['dout']."
+							<input type='hidden' name='dateout' value='".$rowb['dateout']."' />".$rowb['dateout']."
 								</td>
 								<td class='BorderInfDch' align='right' ".$sty.">
-							<input type='hidden' name='tout' value='".$rowb['tout']."' />".$rowb['tout']."
+							<input type='hidden' name='timeout' value='".$rowb['timeout']."' />".$rowb['timeout']."
 								</td>
 								<td class='BorderInfDch' align='right' ".$sty.">
-							<input type='hidden' name='ttot' value='".$rowb['ttot']."' />".$rowb['ttot']."
+							<input type='hidden' name='hourstot' value='".$rowb['hourstot']."' />".$rowb['hourstot']."
 								</td>");
 
-						if(@$rowb['dfeed'] != ''){
+						if(@$rowb['deldate'] != ''){
 							print("<td class='BorderInfDch' align='right'>
-										<input type='hidden' name='dfeed' value='".$rowb['dfeed']."' />
-											".$rowb['dfeed']." / ".$rowb['tfeed']."
-										<input type='hidden' name='tfeed' value='".$rowb['tfeed']."' />
+										<input type='hidden' name='deldate' value='".$rowb['deldate']."' />
+											".$rowb['deldate']." / ".$rowb['deltime']."
+										<input type='hidden' name='deltime' value='".$rowb['deltime']."' />
 									</td>");
 						}else{ }
 

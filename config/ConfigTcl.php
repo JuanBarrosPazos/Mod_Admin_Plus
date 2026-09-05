@@ -12,19 +12,19 @@
   `ref` varchar(20) collate utf8mb4_spanish2_ci NOT NULL,
   /*`Nombre` varchar(25) collate utf8mb4_spanish2_ci NOT NULL,*/
   /*`Apellidos` varchar(25) collate utf8mb4_spanish2_ci NOT NULL,*/
-  `din` DATE NOT NULL DEFAULT (CURRENT_DATE()),
-  `tin` time NOT NULL,
-  `dout` DATE DEFAULT NULL,
-  `tout` time NULL,
-  `ttot` time NULL,
-  `error` varchar(5) NOT NULL default 'false',
+  `datein` DATE NOT NULL DEFAULT (CURRENT_DATE()),
+  `timein` time NOT NULL,
+  `dateout` DATE DEFAULT NULL,
+  `timeout` time DEFAULT NULL,
+  `hourstot` time DEFAULT NULL,
+  `errorhourstot` varchar(5) NOT NULL default 'false',
   `del` varchar(5) NOT NULL default 'false',
-  `dfeed` DATE DEFAULT NULL,
-  `tfeed` time NULL,
+  `deldate` DATE DEFAULT NULL,
+  `deltime` time DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `ref` (`ref`),
   FOREIGN KEY (`ref`) REFERENCES ".$table_name_fk."(`ref`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci AUTO_INCREMENT=1 ";
 		
 	global $dat3;
 	if(mysqli_query($db , $tcl)){

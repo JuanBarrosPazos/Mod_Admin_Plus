@@ -34,13 +34,13 @@ if(($_SESSION['Nivel'] == 'wmaster')||($_SESSION['Nivel'] == 'admin')){
 
 function calc(){
 	
-	global $din;			$din = trim($_POST['din']);
-	global $tin;			$tin = trim($_POST['tin']);
+	global $din;			$din = trim($_POST['datein']);
+	global $tin;			$tin = trim($_POST['timein']);
 	global $in;				$in = $din." ".$tin;
-	global $tinh;			$tinh = substr($_POST['tin'],0,2);
+	global $tinh;			$tinh = substr($_POST['timein'],0,2);
 	
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
+	global $dout;			$dout = trim($_POST['dateout']);
+	global $tout;			$tout = trim($_POST['timeout']);
 	global $out;			$out = $dout." ".$tout;
 	
 	$fecha1 = new DateTime($in);//fecha inicial
@@ -70,14 +70,14 @@ function validate_form(){
 	global $sqld;			global $qd;
 	//global $rowd;
 
-	global $douty;			$douty = substr($_POST['dout'],0,4);
+	global $douty;			$douty = substr($_POST['dateout'],0,4);
 	global $datem;			$datem = date('m');
-	global $doutm;			$doutm = substr($_POST['dout'],5,2);
+	global $doutm;			$doutm = substr($_POST['dateout'],5,2);
 	global $dated;			$dated = date('d');
-	global $doutd;			$doutd = substr($_POST['dout'],-2);
-	global $diny;			$diny = substr($_POST['din'],0,4);
-	global $dind;			$dind = substr($_POST['din'],-2);
-	global $dinm;			$dinm = substr($_POST['din'],5,2);
+	global $doutd;			$doutd = substr($_POST['dateout'],-2);
+	global $diny;			$diny = substr($_POST['datein'],0,4);
+	global $dind;			$dind = substr($_POST['datein'],-2);
+	global $dinm;			$dinm = substr($_POST['datein'],5,2);
 
 	/* 
 	SOLO PERMITE MODIFICAR DATOS DEL AÑO CORRIENTE
@@ -85,20 +85,20 @@ function validate_form(){
 	SOLO PERMITE MODIFICAR DATOS SI EL AÑO ES EL MISMO QUE DE ENTRADA
 	echo "* Year In: ".$datey."<br> * Year Out: ".$douty;
 	 */
-	global $datey;			$datey = substr($_POST['din'],0,4);
+	global $datey;			$datey = substr($_POST['datein'],0,4);
 	global $th;				$th = 23;
 	global $thms;			$thms = 59;
-	global $touth;			$touth = substr($_POST['tout'],0,2);
-	global $toutm;			$toutm = substr($_POST['tout'],3,2);
-	global $touts;			$touts = substr($_POST['tout'],-2);
+	global $touth;			$touth = substr($_POST['timeout'],0,2);
+	global $toutm;			$toutm = substr($_POST['timeout'],3,2);
+	global $touts;			$touts = substr($_POST['timeout'],-2);
 
-	global $din;			$din = trim($_POST['din']);
-	global $tin;			$tin = trim($_POST['tin']);
+	global $din;			$din = trim($_POST['datein']);
+	global $tin;			$tin = trim($_POST['timein']);
 	global $in;				$in = $din." ".$tin;
-	global $tinh;			$tinh = substr($_POST['tin'],0,2);
+	global $tinh;			$tinh = substr($_POST['timein'],0,2);
 	
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
+	global $dout;			$dout = trim($_POST['dateout']);
+	global $tout;			$tout = trim($_POST['timeout']);
 	global $out;			$out = $dout." ".$tout;
 	
 			///////////////////////			**********   		///////////////////////
@@ -106,31 +106,31 @@ function validate_form(){
 	$errors = array();
 	
 	/* VALIDAMOS QUE LOS DOS CAMPOS NO SON IGUALES */
-	if(($_POST['din'] == $_POST['dout']) && ($_POST['tin'] == $_POST['tout']) ){
+	if(($_POST['datein'] == $_POST['dateout']) && ($_POST['timein'] == $_POST['timeout']) ){
 		$errors [] = "FECHA OUT / IN MISMA HORA Y FECHA";
 	/* VALIDAMOS LOS FORMATOS */
-	}elseif(!preg_match('/^\d{4}-\d{2}-\d{2}$/',$_POST['dout'])){
+	}elseif(!preg_match('/^\d{4}-\d{2}-\d{2}$/',$_POST['dateout'])){
 		$errors [] = "FECHA OUT 1 Formato incorrecto YYYY-MM-DD";
-	}elseif(!preg_match('/^[0-9\-\s]+$/',$_POST['dout'])){
+	}elseif(!preg_match('/^[0-9\-\s]+$/',$_POST['dateout'])){
 		$errors [] = "FECHA OUT 2 Formato incorrecto YYYY-MM-DD";
-	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>´"·\(\)=¿?!¡\[\]\{\};,:\.\*\']+$/',$_POST['dout'])){
+	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>´"·\(\)=¿?!¡\[\]\{\};,:\.\*\']+$/',$_POST['dateout'])){
 		$errors [] = "FECHA OUT Caracteres no permitidos";
-	}elseif(!preg_match('/^\d{2}:\d{2}:\d{2}$/',$_POST['tout'])){
+	}elseif(!preg_match('/^\d{2}:\d{2}:\d{2}$/',$_POST['timeout'])){
 		$errors [] = "TIME OUT 1 Formato incorrecto HH:MM:SS";
-	}elseif(!preg_match('/^[0-9:\s]+$/',$_POST['tout'])){
+	}elseif(!preg_match('/^[0-9:\s]+$/',$_POST['timeout'])){
 		$errors [] = "TIME OUT 2 Formato incorrecto HH:MM:SS";
-	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>-´"·\(\)=¿?!¡\[\]\{\};,\.\*\']+$/',$_POST['tout'])){
+	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>-´"·\(\)=¿?!¡\[\]\{\};,\.\*\']+$/',$_POST['timeout'])){
 		$errors [] = "TIME OUT Caracteres no permitidos";
 
 		// SI LOS FORMATOS SON CORRECTOS:
 	}else{ 	calc(); 
 	
 		/* VALIDAMOS EL CAMPO DATE OUT */
-		if(strlen(trim($_POST['dout'])) == 0){
+		if(strlen(trim($_POST['dateout'])) == 0){
 			$errors [] = "FECHA OUT Campo obligatorio";
-		}elseif(strlen(trim($_POST['dout'])) < 10){
+		}elseif(strlen(trim($_POST['dateout'])) < 10){
 			$errors [] = "FECHA OUT Valores incorrectos YYYY-MM-DD";
-		}elseif(strlen(trim($_POST['dout'])) > 10){
+		}elseif(strlen(trim($_POST['dateout'])) > 10){
 			$errors [] = "FECHA OUT Valores incorrectos YYYY-MM-DD";
 		}elseif(trim($douty) != $datey){
 			$errors [] = "FECHA OUT AÑO NO PERMITIDO";
@@ -146,11 +146,11 @@ function validate_form(){
 		}
 		
 		/* VALIDAMOS EL CAMPO TIME OUT */
-		if(strlen(trim($_POST['tout'])) == 0){
+		if(strlen(trim($_POST['timeout'])) == 0){
 			$errors [] = "TIME OUT Campo obligatorio";
-		}elseif(strlen(trim($_POST['tout'])) < 8){
+		}elseif(strlen(trim($_POST['timeout'])) < 8){
 			$errors [] = "TIME OUT Valores incorrectos HH:MM:SS";
-		}elseif(strlen(trim($_POST['tout'])) > 8){
+		}elseif(strlen(trim($_POST['timeout'])) > 8){
 			$errors [] = "TIME OUT Valores incorrectos HH:MM:SS";
 		}elseif(($touth > $th)||($toutm > $thms)||($touts > $thms)){
 				$errors [] = "TIME OUT HORA NO PERMITIDA";
@@ -160,7 +160,7 @@ function validate_form(){
 		}elseif($_SESSION['ttotd'] > 0){
 			$errors [] = "DATE OUT MÁS DE 24 HORAS";
 		}elseif($_SESSION['ttoth'] > 9){
-			$errors [] = "TIME OUT MÁS DE 10 HORAS";
+			$errors [] = "TIME OUT MÁS DE 09 HORAS";
 		}
 	}	// FIN ELSE SI TODOS LOS FORMATOS SON CORRECTOS
 	 
@@ -177,7 +177,7 @@ function suma_todo(){
 	global $db;			global $db_name;
 	
 	global $nm;
-	$nm = substr($_POST['din'],5,2);
+	$nm = substr($_POST['datein'],5,2);
 	$nm = str_replace(":","",$nm);
 
 	global $diny;
@@ -211,12 +211,12 @@ function process_form(){
 	//$tabla1 = strtolower($_SESSION['clave'].$_SESSION['usuarios']);
 	global $vname;		$vname = "`".strtolower($_SESSION['clave']."horarios_").$diny."`";
 
-	global $din;			$din = trim($_POST['din']);
-	global $tin;			$tin = trim($_POST['tin']);
+	global $din;			$din = trim($_POST['datein']);
+	global $tin;			$tin = trim($_POST['timein']);
 	global $in;				$in = $din." ".$tin;
 
-	global $dout;			$dout = trim($_POST['dout']);
-	global $tout;			$tout = trim($_POST['tout']);
+	global $dout;			$dout = trim($_POST['dateout']);
+	global $tout;			$tout = trim($_POST['timeout']);
 	global $out;			$out = $dout." ".$tout;
 	
 	$fecha1 = new DateTime($in);//fecha inicial
@@ -240,7 +240,7 @@ function process_form(){
 	//echo $difer->format('%Y años %m meses %d days %H horas %i minutos %s segundos');
 						//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
 
-	$sqla = "UPDATE `$db_name`.$vname SET `dout` = '$_POST[dout]', `tout` = '$_POST[tout]', `ttot` =  '$ttot', `error` = '$terror' WHERE `id` = '$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$vname SET `dateout` = '$_POST[dateout]', `timeout` = '$_POST[timeout]', `hourstot` =  '$ttot', `errorhourstot` = '$terror' WHERE `id` = '$_POST[id]' AND `ref` = '$_SESSION[usuarios]' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqla)){ 
 			
@@ -250,20 +250,20 @@ function process_form(){
 		global $dir;			$dir = "../Users/".$_SESSION['usuarios']."/mrficha";
 			
 		global $nm;
-		$nm = substr($_POST['din'],5,2);
+		$nm = substr($_POST['datein'],5,2);
 		$nm = str_replace(":","",$nm);
 
 		global $sumatodo;
 		global $text;
 		$text = "** HORARIO MODIFICADO FECHA: ".date('Y_m_d / H:i:s').".";
 		$text = $text.PHP_EOL."** HORARIO INICIAL ERRONEO: ";
-		$text = $text.PHP_EOL."** ERROR ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
+		$text = $text.PHP_EOL."** ERROR ENTRADA: ".$_POST['datein']." / ".$_POST['timein'].".";
 		$text = $text.PHP_EOL."** ERROR SALIDA: ".$_SESSION['edout']." / ".$_SESSION['etout'].".";
 		$text = $text.PHP_EOL."** ERROR TOTAL TIME: ".$_SESSION['ettot'].".";
 			
-		$text = $text.PHP_EOL."** HORARIO MODIFICADO: ".$_POST['din']." / ".$_POST['tin'].".";
-		$text = $text.PHP_EOL."** MODIF. ENTRADA: ".$_POST['din']." / ".$_POST['tin'].".";
-		$text = $text.PHP_EOL."** MODIF. SALIDA: ".$_POST['dout']." / ".$_POST['tout'].".";
+		$text = $text.PHP_EOL."** HORARIO MODIFICADO: ".$_POST['datein']." / ".$_POST['timein'].".";
+		$text = $text.PHP_EOL."** MODIF. ENTRADA: ".$_POST['datein']." / ".$_POST['timein'].".";
+		$text = $text.PHP_EOL."** MODIF. SALIDA: ".$_POST['dateout']." / ".$_POST['timeout'].".";
 		$text = $text.PHP_EOL."** MODIF. TOTAL TIME: ".$ttot.".";
 
 		$text = $text.PHP_EOL."** HORAS TOTALES MES ".$diny."-".$nm.": ".$sumatodo;
@@ -298,15 +298,15 @@ function show_form($errors=[]){
 						    'ref' => $_SESSION['usuarios'],
 							'name1' => $_POST['name1'],
 							'name2' => $_POST['name2'],
-							'din' => $_POST['din'],
-							'tin' => $_POST['tin'],
-							'dout' => $_POST['dout'],
-							'tout' => $_POST['tout'],
-							'ttot' => $_POST['ttot']);
+							'datein' => $_POST['datein'],
+							'timein' => $_POST['timein'],
+							'dateout' => $_POST['dateout'],
+							'timeout' => $_POST['timeout'],
+							'hourstot' => $_POST['hourstot']);
 
-		$_SESSION['edout'] = $_POST['dout'];
-		$_SESSION['etout'] = $_POST['tout'];
-		$_SESSION['ettot'] = $_POST['ttot'];
+		$_SESSION['edout'] = $_POST['dateout'];
+		$_SESSION['etout'] = $_POST['timeout'];
+		$_SESSION['ettot'] = $_POST['hourstot'];
 		print("<audio src='../audi/file_for_modified.mp3' autoplay></audio>");
 	}
 
@@ -339,27 +339,27 @@ function show_form($errors=[]){
 				</tr>
 				<tr>
 					<td>DATE IN</td>
-					<td>".$defaults['din']."</td>
+					<td>".$defaults['datein']."</td>
 				</tr>
 				<tr>
 					<td>TIME IN</td>
-					<td>".$defaults['tin']."</td>
+					<td>".$defaults['timein']."</td>
 				</tr>
 				<tr>
 					<td>DATE OUT</td>
 					<td>yyyy-mm-dd</br>
-			<input type='date' name='dout' size=11 maxlength=10 value='".$defaults['dout']."' />
+			<input type='date' name='dateout' size=11 maxlength=10 value='".$defaults['dateout']."' />
 					</td>
 				</tr>
 				<tr>
 					<td>TIME OUT</td>
 					<td>hh:mm:ss</br>
-			<input type='time' name='tout' size=11 maxlength=8 value='".$defaults['tout']."' />
+			<input type='time' name='timeout' size=11 maxlength=8 value='".$defaults['timeout']."' />
 					</td>
 				</tr>
 				<tr>
 					<td>TIME TOTAL</td>
-					<td>".$defaults['ttot']."</td>
+					<td>".$defaults['hourstot']."</td>
 				</tr>
 				<tr>
 					<td colspan='2' style='text-align:right !important;'>
@@ -367,9 +367,9 @@ function show_form($errors=[]){
 						<input type='hidden' id='ref' name='ref' value='".$_SESSION['usuarios']."' />
 						<input type='hidden' name='name1' value='".$defaults['name1']."' />
 						<input type='hidden' name='name2' value='".$defaults['name2']."' />
-						<input type='hidden' name='din' value='".$defaults['din']."' />
-						<input type='hidden' name='tin' value='".$defaults['tin']."' />
-						<input type='hidden' name='ttot' value='".$defaults['ttot']."' />
+						<input type='hidden' name='datein' value='".$defaults['datein']."' />
+						<input type='hidden' name='timein' value='".$defaults['timein']."' />
+						<input type='hidden' name='hourstot' value='".$defaults['hourstot']."' />
 				<button type='submit' title='MODIFICAR DATOS' class='botonverde imgButIco SaveBlack' style='vertical-align:top;display:inline-block;margin-top:-0.1em;' ></button>
 						<input type='hidden' name='oculto' value=1 />
 			</form>
@@ -403,10 +403,10 @@ function info_01(){
 		$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
 		$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
 		$text = $text.PHP_EOL."\tID: ".$_POST['id'];
-		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
-		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
-		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
-		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
+		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['datein'];
+		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['timein'];
+		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dateout'];
+		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['timeout'];
 		$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
 
 		$logdocu = $_SESSION['ref'];
@@ -437,10 +437,10 @@ function info_02(){
 		$text = $text.PHP_EOL."\tNOMBRE: ".$_POST['name1'];
 		$text = $text.PHP_EOL."\tAPELLIDOS: ".$_POST['name2'];
 		$text = $text.PHP_EOL."\tID: ".$_POST['id'];
-		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['din'];
-		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['tin'];
-		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dout'];
-		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['tout'];
+		$text = $text.PHP_EOL."\tDATE IN: ".$_POST['datein'];
+		$text = $text.PHP_EOL."\tTIME IN: ".$_POST['timein'];
+		$text = $text.PHP_EOL."\tDATE OUT: ".$_POST['dateout'];
+		$text = $text.PHP_EOL."\tTIME OUT: ".$_POST['timeout'];
 		$text = $text.PHP_EOL."\tTIME TOTAL: ".$ttot;
 
 		$logdocu = $_SESSION['ref'];

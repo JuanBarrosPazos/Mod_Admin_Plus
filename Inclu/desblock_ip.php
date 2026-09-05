@@ -271,7 +271,7 @@ function desbloqueo(){
 	// DESBLOQUEO TODAS LAS IPs IGUALES A LA MIA
 	global $table_name_b;			$table_name_b = "`".$_SESSION['clave']."ipcontrol`";
 
-	$desb = "UPDATE `$db_name`.$table_name_b SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `error` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' AND $table_name_b.`acceso` = 'x' OR $table_name_b.`acceso` = '0' ";
+	$desb = "UPDATE `$db_name`.$table_name_b SET `ref` = '$_POST[refdesb]', `nivel` = '$_POST[nivdesb]', `errorhourstot` = 'des', `acceso` = 'des' WHERE $table_name_b.`ipn` = '$ipCliente' AND $table_name_b.`acceso` = 'x' OR $table_name_b.`acceso` = '0' ";
 	if(mysqli_query($db, $desb)){ $_SESSION['showf'] = 0;
 		print("<div class='centradiv alertdiv'>
 						SU IP ".$ipCliente." HA SIDO DESBLOQUEADA

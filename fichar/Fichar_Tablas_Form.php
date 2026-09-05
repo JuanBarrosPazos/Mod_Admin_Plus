@@ -52,11 +52,11 @@
                         <input type='hidden' id='ref' name='ref' value='".$RefUser."' />
                         <input type='hidden' id='name1' name='name1' value='".$name1."' />
                         <input type='hidden' id='name2' name='name2' value='".$name2."' />
-                        <input type='hidden' id='din' name='din' value='".$din."' />
-                        <input type='hidden' id='tin' name='tin' value='".$tin."' />
-                        <input type='hidden' id='dout' name='dout' value='".$dout."' />
-                        <input type='hidden' id='tout' name='tout' value='".$tout."' />
-                        <input type='hidden' id='ttot' name='ttot' value='".$ttot."' />
+                        <input type='hidden' id='datein' name='datein' value='".$din."' />
+                        <input type='hidden' id='timein' name='timein' value='".$tin."' />
+                        <input type='hidden' id='dateout' name='dateout' value='".$dout."' />
+                        <input type='hidden' id='timeout' name='timeout' value='".$tout."' />
+                        <input type='hidden' id='hourstot' name='hourstot' value='".$ttot."' />
                             <button type='submit' title='FICHAR ENTRADA' class='botonverde imgButIco Clock1Black' style='vertical-align:top;' ></button>
                         <input type='hidden' name='entrada' value=1 />
                     </form>														
@@ -78,8 +78,8 @@
                     <input type='hidden' id='ref' name='ref' value='".$RefUser."' />
                     <input type='hidden' id='name1' name='name1' value='".$name1."' />
                     <input type='hidden' id='name2' name='name2' value='".$name2."' />
-                    <input type='hidden' id='dout' name='dout' value='".$dout."' />
-                    <input type='hidden' id='tout' name='tout' value='".$tout."' />
+                    <input type='hidden' id='dateout' name='dateout' value='".$dout."' />
+                    <input type='hidden' id='timeout' name='timeout' value='".$tout."' />
                         <button type='submit' title='FICHAR SALIDA' class='botonnaranja imgButIco Clock1Black' style='vertical-align:top;' ></button>
                         <input type='hidden' name='salida' value=1 />
                 </form>														
